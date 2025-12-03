@@ -1,0 +1,726 @@
+{
+    "easy": [
+        {
+            "word": "big",
+            "synonym": "large",
+            "translate": "büyük"
+        },
+        {
+            "word": "small",
+            "synonym": "little",
+            "translate": "küçük"
+        },
+        {
+            "word": "happy",
+            "synonym": "glad",
+            "translate": "mutlu"
+        },
+        {
+            "word": "sad",
+            "synonym": "upset",
+            "translate": "üzgün"
+        },
+        {
+            "word": "fast",
+            "synonym": "quick",
+            "translate": "hızlı"
+        },
+        {
+            "word": "beautiful",
+            "synonym": "pretty",
+            "translate": "güzel"
+        },
+        {
+            "word": "smart",
+            "synonym": "clever",
+            "translate": "zeki"
+        },
+        {
+            "word": "hard",
+            "synonym": "difficult",
+            "translate": "zor"
+        },
+        {
+            "word": "easy",
+            "synonym": "simple",
+            "translate": "kolay"
+        },
+        {
+            "word": "good",
+            "synonym": "nice",
+            "translate": "iyi"
+        },
+        {
+            "word": "bad",
+            "synonym": "terrible",
+            "translate": "kötü"
+        },
+        {
+            "word": "hungry",
+            "synonym": "starving",
+            "translate": "aç"
+        },
+        {
+            "word": "tired",
+            "synonym": "exhausted",
+            "translate": "yorgun"
+        },
+        {
+            "word": "rich",
+            "synonym": "wealthy",
+            "translate": "zengin"
+        },
+        {
+            "word": "poor",
+            "synonym": "needy",
+            "translate": "fakir"
+        },
+        {
+            "word": "clean",
+            "synonym": "tidy",
+            "translate": "temiz"
+        },
+        {
+            "word": "dirty",
+            "synonym": "messy",
+            "translate": "kirli"
+        },
+        {
+            "word": "strong",
+            "synonym": "powerful",
+            "translate": "güçlü"
+        },
+        {
+            "word": "weak",
+            "synonym": "feeble",
+            "translate": "zayıf"
+        },
+        {
+            "word": "funny",
+            "synonym": "amusing",
+            "translate": "komik"
+        },
+        {
+            "word": "angry",
+            "synonym": "mad",
+            "translate": "kızgın"
+        },
+        {
+            "word": "fun",
+            "synonym": "enjoyable",
+            "translate": "eğlenceli"
+        },
+        {
+            "word": "boring",
+            "synonym": "dull",
+            "translate": "sıkıcı"
+        },
+        {
+            "word": "interesting",
+            "synonym": "exciting",
+            "translate": "ilginç"
+        },
+        {
+            "word": "scared",
+            "synonym": "afraid",
+            "translate": "korkmuş"
+        },
+        {
+            "word": "slow",
+            "synonym": "unhurried",
+            "translate": "yavaş"
+        },
+        {
+            "word": "old",
+            "synonym": "aged",
+            "translate": "yaşlı"
+        },
+        {
+            "word": "new",
+            "synonym": "fresh",
+            "translate": "yeni"
+        },
+        {
+            "word": "quiet",
+            "synonym": "silent",
+            "translate": "sessiz"
+        },
+        {
+            "word": "home",
+            "synonym": "house",
+            "translate": "ev"
+        }
+    ],
+    "medium": [
+        {
+            "word": "accept",
+            "synonym": "agree",
+            "translate": "kabul etmek"
+        },
+        {
+            "word": "refuse",
+            "synonym": "reject",
+            "translate": "reddetmek"
+        },
+        {
+            "word": "begin",
+            "synonym": "start",
+            "translate": "başlamak"
+        },
+        {
+            "word": "finish",
+            "synonym": "complete",
+            "translate": "bitirmek"
+        },
+        {
+            "word": "help",
+            "synonym": "assist",
+            "translate": "yardım etmek"
+        },
+        {
+            "word": "choose",
+            "synonym": "select",
+            "translate": "seçmek"
+        },
+        {
+            "word": "explain",
+            "synonym": "clarify",
+            "translate": "açıklamak"
+        },
+        {
+            "word": "find",
+            "synonym": "discover",
+            "translate": "bulmak"
+        },
+        {
+            "word": "fix",
+            "synonym": "repair",
+            "translate": "tamir etmek"
+        },
+        {
+            "word": "hope",
+            "synonym": "expect",
+            "translate": "umut etmek"
+        },
+        {
+            "word": "improve",
+            "synonym": "develop",
+            "translate": "geliştirmek"
+        },
+        {
+            "word": "reduce",
+            "synonym": "decrease",
+            "translate": "azaltmak"
+        },
+        {
+            "word": "increase",
+            "synonym": "raise",
+            "translate": "artırmak"
+        },
+        {
+            "word": "decide",
+            "synonym": "determine",
+            "translate": "karar vermek"
+        },
+        {
+            "word": "worry",
+            "synonym": "concern",
+            "translate": "endişelenmek"
+        },
+        {
+            "word": "suggest",
+            "synonym": "recommend",
+            "translate": "önermek"
+        },
+        {
+            "word": "achieve",
+            "synonym": "accomplish",
+            "translate": "başarmak"
+        },
+        {
+            "word": "believe",
+            "synonym": "trust",
+            "translate": "inanmak"
+        },
+        {
+            "word": "change",
+            "synonym": "alter",
+            "translate": "değiştirmek"
+        },
+        {
+            "word": "enjoy",
+            "synonym": "like",
+            "translate": "zevk almak"
+        },
+        {
+            "word": "arrive",
+            "synonym": "reach",
+            "translate": "varmak"
+        },
+        {
+            "word": "plan",
+            "synonym": "arrange",
+            "translate": "plan yapmak"
+        },
+        {
+            "word": "examine",
+            "synonym": "inspect",
+            "translate": "incelemek"
+        },
+        {
+            "word": "argue",
+            "synonym": "discuss",
+            "translate": "tartışmak"
+        },
+        {
+            "word": "allow",
+            "synonym": "permit",
+            "translate": "izin vermek"
+        },
+        {
+            "word": "solve",
+            "synonym": "resolve",
+            "translate": "çözmek"
+        },
+        {
+            "word": "promise",
+            "synonym": "guarantee",
+            "translate": "söz vermek"
+        },
+        {
+            "word": "need",
+            "synonym": "require",
+            "translate": "ihtiyaç duymak"
+        },
+        {
+            "word": "prefer",
+            "synonym": "favor",
+            "translate": "tercih etmek"
+        },
+        {
+            "word": "guess",
+            "synonym": "suppose",
+            "translate": "tahmin etmek"
+        }
+    ],
+    "upper": [
+        {
+            "word": "advantage",
+            "synonym": "benefit",
+            "translate": "avantaj"
+        },
+        {
+            "word": "disadvantage",
+            "synonym": "drawback",
+            "translate": "dezavantaj"
+        },
+        {
+            "word": "goal",
+            "synonym": "objective",
+            "translate": "hedef"
+        },
+        {
+            "word": "result",
+            "synonym": "outcome",
+            "translate": "sonuç"
+        },
+        {
+            "word": "issue",
+            "synonym": "matter",
+            "translate": "mesele"
+        },
+        {
+            "word": "method",
+            "synonym": "approach",
+            "translate": "yöntem"
+        },
+        {
+            "word": "feature",
+            "synonym": "characteristic",
+            "translate": "özellik"
+        },
+        {
+            "word": "trend",
+            "synonym": "tendency",
+            "translate": "eğilim"
+        },
+        {
+            "word": "evidence",
+            "synonym": "proof",
+            "translate": "kanıt"
+        },
+        {
+            "word": "conflict",
+            "synonym": "dispute",
+            "translate": "çatışma"
+        },
+        {
+            "word": "progress",
+            "synonym": "advancement",
+            "translate": "ilerleme"
+        },
+        {
+            "word": "challenge",
+            "synonym": "obstacle",
+            "translate": "zorluk"
+        },
+        {
+            "word": "risk",
+            "synonym": "danger",
+            "translate": "risk"
+        },
+        {
+            "word": "talent",
+            "synonym": "ability",
+            "translate": "yetenek"
+        },
+        {
+            "word": "attitude",
+            "synonym": "mindset",
+            "translate": "tavır"
+        },
+        {
+            "word": "behavior",
+            "synonym": "conduct",
+            "translate": "davranış"
+        },
+        {
+            "word": "limit",
+            "synonym": "boundary",
+            "translate": "sınır"
+        },
+        {
+            "word": "opportunity",
+            "synonym": "chance",
+            "translate": "fırsat"
+        },
+        {
+            "word": "solution",
+            "synonym": "answer",
+            "translate": "çözüm"
+        },
+        {
+            "word": "success",
+            "synonym": "achievement",
+            "translate": "başarı"
+        },
+        {
+            "word": "concept",
+            "synonym": "idea",
+            "translate": "kavram"
+        },
+        {
+            "word": "impact",
+            "synonym": "influence",
+            "translate": "etki"
+        },
+        {
+            "word": "priority",
+            "synonym": "importance",
+            "translate": "öncelik"
+        },
+        {
+            "word": "strategy",
+            "synonym": "plan",
+            "translate": "strateji"
+        },
+        {
+            "word": "system",
+            "synonym": "structure",
+            "translate": "sistem"
+        },
+        {
+            "word": "factor",
+            "synonym": "element",
+            "translate": "faktör"
+        },
+        {
+            "word": "debate",
+            "synonym": "discussion",
+            "translate": "tartışma"
+        },
+        {
+            "word": "participant",
+            "synonym": "member",
+            "translate": "katılımcı"
+        },
+        {
+            "word": "perspective",
+            "synonym": "viewpoint",
+            "translate": "bakış açısı"
+        },
+        {
+            "word": "phenomenon",
+            "synonym": "occurrence",
+            "translate": "olgu"
+        }
+    ],
+    "expert": [
+        {
+            "word": "mitigate",
+            "synonym": "ease",
+            "translate": "hafifletmek"
+        },
+        {
+            "word": "emphasize",
+            "synonym": "highlight",
+            "translate": "vurgulamak"
+        },
+        {
+            "word": "illustrate",
+            "synonym": "demonstrate",
+            "translate": "örneklemek"
+        },
+        {
+            "word": "evaluate",
+            "synonym": "assess",
+            "translate": "değerlendirmek"
+        },
+        {
+            "word": "estimate",
+            "synonym": "approximate",
+            "translate": "tahmin etmek"
+        },
+        {
+            "word": "perceive",
+            "synonym": "recognize",
+            "translate": "algılamak"
+        },
+        {
+            "word": "maintain",
+            "synonym": "preserve",
+            "translate": "sürdürmek"
+        },
+        {
+            "word": "generate",
+            "synonym": "produce",
+            "translate": "üretmek"
+        },
+        {
+            "word": "prohibit",
+            "synonym": "ban",
+            "translate": "yasaklamak"
+        },
+        {
+            "word": "justify",
+            "synonym": "rationalize",
+            "translate": "gerekçelendirmek"
+        },
+        {
+            "word": "trigger",
+            "synonym": "initiate",
+            "translate": "tetiklemek"
+        },
+        {
+            "word": "dominate",
+            "synonym": "control",
+            "translate": "hâkim olmak"
+        },
+        {
+            "word": "violate",
+            "synonym": "breach",
+            "translate": "ihlal etmek"
+        },
+        {
+            "word": "diminish",
+            "synonym": "decrease",
+            "translate": "azaltmak"
+        },
+        {
+            "word": "enhance",
+            "synonym": "improve",
+            "translate": "geliştirmek"
+        },
+        {
+            "word": "integrate",
+            "synonym": "merge",
+            "translate": "bütünleştirmek"
+        },
+        {
+            "word": "allocate",
+            "synonym": "distribute",
+            "translate": "tahsis etmek"
+        },
+        {
+            "word": "compile",
+            "synonym": "collect",
+            "translate": "derlemek"
+        },
+        {
+            "word": "contradict",
+            "synonym": "conflict",
+            "translate": "çelişmek"
+        },
+        {
+            "word": "facilitate",
+            "synonym": "enable",
+            "translate": "kolaylaştırmak"
+        },
+        {
+            "word": "implement",
+            "synonym": "execute",
+            "translate": "uygulamak"
+        },
+        {
+            "word": "interpret",
+            "synonym": "analyze",
+            "translate": "yorumlamak"
+        },
+        {
+            "word": "sustain",
+            "synonym": "uphold",
+            "translate": "sürdürmek"
+        },
+        {
+            "word": "acknowledge",
+            "synonym": "admit",
+            "translate": "kabul etmek / itiraf etmek"
+        },
+        {
+            "word": "anticipate",
+            "synonym": "expect",
+            "translate": "beklemek / öngörmek"
+        },
+        {
+            "word": "collaborate",
+            "synonym": "cooperate",
+            "translate": "iş birliği yapmak"
+        },
+        {
+            "word": "manipulate",
+            "synonym": "control",
+            "translate": "manipüle etmek"
+        },
+        {
+            "word": "presume",
+            "synonym": "assume",
+            "translate": "varsaymak"
+        },
+        {
+            "word": "consolidate",
+            "synonym": "strengthen",
+            "translate": "sağlamlaştırmak"
+        },
+        {
+            "word": "undermine",
+            "synonym": "weaken",
+            "translate": "zayıflatmak"
+        }
+    ],
+    "wrong_answers": [
+        "window",
+        "mountain",
+        "celebrate",
+        "bicycle",
+        "language",
+        "pillow",
+        "keyboard",
+        "ocean",
+        "library",
+        "metaphor",
+        "structure",
+        "inquiry",
+        "alliance",
+        "fragment",
+        "ambiguity",
+        "compass",
+        "harmony",
+        "spectrum",
+        "resonance",
+        "migration",
+        "reflection",
+        "transit",
+        "continuum",
+        "verdict",
+        "provision",
+        "circuit",
+        "threshold",
+        "vessel",
+        "domain",
+        "catalyst",
+        "terrain",
+        "equation",
+        "cascade",
+        "synthesis",
+        "artifact",
+        "dimension",
+        "protocol",
+        "interval",
+        "priority",
+        "passage",
+        "segment",
+        "transition",
+        "adviser",
+        "sequence",
+        "commerce",
+        "tribute",
+        "fragrance",
+        "notion",
+        "veracity",
+        "momentum",
+        "archive",
+        "impulse",
+        "basket",
+        "sunset",
+        "curious",
+        "pencil",
+        "garden",
+        "planet",
+        "whisper",
+        "traffic",
+        "mirror",
+        "blanket",
+        "festival",
+        "orange",
+        "sandwich",
+        "battery",
+        "airport",
+        "blank",
+        "adventure",
+        "island",
+        "puzzle",
+        "river",
+        "candle",
+        "forest",
+        "camera",
+        "ticket",
+        "bridge",
+        "pocket",
+        "rainbow",
+        "musician",
+        "button",
+        "market",
+        "thunder",
+        "shampoo",
+        "hunger",
+        "sincere",
+        "energy",
+        "drawer",
+        "solitude",
+        "heritage",
+        "turbulent",
+        "endeavor",
+        "friction",
+        "signal",
+        "lantern",
+        "companion",
+        "fabric",
+        "harbor",
+        "volume",
+        "ceiling",
+        "fiction",
+        "gesture",
+        "harvest",
+        "journey",
+        "stadium",
+        "climate",
+        "engine",
+        "gravity",
+        "legend",
+        "meadow",
+        "pattern",
+        "sculpture",
+        "voyage",
+        "workshop"
+    ]
+}

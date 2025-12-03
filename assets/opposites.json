@@ -1,0 +1,813 @@
+{
+    "easy": [
+        {
+            "word": "heavy",
+            "opposite": "light",
+            "translate": "ağır"
+        },
+        {
+            "word": "expensive",
+            "opposite": "cheap",
+            "translate": "pahalı"
+        },
+        {
+            "word": "east",
+            "opposite": "west",
+            "translate": "doğu"
+        },
+        {
+            "word": "fast",
+            "opposite": "slow",
+            "translate": "hızlı"
+        },
+        {
+            "word": "wide",
+            "opposite": "narrow",
+            "translate": "dar"
+        },
+        {
+            "word": "early",
+            "opposite": "late",
+            "translate": "erken"
+        },
+        {
+            "word": "clean",
+            "opposite": "dirty",
+            "translate": "temiz"
+        },
+        {
+            "word": "full",
+            "opposite": "empty",
+            "translate": "dolu"
+        },
+        {
+            "word": "strong",
+            "opposite": "weak",
+            "translate": "güçlü"
+        },
+        {
+            "word": "high",
+            "opposite": "low",
+            "translate": "yüksek"
+        },
+        {
+            "word": "right",
+            "opposite": "wrong",
+            "translate": "doğru"
+        },
+        {
+            "word": "open",
+            "opposite": "closed",
+            "translate": "açık"
+        },
+        {
+            "word": "near",
+            "opposite": "far",
+            "translate": "yakın"
+        },
+        {
+            "word": "wet",
+            "opposite": "dry",
+            "translate": "ıslak"
+        },
+        {
+            "word": "rich",
+            "opposite": "poor",
+            "translate": "zengin"
+        },
+        {
+            "word": "light",
+            "opposite": "dark",
+            "translate": "aydınlık"
+        },
+        {
+            "word": "thick",
+            "opposite": "thin",
+            "translate": "kalın"
+        },
+        {
+            "word": "noisy",
+            "opposite": "quiet",
+            "translate": "gürültülü"
+        },
+        {
+            "word": "up",
+            "opposite": "down",
+            "translate": "yukarı"
+        },
+        {
+            "word": "start",
+            "opposite": "finish",
+            "translate": "başlamak"
+        },
+        {
+            "word": "tall",
+            "opposite": "short",
+            "translate": "uzun boylu"
+        },
+        {
+            "word": "safe",
+            "opposite": "dangerous",
+            "translate": "güvenli"
+        },
+        {
+            "word": "hard",
+            "opposite": "soft",
+            "translate": "sert"
+        },
+        {
+            "word": "busy",
+            "opposite": "free",
+            "translate": "meşgul"
+        },
+        {
+            "word": "sunny",
+            "opposite": "rainy",
+            "translate": "güneşli"
+        },
+        {
+            "word": "cool",
+            "opposite": "warm",
+            "translate": "serin"
+        },
+        {
+            "word": "hungry",
+            "opposite": "full",
+            "translate": "aç"
+        },
+        {
+            "word": "deep",
+            "opposite": "shallow",
+            "translate": "derin"
+        },
+        {
+            "word": "left",
+            "opposite": "right",
+            "translate": "sol"
+        },
+        {
+            "word": "raise",
+            "opposite": "lower",
+            "translate": "yükseltmek"
+        },
+        {
+            "word": "share",
+            "opposite": "keep",
+            "translate": "paylaşmak"
+        },
+        {
+            "word": "export",
+            "opposite": "import",
+            "translate": "ihracat yapmak"
+        },
+        {
+            "word": "wake",
+            "opposite": "sleep",
+            "translate": "uyanmak"
+        },
+        {
+            "word": "come",
+            "opposite": "go",
+            "translate": "gelmek"
+        }
+    ],
+    "medium": [
+        {
+            "word": "buy",
+            "opposite": "sell",
+            "translate": "satın almak"
+        },
+        {
+            "word": "borrow",
+            "opposite": "lend",
+            "translate": "ödünç almak"
+        },
+        {
+            "word": "win",
+            "opposite": "lose",
+            "translate": "kazanmak"
+        },
+        {
+            "word": "push",
+            "opposite": "pull",
+            "translate": "itmek"
+        },
+        {
+            "word": "accept",
+            "opposite": "reject",
+            "translate": "kabul etmek"
+        },
+        {
+            "word": "arrive",
+            "opposite": "depart",
+            "translate": "varmak"
+        },
+        {
+            "word": "enter",
+            "opposite": "exit",
+            "translate": "girmek"
+        },
+        {
+            "word": "build",
+            "opposite": "destroy",
+            "translate": "inşa etmek"
+        },
+        {
+            "word": "increase",
+            "opposite": "reduce",
+            "translate": "artırmak"
+        },
+        {
+            "word": "attack",
+            "opposite": "defend",
+            "translate": "saldırmak"
+        },
+        {
+            "word": "join",
+            "opposite": "quit",
+            "translate": "katılmak"
+        },
+        {
+            "word": "hire",
+            "opposite": "fire",
+            "translate": "işe almak"
+        },
+        {
+            "word": "expand",
+            "opposite": "shrink",
+            "translate": "genişlemek"
+        },
+        {
+            "word": "connect",
+            "opposite": "separate",
+            "translate": "bağlamak"
+        },
+        {
+            "word": "praise",
+            "opposite": "criticize",
+            "translate": "övmek"
+        },
+        {
+            "word": "save",
+            "opposite": "spend",
+            "translate": "tasarruf etmek"
+        },
+        {
+            "word": "rise",
+            "opposite": "fall",
+            "translate": "yükselmek"
+        },
+        {
+            "word": "smile",
+            "opposite": "frown",
+            "translate": "gülümsemek"
+        },
+        {
+            "word": "allow",
+            "opposite": "forbid",
+            "translate": "izin vermek"
+        },
+        {
+            "word": "marry",
+            "opposite": "divorce",
+            "translate": "evlenmek"
+        },
+        {
+            "word": "give",
+            "opposite": "take",
+            "translate": "vermek"
+        },
+        {
+            "word": "start",
+            "opposite": "stop",
+            "translate": "başlamak"
+        },
+        {
+            "word": "open",
+            "opposite": "close",
+            "translate": "açmak"
+        },
+        {
+            "word": "remember",
+            "opposite": "forget",
+            "translate": "hatırlamak"
+        },
+        {
+            "word": "send",
+            "opposite": "receive",
+            "translate": "göndermek"
+        },
+        {
+            "word": "shout",
+            "opposite": "whisper",
+            "translate": "bağırmak"
+        },
+        {
+            "word": "succeed",
+            "opposite": "fail",
+            "translate": "başarmak"
+        },
+        {
+            "word": "improve",
+            "opposite": "worsen",
+            "translate": "iyileştirmek"
+        },
+        {
+            "word": "love",
+            "opposite": "hate",
+            "translate": "sevmek"
+        },
+        {
+            "word": "find",
+            "opposite": "lose",
+            "translate": "bulmak"
+        },
+        {
+            "word": "create",
+            "opposite": "destroy",
+            "translate": "yaratmak"
+        },
+        {
+            "word": "agree",
+            "opposite": "refuse",
+            "translate": "aynı fikirde olmak"
+        },
+        {
+            "word": "stand",
+            "opposite": "sit",
+            "translate": "ayakta durmak"
+        },
+        {
+            "word": "grow",
+            "opposite": "decline",
+            "translate": "büyümek"
+        }
+    ],
+    "upper": [
+        {
+            "word": "ancient",
+            "opposite": "modern",
+            "translate": "antik"
+        },
+        {
+            "word": "rural",
+            "opposite": "urban",
+            "translate": "kırsal"
+        },
+        {
+            "word": "internal",
+            "opposite": "external",
+            "translate": "içsel"
+        },
+        {
+            "word": "central",
+            "opposite": "peripheral",
+            "translate": "merkezi"
+        },
+        {
+            "word": "active",
+            "opposite": "passive",
+            "translate": "aktif"
+        },
+        {
+            "word": "formal",
+            "opposite": "casual",
+            "translate": "resmî"
+        },
+        {
+            "word": "complex",
+            "opposite": "simple",
+            "translate": "karmaşık"
+        },
+        {
+            "word": "moderate",
+            "opposite": "extreme",
+            "translate": "ılımlı"
+        },
+        {
+            "word": "genuine",
+            "opposite": "fake",
+            "translate": "gerçek"
+        },
+        {
+            "word": "global",
+            "opposite": "local",
+            "translate": "küresel"
+        },
+        {
+            "word": "permanent",
+            "opposite": "temporary",
+            "translate": "kalıcı"
+        },
+        {
+            "word": "majority",
+            "opposite": "minority",
+            "translate": "çoğunluk"
+        },
+        {
+            "word": "flexible",
+            "opposite": "rigid",
+            "translate": "esnek"
+        },
+        {
+            "word": "logical",
+            "opposite": "emotional",
+            "translate": "mantıksal"
+        },
+        {
+            "word": "objective",
+            "opposite": "subjective",
+            "translate": "nesnel"
+        },
+        {
+            "word": "loyal",
+            "opposite": "treacherous",
+            "translate": "sadık"
+        },
+        {
+            "word": "abstract",
+            "opposite": "concrete",
+            "translate": "soyut"
+        },
+        {
+            "word": "verbal",
+            "opposite": "physical",
+            "translate": "sözel"
+        },
+        {
+            "word": "optimistic",
+            "opposite": "pessimistic",
+            "translate": "iyimser"
+        },
+        {
+            "word": "trivial",
+            "opposite": "crucial",
+            "translate": "önemsiz"
+        },
+        {
+            "word": "scarce",
+            "opposite": "abundant",
+            "translate": "kıt"
+        },
+        {
+            "word": "generous",
+            "opposite": "stingy",
+            "translate": "cömert"
+        },
+        {
+            "word": "fragile",
+            "opposite": "robust",
+            "translate": "kırılgan"
+        },
+        {
+            "word": "efficient",
+            "opposite": "wasteful",
+            "translate": "verimli"
+        },
+        {
+            "word": "explicit",
+            "opposite": "vague",
+            "translate": "açık, belirgin"
+        },
+        {
+            "word": "voluntary",
+            "opposite": "compulsory",
+            "translate": "gönüllü"
+        },
+        {
+            "word": "domestic",
+            "opposite": "foreign",
+            "translate": "yerel, iç"
+        },
+        {
+            "word": "theoretical",
+            "opposite": "practical",
+            "translate": "teorik"
+        },
+        {
+            "word": "stable",
+            "opposite": "volatile",
+            "translate": "istikrarlı"
+        },
+        {
+            "word": "conservative",
+            "opposite": "progressive",
+            "translate": "muhafazakâr"
+        },
+        {
+            "word": "humble",
+            "opposite": "arrogant",
+            "translate": "alçakgönüllü"
+        },
+        {
+            "word": "rational",
+            "opposite": "absurd",
+            "translate": "mantıklı"
+        },
+        {
+            "word": "profound",
+            "opposite": "superficial",
+            "translate": "derin (düşünce olarak)"
+        },
+        {
+            "word": "coherent",
+            "opposite": "chaotic",
+            "translate": "tutarlı"
+        },
+        {
+            "word": "decisive",
+            "opposite": "hesitant",
+            "translate": "kararlı"
+        }
+    ],
+    "expert": [
+        {
+            "word": "advocate",
+            "opposite": "oppose",
+            "translate": "savunmak"
+        },
+        {
+            "word": "accumulate",
+            "opposite": "disperse",
+            "translate": "biriktirmek"
+        },
+        {
+            "word": "acquire",
+            "opposite": "relinquish",
+            "translate": "edinmek"
+        },
+        {
+            "word": "allocate",
+            "opposite": "withdraw",
+            "translate": "tahsis etmek"
+        },
+        {
+            "word": "authorize",
+            "opposite": "prohibit",
+            "translate": "yetki vermek"
+        },
+        {
+            "word": "commence",
+            "opposite": "cease",
+            "translate": "başlamak"
+        },
+        {
+            "word": "comply",
+            "opposite": "violate",
+            "translate": "uymak"
+        },
+        {
+            "word": "consolidate",
+            "opposite": "fragment",
+            "translate": "sağlamlaştırmak"
+        },
+        {
+            "word": "diminish",
+            "opposite": "intensify",
+            "translate": "azaltmak"
+        },
+        {
+            "word": "discover",
+            "opposite": "overlook",
+            "translate": "keşfetmek"
+        },
+        {
+            "word": "enhance",
+            "opposite": "undermine",
+            "translate": "geliştirmek"
+        },
+        {
+            "word": "exacerbate",
+            "opposite": "alleviate",
+            "translate": "kötüleştirmek"
+        },
+        {
+            "word": "flourish",
+            "opposite": "decline",
+            "translate": "gelişmek"
+        },
+        {
+            "word": "foster",
+            "opposite": "hinder",
+            "translate": "teşvik etmek"
+        },
+        {
+            "word": "integrate",
+            "opposite": "segregate",
+            "translate": "bütünleştirmek"
+        },
+        {
+            "word": "justify",
+            "opposite": "condemn",
+            "translate": "haklı çıkarmak"
+        },
+        {
+            "word": "precede",
+            "opposite": "follow",
+            "translate": "önce gelmek"
+        },
+        {
+            "word": "promote",
+            "opposite": "obstruct",
+            "translate": "desteklemek"
+        },
+        {
+            "word": "retain",
+            "opposite": "abandon",
+            "translate": "elde tutmak"
+        },
+        {
+            "word": "verify",
+            "opposite": "falsify",
+            "translate": "doğrulamak"
+        },
+        {
+            "word": "mitigate",
+            "opposite": "aggravate",
+            "translate": "hafifletmek"
+        },
+        {
+            "word": "sustain",
+            "opposite": "exhaust",
+            "translate": "sürdürmek"
+        },
+        {
+            "word": "facilitate",
+            "opposite": "hinder",
+            "translate": "kolaylaştırmak"
+        },
+        {
+            "word": "innovate",
+            "opposite": "copy",
+            "translate": "yenilik yapmak"
+        },
+        {
+            "word": "intervene",
+            "opposite": "ignore",
+            "translate": "müdahale etmek"
+        },
+        {
+            "word": "delegate",
+            "opposite": "centralize",
+            "translate": "yetki devretmek"
+        },
+        {
+            "word": "inhibit",
+            "opposite": "stimulate",
+            "translate": "engellemek"
+        },
+        {
+            "word": "broaden",
+            "opposite": "restrict",
+            "translate": "genişletmek"
+        },
+        {
+            "word": "reinforce",
+            "opposite": "weaken",
+            "translate": "güçlendirmek"
+        },
+        {
+            "word": "diversify",
+            "opposite": "standardize",
+            "translate": "çeşitlendirmek"
+        },
+        {
+            "word": "escalate",
+            "opposite": "reduce",
+            "translate": "tırmandırmak"
+        },
+        {
+            "word": "rectify",
+            "opposite": "damage",
+            "translate": "düzeltmek"
+        },
+        {
+            "word": "synchronize",
+            "opposite": "separate",
+            "translate": "eşzamanlamak"
+        },
+        {
+            "word": "clarify",
+            "opposite": "confuse",
+            "translate": "açıklığa kavuşturmak"
+        },
+        {
+            "word": "optimize",
+            "opposite": "worsen",
+            "translate": "en iyi hâle getirmek"
+        }
+    ],
+    "wrong_answers": [
+        "mountain",
+        "celebrate",
+        "bicycle",
+        "language",
+        "pillow",
+        "keyboard",
+        "ocean",
+        "library",
+        "metaphor",
+        "structure",
+        "inquiry",
+        "alliance",
+        "fragment",
+        "ambiguity",
+        "compass",
+        "harmony",
+        "spectrum",
+        "resonance",
+        "migration",
+        "reflection",
+        "transit",
+        "continuum",
+        "verdict",
+        "provision",
+        "circuit",
+        "threshold",
+        "vessel",
+        "domain",
+        "catalyst",
+        "terrain",
+        "equation",
+        "cascade",
+        "synthesis",
+        "artifact",
+        "dimension",
+        "protocol",
+        "interval",
+        "priority",
+        "passage",
+        "segment",
+        "transition",
+        "adviser",
+        "sequence",
+        "commerce",
+        "tribute",
+        "fragrance",
+        "notion",
+        "veracity",
+        "momentum",
+        "archive",
+        "impulse",
+        "basket",
+        "sunset",
+        "curious",
+        "pencil",
+        "garden",
+        "planet",
+        "whisper",
+        "traffic",
+        "mirror",
+        "blanket",
+        "festival",
+        "orange",
+        "sandwich",
+        "battery",
+        "airport",
+        "blank",
+        "adventure",
+        "island",
+        "puzzle",
+        "river",
+        "candle",
+        "forest",
+        "camera",
+        "ticket",
+        "bridge",
+        "pocket",
+        "rainbow",
+        "musician",
+        "market",
+        "thunder",
+        "shampoo",
+        "hunger",
+        "sincere",
+        "energy",
+        "drawer",
+        "solitude",
+        "heritage",
+        "turbulent",
+        "endeavor",
+        "friction",
+        "signal",
+        "lantern",
+        "companion",
+        "fabric",
+        "harbor",
+        "volume",
+        "ceiling",
+        "fiction",
+        "gesture",
+        "harvest",
+        "journey",
+        "stadium",
+        "climate",
+        "engine",
+        "gravity",
+        "legend",
+        "meadow",
+        "pattern",
+        "sculpture",
+        "voyage"
+    ]
+}

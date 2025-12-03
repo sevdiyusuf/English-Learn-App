@@ -1,0 +1,333 @@
+{
+    "categories": [
+        {
+            "id": "food",
+            "name": "Food",
+            "color": "#F4A261",
+            "words": [
+                {
+                    "english": "bread",
+                    "turkish": "ekmek"
+                },
+                {
+                    "english": "butter",
+                    "turkish": "tereyağı"
+                },
+                {
+                    "english": "rice",
+                    "turkish": "pirinç"
+                },
+                {
+                    "english": "salad",
+                    "turkish": "salata"
+                },
+                {
+                    "english": "soup",
+                    "turkish": "çorba"
+                },
+                {
+                    "english": "chicken",
+                    "turkish": "tavuk"
+                },
+                {
+                    "english": "pasta",
+                    "turkish": "makarna"
+                },
+                {
+                    "english": "banana",
+                    "turkish": "muz"
+                },
+                {
+                    "english": "tomato",
+                    "turkish": "domates"
+                },
+                {
+                    "english": "cheese",
+                    "turkish": "peynir"
+                }
+            ]
+        },
+        {
+            "id": "travel",
+            "name": "Travel",
+            "color": "#2A9D8F",
+            "words": [
+                {
+                    "english": "ticket",
+                    "turkish": "bilet"
+                },
+                {
+                    "english": "passport",
+                    "turkish": "pasaport"
+                },
+                {
+                    "english": "luggage",
+                    "turkish": "bagaj"
+                },
+                {
+                    "english": "platform",
+                    "turkish": "peron"
+                },
+                {
+                    "english": "flight",
+                    "turkish": "uçuş"
+                },
+                {
+                    "english": "map",
+                    "turkish": "harita"
+                },
+                {
+                    "english": "journey",
+                    "turkish": "seyahat"
+                },
+                {
+                    "english": "border",
+                    "turkish": "sınır"
+                },
+                {
+                    "english": "hotel",
+                    "turkish": "otel"
+                },
+                {
+                    "english": "suitcase",
+                    "turkish": "bavul"
+                }
+            ]
+        },
+        {
+            "id": "feelings",
+            "name": "Feelings",
+            "color": "#E76F51",
+            "words": [
+                {
+                    "english": "angry",
+                    "turkish": "kızgın"
+                },
+                {
+                    "english": "bored",
+                    "turkish": "sıkılmış"
+                },
+                {
+                    "english": "excited",
+                    "turkish": "heyecanlı"
+                },
+                {
+                    "english": "worried",
+                    "turkish": "endişeli"
+                },
+                {
+                    "english": "tired",
+                    "turkish": "yorgun"
+                },
+                {
+                    "english": "sad",
+                    "turkish": "üzgün"
+                },
+                {
+                    "english": "proud",
+                    "turkish": "gururlu"
+                },
+                {
+                    "english": "confused",
+                    "turkish": "kafası karışmış"
+                },
+                {
+                    "english": "calm",
+                    "turkish": "sakin"
+                },
+                {
+                    "english": "shy",
+                    "turkish": "utangaç"
+                }
+            ]
+        },
+        {
+            "id": "house",
+            "name": "House",
+            "color": "#457B9D",
+            "words": [
+                {
+                    "english": "sofa",
+                    "turkish": "kanepe"
+                },
+                {
+                    "english": "lamp",
+                    "turkish": "lamba"
+                },
+                {
+                    "english": "blanket",
+                    "turkish": "battaniye"
+                },
+                {
+                    "english": "shelf",
+                    "turkish": "raf"
+                },
+                {
+                    "english": "mirror",
+                    "turkish": "ayna"
+                },
+                {
+                    "english": "carpet",
+                    "turkish": "halı"
+                },
+                {
+                    "english": "pillow",
+                    "turkish": "yastık"
+                },
+                {
+                    "english": "desk",
+                    "turkish": "çalışma masası"
+                },
+                {
+                    "english": "wardrobe",
+                    "turkish": "gardırop"
+                },
+                {
+                    "english": "chair",
+                    "turkish": "sandalye"
+                }
+            ]
+        },
+        {
+            "id": "school",
+            "name": "School",
+            "color": "#6C5CE7",
+            "words": [
+                {
+                    "english": "homework",
+                    "turkish": "ödev"
+                },
+                {
+                    "english": "classroom",
+                    "turkish": "sınıf"
+                },
+                {
+                    "english": "notebook",
+                    "turkish": "defter"
+                },
+                {
+                    "english": "pencil",
+                    "turkish": "kurşun kalem"
+                },
+                {
+                    "english": "teacher",
+                    "turkish": "öğretmen"
+                },
+                {
+                    "english": "subject",
+                    "turkish": "ders"
+                },
+                {
+                    "english": "exam",
+                    "turkish": "sınav"
+                },
+                {
+                    "english": "library",
+                    "turkish": "kütüphane"
+                },
+                {
+                    "english": "lesson",
+                    "turkish": "ders"
+                },
+                {
+                    "english": "schedule",
+                    "turkish": "program"
+                }
+            ]
+        },
+        {
+            "id": "nature",
+            "name": "Nature",
+            "color": "#2E8B57",
+            "words": [
+                {
+                    "english": "river",
+                    "turkish": "nehir"
+                },
+                {
+                    "english": "forest",
+                    "turkish": "orman"
+                },
+                {
+                    "english": "mountain",
+                    "turkish": "dağ"
+                },
+                {
+                    "english": "storm",
+                    "turkish": "fırtına"
+                },
+                {
+                    "english": "rain",
+                    "turkish": "yağmur"
+                },
+                {
+                    "english": "wind",
+                    "turkish": "rüzgar"
+                },
+                {
+                    "english": "sunrise",
+                    "turkish": "gün doğumu"
+                },
+                {
+                    "english": "island",
+                    "turkish": "ada"
+                },
+                {
+                    "english": "valley",
+                    "turkish": "vadi"
+                },
+                {
+                    "english": "flower",
+                    "turkish": "çiçek"
+                }
+            ]
+        },
+        {
+            "id": "clothes",
+            "name": "Clothes",
+            "color": "#8D99AE",
+            "words": [
+                {
+                    "english": "jacket",
+                    "turkish": "ceket"
+                },
+                {
+                    "english": "shirt",
+                    "turkish": "gömlek"
+                },
+                {
+                    "english": "skirt",
+                    "turkish": "etek"
+                },
+                {
+                    "english": "boots",
+                    "turkish": "bot"
+                },
+                {
+                    "english": "gloves",
+                    "turkish": "eldiven"
+                },
+                {
+                    "english": "scarf",
+                    "turkish": "atkı"
+                },
+                {
+                    "english": "jeans",
+                    "turkish": "kot pantolon"
+                },
+                {
+                    "english": "hat",
+                    "turkish": "şapka"
+                },
+                {
+                    "english": "sneakers",
+                    "turkish": "spor ayakkabı"
+                },
+                {
+                    "english": "coat",
+                    "turkish": "mont"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "55568769953",
+    "project_id": "my-english-project-f25ff",
+    "storage_bucket": "my-english-project-f25ff.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:55568769953:android:2fe5073ef2d7ca2cf921e0",
+        "android_client_info": {
+          "package_name": "com.example.yunoo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwjmzOdDqqoDtNZkHC_7VgOzcUFFq8SyY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
