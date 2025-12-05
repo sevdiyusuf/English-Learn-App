@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
 
 import '../../dictionary/load_dictionary.dart';
+import '../../dictionary/models/dict_entry.dart';
 import '../models/word_pair.dart';
 import '../models/word_set.dart';
 import 'word_match_repo.dart';
@@ -40,7 +41,7 @@ final wordMatchRepoProvider = FutureProvider<WordMatchRepoInterface>((
   if (kIsWeb) {
     return WordMatchRepoWeb();
   }
-  
+
   // Wait for Isar to be initialized with proper error handling and verification
   for (var attempt = 0; attempt < 5; attempt++) {
     try {
@@ -50,25 +51,68 @@ final wordMatchRepoProvider = FutureProvider<WordMatchRepoInterface>((
           await Future.delayed(Duration(milliseconds: 500 * (attempt + 1)));
           continue;
         }
-        throw StateError('Isar instance could not be initialized on non-web platform');
+        throw StateError(
+          'Isar instance could not be initialized on non-web platform',
+        );
       }
-      
+
       // Verify Isar is fully initialized by trying multiple queries
-      try {
-        // Try to access collections to ensure they're initialized
-        await isar.wordSets.count();
-        await isar.wordPairs.count();
-        // Additional delay to ensure collections are fully ready
-        await Future.delayed(const Duration(milliseconds: 200));
-        debugPrint('Isar verified and ready');
-        return WordMatchRepo(isar);
-      } catch (e) {
-        debugPrint('Isar not ready yet, attempt ${attempt + 1}: $e');
-        if (attempt < 4) {
-          await Future.delayed(Duration(milliseconds: 800 * (attempt + 1)));
-          continue;
+      // APK'da collections'ların başlatılması daha uzun sürebilir
+      bool collectionsReady = false;
+      for (var verifyAttempt = 0; verifyAttempt < 10; verifyAttempt++) {
+        try {
+          // Wait progressively longer for each verification attempt
+          await Future.delayed(
+            Duration(milliseconds: 300 + (verifyAttempt * 200)),
+          );
+
+          // Try to access collections to ensure they're initialized
+          await isar.wordSets.count();
+          await isar.wordPairs.count();
+          await isar.dictEntrys.count();
+
+          // Additional delay to ensure collections are fully ready
+          await Future.delayed(const Duration(milliseconds: 300));
+
+          collectionsReady = true;
+          debugPrint(
+            'Isar verified and ready on verification attempt ${verifyAttempt + 1}',
+          );
+          break;
+        } catch (e) {
+          debugPrint(
+            'Isar collections not ready yet, verification attempt ${verifyAttempt + 1}: $e',
+          );
+          if (verifyAttempt == 9) {
+            // Last verification attempt failed
+            debugPrint(
+              'Isar collections verification failed after 10 attempts',
+            );
+            if (attempt < 4) {
+              // Retry the whole initialization
+              await Future.delayed(
+                Duration(milliseconds: 1000 * (attempt + 1)),
+              );
+              break; // Break inner loop, continue outer retry loop
+            } else {
+              rethrow;
+            }
+          }
         }
-        rethrow;
+      }
+
+      if (collectionsReady) {
+        return WordMatchRepo(isar);
+      } else {
+        // Collections not ready, but not last attempt - continue retry
+        if (attempt < 4) {
+          await Future.delayed(Duration(milliseconds: 1000 * (attempt + 1)));
+          continue;
+        } else {
+          throw StateError(
+            'Isar collections could not be initialized after verification attempts',
+          );
+        }
       }
     } catch (e) {
       debugPrint('Isar initialization attempt ${attempt + 1} failed: $e');

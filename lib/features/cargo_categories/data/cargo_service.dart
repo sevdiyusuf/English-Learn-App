@@ -117,4 +117,116 @@ class CargoService {
       return null;
     }
   }
+
+  /// Get 3 random distinct categories from all available categories
+  List<Category> getRandomCategories(int count, Random random) {
+    if (_categories == null) {
+      throw StateError('Data not loaded. Call loadData() first.');
+    }
+    final allCategories = List<Category>.from(_categories!);
+    allCategories.shuffle(random);
+    return allCategories.take(count).toList();
+  }
+
+  /// Get categories by difficulty level
+  List<Category> getCategoriesByDifficulty(String difficulty) {
+    if (_categories == null) {
+      throw StateError('Data not loaded. Call loadData() first.');
+    }
+    return _categories!.where((cat) => cat.difficulty == difficulty).toList();
+  }
+
+  /// Get 3 random categories based on game level
+  /// Beginner: 2 easy + 1 medium
+  /// Normal: 2 medium + 1 easy
+  /// Advanced: 2 medium + 1 hard
+  /// Expert: 2 hard + 1 medium
+  List<Category> getRandomCategoriesByLevel(String level, Random random) {
+    if (_categories == null) {
+      throw StateError('Data not loaded. Call loadData() first.');
+    }
+
+    // Get categories by difficulty and create fresh shuffled copies
+    final easyCategories = List<Category>.from(getCategoriesByDifficulty('easy'));
+    final mediumCategories = List<Category>.from(getCategoriesByDifficulty('medium'));
+    final hardCategories = List<Category>.from(getCategoriesByDifficulty('hard'));
+
+    // Shuffle each difficulty list multiple times for better randomization
+    for (int i = 0; i < 3; i++) {
+      easyCategories.shuffle(random);
+      mediumCategories.shuffle(random);
+      hardCategories.shuffle(random);
+    }
+
+    final selected = <Category>[];
+
+    switch (level) {
+      case 'beginner':
+        // 2 easy + 1 medium
+        if (easyCategories.length < 2 || mediumCategories.length < 1) {
+          throw StateError('Not enough categories for beginner level');
+        }
+        // Use random indices instead of just taking first ones
+        final easyIndices = List<int>.generate(easyCategories.length, (i) => i)..shuffle(random);
+        final mediumIndices = List<int>.generate(mediumCategories.length, (i) => i)..shuffle(random);
+        selected.add(easyCategories[easyIndices[0]]);
+        selected.add(easyCategories[easyIndices[1]]);
+        selected.add(mediumCategories[mediumIndices[0]]);
+        break;
+      case 'normal':
+        // 2 medium + 1 easy
+        if (mediumCategories.length < 2 || easyCategories.length < 1) {
+          throw StateError('Not enough categories for normal level');
+        }
+        final mediumIndices = List<int>.generate(mediumCategories.length, (i) => i)..shuffle(random);
+        final easyIndices = List<int>.generate(easyCategories.length, (i) => i)..shuffle(random);
+        selected.add(mediumCategories[mediumIndices[0]]);
+        selected.add(mediumCategories[mediumIndices[1]]);
+        selected.add(easyCategories[easyIndices[0]]);
+        break;
+      case 'advanced':
+        // 2 medium + 1 hard
+        if (mediumCategories.length < 2 || hardCategories.length < 1) {
+          throw StateError('Not enough categories for advanced level');
+        }
+        final mediumIndices = List<int>.generate(mediumCategories.length, (i) => i)..shuffle(random);
+        final hardIndices = List<int>.generate(hardCategories.length, (i) => i)..shuffle(random);
+        selected.add(mediumCategories[mediumIndices[0]]);
+        selected.add(mediumCategories[mediumIndices[1]]);
+        selected.add(hardCategories[hardIndices[0]]);
+        break;
+      case 'expert':
+        // 2 hard + 1 medium
+        if (hardCategories.length < 2 || mediumCategories.length < 1) {
+          throw StateError('Not enough categories for expert level');
+        }
+        final hardIndices = List<int>.generate(hardCategories.length, (i) => i)..shuffle(random);
+        final mediumIndices = List<int>.generate(mediumCategories.length, (i) => i)..shuffle(random);
+        selected.add(hardCategories[hardIndices[0]]);
+        selected.add(hardCategories[hardIndices[1]]);
+        selected.add(mediumCategories[mediumIndices[0]]);
+        break;
+      default:
+        throw StateError('Invalid game level: $level');
+    }
+
+    // Shuffle final selection multiple times for better randomization
+    for (int i = 0; i < 3; i++) {
+      selected.shuffle(random);
+    }
+    return selected;
+  }
+
+  /// Get 4 random words from a specific category
+  List<CargoWord> getRandomWordsFromCategory(String categoryId, int count, Random random) {
+    if (_wordsByCategory == null) {
+      throw StateError('Data not loaded. Call loadData() first.');
+    }
+    final words = List<CargoWord>.from(_wordsByCategory![categoryId] ?? []);
+    if (words.length < count) {
+      throw StateError('Category $categoryId has fewer than $count words');
+    }
+    words.shuffle(random);
+    return words.take(count).toList();
+  }
 }

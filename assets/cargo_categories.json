@@ -4,6 +4,7 @@
             "id": "food",
             "name": "Food",
             "color": "#F4A261",
+            "difficulty": "easy",
             "words": [
                 {
                     "english": "bread",
@@ -51,6 +52,7 @@
             "id": "travel",
             "name": "Travel",
             "color": "#2A9D8F",
+            "difficulty": "medium",
             "words": [
                 {
                     "english": "ticket",
@@ -98,6 +100,7 @@
             "id": "feelings",
             "name": "Feelings",
             "color": "#E76F51",
+            "difficulty": "medium",
             "words": [
                 {
                     "english": "angry",
@@ -145,6 +148,7 @@
             "id": "house",
             "name": "House",
             "color": "#457B9D",
+            "difficulty": "easy",
             "words": [
                 {
                     "english": "sofa",
@@ -192,6 +196,7 @@
             "id": "school",
             "name": "School",
             "color": "#6C5CE7",
+            "difficulty": "easy",
             "words": [
                 {
                     "english": "homework",
@@ -239,6 +244,7 @@
             "id": "nature",
             "name": "Nature",
             "color": "#2E8B57",
+            "difficulty": "medium",
             "words": [
                 {
                     "english": "river",
@@ -286,6 +292,7 @@
             "id": "clothes",
             "name": "Clothes",
             "color": "#8D99AE",
+            "difficulty": "easy",
             "words": [
                 {
                     "english": "jacket",
@@ -326,6 +333,534 @@
                 {
                     "english": "coat",
                     "turkish": "mont"
+                }
+            ]
+        },
+        {
+            "id": "family",
+            "name": "Family",
+            "color": "#FFB703",
+            "difficulty": "easy",
+            "words": [
+                {
+                    "english": "mother",
+                    "turkish": "anne"
+                },
+                {
+                    "english": "father",
+                    "turkish": "baba"
+                },
+                {
+                    "english": "sister",
+                    "turkish": "kız kardeş"
+                },
+                {
+                    "english": "brother",
+                    "turkish": "erkek kardeş"
+                },
+                {
+                    "english": "grandmother",
+                    "turkish": "büyükanne"
+                },
+                {
+                    "english": "grandfather",
+                    "turkish": "büyükbaba"
+                },
+                {
+                    "english": "aunt",
+                    "turkish": "hala / teyze"
+                },
+                {
+                    "english": "uncle",
+                    "turkish": "amca / dayı"
+                },
+                {
+                    "english": "cousin",
+                    "turkish": "kuzen"
+                },
+                {
+                    "english": "baby",
+                    "turkish": "bebek"
+                }
+            ]
+        },
+        {
+            "id": "daily_routine",
+            "name": "Daily Routine",
+            "color": "#118AB2",
+            "difficulty": "easy",
+            "words": [
+                {
+                    "english": "wake up",
+                    "turkish": "uyanmak"
+                },
+                {
+                    "english": "brush teeth",
+                    "turkish": "diş fırçalamak"
+                },
+                {
+                    "english": "have breakfast",
+                    "turkish": "kahvaltı etmek"
+                },
+                {
+                    "english": "go to school",
+                    "turkish": "okula gitmek"
+                },
+                {
+                    "english": "do homework",
+                    "turkish": "ödev yapmak"
+                },
+                {
+                    "english": "have lunch",
+                    "turkish": "öğle yemeği yemek"
+                },
+                {
+                    "english": "have dinner",
+                    "turkish": "akşam yemeği yemek"
+                },
+                {
+                    "english": "take a shower",
+                    "turkish": "duş almak"
+                },
+                {
+                    "english": "get dressed",
+                    "turkish": "giyinmek"
+                },
+                {
+                    "english": "go to bed",
+                    "turkish": "yatağa gitmek"
+                }
+            ]
+        },
+        {
+            "id": "jobs",
+            "name": "Jobs",
+            "color": "#D62828",
+            "difficulty": "medium",
+            "words": [
+                {
+                    "english": "doctor",
+                    "turkish": "doktor"
+                },
+                {
+                    "english": "engineer",
+                    "turkish": "mühendis"
+                },
+                {
+                    "english": "shop assistant",
+                    "turkish": "tezgahtar"
+                },
+                {
+                    "english": "waiter",
+                    "turkish": "garson"
+                },
+                {
+                    "english": "mechanic",
+                    "turkish": "tamirci"
+                },
+                {
+                    "english": "lawyer",
+                    "turkish": "avukat"
+                },
+                {
+                    "english": "nurse",
+                    "turkish": "hemşire"
+                },
+                {
+                    "english": "architect",
+                    "turkish": "mimar"
+                },
+                {
+                    "english": "journalist",
+                    "turkish": "gazeteci"
+                },
+                {
+                    "english": "electrician",
+                    "turkish": "elektrikçi"
+                }
+            ]
+        },
+        {
+            "id": "city",
+            "name": "City",
+            "color": "#06D6A0",
+            "difficulty": "medium",
+            "words": [
+                {
+                    "english": "square",
+                    "turkish": "meydan"
+                },
+                {
+                    "english": "bridge",
+                    "turkish": "köprü"
+                },
+                {
+                    "english": "traffic jam",
+                    "turkish": "trafik sıkışıklığı"
+                },
+                {
+                    "english": "crosswalk",
+                    "turkish": "yaya geçidi"
+                },
+                {
+                    "english": "subway",
+                    "turkish": "metro"
+                },
+                {
+                    "english": "parking lot",
+                    "turkish": "otopark"
+                },
+                {
+                    "english": "sidewalk",
+                    "turkish": "kaldırım"
+                },
+                {
+                    "english": "intersection",
+                    "turkish": "kavşak"
+                },
+                {
+                    "english": "roundabout",
+                    "turkish": "dönel kavşak"
+                },
+                {
+                    "english": "city hall",
+                    "turkish": "belediye binası"
+                }
+            ]
+        },
+        {
+            "id": "free_time",
+            "name": "Free Time",
+            "color": "#9B5DE5",
+            "difficulty": "medium",
+            "words": [
+                {
+                    "english": "hobby",
+                    "turkish": "hobi"
+                },
+                {
+                    "english": "camping",
+                    "turkish": "kamp yapma"
+                },
+                {
+                    "english": "cycling",
+                    "turkish": "bisiklete binme"
+                },
+                {
+                    "english": "hiking",
+                    "turkish": "doğa yürüyüşü"
+                },
+                {
+                    "english": "painting",
+                    "turkish": "resim yapma"
+                },
+                {
+                    "english": "gardening",
+                    "turkish": "bahçe işi"
+                },
+                {
+                    "english": "fishing",
+                    "turkish": "balık tutma"
+                },
+                {
+                    "english": "reading",
+                    "turkish": "okuma"
+                },
+                {
+                    "english": "dancing",
+                    "turkish": "dans etme"
+                },
+                {
+                    "english": "playing chess",
+                    "turkish": "satranç oynama"
+                }
+            ]
+        },
+        {
+            "id": "technology",
+            "name": "Technology",
+            "color": "#F15BB5",
+            "difficulty": "hard",
+            "words": [
+                {
+                    "english": "keyboard",
+                    "turkish": "klavye"
+                },
+                {
+                    "english": "screen",
+                    "turkish": "ekran"
+                },
+                {
+                    "english": "charger",
+                    "turkish": "şarj aleti"
+                },
+                {
+                    "english": "headphones",
+                    "turkish": "kulaklık"
+                },
+                {
+                    "english": "battery",
+                    "turkish": "pil / batarya"
+                },
+                {
+                    "english": "smartphone",
+                    "turkish": "akıllı telefon"
+                },
+                {
+                    "english": "tablet",
+                    "turkish": "tablet"
+                },
+                {
+                    "english": "download",
+                    "turkish": "indirmek"
+                },
+                {
+                    "english": "upload",
+                    "turkish": "yüklemek"
+                },
+                {
+                    "english": "wifi",
+                    "turkish": "kablosuz internet"
+                }
+            ]
+        },
+        {
+            "id": "health",
+            "name": "Health",
+            "color": "#3A86FF",
+            "difficulty": "hard",
+            "words": [
+                {
+                    "english": "appointment",
+                    "turkish": "randevu"
+                },
+                {
+                    "english": "symptom",
+                    "turkish": "belirti"
+                },
+                {
+                    "english": "infection",
+                    "turkish": "enfeksiyon"
+                },
+                {
+                    "english": "treatment",
+                    "turkish": "tedavi"
+                },
+                {
+                    "english": "medicine",
+                    "turkish": "ilaç"
+                },
+                {
+                    "english": "blood pressure",
+                    "turkish": "tansiyon"
+                },
+                {
+                    "english": "fracture",
+                    "turkish": "kırık"
+                },
+                {
+                    "english": "surgery",
+                    "turkish": "ameliyat"
+                },
+                {
+                    "english": "allergy",
+                    "turkish": "alerji"
+                },
+                {
+                    "english": "recovery",
+                    "turkish": "iyileşme"
+                }
+            ]
+        },
+        {
+            "id": "environment",
+            "name": "Environment",
+            "color": "#8338EC",
+            "difficulty": "hard",
+            "words": [
+                {
+                    "english": "pollution",
+                    "turkish": "kirlilik"
+                },
+                {
+                    "english": "recycle",
+                    "turkish": "geri dönüştürmek"
+                },
+                {
+                    "english": "climate change",
+                    "turkish": "iklim değişikliği"
+                },
+                {
+                    "english": "forest fire",
+                    "turkish": "orman yangını"
+                },
+                {
+                    "english": "renewable energy",
+                    "turkish": "yenilenebilir enerji"
+                },
+                {
+                    "english": "endangered species",
+                    "turkish": "nesli tükenmekte olan tür"
+                },
+                {
+                    "english": "carbon footprint",
+                    "turkish": "karbon ayak izi"
+                },
+                {
+                    "english": "greenhouse gas",
+                    "turkish": "sera gazı"
+                },
+                {
+                    "english": "deforestation",
+                    "turkish": "ormanların yok edilmesi"
+                },
+                {
+                    "english": "sustainable",
+                    "turkish": "sürdürülebilir"
+                }
+            ]
+        },
+        {
+            "id": "science",
+            "name": "Science",
+            "color": "#FB5607",
+            "difficulty": "hard",
+            "words": [
+                {
+                    "english": "experiment",
+                    "turkish": "deney"
+                },
+                {
+                    "english": "laboratory",
+                    "turkish": "laboratuvar"
+                },
+                {
+                    "english": "hypothesis",
+                    "turkish": "hipotez"
+                },
+                {
+                    "english": "research",
+                    "turkish": "araştırma"
+                },
+                {
+                    "english": "scientist",
+                    "turkish": "bilim insanı"
+                },
+                {
+                    "english": "microscope",
+                    "turkish": "mikroskop"
+                },
+                {
+                    "english": "evidence",
+                    "turkish": "kanıt"
+                },
+                {
+                    "english": "chemical reaction",
+                    "turkish": "kimyasal tepkime"
+                },
+                {
+                    "english": "gravity",
+                    "turkish": "yerçekimi"
+                },
+                {
+                    "english": "theory",
+                    "turkish": "kuram / teori"
+                }
+            ]
+        },
+        {
+            "id": "business",
+            "name": "Business",
+            "color": "#2B2D42",
+            "difficulty": "hard",
+            "words": [
+                {
+                    "english": "company",
+                    "turkish": "şirket"
+                },
+                {
+                    "english": "customer",
+                    "turkish": "müşteri"
+                },
+                {
+                    "english": "profit",
+                    "turkish": "kâr"
+                },
+                {
+                    "english": "contract",
+                    "turkish": "sözleşme"
+                },
+                {
+                    "english": "deadline",
+                    "turkish": "son teslim tarihi"
+                },
+                {
+                    "english": "negotiation",
+                    "turkish": "müzakere / pazarlık"
+                },
+                {
+                    "english": "investment",
+                    "turkish": "yatırım"
+                },
+                {
+                    "english": "expense",
+                    "turkish": "gider"
+                },
+                {
+                    "english": "budget",
+                    "turkish": "bütçe"
+                },
+                {
+                    "english": "manager",
+                    "turkish": "yönetici"
+                }
+            ]
+        },
+        {
+            "id": "culture",
+            "name": "Culture",
+            "color": "#52B788",
+            "difficulty": "hard",
+            "words": [
+                {
+                    "english": "tradition",
+                    "turkish": "gelenek"
+                },
+                {
+                    "english": "festival",
+                    "turkish": "festival / şenlik"
+                },
+                {
+                    "english": "custom",
+                    "turkish": "görenek"
+                },
+                {
+                    "english": "folklore",
+                    "turkish": "halk kültürü"
+                },
+                {
+                    "english": "ceremony",
+                    "turkish": "tören"
+                },
+                {
+                    "english": "belief",
+                    "turkish": "inanç"
+                },
+                {
+                    "english": "heritage",
+                    "turkish": "miras"
+                },
+                {
+                    "english": "superstition",
+                    "turkish": "batıl inanç"
+                },
+                {
+                    "english": "myth",
+                    "turkish": "efsane"
+                },
+                {
+                    "english": "ritual",
+                    "turkish": "ritüel"
                 }
             ]
         }

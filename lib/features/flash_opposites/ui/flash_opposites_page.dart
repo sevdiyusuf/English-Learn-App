@@ -1,4 +1,5 @@
 import 'dart:ui'; // Blur efekti için gerekli
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -171,78 +172,74 @@ class _FlashOppositesPageState extends ConsumerState<FlashOppositesPage> {
       child: Row(
         children: [
           // Timer (left)
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-            decoration: BoxDecoration(
-              color: Colors.blue.withValues(alpha: 0.3),
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(
-                color: Colors.blue.withValues(alpha: 0.5),
-                width: 1,
-              ),
-            ),
-            child: Row(
-              children: [
-                const Icon(Icons.timer, color: Colors.white70, size: 16),
-                const SizedBox(width: 6),
-                Text(
-                  _formatDuration(gameState.elapsedDuration),
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
+          Expanded(
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: BoxDecoration(
+                  color: Colors.blue.withValues(alpha: 0.3),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: Colors.blue.withValues(alpha: 0.5),
+                    width: 1,
                   ),
                 ),
-              ],
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(Icons.timer, color: Colors.white70, size: 16),
+                    const SizedBox(width: 6),
+                    Text(
+                      _formatDuration(gameState.elapsedDuration),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
 
-          // Spacer to push lives to center
-          Expanded(
-            child: Center(
-              // Lives (center)
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Icon(
-                    Icons.favorite_border,
-                    color: Colors.white70,
-                    size: 20,
-                  ),
-                  const SizedBox(width: 8),
-                  _buildLivesIndicator(gameState.livesLeft),
-                ],
-              ),
-            ),
-          ),
+          // Lives (center)
+          _buildLivesIndicator(gameState.livesLeft),
 
           // Score (right)
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-            decoration: BoxDecoration(
-              color: AppColors.primary,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.primary.withValues(alpha: 0.5),
-                  blurRadius: 10,
-                  spreadRadius: 1,
+          Expanded(
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                decoration: BoxDecoration(
+                  color: AppColors.primary,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.primary.withValues(alpha: 0.5),
+                      blurRadius: 10,
+                      spreadRadius: 1,
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            child: Row(
-              children: [
-                const Icon(Icons.star, color: Colors.yellow, size: 16),
-                const SizedBox(width: 6),
-                Text(
-                  '${gameState.score}',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(Icons.star, color: Colors.yellow, size: 16),
+                    const SizedBox(width: 6),
+                    Text(
+                      '${gameState.score}',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ],
@@ -388,9 +385,9 @@ class _FlashOppositesPageState extends ConsumerState<FlashOppositesPage> {
               final color = gameState.wordColors[option];
               final isSelected = gameState.selectedOption == option;
 
-              // Üst satırdaki en sağdaki kart (rowIndex == 2) ekrandan taşmaması
-              // ve hafif içerde durması için sağdan 2px içeride hizalanıyor.
-              if (isTopRow && rowIndex == 2) {
+              // Üst satırdaki en sağdaki kart (rowIndex == 2) için mobilde özel hizalama
+              // Web/PC'de tüm kartlar baseX ile hizalanır
+              if (isTopRow && rowIndex == 2 && !kIsWeb) {
                 return Positioned(
                   top: actualY,
                   right: 2.0,
@@ -414,7 +411,7 @@ class _FlashOppositesPageState extends ConsumerState<FlashOppositesPage> {
                 );
               }
 
-              // Diğer kartlar soldan hesaplanan baseX ile hizalanıyor.
+              // Diğer kartlar ve web/PC'deki tüm kartlar soldan hesaplanan baseX ile hizalanıyor.
               return Positioned(
                 top: actualY,
                 left: baseX,

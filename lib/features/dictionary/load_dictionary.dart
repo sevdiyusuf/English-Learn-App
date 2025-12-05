@@ -39,22 +39,35 @@ Future<Isar?> openDictionaryStore() async {
     );
 
     debugPrint('Isar database opened successfully');
-    
-    // Wait a bit to ensure Isar collections are fully initialized
-    await Future.delayed(const Duration(milliseconds: 300));
-    
-    // Verify collections are accessible (using extension methods from generated files)
-    try {
-      // Access collections through the generated extensions
-      await isar.wordSets.count();
-      await isar.wordPairs.count();
-      debugPrint('Isar collections verified');
-    } catch (e) {
-      debugPrint('Warning: Isar collections not ready yet: $e');
-      // Wait a bit more
-      await Future.delayed(const Duration(milliseconds: 500));
+
+    // APK'da collections'ların tamamen başlatılması için daha uzun bekleme ve doğrulama
+    // Retry mekanizması ile collections'ların hazır olduğundan emin ol
+    for (var attempt = 0; attempt < 10; attempt++) {
+      try {
+        // Wait progressively longer for each attempt
+        await Future.delayed(Duration(milliseconds: 200 + (attempt * 100)));
+
+        // Verify collections are accessible (using extension methods from generated files)
+        // Try to access collections to ensure they're initialized
+        await isar.wordSets.count();
+        await isar.wordPairs.count();
+        await isar.dictEntrys.count();
+
+        debugPrint('Isar collections verified on attempt ${attempt + 1}');
+        break; // Success, exit retry loop
+      } catch (e) {
+        debugPrint(
+          'Warning: Isar collections not ready yet, attempt ${attempt + 1}: $e',
+        );
+        if (attempt == 9) {
+          // Last attempt failed, but continue anyway - might work later
+          debugPrint(
+            'Isar collections verification failed after 10 attempts, but continuing...',
+          );
+        }
+      }
     }
-    
+
     debugPrint('Seeding dictionary if empty...');
 
     await _seedDictionaryIfEmpty(isar);

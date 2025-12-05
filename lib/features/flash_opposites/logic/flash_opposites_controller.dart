@@ -170,7 +170,7 @@ class FlashOppositesController extends StateNotifier<FlashOppositesState> {
 
   void _animateWordFalling(String word) {
     const targetPosition = 0.0; // Center position
-    const duration = Duration(milliseconds: 600);
+    const duration = Duration(milliseconds: 400); // Increased speed (was 600)
     const steps = 40;
     final stepDuration = duration ~/ steps;
     final stepSize = 100.0 / steps; // From -100 to 0

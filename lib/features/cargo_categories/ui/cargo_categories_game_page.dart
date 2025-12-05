@@ -5,11 +5,10 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/repositories/game_saved_words_repository.dart';
 import '../../../core/theme/app_colors.dart';
-import '../data/cargo_service.dart';
 import '../logic/cargo_categories_controller.dart';
 import '../models/cargo_categories_state.dart';
 import '../models/cargo_word.dart';
-import 'widgets/category_dock.dart';
+import 'widgets/cargo_column.dart' show CargoColumnWidget;
 import 'widgets/conveyor_area.dart';
 import 'widgets/score_dialog.dart';
 
@@ -25,207 +24,347 @@ class CargoCategoriesGamePage extends ConsumerStatefulWidget {
 
 class _CargoCategoriesGamePageState
     extends ConsumerState<CargoCategoriesGamePage> {
-  bool _scoreDialogShown = false;
+  // Modal yerine durum değişkeni ile kontrol edilen görünürlük
+  bool _isScorePanelVisible = false;
+  bool _gameFinishedHandled = false;
+  bool _showTranslate = false;
 
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(cargoCategoriesControllerProvider);
 
-    // Show score dialog when game finishes
-    if (state.isFinished && !_scoreDialogShown) {
+    // Oyun bittiğinde paneli tetikle
+    if (state.isFinished &&
+        !_gameFinishedHandled &&
+        !state.isRegrouping &&
+        state.chosenCategories.isNotEmpty) {
+      _gameFinishedHandled = true;
+      // Animasyonun pürüzsüz başlaması için ufak gecikme
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        _scoreDialogShown = true;
-        _showScoreDialog(context, state);
+        Future.delayed(const Duration(milliseconds: 600), () {
+          if (mounted) {
+            setState(() {
+              _isScorePanelVisible = true;
+            });
+          }
+        });
       });
     }
 
-    // Oyun başlamamışsa ve bitmemişse setup'a yönlendir
-    // Ancak currentWord varsa oyun başlamış demektir, bekle
-    if (!state.isRunning && !state.isFinished && state.currentWord == null) {
-      // Redirect to setup if game not started
+    // Oyun başlamadıysa setup'a yönlendir
+    if (!state.isRunning &&
+        !state.isFinished &&
+        state.chosenCategories.isEmpty) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (context.mounted) {
-          context.go('/cargo-categories/setup');
-        }
+        Future.delayed(const Duration(milliseconds: 200), () {
+          if (context.mounted) {
+            final currentState = ref.read(cargoCategoriesControllerProvider);
+            if (!currentState.isRunning &&
+                !currentState.isFinished &&
+                currentState.chosenCategories.isEmpty) {
+              context.go('/cargo-categories/setup');
+            }
+          }
+        });
       });
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
-    // Handle back button - stop game and go back to setup
+    // Kategori kontrolü
+    if (state.chosenCategories.length != 3) {
+      return const Scaffold(body: Center(child: Text('Kategori bulunamadı')));
+    }
+
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
         if (!didPop && state.isRunning) {
-          // Stop the game when back button is pressed
           ref.read(cargoCategoriesControllerProvider.notifier).reset();
           if (context.mounted) {
             context.go('/cargo-categories/setup');
           }
         }
       },
-      child: _buildGameContent(context, state),
-    );
-  }
-
-  Widget _buildGameContent(BuildContext context, CargoCategoriesState state) {
-    final selectedCategories =
-        state.selectedCategories
-            .map((id) => CargoService.instance.getCategoryById(id))
-            .where((cat) => cat != null)
-            .cast()
-            .toList();
-
-    if (selectedCategories.length != 3) {
-      return const Scaffold(body: Center(child: Text('Kategori bulunamadı')));
-    }
-
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: SafeArea(
-        child: Stack(
-          children: [
-            // Background
-            Positioned.fill(
-              child: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      AppColors.backgroundDark,
-                      AppColors.backgroundMedium,
-                    ],
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: SafeArea(
+          // Stack kullanarak Skor Panelini sayfanın bir parçası yapıyoruz (Modal değil)
+          child: Stack(
+            children: [
+              // 1. Arka Plan
+              Positioned.fill(
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        AppColors.backgroundDark,
+                        AppColors.backgroundMedium,
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
 
-            // Top bar: Timer and Score - En üstte, her zaman görünür
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              child: _TopStatusBar(
-                remainingTime: state.remainingTime,
-                score: state.score,
+              // 2. Oyun Alanı (En altta kalacak, etkileşime açık)
+              Column(
+                children: [
+                  _buildTopBar(context, state),
+                  _buildGameArea(context, state),
+                  _buildConveyorArea(context, state),
+                ],
               ),
-            ),
 
-            // Save bar above categories
-            Positioned(
-              top: 80,
-              left: 16,
-              right: 16,
-              child: _SaveBar(
-                onReceiveWord: (word) {
-                  // Kelimeyi kaydet (async ama await etmeden devam et)
-                  _saveWord(context, word);
-                  // Kelime kaydedildikten sonra yeni kelime yükle
-                  if (state.isRunning && !state.isFinished) {
-                    ref
-                        .read(cargoCategoriesControllerProvider.notifier)
-                        .handleWordSaved();
-                  }
-                },
-              ),
-            ),
-
-            // Category docks in the center - Save bar'ın altında
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 140),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children:
-                      selectedCategories.map((category) {
-                        return CategoryDock(
-                          category: category,
-
-                          // State'ten gelen renk/durum bilgileri
-                          isHighlighted:
-                              state.highlightedCategoryId == category.id,
-                          isWrong: state.wrongCategoryId == category.id,
-
-                          // 1. Tıklama (Tap) Durumu
-                          onTap: () {
-                            ref
-                                .read(
-                                  cargoCategoriesControllerProvider.notifier,
-                                )
-                                .handleAnswer(category.id);
-                          },
-
-                          // 2. Sürükle-Bırak (Drag) Durumu - KRİTİK KISIM
-                          onReceiveWord: (droppedWord) {
-                            debugPrint(
-                              "PAGE: Kelime Drop Edildi: ${droppedWord.word}",
-                            );
-                            ref
-                                .read(
-                                  cargoCategoriesControllerProvider.notifier,
-                                )
-                                .handleAnswer(
-                                  category.id,
-                                  droppedWord: droppedWord,
-                                );
-                          },
-                        );
-                      }).toList(),
+              // 3. Skor Paneli Overlay'i
+              // AnimatedSlide ile aşağıdan yukarı kayarak gelir
+              // IgnorePointer kullanmıyoruz, böylece sadece panelin kendisine tıklanır, arkası boş kalır.
+              if (state.isFinished) // Sadece oyun bittiğinde render et
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: AnimatedSlide(
+                    offset:
+                        _isScorePanelVisible
+                            ? Offset.zero
+                            : const Offset(0, 1.2),
+                    duration: const Duration(milliseconds: 800),
+                    curve: Curves.easeOutQuart,
+                    child: _buildScorePanel(context, state),
+                  ),
                 ),
-              ),
-            ),
-
-            // Conveyor belt at the bottom
-            Positioned(
-              bottom: 80,
-              left: 0,
-              right: 0,
-              child: ConveyorArea(
-                currentWord: state.currentWord,
-                travelDuration:
-                    state.selectedDifficulty?.travelDuration ??
-                    const Duration(seconds: 2),
-                onTimeout: () {
-                  ref
-                      .read(cargoCategoriesControllerProvider.notifier)
-                      .handleTimeout();
-                },
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 
-  void _showScoreDialog(BuildContext context, CargoCategoriesState state) {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder:
-          (context) => ScoreDialog(
-            score: state.score,
-            correctCount: state.correctCount,
-            wrongCount: state.wrongCount,
-            missedCount: state.missedCount,
-            difficulty: state.selectedDifficulty,
-            selectedCategories: state.selectedCategories,
-            onPlayAgain: () {
-              Navigator.of(context).pop();
-              _scoreDialogShown = false;
-              ref.read(cargoCategoriesControllerProvider.notifier).reset();
-              context.go('/cargo-categories/setup');
-            },
-            onBack: () {
-              Navigator.of(context).pop();
-              ref.read(cargoCategoriesControllerProvider.notifier).reset();
-              context.go('/cargo-categories/setup');
-            },
+  Widget _buildTopBar(BuildContext context, CargoCategoriesState state) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: BoxDecoration(
+        color: AppColors.surfaceDark.withValues(alpha: 0.9),
+        border: Border(
+          bottom: BorderSide(
+            color: Colors.white.withValues(alpha: 0.1),
+            width: 1,
           ),
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.arrow_back, color: Colors.white),
+                onPressed: () {
+                  if (state.isRunning) {
+                    ref
+                        .read(cargoCategoriesControllerProvider.notifier)
+                        .reset();
+                  }
+                  if (context.canPop()) {
+                    context.pop();
+                  } else {
+                    context.go('/cargo-categories/setup');
+                  }
+                },
+                tooltip: 'Geri',
+              ),
+              const SizedBox(width: 8),
+              Text(
+                '${state.totalWordsPlaced} / 12',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(width: 16),
+              SvgPicture.asset(
+                'assets/icons/speed.svg',
+                width: 20,
+                height: 20,
+                colorFilter: ColorFilter.mode(
+                  Colors.white.withValues(alpha: 0.8),
+                  BlendMode.srcIn,
+                ),
+              ),
+              const SizedBox(width: 4),
+              Text(
+                _formatDuration(state.elapsedTime),
+                style: TextStyle(
+                  color: Colors.white.withValues(alpha: 0.9),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+          FilledButton(
+            onPressed:
+                state.canCheck && !state.isFinished
+                    ? () {
+                      ref
+                          .read(cargoCategoriesControllerProvider.notifier)
+                          .checkSolution();
+                    }
+                    : null,
+            style: FilledButton.styleFrom(
+              backgroundColor:
+                  state.canCheck && !state.isFinished
+                      ? AppColors.success
+                      : Colors.grey,
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SvgPicture.asset(
+                  'assets/icons/local_shipping.svg',
+                  width: 18,
+                  height: 18,
+                  colorFilter: const ColorFilter.mode(
+                    Colors.white,
+                    BlendMode.srcIn,
+                  ),
+                ),
+                const SizedBox(width: 8),
+                const Text('Doğrula'),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
-  Future<void> _saveWord(BuildContext context, CargoWord word) async {
+  Widget _buildGameArea(BuildContext context, CargoCategoriesState state) {
+    return Expanded(
+      child: AnimatedOpacity(
+        opacity: state.isRegrouping ? 0.3 : 1.0,
+        duration: const Duration(milliseconds: 500),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          // Skor tablosu geldiğinde oyun alanını biraz yukarı kaydırabiliriz (isteğe bağlı)
+          // veya olduğu gibi bırakabiliriz. Şimdilik olduğu gibi bırakıyoruz.
+          child: Row(
+            children: List.generate(3, (index) {
+              final category = state.chosenCategories[index];
+              final column =
+                  state.columns.length > index
+                      ? state.columns[index]
+                      : const CargoColumn(words: []);
+
+              return CargoColumnWidget(
+                category: category,
+                words: column.words,
+                showCategoryName: state.showSolution,
+                showTranslate: _showTranslate,
+                onBookmarkTap: (word) => _saveWordToGames(context, word),
+                onReceiveWord: (word) {
+                  if (state.isRegrouping) return;
+                  int? fromColumnIndex;
+                  for (int i = 0; i < state.columns.length; i++) {
+                    if (state.columns[i].words.any(
+                      (w) => w.word == word.word,
+                    )) {
+                      fromColumnIndex = i;
+                      break;
+                    }
+                  }
+
+                  if (fromColumnIndex != null && fromColumnIndex != index) {
+                    ref
+                        .read(cargoCategoriesControllerProvider.notifier)
+                        .moveWordBetweenColumns(word, fromColumnIndex, index);
+                  } else {
+                    ref
+                        .read(cargoCategoriesControllerProvider.notifier)
+                        .dropWordToColumn(word, index);
+                  }
+                },
+                onWordMoved: (word, fromIndex) {
+                  // This is handled by onReceiveWord
+                },
+              );
+            }),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildConveyorArea(BuildContext context, CargoCategoriesState state) {
+    // Skor paneli açıkken bantın üstüne binmemesi için biraz boşluk bırakabiliriz
+    // veya panel bantın üstünü örtebilir (daha şık durur).
+    return Container(
+      height: 120,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: ConveyorArea(
+        currentWord: state.currentWord,
+        travelDuration:
+            state.selectedDifficulty?.travelDuration ??
+            const Duration(seconds: 2),
+        onTimeout: (timedOutWord) {
+          ref
+              .read(cargoCategoriesControllerProvider.notifier)
+              .handleTimeout(timedOutWord);
+        },
+      ),
+    );
+  }
+
+  // Özel Skor Paneli Widget'ı (Dialog Değil)
+  Widget _buildScorePanel(BuildContext context, CargoCategoriesState state) {
+    // Skor değerlerini al
+    final score = state.finalScore ?? 0;
+    final correctCount = state.finalCorrectCount ?? 0;
+    final wrongCount = state.finalWrongCount ?? 0;
+
+    return ScoreDialog(
+      score: score,
+      correctCount: correctCount,
+      wrongCount: wrongCount,
+      missedCount: 0,
+      elapsedTime: state.elapsedTime,
+      difficulty: state.selectedDifficulty,
+      selectedCategories: state.chosenCategories.map((c) => c.id).toList(),
+      onPlayAgain: () {
+        setState(() {
+          _isScorePanelVisible = false;
+          _gameFinishedHandled = false;
+        });
+        ref.read(cargoCategoriesControllerProvider.notifier).reset();
+        if (context.mounted) {
+          context.go('/cargo-categories/setup');
+        }
+      },
+      onBack: () {
+        setState(() {
+          _isScorePanelVisible = false;
+          _gameFinishedHandled = false;
+        });
+        ref.read(cargoCategoriesControllerProvider.notifier).reset();
+        if (context.mounted) {
+          context.go('/cargo-categories/setup');
+        }
+      },
+      onToggleTranslate: () {
+        setState(() {
+          _showTranslate = !_showTranslate;
+        });
+      },
+    );
+  }
+
+  String _formatDuration(Duration duration) {
+    final minutes = duration.inMinutes;
+    final seconds = duration.inSeconds % 60;
+    return '${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
+  }
+
+  Future<void> _saveWordToGames(BuildContext context, CargoWord word) async {
     try {
       final repository = ref.read(gameSavedWordsRepositoryProvider);
       final saved = await repository.saveToWordsFromGames(
@@ -243,6 +382,7 @@ class _CargoCategoriesGamePageState
                   : 'Bu kelime zaten kayıtlı.',
             ),
             duration: const Duration(seconds: 2),
+            backgroundColor: saved ? Colors.green : Colors.orange,
           ),
         );
       }
@@ -250,134 +390,12 @@ class _CargoCategoriesGamePageState
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Kaydedilemedi, lütfen tekrar deneyin: $e'),
-            duration: const Duration(seconds: 3),
+            content: Text('Kelime kaydedilirken hata oluştu: $e'),
+            duration: const Duration(seconds: 2),
+            backgroundColor: Colors.red,
           ),
         );
       }
     }
-  }
-}
-
-class _SaveBar extends StatelessWidget {
-  const _SaveBar({required this.onReceiveWord});
-
-  final Function(CargoWord) onReceiveWord;
-
-  @override
-  Widget build(BuildContext context) {
-    return DragTarget<CargoWord>(
-      onWillAcceptWithDetails: (details) => true,
-      onAcceptWithDetails: (details) {
-        onReceiveWord(details.data);
-      },
-      builder: (context, candidateData, rejectedData) {
-        final isHovering = candidateData.isNotEmpty;
-
-        return Container(
-          height: 50,
-          decoration: BoxDecoration(
-            color:
-                isHovering
-                    ? AppColors.primary.withValues(alpha: 0.8)
-                    : Colors.black.withValues(alpha: 0.6),
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color:
-                  isHovering
-                      ? AppColors.primary
-                      : Colors.white.withValues(alpha: 0.3),
-              width: 2,
-            ),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SvgPicture.asset(
-                'assets/icons/bookmark.svg',
-                width: 20,
-                height: 20,
-                colorFilter: ColorFilter.mode(
-                  Colors.white.withValues(alpha: 0.9),
-                  BlendMode.srcIn,
-                ),
-              ),
-              const SizedBox(width: 8),
-              Text(
-                'Bilmediğin kelimeleri buraya sürükle',
-                style: TextStyle(
-                  color: Colors.white.withValues(alpha: 0.9),
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _TopStatusBar extends StatelessWidget {
-  const _TopStatusBar({required this.remainingTime, required this.score});
-
-  final Duration remainingTime;
-  final int score;
-
-  String _formatDuration(Duration duration) {
-    final minutes = duration.inMinutes;
-    final seconds = duration.inSeconds % 60;
-    return '${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      decoration: BoxDecoration(
-        color: AppColors.surfaceDark.withValues(alpha: 0.9),
-        border: Border(
-          bottom: BorderSide(
-            color: Colors.white.withValues(alpha: 0.1),
-            width: 1,
-          ),
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              const Icon(Icons.timer, color: Colors.white, size: 20),
-              const SizedBox(width: 8),
-              Text(
-                _formatDuration(remainingTime),
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            decoration: BoxDecoration(
-              color: AppColors.primary,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Text(
-              '$score',
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
   }
 }

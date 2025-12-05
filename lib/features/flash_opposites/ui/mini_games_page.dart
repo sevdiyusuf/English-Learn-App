@@ -72,26 +72,7 @@ class MiniGamesPage extends StatelessWidget {
 
                   SizedBox(height: spacing),
 
-                  _GameButton(
-                    title: 'Flash Opposites',
-                    subtitle: 'Zıt anlamlı kelime seçme oyunu',
-                    icon: Icons.flash_on,
-                    svgAsset: 'assets/icons/flash_on.svg',
-                    color: const Color.fromARGB(255, 175, 63, 192), // Mor
-                    onTap: () => context.push('/flash-opposites'),
-                  ),
-                  SizedBox(height: spacing),
-
-                  _GameButton(
-                    title: 'Flash Synonym',
-                    subtitle: 'Eş/yakın anlamlı kelimeleri seçin',
-                    icon: Icons.compare_arrows,
-                    svgAsset: 'assets/icons/compare_arrows.svg',
-                    color: const Color.fromARGB(255, 63, 192, 175), // Turkuaz
-                    onTap: () => context.push('/flash-synonym'),
-                  ),
-                  SizedBox(height: spacing),
-
+                  // 1. Cargo Categories (en üstte)
                   _GameButton(
                     title: 'Cargo Categories',
                     subtitle: 'Kelimeleri kategorilere ayır',
@@ -102,6 +83,29 @@ class MiniGamesPage extends StatelessWidget {
                   ),
                   SizedBox(height: spacing),
 
+                  // 2. Flash Synonym
+                  _GameButton(
+                    title: 'Flash Synonym',
+                    subtitle: 'Eş/yakın anlamlı kelimeleri seçin',
+                    icon: Icons.compare_arrows,
+                    svgAsset: 'assets/icons/compare_arrows.svg',
+                    color: const Color.fromARGB(255, 63, 192, 175), // Turkuaz
+                    onTap: () => context.push('/flash-synonym'),
+                  ),
+                  SizedBox(height: spacing),
+
+                  // 3. Flash Opposites
+                  _GameButton(
+                    title: 'Flash Opposites',
+                    subtitle: 'Zıt anlamlı kelime seçme oyunu',
+                    icon: Icons.flash_on,
+                    svgAsset: 'assets/icons/flash_on.svg',
+                    color: const Color.fromARGB(255, 175, 63, 192), // Mor
+                    onTap: () => context.push('/flash-opposites'),
+                  ),
+                  SizedBox(height: spacing),
+
+                  // 4. Word Echo
                   _GameButton(
                     title: 'Word Echo',
                     subtitle: 'Kelimeyi hatırla ve doğru yeri seç',

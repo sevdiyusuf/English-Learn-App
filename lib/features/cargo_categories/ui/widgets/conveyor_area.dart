@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../../models/cargo_word.dart';
-import 'word_box.dart';
+import 'cargo_package.dart';
 
 class _AnimatingWordData {
   final String id;
@@ -21,7 +21,8 @@ class ConveyorArea extends StatefulWidget {
 
   final CargoWord? currentWord;
   final Duration travelDuration;
-  final VoidCallback onTimeout;
+  final Function(CargoWord)
+  onTimeout; // Changed to accept the word that timed out
 
   @override
   State<ConveyorArea> createState() => _ConveyorAreaState();
@@ -101,10 +102,11 @@ class _ConveyorAreaState extends State<ConveyorArea> {
                 _activeWordData != null &&
                 !_isDropped &&
                 _animationTimer == null) {
+              final timedOutWord = _activeWordData!.fullWord;
               debugPrint(
                 "ConveyorArea: Timeout triggered for ${_activeWordData!.id}",
               );
-              widget.onTimeout();
+              widget.onTimeout(timedOutWord);
             } else {
               if (kDebugMode) {
                 debugPrint(
@@ -141,18 +143,30 @@ class _ConveyorAreaState extends State<ConveyorArea> {
     final oldWordId = oldWidget.currentWord?.word;
     final newWordId = newWord?.word;
 
-    // --- KRİTİK DÜZELTME BURADA ---
-
-    // Sadece YENİ ve DOLU bir kelime gelirse animasyonu değiştir.
-    if (newWord != null && newWordId != oldWordId) {
-      if (_screenWidth != null) {
-        debugPrint("ConveyorArea: New word detected: ${newWord.word}");
-        _startAnimation(newWord, _screenWidth!);
-      }
+    // If current word becomes null, stop animation and clear
+    if (newWord == null && oldWidget.currentWord != null) {
+      debugPrint("ConveyorArea: Word cleared, stopping animation");
+      _stopAnimation();
+      return;
     }
 
-    // DİKKAT: "else if (newWord == null)" BLOĞUNU TAMAMEN SİLDİM.
-    // Controller null gönderirse, görmezden geliyoruz ve mevcut animasyon devam ediyor.
+    // Sadece YENİ ve DOLU bir kelime gelirse animasyonu değiştir.
+    // IMPORTANT: If oldWord was null and newWord is not null, start animation
+    // This handles the case where a word times out, is cleared, then reloaded
+    if (newWord != null &&
+        (newWordId != oldWordId || (oldWordId == null && newWordId != null))) {
+      if (_screenWidth != null) {
+        debugPrint(
+          "ConveyorArea: New word detected: ${newWord.word} (old: $oldWordId, new: $newWordId)",
+        );
+        _startAnimation(newWord, _screenWidth!);
+      } else {
+        // Screen width not yet available, wait for it in build
+        debugPrint(
+          "ConveyorArea: New word detected but screen width not available yet: ${newWord.word}",
+        );
+      }
+    }
   }
 
   @override
@@ -232,18 +246,18 @@ class _ConveyorAreaState extends State<ConveyorArea> {
 
                       feedback: Material(
                         color: Colors.transparent,
-                        child: WordBox(
-                          english: _activeWordData!.fullWord.word,
-                          turkish: _activeWordData!.fullWord.translate,
+                        child: CargoPackage(
+                          word: _activeWordData!.fullWord,
+                          isSmall: false, // Large when dragging
                         ),
                       ),
 
                       // Sürüklerken arkada boşluk bırak
                       childWhenDragging: const SizedBox(),
 
-                      child: WordBox(
-                        english: _activeWordData!.fullWord.word,
-                        turkish: _activeWordData!.fullWord.translate,
+                      child: CargoPackage(
+                        word: _activeWordData!.fullWord,
+                        isSmall: false, // Large size on conveyor belt
                       ),
                     ),
                   ),

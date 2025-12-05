@@ -35,9 +35,6 @@ class _CargoCategoriesSetupPageState
   Widget build(BuildContext context) {
     final state = ref.watch(cargoCategoriesControllerProvider);
 
-    // Setup sayfasına her geldiğinde, eğer oyun çalışıyorsa reset et
-    // Bu sayede oyunu oynarken geri tuşuna basıldığında buton aktif olur
-    // Ancak oyun başlatılırken reset etme (isRunning true olabilir ama henüz game sayfasına gidilmemiş olabilir)
     if (state.isFinished) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (mounted) {
@@ -49,7 +46,6 @@ class _CargoCategoriesSetupPageState
     return FutureBuilder<void>(
       future: _loadDataFuture,
       builder: (context, snapshot) {
-        // --- LOADING STATE ---
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Scaffold(
             backgroundColor: Colors.transparent,
@@ -57,13 +53,13 @@ class _CargoCategoriesSetupPageState
           );
         }
 
-        // --- ERROR STATE ---
         if (snapshot.hasError) {
           return Scaffold(
             backgroundColor: Colors.transparent,
             appBar: _buildAppBar(context),
             body: Center(
               child: _GlassContainer(
+                padding: const EdgeInsets.all(24),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -75,7 +71,7 @@ class _CargoCategoriesSetupPageState
                     const SizedBox(height: 16),
                     Text(
                       'Hata: ${snapshot.error}',
-                      style: const TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white, fontSize: 16),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 16),
@@ -97,8 +93,6 @@ class _CargoCategoriesSetupPageState
           );
         }
 
-        // --- SUCCESS STATE ---
-        final categories = CargoService.instance.getCategories();
         final padding = ResponsiveUtils.responsivePadding(context);
         final spacing = ResponsiveUtils.responsiveSpacing(context);
         final maxWidth = ResponsiveUtils.responsive<double>(
@@ -109,26 +103,31 @@ class _CargoCategoriesSetupPageState
         );
 
         return Scaffold(
-          backgroundColor: Colors.transparent,
+          backgroundColor: const Color.fromARGB(0, 0, 0, 0),
           extendBodyBehindAppBar: true,
           appBar: _buildAppBar(context),
           body: Stack(
             children: [
-              // 1. KATMAN: Vignette (Karartma)
               const SizedBox.expand(
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     gradient: RadialGradient(
-                      center: Alignment.center,
-                      radius: 1.2,
-                      colors: [Colors.transparent, Colors.black87],
-                      stops: [0.3, 1.0],
+                      center: Alignment.topCenter,
+                      radius: 1.5,
+                      colors: [
+                        Color.fromARGB(
+                          255,
+                          38,
+                          91,
+                          101,
+                        ), // Biraz daha mavimsi gri
+                        Color(0xFF000000),
+                      ],
+                      stops: [0.0, 1.0],
                     ),
                   ),
                 ),
               ),
-
-              // 2. KATMAN: İçerik
               SafeArea(
                 child: SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),
@@ -142,79 +141,21 @@ class _CargoCategoriesSetupPageState
                           children: [
                             SizedBox(height: spacing),
 
-                            // Title Section
-                            _GlassContainer(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 20,
-                                horizontal: 16,
-                              ),
-                              child: Text(
-                                'OYUN AYARLARI',
-                                style: Theme.of(
-                                  context,
-                                ).textTheme.headlineMedium?.copyWith(
-                                  fontWeight: FontWeight.w900,
-                                  color: Colors.white,
-                                  letterSpacing: 2,
-                                  shadows: [
-                                    Shadow(
-                                      blurRadius: 10,
-                                      color: AppColors.primary.withValues(
-                                        alpha: 0.8,
-                                      ),
-                                      offset: const Offset(0, 0),
-                                    ),
-                                  ],
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-
+                            // --- BİLGİLENDİRME KARTI ---
+                            _buildInfoCard(context),
                             SizedBox(height: spacing * 2),
 
-                            // Difficulty Section
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8.0,
-                                vertical: 8,
-                              ),
-                              decoration: BoxDecoration(
-                                color: AppColors.surfaceDark.withValues(
-                                  alpha: 0.9,
-                                ),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Text(
-                                'ZORLUK SEVİYESİ',
-                                style: TextStyle(
-                                  color: Colors.white.withValues(alpha: 0.8),
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 1,
-                                  fontSize: 14,
-                                ),
-                              ),
+                            // --- 1. HIZ SEÇENEĞİ ---
+                            _buildSectionHeader(
+                              context,
+                              'HIZ',
+                              'assets/icons/speed.svg',
                             ),
+                            const SizedBox(height: 12),
                             Row(
                               children: [
                                 Expanded(
-                                  child: _DifficultyButton(
-                                    difficulty: Difficulty.slow,
-                                    isSelected:
-                                        state.selectedDifficulty ==
-                                        Difficulty.slow,
-                                    onTap: () {
-                                      ref
-                                          .read(
-                                            cargoCategoriesControllerProvider
-                                                .notifier,
-                                          )
-                                          .selectDifficulty(Difficulty.slow);
-                                    },
-                                  ),
-                                ),
-                                SizedBox(width: spacing),
-                                Expanded(
-                                  child: _DifficultyButton(
+                                  child: _SpeedButton(
                                     difficulty: Difficulty.normal,
                                     isSelected:
                                         state.selectedDifficulty ==
@@ -231,7 +172,7 @@ class _CargoCategoriesSetupPageState
                                 ),
                                 SizedBox(width: spacing),
                                 Expanded(
-                                  child: _DifficultyButton(
+                                  child: _SpeedButton(
                                     difficulty: Difficulty.fast,
                                     isSelected:
                                         state.selectedDifficulty ==
@@ -249,127 +190,110 @@ class _CargoCategoriesSetupPageState
                               ],
                             ),
 
-                            SizedBox(height: spacing * 3),
+                            SizedBox(height: spacing * 2),
 
-                            // Category Section Header
+                            // --- 2. ZORLUK SEVİYESİ ---
+                            _buildSectionHeader(
+                              context,
+                              'ZORLUK SEVİYESİ',
+                              'assets/icons/local_shipping.svg',
+                            ),
+                            const SizedBox(height: 12),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8.0,
-                                    vertical: 8,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: AppColors.surfaceDark.withValues(
-                                      alpha: 0.9,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Text(
-                                    'KATEGORİLERİ SEÇ',
-                                    style: TextStyle(
-                                      color: Colors.white.withValues(
-                                        alpha: 0.8,
-                                      ),
-                                      fontWeight: FontWeight.bold,
-                                      letterSpacing: 1,
-                                      fontSize: 14,
-                                    ),
+                                Expanded(
+                                  child: _GameLevelButton(
+                                    level: GameLevel.beginner,
+                                    isSelected:
+                                        state.selectedGameLevel ==
+                                        GameLevel.beginner,
+                                    onTap: () {
+                                      ref
+                                          .read(
+                                            cargoCategoriesControllerProvider
+                                                .notifier,
+                                          )
+                                          .selectGameLevel(GameLevel.beginner);
+                                    },
                                   ),
                                 ),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 16,
-                                    vertical: 6,
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: _GameLevelButton(
+                                    level: GameLevel.normal,
+                                    isSelected:
+                                        state.selectedGameLevel ==
+                                        GameLevel.normal,
+                                    onTap: () {
+                                      ref
+                                          .read(
+                                            cargoCategoriesControllerProvider
+                                                .notifier,
+                                          )
+                                          .selectGameLevel(GameLevel.normal);
+                                    },
                                   ),
-                                  decoration: BoxDecoration(
-                                    color:
-                                        state.selectedCategories.length == 3
-                                            ? AppColors.success
-                                            : Colors.white.withValues(
-                                              alpha: 0.1,
-                                            ),
-                                    borderRadius: BorderRadius.circular(20),
-                                    border: Border.all(
-                                      color:
-                                          state.selectedCategories.length == 3
-                                              ? AppColors.success
-                                              : Colors.white.withValues(
-                                                alpha: 0.3,
-                                              ),
-                                    ),
-                                    boxShadow:
-                                        state.selectedCategories.length == 3
-                                            ? [
-                                              BoxShadow(
-                                                color: AppColors.success
-                                                    .withValues(alpha: 0.5),
-                                                blurRadius: 10,
-                                              ),
-                                            ]
-                                            : [],
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 8),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: _GameLevelButton(
+                                    level: GameLevel.advanced,
+                                    isSelected:
+                                        state.selectedGameLevel ==
+                                        GameLevel.advanced,
+                                    onTap: () {
+                                      ref
+                                          .read(
+                                            cargoCategoriesControllerProvider
+                                                .notifier,
+                                          )
+                                          .selectGameLevel(GameLevel.advanced);
+                                    },
                                   ),
-                                  child: Text(
-                                    '${state.selectedCategories.length} / 3',
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: _GameLevelButton(
+                                    level: GameLevel.expert,
+                                    isSelected:
+                                        state.selectedGameLevel ==
+                                        GameLevel.expert,
+                                    onTap: () {
+                                      ref
+                                          .read(
+                                            cargoCategoriesControllerProvider
+                                                .notifier,
+                                          )
+                                          .selectGameLevel(GameLevel.expert);
+                                    },
                                   ),
                                 ),
                               ],
                             ),
 
-                            SizedBox(height: spacing),
+                            SizedBox(height: spacing * 3),
 
-                            // Category Chips
-                            _GlassContainer(
-                              padding: const EdgeInsets.all(16),
-                              child: Wrap(
-                                spacing: spacing,
-                                runSpacing: spacing,
-                                alignment: WrapAlignment.center,
-                                children:
-                                    categories.map((category) {
-                                      final isSelected = state
-                                          .selectedCategories
-                                          .contains(category.id);
-                                      return _CategoryChip(
-                                        category: category,
-                                        isSelected: isSelected,
-                                        onTap: () {
-                                          ref
-                                              .read(
-                                                cargoCategoriesControllerProvider
-                                                    .notifier,
-                                              )
-                                              .toggleCategory(category.id);
-                                        },
-                                      );
-                                    }).toList(),
-                              ),
-                            ),
-
-                            SizedBox(height: spacing * 4),
-
-                            // Start Button
+                            // --- BAŞLAT BUTONU ---
                             AnimatedOpacity(
                               duration: const Duration(milliseconds: 300),
                               opacity: state.canStartGame ? 1.0 : 0.5,
                               child: Container(
                                 width: double.infinity,
-                                height: 64,
+                                height: 56,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
+                                  borderRadius: BorderRadius.circular(16),
                                   boxShadow:
                                       state.canStartGame
                                           ? [
                                             BoxShadow(
                                               color: AppColors.primary
-                                                  .withValues(alpha: 0.6),
+                                                  .withValues(alpha: 0.5),
                                               blurRadius: 20,
-                                              offset: const Offset(0, 5),
+                                              offset: const Offset(0, 4),
                                             ),
                                           ]
                                           : [],
@@ -377,35 +301,38 @@ class _CargoCategoriesSetupPageState
                                 child: FilledButton(
                                   onPressed:
                                       state.canStartGame
-                                          ? () async {
-                                            // Önce oyunu başlat
+                                          ? () {
                                             ref
                                                 .read(
                                                   cargoCategoriesControllerProvider
                                                       .notifier,
                                                 )
                                                 .startGame();
-                                            // State'in güncellenmesi için kısa bir bekleme
-                                            await Future.delayed(
-                                              const Duration(milliseconds: 100),
-                                            );
-                                            // Sonra game sayfasına git
-                                            if (mounted) {
-                                              await context.push(
-                                                '/cargo-categories/game',
-                                              );
-                                            }
+                                            WidgetsBinding.instance
+                                                .addPostFrameCallback((_) {
+                                                  if (mounted &&
+                                                      context.mounted) {
+                                                    context.go(
+                                                      '/cargo-categories/game',
+                                                    );
+                                                  }
+                                                });
                                           }
                                           : null,
                                   style: FilledButton.styleFrom(
                                     backgroundColor:
                                         state.canStartGame
-                                            ? AppColors.primary
+                                            ? const Color.fromARGB(
+                                              255,
+                                              65,
+                                              126,
+                                              138,
+                                            )
                                             : Colors.grey.withValues(
                                               alpha: 0.3,
                                             ),
                                     shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20),
+                                      borderRadius: BorderRadius.circular(16),
                                     ),
                                     elevation: 0,
                                   ),
@@ -416,17 +343,18 @@ class _CargoCategoriesSetupPageState
                                         'OYUNU BAŞLAT',
                                         style: Theme.of(
                                           context,
-                                        ).textTheme.titleLarge?.copyWith(
+                                        ).textTheme.titleMedium?.copyWith(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,
-                                          letterSpacing: 1.5,
+                                          letterSpacing: 1.2,
+                                          fontSize: 16,
                                         ),
                                       ),
                                       if (state.canStartGame) ...[
-                                        const SizedBox(width: 12),
+                                        const SizedBox(width: 8),
                                         const Icon(
                                           Icons.play_arrow_rounded,
-                                          size: 32,
+                                          size: 26,
                                         ),
                                       ],
                                     ],
@@ -434,6 +362,16 @@ class _CargoCategoriesSetupPageState
                                 ),
                               ),
                             ),
+
+                            SizedBox(height: spacing * 3),
+
+                            _buildSectionHeader(
+                              context,
+                              'KATEGORİLER',
+                              'assets/icons/local_shipping.svg',
+                            ),
+                            const SizedBox(height: 12),
+                            _buildCategoriesGrid(),
                             SizedBox(height: spacing * 2),
                           ],
                         ),
@@ -449,46 +387,229 @@ class _CargoCategoriesSetupPageState
     );
   }
 
-  PreferredSizeWidget _buildAppBar(BuildContext context) {
-    return AppBar(
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      centerTitle: true,
-      leading: Container(
-        margin: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          color: Colors.black.withValues(alpha: 0.3),
-          shape: BoxShape.circle,
-        ),
-        child: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            // Oyun çalışıyorsa durdur
-            final state = ref.read(cargoCategoriesControllerProvider);
-            if (state.isRunning) {
-              ref.read(cargoCategoriesControllerProvider.notifier).reset();
-            }
-            if (context.canPop()) {
-              context.pop();
-            } else {
-              context.go('/mode-select');
-            }
-          },
-          tooltip: 'Geri dön',
+  // Bilgilendirme Kartı
+  Widget _buildInfoCard(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(16),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: const Color(0xFF1E293B).withValues(alpha: 0.5),
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color: Colors.white.withValues(alpha: 0.2),
+              width: 1,
+            ),
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Sol: Info ikonu
+              Padding(
+                padding: const EdgeInsets.only(top: 2),
+                child: SvgPicture.asset(
+                  'assets/icons/info.svg',
+                  width: 20,
+                  height: 20,
+                  colorFilter: ColorFilter.mode(
+                    const Color.fromARGB(
+                      255,
+                      116,
+                      194,
+                      209,
+                    ).withValues(alpha: 0.9),
+                    BlendMode.srcIn,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 12),
+              // Sağ: Bilgilendirme metni
+              Expanded(
+                child: Text(
+                  'Banttan gelen paketleri yakın anlamlarına göre 3 kategoriye gruplandırın.',
+                  style: TextStyle(
+                    color: Colors.white.withValues(alpha: 0.9),
+                    fontSize: 14,
+                    height: 1.4,
+                    letterSpacing: 0.3,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
-      title: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        decoration: BoxDecoration(
-          color: AppColors.surfaceDark.withValues(alpha: 0.9),
-          borderRadius: BorderRadius.circular(20),
+    );
+  }
+
+  // Estetik Başlık Widget'ı - MERKEZ HİZALAMA
+  Widget _buildSectionHeader(
+    BuildContext context,
+    String title,
+    String svgPath,
+  ) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center, // Merkeze hizalama
+      children: [
+        SvgPicture.asset(
+          svgPath,
+          width: 20,
+          height: 20,
+          colorFilter: ColorFilter.mode(
+            const Color.fromARGB(255, 116, 194, 209).withValues(alpha: 0.9),
+            BlendMode.srcIn,
+          ),
         ),
-        child: const Text(
-          'Cargo Categories',
+        const SizedBox(width: 8),
+        Text(
+          title,
           style: TextStyle(
-            color: Colors.white,
+            color: Colors.white.withValues(alpha: 0.9),
             fontWeight: FontWeight.bold,
-            shadows: [Shadow(blurRadius: 5, color: Colors.black)],
+            letterSpacing: 1.2,
+            fontSize: 16,
+            shadows: [
+              Shadow(
+                blurRadius: 8,
+                color: AppColors.primary.withValues(alpha: 0.5),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildCategoriesGrid() {
+    final allCategories = CargoService.instance.getCategories();
+    final categoryIds = [
+      'clothes',
+      'family',
+      'daily_routine',
+      'technology',
+      'health',
+      'environment',
+      'science',
+      'business',
+      'culture',
+      'travel',
+      'feelings',
+      'nature',
+      'jobs',
+      'city',
+      'free_time',
+      'food',
+      'house',
+      'school',
+    ];
+
+    final categories =
+        categoryIds
+            .map(
+              (id) => allCategories.firstWhere(
+                (cat) => cat.id == id,
+                orElse: () => allCategories.first,
+              ),
+            )
+            .where((cat) => categoryIds.contains(cat.id))
+            .toList();
+
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 4,
+        crossAxisSpacing: 8,
+        mainAxisSpacing: 8,
+        childAspectRatio: 2.2,
+      ),
+      itemCount: categories.length,
+      itemBuilder: (context, index) {
+        return _CategoryCard(category: categories[index]);
+      },
+    );
+  }
+
+  PreferredSizeWidget _buildAppBar(BuildContext context) {
+    // Toplam AppBar alanı için yükseklik (SafeArea + Margin + İçerik)
+    const double toolbarHeight = 80.0;
+
+    return PreferredSize(
+      preferredSize: const Size.fromHeight(toolbarHeight),
+      child: SafeArea(
+        child: Container(
+          height: 64, // Floating panelin kendi yüksekliği
+          margin: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(24),
+            // Hafif transparan siyah arka plan (Glassmorphism için temel)
+            color: const Color.fromARGB(
+              255,
+              102,
+              135,
+              155,
+            ).withValues(alpha: 0.5),
+            border: Border.all(
+              color: Colors.white.withValues(alpha: 0.15),
+              width: 1.0,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.2),
+                blurRadius: 15,
+                offset: const Offset(0, 5),
+              ),
+            ],
+          ),
+          // Blur efektini sınırların içinde tutmak için ClipRRect
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(24),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: NavigationToolbar(
+                  leading: IconButton(
+                    icon: const Icon(
+                      Icons.arrow_back_ios_new_rounded,
+                      color: Colors.white,
+                      size: 20,
+                    ),
+                    onPressed: () {
+                      final state = ref.read(cargoCategoriesControllerProvider);
+                      if (state.isRunning) {
+                        ref
+                            .read(cargoCategoriesControllerProvider.notifier)
+                            .reset();
+                      }
+                      if (context.canPop()) {
+                        context.pop();
+                      } else {
+                        context.go('/mode-select');
+                      }
+                    },
+                  ),
+                  middle: Text(
+                    'OYUN AYARLARI',
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: 1.5,
+                      fontSize: 19,
+                      shadows: [
+                        Shadow(
+                          blurRadius: 10,
+                          color: AppColors.primary.withValues(alpha: 0.5),
+                        ),
+                      ],
+                    ),
+                  ),
+                  centerMiddle: true,
+                ),
+              ),
+            ),
           ),
         ),
       ),
@@ -496,9 +617,75 @@ class _CargoCategoriesSetupPageState
   }
 }
 
-// --- ZORLUK SEVİYESİ BUTONU ---
-class _DifficultyButton extends StatelessWidget {
-  const _DifficultyButton({
+class _GameLevelButton extends StatelessWidget {
+  const _GameLevelButton({
+    required this.level,
+    required this.isSelected,
+    required this.onTap,
+  });
+
+  final GameLevel level;
+  final bool isSelected;
+  final VoidCallback onTap;
+
+  Color get _color {
+    switch (level) {
+      case GameLevel.beginner:
+        return AppColors.success;
+      case GameLevel.normal:
+        return AppColors.primary;
+      case GameLevel.advanced:
+        return Colors.orange;
+      case GameLevel.expert:
+        return AppColors.error;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        decoration: BoxDecoration(
+          color:
+              isSelected
+                  ? _color.withValues(alpha: 0.2)
+                  : Colors.white.withValues(alpha: 0.05),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: isSelected ? _color : Colors.white.withValues(alpha: 0.1),
+            width: isSelected ? 1.5 : 1,
+          ),
+          boxShadow:
+              isSelected
+                  ? [
+                    BoxShadow(
+                      color: _color.withValues(alpha: 0.3),
+                      blurRadius: 8,
+                      spreadRadius: 0,
+                    ),
+                  ]
+                  : [],
+        ),
+        child: Center(
+          child: Text(
+            level.displayName,
+            style: TextStyle(
+              color: isSelected ? Colors.white : Colors.white70,
+              fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+              fontSize: 15,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _SpeedButton extends StatelessWidget {
+  const _SpeedButton({
     required this.difficulty,
     required this.isSelected,
     required this.onTap,
@@ -510,8 +697,6 @@ class _DifficultyButton extends StatelessWidget {
 
   Color get _color {
     switch (difficulty) {
-      case Difficulty.slow:
-        return AppColors.success;
       case Difficulty.normal:
         return AppColors.primary;
       case Difficulty.fast:
@@ -523,186 +708,47 @@ class _DifficultyButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            padding: const EdgeInsets.symmetric(vertical: 20),
-            decoration: BoxDecoration(
-              // Blur efekti için yarı şeffaf koyu zemin
-              color: const Color(0xFF1E293B).withValues(alpha: 0.4),
-              // Seçiliyse renkli gradyan overlay, değilse şeffaf
-              gradient:
-                  isSelected
-                      ? LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          _color.withValues(alpha: 0.4),
-                          _color.withValues(alpha: 0.1),
-                        ],
-                      )
-                      : LinearGradient(
-                        colors: [
-                          Colors.white.withValues(alpha: 0.1),
-                          Colors.white.withValues(alpha: 0.05),
-                        ],
-                      ),
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(
-                color:
-                    isSelected
-                        ? _color // Parlak kenarlık
-                        : Colors.white.withValues(alpha: 0.2), // Soluk kenarlık
-                width: isSelected ? 2 : 1,
-              ),
-              boxShadow: [
-                if (isSelected)
-                  BoxShadow(
-                    color: _color.withValues(alpha: 0.4),
-                    blurRadius: 15,
-                    spreadRadius: 1,
-                  )
-                else
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.2),
-                    blurRadius: 5,
-                  ),
-              ],
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SvgPicture.asset(
-                  'assets/icons/speed.svg',
-                  width: 32,
-                  height: 32,
-                  colorFilter: ColorFilter.mode(
-                    isSelected
-                        ? Colors.white
-                        : Colors.white.withValues(alpha: 0.5),
-                    BlendMode.srcIn,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  difficulty.displayName,
-                  style: TextStyle(
-                    color:
-                        isSelected
-                            ? Colors.white
-                            : Colors.white.withValues(alpha: 0.7),
-                    fontWeight: isSelected ? FontWeight.w900 : FontWeight.w500,
-                    fontSize: 16,
-                    shadows:
-                        isSelected
-                            ? [Shadow(blurRadius: 8, color: _color)]
-                            : [],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-// --- KATEGORİ ÇİPİ ---
-class _CategoryChip extends StatelessWidget {
-  const _CategoryChip({
-    required this.category,
-    required this.isSelected,
-    required this.onTap,
-  });
-
-  final Category category;
-  final bool isSelected;
-  final VoidCallback onTap;
-
-  Color get _categoryColor {
-    try {
-      final colorString = category.color.replaceAll('#', '');
-      return Color(int.parse('FF$colorString', radix: 16));
-    } catch (e) {
-      return AppColors.primary;
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+        padding: const EdgeInsets.symmetric(vertical: 14),
         decoration: BoxDecoration(
-          // Seçiliyse kategori renginde gradyan, değilse cam
           gradient:
               isSelected
                   ? LinearGradient(
                     colors: [
-                      _categoryColor.withValues(alpha: 0.5),
-                      _categoryColor.withValues(alpha: 0.2),
+                      _color.withValues(alpha: 0.3),
+                      _color.withValues(alpha: 0.1),
                     ],
                   )
-                  : LinearGradient(
-                    colors: [
-                      Colors.white.withValues(alpha: 0.1),
-                      Colors.white.withValues(alpha: 0.05),
-                    ],
-                  ),
-          borderRadius: BorderRadius.circular(24),
+                  : null,
+          color: isSelected ? null : Colors.white.withValues(alpha: 0.05),
+          borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color:
-                isSelected
-                    ? _categoryColor
-                    : Colors.white.withValues(alpha: 0.3),
-            width: isSelected ? 2 : 1,
+            color: isSelected ? _color : Colors.white.withValues(alpha: 0.1),
+            width: isSelected ? 1.5 : 1,
           ),
-          boxShadow: [
-            if (isSelected)
-              BoxShadow(
-                color: _categoryColor.withValues(alpha: 0.4),
-                blurRadius: 12,
-                offset: const Offset(0, 2),
-              ),
-          ],
         ),
         child: Row(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            AnimatedScale(
-              duration: const Duration(milliseconds: 200),
-              scale: isSelected ? 1.0 : 0.0,
-              child:
-                  isSelected
-                      ? Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
-                        child: Icon(
-                          Icons.check_circle,
-                          color: Colors.white,
-                          size: 20,
-                        ),
-                      )
-                      : const SizedBox(),
+            SvgPicture.asset(
+              difficulty == Difficulty.fast
+                  ? 'assets/icons/speed.svg'
+                  : 'assets/icons/timer.svg',
+              width: 20,
+              height: 20,
+              colorFilter: ColorFilter.mode(
+                isSelected ? Colors.white : Colors.white60,
+                BlendMode.srcIn,
+              ),
             ),
+            const SizedBox(width: 8),
             Text(
-              category.name,
+              difficulty.displayName,
               style: TextStyle(
-                color: Colors.white,
+                color: isSelected ? Colors.white : Colors.white70,
                 fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
-                fontSize: 16,
-                shadows: const [
-                  Shadow(
-                    blurRadius: 2,
-                    color: Colors.black54,
-                    offset: Offset(0, 1),
-                  ),
-                ],
+                fontSize: 15,
               ),
             ),
           ],
@@ -712,7 +758,72 @@ class _CategoryChip extends StatelessWidget {
   }
 }
 
-// --- YARDIMCI: GLASS PANEL ---
+class _CategoryCard extends StatelessWidget {
+  const _CategoryCard({required this.category});
+
+  final Category category;
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(30), // Tam oval şekil
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+        child: Container(
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(
+              255,
+              68,
+              4,
+              4,
+            ).withValues(alpha: 0.4), // Koyu mor
+            borderRadius: BorderRadius.circular(30), // Tam oval
+            border: Border.all(
+              color: Colors.white.withValues(alpha: 0.5),
+              width: 1,
+            ),
+          ),
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SvgPicture.asset(
+                    'assets/icons/package.svg',
+                    width: 16,
+                    height: 16,
+                    colorFilter: ColorFilter.mode(
+                      Colors.white.withValues(alpha: 0.9),
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                  const SizedBox(width: 6),
+                  Flexible(
+                    child: Text(
+                      category.name,
+                      textAlign: TextAlign.center,
+                      maxLines: 1, // Yatay olduğu için tek satır daha iyi
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 13, // Yazı büyütüldü (11 -> 13)
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 0.5,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _GlassContainer extends StatelessWidget {
   final Widget child;
   final EdgeInsetsGeometry padding;
@@ -728,9 +839,7 @@ class _GlassContainer extends StatelessWidget {
         child: Container(
           padding: padding,
           decoration: BoxDecoration(
-            color: const Color(
-              0xFF1E293B,
-            ).withValues(alpha: 0.4), // Yarı şeffaf koyu zemin
+            color: const Color(0xFF1E293B).withValues(alpha: 0.4),
             borderRadius: BorderRadius.circular(20),
             border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
           ),

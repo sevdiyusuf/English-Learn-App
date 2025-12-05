@@ -1,14 +1,34 @@
 import 'cargo_word.dart';
+import 'category.dart';
 
+/// Game difficulty level (determines category selection)
+enum GameLevel {
+  beginner, // Başlangıç: 2 easy + 1 medium
+  normal,   // Normal: 2 medium + 1 easy
+  advanced, // İleri: 2 medium + 1 hard
+  expert;   // Uzman: 2 hard + 1 medium
+
+  String get displayName {
+    switch (this) {
+      case GameLevel.beginner:
+        return 'Başlangıç';
+      case GameLevel.normal:
+        return 'Normal';
+      case GameLevel.advanced:
+        return 'İleri';
+      case GameLevel.expert:
+        return 'Uzman';
+    }
+  }
+}
+
+/// Speed setting (determines conveyor belt speed)
 enum Difficulty {
-  slow,
-  normal,
-  fast;
+  normal, // Normal hız
+  fast;   // Hızlı
 
   Duration get travelDuration {
     switch (this) {
-      case Difficulty.slow:
-        return const Duration(milliseconds: 4000);
       case Difficulty.normal:
         return const Duration(milliseconds: 2500);
       case Difficulty.fast:
@@ -18,8 +38,6 @@ enum Difficulty {
 
   String get displayName {
     switch (this) {
-      case Difficulty.slow:
-        return 'Yavaş';
       case Difficulty.normal:
         return 'Normal';
       case Difficulty.fast:
@@ -28,78 +46,117 @@ enum Difficulty {
   }
 }
 
-class CargoCategoriesState {
-  const CargoCategoriesState({
-    this.selectedCategories = const [],
-    this.selectedDifficulty,
-    this.currentWord,
-    this.remainingWords = const [],
-    this.score = 0,
-    this.correctCount = 0,
-    this.wrongCount = 0,
-    this.missedCount = 0,
-    this.remainingTime = const Duration(minutes: 1),
-    this.isRunning = false,
-    this.isFinished = false,
-    this.currentWordStartTime,
-    this.highlightedCategoryId,
-    this.wrongCategoryId,
+/// Represents a column that can hold up to 4 words
+class CargoColumn {
+  const CargoColumn({
+    this.words = const [],
   });
 
-  final List<String> selectedCategories; // Category IDs (should be exactly 3)
-  final Difficulty? selectedDifficulty;
-  final CargoWord? currentWord;
-  final List<CargoWord> remainingWords;
-  final int score;
-  final int correctCount;
-  final int wrongCount;
-  final int missedCount;
-  final Duration remainingTime;
-  final bool isRunning;
-  final bool isFinished;
-  final DateTime? currentWordStartTime;
-  final String? highlightedCategoryId;
-  final String? wrongCategoryId;
+  final List<CargoWord> words; // No limit
 
-  CargoCategoriesState copyWith({
-    List<String>? selectedCategories,
-    Difficulty? selectedDifficulty,
-    CargoWord? currentWord,
-    List<CargoWord>? remainingWords,
-    int? score,
-    int? correctCount,
-    int? wrongCount,
-    int? missedCount,
-    Duration? remainingTime,
-    bool? isRunning,
-    bool? isFinished,
-    DateTime? currentWordStartTime,
-    String? highlightedCategoryId,
-    String? wrongCategoryId,
+  CargoColumn copyWith({
+    List<CargoWord>? words,
   }) {
-    return CargoCategoriesState(
-      selectedCategories: selectedCategories ?? this.selectedCategories,
-      selectedDifficulty: selectedDifficulty ?? this.selectedDifficulty,
-      currentWord: currentWord,
-      remainingWords: remainingWords ?? this.remainingWords,
-      score: score ?? this.score,
-      correctCount: correctCount ?? this.correctCount,
-      wrongCount: wrongCount ?? this.wrongCount,
-      missedCount: missedCount ?? this.missedCount,
-      remainingTime: remainingTime ?? this.remainingTime,
-      isRunning: isRunning ?? this.isRunning,
-      isFinished: isFinished ?? this.isFinished,
-      currentWordStartTime: currentWordStartTime ?? this.currentWordStartTime,
-      highlightedCategoryId: highlightedCategoryId,
-      wrongCategoryId: wrongCategoryId,
+    return CargoColumn(
+      words: words ?? this.words,
     );
   }
 
+  bool get isFull => false; // No limit, always return false
+  bool get isEmpty => words.isEmpty;
+}
+
+class CargoCategoriesState {
+  const CargoCategoriesState({
+    this.chosenCategories = const [], // 3 Category objects
+    this.selectedGameLevel = GameLevel.beginner, // Default: Başlangıç
+    this.selectedDifficulty = Difficulty.normal, // Default: Normal
+    this.currentWord,
+    this.remainingOnBelt = const [], // Words yet to be placed
+    this.columns = const [], // 3 CargoColumn objects
+    this.showSolution = false, // Whether to show category names
+    this.isRegrouping = false, // Animation state for regrouping
+    this.isRunning = false,
+    this.isFinished = false,
+    this.hasWon = false,
+    this.elapsedTime = Duration.zero, // Time elapsed since game start
+    this.finalScore,
+    this.finalCorrectCount,
+    this.finalWrongCount,
+  });
+
+  final List<Category> chosenCategories; // Length 3
+  final GameLevel selectedGameLevel; // Game difficulty level
+  final Difficulty? selectedDifficulty; // Speed setting
+  final CargoWord? currentWord; // Current word on conveyor belt
+  final List<CargoWord> remainingOnBelt; // Words yet to be placed
+  final List<CargoColumn> columns; // Length 3, each with max 4 words
+  final bool showSolution; // If true, show category names instead of "?"
+  final bool isRegrouping; // Animation state
+  final bool isRunning;
+  final bool isFinished;
+  final bool hasWon;
+  final Duration elapsedTime; // Time elapsed since game start
+  final int? finalScore; // Score calculated before regrouping
+  final int? finalCorrectCount; // Correct count before regrouping
+  final int? finalWrongCount; // Wrong count before regrouping
+
+  CargoCategoriesState copyWith({
+    List<Category>? chosenCategories,
+    GameLevel? selectedGameLevel,
+    Difficulty? selectedDifficulty,
+    Object? currentWord = _undefined,
+    List<CargoWord>? remainingOnBelt,
+    List<CargoColumn>? columns,
+    bool? showSolution,
+    bool? isRegrouping,
+    bool? isRunning,
+    bool? isFinished,
+    bool? hasWon,
+    Duration? elapsedTime,
+    int? finalScore,
+    int? finalCorrectCount,
+    int? finalWrongCount,
+  }) {
+    return CargoCategoriesState(
+      chosenCategories: chosenCategories ?? this.chosenCategories,
+      selectedGameLevel: selectedGameLevel ?? this.selectedGameLevel,
+      selectedDifficulty: selectedDifficulty ?? this.selectedDifficulty,
+      currentWord: currentWord == _undefined ? this.currentWord : currentWord as CargoWord?,
+      remainingOnBelt: remainingOnBelt ?? this.remainingOnBelt,
+      columns: columns ?? this.columns,
+      showSolution: showSolution ?? this.showSolution,
+      isRegrouping: isRegrouping ?? this.isRegrouping,
+      isRunning: isRunning ?? this.isRunning,
+      isFinished: isFinished ?? this.isFinished,
+      hasWon: hasWon ?? this.hasWon,
+      elapsedTime: elapsedTime ?? this.elapsedTime,
+      finalScore: finalScore ?? this.finalScore,
+      finalCorrectCount: finalCorrectCount ?? this.finalCorrectCount,
+      finalWrongCount: finalWrongCount ?? this.finalWrongCount,
+    );
+  }
+
+  /// Check if all words are placed (belt empty and all 12 words are in columns)
+  bool get canCheck {
+    if (remainingOnBelt.isNotEmpty) return false;
+    if (currentWord != null) return false;
+    if (columns.length != 3) return false;
+    // Check if total words in all columns equals 12 (no limit per column)
+    final totalWords = columns.fold<int>(0, (sum, col) => sum + col.words.length);
+    return totalWords == 12;
+  }
+
+  /// Check if game can start (needs speed selection)
   bool get canStartGame {
-    return selectedCategories.length == 3 &&
-        selectedDifficulty != null &&
-        !isRunning &&
-        !isFinished;
+    return selectedDifficulty != null && !isRunning && !isFinished;
+  }
+
+  /// Get total words placed across all columns
+  int get totalWordsPlaced {
+    return columns.fold<int>(0, (sum, col) => sum + col.words.length);
   }
 }
+
+const _undefined = Object();
 
