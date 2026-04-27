@@ -4,9 +4,9 @@ import 'category.dart';
 /// Game difficulty level (determines category selection)
 enum GameLevel {
   beginner, // Başlangıç: 2 easy + 1 medium
-  normal,   // Normal: 2 medium + 1 easy
+  normal, // Normal: 2 medium + 1 easy
   advanced, // İleri: 2 medium + 1 hard
-  expert;   // Uzman: 2 hard + 1 medium
+  expert; // Uzman: 2 hard + 1 medium
 
   String get displayName {
     switch (this) {
@@ -25,7 +25,7 @@ enum GameLevel {
 /// Speed setting (determines conveyor belt speed)
 enum Difficulty {
   normal, // Normal hız
-  fast;   // Hızlı
+  fast; // Hızlı
 
   Duration get travelDuration {
     switch (this) {
@@ -48,18 +48,12 @@ enum Difficulty {
 
 /// Represents a column that can hold up to 4 words
 class CargoColumn {
-  const CargoColumn({
-    this.words = const [],
-  });
+  const CargoColumn({this.words = const []});
 
   final List<CargoWord> words; // No limit
 
-  CargoColumn copyWith({
-    List<CargoWord>? words,
-  }) {
-    return CargoColumn(
-      words: words ?? this.words,
-    );
+  CargoColumn copyWith({List<CargoWord>? words}) {
+    return CargoColumn(words: words ?? this.words);
   }
 
   bool get isFull => false; // No limit, always return false
@@ -72,6 +66,7 @@ class CargoCategoriesState {
     this.selectedGameLevel = GameLevel.beginner, // Default: Başlangıç
     this.selectedDifficulty = Difficulty.normal, // Default: Normal
     this.currentWord,
+    this.draggedWord,
     this.remainingOnBelt = const [], // Words yet to be placed
     this.columns = const [], // 3 CargoColumn objects
     this.showSolution = false, // Whether to show category names
@@ -89,6 +84,7 @@ class CargoCategoriesState {
   final GameLevel selectedGameLevel; // Game difficulty level
   final Difficulty? selectedDifficulty; // Speed setting
   final CargoWord? currentWord; // Current word on conveyor belt
+  final CargoWord? draggedWord; // Word currently being dragged by user
   final List<CargoWord> remainingOnBelt; // Words yet to be placed
   final List<CargoColumn> columns; // Length 3, each with max 4 words
   final bool showSolution; // If true, show category names instead of "?"
@@ -106,6 +102,7 @@ class CargoCategoriesState {
     GameLevel? selectedGameLevel,
     Difficulty? selectedDifficulty,
     Object? currentWord = _undefined,
+    Object? draggedWord = _undefined,
     List<CargoWord>? remainingOnBelt,
     List<CargoColumn>? columns,
     bool? showSolution,
@@ -122,7 +119,14 @@ class CargoCategoriesState {
       chosenCategories: chosenCategories ?? this.chosenCategories,
       selectedGameLevel: selectedGameLevel ?? this.selectedGameLevel,
       selectedDifficulty: selectedDifficulty ?? this.selectedDifficulty,
-      currentWord: currentWord == _undefined ? this.currentWord : currentWord as CargoWord?,
+      currentWord:
+          currentWord == _undefined
+              ? this.currentWord
+              : currentWord as CargoWord?,
+      draggedWord:
+          draggedWord == _undefined
+              ? this.draggedWord
+              : draggedWord as CargoWord?,
       remainingOnBelt: remainingOnBelt ?? this.remainingOnBelt,
       columns: columns ?? this.columns,
       showSolution: showSolution ?? this.showSolution,
@@ -141,6 +145,7 @@ class CargoCategoriesState {
   bool get canCheck {
     if (remainingOnBelt.isNotEmpty) return false;
     if (currentWord != null) return false;
+    if (draggedWord != null) return false;
     if (columns.length != 3) return false;
     // Check if total words in all columns equals 12 (no limit per column)
     final totalWords = columns.fold<int>(0, (sum, col) => sum + col.words.length);

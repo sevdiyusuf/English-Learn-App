@@ -1,0 +1,88 @@
+{
+    "schema_version": "1.0",
+    "level": "B1",
+    "lesson_id": "B1-USED-01-lesson",
+    "title": "Used to vs Would (Past Habits)",
+    "topic_tags": [
+        "used_to",
+        "would",
+        "past_habits",
+        "states"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Geçmişteki alışkanlıklarımızı anlatmak için 'Used to' ve 'Would' yapılarını nasıl kullanacağımızı öğreneceğiz.",
+                    "Bu iki yapı arasındaki önemli farkları ve hangi durumlarda birbirinin yerine geçemeyeceklerini kavrayacağız.",
+                    "Geçmişteki 'durumlar' (states) ile 'eylemler' (actions) arasındaki ayrımı öğreneceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Used to: Geçmiş Alışkanlıklar ve Durumlar",
+                "bullets": [
+                    "'Used to' yapısı, geçmişte yaptığımız ama artık yapmadığımız eylemler için kullanılır.",
+                    "Aynı zamanda geçmişte doğru olan ama artık olmayan **durumlar** (stative verbs: be, have, live, like) için de kullanılır.",
+                    "Olumlu: S + used to + V1",
+                    "Olumsuz: S + didn't use to + V1",
+                    "Soru: Did + S + use to + V1?"
+                ],
+                "examples": [
+                    "I **used to** smoke, but I quit. (Eskiden sigara içerdim.)",
+                    "I **used to** live in London. (Eskiden Londra'da yaşardım. - Durum)",
+                    "Did you **use to** play football? (Eskiden futbol oynar mıydın?)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "Would: Geçmişteki Tekrarlanan Eylemler",
+                "bullets": [
+                    "'Would' yapısı da geçmişteki alışkanlıkları anlatır, ancak sadece **tekrarlanan eylemler** (action verbs) için kullanılır.",
+                    "**Önemli**: 'Would' yapısını geçmişteki durumlar (live, be, have, like) için **kullanamayız**."
+                ],
+                "examples": [
+                    "Every summer, we **would** go to the beach. (Her yaz sahile giderdik.)",
+                    "My teacher **would** always give us extra homework. (Öğretmenim bize hep fazladan ödev verirdi.)",
+                    "Hatalı: I would have a big dog. ✗ (Durum olduğu için 'used to' olmalı)"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "Which sentence is INCORRECT?",
+                "options": [
+                    "I would live in a small village when I was a child.",
+                    "I used to live in a small village when I was a child."
+                ],
+                "answer": "I would live in a small village when I was a child.",
+                "explain": "'Live' bir durum fiilidir (state verb). 'Would' sadece eylem fiilleriyle geçmiş alışkanlıkları anlatmak için kullanılır. Durumlar için 'used to' kullanılmalıdır."
+            },
+            {
+                "id": "c4",
+                "type": "rule",
+                "title": "Used to vs Would Farkı",
+                "bullets": [
+                    "**Used to**: Hem eylemler (actions) hem durumlar (states) için uygundur.",
+                    "**Would**: Sadece eylemler (actions) için uygundur. Genelde geçmişteki belirli bir zaman diliminden bahsedilirken tercih edilir.",
+                    "Eğer bir durumdan bahsediyorsanız (örneğin: 'I used to be shy'), 'would' kullanamazsınız."
+                ],
+                "examples": [
+                    "I **used to** be a teacher. (Doğru ✓)",
+                    "I **would** be a teacher. (Hatalı ✗ - Durum fiili 'be')",
+                    "When I lived in Paris, I **would** drink coffee every morning. (Doğru ✓ - Eylem fiili 'drink')"
+                ]
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": false
+    },
+    "train_worksheet_id": "B1-USED-01"
+}

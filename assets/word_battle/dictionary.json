@@ -1,0 +1,5916 @@
+[
+    {
+        "word": "accept",
+        "type": "verb"
+    },
+    {
+        "word": "achieve",
+        "type": "verb"
+    },
+    {
+        "word": "act",
+        "type": "verb"
+    },
+    {
+        "word": "add",
+        "type": "verb"
+    },
+    {
+        "word": "admire",
+        "type": "verb"
+    },
+    {
+        "word": "admit",
+        "type": "verb"
+    },
+    {
+        "word": "advise",
+        "type": "verb"
+    },
+    {
+        "word": "affect",
+        "type": "verb"
+    },
+    {
+        "word": "afford",
+        "type": "verb"
+    },
+    {
+        "word": "agree",
+        "type": "verb"
+    },
+    {
+        "word": "aim",
+        "type": "verb"
+    },
+    {
+        "word": "allow",
+        "type": "verb"
+    },
+    {
+        "word": "announce",
+        "type": "verb"
+    },
+    {
+        "word": "answer",
+        "type": "verb"
+    },
+    {
+        "word": "apologize",
+        "type": "verb"
+    },
+    {
+        "word": "appear",
+        "type": "verb"
+    },
+    {
+        "word": "apply",
+        "type": "verb"
+    },
+    {
+        "word": "appoint",
+        "type": "verb"
+    },
+    {
+        "word": "approve",
+        "type": "verb"
+    },
+    {
+        "word": "arrange",
+        "type": "verb"
+    },
+    {
+        "word": "arrive",
+        "type": "verb"
+    },
+    {
+        "word": "ask",
+        "type": "verb"
+    },
+    {
+        "word": "assist",
+        "type": "verb"
+    },
+    {
+        "word": "assume",
+        "type": "verb"
+    },
+    {
+        "word": "attach",
+        "type": "verb"
+    },
+    {
+        "word": "attack",
+        "type": "verb"
+    },
+    {
+        "word": "attempt",
+        "type": "verb"
+    },
+    {
+        "word": "attend",
+        "type": "verb"
+    },
+    {
+        "word": "attract",
+        "type": "verb"
+    },
+    {
+        "word": "avoid",
+        "type": "verb"
+    },
+    {
+        "word": "balance",
+        "type": "verb"
+    },
+    {
+        "word": "bathe",
+        "type": "verb"
+    },
+    {
+        "word": "be",
+        "type": "verb"
+    },
+    {
+        "word": "beat",
+        "type": "verb"
+    },
+    {
+        "word": "become",
+        "type": "verb"
+    },
+    {
+        "word": "beg",
+        "type": "verb"
+    },
+    {
+        "word": "begin",
+        "type": "verb"
+    },
+    {
+        "word": "behave",
+        "type": "verb"
+    },
+    {
+        "word": "believe",
+        "type": "verb"
+    },
+    {
+        "word": "bet",
+        "type": "verb"
+    },
+    {
+        "word": "bind",
+        "type": "verb"
+    },
+    {
+        "word": "bite",
+        "type": "verb"
+    },
+    {
+        "word": "blame",
+        "type": "verb"
+    },
+    {
+        "word": "boil",
+        "type": "verb"
+    },
+    {
+        "word": "book",
+        "type": "verb"
+    },
+    {
+        "word": "borrow",
+        "type": "verb"
+    },
+    {
+        "word": "brake",
+        "type": "verb"
+    },
+    {
+        "word": "break",
+        "type": "verb"
+    },
+    {
+        "word": "breathe",
+        "type": "verb"
+    },
+    {
+        "word": "breed",
+        "type": "verb"
+    },
+    {
+        "word": "bring",
+        "type": "verb"
+    },
+    {
+        "word": "build",
+        "type": "verb"
+    },
+    {
+        "word": "burst",
+        "type": "verb"
+    },
+    {
+        "word": "buy",
+        "type": "verb"
+    },
+    {
+        "word": "calculate",
+        "type": "verb"
+    },
+    {
+        "word": "call",
+        "type": "verb"
+    },
+    {
+        "word": "care",
+        "type": "verb"
+    },
+    {
+        "word": "carry",
+        "type": "verb"
+    },
+    {
+        "word": "carve",
+        "type": "verb"
+    },
+    {
+        "word": "cast",
+        "type": "verb"
+    },
+    {
+        "word": "cause",
+        "type": "verb"
+    },
+    {
+        "word": "celebrate",
+        "type": "verb"
+    },
+    {
+        "word": "challenge",
+        "type": "verb"
+    },
+    {
+        "word": "change",
+        "type": "verb"
+    },
+    {
+        "word": "charge",
+        "type": "verb"
+    },
+    {
+        "word": "cheat",
+        "type": "verb"
+    },
+    {
+        "word": "check",
+        "type": "verb"
+    },
+    {
+        "word": "cheer",
+        "type": "verb"
+    },
+    {
+        "word": "choke",
+        "type": "verb"
+    },
+    {
+        "word": "choose",
+        "type": "verb"
+    },
+    {
+        "word": "clean",
+        "type": "verb"
+    },
+    {
+        "word": "cling",
+        "type": "verb"
+    },
+    {
+        "word": "clip",
+        "type": "verb"
+    },
+    {
+        "word": "coach",
+        "type": "verb"
+    },
+    {
+        "word": "coil",
+        "type": "verb"
+    },
+    {
+        "word": "collect",
+        "type": "verb"
+    },
+    {
+        "word": "combat",
+        "type": "verb"
+    },
+    {
+        "word": "come",
+        "type": "verb"
+    },
+    {
+        "word": "command",
+        "type": "verb"
+    },
+    {
+        "word": "commit",
+        "type": "verb"
+    },
+    {
+        "word": "compare",
+        "type": "verb"
+    },
+    {
+        "word": "compel",
+        "type": "verb"
+    },
+    {
+        "word": "compete",
+        "type": "verb"
+    },
+    {
+        "word": "complain",
+        "type": "verb"
+    },
+    {
+        "word": "complete",
+        "type": "verb"
+    },
+    {
+        "word": "concern",
+        "type": "verb"
+    },
+    {
+        "word": "condemn",
+        "type": "verb"
+    },
+    {
+        "word": "confess",
+        "type": "verb"
+    },
+    {
+        "word": "confirm",
+        "type": "verb"
+    },
+    {
+        "word": "confront",
+        "type": "verb"
+    },
+    {
+        "word": "confuse",
+        "type": "verb"
+    },
+    {
+        "word": "connect",
+        "type": "verb"
+    },
+    {
+        "word": "conserve",
+        "type": "verb"
+    },
+    {
+        "word": "consider",
+        "type": "verb"
+    },
+    {
+        "word": "consist",
+        "type": "verb"
+    },
+    {
+        "word": "construct",
+        "type": "verb"
+    },
+    {
+        "word": "consult",
+        "type": "verb"
+    },
+    {
+        "word": "contact",
+        "type": "verb"
+    },
+    {
+        "word": "contain",
+        "type": "verb"
+    },
+    {
+        "word": "continue",
+        "type": "verb"
+    },
+    {
+        "word": "contribute",
+        "type": "verb"
+    },
+    {
+        "word": "convert",
+        "type": "verb"
+    },
+    {
+        "word": "convince",
+        "type": "verb"
+    },
+    {
+        "word": "cook",
+        "type": "verb"
+    },
+    {
+        "word": "copy",
+        "type": "verb"
+    },
+    {
+        "word": "correct",
+        "type": "verb"
+    },
+    {
+        "word": "cough",
+        "type": "verb"
+    },
+    {
+        "word": "count",
+        "type": "verb"
+    },
+    {
+        "word": "cover",
+        "type": "verb"
+    },
+    {
+        "word": "crack",
+        "type": "verb"
+    },
+    {
+        "word": "crash",
+        "type": "verb"
+    },
+    {
+        "word": "crawl",
+        "type": "verb"
+    },
+    {
+        "word": "create",
+        "type": "verb"
+    },
+    {
+        "word": "creep",
+        "type": "verb"
+    },
+    {
+        "word": "criticize",
+        "type": "verb"
+    },
+    {
+        "word": "crush",
+        "type": "verb"
+    },
+    {
+        "word": "cry",
+        "type": "verb"
+    },
+    {
+        "word": "cut",
+        "type": "verb"
+    },
+    {
+        "word": "damage",
+        "type": "verb"
+    },
+    {
+        "word": "damn",
+        "type": "verb"
+    },
+    {
+        "word": "debate",
+        "type": "verb"
+    },
+    {
+        "word": "decay",
+        "type": "verb"
+    },
+    {
+        "word": "deceive",
+        "type": "verb"
+    },
+    {
+        "word": "decide",
+        "type": "verb"
+    },
+    {
+        "word": "declare",
+        "type": "verb"
+    },
+    {
+        "word": "decorate",
+        "type": "verb"
+    },
+    {
+        "word": "defeat",
+        "type": "verb"
+    },
+    {
+        "word": "defend",
+        "type": "verb"
+    },
+    {
+        "word": "define",
+        "type": "verb"
+    },
+    {
+        "word": "delay",
+        "type": "verb"
+    },
+    {
+        "word": "delight",
+        "type": "verb"
+    },
+    {
+        "word": "deliver",
+        "type": "verb"
+    },
+    {
+        "word": "demonstrate",
+        "type": "verb"
+    },
+    {
+        "word": "deny",
+        "type": "verb"
+    },
+    {
+        "word": "depend",
+        "type": "verb"
+    },
+    {
+        "word": "describe",
+        "type": "verb"
+    },
+    {
+        "word": "deserve",
+        "type": "verb"
+    },
+    {
+        "word": "design",
+        "type": "verb"
+    },
+    {
+        "word": "desire",
+        "type": "verb"
+    },
+    {
+        "word": "detect",
+        "type": "verb"
+    },
+    {
+        "word": "determine",
+        "type": "verb"
+    },
+    {
+        "word": "develop",
+        "type": "verb"
+    },
+    {
+        "word": "die",
+        "type": "verb"
+    },
+    {
+        "word": "direct",
+        "type": "verb"
+    },
+    {
+        "word": "discard",
+        "type": "verb"
+    },
+    {
+        "word": "discipline",
+        "type": "verb"
+    },
+    {
+        "word": "discover",
+        "type": "verb"
+    },
+    {
+        "word": "discuss",
+        "type": "verb"
+    },
+    {
+        "word": "dislike",
+        "type": "verb"
+    },
+    {
+        "word": "display",
+        "type": "verb"
+    },
+    {
+        "word": "dispose",
+        "type": "verb"
+    },
+    {
+        "word": "dissolve",
+        "type": "verb"
+    },
+    {
+        "word": "disturb",
+        "type": "verb"
+    },
+    {
+        "word": "divide",
+        "type": "verb"
+    },
+    {
+        "word": "do",
+        "type": "verb"
+    },
+    {
+        "word": "drag",
+        "type": "verb"
+    },
+    {
+        "word": "drill",
+        "type": "verb"
+    },
+    {
+        "word": "drop",
+        "type": "verb"
+    },
+    {
+        "word": "dump",
+        "type": "verb"
+    },
+    {
+        "word": "earn",
+        "type": "verb"
+    },
+    {
+        "word": "eat",
+        "type": "verb"
+    },
+    {
+        "word": "edit",
+        "type": "verb"
+    },
+    {
+        "word": "educate",
+        "type": "verb"
+    },
+    {
+        "word": "embarrass",
+        "type": "verb"
+    },
+    {
+        "word": "emphasize",
+        "type": "verb"
+    },
+    {
+        "word": "employ",
+        "type": "verb"
+    },
+    {
+        "word": "enable",
+        "type": "verb"
+    },
+    {
+        "word": "enclose",
+        "type": "verb"
+    },
+    {
+        "word": "encounter",
+        "type": "verb"
+    },
+    {
+        "word": "encourage",
+        "type": "verb"
+    },
+    {
+        "word": "end",
+        "type": "verb"
+    },
+    {
+        "word": "endorse",
+        "type": "verb"
+    },
+    {
+        "word": "endure",
+        "type": "verb"
+    },
+    {
+        "word": "enforce",
+        "type": "verb"
+    },
+    {
+        "word": "engage",
+        "type": "verb"
+    },
+    {
+        "word": "enhance",
+        "type": "verb"
+    },
+    {
+        "word": "enjoy",
+        "type": "verb"
+    },
+    {
+        "word": "enlarge",
+        "type": "verb"
+    },
+    {
+        "word": "enrich",
+        "type": "verb"
+    },
+    {
+        "word": "ensure",
+        "type": "verb"
+    },
+    {
+        "word": "enter",
+        "type": "verb"
+    },
+    {
+        "word": "entertain",
+        "type": "verb"
+    },
+    {
+        "word": "entitle",
+        "type": "verb"
+    },
+    {
+        "word": "escape",
+        "type": "verb"
+    },
+    {
+        "word": "establish",
+        "type": "verb"
+    },
+    {
+        "word": "estimate",
+        "type": "verb"
+    },
+    {
+        "word": "evaluate",
+        "type": "verb"
+    },
+    {
+        "word": "examine",
+        "type": "verb"
+    },
+    {
+        "word": "exceed",
+        "type": "verb"
+    },
+    {
+        "word": "exchange",
+        "type": "verb"
+    },
+    {
+        "word": "exclude",
+        "type": "verb"
+    },
+    {
+        "word": "expand",
+        "type": "verb"
+    },
+    {
+        "word": "expect",
+        "type": "verb"
+    },
+    {
+        "word": "experience",
+        "type": "verb"
+    },
+    {
+        "word": "experiment",
+        "type": "verb"
+    },
+    {
+        "word": "explain",
+        "type": "verb"
+    },
+    {
+        "word": "explode",
+        "type": "verb"
+    },
+    {
+        "word": "explore",
+        "type": "verb"
+    },
+    {
+        "word": "express",
+        "type": "verb"
+    },
+    {
+        "word": "extend",
+        "type": "verb"
+    },
+    {
+        "word": "face",
+        "type": "verb"
+    },
+    {
+        "word": "fade",
+        "type": "verb"
+    },
+    {
+        "word": "fail",
+        "type": "verb"
+    },
+    {
+        "word": "fall",
+        "type": "verb"
+    },
+    {
+        "word": "fancy",
+        "type": "verb"
+    },
+    {
+        "word": "fasten",
+        "type": "verb"
+    },
+    {
+        "word": "favor",
+        "type": "verb"
+    },
+    {
+        "word": "fax",
+        "type": "verb"
+    },
+    {
+        "word": "fear",
+        "type": "verb"
+    },
+    {
+        "word": "feature",
+        "type": "verb"
+    },
+    {
+        "word": "feel",
+        "type": "verb"
+    },
+    {
+        "word": "fetch",
+        "type": "verb"
+    },
+    {
+        "word": "finance",
+        "type": "verb"
+    },
+    {
+        "word": "find",
+        "type": "verb"
+    },
+    {
+        "word": "finish",
+        "type": "verb"
+    },
+    {
+        "word": "fish",
+        "type": "verb"
+    },
+    {
+        "word": "fit",
+        "type": "verb"
+    },
+    {
+        "word": "fix",
+        "type": "verb"
+    },
+    {
+        "word": "flap",
+        "type": "verb"
+    },
+    {
+        "word": "flee",
+        "type": "verb"
+    },
+    {
+        "word": "flick",
+        "type": "verb"
+    },
+    {
+        "word": "float",
+        "type": "verb"
+    },
+    {
+        "word": "flow",
+        "type": "verb"
+    },
+    {
+        "word": "focus",
+        "type": "verb"
+    },
+    {
+        "word": "fold",
+        "type": "verb"
+    },
+    {
+        "word": "follow",
+        "type": "verb"
+    },
+    {
+        "word": "forbid",
+        "type": "verb"
+    },
+    {
+        "word": "forecast",
+        "type": "verb"
+    },
+    {
+        "word": "foresee",
+        "type": "verb"
+    },
+    {
+        "word": "forgive",
+        "type": "verb"
+    },
+    {
+        "word": "form",
+        "type": "verb"
+    },
+    {
+        "word": "frame",
+        "type": "verb"
+    },
+    {
+        "word": "freeze",
+        "type": "verb"
+    },
+    {
+        "word": "frighten",
+        "type": "verb"
+    },
+    {
+        "word": "fulfill",
+        "type": "verb"
+    },
+    {
+        "word": "gain",
+        "type": "verb"
+    },
+    {
+        "word": "gather",
+        "type": "verb"
+    },
+    {
+        "word": "gaze",
+        "type": "verb"
+    },
+    {
+        "word": "generate",
+        "type": "verb"
+    },
+    {
+        "word": "get",
+        "type": "verb"
+    },
+    {
+        "word": "give",
+        "type": "verb"
+    },
+    {
+        "word": "glance",
+        "type": "verb"
+    },
+    {
+        "word": "glow",
+        "type": "verb"
+    },
+    {
+        "word": "go",
+        "type": "verb"
+    },
+    {
+        "word": "govern",
+        "type": "verb"
+    },
+    {
+        "word": "grab",
+        "type": "verb"
+    },
+    {
+        "word": "grin",
+        "type": "verb"
+    },
+    {
+        "word": "grind",
+        "type": "verb"
+    },
+    {
+        "word": "guard",
+        "type": "verb"
+    },
+    {
+        "word": "guess",
+        "type": "verb"
+    },
+    {
+        "word": "hammer",
+        "type": "verb"
+    },
+    {
+        "word": "handle",
+        "type": "verb"
+    },
+    {
+        "word": "happen",
+        "type": "verb"
+    },
+    {
+        "word": "harass",
+        "type": "verb"
+    },
+    {
+        "word": "harvest",
+        "type": "verb"
+    },
+    {
+        "word": "haunt",
+        "type": "verb"
+    },
+    {
+        "word": "have",
+        "type": "verb"
+    },
+    {
+        "word": "heal",
+        "type": "verb"
+    },
+    {
+        "word": "heap",
+        "type": "verb"
+    },
+    {
+        "word": "hear",
+        "type": "verb"
+    },
+    {
+        "word": "heat",
+        "type": "verb"
+    },
+    {
+        "word": "help",
+        "type": "verb"
+    },
+    {
+        "word": "hesitate",
+        "type": "verb"
+    },
+    {
+        "word": "highlight",
+        "type": "verb"
+    },
+    {
+        "word": "hint",
+        "type": "verb"
+    },
+    {
+        "word": "hire",
+        "type": "verb"
+    },
+    {
+        "word": "hit",
+        "type": "verb"
+    },
+    {
+        "word": "hope",
+        "type": "verb"
+    },
+    {
+        "word": "hug",
+        "type": "verb"
+    },
+    {
+        "word": "hunt",
+        "type": "verb"
+    },
+    {
+        "word": "identify",
+        "type": "verb"
+    },
+    {
+        "word": "ignore",
+        "type": "verb"
+    },
+    {
+        "word": "illustrate",
+        "type": "verb"
+    },
+    {
+        "word": "imagine",
+        "type": "verb"
+    },
+    {
+        "word": "imply",
+        "type": "verb"
+    },
+    {
+        "word": "import",
+        "type": "verb"
+    },
+    {
+        "word": "impress",
+        "type": "verb"
+    },
+    {
+        "word": "improve",
+        "type": "verb"
+    },
+    {
+        "word": "incline",
+        "type": "verb"
+    },
+    {
+        "word": "include",
+        "type": "verb"
+    },
+    {
+        "word": "increase",
+        "type": "verb"
+    },
+    {
+        "word": "indicate",
+        "type": "verb"
+    },
+    {
+        "word": "induce",
+        "type": "verb"
+    },
+    {
+        "word": "influence",
+        "type": "verb"
+    },
+    {
+        "word": "inform",
+        "type": "verb"
+    },
+    {
+        "word": "inhale",
+        "type": "verb"
+    },
+    {
+        "word": "inject",
+        "type": "verb"
+    },
+    {
+        "word": "injure",
+        "type": "verb"
+    },
+    {
+        "word": "innovate",
+        "type": "verb"
+    },
+    {
+        "word": "inspect",
+        "type": "verb"
+    },
+    {
+        "word": "inspire",
+        "type": "verb"
+    },
+    {
+        "word": "install",
+        "type": "verb"
+    },
+    {
+        "word": "instruct",
+        "type": "verb"
+    },
+    {
+        "word": "insult",
+        "type": "verb"
+    },
+    {
+        "word": "intend",
+        "type": "verb"
+    },
+    {
+        "word": "interest",
+        "type": "verb"
+    },
+    {
+        "word": "interfere",
+        "type": "verb"
+    },
+    {
+        "word": "interrupt",
+        "type": "verb"
+    },
+    {
+        "word": "introduce",
+        "type": "verb"
+    },
+    {
+        "word": "invade",
+        "type": "verb"
+    },
+    {
+        "word": "inventory",
+        "type": "verb"
+    },
+    {
+        "word": "invest",
+        "type": "verb"
+    },
+    {
+        "word": "investigate",
+        "type": "verb"
+    },
+    {
+        "word": "invite",
+        "type": "verb"
+    },
+    {
+        "word": "irritate",
+        "type": "verb"
+    },
+    {
+        "word": "isolate",
+        "type": "verb"
+    },
+    {
+        "word": "jog",
+        "type": "verb"
+    },
+    {
+        "word": "join",
+        "type": "verb"
+    },
+    {
+        "word": "joke",
+        "type": "verb"
+    },
+    {
+        "word": "judge",
+        "type": "verb"
+    },
+    {
+        "word": "justify",
+        "type": "verb"
+    },
+    {
+        "word": "keep",
+        "type": "verb"
+    },
+    {
+        "word": "kill",
+        "type": "verb"
+    },
+    {
+        "word": "kindle",
+        "type": "verb"
+    },
+    {
+        "word": "kiss",
+        "type": "verb"
+    },
+    {
+        "word": "kneel",
+        "type": "verb"
+    },
+    {
+        "word": "knit",
+        "type": "verb"
+    },
+    {
+        "word": "knock",
+        "type": "verb"
+    },
+    {
+        "word": "know",
+        "type": "verb"
+    },
+    {
+        "word": "label",
+        "type": "verb"
+    },
+    {
+        "word": "land",
+        "type": "verb"
+    },
+    {
+        "word": "last",
+        "type": "verb"
+    },
+    {
+        "word": "latch",
+        "type": "verb"
+    },
+    {
+        "word": "laugh",
+        "type": "verb"
+    },
+    {
+        "word": "launch",
+        "type": "verb"
+    },
+    {
+        "word": "lay",
+        "type": "verb"
+    },
+    {
+        "word": "lead",
+        "type": "verb"
+    },
+    {
+        "word": "lean",
+        "type": "verb"
+    },
+    {
+        "word": "learn",
+        "type": "verb"
+    },
+    {
+        "word": "lease",
+        "type": "verb"
+    },
+    {
+        "word": "leave",
+        "type": "verb"
+    },
+    {
+        "word": "lecture",
+        "type": "verb"
+    },
+    {
+        "word": "let",
+        "type": "verb"
+    },
+    {
+        "word": "license",
+        "type": "verb"
+    },
+    {
+        "word": "light",
+        "type": "verb"
+    },
+    {
+        "word": "like",
+        "type": "verb"
+    },
+    {
+        "word": "limit",
+        "type": "verb"
+    },
+    {
+        "word": "line",
+        "type": "verb"
+    },
+    {
+        "word": "listen",
+        "type": "verb"
+    },
+    {
+        "word": "live",
+        "type": "verb"
+    },
+    {
+        "word": "load",
+        "type": "verb"
+    },
+    {
+        "word": "locate",
+        "type": "verb"
+    },
+    {
+        "word": "lock",
+        "type": "verb"
+    },
+    {
+        "word": "log",
+        "type": "verb"
+    },
+    {
+        "word": "long",
+        "type": "verb"
+    },
+    {
+        "word": "look",
+        "type": "verb"
+    },
+    {
+        "word": "loosen",
+        "type": "verb"
+    },
+    {
+        "word": "lose",
+        "type": "verb"
+    },
+    {
+        "word": "love",
+        "type": "verb"
+    },
+    {
+        "word": "maintain",
+        "type": "verb"
+    },
+    {
+        "word": "make",
+        "type": "verb"
+    },
+    {
+        "word": "manage",
+        "type": "verb"
+    },
+    {
+        "word": "manipulate",
+        "type": "verb"
+    },
+    {
+        "word": "manufacture",
+        "type": "verb"
+    },
+    {
+        "word": "mark",
+        "type": "verb"
+    },
+    {
+        "word": "marry",
+        "type": "verb"
+    },
+    {
+        "word": "match",
+        "type": "verb"
+    },
+    {
+        "word": "mean",
+        "type": "verb"
+    },
+    {
+        "word": "measure",
+        "type": "verb"
+    },
+    {
+        "word": "meditate",
+        "type": "verb"
+    },
+    {
+        "word": "meet",
+        "type": "verb"
+    },
+    {
+        "word": "mention",
+        "type": "verb"
+    },
+    {
+        "word": "merge",
+        "type": "verb"
+    },
+    {
+        "word": "miss",
+        "type": "verb"
+    },
+    {
+        "word": "monitor",
+        "type": "verb"
+    },
+    {
+        "word": "motivate",
+        "type": "verb"
+    },
+    {
+        "word": "move",
+        "type": "verb"
+    },
+    {
+        "word": "multiply",
+        "type": "verb"
+    },
+    {
+        "word": "name",
+        "type": "verb"
+    },
+    {
+        "word": "navigate",
+        "type": "verb"
+    },
+    {
+        "word": "need",
+        "type": "verb"
+    },
+    {
+        "word": "negotiate",
+        "type": "verb"
+    },
+    {
+        "word": "nod",
+        "type": "verb"
+    },
+    {
+        "word": "notice",
+        "type": "verb"
+    },
+    {
+        "word": "obey",
+        "type": "verb"
+    },
+    {
+        "word": "observe",
+        "type": "verb"
+    },
+    {
+        "word": "obtain",
+        "type": "verb"
+    },
+    {
+        "word": "occupy",
+        "type": "verb"
+    },
+    {
+        "word": "occur",
+        "type": "verb"
+    },
+    {
+        "word": "offend",
+        "type": "verb"
+    },
+    {
+        "word": "offer",
+        "type": "verb"
+    },
+    {
+        "word": "open",
+        "type": "verb"
+    },
+    {
+        "word": "operate",
+        "type": "verb"
+    },
+    {
+        "word": "oppose",
+        "type": "verb"
+    },
+    {
+        "word": "optimize",
+        "type": "verb"
+    },
+    {
+        "word": "order",
+        "type": "verb"
+    },
+    {
+        "word": "organize",
+        "type": "verb"
+    },
+    {
+        "word": "originate",
+        "type": "verb"
+    },
+    {
+        "word": "overcome",
+        "type": "verb"
+    },
+    {
+        "word": "overlook",
+        "type": "verb"
+    },
+    {
+        "word": "owe",
+        "type": "verb"
+    },
+    {
+        "word": "pack",
+        "type": "verb"
+    },
+    {
+        "word": "paint",
+        "type": "verb"
+    },
+    {
+        "word": "park",
+        "type": "verb"
+    },
+    {
+        "word": "participate",
+        "type": "verb"
+    },
+    {
+        "word": "pass",
+        "type": "verb"
+    },
+    {
+        "word": "pat",
+        "type": "verb"
+    },
+    {
+        "word": "patrol",
+        "type": "verb"
+    },
+    {
+        "word": "pattern",
+        "type": "verb"
+    },
+    {
+        "word": "pay",
+        "type": "verb"
+    },
+    {
+        "word": "perform",
+        "type": "verb"
+    },
+    {
+        "word": "persist",
+        "type": "verb"
+    },
+    {
+        "word": "persuade",
+        "type": "verb"
+    },
+    {
+        "word": "place",
+        "type": "verb"
+    },
+    {
+        "word": "plant",
+        "type": "verb"
+    },
+    {
+        "word": "play",
+        "type": "verb"
+    },
+    {
+        "word": "plead",
+        "type": "verb"
+    },
+    {
+        "word": "please",
+        "type": "verb"
+    },
+    {
+        "word": "point",
+        "type": "verb"
+    },
+    {
+        "word": "polish",
+        "type": "verb"
+    },
+    {
+        "word": "possess",
+        "type": "verb"
+    },
+    {
+        "word": "post",
+        "type": "verb"
+    },
+    {
+        "word": "postpone",
+        "type": "verb"
+    },
+    {
+        "word": "pour",
+        "type": "verb"
+    },
+    {
+        "word": "practise",
+        "type": "verb"
+    },
+    {
+        "word": "praise",
+        "type": "verb"
+    },
+    {
+        "word": "pray",
+        "type": "verb"
+    },
+    {
+        "word": "preach",
+        "type": "verb"
+    },
+    {
+        "word": "precede",
+        "type": "verb"
+    },
+    {
+        "word": "prefer",
+        "type": "verb"
+    },
+    {
+        "word": "prepare",
+        "type": "verb"
+    },
+    {
+        "word": "press",
+        "type": "verb"
+    },
+    {
+        "word": "presume",
+        "type": "verb"
+    },
+    {
+        "word": "pretend",
+        "type": "verb"
+    },
+    {
+        "word": "prevent",
+        "type": "verb"
+    },
+    {
+        "word": "print",
+        "type": "verb"
+    },
+    {
+        "word": "proceed",
+        "type": "verb"
+    },
+    {
+        "word": "process",
+        "type": "verb"
+    },
+    {
+        "word": "produce",
+        "type": "verb"
+    },
+    {
+        "word": "profess",
+        "type": "verb"
+    },
+    {
+        "word": "profit",
+        "type": "verb"
+    },
+    {
+        "word": "progress",
+        "type": "verb"
+    },
+    {
+        "word": "prohibit",
+        "type": "verb"
+    },
+    {
+        "word": "promise",
+        "type": "verb"
+    },
+    {
+        "word": "promote",
+        "type": "verb"
+    },
+    {
+        "word": "proofread",
+        "type": "verb"
+    },
+    {
+        "word": "propose",
+        "type": "verb"
+    },
+    {
+        "word": "prosecute",
+        "type": "verb"
+    },
+    {
+        "word": "protect",
+        "type": "verb"
+    },
+    {
+        "word": "prove",
+        "type": "verb"
+    },
+    {
+        "word": "provide",
+        "type": "verb"
+    },
+    {
+        "word": "publish",
+        "type": "verb"
+    },
+    {
+        "word": "pull",
+        "type": "verb"
+    },
+    {
+        "word": "pump",
+        "type": "verb"
+    },
+    {
+        "word": "punch",
+        "type": "verb"
+    },
+    {
+        "word": "punish",
+        "type": "verb"
+    },
+    {
+        "word": "purchase",
+        "type": "verb"
+    },
+    {
+        "word": "pursue",
+        "type": "verb"
+    },
+    {
+        "word": "push",
+        "type": "verb"
+    },
+    {
+        "word": "put",
+        "type": "verb"
+    },
+    {
+        "word": "question",
+        "type": "verb"
+    },
+    {
+        "word": "quit",
+        "type": "verb"
+    },
+    {
+        "word": "race",
+        "type": "verb"
+    },
+    {
+        "word": "raise",
+        "type": "verb"
+    },
+    {
+        "word": "reach",
+        "type": "verb"
+    },
+    {
+        "word": "react",
+        "type": "verb"
+    },
+    {
+        "word": "read",
+        "type": "verb"
+    },
+    {
+        "word": "realize",
+        "type": "verb"
+    },
+    {
+        "word": "reason",
+        "type": "verb"
+    },
+    {
+        "word": "receive",
+        "type": "verb"
+    },
+    {
+        "word": "recognize",
+        "type": "verb"
+    },
+    {
+        "word": "recommend",
+        "type": "verb"
+    },
+    {
+        "word": "record",
+        "type": "verb"
+    },
+    {
+        "word": "recover",
+        "type": "verb"
+    },
+    {
+        "word": "recruit",
+        "type": "verb"
+    },
+    {
+        "word": "reduce",
+        "type": "verb"
+    },
+    {
+        "word": "refer",
+        "type": "verb"
+    },
+    {
+        "word": "reflect",
+        "type": "verb"
+    },
+    {
+        "word": "refuse",
+        "type": "verb"
+    },
+    {
+        "word": "regret",
+        "type": "verb"
+    },
+    {
+        "word": "relax",
+        "type": "verb"
+    },
+    {
+        "word": "release",
+        "type": "verb"
+    },
+    {
+        "word": "relieve",
+        "type": "verb"
+    },
+    {
+        "word": "rely",
+        "type": "verb"
+    },
+    {
+        "word": "remain",
+        "type": "verb"
+    },
+    {
+        "word": "remark",
+        "type": "verb"
+    },
+    {
+        "word": "remember",
+        "type": "verb"
+    },
+    {
+        "word": "remind",
+        "type": "verb"
+    },
+    {
+        "word": "remove",
+        "type": "verb"
+    },
+    {
+        "word": "repair",
+        "type": "verb"
+    },
+    {
+        "word": "repeat",
+        "type": "verb"
+    },
+    {
+        "word": "replace",
+        "type": "verb"
+    },
+    {
+        "word": "reply",
+        "type": "verb"
+    },
+    {
+        "word": "report",
+        "type": "verb"
+    },
+    {
+        "word": "represent",
+        "type": "verb"
+    },
+    {
+        "word": "request",
+        "type": "verb"
+    },
+    {
+        "word": "require",
+        "type": "verb"
+    },
+    {
+        "word": "rescue",
+        "type": "verb"
+    },
+    {
+        "word": "research",
+        "type": "verb"
+    },
+    {
+        "word": "resent",
+        "type": "verb"
+    },
+    {
+        "word": "reside",
+        "type": "verb"
+    },
+    {
+        "word": "resign",
+        "type": "verb"
+    },
+    {
+        "word": "resist",
+        "type": "verb"
+    },
+    {
+        "word": "resolve",
+        "type": "verb"
+    },
+    {
+        "word": "respect",
+        "type": "verb"
+    },
+    {
+        "word": "respond",
+        "type": "verb"
+    },
+    {
+        "word": "restore",
+        "type": "verb"
+    },
+    {
+        "word": "restrict",
+        "type": "verb"
+    },
+    {
+        "word": "result",
+        "type": "verb"
+    },
+    {
+        "word": "retire",
+        "type": "verb"
+    },
+    {
+        "word": "return",
+        "type": "verb"
+    },
+    {
+        "word": "review",
+        "type": "verb"
+    },
+    {
+        "word": "revise",
+        "type": "verb"
+    },
+    {
+        "word": "ring",
+        "type": "verb"
+    },
+    {
+        "word": "rob",
+        "type": "verb"
+    },
+    {
+        "word": "ruin",
+        "type": "verb"
+    },
+    {
+        "word": "rule",
+        "type": "verb"
+    },
+    {
+        "word": "run",
+        "type": "verb"
+    },
+    {
+        "word": "satisfy",
+        "type": "verb"
+    },
+    {
+        "word": "save",
+        "type": "verb"
+    },
+    {
+        "word": "say",
+        "type": "verb"
+    },
+    {
+        "word": "scan",
+        "type": "verb"
+    },
+    {
+        "word": "scare",
+        "type": "verb"
+    },
+    {
+        "word": "scatter",
+        "type": "verb"
+    },
+    {
+        "word": "school",
+        "type": "verb"
+    },
+    {
+        "word": "seal",
+        "type": "verb"
+    },
+    {
+        "word": "search",
+        "type": "verb"
+    },
+    {
+        "word": "secure",
+        "type": "verb"
+    },
+    {
+        "word": "see",
+        "type": "verb"
+    },
+    {
+        "word": "seem",
+        "type": "verb"
+    },
+    {
+        "word": "select",
+        "type": "verb"
+    },
+    {
+        "word": "sell",
+        "type": "verb"
+    },
+    {
+        "word": "send",
+        "type": "verb"
+    },
+    {
+        "word": "serve",
+        "type": "verb"
+    },
+    {
+        "word": "set",
+        "type": "verb"
+    },
+    {
+        "word": "settle",
+        "type": "verb"
+    },
+    {
+        "word": "shake",
+        "type": "verb"
+    },
+    {
+        "word": "shape",
+        "type": "verb"
+    },
+    {
+        "word": "share",
+        "type": "verb"
+    },
+    {
+        "word": "shave",
+        "type": "verb"
+    },
+    {
+        "word": "shock",
+        "type": "verb"
+    },
+    {
+        "word": "shop",
+        "type": "verb"
+    },
+    {
+        "word": "shout",
+        "type": "verb"
+    },
+    {
+        "word": "show",
+        "type": "verb"
+    },
+    {
+        "word": "sign",
+        "type": "verb"
+    },
+    {
+        "word": "sing",
+        "type": "verb"
+    },
+    {
+        "word": "sit",
+        "type": "verb"
+    },
+    {
+        "word": "ski",
+        "type": "verb"
+    },
+    {
+        "word": "slip",
+        "type": "verb"
+    },
+    {
+        "word": "smell",
+        "type": "verb"
+    },
+    {
+        "word": "smile",
+        "type": "verb"
+    },
+    {
+        "word": "smoke",
+        "type": "verb"
+    },
+    {
+        "word": "solve",
+        "type": "verb"
+    },
+    {
+        "word": "sort",
+        "type": "verb"
+    },
+    {
+        "word": "sound",
+        "type": "verb"
+    },
+    {
+        "word": "speak",
+        "type": "verb"
+    },
+    {
+        "word": "spell",
+        "type": "verb"
+    },
+    {
+        "word": "spend",
+        "type": "verb"
+    },
+    {
+        "word": "spill",
+        "type": "verb"
+    },
+    {
+        "word": "spoil",
+        "type": "verb"
+    },
+    {
+        "word": "spread",
+        "type": "verb"
+    },
+    {
+        "word": "stamp",
+        "type": "verb"
+    },
+    {
+        "word": "stand",
+        "type": "verb"
+    },
+    {
+        "word": "start",
+        "type": "verb"
+    },
+    {
+        "word": "state",
+        "type": "verb"
+    },
+    {
+        "word": "stay",
+        "type": "verb"
+    },
+    {
+        "word": "steer",
+        "type": "verb"
+    },
+    {
+        "word": "step",
+        "type": "verb"
+    },
+    {
+        "word": "stick",
+        "type": "verb"
+    },
+    {
+        "word": "stimulate",
+        "type": "verb"
+    },
+    {
+        "word": "stir",
+        "type": "verb"
+    },
+    {
+        "word": "stop",
+        "type": "verb"
+    },
+    {
+        "word": "store",
+        "type": "verb"
+    },
+    {
+        "word": "stress",
+        "type": "verb"
+    },
+    {
+        "word": "stretch",
+        "type": "verb"
+    },
+    {
+        "word": "strike",
+        "type": "verb"
+    },
+    {
+        "word": "strip",
+        "type": "verb"
+    },
+    {
+        "word": "study",
+        "type": "verb"
+    },
+    {
+        "word": "submit",
+        "type": "verb"
+    },
+    {
+        "word": "substitute",
+        "type": "verb"
+    },
+    {
+        "word": "subtract",
+        "type": "verb"
+    },
+    {
+        "word": "succeed",
+        "type": "verb"
+    },
+    {
+        "word": "suffer",
+        "type": "verb"
+    },
+    {
+        "word": "suggest",
+        "type": "verb"
+    },
+    {
+        "word": "suit",
+        "type": "verb"
+    },
+    {
+        "word": "supervise",
+        "type": "verb"
+    },
+    {
+        "word": "supply",
+        "type": "verb"
+    },
+    {
+        "word": "support",
+        "type": "verb"
+    },
+    {
+        "word": "suppose",
+        "type": "verb"
+    },
+    {
+        "word": "surprise",
+        "type": "verb"
+    },
+    {
+        "word": "surround",
+        "type": "verb"
+    },
+    {
+        "word": "survive",
+        "type": "verb"
+    },
+    {
+        "word": "suspect",
+        "type": "verb"
+    },
+    {
+        "word": "suspend",
+        "type": "verb"
+    },
+    {
+        "word": "sweep",
+        "type": "verb"
+    },
+    {
+        "word": "swim",
+        "type": "verb"
+    },
+    {
+        "word": "switch",
+        "type": "verb"
+    },
+    {
+        "word": "tailor",
+        "type": "verb"
+    },
+    {
+        "word": "take",
+        "type": "verb"
+    },
+    {
+        "word": "talk",
+        "type": "verb"
+    },
+    {
+        "word": "taunt",
+        "type": "verb"
+    },
+    {
+        "word": "teach",
+        "type": "verb"
+    },
+    {
+        "word": "telephone",
+        "type": "verb"
+    },
+    {
+        "word": "tell",
+        "type": "verb"
+    },
+    {
+        "word": "tempt",
+        "type": "verb"
+    },
+    {
+        "word": "test",
+        "type": "verb"
+    },
+    {
+        "word": "thank",
+        "type": "verb"
+    },
+    {
+        "word": "think",
+        "type": "verb"
+    },
+    {
+        "word": "threaten",
+        "type": "verb"
+    },
+    {
+        "word": "throw",
+        "type": "verb"
+    },
+    {
+        "word": "tie",
+        "type": "verb"
+    },
+    {
+        "word": "tip",
+        "type": "verb"
+    },
+    {
+        "word": "tolerate",
+        "type": "verb"
+    },
+    {
+        "word": "top",
+        "type": "verb"
+    },
+    {
+        "word": "trace",
+        "type": "verb"
+    },
+    {
+        "word": "track",
+        "type": "verb"
+    },
+    {
+        "word": "trade",
+        "type": "verb"
+    },
+    {
+        "word": "train",
+        "type": "verb"
+    },
+    {
+        "word": "transfer",
+        "type": "verb"
+    },
+    {
+        "word": "transform",
+        "type": "verb"
+    },
+    {
+        "word": "translate",
+        "type": "verb"
+    },
+    {
+        "word": "transport",
+        "type": "verb"
+    },
+    {
+        "word": "trap",
+        "type": "verb"
+    },
+    {
+        "word": "travel",
+        "type": "verb"
+    },
+    {
+        "word": "treat",
+        "type": "verb"
+    },
+    {
+        "word": "trick",
+        "type": "verb"
+    },
+    {
+        "word": "trust",
+        "type": "verb"
+    },
+    {
+        "word": "try",
+        "type": "verb"
+    },
+    {
+        "word": "tune",
+        "type": "verb"
+    },
+    {
+        "word": "turn",
+        "type": "verb"
+    },
+    {
+        "word": "type",
+        "type": "verb"
+    },
+    {
+        "word": "undergo",
+        "type": "verb"
+    },
+    {
+        "word": "understand",
+        "type": "verb"
+    },
+    {
+        "word": "undo",
+        "type": "verb"
+    },
+    {
+        "word": "unite",
+        "type": "verb"
+    },
+    {
+        "word": "unlock",
+        "type": "verb"
+    },
+    {
+        "word": "update",
+        "type": "verb"
+    },
+    {
+        "word": "upgrade",
+        "type": "verb"
+    },
+    {
+        "word": "upload",
+        "type": "verb"
+    },
+    {
+        "word": "upset",
+        "type": "verb"
+    },
+    {
+        "word": "urge",
+        "type": "verb"
+    },
+    {
+        "word": "use",
+        "type": "verb"
+    },
+    {
+        "word": "utilize",
+        "type": "verb"
+    },
+    {
+        "word": "value",
+        "type": "verb"
+    },
+    {
+        "word": "vanish",
+        "type": "verb"
+    },
+    {
+        "word": "visit",
+        "type": "verb"
+    },
+    {
+        "word": "volunteer",
+        "type": "verb"
+    },
+    {
+        "word": "wait",
+        "type": "verb"
+    },
+    {
+        "word": "wake",
+        "type": "verb"
+    },
+    {
+        "word": "walk",
+        "type": "verb"
+    },
+    {
+        "word": "want",
+        "type": "verb"
+    },
+    {
+        "word": "warn",
+        "type": "verb"
+    },
+    {
+        "word": "wash",
+        "type": "verb"
+    },
+    {
+        "word": "waste",
+        "type": "verb"
+    },
+    {
+        "word": "watch",
+        "type": "verb"
+    },
+    {
+        "word": "water",
+        "type": "verb"
+    },
+    {
+        "word": "wear",
+        "type": "verb"
+    },
+    {
+        "word": "weigh",
+        "type": "verb"
+    },
+    {
+        "word": "welcome",
+        "type": "verb"
+    },
+    {
+        "word": "whisper",
+        "type": "verb"
+    },
+    {
+        "word": "win",
+        "type": "verb"
+    },
+    {
+        "word": "wipe",
+        "type": "verb"
+    },
+    {
+        "word": "wish",
+        "type": "verb"
+    },
+    {
+        "word": "wonder",
+        "type": "verb"
+    },
+    {
+        "word": "work",
+        "type": "verb"
+    },
+    {
+        "word": "worry",
+        "type": "verb"
+    },
+    {
+        "word": "worship",
+        "type": "verb"
+    },
+    {
+        "word": "wrap",
+        "type": "verb"
+    },
+    {
+        "word": "write",
+        "type": "verb"
+    },
+    {
+        "word": "yawn",
+        "type": "verb"
+    },
+    {
+        "word": "zip",
+        "type": "verb"
+    },
+    {
+        "word": "able",
+        "type": "adjective"
+    },
+    {
+        "word": "abnormal",
+        "type": "adjective"
+    },
+    {
+        "word": "acceptable",
+        "type": "adjective"
+    },
+    {
+        "word": "accurate",
+        "type": "adjective"
+    },
+    {
+        "word": "active",
+        "type": "adjective"
+    },
+    {
+        "word": "additional",
+        "type": "adjective"
+    },
+    {
+        "word": "advanced",
+        "type": "adjective"
+    },
+    {
+        "word": "affordable",
+        "type": "adjective"
+    },
+    {
+        "word": "afraid",
+        "type": "adjective"
+    },
+    {
+        "word": "alive",
+        "type": "adjective"
+    },
+    {
+        "word": "alternative",
+        "type": "adjective"
+    },
+    {
+        "word": "amateur",
+        "type": "adjective"
+    },
+    {
+        "word": "amazing",
+        "type": "adjective"
+    },
+    {
+        "word": "ambitious",
+        "type": "adjective"
+    },
+    {
+        "word": "ancient",
+        "type": "adjective"
+    },
+    {
+        "word": "angry",
+        "type": "adjective"
+    },
+    {
+        "word": "annoyed",
+        "type": "adjective"
+    },
+    {
+        "word": "annual",
+        "type": "adjective"
+    },
+    {
+        "word": "anxious",
+        "type": "adjective"
+    },
+    {
+        "word": "artificial",
+        "type": "adjective"
+    },
+    {
+        "word": "ashamed",
+        "type": "adjective"
+    },
+    {
+        "word": "attractive",
+        "type": "adjective"
+    },
+    {
+        "word": "atypical",
+        "type": "adjective"
+    },
+    {
+        "word": "available",
+        "type": "adjective"
+    },
+    {
+        "word": "aware",
+        "type": "adjective"
+    },
+    {
+        "word": "awful",
+        "type": "adjective"
+    },
+    {
+        "word": "bad",
+        "type": "adjective"
+    },
+    {
+        "word": "balanced",
+        "type": "adjective"
+    },
+    {
+        "word": "basic",
+        "type": "adjective"
+    },
+    {
+        "word": "beautiful",
+        "type": "adjective"
+    },
+    {
+        "word": "beneficial",
+        "type": "adjective"
+    },
+    {
+        "word": "big",
+        "type": "adjective"
+    },
+    {
+        "word": "bitter",
+        "type": "adjective"
+    },
+    {
+        "word": "bland",
+        "type": "adjective"
+    },
+    {
+        "word": "blunt",
+        "type": "adjective"
+    },
+    {
+        "word": "boiling",
+        "type": "adjective"
+    },
+    {
+        "word": "boring",
+        "type": "adjective"
+    },
+    {
+        "word": "brave",
+        "type": "adjective"
+    },
+    {
+        "word": "bright",
+        "type": "adjective"
+    },
+    {
+        "word": "brilliant",
+        "type": "adjective"
+    },
+    {
+        "word": "broke",
+        "type": "adjective"
+    },
+    {
+        "word": "busy",
+        "type": "adjective"
+    },
+    {
+        "word": "calm",
+        "type": "adjective"
+    },
+    {
+        "word": "careful",
+        "type": "adjective"
+    },
+    {
+        "word": "careless",
+        "type": "adjective"
+    },
+    {
+        "word": "central",
+        "type": "adjective"
+    },
+    {
+        "word": "cheap",
+        "type": "adjective"
+    },
+    {
+        "word": "chemical",
+        "type": "adjective"
+    },
+    {
+        "word": "chief",
+        "type": "adjective"
+    },
+    {
+        "word": "classic",
+        "type": "adjective"
+    },
+    {
+        "word": "clear",
+        "type": "adjective"
+    },
+    {
+        "word": "close",
+        "type": "adjective"
+    },
+    {
+        "word": "closed",
+        "type": "adjective"
+    },
+    {
+        "word": "cloudy",
+        "type": "adjective"
+    },
+    {
+        "word": "cold",
+        "type": "adjective"
+    },
+    {
+        "word": "colorful",
+        "type": "adjective"
+    },
+    {
+        "word": "comfortable",
+        "type": "adjective"
+    },
+    {
+        "word": "common",
+        "type": "adjective"
+    },
+    {
+        "word": "complex",
+        "type": "adjective"
+    },
+    {
+        "word": "complicated",
+        "type": "adjective"
+    },
+    {
+        "word": "confident",
+        "type": "adjective"
+    },
+    {
+        "word": "confused",
+        "type": "adjective"
+    },
+    {
+        "word": "consistent",
+        "type": "adjective"
+    },
+    {
+        "word": "constant",
+        "type": "adjective"
+    },
+    {
+        "word": "cooked",
+        "type": "adjective"
+    },
+    {
+        "word": "cool",
+        "type": "adjective"
+    },
+    {
+        "word": "cowardly",
+        "type": "adjective"
+    },
+    {
+        "word": "crazy",
+        "type": "adjective"
+    },
+    {
+        "word": "creative",
+        "type": "adjective"
+    },
+    {
+        "word": "critical",
+        "type": "adjective"
+    },
+    {
+        "word": "cruel",
+        "type": "adjective"
+    },
+    {
+        "word": "cultural",
+        "type": "adjective"
+    },
+    {
+        "word": "curious",
+        "type": "adjective"
+    },
+    {
+        "word": "curved",
+        "type": "adjective"
+    },
+    {
+        "word": "cute",
+        "type": "adjective"
+    },
+    {
+        "word": "daily",
+        "type": "adjective"
+    },
+    {
+        "word": "dangerous",
+        "type": "adjective"
+    },
+    {
+        "word": "dark",
+        "type": "adjective"
+    },
+    {
+        "word": "dead",
+        "type": "adjective"
+    },
+    {
+        "word": "deep",
+        "type": "adjective"
+    },
+    {
+        "word": "dependent",
+        "type": "adjective"
+    },
+    {
+        "word": "different",
+        "type": "adjective"
+    },
+    {
+        "word": "dirty",
+        "type": "adjective"
+    },
+    {
+        "word": "dishonest",
+        "type": "adjective"
+    },
+    {
+        "word": "disloyal",
+        "type": "adjective"
+    },
+    {
+        "word": "disorganized",
+        "type": "adjective"
+    },
+    {
+        "word": "distant",
+        "type": "adjective"
+    },
+    {
+        "word": "domestic",
+        "type": "adjective"
+    },
+    {
+        "word": "double",
+        "type": "adjective"
+    },
+    {
+        "word": "dry",
+        "type": "adjective"
+    },
+    {
+        "word": "dull",
+        "type": "adjective"
+    },
+    {
+        "word": "eager",
+        "type": "adjective"
+    },
+    {
+        "word": "early",
+        "type": "adjective"
+    },
+    {
+        "word": "economic",
+        "type": "adjective"
+    },
+    {
+        "word": "educational",
+        "type": "adjective"
+    },
+    {
+        "word": "efficient",
+        "type": "adjective"
+    },
+    {
+        "word": "elementary",
+        "type": "adjective"
+    },
+    {
+        "word": "emotional",
+        "type": "adjective"
+    },
+    {
+        "word": "empty",
+        "type": "adjective"
+    },
+    {
+        "word": "energetic",
+        "type": "adjective"
+    },
+    {
+        "word": "essential",
+        "type": "adjective"
+    },
+    {
+        "word": "exact",
+        "type": "adjective"
+    },
+    {
+        "word": "exciting",
+        "type": "adjective"
+    },
+    {
+        "word": "expensive",
+        "type": "adjective"
+    },
+    {
+        "word": "experienced",
+        "type": "adjective"
+    },
+    {
+        "word": "explicit",
+        "type": "adjective"
+    },
+    {
+        "word": "external",
+        "type": "adjective"
+    },
+    {
+        "word": "extra",
+        "type": "adjective"
+    },
+    {
+        "word": "fair",
+        "type": "adjective"
+    },
+    {
+        "word": "fake",
+        "type": "adjective"
+    },
+    {
+        "word": "false",
+        "type": "adjective"
+    },
+    {
+        "word": "familiar",
+        "type": "adjective"
+    },
+    {
+        "word": "famous",
+        "type": "adjective"
+    },
+    {
+        "word": "fashionable",
+        "type": "adjective"
+    },
+    {
+        "word": "fast",
+        "type": "adjective"
+    },
+    {
+        "word": "fat",
+        "type": "adjective"
+    },
+    {
+        "word": "fatty",
+        "type": "adjective"
+    },
+    {
+        "word": "final",
+        "type": "adjective"
+    },
+    {
+        "word": "firm",
+        "type": "adjective"
+    },
+    {
+        "word": "flat",
+        "type": "adjective"
+    },
+    {
+        "word": "flexible",
+        "type": "adjective"
+    },
+    {
+        "word": "foggy",
+        "type": "adjective"
+    },
+    {
+        "word": "foolish",
+        "type": "adjective"
+    },
+    {
+        "word": "foreign",
+        "type": "adjective"
+    },
+    {
+        "word": "formal",
+        "type": "adjective"
+    },
+    {
+        "word": "fragile",
+        "type": "adjective"
+    },
+    {
+        "word": "free",
+        "type": "adjective"
+    },
+    {
+        "word": "frequent",
+        "type": "adjective"
+    },
+    {
+        "word": "fresh",
+        "type": "adjective"
+    },
+    {
+        "word": "friendly",
+        "type": "adjective"
+    },
+    {
+        "word": "frozen",
+        "type": "adjective"
+    },
+    {
+        "word": "full",
+        "type": "adjective"
+    },
+    {
+        "word": "fun",
+        "type": "adjective"
+    },
+    {
+        "word": "funny",
+        "type": "adjective"
+    },
+    {
+        "word": "fuzzy",
+        "type": "adjective"
+    },
+    {
+        "word": "gas",
+        "type": "adjective"
+    },
+    {
+        "word": "general",
+        "type": "adjective"
+    },
+    {
+        "word": "generous",
+        "type": "adjective"
+    },
+    {
+        "word": "gentle",
+        "type": "adjective"
+    },
+    {
+        "word": "genuine",
+        "type": "adjective"
+    },
+    {
+        "word": "global",
+        "type": "adjective"
+    },
+    {
+        "word": "good",
+        "type": "adjective"
+    },
+    {
+        "word": "gorgeous",
+        "type": "adjective"
+    },
+    {
+        "word": "grateful",
+        "type": "adjective"
+    },
+    {
+        "word": "great",
+        "type": "adjective"
+    },
+    {
+        "word": "guilty",
+        "type": "adjective"
+    },
+    {
+        "word": "handsome",
+        "type": "adjective"
+    },
+    {
+        "word": "happy",
+        "type": "adjective"
+    },
+    {
+        "word": "hard",
+        "type": "adjective"
+    },
+    {
+        "word": "hardworking",
+        "type": "adjective"
+    },
+    {
+        "word": "harmful",
+        "type": "adjective"
+    },
+    {
+        "word": "healthy",
+        "type": "adjective"
+    },
+    {
+        "word": "heavy",
+        "type": "adjective"
+    },
+    {
+        "word": "helpful",
+        "type": "adjective"
+    },
+    {
+        "word": "helpless",
+        "type": "adjective"
+    },
+    {
+        "word": "high",
+        "type": "adjective"
+    },
+    {
+        "word": "honest",
+        "type": "adjective"
+    },
+    {
+        "word": "hopeful",
+        "type": "adjective"
+    },
+    {
+        "word": "hopeless",
+        "type": "adjective"
+    },
+    {
+        "word": "hot",
+        "type": "adjective"
+    },
+    {
+        "word": "huge",
+        "type": "adjective"
+    },
+    {
+        "word": "hungry",
+        "type": "adjective"
+    },
+    {
+        "word": "ideal",
+        "type": "adjective"
+    },
+    {
+        "word": "identical",
+        "type": "adjective"
+    },
+    {
+        "word": "ignorant",
+        "type": "adjective"
+    },
+    {
+        "word": "ill",
+        "type": "adjective"
+    },
+    {
+        "word": "illegal",
+        "type": "adjective"
+    },
+    {
+        "word": "illogical",
+        "type": "adjective"
+    },
+    {
+        "word": "impatient",
+        "type": "adjective"
+    },
+    {
+        "word": "implicit",
+        "type": "adjective"
+    },
+    {
+        "word": "impolite",
+        "type": "adjective"
+    },
+    {
+        "word": "important",
+        "type": "adjective"
+    },
+    {
+        "word": "impossible",
+        "type": "adjective"
+    },
+    {
+        "word": "inaccurate",
+        "type": "adjective"
+    },
+    {
+        "word": "incomplete",
+        "type": "adjective"
+    },
+    {
+        "word": "inconsistent",
+        "type": "adjective"
+    },
+    {
+        "word": "independent",
+        "type": "adjective"
+    },
+    {
+        "word": "indifferent",
+        "type": "adjective"
+    },
+    {
+        "word": "inefficient",
+        "type": "adjective"
+    },
+    {
+        "word": "inexperienced",
+        "type": "adjective"
+    },
+    {
+        "word": "infamous",
+        "type": "adjective"
+    },
+    {
+        "word": "inferior",
+        "type": "adjective"
+    },
+    {
+        "word": "inflexible",
+        "type": "adjective"
+    },
+    {
+        "word": "informal",
+        "type": "adjective"
+    },
+    {
+        "word": "initial",
+        "type": "adjective"
+    },
+    {
+        "word": "innocent",
+        "type": "adjective"
+    },
+    {
+        "word": "insecure",
+        "type": "adjective"
+    },
+    {
+        "word": "intelligent",
+        "type": "adjective"
+    },
+    {
+        "word": "intermediate",
+        "type": "adjective"
+    },
+    {
+        "word": "internal",
+        "type": "adjective"
+    },
+    {
+        "word": "international",
+        "type": "adjective"
+    },
+    {
+        "word": "invalid",
+        "type": "adjective"
+    },
+    {
+        "word": "invisible",
+        "type": "adjective"
+    },
+    {
+        "word": "irregular",
+        "type": "adjective"
+    },
+    {
+        "word": "irresponsible",
+        "type": "adjective"
+    },
+    {
+        "word": "jealous",
+        "type": "adjective"
+    },
+    {
+        "word": "juicy",
+        "type": "adjective"
+    },
+    {
+        "word": "junior",
+        "type": "adjective"
+    },
+    {
+        "word": "kind",
+        "type": "adjective"
+    },
+    {
+        "word": "large",
+        "type": "adjective"
+    },
+    {
+        "word": "late",
+        "type": "adjective"
+    },
+    {
+        "word": "lazy",
+        "type": "adjective"
+    },
+    {
+        "word": "left",
+        "type": "adjective"
+    },
+    {
+        "word": "legal",
+        "type": "adjective"
+    },
+    {
+        "word": "lenient",
+        "type": "adjective"
+    },
+    {
+        "word": "likely",
+        "type": "adjective"
+    },
+    {
+        "word": "liquid",
+        "type": "adjective"
+    },
+    {
+        "word": "little",
+        "type": "adjective"
+    },
+    {
+        "word": "local",
+        "type": "adjective"
+    },
+    {
+        "word": "logical",
+        "type": "adjective"
+    },
+    {
+        "word": "loose",
+        "type": "adjective"
+    },
+    {
+        "word": "loud",
+        "type": "adjective"
+    },
+    {
+        "word": "low",
+        "type": "adjective"
+    },
+    {
+        "word": "loyal",
+        "type": "adjective"
+    },
+    {
+        "word": "lucky",
+        "type": "adjective"
+    },
+    {
+        "word": "luxury",
+        "type": "adjective"
+    },
+    {
+        "word": "major",
+        "type": "adjective"
+    },
+    {
+        "word": "maximum",
+        "type": "adjective"
+    },
+    {
+        "word": "medical",
+        "type": "adjective"
+    },
+    {
+        "word": "mental",
+        "type": "adjective"
+    },
+    {
+        "word": "messy",
+        "type": "adjective"
+    },
+    {
+        "word": "military",
+        "type": "adjective"
+    },
+    {
+        "word": "minimum",
+        "type": "adjective"
+    },
+    {
+        "word": "minor",
+        "type": "adjective"
+    },
+    {
+        "word": "modern",
+        "type": "adjective"
+    },
+    {
+        "word": "modest",
+        "type": "adjective"
+    },
+    {
+        "word": "monthly",
+        "type": "adjective"
+    },
+    {
+        "word": "narrow",
+        "type": "adjective"
+    },
+    {
+        "word": "national",
+        "type": "adjective"
+    },
+    {
+        "word": "natural",
+        "type": "adjective"
+    },
+    {
+        "word": "necessary",
+        "type": "adjective"
+    },
+    {
+        "word": "negative",
+        "type": "adjective"
+    },
+    {
+        "word": "nervous",
+        "type": "adjective"
+    },
+    {
+        "word": "new",
+        "type": "adjective"
+    },
+    {
+        "word": "next",
+        "type": "adjective"
+    },
+    {
+        "word": "nice",
+        "type": "adjective"
+    },
+    {
+        "word": "noisy",
+        "type": "adjective"
+    },
+    {
+        "word": "normal",
+        "type": "adjective"
+    },
+    {
+        "word": "numerous",
+        "type": "adjective"
+    },
+    {
+        "word": "obese",
+        "type": "adjective"
+    },
+    {
+        "word": "obvious",
+        "type": "adjective"
+    },
+    {
+        "word": "official",
+        "type": "adjective"
+    },
+    {
+        "word": "old",
+        "type": "adjective"
+    },
+    {
+        "word": "old-fashioned",
+        "type": "adjective"
+    },
+    {
+        "word": "only",
+        "type": "adjective"
+    },
+    {
+        "word": "optimistic",
+        "type": "adjective"
+    },
+    {
+        "word": "optional",
+        "type": "adjective"
+    },
+    {
+        "word": "organic",
+        "type": "adjective"
+    },
+    {
+        "word": "organized",
+        "type": "adjective"
+    },
+    {
+        "word": "pale",
+        "type": "adjective"
+    },
+    {
+        "word": "passive",
+        "type": "adjective"
+    },
+    {
+        "word": "patient",
+        "type": "adjective"
+    },
+    {
+        "word": "perfect",
+        "type": "adjective"
+    },
+    {
+        "word": "peripheral",
+        "type": "adjective"
+    },
+    {
+        "word": "permanent",
+        "type": "adjective"
+    },
+    {
+        "word": "pessimistic",
+        "type": "adjective"
+    },
+    {
+        "word": "physical",
+        "type": "adjective"
+    },
+    {
+        "word": "plain",
+        "type": "adjective"
+    },
+    {
+        "word": "playful",
+        "type": "adjective"
+    },
+    {
+        "word": "pleasant",
+        "type": "adjective"
+    },
+    {
+        "word": "polar",
+        "type": "adjective"
+    },
+    {
+        "word": "polite",
+        "type": "adjective"
+    },
+    {
+        "word": "political",
+        "type": "adjective"
+    },
+    {
+        "word": "poor",
+        "type": "adjective"
+    },
+    {
+        "word": "popular",
+        "type": "adjective"
+    },
+    {
+        "word": "positive",
+        "type": "adjective"
+    },
+    {
+        "word": "possible",
+        "type": "adjective"
+    },
+    {
+        "word": "practical",
+        "type": "adjective"
+    },
+    {
+        "word": "precise",
+        "type": "adjective"
+    },
+    {
+        "word": "pretty",
+        "type": "adjective"
+    },
+    {
+        "word": "previous",
+        "type": "adjective"
+    },
+    {
+        "word": "primary",
+        "type": "adjective"
+    },
+    {
+        "word": "private",
+        "type": "adjective"
+    },
+    {
+        "word": "productive",
+        "type": "adjective"
+    },
+    {
+        "word": "professional",
+        "type": "adjective"
+    },
+    {
+        "word": "proud",
+        "type": "adjective"
+    },
+    {
+        "word": "public",
+        "type": "adjective"
+    },
+    {
+        "word": "pure",
+        "type": "adjective"
+    },
+    {
+        "word": "quiet",
+        "type": "adjective"
+    },
+    {
+        "word": "rare",
+        "type": "adjective"
+    },
+    {
+        "word": "raw",
+        "type": "adjective"
+    },
+    {
+        "word": "real",
+        "type": "adjective"
+    },
+    {
+        "word": "realistic",
+        "type": "adjective"
+    },
+    {
+        "word": "reasonable",
+        "type": "adjective"
+    },
+    {
+        "word": "reckless",
+        "type": "adjective"
+    },
+    {
+        "word": "regular",
+        "type": "adjective"
+    },
+    {
+        "word": "relaxed",
+        "type": "adjective"
+    },
+    {
+        "word": "responsible",
+        "type": "adjective"
+    },
+    {
+        "word": "rich",
+        "type": "adjective"
+    },
+    {
+        "word": "right",
+        "type": "adjective"
+    },
+    {
+        "word": "ripe",
+        "type": "adjective"
+    },
+    {
+        "word": "rotten",
+        "type": "adjective"
+    },
+    {
+        "word": "rough",
+        "type": "adjective"
+    },
+    {
+        "word": "round",
+        "type": "adjective"
+    },
+    {
+        "word": "rude",
+        "type": "adjective"
+    },
+    {
+        "word": "rural",
+        "type": "adjective"
+    },
+    {
+        "word": "sad",
+        "type": "adjective"
+    },
+    {
+        "word": "safe",
+        "type": "adjective"
+    },
+    {
+        "word": "salty",
+        "type": "adjective"
+    },
+    {
+        "word": "scared",
+        "type": "adjective"
+    },
+    {
+        "word": "scientific",
+        "type": "adjective"
+    },
+    {
+        "word": "secondary",
+        "type": "adjective"
+    },
+    {
+        "word": "selfish",
+        "type": "adjective"
+    },
+    {
+        "word": "senior",
+        "type": "adjective"
+    },
+    {
+        "word": "serious",
+        "type": "adjective"
+    },
+    {
+        "word": "shallow",
+        "type": "adjective"
+    },
+    {
+        "word": "sharp",
+        "type": "adjective"
+    },
+    {
+        "word": "short",
+        "type": "adjective"
+    },
+    {
+        "word": "sick",
+        "type": "adjective"
+    },
+    {
+        "word": "silent",
+        "type": "adjective"
+    },
+    {
+        "word": "similar",
+        "type": "adjective"
+    },
+    {
+        "word": "simple",
+        "type": "adjective"
+    },
+    {
+        "word": "single",
+        "type": "adjective"
+    },
+    {
+        "word": "skillful",
+        "type": "adjective"
+    },
+    {
+        "word": "slim",
+        "type": "adjective"
+    },
+    {
+        "word": "slippery",
+        "type": "adjective"
+    },
+    {
+        "word": "slow",
+        "type": "adjective"
+    },
+    {
+        "word": "small",
+        "type": "adjective"
+    },
+    {
+        "word": "smart",
+        "type": "adjective"
+    },
+    {
+        "word": "smooth",
+        "type": "adjective"
+    },
+    {
+        "word": "social",
+        "type": "adjective"
+    },
+    {
+        "word": "soft",
+        "type": "adjective"
+    },
+    {
+        "word": "solid",
+        "type": "adjective"
+    },
+    {
+        "word": "sour",
+        "type": "adjective"
+    },
+    {
+        "word": "special",
+        "type": "adjective"
+    },
+    {
+        "word": "specific",
+        "type": "adjective"
+    },
+    {
+        "word": "spicy",
+        "type": "adjective"
+    },
+    {
+        "word": "spiritual",
+        "type": "adjective"
+    },
+    {
+        "word": "square",
+        "type": "adjective"
+    },
+    {
+        "word": "stable",
+        "type": "adjective"
+    },
+    {
+        "word": "steady",
+        "type": "adjective"
+    },
+    {
+        "word": "sticky",
+        "type": "adjective"
+    },
+    {
+        "word": "stormy",
+        "type": "adjective"
+    },
+    {
+        "word": "straight",
+        "type": "adjective"
+    },
+    {
+        "word": "strange",
+        "type": "adjective"
+    },
+    {
+        "word": "strict",
+        "type": "adjective"
+    },
+    {
+        "word": "strong",
+        "type": "adjective"
+    },
+    {
+        "word": "stupid",
+        "type": "adjective"
+    },
+    {
+        "word": "stylish",
+        "type": "adjective"
+    },
+    {
+        "word": "subtle",
+        "type": "adjective"
+    },
+    {
+        "word": "successful",
+        "type": "adjective"
+    },
+    {
+        "word": "sunny",
+        "type": "adjective"
+    },
+    {
+        "word": "superior",
+        "type": "adjective"
+    },
+    {
+        "word": "sure",
+        "type": "adjective"
+    },
+    {
+        "word": "sweet",
+        "type": "adjective"
+    },
+    {
+        "word": "tall",
+        "type": "adjective"
+    },
+    {
+        "word": "technical",
+        "type": "adjective"
+    },
+    {
+        "word": "temporary",
+        "type": "adjective"
+    },
+    {
+        "word": "terrible",
+        "type": "adjective"
+    },
+    {
+        "word": "theoretical",
+        "type": "adjective"
+    },
+    {
+        "word": "thick",
+        "type": "adjective"
+    },
+    {
+        "word": "thin",
+        "type": "adjective"
+    },
+    {
+        "word": "thirsty",
+        "type": "adjective"
+    },
+    {
+        "word": "tidy",
+        "type": "adjective"
+    },
+    {
+        "word": "tiny",
+        "type": "adjective"
+    },
+    {
+        "word": "tired",
+        "type": "adjective"
+    },
+    {
+        "word": "traditional",
+        "type": "adjective"
+    },
+    {
+        "word": "trendy",
+        "type": "adjective"
+    },
+    {
+        "word": "triangular",
+        "type": "adjective"
+    },
+    {
+        "word": "tropical",
+        "type": "adjective"
+    },
+    {
+        "word": "true",
+        "type": "adjective"
+    },
+    {
+        "word": "typical",
+        "type": "adjective"
+    },
+    {
+        "word": "ugly",
+        "type": "adjective"
+    },
+    {
+        "word": "unacceptable",
+        "type": "adjective"
+    },
+    {
+        "word": "unattractive",
+        "type": "adjective"
+    },
+    {
+        "word": "unavailable",
+        "type": "adjective"
+    },
+    {
+        "word": "unbalanced",
+        "type": "adjective"
+    },
+    {
+        "word": "unclear",
+        "type": "adjective"
+    },
+    {
+        "word": "uncomfortable",
+        "type": "adjective"
+    },
+    {
+        "word": "uncommon",
+        "type": "adjective"
+    },
+    {
+        "word": "uncreative",
+        "type": "adjective"
+    },
+    {
+        "word": "unfair",
+        "type": "adjective"
+    },
+    {
+        "word": "unfashionable",
+        "type": "adjective"
+    },
+    {
+        "word": "unfriendly",
+        "type": "adjective"
+    },
+    {
+        "word": "ungrateful",
+        "type": "adjective"
+    },
+    {
+        "word": "unhealthy",
+        "type": "adjective"
+    },
+    {
+        "word": "unhelpful",
+        "type": "adjective"
+    },
+    {
+        "word": "unimportant",
+        "type": "adjective"
+    },
+    {
+        "word": "unique",
+        "type": "adjective"
+    },
+    {
+        "word": "unknown",
+        "type": "adjective"
+    },
+    {
+        "word": "unlucky",
+        "type": "adjective"
+    },
+    {
+        "word": "unnecessary",
+        "type": "adjective"
+    },
+    {
+        "word": "unofficial",
+        "type": "adjective"
+    },
+    {
+        "word": "unpleasant",
+        "type": "adjective"
+    },
+    {
+        "word": "unproductive",
+        "type": "adjective"
+    },
+    {
+        "word": "unrealistic",
+        "type": "adjective"
+    },
+    {
+        "word": "unreasonable",
+        "type": "adjective"
+    },
+    {
+        "word": "unskilled",
+        "type": "adjective"
+    },
+    {
+        "word": "unstable",
+        "type": "adjective"
+    },
+    {
+        "word": "unsteady",
+        "type": "adjective"
+    },
+    {
+        "word": "unusual",
+        "type": "adjective"
+    },
+    {
+        "word": "unwilling",
+        "type": "adjective"
+    },
+    {
+        "word": "urban",
+        "type": "adjective"
+    },
+    {
+        "word": "useful",
+        "type": "adjective"
+    },
+    {
+        "word": "useless",
+        "type": "adjective"
+    },
+    {
+        "word": "usual",
+        "type": "adjective"
+    },
+    {
+        "word": "vague",
+        "type": "adjective"
+    },
+    {
+        "word": "valid",
+        "type": "adjective"
+    },
+    {
+        "word": "various",
+        "type": "adjective"
+    },
+    {
+        "word": "visible",
+        "type": "adjective"
+    },
+    {
+        "word": "warm",
+        "type": "adjective"
+    },
+    {
+        "word": "weak",
+        "type": "adjective"
+    },
+    {
+        "word": "wealthy",
+        "type": "adjective"
+    },
+    {
+        "word": "weekly",
+        "type": "adjective"
+    },
+    {
+        "word": "wet",
+        "type": "adjective"
+    },
+    {
+        "word": "whole",
+        "type": "adjective"
+    },
+    {
+        "word": "wide",
+        "type": "adjective"
+    },
+    {
+        "word": "willing",
+        "type": "adjective"
+    },
+    {
+        "word": "windy",
+        "type": "adjective"
+    },
+    {
+        "word": "wise",
+        "type": "adjective"
+    },
+    {
+        "word": "wrong",
+        "type": "adjective"
+    },
+    {
+        "word": "young",
+        "type": "adjective"
+    },
+    [
+        {
+            "word": "time",
+            "type": "noun"
+        },
+        {
+            "word": "year",
+            "type": "noun"
+        },
+        {
+            "word": "people",
+            "type": "noun"
+        },
+        {
+            "word": "way",
+            "type": "noun"
+        },
+        {
+            "word": "day",
+            "type": "noun"
+        },
+        {
+            "word": "man",
+            "type": "noun"
+        },
+        {
+            "word": "woman",
+            "type": "noun"
+        },
+        {
+            "word": "child",
+            "type": "noun"
+        },
+        {
+            "word": "life",
+            "type": "noun"
+        },
+        {
+            "word": "world",
+            "type": "noun"
+        },
+        {
+            "word": "school",
+            "type": "noun"
+        },
+        {
+            "word": "state",
+            "type": "noun"
+        },
+        {
+            "word": "family",
+            "type": "noun"
+        },
+        {
+            "word": "student",
+            "type": "noun"
+        },
+        {
+            "word": "group",
+            "type": "noun"
+        },
+        {
+            "word": "country",
+            "type": "noun"
+        },
+        {
+            "word": "city",
+            "type": "noun"
+        },
+        {
+            "word": "place",
+            "type": "noun"
+        },
+        {
+            "word": "home",
+            "type": "noun"
+        },
+        {
+            "word": "house",
+            "type": "noun"
+        },
+        {
+            "word": "room",
+            "type": "noun"
+        },
+        {
+            "word": "door",
+            "type": "noun"
+        },
+        {
+            "word": "window",
+            "type": "noun"
+        },
+        {
+            "word": "problem",
+            "type": "noun"
+        },
+        {
+            "word": "question",
+            "type": "noun"
+        },
+        {
+            "word": "answer",
+            "type": "noun"
+        },
+        {
+            "word": "work",
+            "type": "noun"
+        },
+        {
+            "word": "job",
+            "type": "noun"
+        },
+        {
+            "word": "company",
+            "type": "noun"
+        },
+        {
+            "word": "business",
+            "type": "noun"
+        },
+        {
+            "word": "money",
+            "type": "noun"
+        },
+        {
+            "word": "price",
+            "type": "noun"
+        },
+        {
+            "word": "number",
+            "type": "noun"
+        },
+        {
+            "word": "fact",
+            "type": "noun"
+        },
+        {
+            "word": "idea",
+            "type": "noun"
+        },
+        {
+            "word": "story",
+            "type": "noun"
+        },
+        {
+            "word": "book",
+            "type": "noun"
+        },
+        {
+            "word": "page",
+            "type": "noun"
+        },
+        {
+            "word": "word",
+            "type": "noun"
+        },
+        {
+            "word": "sentence",
+            "type": "noun"
+        },
+        {
+            "word": "language",
+            "type": "noun"
+        },
+        {
+            "word": "name",
+            "type": "noun"
+        },
+        {
+            "word": "friend",
+            "type": "noun"
+        },
+        {
+            "word": "person",
+            "type": "noun"
+        },
+        {
+            "word": "team",
+            "type": "noun"
+        },
+        {
+            "word": "member",
+            "type": "noun"
+        },
+        {
+            "word": "teacher",
+            "type": "noun"
+        },
+        {
+            "word": "class",
+            "type": "noun"
+        },
+        {
+            "word": "lesson",
+            "type": "noun"
+        },
+        {
+            "word": "test",
+            "type": "noun"
+        },
+        {
+            "word": "exam",
+            "type": "noun"
+        },
+        {
+            "word": "course",
+            "type": "noun"
+        },
+        {
+            "word": "office",
+            "type": "noun"
+        },
+        {
+            "word": "meeting",
+            "type": "noun"
+        },
+        {
+            "word": "plan",
+            "type": "noun"
+        },
+        {
+            "word": "goal",
+            "type": "noun"
+        },
+        {
+            "word": "result",
+            "type": "noun"
+        },
+        {
+            "word": "change",
+            "type": "noun"
+        },
+        {
+            "word": "reason",
+            "type": "noun"
+        },
+        {
+            "word": "point",
+            "type": "noun"
+        },
+        {
+            "word": "case",
+            "type": "noun"
+        },
+        {
+            "word": "part",
+            "type": "noun"
+        },
+        {
+            "word": "end",
+            "type": "noun"
+        },
+        {
+            "word": "start",
+            "type": "noun"
+        },
+        {
+            "word": "hand",
+            "type": "noun"
+        },
+        {
+            "word": "face",
+            "type": "noun"
+        },
+        {
+            "word": "head",
+            "type": "noun"
+        },
+        {
+            "word": "eye",
+            "type": "noun"
+        },
+        {
+            "word": "body",
+            "type": "noun"
+        },
+        {
+            "word": "heart",
+            "type": "noun"
+        },
+        {
+            "word": "mind",
+            "type": "noun"
+        },
+        {
+            "word": "health",
+            "type": "noun"
+        },
+        {
+            "word": "doctor",
+            "type": "noun"
+        },
+        {
+            "word": "hospital",
+            "type": "noun"
+        },
+        {
+            "word": "food",
+            "type": "noun"
+        },
+        {
+            "word": "water",
+            "type": "noun"
+        },
+        {
+            "word": "coffee",
+            "type": "noun"
+        },
+        {
+            "word": "tea",
+            "type": "noun"
+        },
+        {
+            "word": "breakfast",
+            "type": "noun"
+        },
+        {
+            "word": "lunch",
+            "type": "noun"
+        },
+        {
+            "word": "dinner",
+            "type": "noun"
+        },
+        {
+            "word": "restaurant",
+            "type": "noun"
+        },
+        {
+            "word": "store",
+            "type": "noun"
+        },
+        {
+            "word": "market",
+            "type": "noun"
+        },
+        {
+            "word": "street",
+            "type": "noun"
+        },
+        {
+            "word": "road",
+            "type": "noun"
+        },
+        {
+            "word": "car",
+            "type": "noun"
+        },
+        {
+            "word": "bus",
+            "type": "noun"
+        },
+        {
+            "word": "train",
+            "type": "noun"
+        },
+        {
+            "word": "plane",
+            "type": "noun"
+        },
+        {
+            "word": "travel",
+            "type": "noun"
+        },
+        {
+            "word": "trip",
+            "type": "noun"
+        },
+        {
+            "word": "ticket",
+            "type": "noun"
+        },
+        {
+            "word": "phone",
+            "type": "noun"
+        },
+        {
+            "word": "computer",
+            "type": "noun"
+        },
+        {
+            "word": "internet",
+            "type": "noun"
+        },
+        {
+            "word": "app",
+            "type": "noun"
+        },
+        {
+            "word": "account",
+            "type": "noun"
+        },
+        {
+            "word": "password",
+            "type": "noun"
+        },
+        {
+            "word": "message",
+            "type": "noun"
+        },
+        {
+            "word": "email",
+            "type": "noun"
+        },
+        {
+            "word": "picture",
+            "type": "noun"
+        },
+        {
+            "word": "photo",
+            "type": "noun"
+        },
+        {
+            "word": "video",
+            "type": "noun"
+        },
+        {
+            "word": "music",
+            "type": "noun"
+        },
+        {
+            "word": "song",
+            "type": "noun"
+        },
+        {
+            "word": "movie",
+            "type": "noun"
+        },
+        {
+            "word": "game",
+            "type": "noun"
+        },
+        {
+            "word": "sport",
+            "type": "noun"
+        },
+        {
+            "word": "skill",
+            "type": "noun"
+        },
+        {
+            "word": "experience",
+            "type": "noun"
+        },
+        {
+            "word": "knowledge",
+            "type": "noun"
+        },
+        {
+            "word": "information",
+            "type": "noun"
+        },
+        {
+            "word": "news",
+            "type": "noun"
+        },
+        {
+            "word": "law",
+            "type": "noun"
+        },
+        {
+            "word": "government",
+            "type": "noun"
+        },
+        {
+            "word": "community",
+            "type": "noun"
+        },
+        {
+            "word": "culture",
+            "type": "noun"
+        },
+        {
+            "word": "history",
+            "type": "noun"
+        },
+        {
+            "word": "nature",
+            "type": "noun"
+        },
+        {
+            "word": "weather",
+            "type": "noun"
+        },
+        {
+            "word": "sun",
+            "type": "noun"
+        },
+        {
+            "word": "rain",
+            "type": "noun"
+        },
+        {
+            "word": "snow",
+            "type": "noun"
+        },
+        {
+            "word": "wind",
+            "type": "noun"
+        },
+        {
+            "word": "night",
+            "type": "noun"
+        },
+        {
+            "word": "morning",
+            "type": "noun"
+        },
+        {
+            "word": "afternoon",
+            "type": "noun"
+        },
+        {
+            "word": "evening",
+            "type": "noun"
+        },
+        {
+            "word": "week",
+            "type": "noun"
+        },
+        {
+            "word": "month",
+            "type": "noun"
+        },
+        {
+            "word": "hour",
+            "type": "noun"
+        },
+        {
+            "word": "minute",
+            "type": "noun"
+        },
+        {
+            "word": "second",
+            "type": "noun"
+        },
+        {
+            "word": "moment",
+            "type": "noun"
+        },
+        {
+            "word": "chance",
+            "type": "noun"
+        },
+        {
+            "word": "choice",
+            "type": "noun"
+        },
+        {
+            "word": "decision",
+            "type": "noun"
+        },
+        {
+            "word": "success",
+            "type": "noun"
+        },
+        {
+            "word": "failure",
+            "type": "noun"
+        },
+        {
+            "word": "help",
+            "type": "noun"
+        },
+        {
+            "word": "support",
+            "type": "noun"
+        },
+        {
+            "word": "service",
+            "type": "noun"
+        },
+        {
+            "word": "system",
+            "type": "noun"
+        },
+        {
+            "word": "project",
+            "type": "noun"
+        },
+        {
+            "word": "feature",
+            "type": "noun"
+        },
+        {
+            "word": "design",
+            "type": "noun"
+        },
+        {
+            "word": "example",
+            "type": "noun"
+        },
+        {
+            "word": "level",
+            "type": "noun"
+        },
+        {
+            "word": "type",
+            "type": "noun"
+        },
+        {
+            "word": "kind",
+            "type": "noun"
+        },
+        {
+            "word": "pair",
+            "type": "noun"
+        },
+        {
+            "word": "set",
+            "type": "noun"
+        },
+        {
+            "word": "thing",
+            "type": "noun"
+        },
+        {
+            "word": "issue",
+            "type": "noun"
+        },
+        {
+            "word": "matter",
+            "type": "noun"
+        },
+        {
+            "word": "topic",
+            "type": "noun"
+        },
+        {
+            "word": "subject",
+            "type": "noun"
+        },
+        {
+            "word": "theme",
+            "type": "noun"
+        },
+        {
+            "word": "title",
+            "type": "noun"
+        },
+        {
+            "word": "chapter",
+            "type": "noun"
+        },
+        {
+            "word": "article",
+            "type": "noun"
+        },
+        {
+            "word": "paragraph",
+            "type": "noun"
+        },
+        {
+            "word": "line",
+            "type": "noun"
+        },
+        {
+            "word": "letter",
+            "type": "noun"
+        },
+        {
+            "word": "voice",
+            "type": "noun"
+        },
+        {
+            "word": "sound",
+            "type": "noun"
+        },
+        {
+            "word": "noise",
+            "type": "noun"
+        },
+        {
+            "word": "silence",
+            "type": "noun"
+        },
+        {
+            "word": "image",
+            "type": "noun"
+        },
+        {
+            "word": "screen",
+            "type": "noun"
+        },
+        {
+            "word": "button",
+            "type": "noun"
+        },
+        {
+            "word": "menu",
+            "type": "noun"
+        },
+        {
+            "word": "profile",
+            "type": "noun"
+        },
+        {
+            "word": "settings",
+            "type": "noun"
+        },
+        {
+            "word": "option",
+            "type": "noun"
+        },
+        {
+            "word": "tool",
+            "type": "noun"
+        },
+        {
+            "word": "device",
+            "type": "noun"
+        },
+        {
+            "word": "machine",
+            "type": "noun"
+        },
+        {
+            "word": "software",
+            "type": "noun"
+        },
+        {
+            "word": "hardware",
+            "type": "noun"
+        },
+        {
+            "word": "network",
+            "type": "noun"
+        },
+        {
+            "word": "server",
+            "type": "noun"
+        },
+        {
+            "word": "database",
+            "type": "noun"
+        },
+        {
+            "word": "file",
+            "type": "noun"
+        },
+        {
+            "word": "folder",
+            "type": "noun"
+        },
+        {
+            "word": "document",
+            "type": "noun"
+        },
+        {
+            "word": "note",
+            "type": "noun"
+        },
+        {
+            "word": "summary",
+            "type": "noun"
+        },
+        {
+            "word": "report",
+            "type": "noun"
+        },
+        {
+            "word": "model",
+            "type": "noun"
+        },
+        {
+            "word": "data",
+            "type": "noun"
+        },
+        {
+            "word": "dataset",
+            "type": "noun"
+        },
+        {
+            "word": "analysis",
+            "type": "noun"
+        },
+        {
+            "word": "research",
+            "type": "noun"
+        },
+        {
+            "word": "method",
+            "type": "noun"
+        },
+        {
+            "word": "process",
+            "type": "noun"
+        },
+        {
+            "word": "step",
+            "type": "noun"
+        },
+        {
+            "word": "task",
+            "type": "noun"
+        },
+        {
+            "word": "rule",
+            "type": "noun"
+        },
+        {
+            "word": "limit",
+            "type": "noun"
+        },
+        {
+            "word": "error",
+            "type": "noun"
+        },
+        {
+            "word": "bug",
+            "type": "noun"
+        },
+        {
+            "word": "update",
+            "type": "noun"
+        },
+        {
+            "word": "version",
+            "type": "noun"
+        },
+        {
+            "word": "release",
+            "type": "noun"
+        },
+        {
+            "word": "build",
+            "type": "noun"
+        },
+        {
+            "word": "deploy",
+            "type": "noun"
+        },
+        {
+            "word": "backup",
+            "type": "noun"
+        },
+        {
+            "word": "cache",
+            "type": "noun"
+        },
+        {
+            "word": "storage",
+            "type": "noun"
+        },
+        {
+            "word": "memory",
+            "type": "noun"
+        },
+        {
+            "word": "signal",
+            "type": "noun"
+        },
+        {
+            "word": "battery",
+            "type": "noun"
+        },
+        {
+            "word": "charger",
+            "type": "noun"
+        },
+        {
+            "word": "cable",
+            "type": "noun"
+        },
+        {
+            "word": "adapter",
+            "type": "noun"
+        },
+        {
+            "word": "keyboard",
+            "type": "noun"
+        },
+        {
+            "word": "mouse",
+            "type": "noun"
+        },
+        {
+            "word": "monitor",
+            "type": "noun"
+        },
+        {
+            "word": "printer",
+            "type": "noun"
+        },
+        {
+            "word": "camera",
+            "type": "noun"
+        },
+        {
+            "word": "speaker",
+            "type": "noun"
+        },
+        {
+            "word": "headphones",
+            "type": "noun"
+        },
+        {
+            "word": "microphone",
+            "type": "noun"
+        },
+        {
+            "word": "map",
+            "type": "noun"
+        },
+        {
+            "word": "address",
+            "type": "noun"
+        },
+        {
+            "word": "location",
+            "type": "noun"
+        },
+        {
+            "word": "direction",
+            "type": "noun"
+        },
+        {
+            "word": "distance",
+            "type": "noun"
+        },
+        {
+            "word": "route",
+            "type": "noun"
+        },
+        {
+            "word": "corner",
+            "type": "noun"
+        },
+        {
+            "word": "bridge",
+            "type": "noun"
+        },
+        {
+            "word": "station",
+            "type": "noun"
+        },
+        {
+            "word": "airport",
+            "type": "noun"
+        },
+        {
+            "word": "terminal",
+            "type": "noun"
+        },
+        {
+            "word": "gate",
+            "type": "noun"
+        },
+        {
+            "word": "platform",
+            "type": "noun"
+        },
+        {
+            "word": "stop",
+            "type": "noun"
+        },
+        {
+            "word": "traffic",
+            "type": "noun"
+        },
+        {
+            "word": "parking",
+            "type": "noun"
+        },
+        {
+            "word": "garage",
+            "type": "noun"
+        },
+        {
+            "word": "elevator",
+            "type": "noun"
+        },
+        {
+            "word": "stairs",
+            "type": "noun"
+        },
+        {
+            "word": "hall",
+            "type": "noun"
+        },
+        {
+            "word": "hallway",
+            "type": "noun"
+        },
+        {
+            "word": "kitchen",
+            "type": "noun"
+        },
+        {
+            "word": "bathroom",
+            "type": "noun"
+        },
+        {
+            "word": "bedroom",
+            "type": "noun"
+        },
+        {
+            "word": "living room",
+            "type": "noun"
+        },
+        {
+            "word": "garden",
+            "type": "noun"
+        },
+        {
+            "word": "balcony",
+            "type": "noun"
+        },
+        {
+            "word": "bed",
+            "type": "noun"
+        },
+        {
+            "word": "pillow",
+            "type": "noun"
+        },
+        {
+            "word": "blanket",
+            "type": "noun"
+        },
+        {
+            "word": "sheet",
+            "type": "noun"
+        },
+        {
+            "word": "closet",
+            "type": "noun"
+        },
+        {
+            "word": "drawer",
+            "type": "noun"
+        },
+        {
+            "word": "mirror",
+            "type": "noun"
+        },
+        {
+            "word": "lamp",
+            "type": "noun"
+        },
+        {
+            "word": "light",
+            "type": "noun"
+        },
+        {
+            "word": "table",
+            "type": "noun"
+        },
+        {
+            "word": "chair",
+            "type": "noun"
+        },
+        {
+            "word": "sofa",
+            "type": "noun"
+        },
+        {
+            "word": "carpet",
+            "type": "noun"
+        },
+        {
+            "word": "curtain",
+            "type": "noun"
+        },
+        {
+            "word": "clock",
+            "type": "noun"
+        },
+        {
+            "word": "remote",
+            "type": "noun"
+        },
+        {
+            "word": "key",
+            "type": "noun"
+        },
+        {
+            "word": "lock",
+            "type": "noun"
+        },
+        {
+            "word": "shirt",
+            "type": "noun"
+        },
+        {
+            "word": "t-shirt",
+            "type": "noun"
+        },
+        {
+            "word": "pants",
+            "type": "noun"
+        },
+        {
+            "word": "jeans",
+            "type": "noun"
+        },
+        {
+            "word": "jacket",
+            "type": "noun"
+        },
+        {
+            "word": "coat",
+            "type": "noun"
+        },
+        {
+            "word": "dress",
+            "type": "noun"
+        },
+        {
+            "word": "skirt",
+            "type": "noun"
+        },
+        {
+            "word": "shoes",
+            "type": "noun"
+        },
+        {
+            "word": "sneakers",
+            "type": "noun"
+        },
+        {
+            "word": "socks",
+            "type": "noun"
+        },
+        {
+            "word": "hat",
+            "type": "noun"
+        },
+        {
+            "word": "cap",
+            "type": "noun"
+        },
+        {
+            "word": "scarf",
+            "type": "noun"
+        },
+        {
+            "word": "gloves",
+            "type": "noun"
+        },
+        {
+            "word": "belt",
+            "type": "noun"
+        },
+        {
+            "word": "wallet",
+            "type": "noun"
+        },
+        {
+            "word": "bag",
+            "type": "noun"
+        },
+        {
+            "word": "backpack",
+            "type": "noun"
+        },
+        {
+            "word": "watch",
+            "type": "noun"
+        },
+        {
+            "word": "ring",
+            "type": "noun"
+        },
+        {
+            "word": "necklace",
+            "type": "noun"
+        },
+        {
+            "word": "bracelet",
+            "type": "noun"
+        },
+        {
+            "word": "very",
+            "type": "adverb"
+        },
+        {
+            "word": "really",
+            "type": "adverb"
+        },
+        {
+            "word": "quite",
+            "type": "adverb"
+        },
+        {
+            "word": "so",
+            "type": "adverb"
+        },
+        {
+            "word": "too",
+            "type": "adverb"
+        },
+        {
+            "word": "just",
+            "type": "adverb"
+        },
+        {
+            "word": "only",
+            "type": "adverb"
+        },
+        {
+            "word": "also",
+            "type": "adverb"
+        },
+        {
+            "word": "even",
+            "type": "adverb"
+        },
+        {
+            "word": "still",
+            "type": "adverb"
+        },
+        {
+            "word": "already",
+            "type": "adverb"
+        },
+        {
+            "word": "yet",
+            "type": "adverb"
+        },
+        {
+            "word": "again",
+            "type": "adverb"
+        },
+        {
+            "word": "often",
+            "type": "adverb"
+        },
+        {
+            "word": "usually",
+            "type": "adverb"
+        },
+        {
+            "word": "sometimes",
+            "type": "adverb"
+        },
+        {
+            "word": "always",
+            "type": "adverb"
+        },
+        {
+            "word": "never",
+            "type": "adverb"
+        },
+        {
+            "word": "rarely",
+            "type": "adverb"
+        },
+        {
+            "word": "seldom",
+            "type": "adverb"
+        },
+        {
+            "word": "frequently",
+            "type": "adverb"
+        },
+        {
+            "word": "occasionally",
+            "type": "adverb"
+        },
+        {
+            "word": "quickly",
+            "type": "adverb"
+        },
+        {
+            "word": "slowly",
+            "type": "adverb"
+        },
+        {
+            "word": "carefully",
+            "type": "adverb"
+        },
+        {
+            "word": "easily",
+            "type": "adverb"
+        },
+        {
+            "word": "hard",
+            "type": "adverb"
+        },
+        {
+            "word": "well",
+            "type": "adverb"
+        },
+        {
+            "word": "badly",
+            "type": "adverb"
+        },
+        {
+            "word": "better",
+            "type": "adverb"
+        },
+        {
+            "word": "best",
+            "type": "adverb"
+        },
+        {
+            "word": "worse",
+            "type": "adverb"
+        },
+        {
+            "word": "worst",
+            "type": "adverb"
+        },
+        {
+            "word": "together",
+            "type": "adverb"
+        },
+        {
+            "word": "apart",
+            "type": "adverb"
+        },
+        {
+            "word": "here",
+            "type": "adverb"
+        },
+        {
+            "word": "there",
+            "type": "adverb"
+        },
+        {
+            "word": "nearby",
+            "type": "adverb"
+        },
+        {
+            "word": "away",
+            "type": "adverb"
+        },
+        {
+            "word": "inside",
+            "type": "adverb"
+        },
+        {
+            "word": "outside",
+            "type": "adverb"
+        },
+        {
+            "word": "up",
+            "type": "adverb"
+        },
+        {
+            "word": "down",
+            "type": "adverb"
+        },
+        {
+            "word": "left",
+            "type": "adverb"
+        },
+        {
+            "word": "right",
+            "type": "adverb"
+        },
+        {
+            "word": "forward",
+            "type": "adverb"
+        },
+        {
+            "word": "back",
+            "type": "adverb"
+        },
+        {
+            "word": "now",
+            "type": "adverb"
+        },
+        {
+            "word": "then",
+            "type": "adverb"
+        },
+        {
+            "word": "soon",
+            "type": "adverb"
+        },
+        {
+            "word": "late",
+            "type": "adverb"
+        },
+        {
+            "word": "early",
+            "type": "adverb"
+        },
+        {
+            "word": "today",
+            "type": "adverb"
+        },
+        {
+            "word": "tomorrow",
+            "type": "adverb"
+        },
+        {
+            "word": "yesterday",
+            "type": "adverb"
+        },
+        {
+            "word": "tonight",
+            "type": "adverb"
+        },
+        {
+            "word": "recently",
+            "type": "adverb"
+        },
+        {
+            "word": "lately",
+            "type": "adverb"
+        },
+        {
+            "word": "currently",
+            "type": "adverb"
+        },
+        {
+            "word": "eventually",
+            "type": "adverb"
+        },
+        {
+            "word": "finally",
+            "type": "adverb"
+        },
+        {
+            "word": "suddenly",
+            "type": "adverb"
+        },
+        {
+            "word": "maybe",
+            "type": "adverb"
+        },
+        {
+            "word": "perhaps",
+            "type": "adverb"
+        },
+        {
+            "word": "probably",
+            "type": "adverb"
+        },
+        {
+            "word": "definitely",
+            "type": "adverb"
+        },
+        {
+            "word": "certainly",
+            "type": "adverb"
+        },
+        {
+            "word": "surely",
+            "type": "adverb"
+        },
+        {
+            "word": "clearly",
+            "type": "adverb"
+        },
+        {
+            "word": "obviously",
+            "type": "adverb"
+        },
+        {
+            "word": "seriously",
+            "type": "adverb"
+        },
+        {
+            "word": "honestly",
+            "type": "adverb"
+        },
+        {
+            "word": "especially",
+            "type": "adverb"
+        },
+        {
+            "word": "exactly",
+            "type": "adverb"
+        },
+        {
+            "word": "almost",
+            "type": "adverb"
+        },
+        {
+            "word": "nearly",
+            "type": "adverb"
+        },
+        {
+            "word": "completely",
+            "type": "adverb"
+        },
+        {
+            "word": "totally",
+            "type": "adverb"
+        },
+        {
+            "word": "fully",
+            "type": "adverb"
+        },
+        {
+            "word": "partly",
+            "type": "adverb"
+        },
+        {
+            "word": "mainly",
+            "type": "adverb"
+        },
+        {
+            "word": "mostly",
+            "type": "adverb"
+        },
+        {
+            "word": "simply",
+            "type": "adverb"
+        },
+        {
+            "word": "actually",
+            "type": "adverb"
+        },
+        {
+            "word": "basically",
+            "type": "adverb"
+        },
+        {
+            "word": "normally",
+            "type": "adverb"
+        },
+        {
+            "word": "generally",
+            "type": "adverb"
+        },
+        {
+            "word": "specifically",
+            "type": "adverb"
+        },
+        {
+            "word": "directly",
+            "type": "adverb"
+        },
+        {
+            "word": "indirectly",
+            "type": "adverb"
+        },
+        {
+            "word": "immediately",
+            "type": "adverb"
+        },
+        {
+            "word": "gradually",
+            "type": "adverb"
+        },
+        {
+            "word": "constantly",
+            "type": "adverb"
+        },
+        {
+            "word": "continually",
+            "type": "adverb"
+        },
+        {
+            "word": "regularly",
+            "type": "adverb"
+        },
+        {
+            "word": "daily",
+            "type": "adverb"
+        },
+        {
+            "word": "weekly",
+            "type": "adverb"
+        },
+        {
+            "word": "monthly",
+            "type": "adverb"
+        },
+        {
+            "word": "yearly",
+            "type": "adverb"
+        },
+        {
+            "word": "safely",
+            "type": "adverb"
+        },
+        {
+            "word": "quietly",
+            "type": "adverb"
+        },
+        {
+            "word": "loudly",
+            "type": "adverb"
+        },
+        {
+            "word": "politely",
+            "type": "adverb"
+        },
+        {
+            "word": "rudely",
+            "type": "adverb"
+        },
+        {
+            "word": "kindly",
+            "type": "adverb"
+        },
+        {
+            "word": "nicely",
+            "type": "adverb"
+        },
+        {
+            "word": "happily",
+            "type": "adverb"
+        },
+        {
+            "word": "sadly",
+            "type": "adverb"
+        },
+        {
+            "word": "angrily",
+            "type": "adverb"
+        },
+        {
+            "word": "calmly",
+            "type": "adverb"
+        },
+        {
+            "word": "patiently",
+            "type": "adverb"
+        },
+        {
+            "word": "eagerly",
+            "type": "adverb"
+        }
+    ]
+]

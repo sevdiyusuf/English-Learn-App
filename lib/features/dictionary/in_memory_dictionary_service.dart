@@ -20,7 +20,7 @@ class InMemoryDictionaryService implements DictionaryService {
       // Load JSON string with error handling
       String jsonString;
       try {
-        jsonString = await rootBundle.loadString('assets/dictionary.json');
+        jsonString = await rootBundle.loadString('assets/word_battle/dictionary.json');
       } catch (e) {
         if (kDebugMode) {
           debugPrint('Error loading dictionary.json: $e');

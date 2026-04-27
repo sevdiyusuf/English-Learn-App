@@ -14,8 +14,8 @@ extension GetWordPairCollection on Isar {
 }
 
 const WordPairSchema = CollectionSchema(
-  name: r'WordPair',
-  id: -8222807404021742592, // JavaScript safe integer
+  name: r'WordPair365',
+  id: 7450263015964090,
   properties: {
     r'english': PropertySchema(
       id: 0,

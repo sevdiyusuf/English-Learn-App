@@ -2,10 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter/services.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:flutter/foundation.dart';
 
+import '../../../../core/notifications/notification_service.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/widgets/gradient_background.dart';
+import '../../auth/logic/auth_controller.dart';
+import '../../auth/models/app_user.dart';
 import '../data/word_match_providers.dart';
+import '../data/word_match_share_repo.dart';
 import '../logic/word_match_sets_controller.dart';
+import '../logic/word_match_sync_service.dart';
+import 'prebuilt_sets_page.dart';
 
 class WordMatchHomePage extends ConsumerWidget {
   const WordMatchHomePage({super.key});
@@ -14,10 +24,13 @@ class WordMatchHomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Initialize sync service
+    ref.watch(wordMatchSyncProvider);
+
     final setsState = ref.watch(wordMatchSetsControllerProvider);
 
     return Scaffold(
-      backgroundColor: Colors.transparent, // Arka plan resmi görünsün
+      backgroundColor: Colors.transparent,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: AppColors.surfaceDark.withValues(alpha: 0.9),
@@ -32,6 +45,47 @@ class WordMatchHomePage extends ConsumerWidget {
             shadows: [Shadow(blurRadius: 5, color: Colors.black)],
           ),
         ),
+        actions: [
+          // Sync Button
+          Consumer(
+            builder: (context, ref, child) {
+              return IconButton(
+                icon: const Icon(Icons.sync, color: Colors.white),
+                tooltip: 'Senkronize Et',
+                onPressed: () async {
+                  final scaffoldMessenger = ScaffoldMessenger.of(context);
+                  try {
+                    scaffoldMessenger.showSnackBar(
+                      const SnackBar(
+                        content: Text('Senkronizasyon başlatılıyor...'),
+                        duration: Duration(seconds: 1),
+                      ),
+                    );
+
+                    final service = await ref.read(
+                      wordMatchSyncProvider.future,
+                    );
+                    await service.forceSync();
+
+                    scaffoldMessenger.showSnackBar(
+                      const SnackBar(
+                        content: Text('Senkronizasyon tamamlandı'),
+                        backgroundColor: Colors.green,
+                      ),
+                    );
+                  } catch (e) {
+                    scaffoldMessenger.showSnackBar(
+                      SnackBar(
+                        content: Text('Hata: $e'),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                  }
+                },
+              );
+            },
+          ),
+        ],
         leading: Container(
           margin: const EdgeInsets.all(8),
           decoration: BoxDecoration(
@@ -45,168 +99,155 @@ class WordMatchHomePage extends ConsumerWidget {
           ),
         ),
       ),
-      body: Stack(
-        children: [
-          // Background image
-          Positioned.fill(
-            child: Image.asset(
-              'assets/images/background2.png',
-              fit: BoxFit.cover,
-            ),
-          ),
-          // Content
-          SafeArea(
-            child: Column(
-              children: [
-                // BİLGİLENDİRME KARTI (Modern)
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-                  child: Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF1E293B).withValues(alpha: 0.95),
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(
-                        color: Colors.white.withValues(alpha: 0.1),
-                      ),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.black26,
-                          blurRadius: 10,
-                          offset: Offset(0, 4),
-                        ),
-                      ],
+      body: GradientBackground(
+        child: SafeArea(
+          child: Column(
+            children: [
+              // HAZIR SETLER KARTI
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1E293B).withValues(alpha: 0.95),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                      color: const Color(0xFF26A69A).withValues(alpha: 0.5),
+                      width: 1,
                     ),
-                    child: Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: Colors.amber.withValues(alpha: 0.15),
-                            shape: BoxShape.circle,
-                          ),
-                          child: SvgPicture.asset(
-                            'assets/icons/info.svg',
-                            width: 24,
-                            height: 24,
-                            colorFilter: const ColorFilter.mode(
-                              Colors.amber,
-                              BlendMode.srcIn,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.3),
+                        blurRadius: 8,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  clipBehavior: Clip.antiAlias,
+                  child: InkWell(
+                    onTap: () => context.pushNamed(PreBuiltSetsPage.routeName),
+                    child: IntrinsicHeight(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Container(
+                            width: 6,
+                            decoration: const BoxDecoration(
+                              color: Color(0xFF26A69A),
                             ),
                           ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Row(
                                 children: [
-                                  SvgPicture.asset(
-                                    'assets/icons/star.svg',
-                                    width: 14,
-                                    height: 14,
-                                    colorFilter: const ColorFilter.mode(
-                                      Colors.amber,
-                                      BlendMode.srcIn,
+                                  Container(
+                                    padding: const EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white.withValues(
+                                        alpha: 0.1,
+                                      ),
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: const Icon(
+                                      Icons.auto_awesome,
+                                      color: Colors.white,
+                                      size: 24,
                                     ),
                                   ),
-                                  const SizedBox(width: 6),
-                                  Text(
-                                    'Öğrendiğim kelimeler',
-                                    style: TextStyle(
-                                      color: Colors.white.withValues(
-                                        alpha: 0.9,
-                                      ),
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w500,
+                                  const SizedBox(width: 16),
+                                  const Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Hazır Setler',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        SizedBox(height: 4),
+                                        Text(
+                                          'A1, A2, B1, B2 kelime setleri',
+                                          style: TextStyle(
+                                            color: Colors.white70,
+                                            fontSize: 13,
+                                          ),
+                                        ),
+                                      ],
                                     ),
+                                  ),
+                                  const Icon(
+                                    Icons.chevron_right,
+                                    color: Colors.white54,
+                                    size: 24,
                                   ),
                                 ],
                               ),
-                              const SizedBox(height: 6),
-                              Row(
-                                children: [
-                                  SvgPicture.asset(
-                                    'assets/icons/star_empty.svg',
-                                    width: 14,
-                                    height: 14,
-                                    colorFilter: ColorFilter.mode(
-                                      Colors.white.withValues(alpha: 0.5),
-                                      BlendMode.srcIn,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              // SET LİSTESİ
+              Expanded(
+                child: setsState.when(
+                  data:
+                      (data) => _SetList(
+                        state: data,
+                        onCreateSet: () => _onCreateSet(context, ref),
+                      ),
+                  loading:
+                      () => const Center(
+                        child: CircularProgressIndicator(color: Colors.white),
+                      ),
+                  error:
+                      (error, stackTrace) => Center(
+                        child: Container(
+                          padding: const EdgeInsets.all(24),
+                          decoration: BoxDecoration(
+                            color: Colors.black54,
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(
+                                Icons.error_outline,
+                                color: Colors.redAccent,
+                                size: 48,
+                              ),
+                              const SizedBox(height: 12),
+                              Text(
+                                'Setler yüklenemedi: $error',
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                              const SizedBox(height: 12),
+                              ElevatedButton(
+                                onPressed:
+                                    () => ref.refresh(
+                                      wordMatchSetsControllerProvider,
                                     ),
-                                  ),
-                                  const SizedBox(width: 6),
-                                  Text(
-                                    'Öğrenmekte olduğum kelimeler',
-                                    style: TextStyle(
-                                      color: Colors.white.withValues(
-                                        alpha: 0.7,
-                                      ),
-                                      fontSize: 13,
-                                    ),
-                                  ),
-                                ],
+                                child: const Text('Tekrar dene'),
                               ),
                             ],
                           ),
                         ),
-                      ],
-                    ),
-                  ),
+                      ),
                 ),
-
-                // SET LİSTESİ
-                Expanded(
-                  child: setsState.when(
-                    data:
-                        (data) => _SetList(
-                          state: data,
-                          onCreateSet: () => _onCreateSet(context, ref),
-                        ),
-                    loading:
-                        () => const Center(
-                          child: CircularProgressIndicator(color: Colors.white),
-                        ),
-                    error:
-                        (error, stackTrace) => Center(
-                          child: Container(
-                            padding: const EdgeInsets.all(24),
-                            decoration: BoxDecoration(
-                              color: Colors.black54,
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const Icon(
-                                  Icons.error_outline,
-                                  color: Colors.redAccent,
-                                  size: 48,
-                                ),
-                                const SizedBox(height: 12),
-                                Text(
-                                  'Setler yüklenemedi: $error',
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                                const SizedBox(height: 12),
-                                ElevatedButton(
-                                  onPressed:
-                                      () => ref.refresh(
-                                        wordMatchSetsControllerProvider,
-                                      ),
-                                  child: const Text('Tekrar dene'),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
       floatingActionButton: setsState.maybeWhen(
         data:
@@ -343,17 +384,18 @@ class _SetList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    if (state.sets.isEmpty) {
+    final visibleSets = state.sets.where((s) => s.set.name != 'Words from Games').toList();
+    if (visibleSets.isEmpty) {
       return _EmptyState(onCreateTap: onCreateSet);
     }
 
     return ListView.separated(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       physics: const BouncingScrollPhysics(),
-      itemCount: state.sets.length,
+      itemCount: visibleSets.length,
       separatorBuilder: (context, index) => const SizedBox(height: 12),
       itemBuilder: (context, index) {
-        final overview = state.sets[index];
+        final overview = visibleSets[index];
         final set = overview.set;
         final isBuiltin = set.isBuiltin;
 
@@ -374,8 +416,8 @@ class _SetList extends ConsumerWidget {
         final learnedStatuses = learnedStatusesAsync.valueOrNull;
         final activeCount =
             learnedStatuses != null
-                ? learnedStatuses.values.where((v) => !v).length
-                : overview.pairCount;
+                ? learnedStatuses.values.where((v) => v).length
+                : 0;
 
         return Container(
           decoration: BoxDecoration(
@@ -420,7 +462,9 @@ class _SetList extends ConsumerWidget {
                             children: [
                               Expanded(
                                 child: Text(
-                                  set.name,
+                                  set.name == 'Words from Games'
+                                      ? 'Word from Games'
+                                      : set.name,
                                   style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 18,
@@ -473,7 +517,7 @@ class _SetList extends ConsumerWidget {
                                 color: Colors.blueAccent,
                               ),
                               _CustomChip(
-                                label: 'Aktif: $activeCount',
+                                label: 'Yıldızlı: $activeCount',
                                 icon: Icons.check_circle_outline,
                                 color: Colors.greenAccent,
                               ),
@@ -528,8 +572,9 @@ class _SetList extends ConsumerWidget {
                                 borderRadius: BorderRadius.circular(20),
                                 child: InkWell(
                                   onTap:
-                                      () => _startPracticeDirect(
+                                      () => _startPracticeOptions(
                                         context,
+                                        ref,
                                         overview,
                                       ),
                                   borderRadius: BorderRadius.circular(20),
@@ -589,9 +634,57 @@ class _SetList extends ConsumerWidget {
     return _formatDate(date);
   }
 
-  void _startPracticeDirect(BuildContext context, WordSetOverview overview) {
-    if (context.mounted) {
+  Future<void> _startPracticeOptions(
+    BuildContext context,
+    WidgetRef ref,
+    WordSetOverview overview,
+  ) async {
+    final result = await showModalBottomSheet<String>(
+      context: context,
+      backgroundColor: const Color(0xFF1E293B),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      builder: (context) {
+        return SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 40,
+                height: 4,
+                margin: const EdgeInsets.symmetric(vertical: 12),
+                decoration: BoxDecoration(
+                  color: Colors.white24,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+              ListTile(
+                leading: const Icon(Icons.play_arrow, color: AppColors.success),
+                title: const Text(
+                  'Kelime Eşleştirme',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onTap: () => Navigator.pop(context, 'practice'),
+              ),
+              ListTile(
+                leading: const Icon(Icons.quiz, color: Colors.blueAccent),
+                title: const Text(
+                  'Test Modu',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onTap: () => Navigator.pop(context, 'test'),
+              ),
+              const SizedBox(height: 10),
+            ],
+          ),
+        );
+      },
+    );
+
+    if (!context.mounted) return;
+    if (result == 'practice') {
       context.push('/word-match/practice/${overview.set.id}');
+    } else if (result == 'test') {
+      context.push('/word-match/test/${overview.set.id}');
     }
   }
 
@@ -635,10 +728,18 @@ class _SetList extends ConsumerWidget {
               ListTile(
                 leading: const Icon(Icons.play_arrow, color: AppColors.success),
                 title: const Text(
-                  'Eşleştirmeye Başla',
+                  'Kelime Eşleştirme',
                   style: TextStyle(color: Colors.white),
                 ),
                 onTap: () => Navigator.pop(context, 'practice'),
+              ),
+              ListTile(
+                leading: const Icon(Icons.quiz, color: Colors.blueAccent),
+                title: const Text(
+                  'Test Modu',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onTap: () => Navigator.pop(context, 'test'),
               ),
               if (!overview.set.isBuiltin ||
                   overview.set.name == 'Words from Games') ...[
@@ -664,6 +765,23 @@ class _SetList extends ConsumerWidget {
                   onTap: () => Navigator.pop(context, 'delete'),
                 ),
               ],
+              ListTile(
+                leading: const Icon(Icons.share, color: Colors.white70),
+                title: const Text(
+                  'Paylaş (link)',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onTap: () => Navigator.pop(context, 'share'),
+              ),
+              if (!overview.set.isBuiltin)
+                ListTile(
+                  leading: const Icon(Icons.merge_type, color: Colors.white70),
+                  title: const Text(
+                    'Başka setle birleştir',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onTap: () => Navigator.pop(context, 'merge'),
+                ),
               const SizedBox(height: 10),
             ],
           ),
@@ -672,12 +790,18 @@ class _SetList extends ConsumerWidget {
     );
 
     // ... (Switch case mantığı aynı kalacak, sadece UI değişti)
+    if (!context.mounted) return;
     switch (result) {
       case 'practice':
-        if (context.mounted) _startPracticeDirect(context, overview);
+        if (context.mounted) {
+          context.push('/word-match/practice/${overview.set.id}');
+        }
+        return;
+      case 'test':
+        context.push('/word-match/test/${overview.set.id}');
         return;
       case 'edit':
-        if (context.mounted) _editSetDirect(context, overview.set.id);
+        _editSetDirect(context, overview.set.id);
         return;
       case 'delete':
         if (context.mounted) {
@@ -733,8 +857,222 @@ class _SetList extends ConsumerWidget {
           }
         }
         return;
+      case 'share':
+        if (context.mounted) {
+          await _shareSet(context, ref, overview);
+        }
+        return;
+      case 'merge':
+        if (context.mounted) {
+          await _mergeSet(context, ref, overview);
+        }
+        return;
       default:
         return;
+    }
+  }
+
+  Future<void> _shareSet(
+    BuildContext context,
+    WidgetRef ref,
+    WordSetOverview overview,
+  ) async {
+    try {
+      // Ensure we have a user (anonymous or logged in)
+      final notifier = ref.read(authControllerProvider.notifier);
+      final AppUser user =
+          (ref.read(authControllerProvider).value) ??
+          await notifier.ensureAnonymousGuestSignedIn();
+
+      // Show a simple loading dialog
+      if (context.mounted) {
+        showDialog<void>(
+          context: context,
+          barrierDismissible: false,
+          builder: (ctx) {
+            return const Center(child: CircularProgressIndicator());
+          },
+        );
+      }
+
+      final shareRepo = await ref.read(wordMatchShareRepositoryProvider.future);
+      final shareId = await shareRepo.createShareForLocalSet(
+        owner: user,
+        localSetId: overview.set.id,
+      );
+
+      if (!context.mounted) {
+        return;
+      }
+
+      Navigator.of(context, rootNavigator: true).pop(); // close dialog
+
+      final base = Uri.base;
+      // Route: /s/{shareId} handled by GoRouter
+      final link = '${base.origin}/#/s/$shareId';
+
+      if (kIsWeb) {
+        // Web: linki kopyala
+        await Clipboard.setData(ClipboardData(text: link));
+        if (context.mounted) {
+          ref
+              .read(notificationServiceProvider)
+              .showSuccess(
+                title: 'Bağlantı Kopyalandı',
+                message: 'Paylaşım bağlantısı panoya kopyalandı.',
+              );
+        }
+      } else {
+        // Mobile / desktop: sistem paylaşım ekranı
+        // Share.share is deprecated in favor of Share.shareUri or methods on Share class
+        // depending on version. Using SharePlus.share as recommended.
+        await SharePlus.instance.share(
+          ShareParams(
+            text: link,
+            subject: 'Kelime setimi dene: ${overview.set.name}',
+          ),
+        );
+      }
+    } catch (e) {
+      if (!context.mounted) return;
+      // Ensure any loading dialog is closed if still open
+      Navigator.of(
+        context,
+        rootNavigator: true,
+      ).popUntil((route) => route.isFirst || route is! PopupRoute);
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Paylaşım oluşturulamadı: $e')));
+    }
+  }
+
+  Future<void> _mergeSet(
+    BuildContext context,
+    WidgetRef ref,
+    WordSetOverview baseOverview,
+  ) async {
+    final setsState = ref.read(wordMatchSetsControllerProvider).valueOrNull;
+    if (setsState == null) return;
+
+    final otherSets =
+        setsState.sets
+            .where((s) => s.set.id != baseOverview.set.id && !s.set.isBuiltin)
+            .toList();
+    if (otherSets.isEmpty) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              'Birleştirmek için başka düzenlenebilir set bulunamadı.',
+            ),
+          ),
+        );
+      }
+      return;
+    }
+
+    final nameController = TextEditingController(
+      text: '${baseOverview.set.name} + ${otherSets.first.set.name}',
+    );
+    WordSetOverview selected = otherSets.first;
+
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (ctx) {
+        return AlertDialog(
+          backgroundColor: const Color(0xFF1E293B),
+          title: const Text(
+            'Setleri birleştir',
+            style: TextStyle(color: Colors.white),
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Birleştirilecek ikinci seti seç:',
+                style: TextStyle(color: Colors.white70),
+              ),
+              const SizedBox(height: 8),
+              StatefulBuilder(
+                builder: (ctx, setState) {
+                  return DropdownButtonFormField<WordSetOverview>(
+                    // ignore: deprecated_member_use
+                    value: selected,
+                    dropdownColor: const Color(0xFF1E293B),
+                    items: [
+                      for (final s in otherSets)
+                        DropdownMenuItem(
+                          value: s,
+                          child: Text(
+                            s.set.name,
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                        ),
+                    ],
+                    onChanged: (value) {
+                      if (value == null) return;
+                      setState(() {
+                        selected = value;
+                        nameController.text =
+                            '${baseOverview.set.name} + ${selected.set.name}';
+                      });
+                    },
+                  );
+                },
+              ),
+              const SizedBox(height: 12),
+              const Text(
+                'Yeni set adı:',
+                style: TextStyle(color: Colors.white70),
+              ),
+              TextField(
+                controller: nameController,
+                style: const TextStyle(color: Colors.white),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx, false),
+              child: const Text(
+                'Vazgeç',
+                style: TextStyle(color: Colors.white70),
+              ),
+            ),
+            FilledButton(
+              onPressed: () => Navigator.pop(ctx, true),
+              style: FilledButton.styleFrom(backgroundColor: AppColors.primary),
+              child: const Text('Birleştir'),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (confirmed != true) return;
+    final newName = nameController.text.trim();
+    if (newName.isEmpty) return;
+
+    try {
+      final controller = ref.read(wordMatchSetsControllerProvider.notifier);
+      final newId = await controller.mergeSets(
+        baseSetId: baseOverview.set.id,
+        otherSetId: selected.set.id,
+        newName: newName,
+      );
+      if (context.mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('Setler birleştirildi')));
+        context.go('/word-match/edit/$newId');
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Setler birleştirilemedi: $e')));
+      }
     }
   }
 }

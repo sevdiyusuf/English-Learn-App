@@ -1,0 +1,227 @@
+{
+    "schema_version": "1.0",
+    "level": "B1",
+    "lesson_id": "B1-REPORTED-01-lesson",
+    "title": "Reported Speech",
+    "topic_tags": [
+        "reported_speech",
+        "say_tell",
+        "tense_shift",
+        "pronouns"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Birinin söylediği bir cümleyi (ifadeyi) bir başkasına aktarmayı öğreneceğiz.",
+                    "Cümleyi aktarırken zamanı (tense), zamirleri (I, you, we) ve zaman zarflarını nasıl değiştireceğimizi göreceğiz.",
+                    "Say ve Tell fiillerini doğru nesnelerle kullanmayı pekiştireceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Say vs. Tell (Aktarım Fiilleri)",
+                "bullets": [
+                    "**Say (Söylemek)**: Kime söylendiği vurgulanmaz. Arkasından hemen 'that' veya asıl cümle gelir.",
+                    "**Tell (Anlatmak/Haber Vermek)**: Mutlaka bir dinleyici (me, you, him, us...) gerektirir.",
+                    "**İpucu**: 'He said me' diyemezsiniz, doğrusu 'He told me' veya 'He said TO me' şeklindedir."
+                ],
+                "examples": [
+                    "Direct: 'I am happy.'",
+                    "Reported: She **said** (that) she was happy.",
+                    "Reported: She **told me** (that) she was happy."
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "formula",
+                "title": "Zaman Kayması (Tense Shift)",
+                "bullets": [
+                    "Genel kural: Konuşma geçmişte kaldığı için fiili bir derece 'geçmişe' (backshift) çekeriz."
+                ],
+                "formula": [
+                    "Present Simple (V1) → Past Simple (V2)",
+                    "Present Cont. (am/is/are -ing) → Past Cont. (was/were -ing)",
+                    "Past Simple / Present Perfect → Past Perfect (had V3)",
+                    "Will → Would / Can → Could"
+                ],
+                "examples": [
+                    "Present: 'I work.' → She said she **worked**.",
+                    "Present Perfect: 'I have lost it.' → He said he **had lost** it.",
+                    "Modal: 'I can go.' → She said she **could go**."
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "Direct: “I have finished my homework.” \nReported: He said he ____ his homework.",
+                "options": [
+                    "has finished",
+                    "had finished",
+                    "finishes"
+                ],
+                "answer": "had finished",
+                "explain": "Present Perfect (have/has V3), Reported Speech'te Past Perfect (had V3) olur."
+            },
+            {
+                "id": "c4",
+                "type": "rule",
+                "title": "Zamir ve Yer/Zaman Değişimi",
+                "bullets": [
+                    "Konuşan kişi biz olmadığımız için zamirler (I, we, my) değişir.",
+                    "Zaman ifadeleri de 'o an'dan 'geçmişe' göre güncellenir."
+                ],
+                "examples": [
+                    "I → he/she | we → they | my → his/her",
+                    "now → then",
+                    "tomorrow → the next day / the following day",
+                    "yesterday → the day before / the previous night",
+                    "here → there"
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Düz Cümle Yapısını Korumak**: Aktarılan cümle bir soru değildir, bu yüzden 'do/does/did' gibi yardımcı fiillerle soru dizilimi yapılmaz.",
+                    "**Zamanı Güncellememek**: Eğer aktarım fiili (said/told) geçmiş zamandaysa, içerideki fiili şimdiki zamanda bırakmak hatadır.",
+                    "**Tell Yanlış Kullanımı**: 'Tell' fiilinden sonra nesne (me/him/her) koymayı unutmak."
+                ],
+                "examples": [
+                    "Hatalı: She told that she was tired. (Nesne eksik) ✗",
+                    "Doğru: She told **me** that she was tired. ✓",
+                    "Hatalı: He said he **is** coming. ✗",
+                    "Doğru: He said he **was** coming. ✓"
+                ]
+            },
+            {
+                "id": "q2",
+                "type": "checkpoint",
+                "engine": "tap",
+                "prompt": "Hangi cümle dil bilgisi açısından doğrudur?",
+                "bank": [
+                    "She said me she was ill.",
+                    "She told me she was ill.",
+                    "She told she was ill."
+                ],
+                "answer": "She told me she was ill.",
+                "explain": "Say fiili 'me' ile doğrudan kullanılmaz, Tell fiili ise mutlaka bir nesne (me) ister."
+            },
+            {
+                "id": "c6",
+                "type": "tip",
+                "title": "Pratik İpucu: 'That' Kullanımı",
+                "bullets": [
+                    "İngilizcede 'said that' veya 'told me that' yapısındaki 'that' bağlacı çoğu zaman isteğe bağlıdır.",
+                    "Günlük konuşmada genellikle atılır ama resmi yazışmalarda tutulması daha yaygındır."
+                ],
+                "examples": [
+                    "She said she was busy. (Doğru)",
+                    "She said that she was busy. (Doğru)"
+                ]
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Kontekst: Eski Bir Dostla Karşılaşma",
+        "intro_bullets": [
+            "Dün sokakta eski arkadaşın Tom ile karşılaştın.",
+            "Tom sana hayatı hakkında bazı şeyler anlattı.",
+            "Eve gelince Tom'un dediklerini ailene aktarıyorsun."
+        ],
+        "items": [
+            {
+                "engine": "fill",
+                "prompt": "Tom: 'I live in London now.'\nTom said that he ___ in London then.",
+                "answer": [
+                    "lived"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Present Simple (live), Past Simple (lived) yapısına dönüşür."
+            },
+            {
+                "engine": "tap",
+                "prompt": "Tom: 'I will visit you tomorrow.'\nHe told me that he ___ visit me the next day.",
+                "bank": [
+                    "would",
+                    "will",
+                    "could"
+                ],
+                "answer": "would",
+                "explain": "Gelecek zaman bildiren 'will', aktarılan cümlede 'would' olur."
+            },
+            {
+                "engine": "fill",
+                "prompt": "Tom: 'I am working on a new project.'\nHe said he ___ working on a new project.",
+                "answer": [
+                    "was"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Present Continuous (am working), Past Continuous (was working) olur."
+            },
+            {
+                "engine": "order",
+                "prompt": "Tom: 'I lost my phone yesterday.'\n(Cümleyi kur: Telefonunu bir gün önce kaybettiğini söyledi.)",
+                "tokens": [
+                    "He",
+                    "said",
+                    "he",
+                    "had",
+                    "lost",
+                    "his",
+                    "phone",
+                    "the",
+                    "day",
+                    "before"
+                ],
+                "answer_tokens": [
+                    "He",
+                    "said",
+                    "he",
+                    "had",
+                    "lost",
+                    "his",
+                    "phone",
+                    "the",
+                    "day",
+                    "before"
+                ],
+                "explain": "Past Simple (lost), Past Perfect (had lost) olur; yesterday ise 'the day before'a dönüşür."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "Tom: 'I can't come to the party.'\nHe told me that he ____ come to the party.",
+                "options": [
+                    "couldn't",
+                    "can't",
+                    "won't"
+                ],
+                "answer": "couldn't",
+                "explain": "Can/Can't yetenek veya olasılık bildiren modallar, aktarılırken Could/Couldn't olur."
+            }
+        ],
+        "recap_bullets": [
+            "Özetle: Say nesnesiz, Tell nesneli kullanılır.",
+            "Zamanlar her zaman bir basamak geçmişe kayar (am/is -> was).",
+            "Zaman ifadeleri (today, tomorrow) bağlama göre güncellenmelidir."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "B1-REPORTED-01"
+    }
+}

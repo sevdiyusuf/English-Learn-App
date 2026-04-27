@@ -1,0 +1,185 @@
+{
+    "schema_version": "1.0",
+    "level": "B2",
+    "lesson_id": "B2-REL-01-lesson",
+    "title": "İleri Düzey Sıfat Cümlecikleri (Relative Clauses Advanced)",
+    "topic_tags": [
+        "relative_clauses",
+        "non_defining",
+        "reduced",
+        "whose"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Ek bilgi veren ve virgülle ayrılan 'Non-defining' yapılarını öğreneceğiz.",
+                    "İsimler arasında aitlik ilişkisi kuran 'Whose' bağlacını kavrayacağız.",
+                    "Yazımı daha akıcı hale getirmek için sıfat cümleciklerini kısaltma (Reduced) tekniklerini göreceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Non-defining Relative Clauses: Ek Bilgi",
+                "bullets": [
+                    "**Kullanım**: Tanımlanan isim zaten bellidir; bu cümlecik sadece ekstra bilgi verir.",
+                    "**Noktalama**: Bu cümlecikler mutlaka virgüllerle ayrılır.",
+                    "**Önemli**: Bu yapıda asla 'that' bağlacı kullanılamaz; sadece 'who' veya 'which' tercih edilir."
+                ],
+                "examples": [
+                    "My friend, who lives in Ankara, is visiting. (Ankara'da yaşayan arkadaşım ziyarete geliyor.)",
+                    "My car, which is very old, still runs. (Oldukça eski olan arabam hala çalışıyor.)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "Whose: Aitlik Bildirme",
+                "bullets": [
+                    "**Kullanım**: Bir kişinin veya nesnenin bir şeye sahip olduğunu (his/her/its/their yerine) belirtmek için kullanılır.",
+                    "**Dizilim**: 'Whose'dan sonra her zaman bir isim gelir."
+                ],
+                "examples": [
+                    "This is Mr. Lee, whose daughter is a doctor. (Bu, kızı doktor olan Bay Lee.)",
+                    "I met a man whose son is a pilot. (Oğlu pilot olan bir adamla tanıştım.)"
+                ]
+            },
+            {
+                "id": "c4",
+                "type": "rule",
+                "title": "Reduced Relative Clauses: Kısaltma",
+                "bullets": [
+                    "**Kullanım**: Cümleyi daha kısa ve öz hale getirmek için bağlaç (who/which/that) ve 'be' fiili atılır.",
+                    "**Aktif Kısaltma**: 'Who is talking' yerine 'talking' (-ing) kullanılır.",
+                    "**Pasif Kısaltma**: 'Which was written' yerine 'written' (V3) kullanılır."
+                ],
+                "examples": [
+                    "The man talking is my uncle. (Konuşan adam amcamdır.)",
+                    "The book written in 1990 is famous. (1990'da yazılan kitap ünlüdür.)"
+                ]
+            },
+            {
+                "id": "formula",
+                "type": "formula",
+                "title": "Yapı Formülleri",
+                "bullets": [
+                    "Kullanım amacınıza göre şu formülleri takip edin:"
+                ],
+                "formula": [
+                    "Non-defining: Name, who/which ..., is/verb",
+                    "Whose: Person + whose + noun + verb",
+                    "Active Reduction: Noun + V-ing",
+                    "Passive Reduction: Noun + V3"
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**That Kullanımı**: Virgüllü (non-defining) cümlelerde 'that' kullanmak en yaygın hatadır.",
+                    "**Whose ve Who**: Sahiplik bildiren yerlerde 'who' kullanılmaz; mutlaka 'whose' gelmelidir.",
+                    "**Kısaltma Hatası**: Aktif bir eylemde V3 (talking yerine talked) kullanmak anlamı edilgen yapar ve bozar."
+                ],
+                "examples": [
+                    "Hatalı: My car, that is old... ✗",
+                    "Doğru: My car, **which** is old... ✓",
+                    "Hatalı: The man who son is... ✗",
+                    "Doğru: The man **whose** son is... ✓"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "Choose the correct non-defining relative: 'My brother, ___ lives in Izmir, ...'",
+                "options": [
+                    "who",
+                    "where",
+                    "that"
+                ],
+                "answer": "who",
+                "explain": "Virgülle ayrılan ek bilgi cümleciklerinde insanları nitelemek için 'who' kullanılır ve 'that' tercih edilemez."
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Ünlü Yazarın Biyografisi",
+        "intro_bullets": [
+            "Dünyaca ünlü bir yazarın hayatındaki detayları incele.",
+            "Cümlelerin nasıl daha profesyonelce kısaltıldığına ve ek bilgilerin nasıl verildiğine dikkat et."
+        ],
+        "items": [
+            {
+                "engine": "mcq",
+                "prompt": "The author, ____ first novel became a bestseller, lives in London now.",
+                "options": [
+                    "whose",
+                    "who",
+                    "which"
+                ],
+                "answer": "whose",
+                "explain": "Yazarın ilk romanı (aitlik) söz konusu olduğu için 'whose' kullanılır."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "His new book, ____ was published last month, is very successful.",
+                "options": [
+                    "which",
+                    "that",
+                    "who"
+                ],
+                "answer": "which",
+                "explain": "Virgüllü ek bilgi cümleciklerinde nesneler için sadece 'which' kullanılabilir."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "People ____ the story find it very moving.",
+                "options": [
+                    "reading",
+                    "read",
+                    "having read"
+                ],
+                "answer": "reading",
+                "explain": "Hikayeyi okuyan insanlar (aktif kısaltma) anlamı için V-ing yapısı uygundur."
+            },
+            {
+                "engine": "order",
+                "prompt": "Cümleyi kur: '1990'da yazılan kitap ünlüdür.'",
+                "tokens": [
+                    "The",
+                    "book",
+                    "written",
+                    "in",
+                    "1990",
+                    "is",
+                    "famous."
+                ],
+                "answer_tokens": [
+                    "The",
+                    "book",
+                    "written",
+                    "in",
+                    "1990",
+                    "is",
+                    "famous."
+                ],
+                "explain": "Edilgen sıfat cümleciği kısaltmasında (which was written -> written) V3 formu kullanılır."
+            }
+        ],
+        "recap_bullets": [
+            "Non-defining cümleciklerde asla 'that' kullanma.",
+            "Virgüllere dikkat et; ek bilgi her zaman virgülle ayrılır.",
+            "Aitlik için 'whose' + isim yapısını hatırla.",
+            "Kısaltmalarda; aktif eylemler için V-ing, edilgenler için V3 kullan."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "B2-REL-01"
+    }
+}

@@ -14,8 +14,8 @@ extension GetDictEntryCollection on Isar {
 }
 
 const DictEntrySchema = CollectionSchema(
-  name: r'DictEntry',
-  id: 1066350831672453248, // JavaScript safe integer
+  name: r'DictEntry2038',
+  id: 2991999892724499,
   properties: {
     r'type': PropertySchema(
       id: 0,

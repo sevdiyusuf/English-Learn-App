@@ -1,0 +1,208 @@
+{
+    "schema_version": "1.0",
+    "level": "A2",
+    "lesson_id": "A2-PPC-01-lesson",
+    "title": "Present Perfect Continuous",
+    "topic_tags": [
+        "present_perfect_continuous",
+        "for",
+        "since",
+        "how_long",
+        "been_ving"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Geçmişte başlayıp hala devam eden eylemleri anlatmayı öğreneceğiz.",
+                    "Eylemin ne kadar süredir devam ettiğini (How long) vurgulamayı kavrayacağız.",
+                    "Süreç belirten 'for' ve başlangıç noktası belirten 'since' farkını göreceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Süregelen Eylemler",
+                "bullets": [
+                    "Bir işin geçmişten bugüne 'kesintisiz' veya 'vurgulanacak bir süreyle' yapıldığını anlatır.",
+                    "Eylem şu an bitmiş olsa bile etkisi (yorgunluk, ıslaklık vb.) hala gözle görülürdür."
+                ],
+                "examples": [
+                    "I have been studying for two hours. (İki saattir ders çalışıyorum.)",
+                    "It has been raining since morning. (Sabahtan beri yağmur yağıyor.)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "formula",
+                "title": "Cümle Yapısı",
+                "bullets": [
+                    "Bu zamanı kurmak için 'have/has', 'been' ve fiile gelen '-ing' ekine ihtiyacımız var."
+                ],
+                "formula": [
+                    "I / You / We / They + have been + V-ing",
+                    "He / She / It + has been + V-ing"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "She ____ working since 9 a.m.",
+                "options": [
+                    "has been",
+                    "is",
+                    "have been"
+                ],
+                "answer": "has been",
+                "explain": "He/She/It özneleriyle 'has been' yardımcı fiili kullanılır."
+            },
+            {
+                "id": "c4",
+                "type": "rule",
+                "title": "For vs. Since Ayrımı",
+                "bullets": [
+                    "**For (Boyunca)**: Eylemin ne kadar sürdüğünü (zaman aralığını) belirtir.",
+                    "**Since (-den beri)**: Eylemin tam olarak ne zaman başladığını (başlangıç anını) belirtir."
+                ],
+                "examples": [
+                    "for three hours (3 saattir)",
+                    "since 2020 (2020'den beri)",
+                    "for a long time (uzun zamandır)",
+                    "since I was a child (çocukluğumdan beri)"
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**'Been' Kelimesini Unutmak**: 'I have studying' hatalıdır. Mutlaka 'been' eklenmelidir.",
+                    "**Durum Fiilleri (Stative Verbs)**: 'Know, believe, like' gibi fiiller genellikle '-ing' almazlar.",
+                    "**Şimdiki Zamanla Karıştırmak**: 'I am living here for 5 years' yanlıştır. Süreç varsa 'have been living' denmelidir."
+                ],
+                "examples": [
+                    "Hatalı: I have knowing him for years. ✗",
+                    "Doğru: I have known him for years. ✓ (Know fiili -ing almaz.)"
+                ]
+            },
+            {
+                "id": "q2",
+                "type": "checkpoint",
+                "engine": "fill",
+                "prompt": "We have been waiting ____ 30 minutes.",
+                "answer": [
+                    "for"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "30 dakikalık bir 'süreç' belirtildiği için 'for' kullanılır."
+            },
+            {
+                "id": "c6",
+                "type": "tip",
+                "title": "Pratik İpucu: 'How Long' Soruları",
+                "bullets": [
+                    "Birine 'Ne zamandır bunu yapıyorsun?' diye sormak için her zaman 'How long have you been...?' kalıbını kullanın.",
+                    "Bu soruya verilen cevaplar genellikle 'since' veya 'for' içerir."
+                ]
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Kontekst: Sınav Haftası",
+        "intro_bullets": [
+            "Üniversitede final haftası ve kütüphanede arkadaşınla karşılaşıyorsun.",
+            "İkiniz de çok yorgunsunuz çünkü uzun süredir çalışıyorsunuz.",
+            "Süreci anlatan doğru zaman yapılarını seç!"
+        ],
+        "items": [
+            {
+                "engine": "fill",
+                "prompt": "You: 'How long ___ you been studying in the library?'",
+                "answer": [
+                    "have"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "'You' öznesi ile 'have' yardımcı fiili kullanılır."
+            },
+            {
+                "engine": "tap",
+                "prompt": "Friend: 'I ___ working on this project for five hours.'",
+                "bank": [
+                    "have been",
+                    "has been",
+                    "am"
+                ],
+                "answer": "have been",
+                "explain": "Beş saattir devam eden bir eylemi 'have been + V-ing' ile aktarırız."
+            },
+            {
+                "engine": "fill",
+                "prompt": "You: 'Me too. I have been reading this book ___ 10 a.m.'",
+                "answer": [
+                    "since"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Eylemin başlangıç saati (10:00) verildiği için 'since' kullanılır."
+            },
+            {
+                "engine": "order",
+                "prompt": "Friend: (Cümleyi kur: Yağmur sabahtan beri yağıyor.)",
+                "tokens": [
+                    "It",
+                    "has",
+                    "been",
+                    "raining",
+                    "since",
+                    "this",
+                    "morning"
+                ],
+                "answer_tokens": [
+                    "It",
+                    "has",
+                    "been",
+                    "raining",
+                    "since",
+                    "this",
+                    "morning"
+                ],
+                "explain": "Hava durumu gibi süreç bildiren doğa olaylarında bu yapı çok yaygındır."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "You: 'I'm so tired because I ____ coding all day.'",
+                "options": [
+                    "have been",
+                    "am",
+                    "was"
+                ],
+                "answer": "have been",
+                "explain": "Tüm gün süren ve etkisi (yorgunluk) şu an hissedilen bir eylem anlatılıyor."
+            }
+        ],
+        "recap_bullets": [
+            "Hatırla: 'Have/Has been + V-ing' yapısı sürecin hala devam ettiğini gösterir.",
+            "Hatırla: Süreç aralığı için 'for', başlangıç anı için 'since' kullan.",
+            "Hatırla: Ne zamandır yapıldığını sormak için 'How long' ile başla."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "A2-PPC-01"
+    }
+}

@@ -1,0 +1,325 @@
+{
+  "schema_version": "1.0",
+  "level": "B1",
+  "worksheet_id": "B1-PASSIVE-02",
+  "title": "Passive Voice (present/past simple passive) — new set",
+  "topic_tags": [
+    "passive",
+    "be",
+    "v3",
+    "present_simple",
+    "past_simple"
+  ],
+  "subskills": [
+    "recognize_object_focus",
+    "choose_be_form",
+    "choose_v3"
+  ],
+  "difficulty": 3,
+  "engine_sequence": [
+    {
+      "engine": "fill",
+      "count": 8,
+      "rules": {
+        "case_sensitive": false,
+        "allow_contractions": true
+      }
+    },
+    {
+      "engine": "transform",
+      "count": 4,
+      "rules": {
+        "allow_hint": true
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "fill1",
+      "engine": "fill",
+      "prompt": "Coffee ____ (grow) in Brazil.",
+      "translation_tr": "Kahve Brezilya’da yetiştirilir.",
+      "answer": [
+        "is grown"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "hint": "Present simple passive: am/is/are + V3",
+      "tags": [
+        "present_passive",
+        "singular"
+      ]
+    },
+    {
+      "id": "fill2",
+      "engine": "fill",
+      "prompt": "These cars ____ (make) in Germany.",
+      "translation_tr": "Bu arabalar Almanya’da üretilir.",
+      "answer": [
+        "are made"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "present_passive",
+        "plural"
+      ]
+    },
+    {
+      "id": "fill3",
+      "engine": "fill",
+      "prompt": "The tickets ____ (sell) online.",
+      "translation_tr": "Biletler çevrim içi satılır.",
+      "answer": [
+        "are sold"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "present_passive",
+        "plural"
+      ]
+    },
+    {
+      "id": "fill4",
+      "engine": "fill",
+      "prompt": "The floors ____ (wash) every Friday.",
+      "translation_tr": "Zeminler her cuma yıkanır.",
+      "answer": [
+        "are washed"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "present_passive",
+        "plural"
+      ]
+    },
+    {
+      "id": "fill5",
+      "engine": "fill",
+      "prompt": "My phone ____ (charge) every night.",
+      "translation_tr": "Telefonum her gece şarj edilir.",
+      "answer": [
+        "is charged"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "present_passive",
+        "singular"
+      ]
+    },
+    {
+      "id": "fill6",
+      "engine": "fill",
+      "prompt": "The windows ____ (break) during the storm.",
+      "translation_tr": "Fırtına sırasında camlar kırıldı.",
+      "answer": [
+        "were broken"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "hint": "Past simple passive: was/were + V3",
+      "tags": [
+        "past_passive",
+        "plural"
+      ]
+    },
+    {
+      "id": "fill7",
+      "engine": "fill",
+      "prompt": "The meeting ____ (cancel) yesterday.",
+      "translation_tr": "Toplantı dün iptal edildi.",
+      "answer": [
+        "was cancelled",
+        "was canceled"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "past_passive",
+        "singular"
+      ]
+    },
+    {
+      "id": "fill8",
+      "engine": "fill",
+      "prompt": "The final score ____ (announce) by the coach.",
+      "translation_tr": "Son skor antrenör tarafından açıklandı.",
+      "answer": [
+        "was announced"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "past_passive",
+        "singular"
+      ]
+    },
+    {
+      "id": "tr1",
+      "engine": "transform",
+      "prompt": "Active: People recycle glass in many countries.",
+      "translation_tr": "Birçok ülkede cam geri dönüştürülür.",
+      "steps": [
+        {
+          "type": "select",
+          "label": "Choose BE",
+          "options": [
+            "is",
+            "are",
+            "was",
+            "were"
+          ],
+          "answer": "is"
+        },
+        {
+          "type": "select",
+          "label": "Choose V3",
+          "options": [
+            "recycled",
+            "recycle",
+            "recycling"
+          ],
+          "answer": "recycled"
+        }
+      ],
+      "final_template": "Glass {be} {v3} in many countries.",
+      "final_answer": "Glass is recycled in many countries.",
+      "tags": [
+        "transform",
+        "present_passive"
+      ]
+    },
+    {
+      "id": "tr2",
+      "engine": "transform",
+      "prompt": "Active: They serve breakfast at 8 a.m.",
+      "translation_tr": "Kahvaltı saat 8’de servis edilir.",
+      "steps": [
+        {
+          "type": "select",
+          "label": "Choose BE",
+          "options": [
+            "is",
+            "are",
+            "was",
+            "were"
+          ],
+          "answer": "is"
+        },
+        {
+          "type": "select",
+          "label": "Choose V3",
+          "options": [
+            "served",
+            "serve",
+            "serving"
+          ],
+          "answer": "served"
+        }
+      ],
+      "final_template": "Breakfast {be} {v3} at 8 a.m.",
+      "final_answer": "Breakfast is served at 8 a.m.",
+      "tags": [
+        "transform",
+        "present_passive"
+      ]
+    },
+    {
+      "id": "tr3",
+      "engine": "transform",
+      "prompt": "Active: Someone stole my bike last night.",
+      "translation_tr": "Dün gece bisikletim çalındı.",
+      "steps": [
+        {
+          "type": "select",
+          "label": "Choose BE",
+          "options": [
+            "is",
+            "are",
+            "was",
+            "were"
+          ],
+          "answer": "was"
+        },
+        {
+          "type": "select",
+          "label": "Choose V3",
+          "options": [
+            "stolen",
+            "stole",
+            "stealing"
+          ],
+          "answer": "stolen"
+        }
+      ],
+      "final_template": "My bike {be} {v3} last night.",
+      "final_answer": "My bike was stolen last night.",
+      "tags": [
+        "transform",
+        "past_passive"
+      ]
+    },
+    {
+      "id": "tr4",
+      "engine": "transform",
+      "prompt": "Active: The company opened a new store in 2020.",
+      "translation_tr": "Şirket 2020’de yeni bir mağaza açtı.",
+      "steps": [
+        {
+          "type": "select",
+          "label": "Choose BE",
+          "options": [
+            "is",
+            "are",
+            "was",
+            "were"
+          ],
+          "answer": "was"
+        },
+        {
+          "type": "select",
+          "label": "Choose V3",
+          "options": [
+            "opened",
+            "open",
+            "opening"
+          ],
+          "answer": "opened"
+        }
+      ],
+      "final_template": "A new store {be} {v3} in 2020.",
+      "final_answer": "A new store was opened in 2020.",
+      "tags": [
+        "transform",
+        "past_passive"
+      ]
+    }
+  ]
+}

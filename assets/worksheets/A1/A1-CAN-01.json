@@ -1,0 +1,312 @@
+{
+  "schema_version": "1.0",
+  "level": "A1",
+  "worksheet_id": "A1-CAN-01",
+  "title": "Can / can’t (ability) + simple requests",
+  "topic_tags": [
+    "can",
+    "cant",
+    "ability",
+    "requests"
+  ],
+  "subskills": [
+    "choose_can_cant",
+    "make_requests",
+    "question_forms"
+  ],
+  "difficulty": 1,
+  "engine_sequence": [
+    {
+      "engine": "tap",
+      "count": 6,
+      "rules": {
+        "allow_hint": true
+      }
+    },
+    {
+      "engine": "mcq",
+      "count": 8,
+      "rules": {
+        "shuffle_options": true,
+        "allow_hint": true
+      }
+    },
+    {
+      "engine": "fill",
+      "count": 4,
+      "rules": {
+        "case_sensitive": false,
+        "allow_contractions": true
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "tap1",
+      "engine": "tap",
+      "prompt": "Choose: I ____ swim. (I have the ability)",
+      "translation_tr": "Yüzebilirim.",
+      "bank": [
+        "can",
+        "can't"
+      ],
+      "answer": "can",
+      "tags": [
+        "ability"
+      ]
+    },
+    {
+      "id": "tap2",
+      "engine": "tap",
+      "prompt": "Choose: I ____ drive. (I don't know how)",
+      "translation_tr": "Araba süremem.",
+      "bank": [
+        "can",
+        "can't"
+      ],
+      "answer": "can't",
+      "tags": [
+        "ability"
+      ]
+    },
+    {
+      "id": "tap3",
+      "engine": "tap",
+      "prompt": "Choose: ____ you help me, please?",
+      "translation_tr": "Bana yardım eder misin lütfen?",
+      "bank": [
+        "Can",
+        "Can't"
+      ],
+      "answer": "Can",
+      "hint": "Requests use 'Can you...?'",
+      "tags": [
+        "requests"
+      ]
+    },
+    {
+      "id": "tap4",
+      "engine": "tap",
+      "prompt": "Choose: He ____ speak English very well.",
+      "translation_tr": "O İngilizceyi çok iyi konuşabilir.",
+      "bank": [
+        "can",
+        "can't"
+      ],
+      "answer": "can",
+      "tags": [
+        "ability"
+      ]
+    },
+    {
+      "id": "tap5",
+      "engine": "tap",
+      "prompt": "Choose: She ____ come today. She is sick.",
+      "translation_tr": "Bugün gelemez. O hasta.",
+      "bank": [
+        "can",
+        "can't"
+      ],
+      "answer": "can't",
+      "tags": [
+        "ability"
+      ]
+    },
+    {
+      "id": "tap6",
+      "engine": "tap",
+      "prompt": "Choose: ____ I sit here? (polite)",
+      "translation_tr": "Buraya oturabilir miyim?",
+      "bank": [
+        "Can",
+        "Can't"
+      ],
+      "answer": "Can",
+      "tags": [
+        "requests"
+      ]
+    },
+    {
+      "id": "mcq1",
+      "engine": "mcq",
+      "prompt": "I ____ play the guitar.",
+      "translation_tr": "Gitar çalabilirim.",
+      "options": [
+        "can",
+        "can't"
+      ],
+      "answer": "can",
+      "tags": [
+        "ability"
+      ]
+    },
+    {
+      "id": "mcq2",
+      "engine": "mcq",
+      "prompt": "Sorry, I ____ hear you.",
+      "translation_tr": "Üzgünüm, seni duyamıyorum.",
+      "options": [
+        "can",
+        "can't"
+      ],
+      "answer": "can't",
+      "tags": [
+        "ability"
+      ]
+    },
+    {
+      "id": "mcq3",
+      "engine": "mcq",
+      "prompt": "____ you open the door, please?",
+      "translation_tr": "Kapıyı açar mısın lütfen?",
+      "options": [
+        "Can",
+        "Can't"
+      ],
+      "answer": "Can",
+      "tags": [
+        "requests"
+      ]
+    },
+    {
+      "id": "mcq4",
+      "engine": "mcq",
+      "prompt": "She ____ run fast.",
+      "translation_tr": "O hızlı koşabilir.",
+      "options": [
+        "can",
+        "can't"
+      ],
+      "answer": "can",
+      "tags": [
+        "ability"
+      ]
+    },
+    {
+      "id": "mcq5",
+      "engine": "mcq",
+      "prompt": "We ____ go out. It’s late.",
+      "translation_tr": "Dışarı çıkamayız. Geç oldu.",
+      "options": [
+        "can",
+        "can't"
+      ],
+      "answer": "can't",
+      "tags": [
+        "ability"
+      ]
+    },
+    {
+      "id": "mcq6",
+      "engine": "mcq",
+      "prompt": "____ I borrow your pen?",
+      "translation_tr": "Kalemini ödünç alabilir miyim?",
+      "options": [
+        "Can",
+        "Can't"
+      ],
+      "answer": "Can",
+      "tags": [
+        "requests"
+      ]
+    },
+    {
+      "id": "mcq7",
+      "engine": "mcq",
+      "prompt": "He ____ cook pasta.",
+      "translation_tr": "O makarna pişirebilir.",
+      "options": [
+        "can",
+        "can't"
+      ],
+      "answer": "can",
+      "tags": [
+        "ability"
+      ]
+    },
+    {
+      "id": "mcq8",
+      "engine": "mcq",
+      "prompt": "They ____ come now. They are at work.",
+      "translation_tr": "Şimdi gelemezler. İşteler.",
+      "options": [
+        "can",
+        "can't"
+      ],
+      "answer": "can't",
+      "tags": [
+        "ability"
+      ]
+    },
+    {
+      "id": "fill1",
+      "engine": "fill",
+      "prompt": "I ____ speak French. (can/can't)",
+      "translation_tr": "Fransızca konuşabilirim.",
+      "answer": [
+        "can"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "ability"
+      ]
+    },
+    {
+      "id": "fill2",
+      "engine": "fill",
+      "prompt": "She ____ swim. (can/can't)",
+      "translation_tr": "O yüzemez.",
+      "answer": [
+        "can't",
+        "cannot",
+        "can not"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "ability"
+      ]
+    },
+    {
+      "id": "fill3",
+      "engine": "fill",
+      "prompt": "____ you help me? (can)",
+      "translation_tr": "Bana yardım eder misin?",
+      "answer": [
+        "can"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "requests"
+      ]
+    },
+    {
+      "id": "fill4",
+      "engine": "fill",
+      "prompt": "Can I ____ your phone? (use)",
+      "translation_tr": "Telefonunu kullanabilir miyim?",
+      "answer": [
+        "use"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "requests"
+      ]
+    }
+  ]
+}

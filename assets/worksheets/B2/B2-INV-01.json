@@ -1,0 +1,270 @@
+{
+  "schema_version": "1.0",
+  "level": "B2",
+  "worksheet_id": "B2-INV-01",
+  "title": "Inversion",
+  "topic_tags": [
+    "inversion",
+    "negative_adverbials",
+    "never",
+    "rarely",
+    "not_only",
+    "hardly"
+  ],
+  "subskills": [
+    "word_order_inversion",
+    "auxiliary_do_support",
+    "use_negative_adverbials"
+  ],
+  "difficulty": 4,
+  "engine_sequence": [
+    {
+      "engine": "order",
+      "count": 8,
+      "rules": {
+        "allow_hint": true
+      }
+    },
+    {
+      "engine": "error_spotting",
+      "count": 6,
+      "rules": {
+        "allow_hint": true
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "ord1",
+      "engine": "order",
+      "prompt": "Put the words in order.",
+      "translation_tr": "Kelimeleri doğru sıraya koy.",
+      "tokens": [
+        "Never",
+        "have",
+        "I",
+        "seen",
+        "such",
+        "a",
+        "beautiful",
+        "view",
+        "."
+      ],
+      "answer": "Never have I seen such a beautiful view.",
+      "hint": "Negative adverbial + auxiliary + subject.",
+      "tags": [
+        "never"
+      ]
+    },
+    {
+      "id": "ord2",
+      "engine": "order",
+      "prompt": "Put the words in order.",
+      "translation_tr": "Kelimeleri doğru sıraya koy.",
+      "tokens": [
+        "Rarely",
+        "do",
+        "we",
+        "eat",
+        "out",
+        "on",
+        "weekdays",
+        "."
+      ],
+      "answer": "Rarely do we eat out on weekdays.",
+      "tags": [
+        "rarely"
+      ]
+    },
+    {
+      "id": "ord3",
+      "engine": "order",
+      "prompt": "Put the words in order.",
+      "translation_tr": "Kelimeleri doğru sıraya koy.",
+      "tokens": [
+        "Not",
+        "only",
+        "did",
+        "he",
+        "apologise",
+        ",",
+        "but",
+        "he",
+        "also",
+        "fixed",
+        "the",
+        "problem",
+        "."
+      ],
+      "answer": "Not only did he apologise, but he also fixed the problem.",
+      "tags": [
+        "not_only"
+      ]
+    },
+    {
+      "id": "ord4",
+      "engine": "order",
+      "prompt": "Put the words in order.",
+      "translation_tr": "Kelimeleri doğru sıraya koy.",
+      "tokens": [
+        "Hardly",
+        "had",
+        "I",
+        "sat",
+        "down",
+        "when",
+        "the",
+        "phone",
+        "rang",
+        "."
+      ],
+      "answer": "Hardly had I sat down when the phone rang.",
+      "tags": [
+        "hardly"
+      ]
+    },
+    {
+      "id": "ord5",
+      "engine": "order",
+      "prompt": "Put the words in order.",
+      "translation_tr": "Kelimeleri doğru sıraya koy.",
+      "tokens": [
+        "Seldom",
+        "does",
+        "she",
+        "get",
+        "angry",
+        "."
+      ],
+      "answer": "Seldom does she get angry.",
+      "tags": [
+        "seldom"
+      ]
+    },
+    {
+      "id": "ord6",
+      "engine": "order",
+      "prompt": "Put the words in order.",
+      "translation_tr": "Kelimeleri doğru sıraya koy.",
+      "tokens": [
+        "No",
+        "sooner",
+        "had",
+        "they",
+        "arrived",
+        "than",
+        "it",
+        "started",
+        "to",
+        "snow",
+        "."
+      ],
+      "answer": "No sooner had they arrived than it started to snow.",
+      "tags": [
+        "no_sooner"
+      ]
+    },
+    {
+      "id": "ord7",
+      "engine": "order",
+      "prompt": "Put the words in order.",
+      "translation_tr": "Kelimeleri doğru sıraya koy.",
+      "tokens": [
+        "Only",
+        "then",
+        "did",
+        "I",
+        "understand",
+        "the",
+        "answer",
+        "."
+      ],
+      "answer": "Only then did I understand the answer.",
+      "tags": [
+        "only_then"
+      ]
+    },
+    {
+      "id": "ord8",
+      "engine": "order",
+      "prompt": "Put the words in order.",
+      "translation_tr": "Kelimeleri doğru sıraya koy.",
+      "tokens": [
+        "At",
+        "no",
+        "time",
+        "did",
+        "he",
+        "say",
+        "sorry",
+        "."
+      ],
+      "answer": "At no time did he say sorry.",
+      "tags": [
+        "at_no_time"
+      ]
+    },
+    {
+      "id": "err1",
+      "engine": "error_spotting",
+      "prompt": "Never I have seen such a mess.",
+      "translation_tr": "Hiç böyle bir dağınıklık görmedim.",
+      "answer": "Never have I seen such a mess.",
+      "hint": "Inversion: adverbial + auxiliary + subject.",
+      "tags": [
+        "fix_inversion"
+      ]
+    },
+    {
+      "id": "err2",
+      "engine": "error_spotting",
+      "prompt": "Rarely we do eat out.",
+      "translation_tr": "Nadiren dışarıda yemek yeriz.",
+      "answer": "Rarely do we eat out.",
+      "tags": [
+        "fix_inversion"
+      ]
+    },
+    {
+      "id": "err3",
+      "engine": "error_spotting",
+      "prompt": "Not only he did call, but he also came.",
+      "translation_tr": "Sadece aramakla kalmadı, aynı zamanda geldi.",
+      "answer": "Not only did he call, but he also came.",
+      "tags": [
+        "fix_inversion"
+      ]
+    },
+    {
+      "id": "err4",
+      "engine": "error_spotting",
+      "prompt": "Hardly I had arrived when it started.",
+      "translation_tr": "Daha yeni varmıştım ki başladı.",
+      "answer": "Hardly had I arrived when it started.",
+      "tags": [
+        "fix_inversion"
+      ]
+    },
+    {
+      "id": "err5",
+      "engine": "error_spotting",
+      "prompt": "Seldom does she gets angry.",
+      "translation_tr": "O nadiren sinirlenir.",
+      "answer": "Seldom does she get angry.",
+      "hint": "After does → base verb.",
+      "tags": [
+        "do_support"
+      ]
+    },
+    {
+      "id": "err6",
+      "engine": "error_spotting",
+      "prompt": "Only then I did understand.",
+      "translation_tr": "Ancak o zaman anladım.",
+      "answer": "Only then did I understand.",
+      "tags": [
+        "fix_inversion"
+      ]
+    }
+  ]
+}

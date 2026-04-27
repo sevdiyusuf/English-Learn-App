@@ -1,0 +1,281 @@
+{
+  "schema_version": "1.0",
+  "level": "A2",
+  "worksheet_id": "A2-ING-01",
+  "title": "Gerunds (-ing)",
+  "topic_tags": [
+    "gerund",
+    "ing_form",
+    "like_love_hate",
+    "after_prepositions"
+  ],
+  "subskills": [
+    "use_ing_after_prepositions",
+    "use_ing_after_like_love_hate"
+  ],
+  "difficulty": 2,
+  "engine_sequence": [
+    {
+      "engine": "mcq",
+      "count": 10,
+      "rules": {
+        "shuffle_options": true,
+        "allow_hint": true
+      }
+    },
+    {
+      "engine": "fill",
+      "count": 6,
+      "rules": {
+        "case_sensitive": false,
+        "allow_contractions": true
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "mcq1",
+      "engine": "mcq",
+      "prompt": "I’m good at ____ .",
+      "translation_tr": "Bir şeyde iyiyim.",
+      "options": [
+        "swimming",
+        "swim"
+      ],
+      "answer": "swimming",
+      "hint": "After a preposition (at) → -ing.",
+      "tags": [
+        "after_prepositions"
+      ]
+    },
+    {
+      "id": "mcq2",
+      "engine": "mcq",
+      "prompt": "She is interested in ____ English.",
+      "translation_tr": "İngilizce öğrenmekle ilgileniyor.",
+      "options": [
+        "learning",
+        "learn"
+      ],
+      "answer": "learning",
+      "tags": [
+        "after_prepositions"
+      ]
+    },
+    {
+      "id": "mcq3",
+      "engine": "mcq",
+      "prompt": "He likes ____ music.",
+      "translation_tr": "Müzik dinlemeyi sever.",
+      "options": [
+        "listening to",
+        "listen to"
+      ],
+      "answer": "listening to",
+      "tags": [
+        "like_love_hate"
+      ]
+    },
+    {
+      "id": "mcq4",
+      "engine": "mcq",
+      "prompt": "We hate ____ up early.",
+      "translation_tr": "Erken kalkmaktan nefret ederiz.",
+      "options": [
+        "getting",
+        "get"
+      ],
+      "answer": "getting",
+      "tags": [
+        "like_love_hate"
+      ]
+    },
+    {
+      "id": "mcq5",
+      "engine": "mcq",
+      "prompt": "Thanks for ____ me.",
+      "translation_tr": "Bana yardım ettiğin için teşekkürler.",
+      "options": [
+        "helping",
+        "help"
+      ],
+      "answer": "helping",
+      "tags": [
+        "after_prepositions"
+      ]
+    },
+    {
+      "id": "mcq6",
+      "engine": "mcq",
+      "prompt": "I’m tired of ____ this question.",
+      "translation_tr": "Bu soruyu cevaplamaktan bıktım.",
+      "options": [
+        "answering",
+        "answer"
+      ],
+      "answer": "answering",
+      "tags": [
+        "after_prepositions"
+      ]
+    },
+    {
+      "id": "mcq7",
+      "engine": "mcq",
+      "prompt": "They love ____ photos.",
+      "translation_tr": "Fotoğraf çekmeyi severler.",
+      "options": [
+        "taking",
+        "take"
+      ],
+      "answer": "taking",
+      "tags": [
+        "like_love_hate"
+      ]
+    },
+    {
+      "id": "mcq8",
+      "engine": "mcq",
+      "prompt": "He is afraid of ____ .",
+      "translation_tr": "O uçmaktan korkuyor.",
+      "options": [
+        "flying",
+        "fly"
+      ],
+      "answer": "flying",
+      "tags": [
+        "after_prepositions"
+      ]
+    },
+    {
+      "id": "mcq9",
+      "engine": "mcq",
+      "prompt": "I’m excited about ____ you.",
+      "translation_tr": "Seni görmek için heyecanlıyım.",
+      "options": [
+        "seeing",
+        "see"
+      ],
+      "answer": "seeing",
+      "tags": [
+        "after_prepositions"
+      ]
+    },
+    {
+      "id": "mcq10",
+      "engine": "mcq",
+      "prompt": "She doesn’t like ____ coffee.",
+      "translation_tr": "Kahve içmeyi sevmiyor.",
+      "options": [
+        "drinking",
+        "drink"
+      ],
+      "answer": "drinking",
+      "tags": [
+        "like_love_hate"
+      ]
+    },
+    {
+      "id": "fill1",
+      "engine": "fill",
+      "prompt": "I’m good at ____ (cook).",
+      "translation_tr": "Yemek pişirmede iyiyim.",
+      "answer": [
+        "cooking"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "after_prepositions"
+      ]
+    },
+    {
+      "id": "fill2",
+      "engine": "fill",
+      "prompt": "He is interested in ____ (learn) Spanish.",
+      "translation_tr": "İspanyolca öğrenmekle ilgileniyor.",
+      "answer": [
+        "learning"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "after_prepositions"
+      ]
+    },
+    {
+      "id": "fill3",
+      "engine": "fill",
+      "prompt": "They love ____ (travel).",
+      "translation_tr": "Seyahat etmeyi severler.",
+      "answer": [
+        "travelling",
+        "traveling"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "like_love_hate"
+      ]
+    },
+    {
+      "id": "fill4",
+      "engine": "fill",
+      "prompt": "Thanks for ____ (help) me.",
+      "translation_tr": "Bana yardım ettiğin için teşekkürler.",
+      "answer": [
+        "helping"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "after_prepositions"
+      ]
+    },
+    {
+      "id": "fill5",
+      "engine": "fill",
+      "prompt": "I hate ____ (wait) in lines.",
+      "translation_tr": "Sırada beklemekten nefret ederim.",
+      "answer": [
+        "waiting"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "like_love_hate"
+      ]
+    },
+    {
+      "id": "fill6",
+      "engine": "fill",
+      "prompt": "She is afraid of ____ (drive) at night.",
+      "translation_tr": "Gece araba kullanmaktan korkuyor.",
+      "answer": [
+        "driving"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "after_prepositions"
+      ]
+    }
+  ]
+}

@@ -39,7 +39,7 @@ class CargoPackage extends StatelessWidget {
         borderRadius: BorderRadius.circular(borderRadius),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.3),
+            color: Colors.black.withValues(alpha: 0.3),
             blurRadius: isSmall ? 2 : 4,
             offset: Offset(0, isSmall ? 1 : 3),
           ),
@@ -58,10 +58,10 @@ class CargoPackage extends StatelessWidget {
               height: double.infinity,
               width: isSmall ? 8 : 16,
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.3),
+                color: Colors.white.withValues(alpha: 0.3),
                 border: Border.symmetric(
                   vertical: BorderSide(
-                    color: Colors.white.withOpacity(0.1),
+                    color: Colors.white.withValues(alpha: 0.1),
                     width: 0.5,
                   ),
                 ),
@@ -76,16 +76,16 @@ class CargoPackage extends StatelessWidget {
                 vertical: isSmall ? 2 : 4,
               ),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.9),
+                color: Colors.white.withValues(alpha: 0.9),
                 borderRadius: BorderRadius.circular(isSmall ? 4 : 6),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
+                    color: Colors.black.withValues(alpha: 0.1),
                     blurRadius: 2,
                   ),
                 ],
                 border: Border.all(
-                  color: Colors.redAccent.withOpacity(0.3),
+                  color: Colors.redAccent.withValues(alpha: 0.3),
                   width: 0.5,
                 ),
               ),
@@ -99,7 +99,7 @@ class CargoPackage extends StatelessWidget {
                     width: packageIconSize,
                     height: packageIconSize,
                     colorFilter: ColorFilter.mode(
-                      Colors.black.withOpacity(0.7),
+                      Colors.black.withValues(alpha: 0.7),
                       BlendMode.srcIn,
                     ),
                   ),
@@ -137,11 +137,11 @@ class CargoPackage extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.all(4),
                     decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.7),
+                      color: Colors.black.withValues(alpha: 0.7),
                       borderRadius: BorderRadius.circular(6),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.3),
+                          color: Colors.black.withValues(alpha: 0.3),
                           blurRadius: 4,
                           offset: const Offset(0, 2),
                         ),
@@ -152,7 +152,7 @@ class CargoPackage extends StatelessWidget {
                       width: 16,
                       height: 16,
                       colorFilter: ColorFilter.mode(
-                        Colors.white.withOpacity(0.9),
+                        Colors.white.withValues(alpha: 0.9),
                         BlendMode.srcIn,
                       ),
                     ),

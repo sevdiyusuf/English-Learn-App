@@ -10,7 +10,7 @@ plugins {
 
 android {
     namespace = "com.example.yunoo"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 35
     ndkVersion = "29.0.13599879"
 
     compileOptions {
@@ -24,7 +24,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.yunoo"
+        applicationId = "com.example.tamamm"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
@@ -40,13 +40,15 @@ android {
             signingConfig = signingConfigs.getByName("debug")
 
             // APK optimizasyonu: kod küçültme ve kullanılmayan kaynakları atma
-            isMinifyEnabled = true
-            isShrinkResources = true
+            // GEÇİCİ: Isar collections sorunu için test amacıyla kapatıldı
+            // Eğer bu çalışırsa, ProGuard sorunu demektir
+            isMinifyEnabled = false
+            isShrinkResources = false
 
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
-            )
+            // proguardFiles(
+            //     getDefaultProguardFile("proguard-android-optimize.txt"),
+            //     "proguard-rules.pro",
+            // )
         }
     }
 }

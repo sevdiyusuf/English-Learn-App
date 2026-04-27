@@ -1,0 +1,259 @@
+{
+    "schema_version": "1.0",
+    "level": "A2",
+    "worksheet_id": "A2-MAN-01",
+    "title": "Adverbs of Manner",
+    "topic_tags": [
+        "adverbs",
+        "adverbs_of_manner",
+        "word_formation"
+    ],
+    "subskills": [
+        "forming_adverbs",
+        "irregular_adverbs",
+        "sentence_position"
+    ],
+    "difficulty": 2,
+    "engine_sequence": [
+        {
+            "engine": "mcq",
+            "count": 4,
+            "rules": {
+                "shuffle_options": true,
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "tap",
+            "count": 3,
+            "rules": {
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "fill",
+            "count": 3,
+            "rules": {
+                "case_sensitive": false,
+                "allow_contractions": true
+            }
+        },
+        {
+            "engine": "order",
+            "count": 2,
+            "rules": {}
+        }
+    ],
+    "items": [
+        {
+            "id": "man_mcq1",
+            "engine": "mcq",
+            "prompt": "The teacher is speaking very ____. I can't hear her.",
+            "translation_tr": "Öğretmen çok alçak sesle konuşuyor. Onu duyamıyorum.",
+            "options": [
+                "quietly",
+                "quiet",
+                "quietlys"
+            ],
+            "answer": "quietly",
+            "hint": "We need a word to describe 'how' she is speaking.",
+            "explain": "To describe an action (speaking), we use an adverb. Most adverbs end in -ly.",
+            "tags": [
+                "formation"
+            ]
+        },
+        {
+            "id": "man_mcq2",
+            "engine": "mcq",
+            "prompt": "He is a fast runner. He runs very ____.",
+            "translation_tr": "O hızlı bir koşucu. Çok hızlı koşar.",
+            "options": [
+                "fast",
+                "fastly",
+                "well"
+            ],
+            "answer": "fast",
+            "hint": "'Fast' is an irregular adverb.",
+            "explain": "'Fast' is both an adjective and an adverb. 'Fastly' does not exist.",
+            "tags": [
+                "irregular"
+            ]
+        },
+        {
+            "id": "man_mcq3",
+            "engine": "mcq",
+            "prompt": "She is a good pianist. She plays the piano ____.",
+            "translation_tr": "O iyi bir piyanist. Piyanoyu çok iyi çalar.",
+            "options": [
+                "well",
+                "good",
+                "goodly"
+            ],
+            "answer": "well",
+            "hint": "The adverb form of 'good' is different.",
+            "explain": "'Well' is the irregular adverb form of the adjective 'good'.",
+            "tags": [
+                "irregular"
+            ]
+        },
+        {
+            "id": "man_mcq4",
+            "engine": "mcq",
+            "prompt": "Please open the box ____. It is very fragile.",
+            "translation_tr": "Lütfen kutuyu dikkatlice aç. Çok kırılgan.",
+            "options": [
+                "carefully",
+                "careful",
+                "carefuly"
+            ],
+            "answer": "carefully",
+            "hint": "Double the 'l' when adding -ly to 'careful'.",
+            "explain": "Adjectives ending in 'l' add 'ly', resulting in 'll'.",
+            "tags": [
+                "spelling"
+            ]
+        },
+        {
+            "id": "man_tap1",
+            "engine": "tap",
+            "prompt": "They finished the test ____.",
+            "translation_tr": "Sınavı kolayca bitirdiler.",
+            "bank": [
+                "easily",
+                "easy",
+                "easyly",
+                "well"
+            ],
+            "answer": "easily",
+            "hint": "Change 'y' to 'i' before adding -ly.",
+            "explain": "For adjectives ending in 'y', we change 'y' to 'i' and add 'ly'.",
+            "tags": [
+                "spelling"
+            ]
+        },
+        {
+            "id": "man_tap2",
+            "engine": "tap",
+            "prompt": "It is raining ____ outside.",
+            "translation_tr": "Dışarıda çok şiddetli yağmur yağıyor.",
+            "bank": [
+                "heavily",
+                "heavy",
+                "heavyly",
+                "fast"
+            ],
+            "answer": "heavily",
+            "hint": "How is it raining?",
+            "explain": "'Heavily' describes the intensity of the rain.",
+            "tags": [
+                "vocabulary"
+            ]
+        },
+        {
+            "id": "man_tap3",
+            "engine": "tap",
+            "prompt": "You must work ____ to pass the exam.",
+            "translation_tr": "Sınavı geçmek için çok çalışmalısın.",
+            "bank": [
+                "hard",
+                "hardly",
+                "well",
+                "fast"
+            ],
+            "answer": "hard",
+            "hint": "Be careful! 'Hardly' has a different meaning.",
+            "explain": "'Hard' as an adverb means 'with effort'. 'Hardly' means 'almost not'.",
+            "tags": [
+                "irregular",
+                "meaning"
+            ]
+        },
+        {
+            "id": "man_fill1",
+            "engine": "fill",
+            "prompt": "He is happy. He is smiling ____.",
+            "translation_tr": "O mutlu. Gülümserken mutlu görünüyor.",
+            "answer": [
+                "happily"
+            ],
+            "explain": "Happy (adj) -> Happily (adv).",
+            "tags": [
+                "formation"
+            ]
+        },
+        {
+            "id": "man_fill2",
+            "engine": "fill",
+            "prompt": "The car is slow. The car moves ____.",
+            "translation_tr": "Araba yavaş. Yavaşça ilerliyor.",
+            "answer": [
+                "slowly"
+            ],
+            "explain": "Slow (adj) -> Slowly (adv).",
+            "tags": [
+                "formation"
+            ]
+        },
+        {
+            "id": "man_fill3",
+            "engine": "fill",
+            "prompt": "She is a beautiful dancer. She dances ____.",
+            "translation_tr": "O güzel bir dansçı. Zarifçe dans eder.",
+            "answer": [
+                "beautifully"
+            ],
+            "explain": "Beautiful (adj) -> Beautifully (adv).",
+            "tags": [
+                "formation"
+            ]
+        },
+        {
+            "id": "man_order1",
+            "engine": "order",
+            "bank": [
+                "loudly.",
+                "talked",
+                "They",
+                "in",
+                "the",
+                "street"
+            ],
+            "answer": [
+                "They",
+                "talked",
+                "loudly",
+                "in",
+                "the",
+                "street"
+            ],
+            "translation_tr": "Sokakta yüksek sesle konuştular.",
+            "explain": "Adverbs of manner usually come after the verb or the object.",
+            "tags": [
+                "order"
+            ]
+        },
+        {
+            "id": "man_order2",
+            "engine": "order",
+            "bank": [
+                "pushed",
+                "the",
+                "door",
+                "He",
+                "slowly."
+            ],
+            "answer": [
+                "He",
+                "pushed",
+                "the",
+                "door",
+                "slowly."
+            ],
+            "translation_tr": "Kapıyı yavaşça itti.",
+            "explain": "The adverb 'slowly' describes how he pushed the door.",
+            "tags": [
+                "order"
+            ]
+        }
+    ]
+}

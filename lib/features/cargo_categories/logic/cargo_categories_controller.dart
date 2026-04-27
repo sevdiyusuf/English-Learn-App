@@ -4,14 +4,18 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/repositories/user_stats_repo.dart';
+import '../../auth/logic/auth_controller.dart';
 import '../data/cargo_service.dart';
 import '../models/cargo_categories_state.dart';
 import '../models/cargo_word.dart';
 
 class CargoCategoriesController extends StateNotifier<CargoCategoriesState> {
-  CargoCategoriesController() : super(const CargoCategoriesState()) {
+  CargoCategoriesController(this.ref) : super(const CargoCategoriesState()) {
     _initialize();
   }
+
+  final Ref ref;
 
   Timer? _gameTimer;
   DateTime? _gameStartTime;
@@ -74,6 +78,7 @@ class CargoCategoriesController extends StateNotifier<CargoCategoriesState> {
         isRegrouping: false,
         hasWon: false,
         elapsedTime: Duration.zero,
+        draggedWord: null,
       );
 
       // Start timer
@@ -116,13 +121,23 @@ class CargoCategoriesController extends StateNotifier<CargoCategoriesState> {
     List<CargoWord>? remainingBelt,
     int? totalPlacedOverride,
   }) {
+    // CRITICAL: Don't load next word if a word is being dragged
+    // Wait until the dragged word is dropped or drag ends
+    if (state.draggedWord != null) {
+      debugPrint(
+        'loadNextWord: Skipping - word ${state.draggedWord!.word} is being dragged. Wait until it is dropped.',
+      );
+      return;
+    }
+
     // Use override if provided, otherwise read from state
     // This ensures we use the correct totalPlaced value even if state hasn't updated yet
     final totalPlaced = totalPlacedOverride ?? state.totalWordsPlaced;
     final belt = remainingBelt ?? state.remainingOnBelt;
+    final draggedWordId = state.draggedWord?.word;
 
     debugPrint(
-      'loadNextWord: Called with totalPlaced: $totalPlaced, belt.length: ${belt.length}, currentWord: ${state.currentWord?.word}',
+      'loadNextWord: Called with totalPlaced: $totalPlaced, belt.length: ${belt.length}, currentWord: ${state.currentWord?.word}, draggedWord: $draggedWordId',
     );
 
     // Check if all 12 words are placed in columns AND belt is empty
@@ -162,8 +177,27 @@ class CargoCategoriesController extends StateNotifier<CargoCategoriesState> {
       return;
     }
 
-    final word = belt.first;
-    final newRemaining = List<CargoWord>.from(belt)..removeAt(0);
+    // CRITICAL: Skip words that are currently being dragged
+    // Find the first word that is not being dragged
+    CargoWord? word;
+    int wordIndex = -1;
+    for (int i = 0; i < belt.length; i++) {
+      if (belt[i].word != draggedWordId) {
+        word = belt[i];
+        wordIndex = i;
+        break;
+      }
+    }
+
+    // If all words in belt are being dragged, don't load anything
+    if (word == null) {
+      debugPrint(
+        'loadNextWord: All words in belt are being dragged, waiting...',
+      );
+      return;
+    }
+
+    final newRemaining = List<CargoWord>.from(belt)..removeAt(wordIndex);
 
     state = state.copyWith(currentWord: word, remainingOnBelt: newRemaining);
 
@@ -230,12 +264,16 @@ class CargoCategoriesController extends StateNotifier<CargoCategoriesState> {
     // Clear current word if it matches the timed-out word
     // IMPORTANT: Always clear currentWord when a word times out, so it can be reloaded
     // This ensures ConveyorArea detects the change and restarts animation
+    // Also clear draggedWord if it matches (shouldn't happen, but safety check)
     final newCurrentWord =
         state.currentWord?.word == timedOutWord.word ? null : state.currentWord;
+    final newDraggedWord =
+        state.draggedWord?.word == timedOutWord.word ? null : state.draggedWord;
 
     // Update state first to clear currentWord
     state = state.copyWith(
       currentWord: newCurrentWord,
+      draggedWord: newDraggedWord,
       remainingOnBelt: newRemaining,
     );
 
@@ -334,7 +372,17 @@ class CargoCategoriesController extends StateNotifier<CargoCategoriesState> {
     // Remove word from belt (either current word or remaining)
     final newRemaining = List<CargoWord>.from(state.remainingOnBelt);
     CargoWord? newCurrentWord = state.currentWord;
+    CargoWord? newDraggedWord = state.draggedWord;
     bool shouldLoadNext = false;
+
+    // CRITICAL: Clear draggedWord if this word was being dragged
+    bool wasDragged = state.draggedWord?.word == word.word;
+    if (wasDragged) {
+      newDraggedWord = null;
+      debugPrint(
+        'dropWordToColumn: Dragged word ${word.word} was dropped, clearing draggedWord',
+      );
+    }
 
     if (state.currentWord?.word == word.word) {
       // Current word was dropped, clear it and load next
@@ -344,19 +392,16 @@ class CargoCategoriesController extends StateNotifier<CargoCategoriesState> {
         'dropWordToColumn: Current word ${word.word} dropped, will load next. Remaining: ${newRemaining.length}',
       );
     } else {
-      // Remove from remaining belt
+      // Word is from remainingOnBelt or was being dragged
+      // Remove from remaining belt if it's there
       newRemaining.removeWhere((w) => w.word == word.word);
       debugPrint(
-        'dropWordToColumn: Word ${word.word} from belt dropped. Remaining: ${newRemaining.length}, currentWord: ${newCurrentWord?.word}',
+        'dropWordToColumn: Word ${word.word} dropped. Was dragged: $wasDragged, Remaining: ${newRemaining.length}, currentWord: ${newCurrentWord?.word}',
       );
 
-      // If currentWord exists and is not in any column, add it back to belt and load next
-      // This ensures continuous flow - if user drops a word from remainingOnBelt,
-      // we should also clear the currentWord and load next
+      // If currentWord exists and is not in any column, add it back to remainingOnBelt
       if (newCurrentWord != null) {
-        final currentWordRef =
-            newCurrentWord; // Save reference before potentially nulling
-        // Check if currentWord is already in a column
+        final currentWordRef = newCurrentWord; // Save reference before nulling
         bool currentWordInColumn = false;
         for (final column in columns) {
           if (column.words.any((w) => w.word == currentWordRef.word)) {
@@ -365,14 +410,15 @@ class CargoCategoriesController extends StateNotifier<CargoCategoriesState> {
           }
         }
 
-        if (!currentWordInColumn &&
-            !newRemaining.any((w) => w.word == currentWordRef.word)) {
-          // CurrentWord is not in any column and not in remainingOnBelt, add it back
-          newRemaining.add(currentWordRef);
+        if (!currentWordInColumn) {
+          // Current word is not in a column, add it back to remainingOnBelt
+          if (!newRemaining.any((w) => w.word == currentWordRef.word)) {
+            newRemaining.add(currentWordRef);
+          }
           newCurrentWord = null;
           shouldLoadNext = true;
           debugPrint(
-            'dropWordToColumn: Current word ${currentWordRef.word} was not placed, added back to belt. Will load next.',
+            'dropWordToColumn: Current word ${currentWordRef.word} added back to remainingOnBelt, will load next',
           );
         }
       }
@@ -382,6 +428,7 @@ class CargoCategoriesController extends StateNotifier<CargoCategoriesState> {
         0,
         (sum, col) => sum + col.words.length,
       );
+
       if (totalPlaced < 12 && newRemaining.isNotEmpty && !shouldLoadNext) {
         // If currentWord is null now, we can load next immediately
         if (newCurrentWord == null) {
@@ -414,24 +461,28 @@ class CargoCategoriesController extends StateNotifier<CargoCategoriesState> {
 
     state = state.copyWith(
       currentWord: newCurrentWord,
+      draggedWord: newDraggedWord,
       remainingOnBelt: newRemaining,
       columns: columns,
     );
 
-    // Load next word if current was dropped
-    // Continue loading even if remainingOnBelt is empty, as timeout words will be added back
-    if (shouldLoadNext) {
-      // Calculate total placed with updated columns
-      final totalPlaced = columns.fold<int>(
-        0,
-        (sum, col) => sum + col.words.length,
-      );
+    // Calculate total placed with updated columns
+    final totalPlaced = columns.fold<int>(
+      0,
+      (sum, col) => sum + col.words.length,
+    );
 
+    // CRITICAL: Always check if we need to load next word after dropping
+    // Even if currentWord is not null (another word is on belt), we should check
+    // if there are words in remainingOnBelt that need to be loaded after currentWord finishes
+    // However, we only load immediately if currentWord was cleared (shouldLoadNext = true)
+    // Otherwise, the current word on belt will timeout or be placed, and then loadNextWord will be called
+    if (shouldLoadNext) {
       // Use a microtask to ensure state is updated before loading next word
       // Pass the updated remaining list directly to avoid reading stale state
       Future.microtask(() {
         debugPrint(
-          'dropWordToColumn: Future.microtask executing. mounted: $mounted, isRunning: ${state.isRunning}, isFinished: ${state.isFinished}, isRegrouping: ${state.isRegrouping}, totalPlaced: $totalPlaced, newRemaining: ${newRemaining.length}',
+          'dropWordToColumn: Future.microtask executing. mounted: $mounted, isRunning: ${state.isRunning}, isFinished: ${state.isFinished}, isRegrouping: ${state.isRegrouping}, totalPlaced: $totalPlaced, newRemaining: ${newRemaining.length}, newCurrentWord: ${newCurrentWord?.word}',
         );
 
         if (!mounted) {
@@ -449,7 +500,7 @@ class CargoCategoriesController extends StateNotifier<CargoCategoriesState> {
         // Check if all words are placed (use the calculated value, not state)
         // Always try to load next word if there are words remaining, even if totalPlaced >= 12
         // This handles the case where the last word times out and needs to be reloaded
-        if (newRemaining.isNotEmpty) {
+        if (newRemaining.isNotEmpty && newCurrentWord == null) {
           debugPrint(
             'dropWordToColumn: Loading next word, remaining: ${newRemaining.length}, placed: $totalPlaced/12',
           );
@@ -457,6 +508,12 @@ class CargoCategoriesController extends StateNotifier<CargoCategoriesState> {
           loadNextWord(
             remainingBelt: newRemaining,
             totalPlacedOverride: totalPlaced,
+          );
+        } else if (newRemaining.isNotEmpty && newCurrentWord != null) {
+          // Current word is on belt, but we have words in remainingOnBelt
+          // The current word will timeout or be placed, then loadNextWord will be called
+          debugPrint(
+            'dropWordToColumn: Current word ${newCurrentWord.word} is on belt, ${newRemaining.length} words in remaining. Will load after current word is handled.',
           );
         } else if (totalPlaced < 12) {
           // Belt is empty but not all words placed
@@ -472,7 +529,91 @@ class CargoCategoriesController extends StateNotifier<CargoCategoriesState> {
           );
         }
       });
+    } else {
+      // Even if shouldLoadNext is false, check if we need to prepare for next word
+      // This handles the case where a word is dropped while another is on the belt
+      debugPrint(
+        'dropWordToColumn: shouldLoadNext is false. Current word: ${newCurrentWord?.word}, remaining: ${newRemaining.length}, placed: $totalPlaced/12',
+      );
     }
+  }
+
+  /// Handle drag start - word is being picked up from conveyor
+  void onDragStart(CargoWord word) {
+    if (!state.isRunning || state.isFinished || state.isRegrouping) return;
+
+    debugPrint('onDragStart: ${word.word} is being dragged');
+
+    // Set draggedWord to track that this word is being held
+    state = state.copyWith(draggedWord: word);
+
+    // CRITICAL: Don't load next word while dragging
+    // Wait until the word is dropped (dropWordToColumn) or drag ends (onDragEnd)
+    debugPrint(
+      'onDragStart: Word ${word.word} is being dragged. Will not load next word until it is dropped.',
+    );
+  }
+
+  /// Handle drag end (cancelled) - word was not dropped into a valid target
+  void onDragEnd(CargoWord word) {
+    if (!state.isRunning || state.isFinished || state.isRegrouping) return;
+
+    debugPrint('onDragEnd: ${word.word} drag ended (not dropped)');
+
+    // Clear draggedWord
+    // If this word was the currentWord before being dragged, restore it
+    // Otherwise, if it's not in remainingOnBelt and not in columns, add it back
+    CargoWord? newCurrentWord = state.currentWord;
+    final newRemaining = List<CargoWord>.from(state.remainingOnBelt);
+
+    // Check if word is already in a column
+    bool wordInColumn = false;
+    for (final column in state.columns) {
+      if (column.words.any((w) => w.word == word.word)) {
+        wordInColumn = true;
+        break;
+      }
+    }
+
+    // If word is not in a column and not in remainingOnBelt, add it back to remainingOnBelt
+    // CRITICAL: Always add to remainingOnBelt, never restore as currentWord directly
+    // This ensures that if currentWord is null, loadNextWord can be called to load the next word
+    if (!wordInColumn && !newRemaining.any((w) => w.word == word.word)) {
+      newRemaining.add(word);
+      debugPrint(
+        'onDragEnd: Adding ${word.word} back to remainingOnBelt (not restoring as currentWord)',
+      );
+    }
+
+    state = state.copyWith(
+      currentWord: newCurrentWord,
+      draggedWord: null,
+      remainingOnBelt: newRemaining,
+    );
+
+    // CRITICAL: After drag ends, try to load next word if needed
+    // Use microtask to ensure state is updated before loading
+    Future.microtask(() {
+      if (mounted &&
+          state.isRunning &&
+          !state.isFinished &&
+          !state.isRegrouping) {
+        final totalPlaced = state.totalWordsPlaced;
+        final remaining = state.remainingOnBelt;
+        final currentWord = state.currentWord;
+
+        // Load next word if currentWord is null and there are words remaining
+        if (currentWord == null && remaining.isNotEmpty) {
+          debugPrint(
+            'onDragEnd: Loading next word after drag end. Remaining: ${remaining.length}, placed: $totalPlaced/12',
+          );
+          loadNextWord(
+            remainingBelt: remaining,
+            totalPlacedOverride: totalPlaced,
+          );
+        }
+      }
+    });
   }
 
   /// Move word from one column to another
@@ -600,6 +741,8 @@ class CargoCategoriesController extends StateNotifier<CargoCategoriesState> {
         hasWon: true,
         showSolution: true,
       );
+      // Record stats (fire-and-forget)
+      _recordSessionStats();
     } else {
       // Player loses - regroup words into correct columns
       _regroupWords();
@@ -641,8 +784,40 @@ class CargoCategoriesController extends StateNotifier<CargoCategoriesState> {
           showSolution: true,
           hasWon: false,
         );
+        // Record stats (fire-and-forget)
+        _recordSessionStats();
       }
     });
+  }
+
+  Future<void> _recordSessionStats() async {
+    try {
+      final authState = ref.read(authControllerProvider);
+      final user = authState.valueOrNull;
+      if (user == null) return;
+
+      final statsRepo = ref.read(userStatsRepoProvider);
+      final duration = state.elapsedTime;
+
+      // Calculate practiced words (total words placed = 12)
+      final practicedWords = state.totalWordsPlaced;
+      // Calculate correct/wrong based on final state
+      final correctCount = state.finalCorrectCount ?? 0;
+      final wrongCount = state.finalWrongCount ?? 0;
+
+      await statsRepo.recordSession(
+        user: user,
+        modeId: 'cargo_categories',
+        practicedWords: practicedWords,
+        correctAnswers: correctCount,
+        wrongAnswers: wrongCount,
+        duration: duration,
+        score: state.finalScore ?? 0,
+      );
+    } catch (e) {
+      // Don't break the game if stats recording fails
+      debugPrint('Failed to record cargo categories stats: $e');
+    }
   }
 
   void reset() {
@@ -655,6 +830,7 @@ class CargoCategoriesController extends StateNotifier<CargoCategoriesState> {
       finalScore: null,
       finalCorrectCount: null,
       finalWrongCount: null,
+      draggedWord: null,
     );
   }
 
@@ -667,5 +843,5 @@ class CargoCategoriesController extends StateNotifier<CargoCategoriesState> {
 
 final cargoCategoriesControllerProvider =
     StateNotifierProvider<CargoCategoriesController, CargoCategoriesState>(
-      (ref) => CargoCategoriesController(),
+      (ref) => CargoCategoriesController(ref),
     );

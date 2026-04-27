@@ -1,0 +1,171 @@
+{
+    "schema_version": "1.0",
+    "level": "A2",
+    "lesson_id": "A2-MAN-01-lesson",
+    "title": "Adverbs of Manner",
+    "topic_tags": [
+        "adverbs",
+        "adverbs_of_manner",
+        "word_formation"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Eylemlerin 'nasıl' yapıldığını betimlemeyi öğreneceğiz.",
+                    "Sıfatları zarfa dönüştürme kurallarını (Quick -> Quickly) kavrayacağız.",
+                    "Fast, Hard ve Well gibi düzensiz yapıları öğreneceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Zarf Türetme (The -ly Rule)",
+                "bullets": [
+                    "Çoğu sıfatın sonuna **-ly** ekleyerek zarf yaparız.",
+                    "Sıfatlar isimleri nitelerken, zarflar fiilleri niteler."
+                ],
+                "examples": [
+                    "He is a **quiet** boy. (O sessiz bir çocuktur - Sıfat)",
+                    "He speaks **quietly**. (Sessizce konuşur - Zarf)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "Yazım Kuralları (Spelling)",
+                "bullets": [
+                    "**-y ile bitenler**: 'y' düşer, **-ily** gelir (Happy -> Happily).",
+                    "**-le ile bitenler**: 'e' düşer, **-y** gelir (Gentle -> Gently).",
+                    "**-l ile bitenler**: 'ly' eklenince çift 'l' olur (Careful -> Carefully)."
+                ],
+                "examples": [
+                    "Easy -> Easily",
+                    "Beautiful -> Beautifully"
+                ]
+            },
+            {
+                "id": "c4",
+                "type": "rule",
+                "title": "Düzensiz Zarflar (Irregulars)",
+                "bullets": [
+                    "Bazı kelimeler -ly eki almaz, aynı kalır veya tamamen değişir.",
+                    "**Good** -> **Well** (En çok karıştırılan!)",
+                    "**Fast** -> **Fast** (Fastly diye bir kelime yoktur)",
+                    "**Hard** -> **Hard** (Hardly farklı bir anlama gelir)"
+                ],
+                "examples": [
+                    "She is a good singer. She sings **well**.",
+                    "He is a fast driver. He drives **fast**."
+                ]
+            },
+            {
+                "id": "formula",
+                "type": "formula",
+                "title": "Cümledeki Konumu",
+                "bullets": [
+                    "Durum zarfları genellikle fiilden veya nesneden sonra gelir."
+                ],
+                "formula": [
+                    "Subject + Verb + Adverb (She ran quickly)",
+                    "Subject + Verb + Object + Adverb (She closed the door quietly)"
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Yanlış Türetme**: 'Goodly' veya 'Fastly' gibi kelimeler kullanmayın.",
+                    "**Sıfat-Zarf Karışıklığı**: Fiili nitelerken sıfat kullanmayın (He drives slow ✗ -> He drives slowly ✓).",
+                    "**Hardly Yanılgısı**: 'Hardly' 'sıkıca' değil, 'neredeyse hiç' demektir."
+                ],
+                "examples": [
+                    "Hatalı: He plays football good. ✗",
+                    "Doğru: He plays football **well**. ✓"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "fill",
+                "prompt": "She is a careful driver. She drives ____.",
+                "answer": [
+                    "carefully"
+                ],
+                "explain": "Sıfat 'careful' (dikkatli), zarf olduğunda 'carefully' (dikkatlice) olur."
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Yetenek Yarışması",
+        "intro_bullets": [
+            "Bir yetenek yarışmasındaki jüri yorumlarını inceliyoruz. Boşlukları uygun zarflarla doldur."
+        ],
+        "items": [
+            {
+                "engine": "mcq",
+                "prompt": "Jüri: 'The dancer moved very ____ across the stage.'",
+                "options": [
+                    "gracefully",
+                    "graceful",
+                    "good"
+                ],
+                "answer": "gracefully",
+                "explain": "Dansçının hareket etme biçimini nitelemek için zarf (gracefully) gereklidir."
+            },
+            {
+                "engine": "tap",
+                "prompt": "Jüri: 'You sang that song ____. I loved it!'",
+                "bank": [
+                    "well",
+                    "good",
+                    "goodly",
+                    "bad"
+                ],
+                "answer": "well",
+                "explain": "'Good' sıfatının zarf hali 'well'dir."
+            },
+            {
+                "engine": "fill",
+                "prompt": "Jüri: 'But you need to speak ____ (loud) so everyone can hear you.'",
+                "answer": [
+                    "loudly"
+                ],
+                "explain": "Konuşma eylemini nitelemek için 'loudly' (yüksek sesle) kullanılır."
+            },
+            {
+                "engine": "order",
+                "prompt": "Cümleyi kur: 'O testi kolayca bitirdi.'",
+                "tokens": [
+                    "She",
+                    "finished",
+                    "the",
+                    "test",
+                    "easily."
+                ],
+                "answer_tokens": [
+                    "She",
+                    "finished",
+                    "the",
+                    "test",
+                    "easily."
+                ],
+                "explain": "Dizilim: Özne + Fiil + Nesne + Zarf."
+            }
+        ],
+        "recap_bullets": [
+            "Sıfat + -ly = Zarf",
+            "Y ile bitenlerde -ily kuralını hatırla.",
+            "Good -> Well istisnasını unutma.",
+            "Fast ve Hard'ın sonuna -ly ekleme!"
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "A2-MAN-01"
+    }
+}

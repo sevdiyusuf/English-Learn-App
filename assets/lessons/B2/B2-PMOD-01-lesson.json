@@ -1,0 +1,163 @@
+{
+    "schema_version": "1.0",
+    "level": "B2",
+    "lesson_id": "B2-PMOD-01-lesson",
+    "title": "Perfect Modals (Geçmişe Dair Tahminler)",
+    "topic_tags": [
+        "perfect_modals",
+        "past_speculation",
+        "must_have",
+        "might_have",
+        "cant_have"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Geçmişte yaşanmış olaylar hakkında eldeki kanıtları kullanarak çıkarım yapmayı öğreneceğiz.",
+                    "Kesinlik (Must have), ihtimal (Might have) ve imkansızlık (Can't have) durumlarını ayırt edeceğiz.",
+                    "Bu yapıların dilbilgisi formüllerini (Modal + have + V3) hatasız kurmayı kavrayacağız."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Must Have: Güçlü Çıkarım",
+                "bullets": [
+                    "**Kullanım**: Geçmişte bir şeyin olduğuna dair elimizde çok güçlü bir kanıt varsa kullanılır.",
+                    "**Anlam**: '-mış olmalı' (neredeyse eminiz)."
+                ],
+                "examples": [
+                    "The lights are off. They must have gone to bed. (Işıklar kapalı. Yatmış olmalılar.)",
+                    "He isn't answering. He must have forgotten his phone. (Cevap vermiyor. Telefonunu unutmuş olmalı.)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "Might/May/Could Have: İhtimal",
+                "bullets": [
+                    "**Kullanım**: Geçmişteki bir olay hakkında emin olmadığımızda, sadece bir olasılıktan bahsederken kullanılır.",
+                    "**Anlam**: '-mış olabilir' (düşük veya orta seviye ihtimal)."
+                ],
+                "examples": [
+                    "I’m not sure, but she might have left early. (Emin değilim ama erken ayrılmış olabilir.)",
+                    "He looks confused. He might have taken the wrong train. (Kafası karışmış görünüyor. Yanlış trene binmiş olabilir.)"
+                ]
+            },
+            {
+                "id": "c4",
+                "type": "rule",
+                "title": "Can't Have: İmkansızlık",
+                "bullets": [
+                    "**Kullanım**: Geçmişte bir eylemin gerçekleşmesinin imkansız olduğuna dair kanıtımız olduğunda kullanılır.",
+                    "**Anlam**: '-mış olamaz' (kesinlikle olmadı)."
+                ],
+                "examples": [
+                    "They started five minutes ago. They can’t have finished already. (Beş dakika önce başladılar. Çoktan bitirmiş olamazlar.)",
+                    "She was with me all day. She can't have stolen it. (Tüm gün benimleydi. Onu çalmış olamaz.)"
+                ]
+            },
+            {
+                "id": "formula",
+                "type": "formula",
+                "title": "Yapı Formülü",
+                "bullets": [
+                    "Cümle dizilimi tüm özneler için aynıdır:"
+                ],
+                "formula": [
+                    "Subject + Modal + have + Past Participle (V3)",
+                    "Örnek: He + must + have + forgotten...",
+                    "Örnek: They + can't + have + been..."
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Has Kullanımı**: 'He must has' hatalıdır. Modallardan sonra her zaman 'have' gelir.",
+                    "**V2 vs V3**: 'Might have went' yanlıştır; her zaman fiilin 3. hali kullanılır: 'Might have **gone**'.",
+                    "**Gereksiz 'to'**: 'Can't have to finished' hatalıdır. 'Have'den sonra doğrudan V3 gelir."
+                ],
+                "examples": [
+                    "Hatalı: He must have forget his wallet. ✗",
+                    "Doğru: He must have **forgotten** his wallet. ✓",
+                    "Hatalı: It can't have be her. ✗",
+                    "Doğru: It can't have **been** her. ✓"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "Your keys are on the table. You ____ put them there.",
+                "options": [
+                    "must have",
+                    "might have",
+                    "can't have"
+                ],
+                "answer": "must have",
+                "explain": "Anahtarlar masada durduğuna göre onları oraya koymuş olmanız 'çok yüksek ihtimal/kesin'dir."
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Kayıp Cüzdan Gizemi",
+        "intro_bullets": [
+            "Ali cüzdanını bulamıyor. Arkadaşları kanıtlara bakarak çıkarım yapıyor.",
+            "Olayın gerçekleşme ihtimaline göre doğru modal yapısını seç."
+        ],
+        "items": [
+            {
+                "engine": "fill",
+                "prompt": "Mert: 'The door was locked from the outside. You ___ (must / have) left the house with it.'",
+                "answer": [
+                    "must have"
+                ],
+                "explain": "Kapı dışarıdan kilitlendiğine göre evden cüzdanla çıkmış olman kesin bir çıkarımdır."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "Ali: 'I checked my pockets. I ____ dropped it on the bus, but I'm not sure.'",
+                "options": [
+                    "might have",
+                    "must have",
+                    "can't have"
+                ],
+                "answer": "might have",
+                "explain": "'Not sure' (emin değilim) ifadesi düşük bir olasılık bildirir."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "Zeynep: 'The bus was empty! Someone ____ stolen it from your pocket.'",
+                "options": [
+                    "can't have",
+                    "must have",
+                    "might have"
+                ],
+                "answer": "can't have",
+                "explain": "Otobüs boş olduğuna göre birinin cüzdanı çalmış olması imkansızdır."
+            },
+            {
+                "engine": "error_spotting",
+                "prompt": "Ali: 'Wait! I might have went to the cafe before the bus.'",
+                "answer": "Ali: 'Wait! I might have gone to the cafe before the bus.'",
+                "explain": "Perfect modal yapısında fiilin 2. hali (went) değil, 3. hali (gone) kullanılır."
+            }
+        ],
+        "recap_bullets": [
+            "Güçlü kanıt (kesinlik): must have + V3.",
+            "Düşük ihtimal (belirsizlik): might have + V3.",
+            "İmkansızlık (kanıta dayalı): can't have + V3.",
+            "Asla 'must has' veya 'can't have + V2' kullanma."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "B2-PMOD-01"
+    }
+}

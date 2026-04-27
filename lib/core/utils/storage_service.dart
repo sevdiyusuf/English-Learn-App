@@ -1,7 +1,8 @@
 import 'package:flutter/foundation.dart';
 
 import 'browser_storage_stub.dart'
-    if (dart.library.html) 'browser_storage_web.dart';
+    if (dart.library.html) 'browser_storage_web.dart'
+    as browser_storage;
 
 /// Storage service for persisting data across page refreshes
 class StorageService {
@@ -13,7 +14,7 @@ class StorageService {
   static Future<void> saveUsername(String username) async {
     if (kIsWeb) {
       try {
-        setItem(_keyUsername, username);
+        browser_storage.setItem(_keyUsername, username);
       } catch (e) {
         debugPrint('Error saving username: $e');
       }
@@ -24,7 +25,7 @@ class StorageService {
   static String? getUsername() {
     if (kIsWeb) {
       try {
-        final value = getItem(_keyUsername);
+        final value = browser_storage.getItem(_keyUsername);
         // Return null if empty string (iOS Safari might return empty string)
         return value != null && value.isNotEmpty ? value : null;
       } catch (e) {
@@ -40,7 +41,7 @@ class StorageService {
   static Future<void> saveRoomId(String roomId) async {
     if (kIsWeb) {
       try {
-        setItem(_keyRoomId, roomId);
+        browser_storage.setItem(_keyRoomId, roomId);
       } catch (e) {
         debugPrint('Error saving room ID: $e');
       }
@@ -51,7 +52,7 @@ class StorageService {
   static String? getRoomId() {
     if (kIsWeb) {
       try {
-        final value = getItem(_keyRoomId);
+        final value = browser_storage.getItem(_keyRoomId);
         // Return null if empty string (iOS Safari might return empty string)
         return value != null && value.isNotEmpty ? value : null;
       } catch (e) {
@@ -67,7 +68,7 @@ class StorageService {
   static Future<void> saveRoomCode(String roomCode) async {
     if (kIsWeb) {
       try {
-        setItem(_keyRoomCode, roomCode);
+        browser_storage.setItem(_keyRoomCode, roomCode);
       } catch (e) {
         debugPrint('Error saving room code: $e');
       }
@@ -78,7 +79,7 @@ class StorageService {
   static String? getRoomCode() {
     if (kIsWeb) {
       try {
-        final value = getItem(_keyRoomCode);
+        final value = browser_storage.getItem(_keyRoomCode);
         // Return null if empty string (iOS Safari might return empty string)
         return value != null && value.isNotEmpty ? value : null;
       } catch (e) {
@@ -94,9 +95,9 @@ class StorageService {
   static Future<void> clearAll() async {
     if (kIsWeb) {
       try {
-        removeItem(_keyUsername);
-        removeItem(_keyRoomId);
-        removeItem(_keyRoomCode);
+        browser_storage.removeItem(_keyUsername);
+        browser_storage.removeItem(_keyRoomId);
+        browser_storage.removeItem(_keyRoomCode);
       } catch (e) {
         debugPrint('Error clearing storage: $e');
       }
@@ -107,12 +108,24 @@ class StorageService {
   static Future<void> clearRoomData() async {
     if (kIsWeb) {
       try {
-        removeItem(_keyRoomId);
-        removeItem(_keyRoomCode);
+        browser_storage.removeItem(_keyRoomId);
+        browser_storage.removeItem(_keyRoomCode);
       } catch (e) {
         debugPrint('Error clearing room data: $e');
       }
     }
   }
-}
 
+  /// Get app start URL (from JS context)
+  static String? getAppStartUrl() {
+    if (kIsWeb) {
+      try {
+        return browser_storage.getAppStartUrl();
+      } catch (e) {
+        debugPrint('Error getting app start URL: $e');
+        return null;
+      }
+    }
+    return null;
+  }
+}

@@ -1,0 +1,291 @@
+{
+  "schema_version": "1.0",
+  "level": "A2",
+  "worksheet_id": "A2-PP-01",
+  "title": "Past Perfect vs Past Simple",
+  "topic_tags": [
+    "past_perfect",
+    "past_simple",
+    "sequence",
+    "had_v3"
+  ],
+  "subskills": [
+    "choose_past_perfect",
+    "use_had_v3",
+    "order_events"
+  ],
+  "difficulty": 2,
+  "engine_sequence": [
+    {
+      "engine": "order",
+      "count": 6,
+      "rules": {
+        "allow_hint": true
+      }
+    },
+    {
+      "engine": "mcq",
+      "count": 8,
+      "rules": {
+        "shuffle_options": true,
+        "allow_hint": true
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "ord1",
+      "engine": "order",
+      "prompt": "Put the words in order.",
+      "tokens": [
+        "When",
+        "I",
+        "arrived",
+        ",",
+        "they",
+        "had",
+        "left",
+        "."
+      ],
+      "answer": "When I arrived, they had left.",
+      "translation_tr": "Ben vardığımda onlar gitmişti.",
+      "hint": "Earlier action → had + V3.",
+      "tags": [
+        "order",
+        "past_perfect"
+      ]
+    },
+    {
+      "id": "ord2",
+      "engine": "order",
+      "prompt": "Put the words in order.",
+      "tokens": [
+        "She",
+        "was",
+        "sad",
+        "because",
+        "she",
+        "had",
+        "lost",
+        "her",
+        "phone",
+        "."
+      ],
+      "answer": "She was sad because she had lost her phone.",
+      "translation_tr": "Telefonunu kaybettiği için üzgündü.",
+      "tags": [
+        "order",
+        "past_perfect"
+      ]
+    },
+    {
+      "id": "ord3",
+      "engine": "order",
+      "prompt": "Put the words in order.",
+      "tokens": [
+        "After",
+        "he",
+        "had",
+        "finished",
+        "dinner",
+        ",",
+        "he",
+        "watched",
+        "TV",
+        "."
+      ],
+      "answer": "After he had finished dinner, he watched TV.",
+      "translation_tr": "Akşam yemeğini bitirdikten sonra televizyon izledi.",
+      "tags": [
+        "order",
+        "sequence"
+      ]
+    },
+    {
+      "id": "ord4",
+      "engine": "order",
+      "prompt": "Put the words in order.",
+      "tokens": [
+        "We",
+        "didn’t",
+        "go",
+        "out",
+        "because",
+        "it",
+        "had",
+        "started",
+        "to",
+        "rain",
+        "."
+      ],
+      "answer": "We didn’t go out because it had started to rain.",
+      "translation_tr": "Yağmur yağmaya başladığı için dışarı çıkmadık.",
+      "tags": [
+        "order",
+        "past_perfect"
+      ]
+    },
+    {
+      "id": "ord5",
+      "engine": "order",
+      "prompt": "Put the words in order.",
+      "tokens": [
+        "By",
+        "the",
+        "time",
+        "I",
+        "got",
+        "home",
+        ",",
+        "my",
+        "family",
+        "had",
+        "eaten",
+        "."
+      ],
+      "answer": "By the time I got home, my family had eaten.",
+      "translation_tr": "Ben eve vardığımda ailem yemeğini yemişti.",
+      "tags": [
+        "order",
+        "sequence"
+      ]
+    },
+    {
+      "id": "ord6",
+      "engine": "order",
+      "prompt": "Put the words in order.",
+      "tokens": [
+        "He",
+        "noticed",
+        "that",
+        "someone",
+        "had",
+        "opened",
+        "the",
+        "window",
+        "."
+      ],
+      "answer": "He noticed that someone had opened the window.",
+      "translation_tr": "Birinin pencereyi açtığını fark etti.",
+      "tags": [
+        "order",
+        "past_perfect"
+      ]
+    },
+    {
+      "id": "mcq1",
+      "engine": "mcq",
+      "prompt": "When I arrived, they ____ already ____ .",
+      "translation_tr": "Ben vardığımda onlar zaten gitmişti.",
+      "options": [
+        "had / left",
+        "did / leave"
+      ],
+      "answer": "had / left",
+      "hint": "Earlier action before 'arrived' → Past Perfect.",
+      "tags": [
+        "past_perfect"
+      ]
+    },
+    {
+      "id": "mcq2",
+      "engine": "mcq",
+      "prompt": "After she ____ breakfast, she went to work.",
+      "translation_tr": "Kahvaltısını yaptıktan sonra işe gitti.",
+      "options": [
+        "had eaten",
+        "ate"
+      ],
+      "answer": "had eaten",
+      "tags": [
+        "past_perfect"
+      ]
+    },
+    {
+      "id": "mcq3",
+      "engine": "mcq",
+      "prompt": "I ____ the film last night.",
+      "translation_tr": "Dün gece filmi izledim.",
+      "options": [
+        "watched",
+        "had watched"
+      ],
+      "answer": "watched",
+      "hint": "One finished past time (last night) → Past Simple.",
+      "tags": [
+        "past_simple"
+      ]
+    },
+    {
+      "id": "mcq4",
+      "engine": "mcq",
+      "prompt": "He was tired because he ____ late.",
+      "translation_tr": "Geç saatlere kadar çalıştığı için yorgundu.",
+      "options": [
+        "had worked",
+        "worked"
+      ],
+      "answer": "had worked",
+      "tags": [
+        "past_perfect"
+      ]
+    },
+    {
+      "id": "mcq5",
+      "engine": "mcq",
+      "prompt": "By the time we got to the station, the train ____ .",
+      "translation_tr": "Biz istasyona vardığımızda tren gitmişti.",
+      "options": [
+        "had gone",
+        "went"
+      ],
+      "answer": "had gone",
+      "tags": [
+        "sequence"
+      ]
+    },
+    {
+      "id": "mcq6",
+      "engine": "mcq",
+      "prompt": "She ____ her keys and left the house.",
+      "translation_tr": "Anahtarlarını buldu ve evden çıktı.",
+      "options": [
+        "found",
+        "had found"
+      ],
+      "answer": "found",
+      "hint": "Two actions in order (found → left) can be Past Simple.",
+      "tags": [
+        "past_simple"
+      ]
+    },
+    {
+      "id": "mcq7",
+      "engine": "mcq",
+      "prompt": "They didn’t have money because they ____ it all.",
+      "translation_tr": "Paraları yoktu çünkü hepsini harcamışlardı.",
+      "options": [
+        "had spent",
+        "spent"
+      ],
+      "answer": "had spent",
+      "tags": [
+        "past_perfect"
+      ]
+    },
+    {
+      "id": "mcq8",
+      "engine": "mcq",
+      "prompt": "When I called, he ____ to bed.",
+      "translation_tr": "Ben aradığımda o yatağa gitmişti.",
+      "options": [
+        "had gone",
+        "went"
+      ],
+      "answer": "had gone",
+      "tags": [
+        "past_perfect"
+      ]
+    }
+  ]
+}

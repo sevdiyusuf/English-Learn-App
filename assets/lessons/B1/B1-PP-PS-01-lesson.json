@@ -1,0 +1,194 @@
+{
+    "schema_version": "1.0",
+    "level": "B1",
+    "lesson_id": "B1-PP-PS-02-lesson",
+    "title": "Present Perfect vs Past Simple (for/since/how long) - lesson",
+    "topic_tags": [
+        "present_perfect",
+        "past_simple",
+        "for",
+        "since",
+        "how_long"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Geçmişte başlayıp hala devam eden durumları anlatmayı öğreneceğiz.",
+                    "Süreç bildiren 'for' ve başlangıç noktasını belirten 'since' kelimelerini ayırt edeceğiz.",
+                    "Biten eylemler (Past Simple) ile etkisi süren eylemleri (Present Perfect) karşılaştıracağız."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Süreç: For vs. Since",
+                "bullets": [
+                    "**For**: Eylemin ne kadar sürdüğünü (zaman aralığını) belirtir (3 saattir, 5 yıldır).",
+                    "**Since**: Eylemin başladığı tam noktayı belirtir (2019'dan beri, dünden beri).",
+                    "Her iki kelime de genellikle Present Perfect ile kullanılır."
+                ],
+                "examples": [
+                    "I have lived here **for** 5 years.",
+                    "We have known each other **since** 2019."
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "formula",
+                "title": "Zamanların Karşılaştırılması",
+                "bullets": [
+                    "Present Perfect: Zaman belirsizdir veya süreç devam ediyordur.",
+                    "Past Simple: Eylem bitmiştir ve ne zaman olduğu bellidir (dün, geçen yıl)."
+                ],
+                "formula": [
+                    "Present Perfect: Have/Has + Verb (V3)",
+                    "Past Simple: Verb (V2) or Verb + ed"
+                ],
+                "examples": [
+                    "I have had this phone for a year. (Hala bende.)",
+                    "We went there last month. (Bitti, geçen aydaydı.)"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "She ____ to this city in 2022.",
+                "options": [
+                    "has moved",
+                    "moved"
+                ],
+                "answer": "moved",
+                "explain": "'2022' net bir geçmiş zaman noktası olduğu için Past Simple (V2) kullanılmalıdır."
+            },
+            {
+                "id": "c4",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Since ve For Karıştırmak**: 'since 3 hours' yanlış bir kullanımdır. Doğrusu 'for 3 hours'dur.",
+                    "**Net Zamanla Have Kullanmak**: 'I have seen him yesterday' denmez. Yesterday varsa 'saw' denmelidir.",
+                    "**Know Fiili**: Duygu/durum fiilleri genellikle süreç belirtirken Present Perfect ile kullanılır."
+                ],
+                "examples": [
+                    "Hatalı: I have met him last week. ✗",
+                    "Doğru: I **met** him last week. ✓"
+                ]
+            },
+            {
+                "id": "q2",
+                "type": "checkpoint",
+                "engine": "fill",
+                "prompt": "How long ____ you ____ (know) your best friend?",
+                "answer": [
+                    "have you known"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Tanışıklık durumu geçmişten bugüne gelen bir süreç olduğu için 'how long' ile Present Perfect soru yapısı kurulur."
+            },
+            {
+                "id": "c5",
+                "type": "tip",
+                "title": "Pratik İpucu: 'How Long' Soruları",
+                "bullets": [
+                    "Bir durumun ne zamandır sürdüğünü sorarken Present Perfect kullanın.",
+                    "Eğer eylem geçmişte bittiyse 'When did...?' sorusunu tercih edin."
+                ]
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Kontekst: Kariyer Yolculuğu",
+        "intro_bullets": [
+            "Bir iş mülakatındasın ve geçmiş deneyimlerini anlatıyorsun.",
+            "Hangi eylemlerin bittiğini, hangilerinin devam ettiğini belirtmek için zamanlara dikkat et!"
+        ],
+        "items": [
+            {
+                "engine": "fill",
+                "prompt": "Interviewer: 'How long ___ you ___ (work) in the IT sector?'",
+                "answer": [
+                    "have you worked"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Kariyer süreci geçmişten günümüze geldiği için Present Perfect uygundur."
+            },
+            {
+                "engine": "tap",
+                "prompt": "Candidate: 'I ___ in Istanbul since 2021 and I love it here.'",
+                "bank": [
+                    "have lived",
+                    "lived",
+                    "live"
+                ],
+                "answer": "have lived",
+                "explain": "Başlangıç noktası (since 2021) verildiği için süreç vurgulanmaktadır."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "Candidate: 'Before that, I ____ my first house in 2018.'",
+                "options": [
+                    "bought",
+                    "have bought"
+                ],
+                "answer": "bought",
+                "explain": "'2018' bitmiş bir zaman dilimidir."
+            },
+            {
+                "engine": "order",
+                "prompt": "Cümleyi kur: 'Onu Haziran'dan beri görmedi.'",
+                "tokens": [
+                    "He",
+                    "hasn't",
+                    "seen",
+                    "her",
+                    "since",
+                    "June"
+                ],
+                "answer_tokens": [
+                    "He",
+                    "hasn't",
+                    "seen",
+                    "her",
+                    "since",
+                    "June"
+                ],
+                "explain": "Belirli bir başlangıç anından beri devam etmeyen durumlar Present Perfect ile anlatılır."
+            },
+            {
+                "engine": "fill",
+                "prompt": "Interviewer: 'When ___ you ___ (graduate) from university?'",
+                "answer": [
+                    "did you graduate"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Mezuniyet anı bitmiş tekil bir olaydır."
+            }
+        ],
+        "recap_bullets": [
+            "Hatırla: Süreç aralığı için 'for', başlangıç anı için 'since' kullanılır.",
+            "Hatırla: 'Yesterday, last year, in 2020' varsa sadece Past Simple (V2) kullan.",
+            "Hatırla: Deneyimler ve ne zaman olduğu söylenmeyen eylemler Present Perfect ile aktarılır."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "B1-PP-PS-02"
+    }
+}

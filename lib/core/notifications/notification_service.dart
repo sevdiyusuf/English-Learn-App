@@ -20,7 +20,7 @@ class AppNotification {
     this.message,
     required this.type,
     this.duration = const Duration(seconds: 3),
-    this.action,
+    this.actions,
   });
 
   final String id;
@@ -28,7 +28,7 @@ class AppNotification {
   final String? message;
   final NotificationType type;
   final Duration duration;
-  final NotificationAction? action;
+  final List<NotificationAction>? actions;
 
   IconData get icon {
     switch (type) {

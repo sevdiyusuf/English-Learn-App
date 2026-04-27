@@ -1,8 +1,7 @@
-import 'dart:ui'; // Blur efekti için gerekli
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/responsive/responsive_utils.dart';
 import '../../../core/theme/app_colors.dart';
 
 class FlashSynonymLevelSelectPage extends StatelessWidget {
@@ -12,113 +11,81 @@ class FlashSynonymLevelSelectPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final padding = ResponsiveUtils.responsivePadding(context);
-    final spacing = ResponsiveUtils.responsiveSpacing(context);
-    final maxWidth = ResponsiveUtils.responsive<double>(
-      context: context,
-      mobile: double.infinity,
-      tablet: 500,
-      desktop: 600,
-    );
+    // Get screen height and constrain to 80% of screen
+    final screenHeight = MediaQuery.of(context).size.height;
+    final maxHeight = screenHeight * 0.8;
 
-    return Scaffold(
-      backgroundColor: Colors.transparent, // Arka plan resmi görünsün
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        centerTitle: true,
-        leading: Container(
-          margin: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: Colors.black.withValues(alpha: 0.5), // Daha belirgin buton
-            shape: BoxShape.circle,
-          ),
-          child: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.white),
-            onPressed: () => context.pop(),
-            tooltip: 'Geri dön',
-          ),
-        ),
-        title: const Text(
-          'Flash Synonym',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            shadows: [Shadow(blurRadius: 5, color: Colors.black)],
-          ),
-        ),
-      ),
-      body: Stack(
-        children: [
-          // 1. KATMAN: Arka Plan Karartma (Daha koyu)
-          // const SizedBox.expand(
-          //   child: DecoratedBox(
-          //     decoration: BoxDecoration(
-          // color: Colors.black54, // Tüm arka planı biraz karart
-          //     ),
-          //   ),
-          // ),
-
-          // 2. KATMAN: İçerik
-          Center(
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Padding(
-                padding: padding,
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(maxWidth: maxWidth),
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxHeight: maxHeight),
+      child: ClipRRect(
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
+          child: Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: const Color(0xFF1E293B).withValues(alpha: 0.90),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(30),
+              ),
+              border: Border(
+                top: BorderSide(
+                  color: Colors.white.withValues(alpha: 0.15),
+                  width: 1,
+                ),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.6),
+                  blurRadius: 30,
+                  offset: const Offset(0, -10),
+                ),
+              ],
+            ),
+            child: SafeArea(
+              top: false,
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(24, 12, 24, 24),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      const SizedBox(height: 20),
-                      // Başlık
+                      // Handle bar
                       Container(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 16,
-                          horizontal: 24,
-                        ),
+                        width: 48,
+                        height: 5,
+                        margin: const EdgeInsets.only(bottom: 20),
                         decoration: BoxDecoration(
-                          color: AppColors.surfaceDark.withValues(alpha: 0.9),
-                          borderRadius: BorderRadius.circular(16),
-                          border: Border.all(
-                            color: Colors.white.withValues(alpha: 0.1),
-                          ),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.black45,
-                              blurRadius: 10,
-                              offset: Offset(0, 4),
-                            ),
-                          ],
-                        ),
-                        child: Text(
-                          'ZORLUK SEVİYESİ',
-                          style: Theme.of(
-                            context,
-                          ).textTheme.headlineSmall?.copyWith(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w900,
-                            color: Colors.white,
-                            letterSpacing: 1.5,
-                          ),
-                          textAlign: TextAlign.center,
+                          color: Colors.white.withValues(alpha: 0.2),
+                          borderRadius: BorderRadius.circular(10),
                         ),
                       ),
+                      // Title
+                      Text(
+                        'ZORLUK SEVİYESİ',
+                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w900,
+                          color: Colors.white,
+                          letterSpacing: 1.5,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 24),
 
-                      SizedBox(height: spacing * 2),
-
-                      // Level Buttons - GÜNCELLENMİŞ TASARIM
+                      // Level Buttons
                       _LevelButton(
                         level: 'easy',
                         title: 'KOLAY',
                         description: 'Başlangıç seviyesi',
                         color: AppColors.success, // Yeşil
                         icon: Icons.sentiment_satisfied_alt_rounded,
-                        onTap: () => context.push('/flash-synonym/easy'),
+                        onTap: () {
+                          Navigator.of(context).pop(); // Close bottom sheet
+                          context.push('/flash-synonym/easy');
+                        },
                       ),
-                      SizedBox(height: spacing),
+                      const SizedBox(height: 16),
 
                       _LevelButton(
                         level: 'medium',
@@ -126,9 +93,12 @@ class FlashSynonymLevelSelectPage extends StatelessWidget {
                         description: 'Kelime dağarcığını geliştir',
                         color: AppColors.primary, // Mavi
                         icon: Icons.trending_up_rounded,
-                        onTap: () => context.push('/flash-synonym/medium'),
+                        onTap: () {
+                          Navigator.of(context).pop(); // Close bottom sheet
+                          context.push('/flash-synonym/medium');
+                        },
                       ),
-                      SizedBox(height: spacing),
+                      const SizedBox(height: 16),
 
                       _LevelButton(
                         level: 'upper',
@@ -136,9 +106,12 @@ class FlashSynonymLevelSelectPage extends StatelessWidget {
                         description: 'Zorlu kelimeler',
                         color: AppColors.warning, // Turuncu
                         icon: Icons.school_rounded,
-                        onTap: () => context.push('/flash-synonym/upper'),
+                        onTap: () {
+                          Navigator.of(context).pop(); // Close bottom sheet
+                          context.push('/flash-synonym/upper');
+                        },
                       ),
-                      SizedBox(height: spacing),
+                      const SizedBox(height: 16),
 
                       _LevelButton(
                         level: 'expert',
@@ -146,17 +119,20 @@ class FlashSynonymLevelSelectPage extends StatelessWidget {
                         description: 'Sadece ustalar için',
                         color: AppColors.error, // Kırmızı
                         icon: Icons.flash_on_rounded,
-                        onTap: () => context.push('/flash-synonym/expert'),
+                        onTap: () {
+                          Navigator.of(context).pop(); // Close bottom sheet
+                          context.push('/flash-synonym/expert');
+                        },
                       ),
 
-                      const SizedBox(height: 40),
+                      const SizedBox(height: 24),
                     ],
                   ),
                 ),
               ),
             ),
           ),
-        ],
+        ),
       ),
     );
   }
@@ -182,7 +158,7 @@ class _LevelButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
+      height: 90,
       decoration: BoxDecoration(
         color: const Color(0xFF1E293B), // Tamamen opak, koyu lacivert zemin
         borderRadius: BorderRadius.circular(16),

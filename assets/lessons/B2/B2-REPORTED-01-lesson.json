@@ -1,0 +1,178 @@
+{
+    "schema_version": "1.0",
+    "level": "B2",
+    "lesson_id": "B2-REPORTED-01-lesson",
+    "title": "Reported Speech: Questions & Commands",
+    "topic_tags": [
+        "reported_speech",
+        "questions",
+        "commands",
+        "asked",
+        "told"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Soru cümlelerini (Wh- ve Yes/No) aktarırken kullanılan düz cümle dizilimini öğreneceğiz.",
+                    "Emir ve rica cümlelerini 'to + infinitive' yapısıyla nasıl aktaracağımızı kavrayacağız.",
+                    "Zaman (tense), kişi (pronoun) ve yer-zaman zarflarındaki değişimleri (shifts) pekiştireceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Reported Questions: Soru Dizilimi Değişimi",
+                "bullets": [
+                    "**Düz Cümle Dizilimi**: Aktarılan sorularda artık soru sormuyoruz, birinin sorduğu soruyu anlatıyoruz. Bu yüzden 'do/does/did' yardımcı fiilleri atılır ve özne fiilden önce gelir.",
+                    "**Wh- Soruları**: Soru kelimesi (where, what, why) bağlaç olarak aynen kalır.",
+                    "**Yes/No Soruları**: Eğer soru bir Wh- kelimesiyle başlamıyorsa, aktarırken 'if' veya 'whether' kullanılır."
+                ],
+                "examples": [
+                    "Direct: “Where do you live?” → He asked me where I lived.",
+                    "Direct: “Do you like tea?” → She asked him if he liked tea."
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "Reported Commands: Emir ve Ricalar",
+                "bullets": [
+                    "Emirleri aktarırken 'say' yerine genellikle 'tell' veya 'ask' (rica için) kullanılır.",
+                    "**Olumlu Emir**: 'to + fiil' yapısı kullanılır.",
+                    "**Olumsuz Emir**: 'not to + fiil' yapısı kullanılır."
+                ],
+                "examples": [
+                    "Direct: “Open the window.” → He told us to open the window.",
+                    "Direct: “Don’t touch it!” → She told me not to touch it."
+                ]
+            },
+            {
+                "id": "formula",
+                "type": "formula",
+                "title": "Dönüşüm Formülleri",
+                "bullets": [
+                    "Aktarım sırasında yapılan temel değişiklikler:"
+                ],
+                "formula": [
+                    "Wh- Question: asked + person + wh-word + subject + verb (backshift)",
+                    "Yes/No Question: asked + person + if/whether + subject + verb (backshift)",
+                    "Commands: told + person + (not) + to + verb"
+                ]
+            },
+            {
+                "id": "c4",
+                "type": "rule",
+                "title": "Zaman ve Zarf Kaymaları (Shifts)",
+                "bullets": [
+                    "**Tense Shift**: Genelde bir derece geçmişe gidilir (Present -> Past, Can -> Could vb.).",
+                    "**Time Shift**: Zaman zarfları değişir (Tomorrow -> The next day).",
+                    "**Pronoun Shift**: Konuşan kişiye göre zamirler değişir (I -> He/She)."
+                ],
+                "examples": [
+                    "“Are you coming tomorrow?” → They asked if we were coming the next day."
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Soru Dizilimini Korumak**: 'He asked me where did I live' hatalıdır. Doğrusu 'where I lived' olmalıdır.",
+                    "**Emirlerde 'that' Kullanmak**: 'She told me that don't touch' hatalıdır. Doğrusu 'told me not to touch' olmalıdır.",
+                    "**Yardımcı Fiil Hatası**: Aktarılan soruda 'do/does/did' kesinlikle kullanılmaz."
+                ],
+                "examples": [
+                    "Hatalı: She asked what time was it. ✗",
+                    "Doğru: She asked what time it was. ✓"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "“Where are you going?” - He asked me...",
+                "options": [
+                    "where I was going.",
+                    "where was I going.",
+                    "if I was going."
+                ],
+                "answer": "where I was going.",
+                "explain": "Aktarılan sorularda soru kelimesinden sonra düz cümle dizilimi (Özne + Fiil) gelmelidir."
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "İş Görüşmesi Sonrası",
+        "intro_bullets": [
+            "Ali'nin iş görüşmesinde kendisine sorulanları ve söylenenleri arkadaşına anlatmasını takip et.",
+            "Soruların ve emirlerin aktarılırken nasıl değiştiğine dikkat et."
+        ],
+        "items": [
+            {
+                "engine": "mcq",
+                "prompt": "Ali: 'First, the manager asked me ____ I could start work immediately.'",
+                "options": [
+                    "if",
+                    "what",
+                    "where"
+                ],
+                "answer": "if",
+                "explain": "Evet/Hayır sorusu aktarılırken 'if' bağlacı kullanılır."
+            },
+            {
+                "engine": "fill",
+                "prompt": "Ali: 'Then she asked me where I ____ (live) currently.'",
+                "answer": [
+                    "lived"
+                ],
+                "explain": "Dolaylı anlatımda geniş zaman (live), geçmiş zamana (lived) dönüşür."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "Ali: 'At the end, she told me ____ any documents behind.'",
+                "options": [
+                    "not to leave",
+                    "don't leave",
+                    "to not leave"
+                ],
+                "answer": "not to leave",
+                "explain": "Olumsuz emirler 'not to + fiil' yapısıyla aktarılır."
+            },
+            {
+                "engine": "order",
+                "prompt": "Cümleyi kur: 'Bana yardım etmemi söyledi.'",
+                "tokens": [
+                    "He",
+                    "told",
+                    "me",
+                    "to",
+                    "help",
+                    "him."
+                ],
+                "answer_tokens": [
+                    "He",
+                    "told",
+                    "me",
+                    "to",
+                    "help",
+                    "him."
+                ],
+                "explain": "Rica/Emir cümleleri aktarılırken 'to + infinitive' kullanılır."
+            }
+        ],
+        "recap_bullets": [
+            "Soruları aktarırken 'do/does/did' kullanma, dizilimi düzelt.",
+            "Wh- yoksa 'if' kullan.",
+            "Emirlerde 'to' veya 'not to' yapısını unutma.",
+            "Zamanı ve zamirleri konuşan kişiye göre kaydırmayı hatırla."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "B2-REPORTED-01"
+    }
+}

@@ -5,6 +5,9 @@ import 'package:go_router/go_router.dart';
 import '../../../core/responsive/responsive_utils.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/svg_icon.dart';
+import '../../word_echo/ui/word_echo_mode_selection_page.dart';
+import '../ui/flash_opposites_level_select_page.dart';
+import '../../flash_synonym/ui/flash_synonym_level_select_page.dart';
 
 class MiniGamesPage extends StatelessWidget {
   const MiniGamesPage({super.key});
@@ -72,7 +75,67 @@ class MiniGamesPage extends StatelessWidget {
 
                   SizedBox(height: spacing),
 
-                  // 1. Cargo Categories (en üstte)
+                  // 1.Flash Opposites
+                  _GameButton(
+                    title: 'Flash Opposites',
+                    subtitle: 'Zıt anlamlı kelime seçme oyunu',
+                    icon: Icons.flash_on,
+                    svgAsset: 'assets/icons/flash_on.svg',
+                    color: const Color.fromARGB(255, 175, 63, 192), // Mor
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        barrierColor: Colors.black.withValues(alpha: 0.5),
+                        builder:
+                            (context) => const FlashOppositesLevelSelectPage(),
+                      );
+                    },
+                  ),
+                  SizedBox(height: spacing),
+
+                  // 2. Word Echo
+                  _GameButton(
+                    title: 'Word Echo',
+                    subtitle: 'Kelimeyi hatırla ve doğru yeri seç',
+                    icon: Icons.memory,
+                    svgAsset: 'assets/icons/memory.svg',
+                    color: const Color.fromARGB(255, 99, 102, 241), // İndigo
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        barrierColor: Colors.black.withValues(alpha: 0.5),
+                        builder: (context) => const WordEchoModeSelectionPage(),
+                      );
+                    },
+                  ),
+
+                  SizedBox(height: spacing * 2),
+
+                  // 3. Flash Synonym
+                  _GameButton(
+                    title: 'Flash Synonym',
+                    subtitle: 'Eş/yakın anlamlı kelimeleri seçin',
+                    icon: Icons.compare_arrows,
+                    svgAsset: 'assets/icons/compare_arrows.svg',
+                    color: const Color.fromARGB(255, 63, 192, 175), // Turkuaz
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        barrierColor: Colors.black.withValues(alpha: 0.5),
+                        builder:
+                            (context) => const FlashSynonymLevelSelectPage(),
+                      );
+                    },
+                  ),
+                  SizedBox(height: spacing),
+
+                  // 4. Cargo Categories
                   _GameButton(
                     title: 'Cargo Categories',
                     subtitle: 'Kelimeleri kategorilere ayır',
@@ -82,40 +145,6 @@ class MiniGamesPage extends StatelessWidget {
                     onTap: () => context.push('/cargo-categories/setup'),
                   ),
                   SizedBox(height: spacing),
-
-                  // 2. Flash Synonym
-                  _GameButton(
-                    title: 'Flash Synonym',
-                    subtitle: 'Eş/yakın anlamlı kelimeleri seçin',
-                    icon: Icons.compare_arrows,
-                    svgAsset: 'assets/icons/compare_arrows.svg',
-                    color: const Color.fromARGB(255, 63, 192, 175), // Turkuaz
-                    onTap: () => context.push('/flash-synonym'),
-                  ),
-                  SizedBox(height: spacing),
-
-                  // 3. Flash Opposites
-                  _GameButton(
-                    title: 'Flash Opposites',
-                    subtitle: 'Zıt anlamlı kelime seçme oyunu',
-                    icon: Icons.flash_on,
-                    svgAsset: 'assets/icons/flash_on.svg',
-                    color: const Color.fromARGB(255, 175, 63, 192), // Mor
-                    onTap: () => context.push('/flash-opposites'),
-                  ),
-                  SizedBox(height: spacing),
-
-                  // 4. Word Echo
-                  _GameButton(
-                    title: 'Word Echo',
-                    subtitle: 'Kelimeyi hatırla ve doğru yeri seç',
-                    icon: Icons.memory,
-                    svgAsset: 'assets/icons/memory.svg',
-                    color: const Color.fromARGB(255, 99, 102, 241), // İndigo
-                    onTap: () => context.push('/word-echo'),
-                  ),
-
-                  SizedBox(height: spacing * 2),
 
                   // ONLINE GAMES Header
                   _SectionHeader(title: 'ONLINE GAMES'),
@@ -128,7 +157,7 @@ class MiniGamesPage extends StatelessWidget {
                     icon: Icons.people,
                     svgAsset: 'assets/icons/people.svg',
                     color: AppColors.primary, // Mavi
-                    onTap: () => context.go('/'),
+                    onTap: () => context.go('/lobby'),
                   ),
 
                   SizedBox(height: spacing * 2),

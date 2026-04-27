@@ -1,10 +1,21 @@
-// Stub implementation used on non-web platforms.
-// This avoids importing any web-only libraries when building for mobile/desktop.
+// Stub implementation used on non-web platforms (and during tests).
+// This acts as an in-memory storage for testing purposes.
 
-String? getItem(String key) => null;
+final Map<String, String> _memoryStorage = {};
 
-void setItem(String key, String value) {}
+String? getItem(String key) => _memoryStorage[key];
 
-void removeItem(String key) {}
+void setItem(String key, String value) {
+  _memoryStorage[key] = value;
+}
 
+void removeItem(String key) {
+  _memoryStorage.remove(key);
+}
 
+// Helper for testing
+void clearStorage() {
+  _memoryStorage.clear();
+}
+
+String? getAppStartUrl() => null;

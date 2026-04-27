@@ -14,6 +14,8 @@ import '../../../core/utils/retry_helper.dart';
 import '../../../core/utils/storage_service.dart';
 import '../../../core/widgets/loading_skeleton.dart';
 import '../../auth/logic/auth_controller.dart';
+import '../../friends/ui/friend_selection_sheet.dart';
+import '../../game/data/word_battle_pack_service.dart';
 import '../../game/models/room.dart';
 import '../logic/room_controller.dart';
 
@@ -29,6 +31,42 @@ class RoomLobbyPage extends ConsumerStatefulWidget {
 }
 
 class _RoomLobbyPageState extends ConsumerState<RoomLobbyPage> {
+  GameMode _gameMode = GameMode.theme;
+  String _themeDifficulty = 'easy';
+  String _corePosType = 'verb';
+  WordBattlePack? _previewPack;
+  bool _loadingPreview = false;
+
+  Future<void> _refreshThemePreview() async {
+    setState(() => _loadingPreview = true);
+    try {
+      final pack = await WordBattlePackService.instance.pickRandomPack(
+        _themeDifficulty,
+      );
+      if (mounted) {
+        setState(() {
+          _previewPack = pack;
+          _loadingPreview = false;
+        });
+      }
+    } catch (_) {
+      if (mounted) {
+        setState(() {
+          _previewPack = null;
+          _loadingPreview = false;
+        });
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_gameMode == GameMode.theme) _refreshThemePreview();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     try {
@@ -407,12 +445,155 @@ class _RoomLobbyPageState extends ConsumerState<RoomLobbyPage> {
     );
   }
 
+  Widget _buildGameSetup(
+    BuildContext context,
+    Room room,
+    bool isHost,
+    bool setupLocked,
+  ) {
+    if (!isHost) {
+      // Non-host: show read-only current selection if locked
+      if (setupLocked && room.settings != null) {
+        return _buildGameSetupReadOnly(context, room);
+      }
+      return const SizedBox.shrink();
+    }
+    if (setupLocked) {
+      return _buildGameSetupReadOnly(context, room);
+    }
+    // Host: show mode selector and options
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          'Oyun kurulumu',
+          style: Theme.of(
+            context,
+          ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 8),
+        // Mode toggle: Theme Battle | Core English
+        SegmentedButton<GameMode>(
+          segments: const [
+            ButtonSegment<GameMode>(
+              value: GameMode.theme,
+              label: Text('Tema Savaşı'),
+              icon: Icon(Icons.category_outlined),
+            ),
+            ButtonSegment<GameMode>(
+              value: GameMode.core,
+              label: Text('Core English'),
+              icon: Icon(Icons.translate_outlined),
+            ),
+          ],
+          selected: {_gameMode},
+          onSelectionChanged: (Set<GameMode> selected) {
+            setState(() {
+              _gameMode = selected.first;
+              if (_gameMode == GameMode.theme) {
+                _refreshThemePreview();
+              }
+            });
+          },
+        ),
+        const SizedBox(height: 12),
+        if (_gameMode == GameMode.theme) ...[
+          Text('Zorluk', style: Theme.of(context).textTheme.labelMedium),
+          const SizedBox(height: 4),
+          SegmentedButton<String>(
+            segments: const [
+              ButtonSegment<String>(value: 'easy', label: Text('Kolay')),
+              ButtonSegment<String>(value: 'medium', label: Text('Orta')),
+              ButtonSegment<String>(value: 'hard', label: Text('Zor')),
+            ],
+            selected: {_themeDifficulty},
+            onSelectionChanged: (Set<String> s) {
+              setState(() {
+                _themeDifficulty = s.first;
+                _refreshThemePreview();
+              });
+            },
+          ),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              Text(
+                'Tema önizleme: ',
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+              if (_loadingPreview)
+                const SizedBox(
+                  width: 16,
+                  height: 16,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                )
+              else
+                Text(
+                  _previewPack?.title ?? '—',
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w600),
+                ),
+            ],
+          ),
+        ] else ...[
+          Text('Kelime türü', style: Theme.of(context).textTheme.labelMedium),
+          const SizedBox(height: 4),
+          SegmentedButton<String>(
+            segments: const [
+              ButtonSegment<String>(value: 'verb', label: Text('Fiil')),
+              ButtonSegment<String>(value: 'adjective', label: Text('Sıfat')),
+              ButtonSegment<String>(value: 'noun', label: Text('İsim')),
+              ButtonSegment<String>(value: 'adverb', label: Text('Zarf')),
+            ],
+            selected: {_corePosType},
+            onSelectionChanged: (Set<String> s) {
+              setState(() => _corePosType = s.first);
+            },
+          ),
+        ],
+      ],
+    );
+  }
+
+  Widget _buildGameSetupReadOnly(BuildContext context, Room room) {
+    final mode = room.gameMode;
+    final settings = room.settings;
+    String label = mode == GameMode.theme ? 'Tema Savaşı' : 'Core English';
+    if (settings != null) {
+      if (settings.theme != null) {
+        label +=
+            ' • ${settings.theme!.difficulty} • ${settings.theme!.packTitle}';
+      } else if (settings.core != null) {
+        final t = settings.core!.posType;
+        final tr =
+            t == 'verb'
+                ? 'Fiil'
+                : t == 'adjective'
+                ? 'Sıfat'
+                : t == 'noun'
+                ? 'İsim'
+                : 'Zarf';
+        label += ' • $tr';
+      }
+    }
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 4),
+      child: Text(
+        'Kurulum: $label',
+        style: Theme.of(context).textTheme.bodySmall,
+      ),
+    );
+  }
+
   Widget _buildSidebar(
     BuildContext context,
     Room room,
     bool isHost,
     bool isBusy,
   ) {
+    final setupLocked = room.locked;
     return Card(
       margin: EdgeInsets.zero,
       child: Padding(
@@ -423,6 +604,26 @@ class _RoomLobbyPageState extends ConsumerState<RoomLobbyPage> {
           children: [
             Text('Durum: ${room.status.name}'),
             Text('Tur süresi: ${room.turnDurationSeconds} sn'),
+            const SizedBox(height: 12),
+            // Game Setup panel (host only, before game starts)
+            _buildGameSetup(context, room, isHost, setupLocked),
+            const SizedBox(height: 12),
+            FilledButton.icon(
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  backgroundColor: AppColors.surface,
+                  builder:
+                      (context) => FriendSelectionSheet(
+                        roomId: room.roomCode ?? widget.roomId,
+                        gameType: 'word_battle',
+                      ),
+                );
+              },
+              icon: const Icon(Icons.person_add),
+              label: const Text('Arkadaş Davet Et'),
+            ),
             const SizedBox(height: 12),
             FilledButton.icon(
               onPressed:
@@ -460,6 +661,8 @@ class _RoomLobbyPageState extends ConsumerState<RoomLobbyPage> {
                             (room.status != RoomStatus.waiting &&
                                 room.status != RoomStatus.finished))
                         ? null
+                        : (_gameMode == GameMode.theme && _previewPack == null)
+                        ? null
                         : () async {
                           if (kDebugMode) {
                             debugPrint('Start game button clicked');
@@ -469,8 +672,6 @@ class _RoomLobbyPageState extends ConsumerState<RoomLobbyPage> {
                             debugPrint('Room players: ${room.players.length}');
                           }
                           try {
-                            // Use room.id (document ID) for startGame, fallback to widget.roomId
-                            // room_controller will handle roomCode vs document ID conversion
                             final roomId = room.id ?? widget.roomId;
                             if (roomId.isEmpty) {
                               if (!mounted) return;
@@ -482,14 +683,39 @@ class _RoomLobbyPageState extends ConsumerState<RoomLobbyPage> {
                                   );
                               return;
                             }
+                            GameMode? gameMode;
+                            GameRoomSettings? settings;
+                            if (room.locked && room.settings != null) {
+                              gameMode = room.gameMode;
+                              settings = room.settings;
+                            } else if (_gameMode == GameMode.theme &&
+                                _previewPack != null) {
+                              gameMode = GameMode.theme;
+                              settings = GameRoomSettings(
+                                theme: ThemeGameSettings(
+                                  difficulty: _themeDifficulty,
+                                  packId: _previewPack!.id,
+                                  packTitle: _previewPack!.title,
+                                ),
+                              );
+                            } else if (_gameMode == GameMode.core) {
+                              gameMode = GameMode.core;
+                              settings = GameRoomSettings(
+                                core: CoreGameSettings(posType: _corePosType),
+                              );
+                            }
                             if (kDebugMode) {
                               debugPrint(
-                                'Calling startGame with roomId: $roomId',
+                                'Calling startGame with roomId: $roomId gameMode: $gameMode',
                               );
                             }
                             await ref
                                 .read(roomControllerProvider.notifier)
-                                .startGame(roomId: roomId);
+                                .startGame(
+                                  roomId: roomId,
+                                  gameMode: gameMode,
+                                  settings: settings,
+                                );
                             if (!mounted) return;
                             if (kDebugMode) {
                               debugPrint('Start game succeeded');

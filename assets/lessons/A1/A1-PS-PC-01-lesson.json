@@ -1,0 +1,220 @@
+{
+    "schema_version": "1.0",
+    "level": "A1",
+    "lesson_id": "A1-PS-PC-01-lesson",
+    "title": "Present Simple vs Present Continuous",
+    "topic_tags": [
+        "present_simple",
+        "present_continuous",
+        "time_expressions"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Her zaman yaptığımız rutinler ile şu an yapmakta olduğumuz işleri birbirinden ayırmayı öğreneceğiz.",
+                    "Cümle içinde hangi zamanı kullanmamız gerektiğini fısıldayan 'anahtar kelimeleri' tanıyacağız.",
+                    "Present Continuous (Şimdiki Zaman) yapısındaki yardımcı fiil ve ek kurallarını pekiştireceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Present Simple: Genel Durumlar",
+                "bullets": [
+                    "**Rutinler**: Her gün, her hafta veya genellikle yaptığımız işler (I go to school).",
+                    "**Kalıcı Durumlar**: Değişmesi beklenmeyen gerçekler ve meslekler (He works in a bank).",
+                    "**He/She/It Hatırlatması**: Fiilin sonuna '-s' takısı getirmeyi unutmayın."
+                ],
+                "examples": [
+                    "I drink tea every morning. (Her sabah çay içerim.)",
+                    "Water boils at 100 degrees. (Su 100 derecede kaynar.)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "Present Continuous: Şu Anki Eylemler",
+                "bullets": [
+                    "**Konuşma Anı**: Tam şu anda gerçekleşen eylemler (I am eating now).",
+                    "**Geçici Durumlar**: Sadece bu aralar yaptığımız işler.",
+                    "**Dikkat**: Bu zamanda mutlaka bir yardımcı fiil (am/is/are) ve fiile gelen '-ing' eki olmalıdır."
+                ],
+                "examples": [
+                    "Shh! The baby is sleeping. (Şşşt! Bebek uyuyor.)",
+                    "I am working on a project these days. (Bu günlerde bir proje üzerinde çalışıyorum.)"
+                ]
+            },
+            {
+                "id": "formula",
+                "type": "formula",
+                "title": "Yapı Karşılaştırması",
+                "bullets": [
+                    "İki zamanın cümle dizilimleri birbirinden tamamen farklıdır."
+                ],
+                "formula": [
+                    "Simple: Subject + V1(/Vs) (I play / He plays)",
+                    "Continuous: Subject + am/is/are + V-ing (I am playing / He is playing)"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "Usually, I ____ coffee, but right now I ____ tea.",
+                "options": [
+                    "drink / am drinking",
+                    "am drinking / drink",
+                    "drinks / drinking"
+                ],
+                "answer": "drink / am drinking",
+                "explain": "'Usually' (genellikle) Present Simple gerektirir, 'right now' (şu an) ise Present Continuous gerektirir."
+            },
+            {
+                "id": "c4",
+                "type": "rule",
+                "title": "Zaman Sinyalleri (Time Expressions)",
+                "bullets": [
+                    "Cümlede hangi zamanı seçeceğinizi bu kelimelere bakarak anlayabilirsiniz."
+                ],
+                "examples": [
+                    "**Present Simple**: always, usually, often, every day, on Mondays.",
+                    "**Present Continuous**: now, at the moment, right now, Look!, Listen!."
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Yardımcı Fiili Unutmak**: 'I working' hatalıdır. Doğrusu 'I **am** working' olmalıdır.",
+                    "**-ing Ekini Unutmak**: 'He is work' hatalıdır. Doğrusu 'He is work**ing**' olmalıdır.",
+                    "**Durum Fiilleri (Stative Verbs)**: 'Like, love, want, know' gibi fiiller genellikle '-ing' almazlar.",
+                    "**Rutinlerde -ing Kullanmak**: Her gün yapılan işlerde 'I am going to school every day' denmez."
+                ],
+                "examples": [
+                    "Hatalı: I am liking pizza. ✗",
+                    "Doğru: I like pizza. ✓ (Duygu bildiren fiiller şimdiki zaman eki almaz.)",
+                    "Hatalı: She working now. ✗",
+                    "Doğru: She **is** work**ing** now. ✓"
+                ]
+            },
+            {
+                "id": "q2",
+                "type": "checkpoint",
+                "engine": "fill",
+                "prompt": "Look! The cat ____ (climb) the tree!",
+                "answer": [
+                    "is climbing"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "'Look!' (Bak!) komutu, eylemin tam şu an olduğunu gösterir."
+            },
+            {
+                "id": "c6",
+                "type": "tip",
+                "title": "Pratik İpucu: Kalıcılık Testi",
+                "bullets": [
+                    "Eylem her zaman mı oluyor (Geniş Zaman), yoksa sadece geçici bir süreliğine mi (Şimdiki Zaman)?",
+                    "Mesleğiniz 'Simple', o an masada yaptığınız iş 'Continuous' olur."
+                ]
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Kontekst: Pazar Sabahı",
+        "intro_bullets": [
+            "Jane'in pazar sabahı rutinlerini ve şu an ne yaptığını öğreniyoruz.",
+            "Jane genellikle ne yapar, bugün ne farklı? Dikkatle incele."
+        ],
+        "items": [
+            {
+                "engine": "fill",
+                "prompt": "Jane usually ___ (wake up) late on Sundays.",
+                "answer": [
+                    "wakes up"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "'Usually' ve pazar günleri yapılan genel bir eylem olduğu için Simple Present kullanılır."
+            },
+            {
+                "engine": "tap",
+                "prompt": "But today is different. At the moment, she ___ breakfast for her family.",
+                "bank": [
+                    "is making",
+                    "makes",
+                    "make"
+                ],
+                "answer": "is making",
+                "explain": "'At the moment' şu anı belirttiği için Present Continuous gereklidir."
+            },
+            {
+                "engine": "fill",
+                "prompt": "Her father always ___ (read) the newspaper in the morning.",
+                "answer": [
+                    "reads"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "'Always' bir rutin bildirir, bu yüzden fiil -s takısı alır."
+            },
+            {
+                "engine": "order",
+                "prompt": "Cümleyi kur: 'Şu an o gazete okumuyor.'",
+                "tokens": [
+                    "He",
+                    "is",
+                    "not",
+                    "reading",
+                    "the",
+                    "newspaper",
+                    "now"
+                ],
+                "answer_tokens": [
+                    "He",
+                    "is",
+                    "not",
+                    "reading",
+                    "the",
+                    "newspaper",
+                    "now"
+                ],
+                "explain": "Şimdiki zamanın olumsuz soru yapısı: be + not + V-ing."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "Look! The sun ____ and the birds are singing.",
+                "options": [
+                    "is shining",
+                    "shines",
+                    "shine"
+                ],
+                "answer": "is shining",
+                "explain": "'Look!' ifadesi dışarıdaki anlık durumu aktardığı için Continuous seçilmelidir."
+            }
+        ],
+        "recap_bullets": [
+            "Hatırla: Rutinlerde (always, usually) fiilin yalın veya -s takılı halini kullan.",
+            "Hatırla: Şu anda olanlarda (now, at the moment) 'am/is/are + -ing' yapısını kur.",
+            "Hatırla: 'Like, know, want' gibi fiilleri şimdiki zamanla kullanmamaya çalış."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "A1-PS-PC-01"
+    }
+}

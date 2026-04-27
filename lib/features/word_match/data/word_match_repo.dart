@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:flutter/services.dart';
 import 'package:isar/isar.dart';
 
 import '../models/word_pair.dart';
@@ -9,26 +11,28 @@ class WordMatchRepo implements WordMatchRepoInterface {
 
   final Isar _isar;
 
-  static const String builtinSetId = 'builtin_a2_exam_prep';
-  static const String wordsFromGamesSetName = 'Words from Games';
+  static const String wordsFromGamesSetName =
+      WordMatchRepoInterface.wordsFromGamesSetName;
 
   @override
   Stream<List<WordSet>> watchSets() {
     return _isar.wordSets
-        .where()
+        .filter()
+        .isBuiltinEqualTo(false)
+        .or()
+        .nameEqualTo(wordsFromGamesSetName)
         .sortByUpdatedAtDesc()
-        .watch(fireImmediately: true)
-        .map((sets) {
-          // Sort manually: built-in sets first, then by updatedAt
-          final sorted = List<WordSet>.from(sets);
-          sorted.sort((a, b) {
-            if (a.isBuiltin != b.isBuiltin) {
-              return a.isBuiltin ? -1 : 1; // built-in first
-            }
-            return b.updatedAt.compareTo(a.updatedAt); // newest first
-          });
-          return sorted;
-        });
+        .watch(fireImmediately: true);
+  }
+
+  @override
+  Stream<List<WordSet>> watchLevelSets() {
+    return _isar.wordSets
+        .filter()
+        .isBuiltinEqualTo(true)
+        .not()
+        .nameEqualTo(wordsFromGamesSetName)
+        .watch(fireImmediately: true);
   }
 
   @override
@@ -64,6 +68,11 @@ class WordMatchRepo implements WordMatchRepoInterface {
   }
 
   @override
+  Future<WordSet?> getSetByCloudId(String cloudId) {
+    return _isar.wordSets.filter().cloudIdEqualTo(cloudId).findFirst();
+  }
+
+  @override
   Future<int> createSet(String name) async {
     final setCount = await countSets();
     if (setCount >= WordMatchRepoInterface.maxSets) {
@@ -71,7 +80,7 @@ class WordMatchRepo implements WordMatchRepoInterface {
         'Kelime seti limiti (${WordMatchRepoInterface.maxSets}) aşıldı',
       );
     }
-    final now = DateTime.now();
+    final now = DateTime.now().toUtc();
     final setName = name.trim();
     if (setName.isEmpty) {
       throw ArgumentError('Set adı boş olamaz');
@@ -80,11 +89,99 @@ class WordMatchRepo implements WordMatchRepoInterface {
         WordSet()
           ..name = setName
           ..createdAt = now
-          ..updatedAt = now;
+          ..updatedAt = now
+          ..isBuiltin = false;
     return _isar.writeTxn(() async {
       final id = await _isar.wordSets.put(set);
       return id;
     });
+  }
+
+  /// Merge two sets into a new set. Reads pairs outside txn; in txn creates set
+  /// and inserts pairs with explicitly assigned ids so every pair is stored.
+  @override
+  Future<int> mergeSetsIntoNewSet({
+    required int baseSetId,
+    required int otherSetId,
+    required String newName,
+  }) async {
+    if (baseSetId == otherSetId) {
+      throw ArgumentError('Aynı seti kendiyle birleştiremezsiniz');
+    }
+    final trimmedName = newName.trim();
+    if (trimmedName.isEmpty) {
+      throw ArgumentError('Set adı boş olamaz');
+    }
+
+    // 1) Read pairs OUTSIDE write transaction (avoid any txn read/write interaction)
+    final basePairs =
+        await _isar.wordPairs.filter().setIdEqualTo(baseSetId).findAll();
+    final otherPairs =
+        await _isar.wordPairs.filter().setIdEqualTo(otherSetId).findAll();
+    final allPairs = [...basePairs, ...otherPairs];
+
+    final seen = <String>{};
+    final toInsert = <WordPair>[];
+    for (final p in allPairs) {
+      if (p.english.trim().isEmpty) continue;
+      final key =
+          '${p.english.toLowerCase().trim()}|${p.turkish.toLowerCase().trim()}';
+      if (seen.contains(key)) continue;
+      seen.add(key);
+      toInsert.add(
+        WordPair()
+          ..setId = 0
+          ..english = p.english.trim()
+          ..turkish = p.turkish.trim()
+          ..learned = false,
+      );
+    }
+
+    if (toInsert.length > WordMatchRepoInterface.maxPairsPerSet) {
+      throw StateError(
+        'Birleştirilmiş sette en fazla '
+        '${WordMatchRepoInterface.maxPairsPerSet} kelime çifti olabilir.',
+      );
+    }
+
+    if (toInsert.isEmpty) {
+      // Only create empty set
+      return createSet(trimmedName);
+    }
+
+    // 2) Get current max id so we can assign unique ids (read outside txn)
+    int nextId = 1;
+    final existingIds = await _isar.wordPairs.where().findAll();
+    for (final o in existingIds) {
+      if (o.id >= nextId) nextId = o.id + 1;
+    }
+
+    // 3) Assign explicit id and newSetId to each pair
+    final newSetId = await _isar.writeTxn(() async {
+      final setCount = await _isar.wordSets.count();
+      if (setCount >= WordMatchRepoInterface.maxSets) {
+        throw StateError(
+          'Kelime seti limiti (${WordMatchRepoInterface.maxSets}) aşıldı',
+        );
+      }
+      final now = DateTime.now().toUtc();
+      final newSet =
+          WordSet()
+            ..name = trimmedName
+            ..createdAt = now
+            ..updatedAt = now
+            ..isBuiltin = false;
+      final id = await _isar.wordSets.put(newSet);
+
+      for (final p in toInsert) {
+        p.id = nextId++;
+        p.setId = id;
+      }
+      await _isar.wordPairs.putAll(toInsert);
+      return id;
+    });
+
+    return newSetId;
   }
 
   @override
@@ -100,7 +197,7 @@ class WordMatchRepo implements WordMatchRepoInterface {
     final updated =
         set
           ..name = trimmed
-          ..updatedAt = DateTime.now();
+          ..updatedAt = DateTime.now().toUtc();
     await _isar.writeTxn(() async {
       await _isar.wordSets.put(updated);
     });
@@ -136,61 +233,82 @@ class WordMatchRepo implements WordMatchRepoInterface {
     if (trimmedName.isEmpty) {
       throw ArgumentError('Set adı boş olamaz');
     }
+
     // Sanitize and remove duplicates (case-insensitive)
     // IMPORTANT: Process pairs in order - first occurrence wins
-    // New pairs (ID=0) should always be added if they don't exist
     final sanitizedPairsMap = <String, WordPair>{};
-    final newPairs = <WordPair>[]; // Track new pairs separately
-    
+
     for (final pair in pairs) {
       if (pair.english.trim().isEmpty) continue;
-      
-      final normalizedKey = '${pair.english.toLowerCase().trim()}|${pair.turkish.toLowerCase().trim()}';
-      
-      // If this is a new pair (ID=0), track it separately
-      if (pair.id == 0) {
-        // Only add if it doesn't already exist
-        if (!sanitizedPairsMap.containsKey(normalizedKey)) {
-          newPairs.add(pair);
-        }
+
+      final normalizedKey =
+          '${pair.english.toLowerCase().trim()}|${pair.turkish.toLowerCase().trim()}';
+
+      // Skip if we already have this pair (deduplication)
+      if (sanitizedPairsMap.containsKey(normalizedKey)) {
         continue;
       }
-      
-      // For existing pairs, keep the first one (lower ID = older = first added)
-      if (!sanitizedPairsMap.containsKey(normalizedKey)) {
-        sanitizedPairsMap[normalizedKey] = WordPair()
-          ..id = pair.id // Mevcut ID'yi koru (yeni pair'ler için Isar otomatik atar)
-          ..setId = setId
-          ..english = pair.english.trim()
-          ..turkish = pair.turkish.trim();
+
+      // Determine if this is a new pair or an existing one
+      final isNewPair =
+          pair.id == 0 ||
+          pair.id == Isar.autoIncrement ||
+          pair.setId == 0 ||
+          pair.setId != setId;
+
+      if (isNewPair) {
+        // Create a completely NEW WordPair instance for new pairs
+        // This ensures Isar treats it as a brand new object
+        sanitizedPairsMap[normalizedKey] =
+            WordPair()
+              ..id =
+                  Isar
+                      .autoIncrement // Let Isar assign new ID
+              ..setId =
+                  setId // Set to the target set ID
+              ..english = pair.english.trim()
+              ..turkish = pair.turkish.trim()
+              ..learned = pair.learned; // Preserve learned status if provided
+      } else {
+        // For existing pairs, create a copy with the same ID but ensure setId matches
+        sanitizedPairsMap[normalizedKey] =
+            WordPair()
+              ..id =
+                  pair
+                      .id // Keep existing ID
+              ..setId =
+                  setId // Ensure setId matches (might have changed)
+              ..english = pair.english.trim()
+              ..turkish = pair.turkish.trim()
+              ..learned = pair.learned; // Preserve learned status
       }
-      // Duplicate found - keep the first one (already in map)
     }
-    
-    // Add new pairs to the map (Isar will assign IDs automatically)
-    for (final newPair in newPairs) {
-      final normalizedKey = '${newPair.english.toLowerCase().trim()}|${newPair.turkish.toLowerCase().trim()}';
-      sanitizedPairsMap[normalizedKey] = WordPair()
-        ..id = 0 // Isar will assign ID automatically
-        ..setId = setId
-        ..english = newPair.english.trim()
-        ..turkish = newPair.turkish.trim();
-    }
-    
+
     final sanitizedPairs = sanitizedPairsMap.values.toList(growable: false);
 
+    // Perform all operations in a single transaction for atomicity
     await _isar.writeTxn(() async {
+      // Verify set exists
       final set = await _isar.wordSets.get(setId);
       if (set == null) {
         throw StateError('Set bulunamadı');
       }
+
+      // Update set metadata
       set
         ..name = trimmedName
         ..updatedAt = DateTime.now();
       await _isar.wordSets.put(set);
 
+      // Delete all existing pairs for this set
       await _isar.wordPairs.filter().setIdEqualTo(setId).deleteAll();
-      await _isar.wordPairs.putAll(sanitizedPairs);
+
+      // Insert pairs one-by-one so each gets a unique auto-increment ID.
+      // putAll() with multiple objects all having id==Isar.autoIncrement can
+      // cause only one to be stored (same ID assigned to all).
+      for (final pair in sanitizedPairs) {
+        await _isar.wordPairs.put(pair);
+      }
     });
   }
 
@@ -212,206 +330,140 @@ class WordMatchRepo implements WordMatchRepoInterface {
   /// Called on first app launch or when Word Match module is first accessed.
   @override
   Future<void> ensureBuiltinSet() async {
-    await _isar.writeTxn(() async {
-      // Check if built-in set already exists by name
-      final existing =
-          await _isar.wordSets
-              .filter()
-              .nameEqualTo('A2 Sınav Hazırlığı')
-              .isBuiltinEqualTo(true)
-              .findFirst();
-      if (existing != null) {
-        return; // Already exists
-      }
-
-      // Create the built-in set
-      final now = DateTime.now();
-      final builtinSet =
-          WordSet()
-            ..name = 'A2 Sınav Hazırlığı'
-            ..createdAt = now
-            ..updatedAt = now
-            ..isBuiltin = true;
-
-      final setId = await _isar.wordSets.put(builtinSet);
-
-      // Add all word pairs
-      final pairs = _getBuiltinWordPairs(setId);
-      await _isar.wordPairs.putAll(pairs);
-    });
+    // Deprecated: 'A2 Sınav Hazırlığı' is removed.
+    // Level sets are now handled by ensureLevelSets().
   }
 
-  List<WordPair> _getBuiltinWordPairs(int setId) {
-    final pairs = <WordPair>[];
-    final wordList = [
-      ['be crazy about', 'bir şeye bayılmak / çok düşkün olmak'],
-      ['bargain', 'pazarlık, kelepir ürün'],
-      ['consumer', 'tüketici'],
-      ['prefer', 'tercih etmek'],
-      ['expert', 'uzman'],
-      ['jewelry store', 'kuyumcu'],
-      ['estate agent\'s', 'emlakçı'],
-      ['pharmacy', 'eczane'],
-      ['tailors', 'terziler'],
-      ['cosmopolitan', 'kozmopolit (çok kültürlü)'],
-      ['cozy', 'samimi, sıcak, rahat'],
-      ['a stroll', 'yürüyüş'],
-      ['on a budget', 'kısıtlı bütçeyle'],
-      ['authentic', 'otantik, özgün'],
-      ['emission', 'salınım, yayma (özellikle gaz)'],
-      ['affordable', 'uygun fiyatlı'],
-      ['cheap', 'ucuz'],
-      ['unforgettable', 'unutulmaz'],
-      ['journey', 'yolculuk'],
-      ['slow down', 'yavaşlamak'],
-      ['tram', 'tramvay'],
-      ['on the way', 'yolda'],
-      ['take the train', 'trene binmek'],
-      ['drive to work', 'işe arabayla gitmek'],
-      ['fuel', 'yakıt'],
-      ['direction', 'yön'],
-      ['select', 'seçmek'],
-      ['zoom', 'yakınlaştırmak / zoom yapmak'],
-      ['represent', 'temsil etmek'],
-      ['reporter', 'muhabir'],
-      ['eye witness', 'görgü tanığı'],
-      ['emergency services', 'acil servisler'],
-      ['emergency', 'acil durum'],
-      ['incident', 'olay'],
-      ['hood', 'kaput (araba), kapüşon'],
-      ['stuff (v.)', 'doldurmak / tıkmak'],
-      ['fortune', 'servet, talih'],
-      ['mystery', 'gizem'],
-      ['shock', 'şok'],
-      ['advert', 'reklam'],
-      ['luxury', 'lüks'],
-      ['discount', 'indirim'],
-      ['professional', 'profesyonel'],
-      ['small ad', 'küçük ilan'],
-      ['formal', 'resmi'],
-      ['nervous', 'gergin, endişeli'],
-      ['refuse', 'reddetmek'],
-      ['fail', 'başarısız olmak'],
-      ['arrive', 'varmak'],
-      ['glad', 'memnun, mutlu'],
-      ['janitor', 'kapıcı, hademe'],
-      ['overtime', 'fazla mesai'],
-      ['shifts', 'vardiyalar'],
-      ['appointment', 'randevu'],
-      ['catering firm', 'yemek/hizmet şirketi'],
-      ['exciting', 'heyecan verici'],
-      ['boring', 'sıkıcı'],
-      ['interesting', 'ilginç'],
-      ['tiring', 'yorucu'],
-      ['repetitive', 'tekrarlı'],
-      ['challenging', 'zorlayıcı'],
-      ['skilled', 'becerili'],
-      ['unskilled', 'beceriksiz'],
-      ['stressful', 'stresli'],
-      ['well-paid', 'iyi maaşlı'],
-      ['badly-paid', 'kötü maaşlı'],
-      ['crime', 'suç'],
-      ['serious', 'ciddi'],
-      ['petty', 'küçük, önemsiz (suçlar için)'],
-      ['everyday', 'günlük'],
-      ['equipment', 'ekipman'],
-      ['get ready', 'hazırlanmak'],
-      ['pack', 'eşyaları toplamak'],
-      ['to be good at', 'bir şeyde iyi olmak'],
-      ['to be nervous about', 'bir şey hakkında gergin olmak'],
-      ['get back', 'geri dönmek'],
-      ['identity', 'kimlik'],
-      ['confirm', 'doğrulamak'],
-      ['attend', 'katılmak'],
-      ['documents', 'belgeler'],
-      ['requires', 'gerektirir'],
-      ['declare', 'beyan etmek'],
-      ['confiscate', 'el koymak'],
-      ['import', 'ithalat'],
-      ['export', 'ihracat'],
-      ['regulations', 'yönetmelikler / kurallar'],
-      ['luxurious', 'çok lüks'],
-      ['ancient', 'antik'],
-      ['genuine', 'gerçek, hakiki'],
-      ['effective', 'etkili'],
-      ['contemporary', 'çağdaş'],
-      ['church', 'kilise'],
-      ['monastery', 'manastır'],
-      ['palace', 'saray'],
-      ['explore', 'keşfetmek'],
-      ['impressive', 'etkileyici'],
-      ['common', 'yaygın'],
-      ['injury', 'yaralanma'],
-      ['choking', 'boğulma'],
-      ['at risk', 'risk altında'],
-      ['poisoning', 'zehirlenme'],
-      ['preventative medicine', 'önleyici tıp'],
-      ['supplement', 'takviye'],
-      ['natural remedy', 'doğal tedavi / doğal ilaç'],
-      ['deficiency', 'eksiklik'],
-      ['G.P. (general practitioner)', 'pratisyen hekim'],
-      ['tent', 'çadır'],
-      ['sleeping bag', 'uyku tulumu'],
-      ['camping stove', 'kamp ocağı'],
-      ['compass', 'pusula'],
-      ['map', 'harita'],
-      ['first aid kit', 'ilk yardım çantası'],
-      ['bandage', 'bandaj'],
-      ['myth', 'mit'],
-      ['grave', 'mezar'],
-      ['coffin', 'tabut'],
-      ['suspect', 'şüphelenmek'],
-      ['repel', 'püskürtmek, itmek'],
-      ['ceremony', 'tören'],
-      ['responsible for', 'sorumlu'],
-      ['bless', 'kutsamak'],
-      ['tradition', 'gelenek'],
-      ['infidelity', 'sadakatsizlik'],
-      ['study', 'çalışma'],
-      ['achieve', 'başarmak'],
-      ['reward', 'ödüllendirmek'],
-      ['raise', 'yükseltmek / artırmak'],
-      ['sponsor', 'desteklemek, sponsor olmak'],
-      ['apologize', 'özür dilemek'],
-      ['editor', 'editör'],
-      ['proposal', 'teklif, öneri'],
-      ['briefing', 'bilgilendirme toplantısı'],
-      ['put up with', 'katlanmak'],
-      ['disturb', 'rahatsız etmek'],
-      ['realize', 'fark etmek'],
-      ['volume', 'ses seviyesi'],
-      ['relieved', 'rahatlamış'],
-      ['honest', 'dürüst'],
-      ['mean', 'kötü / cimri'],
-      ['kind', 'kibar, nazik'],
-      ['friendly', 'arkadaş canlısı'],
-      ['helpful', 'yardımsever'],
-      ['shy', 'utangaç'],
-      ['funny', 'komik'],
-      ['polite', 'nazik'],
-      ['rude', 'kaba'],
-      ['brave', 'cesur'],
-      ['lazy', 'tembel'],
-      ['hard-working', 'çalışkan'],
-      ['clever', 'zeki'],
-      ['confident', 'kendine güvenen'],
-      ['patient', 'sabırlı'],
-      ['quiet', 'sessiz'],
-      ['talkative', 'konuşkan'],
-      ['generous', 'cömert'],
-      ['careful', 'dikkatli'],
-    ];
+  @override
+  Future<void> ensureLevelSets() async {
+    final levels = ['a1', 'a2', 'b1', 'b2'];
+    final difficulties = ['Easy', 'Medium', 'Hard'];
 
-    for (final entry in wordList) {
-      pairs.add(
-        WordPair()
-          ..setId = setId
-          ..english = entry[0]
-          ..turkish = entry[1],
-      );
+    for (final level in levels) {
+      try {
+        final jsonString = await rootBundle.loadString(
+          'assets/word_sets/${level}_set.json',
+        );
+        final Map<String, dynamic> data = json.decode(jsonString);
+
+        for (final difficulty in difficulties) {
+          final key = '${level.toUpperCase()}_$difficulty';
+          if (!data.containsKey(key)) continue;
+
+          final List<dynamic> wordList = data[key];
+          final String displayName = _getDisplayName(level, difficulty);
+
+          await _isar.writeTxn(() async {
+            final existing =
+                await _isar.wordSets
+                    .filter()
+                    .nameEqualTo(displayName)
+                    .isBuiltinEqualTo(true)
+                    .findFirst();
+
+            if (existing == null) {
+              final now = DateTime.now();
+              final levelSet =
+                  WordSet()
+                    ..name = displayName
+                    ..createdAt = now
+                    ..updatedAt = now
+                    ..isBuiltin = true;
+
+              final setId = await _isar.wordSets.put(levelSet);
+
+              final pairs = <WordPair>[];
+              for (final wordData in wordList) {
+                pairs.add(
+                  WordPair()
+                    ..setId = setId
+                    ..english = wordData['en']
+                    ..turkish = wordData['tr'],
+                );
+              }
+              await _isar.wordPairs.putAll(pairs);
+            }
+          });
+        }
+      } catch (e) {
+        print('Error loading level set $level: $e');
+      }
     }
+  }
 
-    return pairs;
+  String _getDisplayName(String level, String difficulty) {
+    final diffTr =
+        {'Easy': 'Kolay', 'Medium': 'Orta', 'Hard': 'Zor'}[difficulty];
+    return '${level.toUpperCase()} $diffTr';
+  }
+
+  @override
+  Future<void> fixBuiltinSets() async {
+    await _isar.writeTxn(() async {
+      final sets = await _isar.wordSets.where().findAll();
+
+      final levels = ['A1', 'A2', 'B1', 'B2'];
+      final diffs = ['Kolay', 'Orta', 'Zor'];
+      final levelSetNames = <String>[];
+      for (final l in levels) {
+        for (final d in diffs) {
+          levelSetNames.add('$l $d');
+        }
+      }
+
+      final authorizedNames = [wordsFromGamesSetName, ...levelSetNames];
+
+      // 1. Fix unauthorized builtin flags and remove deprecated sets
+      for (final set in sets) {
+        if (set.name == 'A2 Sınav Hazırlığı') {
+          // Explicitly delete the deprecated set
+          await deleteSet(set.id);
+          continue;
+        }
+        if (set.isBuiltin) {
+          if (!authorizedNames.contains(set.name)) {
+            set.isBuiltin = false;
+            await _isar.wordSets.put(set);
+          }
+        }
+      }
+
+      // 2. Deduplicate and Repair Authorized Sets
+      for (final name in authorizedNames) {
+        final matches = sets.where((s) => s.name == name).toList();
+        if (matches.length > 1) {
+          // Prioritize: isBuiltin=true, then ID order
+          matches.sort((a, b) {
+            if (a.isBuiltin && !b.isBuiltin) return -1;
+            if (!a.isBuiltin && b.isBuiltin) return 1;
+            return a.id.compareTo(b.id);
+          });
+
+          // Keep first
+          final keep = matches.first;
+          if (!keep.isBuiltin) {
+            keep.isBuiltin = true;
+            await _isar.wordSets.put(keep);
+          }
+
+          // Delete others
+          for (int i = 1; i < matches.length; i++) {
+            final toDelete = matches[i];
+            await _isar.wordSets.delete(toDelete.id);
+            await _isar.wordPairs
+                .filter()
+                .setIdEqualTo(toDelete.id)
+                .deleteAll();
+          }
+        } else if (matches.length == 1) {
+          final s = matches.first;
+          if (!s.isBuiltin) {
+            s.isBuiltin = true;
+            await _isar.wordSets.put(s);
+          }
+        }
+      }
+    });
   }
 
   @override
@@ -429,10 +481,8 @@ class WordMatchRepo implements WordMatchRepoInterface {
   @override
   Future<void> resetAllLearned(int setId) async {
     await _isar.writeTxn(() async {
-      final pairs = await _isar.wordPairs
-          .filter()
-          .setIdEqualTo(setId)
-          .findAll();
+      final pairs =
+          await _isar.wordPairs.filter().setIdEqualTo(setId).findAll();
       for (final pair in pairs) {
         pair.learned = false;
       }
@@ -442,10 +492,7 @@ class WordMatchRepo implements WordMatchRepoInterface {
 
   @override
   Future<Map<int, bool>> getLearnedStatuses(int setId) async {
-    final pairs = await _isar.wordPairs
-        .filter()
-        .setIdEqualTo(setId)
-        .findAll();
+    final pairs = await _isar.wordPairs.filter().setIdEqualTo(setId).findAll();
     return {for (final pair in pairs) pair.id: pair.learned};
   }
 
@@ -455,22 +502,23 @@ class WordMatchRepo implements WordMatchRepoInterface {
   Future<void> ensureWordsFromGamesSet() async {
     await _isar.writeTxn(() async {
       // Check if "Words from Games" set already exists by name
-      final existing = await _isar.wordSets
-          .filter()
-          .nameEqualTo(wordsFromGamesSetName)
-          .isBuiltinEqualTo(true)
-          .findFirst();
+      final existing =
+          await _isar.wordSets
+              .filter()
+              .nameEqualTo(wordsFromGamesSetName)
+              .findFirst();
       if (existing != null) {
         return; // Already exists
       }
 
       // Create the "Words from Games" set
       final now = DateTime.now();
-      final wordsFromGamesSet = WordSet()
-        ..name = wordsFromGamesSetName
-        ..createdAt = now
-        ..updatedAt = now
-        ..isBuiltin = true;
+      final wordsFromGamesSet =
+          WordSet()
+            ..name = wordsFromGamesSetName
+            ..createdAt = now
+            ..updatedAt = now
+            ..isBuiltin = true;
 
       await _isar.wordSets.put(wordsFromGamesSet);
     });
@@ -480,11 +528,54 @@ class WordMatchRepo implements WordMatchRepoInterface {
   /// Returns null if the set doesn't exist.
   @override
   Future<int?> getWordsFromGamesSetId() async {
-    final set = await _isar.wordSets
-        .filter()
-        .nameEqualTo(wordsFromGamesSetName)
-        .isBuiltinEqualTo(true)
-        .findFirst();
+    final set =
+        await _isar.wordSets
+            .filter()
+            .nameEqualTo(wordsFromGamesSetName)
+            .isBuiltinEqualTo(true)
+            .findFirst();
     return set?.id;
+  }
+
+  @override
+  Future<void> updateSetCloudId(int id, String cloudId) async {
+    final set = await _isar.wordSets.get(id);
+    if (set != null) {
+      set.cloudId = cloudId;
+      await _isar.writeTxn(() async {
+        await _isar.wordSets.put(set);
+      });
+    }
+  }
+
+  @override
+  Future<void> updateSetVisibility(int id, SetVisibility visibility) async {
+    final set = await _isar.wordSets.get(id);
+    if (set != null) {
+      set.visibility = visibility;
+      set.updatedAt = DateTime.now().toUtc();
+      await _isar.writeTxn(() async {
+        await _isar.wordSets.put(set);
+      });
+    }
+  }
+
+  @override
+  Future<void> updateSetMetadata(
+    int id, {
+    String? sourceSetId,
+    String? sourceOwnerUid,
+    DateTime? importedAt,
+  }) async {
+    final set = await _isar.wordSets.get(id);
+    if (set != null) {
+      if (sourceSetId != null) set.sourceSetId = sourceSetId;
+      if (sourceOwnerUid != null) set.sourceOwnerUid = sourceOwnerUid;
+      if (importedAt != null) set.importedAt = importedAt;
+      set.updatedAt = DateTime.now().toUtc();
+      await _isar.writeTxn(() async {
+        await _isar.wordSets.put(set);
+      });
+    }
   }
 }

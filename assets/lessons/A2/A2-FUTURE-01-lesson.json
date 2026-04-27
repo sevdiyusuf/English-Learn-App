@@ -1,0 +1,203 @@
+{
+    "schema_version": "1.0",
+    "level": "A2",
+    "lesson_id": "A2-FUTURE-01-lesson",
+    "title": "Will vs Be going to",
+    "topic_tags": [
+        "future",
+        "will",
+        "going_to",
+        "prediction",
+        "plan",
+        "evidence"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Gelecek zamanın iki farklı kullanımını (Will ve Be Going To) öğreneceğiz.",
+                    "Önceden yapılmış planlar ile anlık verilen kararları ayırt edeceğiz.",
+                    "Kanıta dayalı tahminler ile kişisel fikirlerimizi nasıl söyleyeceğimizi göreceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Will: Anlık Kararlar ve Sözler",
+                "bullets": [
+                    "**Spontaneous Decisions**: Konuşma anında aniden verdiğimiz kararlar.",
+                    "**Promises**: Birine söz verirken kullanılır.",
+                    "**Predictions (Opinions)**: 'I think' gibi kişisel görüşe dayalı tahminler."
+                ],
+                "examples": [
+                    "Wait, I **will** help you! (Anlık yardım teklifi)",
+                    "I **will** call you tonight. (Söz verme)",
+                    "I think it **will** rain tomorrow. (Kişisel görüş)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "Be Going To: Planlar ve Niyetler",
+                "bullets": [
+                    "**Plans & Intentions**: Önceden karar verilmiş, planlanmış eylemler.",
+                    "**Evidence**: Gözümüzün önünde bir kanıt varsa (örneğin kara bulutlar)."
+                ],
+                "examples": [
+                    "We **are going to** visit my grandparents. (Önceden planlandı)",
+                    "Look at those clouds! It **is going to** rain. (Kanıt var)"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "Soru: 'I've bought my ticket. I ____ travel next week.'",
+                "options": [
+                    "will",
+                    "am going to"
+                ],
+                "answer": "am going to",
+                "explain": "Bilet almak bir hazırlıktır ve eylemin planlanmış olduğunu gösterir."
+            },
+            {
+                "id": "c4",
+                "type": "formula",
+                "title": "Gelecek Zaman Formülleri",
+                "bullets": [
+                    "Cümle yapılarında yardımcı fiillere dikkat etmeliyiz."
+                ],
+                "formula": [
+                    "Will: Subject + will + Verb (V1)",
+                    "Going to: Subject + am/is/are + going to + Verb (V1)"
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Anlık Kararlarda Going To Kullanmak**: Kapı çaldığında 'I am going to open it' denmez, 'I will open it' denir.",
+                    "**Kanıt Varken Will Kullanmak**: Bardak masanın ucundan düşmek üzereyse 'It will fall' yerine 'It is going to fall' daha doğrudur."
+                ],
+                "examples": [
+                    "Hatalı: Look! He will drop the glass. ✗",
+                    "Doğru: Look! He **is going to** drop the glass. ✓"
+                ]
+            },
+            {
+                "id": "q2",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "Biri elinde ağır paketlerle geliyor. Ne dersin?",
+                "options": [
+                    "I am going to help you!",
+                    "I will help you!"
+                ],
+                "answer": "I will help you!",
+                "explain": "Konuşma anında verilen yardım kararları 'will' ile söylenir."
+            },
+            {
+                "id": "c6",
+                "type": "tip",
+                "title": "Pratik Ayırt Etme Yolu",
+                "bullets": [
+                    "**Will**: Zar atmak gibidir (Tahmin/Şans) veya süper kahraman gibi atılmaktır (Anlık yardım).",
+                    "**Going To**: Ajanda tutmak gibidir (Plan) veya dedektiflik yapmaktır (İpucundan sonuca varmak)."
+                ]
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Kontekst: Hafta Sonu Tatili",
+        "intro_bullets": [
+            "İki arkadaş hafta sonu için plan yapıyorlar.",
+            "Hava durumuna ve hazırlıklarına göre uygun gelecek zaman yapısını seç!",
+            "Anlık kararlar ile planlar arasındaki farka odaklan."
+        ],
+        "items": [
+            {
+                "engine": "fill",
+                "prompt": "Sarah: 'We ____ (visit) the new museum this Saturday. I already reserved the spot.'",
+                "answer": [
+                    "are going to visit"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Rezervasyon yapıldığı için bu bir planlanmış eylemdir."
+            },
+            {
+                "engine": "tap",
+                "prompt": "Mark: 'Oh, I didn't know that. Wait, I ___ come with you!'",
+                "bank": [
+                    "will",
+                    "am going to",
+                    "won't"
+                ],
+                "answer": "will",
+                "explain": "Mark bu bilgiyi yeni öğrendi ve gelme kararını o an verdi."
+            },
+            {
+                "engine": "fill",
+                "prompt": "Sarah: 'Great! But look at the sky. It's so dark. It ____ (rain).'",
+                "answer": [
+                    "is going to rain"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Gökyüzünün karanlık olması fiziksel bir kanıttır."
+            },
+            {
+                "engine": "order",
+                "prompt": "Mark: (Söz ver: Endişelenme, şemsiyemi getireceğim.)",
+                "tokens": [
+                    "Don't",
+                    "worry,",
+                    "I",
+                    "will",
+                    "bring",
+                    "my",
+                    "umbrella"
+                ],
+                "answer_tokens": [
+                    "Don't",
+                    "worry,",
+                    "I",
+                    "will",
+                    "bring",
+                    "my",
+                    "umbrella"
+                ],
+                "explain": "Geleceğe dair verilen sözler 'will' ile kurulur."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "Sarah: 'Do you think we ____ have a good time?'",
+                "options": [
+                    "will",
+                    "are going to"
+                ],
+                "answer": "will",
+                "explain": "'Do you think' bir fikir/tahmin sorusudur, bu yüzden 'will' uygundur."
+            }
+        ],
+        "recap_bullets": [
+            "Hatırla: Planlar ve kanıtlı durumlar için 'be going to' kullan.",
+            "Hatırla: Anlık kararlar, sözler ve kişisel fikirler için 'will' kullan.",
+            "Hatırla: 'I think' gördüğünde genellikle 'will' yoluna sap!"
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "A2-FUTURE-01"
+    }
+}

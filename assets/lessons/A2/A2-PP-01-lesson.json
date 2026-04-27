@@ -1,0 +1,211 @@
+{
+    "schema_version": "1.0",
+    "level": "A2",
+    "lesson_id": "A2-PP-01-lesson",
+    "title": "Past Perfect vs Past Simple",
+    "topic_tags": [
+        "past_perfect",
+        "past_simple",
+        "sequence",
+        "had_v3"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Geçmişte gerçekleşmiş iki olay arasındaki zaman sıralamasını kurmayı öğreneceğiz.",
+                    "Hangi olayın 'daha önce' olduğunu belirtmek için Past Perfect yapısını kullanacağız.",
+                    "Sequence (sıralama) kelimeleriyle cümleleri birbirine bağlamayı kavrayacağız."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Geçmişin Geçmişi (Past Perfect)",
+                "bullets": [
+                    "Eğer geçmişte iki olay arka arkaya olduysa, **en önce** olan olay için 'Had + V3' kullanılır.",
+                    "Daha sonra (bize daha yakın zamanda) olan olay için ise 'Past Simple (V2)' kullanılır."
+                ],
+                "examples": [
+                    "When I arrived, they **had left**. (Ben vardığımda onlar çoktan gitmişti.)",
+                    "She was sad because she **had lost** her phone. (Üzgündü çünkü telefonunu kaybetmişti.)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "formula",
+                "title": "Yapı ve Formül: Had + V3",
+                "bullets": [
+                    "Tüm öznelerle (I, You, He, She, It, We, They) aynı yardımcı fiili kullanırız.",
+                    "Fiilin 3. hali (Past Participle) kullanılır."
+                ],
+                "formula": [
+                    "Subject + had + Verb (V3)"
+                ],
+                "examples": [
+                    "I had finished.",
+                    "They had eaten."
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "Direct: 'I went to bed at 10 PM. I finished my homework at 9 PM.' \nReported: Before I went to bed, I ____ my homework.",
+                "options": [
+                    "had finished",
+                    "finished",
+                    "have finished"
+                ],
+                "answer": "had finished",
+                "explain": "Ödev bitirme eylemi uyumadan önce gerçekleştiği için 'had + V3' kullanılmalıdır."
+            },
+            {
+                "id": "c4",
+                "type": "rule",
+                "title": "Zaman Bağlaçları: After, Before, By the time",
+                "bullets": [
+                    "**After** + Past Perfect: Olay bittikten sonra.",
+                    "**By the time** + Past Simple: O ana gelindiğinde.",
+                    "**Because** + Past Perfect: Sebebi daha önce olmuş bir olay."
+                ],
+                "examples": [
+                    "After he **had finished** dinner, he watched TV.",
+                    "By the time I **got** home, my family **had eaten**."
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Sırayı Karıştırmak**: Yakın geçmişteki olay için 'had' kullanmak hatalıdır.",
+                    "**Zaman Zarflarını Yanlış Kullanmak**: Sadece geçmişteki tek bir olaydan bahsederken Past Perfect kullanılmaz."
+                ],
+                "examples": [
+                    "Hatalı: I had watched a movie last night. ✗",
+                    "Doğru: I watched a movie last night. ✓ (Kıyaslanacak başka olay yok)"
+                ]
+            },
+            {
+                "id": "q2",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "When I called, he ____ to bed.",
+                "options": [
+                    "had gone",
+                    "went",
+                    "goes"
+                ],
+                "answer": "had gone",
+                "hint": "Arama yapıldığında uyuma eylemi çoktan gerçekleşmişti."
+            },
+            {
+                "id": "c6",
+                "type": "tip",
+                "title": "Zaman Çizelgesi Mantığı",
+                "bullets": [
+                    "Bu yapıyı bir tren rayı gibi düşünün; en uzaktaki vagon Past Perfect, lokomotif Past Simple'dır.",
+                    "Olayları sıralarken 'First action' (İlk eylem) her zaman 'Had + V3' alır."
+                ]
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Kontekst: Kaçan Tren",
+        "intro_bullets": [
+            "Bugün işe yetişmek için acele ettin ama işler istediğin gibi gitmedi.",
+            "Olayların gerçekleşme sırasını doğru zaman yapılarıyla anlat.",
+            "Had + V3 (ilk olay) ve V2 (ikinci olay) dengesine dikkat et!"
+        ],
+        "items": [
+            {
+                "engine": "fill",
+                "prompt": "I was very tired this morning because I ___ (not / sleep) well.",
+                "answer": [
+                    "had not slept",
+                    "hadn't slept"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces",
+                    "accept_contractions"
+                ],
+                "explain": "Yorgun olma sebebim (uyuyamama) daha önce gerçekleşti."
+            },
+            {
+                "engine": "tap",
+                "prompt": "By the time I got to the station, the train ___ .",
+                "bank": [
+                    "had gone",
+                    "went",
+                    "has gone"
+                ],
+                "answer": "had gone",
+                "explain": "İstasyona vardığımda tren çoktan gitmişti."
+            },
+            {
+                "engine": "fill",
+                "prompt": "I realized that I ___ (leave) my ticket at home.",
+                "answer": [
+                    "had left"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Bileti evde bırakma eylemi, fark etme anından önce oldu."
+            },
+            {
+                "engine": "order",
+                "prompt": "Cümleyi kur: 'O pencereyi birinin açtığını fark etti.'",
+                "tokens": [
+                    "He",
+                    "noticed",
+                    "that",
+                    "someone",
+                    "had",
+                    "opened",
+                    "the",
+                    "window"
+                ],
+                "answer_tokens": [
+                    "He",
+                    "noticed",
+                    "that",
+                    "someone",
+                    "had",
+                    "opened",
+                    "the",
+                    "window"
+                ],
+                "explain": "Önce pencere açıldı, sonra o fark etti."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "After I ____ breakfast, I left the house.",
+                "options": [
+                    "had eaten",
+                    "ate",
+                    "eating"
+                ],
+                "answer": "had eaten",
+                "explain": "'After' bağlacından sonra genellikle ilk gerçekleşen olay (Past Perfect) gelir."
+            }
+        ],
+        "recap_bullets": [
+            "Hatırla: Geçmişteki iki olaydan ilk olanı 'Had + V3' alır.",
+            "Hatırla: 'By the time' gördüğünde cümlenin diğer kısmında Past Perfect ara.",
+            "Hatırla: Sebep-sonuç ilişkilerinde (because) sebep genellikle Past Perfect'tir."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "A2-PP-01"
+    }
+}

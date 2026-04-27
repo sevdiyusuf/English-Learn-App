@@ -4,10 +4,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/widgets/gradient_background.dart';
 import '../data/word_match_providers.dart';
 import '../data/word_match_repo_interface.dart';
+import '../logic/word_match_sync_service.dart';
 import '../models/word_pair.dart';
 import '../models/word_set.dart';
+import 'word_match_set_detail_page.dart';
 import 'widgets/pair_edit_row.dart';
 
 class WordSetDetail {
@@ -77,7 +80,8 @@ class _EditWordSetPageState extends ConsumerState<EditWordSetPage> {
         if (!didPop) {
           final detail = detailAsync.valueOrNull;
           // "Words from Games" seti düzenlenebilir olmalı
-          final isEditable = detail != null && 
+          final isEditable =
+              detail != null &&
               (!detail.set.isBuiltin || detail.set.name == 'Words from Games');
           if (isEditable) {
             // Değişiklik var mı kontrol et
@@ -124,8 +128,10 @@ class _EditWordSetPageState extends ConsumerState<EditWordSetPage> {
             onPressed: () async {
               final detail = detailAsync.valueOrNull;
               // "Words from Games" seti düzenlenebilir olmalı
-              final isEditable = detail != null && 
-                  (!detail.set.isBuiltin || detail.set.name == 'Words from Games');
+              final isEditable =
+                  detail != null &&
+                  (!detail.set.isBuiltin ||
+                      detail.set.name == 'Words from Games');
               if (isEditable) {
                 // Değişiklik var mı kontrol et
                 final hasChanges =
@@ -170,8 +176,10 @@ class _EditWordSetPageState extends ConsumerState<EditWordSetPage> {
                       : () async {
                         final detail = detailAsync.valueOrNull;
                         // "Words from Games" seti düzenlenebilir olmalı
-                        final isEditable = detail != null && 
-                            (!detail.set.isBuiltin || detail.set.name == 'Words from Games');
+                        final isEditable =
+                            detail != null &&
+                            (!detail.set.isBuiltin ||
+                                detail.set.name == 'Words from Games');
                         if (!isEditable) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
@@ -189,58 +197,48 @@ class _EditWordSetPageState extends ConsumerState<EditWordSetPage> {
         // FloatingActionButton kaldırıldı - artık üstte sabit input alanı var
         backgroundColor: Colors.transparent,
         extendBodyBehindAppBar: true,
-        body: Stack(
-          children: [
-            // Background image
-            Positioned.fill(
-              child: Image.asset(
-                'assets/images/background2.png',
-                fit: BoxFit.cover,
-              ),
+        body: GradientBackground(
+          child: SafeArea(
+            child: detailAsync.when(
+              data:
+                  (detail) =>
+                      (detail.set.isBuiltin &&
+                              detail.set.name != 'Words from Games')
+                          ? Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(Icons.lock_outline, size: 64),
+                                const SizedBox(height: 16),
+                                const Text(
+                                  'Yerleşik setler düzenlenemez',
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                                const SizedBox(height: 8),
+                                const Text(
+                                  'Bu seti görüntüleyebilir ve eşleştirme oyunu olarak oynayabilirsiniz.',
+                                ),
+                                const SizedBox(height: 24),
+                                FilledButton.icon(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                    Navigator.of(context).pushNamed(
+                                      '/word-match/practice/${detail.set.id}',
+                                    );
+                                  },
+                                  icon: const Icon(Icons.play_arrow),
+                                  label: const Text('Eşleştirmeye Başla'),
+                                ),
+                              ],
+                            ),
+                          )
+                          : _buildForm(),
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error:
+                  (error, stackTrace) =>
+                      Center(child: Text('Sayfa yüklenemedi: $error')),
             ),
-            // Content
-            SafeArea(
-              child: detailAsync.when(
-          data:
-              (detail) =>
-                  // "Words from Games" seti düzenlenebilir olmalı
-                  (detail.set.isBuiltin && detail.set.name != 'Words from Games')
-                      ? Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(Icons.lock_outline, size: 64),
-                            const SizedBox(height: 16),
-                            const Text(
-                              'Yerleşik setler düzenlenemez',
-                              style: TextStyle(fontSize: 18),
-                            ),
-                            const SizedBox(height: 8),
-                            const Text(
-                              'Bu seti görüntüleyebilir ve eşleştirme oyunu olarak oynayabilirsiniz.',
-                            ),
-                            const SizedBox(height: 24),
-                            FilledButton.icon(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                                Navigator.of(context).pushNamed(
-                                  '/word-match/practice/${detail.set.id}',
-                                );
-                              },
-                              icon: const Icon(Icons.play_arrow),
-                              label: const Text('Eşleştirmeye Başla'),
-                            ),
-                          ],
-                        ),
-                      )
-                      : _buildForm(),
-                loading: () => const Center(child: CircularProgressIndicator()),
-                error:
-                    (error, stackTrace) =>
-                        Center(child: Text('Sayfa yüklenemedi: $error')),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
@@ -485,6 +483,21 @@ class _EditWordSetPageState extends ConsumerState<EditWordSetPage> {
         setName: _nameController.text,
         pairs: pairs,
       );
+
+      // Trigger sync
+      try {
+        final syncService = await ref.read(wordMatchSyncProvider.future);
+        await syncService.syncSet(widget.setId);
+      } catch (e) {
+        debugPrint('Sync failed after savePairs: $e');
+      }
+
+      // Invalidate all related providers to refresh UI in both edit and detail pages
+      ref.invalidate(wordSetDetailProvider(widget.setId));
+      // Import and invalidate detail page providers
+      ref.invalidate(wordMatchPairsProvider(widget.setId));
+      ref.invalidate(wordMatchLearnedStatusesProvider(widget.setId));
+      ref.invalidate(wordMatchSetProvider(widget.setId));
       if (mounted) {
         ScaffoldMessenger.of(
           context,

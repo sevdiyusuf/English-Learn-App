@@ -4,17 +4,21 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/repositories/user_stats_repo.dart';
+import '../../auth/logic/auth_controller.dart';
 import '../data/synonym_service.dart';
 import '../models/flash_synonym_state.dart';
 import '../models/synonym_word.dart';
 import 'adaptive_difficulty_helper.dart';
 
 class FlashSynonymController extends StateNotifier<FlashSynonymState> {
-  FlashSynonymController(this.level) : super(const FlashSynonymState()) {
+  FlashSynonymController(this.level, this.ref)
+    : super(const FlashSynonymState()) {
     _initialize();
   }
 
   final String level;
+  final Ref ref;
   final Random _random = Random();
   // ignore: prefer_final_fields
   List<SynonymWord> _usedWords = [];
@@ -78,7 +82,9 @@ class FlashSynonymController extends StateNotifier<FlashSynonymState> {
         timer.cancel();
         return;
       }
-      final elapsed = DateTime.now().difference(state.gameStartTime ?? DateTime.now());
+      final elapsed = DateTime.now().difference(
+        state.gameStartTime ?? DateTime.now(),
+      );
       state = state.copyWith(elapsedDuration: elapsed);
     });
 
@@ -314,15 +320,46 @@ class FlashSynonymController extends StateNotifier<FlashSynonymState> {
     _gameTimer = null;
 
     // Calculate final elapsed time
-    final finalElapsed = state.gameStartTime != null
-        ? DateTime.now().difference(state.gameStartTime!)
-        : state.elapsedDuration;
+    final finalElapsed =
+        state.gameStartTime != null
+            ? DateTime.now().difference(state.gameStartTime!)
+            : state.elapsedDuration;
 
     state = state.copyWith(
       isGameActive: false,
       isGameFinished: true,
       elapsedDuration: finalElapsed,
     );
+
+    // Record stats (fire-and-forget)
+    _recordSessionStats();
+  }
+
+  Future<void> _recordSessionStats() async {
+    try {
+      final authState = ref.read(authControllerProvider);
+      final user = authState.valueOrNull;
+      if (user == null) return;
+
+      final statsRepo = ref.read(userStatsRepoProvider);
+      final duration = state.elapsedDuration;
+
+      // Calculate practiced words (total questions answered)
+      final practicedWords = state.correctCount + state.wrongCount;
+
+      await statsRepo.recordSession(
+        user: user,
+        modeId: 'flash_synonym',
+        practicedWords: practicedWords,
+        correctAnswers: state.correctCount,
+        wrongAnswers: state.wrongCount,
+        duration: duration,
+        score: state.score,
+      );
+    } catch (e) {
+      // Don't break the game if stats recording fails
+      debugPrint('Failed to record flash synonym stats: $e');
+    }
   }
 
   void reset() {
@@ -363,5 +400,5 @@ class FlashSynonymController extends StateNotifier<FlashSynonymState> {
 
 final flashSynonymControllerProvider = StateNotifierProvider.autoDispose
     .family<FlashSynonymController, FlashSynonymState, String>((ref, level) {
-      return FlashSynonymController(level);
+      return FlashSynonymController(level, ref);
     });

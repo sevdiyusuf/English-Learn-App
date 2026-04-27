@@ -1,0 +1,179 @@
+{
+    "schema_version": "1.0",
+    "level": "A2",
+    "lesson_id": "A2-REL-01-lesson",
+    "title": "Relative Clauses (who/which/where)",
+    "topic_tags": [
+        "relative_clauses",
+        "who",
+        "which",
+        "where"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "İki cümleyi birbirine bağlayarak daha akıcı konuşmayı öğreneceğiz.",
+                    "Kişileri, nesneleri ve yerleri tanımlarken doğru kelimeyi (who, which, where) seçmeyi kavrayacağız.",
+                    "Tanımlayıcı cümleler (definitions) kurarak kelime dağarcığımızı nasıl açıklayacağımızı göreceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Kişiler İçin: Who",
+                "bullets": [
+                    "Bir insandan bahsederken ve onun hakkında ek bilgi verirken **who** kullanılır.",
+                    "Cümlede 'o kişi ki...' anlamı katar."
+                ],
+                "examples": [
+                    "A doctor is a person **who** helps sick people.",
+                    "The man **who** lives next door is friendly."
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "Nesneler İçin: Which",
+                "bullets": [
+                    "Hayvanlar, eşyalar veya cansız varlıklar hakkında bilgi verirken **which** kullanılır.",
+                    "Türkçeye '... olan şey' olarak çevrilebilir."
+                ],
+                "examples": [
+                    "A camera is something **which** takes photos.",
+                    "The book **which** I bought is great."
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "tap",
+                "prompt": "A pilot is a person ____ flies planes.",
+                "bank": [
+                    "who",
+                    "which",
+                    "where"
+                ],
+                "answer": "who",
+                "explain": "Bahsedilen özne bir insan (pilot) olduğu için 'who' kullanılır."
+            },
+            {
+                "id": "c4",
+                "type": "rule",
+                "title": "Yerler İçin: Where",
+                "bullets": [
+                    "Bir mekandan, şehirden veya binadan bahsederken **where** kullanılır.",
+                    "O yerde bir eylem gerçekleştiğini vurgular."
+                ],
+                "examples": [
+                    "A bakery is a place **where** you buy bread.",
+                    "That's the café **where** we met."
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**İnsanlar için Which Kullanmak**: 'The teacher which speaks' hatalıdır. Doğrusu 'The teacher **who** speaks' olmalıdır.",
+                    "**Yerlerde Which ve Where Karıştırmak**: Eğer sadece yerin kendisini bir 'nesne' olarak tanımlıyorsanız 'which', orada bir şey yapıldığını söylüyorsanız 'where' kullanın."
+                ],
+                "examples": [
+                    "Hatalı: This is the park who I play. ✗",
+                    "Doğru: This is the park **where** I play. ✓"
+                ]
+            },
+            {
+                "id": "q2",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "A fridge is something ____ keeps food cold.",
+                "options": [
+                    "who",
+                    "which",
+                    "where"
+                ],
+                "answer": "which",
+                "explain": "Buzdolabı (fridge) bir nesne olduğu için 'which' doğru tercihtir."
+            },
+            {
+                "id": "c6",
+                "type": "tip",
+                "title": "Pratik İpucu: Tanım Yapmak",
+                "bullets": [
+                    "İngilizce bir kelimeyi unuttuğunuzda 'It is a thing which...' veya 'He is a person who...' diyerek o kelimeyi betimleyebilirsiniz.",
+                    "Bu yapı akıcılığınızı hızla artırır."
+                ]
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Kontekst: Yeni Bir Şehirde",
+        "intro_bullets": [
+            "Yeni bir şehre taşındın ve etrafı tanımaya çalışıyorsun.",
+            "Gördüğün yerleri ve tanıştığın kişileri doğru zamirlerle tanımla."
+        ],
+        "items": [
+            {
+                "engine": "fill",
+                "prompt": "This is the library ___ I study every afternoon.",
+                "answer": [
+                    "where"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Kütüphane bir mekan olduğu için 'where' kullanılır."
+            },
+            {
+                "engine": "tap",
+                "prompt": "I met a neighbor ___ helps me with my bags.",
+                "bank": [
+                    "who",
+                    "which",
+                    "where"
+                ],
+                "answer": "who",
+                "explain": "Komşu (neighbor) bir insan olduğu için 'who' seçilmelidir."
+            },
+            {
+                "engine": "fill",
+                "prompt": "There is a small shop ___ sells great coffee.",
+                "answer": [
+                    "which"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Dükkan burada nesne/şey (something) olarak tanımlandığı için 'which' uygundur."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "A museum is a place ____ you can see ancient art.",
+                "options": [
+                    "where",
+                    "who",
+                    "which"
+                ],
+                "answer": "where",
+                "explain": "Müze, eylem yapılan bir yer olduğu için 'where' ile tanımlanır."
+            }
+        ],
+        "recap_bullets": [
+            "Hatırla: İnsanlar için **who**, eşyalar için **which** kullan.",
+            "Hatırla: Mekanlardan ve orada yapılan eylemlerden bahsederken **where** kullan.",
+            "Hatırla: Tanım cümleleri kurmak akıcılığını artırır."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "A2-REL-01"
+    }
+}

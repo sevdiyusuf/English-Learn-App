@@ -2,18 +2,23 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/input_validator.dart';
+import '../../models/room.dart';
 
 class WordInput extends StatefulWidget {
   const WordInput({
     super.key,
     required this.enabled,
     required this.onWordSubmit,
-    this.currentWordType, // 'verb' or 'adjective' from room
+    this.currentWordType, // 'verb' | 'adjective' | 'noun' | 'adverb' | 'word'
+    this.gameMode,
+    this.settings,
   });
 
   final bool enabled;
   final Future<void> Function(String word) onWordSubmit;
-  final String? currentWordType; // Track server-side word type
+  final String? currentWordType;
+  final GameMode? gameMode;
+  final GameRoomSettings? settings;
 
   @override
   State<WordInput> createState() => _WordInputState();
@@ -67,6 +72,30 @@ class _WordInputState extends State<WordInput> {
     _isSubmitting = false;
   }
 
+  String _hintText() {
+    final mode = widget.gameMode;
+    final settings = widget.settings;
+    if (mode == GameMode.theme && settings?.theme != null) {
+      return 'KONU: ${settings!.theme!.packTitle.toUpperCase()}';
+    }
+    if (mode == GameMode.core && settings?.core != null) {
+      final t = settings!.core!.posType;
+      final tr =
+          t == 'verb'
+              ? 'FİİL'
+              : t == 'adjective'
+              ? 'SIFAT'
+              : t == 'noun'
+              ? 'İSİM'
+              : 'ZARF';
+      return 'GÖREV: $tr GİRİN';
+    }
+    final type = widget.currentWordType;
+    if (type == 'verb' || type == null) return 'FİİL GİRİN...';
+    if (type == 'adjective') return 'SIFAT GİRİN...';
+    return 'CEVAP YAZ...';
+  }
+
   @override
   void dispose() {
     _wordController.dispose();
@@ -79,11 +108,11 @@ class _WordInputState extends State<WordInput> {
     }
     final rawWord = _wordController.text;
     final word = rawWord.trim();
-    
+
     if (word.isEmpty || !_hasText) {
       return;
     }
-    
+
     // Validate input
     final validationError = InputValidator.validateWord(word);
     if (validationError != null) {
@@ -99,13 +128,13 @@ class _WordInputState extends State<WordInput> {
       }
       return;
     }
-    
+
     // Sanitize word before submission
     final sanitizedWord = InputValidator.sanitizeWord(word);
-    
+
     // Prevent double submission
     if (_isSubmitting) return;
-    
+
     setState(() => _isSubmitting = true);
     try {
       await widget.onWordSubmit(sanitizedWord);
@@ -133,7 +162,7 @@ class _WordInputState extends State<WordInput> {
             controller: _wordController,
             enabled: widget.enabled && !_isSubmitting,
             decoration: InputDecoration(
-              hintText: 'Cevap yaz...',
+              hintText: _hintText(),
               hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.7)),
               filled: true,
               fillColor: AppColors.surfaceDark.withValues(alpha: 0.9),
@@ -162,31 +191,36 @@ class _WordInputState extends State<WordInput> {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: (widget.enabled &&
-                      !_isSubmitting &&
-                      _hasText)
-                  ? _handleSubmit
-                  : null,
+              onTap:
+                  (widget.enabled && !_isSubmitting && _hasText)
+                      ? _handleSubmit
+                      : null,
               borderRadius: BorderRadius.circular(24),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                child: _isSubmitting
-                    ? const SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 12,
+                ),
+                child:
+                    _isSubmitting
+                        ? const SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              Colors.white,
+                            ),
+                          ),
+                        )
+                        : const Text(
+                          'Cevapla',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 15,
+                          ),
                         ),
-                      )
-                    : const Text(
-                        'Cevapla',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 15,
-                        ),
-                      ),
               ),
             ),
           ),

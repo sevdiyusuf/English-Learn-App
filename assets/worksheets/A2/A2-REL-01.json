@@ -1,0 +1,322 @@
+{
+    "schema_version": "1.0",
+    "level": "A2",
+    "worksheet_id": "A2-REL-01",
+    "title": "Relative Clauses (who/which/where)",
+    "topic_tags": [
+        "relative_clauses",
+        "who",
+        "which",
+        "where"
+    ],
+    "subskills": [
+        "match_person_thing_place",
+        "choose_relative_pronoun",
+        "build_definition"
+    ],
+    "difficulty": 2,
+    "engine_sequence": [
+        {
+            "engine": "tap",
+            "count": 6,
+            "rules": {
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "mcq",
+            "count": 8,
+            "rules": {
+                "shuffle_options": true,
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "fill",
+            "count": 4,
+            "rules": {
+                "case_sensitive": false
+            }
+        }
+    ],
+    "items": [
+        {
+            "id": "tap1",
+            "engine": "tap",
+            "prompt": "A doctor is a person ____ helps sick people.",
+            "translation_tr": "Doktor, hasta insanlara yardım eden kişidir.",
+            "bank": [
+                "who",
+                "which",
+                "where"
+            ],
+            "answer": "who",
+            "tags": [
+                "person"
+            ]
+        },
+        {
+            "id": "tap2",
+            "engine": "tap",
+            "prompt": "A laptop is a thing ____ you use for work.",
+            "translation_tr": "Dizüstü bilgisayar, iş için kullandığın bir şeydir.",
+            "bank": [
+                "who",
+                "which",
+                "where"
+            ],
+            "answer": "which",
+            "tags": [
+                "thing"
+            ]
+        },
+        {
+            "id": "tap3",
+            "engine": "tap",
+            "prompt": "A restaurant is a place ____ you can eat.",
+            "translation_tr": "Restoran, yemek yiyebileceğin bir yerdir.",
+            "bank": [
+                "who",
+                "which",
+                "where"
+            ],
+            "answer": "where",
+            "tags": [
+                "place"
+            ]
+        },
+        {
+            "id": "tap4",
+            "engine": "tap",
+            "prompt": "A pilot is a person ____ flies planes.",
+            "translation_tr": "Pilot, uçak uçuran kişidir.",
+            "bank": [
+                "who",
+                "which",
+                "where"
+            ],
+            "answer": "who",
+            "tags": [
+                "person"
+            ]
+        },
+        {
+            "id": "tap5",
+            "engine": "tap",
+            "prompt": "A museum is a place ____ you see art.",
+            "translation_tr": "Müze, sanat görebileceğin bir yerdir.",
+            "bank": [
+                "who",
+                "which",
+                "where"
+            ],
+            "answer": "where",
+            "tags": [
+                "place"
+            ]
+        },
+        {
+            "id": "tap6",
+            "engine": "tap",
+            "prompt": "A phone is a thing ____ you call people with.",
+            "translation_tr": "Telefon, insanları aradığın bir şeydir.",
+            "bank": [
+                "who",
+                "which",
+                "where"
+            ],
+            "answer": "which",
+            "tags": [
+                "thing"
+            ]
+        },
+        {
+            "id": "mcq1",
+            "engine": "mcq",
+            "prompt": "The man ____ lives next door is friendly.",
+            "translation_tr": "Yan dairede yaşayan adam çok arkadaş canlısıdır.",
+            "options": [
+                "who",
+                "which",
+                "where"
+            ],
+            "answer": "who",
+            "tags": [
+                "person"
+            ]
+        },
+        {
+            "id": "mcq2",
+            "engine": "mcq",
+            "prompt": "The book ____ I bought is great.",
+            "translation_tr": "Aldığım kitap harika.",
+            "options": [
+                "who",
+                "which",
+                "where"
+            ],
+            "answer": "which",
+            "tags": [
+                "thing"
+            ]
+        },
+        {
+            "id": "mcq3",
+            "engine": "mcq",
+            "prompt": "That’s the café ____ we met.",
+            "translation_tr": "Tanıştığımız kafe orası.",
+            "options": [
+                "who",
+                "which",
+                "where"
+            ],
+            "answer": "where",
+            "tags": [
+                "place"
+            ]
+        },
+        {
+            "id": "mcq4",
+            "engine": "mcq",
+            "prompt": "A nurse is someone ____ helps doctors.",
+            "translation_tr": "Hemşire, doktorlara yardım eden kişidir.",
+            "options": [
+                "who",
+                "which",
+                "where"
+            ],
+            "answer": "who",
+            "tags": [
+                "person"
+            ]
+        },
+        {
+            "id": "mcq5",
+            "engine": "mcq",
+            "prompt": "A fridge is something ____ keeps food cold.",
+            "translation_tr": "Buzdolabı, yiyecekleri soğuk tutan şeydir.",
+            "options": [
+                "who",
+                "which",
+                "where"
+            ],
+            "answer": "which",
+            "tags": [
+                "thing"
+            ]
+        },
+        {
+            "id": "mcq6",
+            "engine": "mcq",
+            "prompt": "This is the park ____ I play football.",
+            "translation_tr": "Futbol oynadığım park burası.",
+            "options": [
+                "who",
+                "which",
+                "where"
+            ],
+            "answer": "where",
+            "tags": [
+                "place"
+            ]
+        },
+        {
+            "id": "mcq7",
+            "engine": "mcq",
+            "prompt": "I know a teacher ____ speaks three languages.",
+            "translation_tr": "Üç dil konuşan bir öğretmen tanıyorum.",
+            "options": [
+                "who",
+                "which",
+                "where"
+            ],
+            "answer": "who",
+            "tags": [
+                "person"
+            ]
+        },
+        {
+            "id": "mcq8",
+            "engine": "mcq",
+            "prompt": "This is the movie ____ won an award.",
+            "translation_tr": "Ödül kazanan film bu.",
+            "options": [
+                "who",
+                "which",
+                "where"
+            ],
+            "answer": "which",
+            "tags": [
+                "thing"
+            ]
+        },
+        {
+            "id": "fill1",
+            "engine": "fill",
+            "prompt": "A bakery is a place ____ you buy bread.",
+            "translation_tr": "Fırın, ekmek aldığın yerdir.",
+            "answer": [
+                "where"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "place"
+            ]
+        },
+        {
+            "id": "fill2",
+            "engine": "fill",
+            "prompt": "A firefighter is someone ____ puts out fires.",
+            "translation_tr": "İtfaiyeci, yangın söndüren kişidir.",
+            "answer": [
+                "who"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "person"
+            ]
+        },
+        {
+            "id": "fill3",
+            "engine": "fill",
+            "prompt": "A camera is something ____ takes photos.",
+            "translation_tr": "Fotoğraf makinesi, fotoğraf çeken şeydir.",
+            "answer": [
+                "which"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "thing"
+            ]
+        },
+        {
+            "id": "fill4",
+            "engine": "fill",
+            "prompt": "This is the street ____ I live.",
+            "translation_tr": "Benim yaşadığım sokak burası.",
+            "answer": [
+                "where"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "place"
+            ]
+        }
+    ]
+}

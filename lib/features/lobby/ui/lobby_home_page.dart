@@ -8,7 +8,9 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/storage_service.dart';
 
 class LobbyHomePage extends StatefulWidget {
-  const LobbyHomePage({super.key});
+  const LobbyHomePage({super.key, this.from});
+
+  final String? from;
 
   static const routeName = 'home';
 
@@ -77,8 +79,14 @@ class _LobbyHomePageState extends State<LobbyHomePage> {
           ),
           child: IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.white),
-            onPressed: () => context.go('/mini-games'),
-            tooltip: 'Mini Games\'e dön',
+            onPressed: () {
+              if (widget.from == 'multiplayer') {
+                context.go('/multiplayer');
+              } else {
+                context.go('/mini-games');
+              }
+            },
+            tooltip: 'Geri',
           ),
         ),
         title: Container(

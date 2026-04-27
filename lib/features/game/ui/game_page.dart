@@ -1,10 +1,10 @@
-import 'dart:async';
-
+import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/animations/animations.dart';
+import '../../../../core/audio/sound_manager.dart';
 import '../../../../core/notifications/game_notifications.dart';
 import '../../../../core/notifications/notification_service.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -16,9 +16,9 @@ import '../../auth/logic/auth_controller.dart';
 import '../logic/game_controller.dart';
 import '../logic/timer_service.dart';
 import '../models/game_state.dart';
-import '../models/room.dart';
-import 'components/countdown_widget.dart';
-import 'components/player_badges.dart';
+import '../models/room.dart'; // RoomStatus, GameMode
+import 'components/game_background.dart';
+import 'components/game_header.dart';
 import 'components/word_input.dart';
 import 'components/word_pool.dart';
 
@@ -36,6 +36,21 @@ class GamePage extends ConsumerStatefulWidget {
 class _GamePageState extends ConsumerState<GamePage> {
   String? _previousTurnUid;
   bool _gameEndDialogShown = false;
+  late ConfettiController _confettiController;
+
+  @override
+  void initState() {
+    super.initState();
+    _confettiController = ConfettiController(
+      duration: const Duration(seconds: 2),
+    );
+  }
+
+  @override
+  void dispose() {
+    _confettiController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,17 +59,20 @@ class _GamePageState extends ConsumerState<GamePage> {
     final authState = ref.watch(authControllerProvider);
     final userUid = authState.value?.uid;
 
-    // Handle game notifications - only notify when turn changes
-    gameAsync.whenData((game) {
-      final room = game.room;
-      final currentTurnUid = room.currentTurnUid;
+    // Listen for turn changes to show notifications
+    ref.listen(gameControllerProvider(widget.roomId), (previous, next) {
+      next.whenData((game) {
+        final room = game.room;
+        final currentTurnUid = room.currentTurnUid;
 
-      // Only notify when it's the user's turn (not on status changes)
-      if (_previousTurnUid != currentTurnUid && currentTurnUid == userUid) {
-        GameNotifications.setupGameNotifications(ref, room, userUid);
-      }
-
-      _previousTurnUid = currentTurnUid;
+        // Check if turn changed to current user
+        if (_previousTurnUid != currentTurnUid && currentTurnUid == userUid) {
+          if (_previousTurnUid != null && userUid != null) {
+            GameNotifications.setupGameNotifications(ref, room, userUid);
+          }
+        }
+        _previousTurnUid = currentTurnUid;
+      });
     });
 
     // Listen for game finished state - must be in build method
@@ -69,10 +87,53 @@ class _GamePageState extends ConsumerState<GamePage> {
           final wasFinished = prevGame?.room.status == RoomStatus.finished;
           final isFinished = game.room.status == RoomStatus.finished;
 
+          // Check for new words to show round summary
+          final prevWords = prevGame?.playedWords ?? [];
+          final nextWords = game.playedWords;
+          if (nextWords.length > prevWords.length) {
+            final lastWord = nextWords.last;
+            final player = game.room.playerNames[lastWord.byUid] ?? 'Oyuncu';
+
+            // Check if it's my word
+            final isMyWord = lastWord.byUid == userUid;
+            if (isMyWord) {
+              _confettiController.play();
+              // Play success sound
+              ref.read(soundManagerProvider).playSuccess();
+            }
+
+            // Show toast for round summary
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  '$player: "${lastWord.word}" (+10 puan)',
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                backgroundColor: Colors.green.shade700,
+                duration: const Duration(seconds: 2),
+                behavior: SnackBarBehavior.floating,
+                margin: const EdgeInsets.all(16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+            );
+          }
+
           if (isFinished && !wasFinished && !_gameEndDialogShown) {
             _gameEndDialogShown = true;
+
+            // Play victory/game over sound
+            final winner = game.room.winnerUid;
+            final isWinner = winner == userUid;
+            if (isWinner) {
+              ref.read(soundManagerProvider).playVictory();
+            }
+
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              if (!mounted) return;
+              if (!mounted) {
+                return;
+              }
               final winner = game.room.winnerUid;
 
               // Get winner name from playerNames map
@@ -81,6 +142,20 @@ class _GamePageState extends ConsumerState<GamePage> {
                       ? (game.room.playerNames[winner] ?? winner)
                       : 'Berabere';
 
+              // Prepare score summary
+              final scores = game.computedScores;
+              final sortedScores =
+                  scores.entries.toList()
+                    ..sort((a, b) => b.value.compareTo(a.value));
+
+              final scoreSummary = sortedScores
+                  .map((e) {
+                    final name = game.room.playerNames[e.key] ?? 'Oyuncu';
+                    final isWinner = e.key == winner;
+                    return '${isWinner ? "🏆 " : ""}$name: ${e.value} puan';
+                  })
+                  .join('\n');
+
               showDialog<void>(
                 context: context,
                 barrierDismissible: false,
@@ -88,10 +163,23 @@ class _GamePageState extends ConsumerState<GamePage> {
                     (ctx) => SuccessAnimation(
                       child: AlertDialog(
                         title: const Text('Oyun bitti!'),
-                        content: Text(
-                          winner != null
-                              ? 'Kazanan: $winnerName'
-                              : 'Oyun berabere bitti!',
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              winner != null
+                                  ? 'Kazanan: $winnerName'
+                                  : 'Oyun berabere bitti!',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            const Text('Skor Tablosu:'),
+                            const SizedBox(height: 8),
+                            Text(scoreSummary),
+                          ],
                         ),
                         actions: [
                           TextButton(
@@ -162,7 +250,6 @@ class _GamePageState extends ConsumerState<GamePage> {
           title: gameAsync.when(
             data: (game) {
               if (game.room.status == RoomStatus.active) {
-                final timerOffset = timerState.asData?.value ?? Duration.zero;
                 return Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -179,11 +266,6 @@ class _GamePageState extends ConsumerState<GamePage> {
                         'Word Battle',
                         style: TextStyle(color: Colors.white),
                       ),
-                    ),
-                    const SizedBox(width: 12),
-                    _GameTimer(
-                      startTime: game.room.createdAt,
-                      serverOffset: timerOffset,
                     ),
                   ],
                 );
@@ -352,16 +434,26 @@ class _GamePageState extends ConsumerState<GamePage> {
             }
 
             // Only show game UI if room is active
-            final isPlayerTurn = game.room.currentTurnUid == userUid;
             final timerOffset = timerState.asData?.value ?? Duration.zero;
 
             return Stack(
               children: [
                 // Background image
-                Positioned.fill(
-                  child: Image.asset(
-                    'assets/images/background.png',
-                    fit: BoxFit.cover,
+                const GameBackground(),
+                // Confetti
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: ConfettiWidget(
+                    confettiController: _confettiController,
+                    blastDirectionality: BlastDirectionality.explosive,
+                    shouldLoop: false,
+                    colors: const [
+                      Colors.green,
+                      Colors.blue,
+                      Colors.pink,
+                      Colors.orange,
+                      Colors.purple,
+                    ],
                   ),
                 ),
                 // Content with padding and semi-transparent white overlay
@@ -371,56 +463,13 @@ class _GamePageState extends ConsumerState<GamePage> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       // Header with countdown and player info
-                      Container(
-                        decoration: BoxDecoration(
-                          color: AppColors.surfaceDark.withValues(alpha: 0.9),
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(12),
-                            topRight: Radius.circular(12),
-                          ),
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 8,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // Game elapsed time
-                            if (game.room.status == RoomStatus.active)
-                              _GameTimer(
-                                startTime: game.room.createdAt,
-                                serverOffset: timerOffset,
-                              ),
-                            FadeInAnimation(
-                              child: CountdownWidget(
-                                deadline: game.room.turnDeadlineAt,
-                                turnDurationSeconds:
-                                    game.room.turnDurationSeconds,
-                                isActiveTurn: isPlayerTurn,
-                                serverOffset: timerOffset,
-                                onTimeout: () async {
-                                  try {
-                                    await ref
-                                        .read(
-                                          gameControllerProvider(
-                                            widget.roomId,
-                                          ).notifier,
-                                        )
-                                        .resolveTimeout();
-                                  } on Object catch (_) {}
-                                },
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            SlideInAnimation(
-                              delay: const Duration(milliseconds: 100),
-                              child: PlayerBadges(
-                                room: game.room,
-                                currentUid: userUid,
-                              ),
-                            ),
-                          ],
+                      GameHeader(
+                        room: game.room,
+                        currentUserUid: userUid,
+                        scores: game.computedScores,
+                        serverOffset: timerOffset,
+                        gameController: ref.read(
+                          gameControllerProvider(widget.roomId).notifier,
                         ),
                       ),
                       // Messages area - takes most of the space
@@ -458,54 +507,44 @@ class _GamePageState extends ConsumerState<GamePage> {
                         ),
                         child: WordInput(
                           enabled:
-                              isPlayerTurn &&
+                              game.room.currentTurnUid == userUid &&
                               game.room.status == RoomStatus.active,
                           currentWordType: game.room.currentWordType,
+                          gameMode: game.room.gameMode,
+                          settings: game.room.settings,
                           onWordSubmit: (word) async {
                             try {
-                              final isVerb =
-                                  game.room.currentWordType == 'verb' ||
-                                  game.room.currentWordType == null;
+                              final type = await ref
+                                  .read(
+                                    gameControllerProvider(
+                                      widget.roomId,
+                                    ).notifier,
+                                  )
+                                  .handleWordSubmission(word);
 
-                              if (isVerb) {
-                                await ref
-                                    .read(
-                                      gameControllerProvider(
-                                        widget.roomId,
-                                      ).notifier,
-                                    )
-                                    .submitVerb(verb: word);
-                                if (!mounted) return;
-                                ref
-                                    .read(notificationServiceProvider)
-                                    .showSuccess(
-                                      title: 'Fiil gönderildi',
-                                      message: 'Sıra rakibinde',
-                                    );
-                              } else {
-                                await ref
-                                    .read(
-                                      gameControllerProvider(
-                                        widget.roomId,
-                                      ).notifier,
-                                    )
-                                    .submitAdjective(adjective: word);
-                                if (!mounted) return;
-                                ref
-                                    .read(notificationServiceProvider)
-                                    .showSuccess(
-                                      title: 'Sıfat gönderildi!',
-                                      message: 'Sıra rakibinde',
-                                    );
-                              }
-                            } on Object catch (err) {
+                              if (!mounted) return;
+
+                              String message = 'Kelime gönderildi';
+                              if (type == 'verb')
+                                message = 'Fiil gönderildi, sıra rakibinde';
+                              if (type == 'adjective')
+                                message = 'Sıfat gönderildi, şimdi fiil yaz';
+
+                              ref
+                                  .read(notificationServiceProvider)
+                                  .showSuccess(
+                                    title: 'Başarılı',
+                                    message: message,
+                                  );
+                            } catch (err) {
                               if (!mounted) return;
                               ref
                                   .read(notificationServiceProvider)
                                   .showError(
                                     title: 'Hata',
-                                    message: ErrorMessageHelper.getErrorMessage(
-                                      err,
+                                    message: err.toString().replaceAll(
+                                      'Exception: ',
+                                      '',
                                     ),
                                   );
                             }
@@ -535,7 +574,8 @@ class _GamePageState extends ConsumerState<GamePage> {
               children: [
                 Text(
                   '• Oyuncular sırayla kelime yazar.\n'
-                  '• Sıra sende olduğunda, altta gözüken kelime türüne göre (fiil / sıfat) bir kelime gir.\n'
+                  '• Tema Savaşı: Seçilen temayla ilgili bir kelime yaz.\n'
+                  '• Core English: Seçilen türde (fiil/sıfat/isim/zarf) bir kelime yaz.\n'
                   '• Süre bittiğinde hamle yapmadıysan tur otomatik geçer.\n'
                   '• Geçerli kelime yazan oyuncu puan kazanır; tekrar eden kelimeler sayılmaz.',
                 ),
@@ -552,81 +592,6 @@ class _GamePageState extends ConsumerState<GamePage> {
               ),
             ],
           ),
-    );
-  }
-}
-
-class _GameTimer extends StatefulWidget {
-  const _GameTimer({required this.startTime, required this.serverOffset});
-
-  final DateTime startTime;
-  final Duration serverOffset;
-
-  @override
-  State<_GameTimer> createState() => _GameTimerState();
-}
-
-class _GameTimerState extends State<_GameTimer> {
-  Timer? _timer;
-  Duration _elapsed = Duration.zero;
-
-  @override
-  void initState() {
-    super.initState();
-    _updateElapsed();
-    _timer = Timer.periodic(const Duration(seconds: 1), (_) {
-      _updateElapsed();
-    });
-  }
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
-  }
-
-  void _updateElapsed() {
-    final adjustedNow = DateTime.now().add(widget.serverOffset);
-    final elapsed = adjustedNow.difference(widget.startTime);
-    if (mounted) {
-      setState(() {
-        _elapsed = elapsed;
-      });
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final minutes = _elapsed.inMinutes;
-    final seconds = _elapsed.inSeconds % 60;
-    final formattedTime =
-        '${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
-
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.25),
-        borderRadius: BorderRadius.circular(6),
-        border: Border.all(
-          color: Colors.white.withValues(alpha: 0.3),
-          width: 1,
-        ),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Icon(Icons.timer_outlined, size: 14, color: Colors.white),
-          const SizedBox(width: 4),
-          Text(
-            formattedTime,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 13,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

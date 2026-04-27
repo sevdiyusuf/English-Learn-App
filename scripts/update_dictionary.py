@@ -33,7 +33,7 @@ def main():
     print(f"Parsed {len(adjectives)} unique adjectives")
     
     # Read existing dictionary
-    dict_path = os.path.join(os.path.dirname(__file__), '..', 'assets', 'dictionary.json')
+    dict_path = os.path.join(os.path.dirname(__file__), '..', 'assets', 'word_battle', 'dictionary.json')
     existing_words = {}
     
     if os.path.exists(dict_path):

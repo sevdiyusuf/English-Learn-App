@@ -1,0 +1,134 @@
+{
+    "schema_version": "1.0",
+    "level": "A1",
+    "lesson_id": "A1-ADV-01-lesson",
+    "title": "Adverbs of Frequency",
+    "topic_tags": [
+        "adverbs_of_frequency",
+        "present_simple",
+        "routines"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Bir eylemi ne sıklıkla yaptığımızı söylemeyi öğreneceğiz.",
+                    "Always, usually, never gibi kelimelerin cümlede nereye geleceğini kavrayacağız.",
+                    "Yüzdelik dilimlere göre hangi zarfın uygun olduğunu öğreneceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Sıklık Dereceleri",
+                "bullets": [
+                    "**Always** (%100): Her zaman",
+                    "**Usually / Often** (%70-80): Genellikle / Sık sık",
+                    "**Sometimes** (%50): Bazen",
+                    "**Never** (%0): Asla / Hiçbir zaman"
+                ],
+                "examples": [
+                    "I always brush my teeth. (Dişlerimi her zaman fırçalarım.)",
+                    "I never eat meat. (Asla et yemem.)"
+                ]
+            },
+            {
+                "id": "formula",
+                "type": "formula",
+                "title": "Cümledeki Konumu",
+                "bullets": [
+                    "Zarfın yeri, cümledeki fiilin türüne göre değişir."
+                ],
+                "formula": [
+                    "Main Verbs: Subject + Adverb + Verb (I always go)",
+                    "Be Verb: Subject + am/is/are + Adverb (I am always late)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "common_mistake",
+                "title": "Sıklık Zarflarında Konum Hatası",
+                "bullets": [
+                    "**Fiilden Sonra Kullanmak**: 'I go always' yanlıştır. Doğrusu 'I **always go**' olmalıdır.",
+                    "**Never ile Not Kullanmak**: 'I don't never' yanlıştır. Never zaten olumsuzluk anlamı katar: 'I **never** go'.",
+                    "**Be Fiili İstisnası**: Am/is/are söz konusu olduğunda zarf sonra gelir."
+                ],
+                "examples": [
+                    "Hatalı: She is often happy. ✓ (Doğru dizilim)",
+                    "Hatalı: She often is happy. ✗ (Be fiilinden önce gelmez)"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "fill",
+                "prompt": "We ____ (usually / have) dinner at 8 PM.",
+                "answer": [
+                    "usually have"
+                ],
+                "explain": "Sıklık zarfı ana fiilden (have) önce gelir."
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Tom'un Rutini",
+        "intro_bullets": [
+            "Tom'un günlük alışkanlıklarını inceleyerek cümleleri tamamla."
+        ],
+        "items": [
+            {
+                "engine": "mcq",
+                "prompt": "Tom is a very healthy person. He ____ eats fast food.",
+                "options": [
+                    "never",
+                    "always",
+                    "usually"
+                ],
+                "answer": "never",
+                "explain": "Sağlıklı biri olduğu için fast food yeme sıklığı %0 yani 'never' olmalıdır."
+            },
+            {
+                "engine": "tap",
+                "prompt": "He ____ at the gym in the evenings.",
+                "bank": [
+                    "is often",
+                    "often is",
+                    "often"
+                ],
+                "answer": "is often",
+                "explain": "'Be' fiili (is) sıklık zarfından önce gelir."
+            },
+            {
+                "engine": "order",
+                "prompt": "Cümleyi kur: 'O her zaman erken kalkar.'",
+                "tokens": [
+                    "He",
+                    "always",
+                    "wakes",
+                    "up",
+                    "early."
+                ],
+                "answer_tokens": [
+                    "He",
+                    "always",
+                    "wakes",
+                    "up",
+                    "early."
+                ],
+                "explain": "Dizilim: Özne + Sıklık Zarfı + Fiil."
+            }
+        ],
+        "recap_bullets": [
+            "Normal fiillerden ÖNCE kullan.",
+            "Am/Is/Are'dan SONRA kullan.",
+            "Never kullanırken cümleyi ayrıca olumsuz (don't/doesn't) yapma."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "A1-ADV-01"
+    }
+}

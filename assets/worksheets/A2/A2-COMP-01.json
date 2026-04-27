@@ -1,0 +1,313 @@
+{
+    "schema_version": "1.0",
+    "level": "A2",
+    "worksheet_id": "A2-COMP-01",
+    "title": "Comparatives & Superlatives",
+    "topic_tags": [
+        "comparatives",
+        "superlatives",
+        "irregular"
+    ],
+    "subskills": [
+        "choose_er_more",
+        "use_than",
+        "use_the_superlative"
+    ],
+    "difficulty": 2,
+    "engine_sequence": [
+        {
+            "engine": "mcq",
+            "count": 10,
+            "rules": {
+                "shuffle_options": true,
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "fill",
+            "count": 8,
+            "rules": {
+                "case_sensitive": false,
+                "allow_contractions": true
+            }
+        }
+    ],
+    "items": [
+        {
+            "id": "mcq1",
+            "engine": "mcq",
+            "prompt": "This car is ____ than that one. (fast)",
+            "translation_tr": "Bu araba, şu olandan daha hızlı.",
+            "options": [
+                "faster",
+                "more fast"
+            ],
+            "answer": "faster",
+            "tags": [
+                "comparative"
+            ]
+        },
+        {
+            "id": "mcq2",
+            "engine": "mcq",
+            "prompt": "My house is ____ than yours. (big)",
+            "translation_tr": "Benim evim seninkinden daha büyük.",
+            "options": [
+                "bigger",
+                "more big"
+            ],
+            "answer": "bigger",
+            "tags": [
+                "comparative"
+            ]
+        },
+        {
+            "id": "mcq3",
+            "engine": "mcq",
+            "prompt": "This book is ____ than the other one. (interesting)",
+            "translation_tr": "Bu kitap diğerinden daha ilginç.",
+            "options": [
+                "more interesting",
+                "interestinger"
+            ],
+            "answer": "more interesting",
+            "tags": [
+                "more"
+            ]
+        },
+        {
+            "id": "mcq4",
+            "engine": "mcq",
+            "prompt": "She is the ____ student in the class. (smart)",
+            "translation_tr": "O sınıftaki en zeki öğrenci.",
+            "options": [
+                "smartest",
+                "most smart"
+            ],
+            "answer": "smartest",
+            "tags": [
+                "superlative"
+            ]
+        },
+        {
+            "id": "mcq5",
+            "engine": "mcq",
+            "prompt": "It is the ____ place I’ve visited. (beautiful)",
+            "translation_tr": "Burası ziyaret ettiğim en güzel yer.",
+            "options": [
+                "most beautiful",
+                "beautifulest"
+            ],
+            "answer": "most beautiful",
+            "tags": [
+                "most"
+            ]
+        },
+        {
+            "id": "mcq6",
+            "engine": "mcq",
+            "prompt": "Tom is ____ than me. (good)",
+            "translation_tr": "Tom benden daha iyi.",
+            "options": [
+                "better",
+                "gooder"
+            ],
+            "answer": "better",
+            "tags": [
+                "irregular"
+            ]
+        },
+        {
+            "id": "mcq7",
+            "engine": "mcq",
+            "prompt": "This is the ____ day of my life. (bad)",
+            "translation_tr": "Bu hayatımın en kötü günü.",
+            "options": [
+                "worst",
+                "baddest"
+            ],
+            "answer": "worst",
+            "tags": [
+                "irregular"
+            ]
+        },
+        {
+            "id": "mcq8",
+            "engine": "mcq",
+            "prompt": "I’m ____ today than yesterday. (tired)",
+            "translation_tr": "Bugün dünden daha yorgunum.",
+            "options": [
+                "more tired",
+                "tirer"
+            ],
+            "answer": "more tired",
+            "tags": [
+                "more"
+            ]
+        },
+        {
+            "id": "mcq9",
+            "engine": "mcq",
+            "prompt": "She runs ____ than her sister. (far)",
+            "translation_tr": "Kız kardeşinden daha uzağa koşar.",
+            "options": [
+                "farther",
+                "more far"
+            ],
+            "answer": "farther",
+            "tags": [
+                "irregular"
+            ]
+        },
+        {
+            "id": "mcq10",
+            "engine": "mcq",
+            "prompt": "Mount Everest is the ____ mountain in the world.",
+            "translation_tr": "Everest Dağı dünyadaki en yüksek dağdır.",
+            "options": [
+                "highest",
+                "higher"
+            ],
+            "answer": "highest",
+            "tags": [
+                "superlative"
+            ]
+        },
+        {
+            "id": "fill1",
+            "engine": "fill",
+            "prompt": "This exam is ____ (easy) than the last one.",
+            "translation_tr": "Bu sınav, sonuncusundan daha kolay.",
+            "answer": [
+                "easier"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "comparative"
+            ]
+        },
+        {
+            "id": "fill2",
+            "engine": "fill",
+            "prompt": "This is the ____ (cheap) phone here.",
+            "translation_tr": "Bu, buradaki en ucuz telefon.",
+            "answer": [
+                "cheapest"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "superlative"
+            ]
+        },
+        {
+            "id": "fill3",
+            "engine": "fill",
+            "prompt": "My English is ____ (good) now.",
+            "translation_tr": "İngilizcem şimdi daha iyi.",
+            "answer": [
+                "better"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "irregular"
+            ]
+        },
+        {
+            "id": "fill4",
+            "engine": "fill",
+            "prompt": "This film is ____ (bad) than the first one.",
+            "translation_tr": "Bu film ilkinden daha kötü.",
+            "answer": [
+                "worse"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "irregular"
+            ]
+        },
+        {
+            "id": "fill5",
+            "engine": "fill",
+            "prompt": "She is the ____ (friendly) person I know.",
+            "translation_tr": "O tanıdığım en arkadaş canlısı kişi.",
+            "answer": [
+                "friendliest"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "superlative"
+            ]
+        },
+        {
+            "id": "fill6",
+            "engine": "fill",
+            "prompt": "This task is ____ (difficult) than that one.",
+            "translation_tr": "Bu görev, şu olandan daha zor.",
+            "answer": [
+                "more difficult"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "more"
+            ]
+        },
+        {
+            "id": "fill7",
+            "engine": "fill",
+            "prompt": "He is ____ (tall) than his brother.",
+            "translation_tr": "O kardeşinden daha uzun.",
+            "answer": [
+                "taller"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "comparative"
+            ]
+        },
+        {
+            "id": "fill8",
+            "engine": "fill",
+            "prompt": "This is the ____ (interesting) lesson today.",
+            "translation_tr": "Bu, bugünün en ilginç dersi.",
+            "answer": [
+                "most interesting"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "most"
+            ]
+        }
+    ]
+}

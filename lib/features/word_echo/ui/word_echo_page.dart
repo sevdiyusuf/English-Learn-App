@@ -5,8 +5,10 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/repositories/game_saved_words_repository.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../word_match/data/word_match_providers.dart';
 import '../data/word_echo_service.dart';
 import '../logic/word_echo_controller.dart';
+import '../models/word_echo_config.dart';
 import '../models/word_echo_state.dart';
 import 'widgets/word_echo_summary_dialog.dart';
 
@@ -332,16 +334,61 @@ class _WordEchoPageState extends ConsumerState<WordEchoPage> {
   Future<void> _saveSlotWord(BuildContext context, String english) async {
     try {
       // Find the Turkish translation for this English word
-      final words = WordEchoService.instance.getWords();
-      final word = words.firstWhere(
-        (w) => w.english.toLowerCase() == english.toLowerCase(),
-        orElse: () => throw StateError('Word not found: $english'),
+      // First try from current state (works for both Personal Echo and Global)
+      String? turkish;
+
+      // Check if word is in current slots (from Personal Echo or Global)
+      final state = ref.read(
+        wordEchoControllerProvider(
+          WordEchoControllerParams(
+            speed: widget.speed,
+            setName: widget.setName,
+          ),
+        ),
       );
+
+      // Try to find Turkish from current question's correct word
+      if (state.currentCorrectEnglishWord?.toLowerCase() ==
+          english.toLowerCase()) {
+        turkish = state.currentTurkishHint;
+      }
+
+      // If not found, try from WordEchoService (Global words)
+      if (turkish == null) {
+        try {
+          final word = WordEchoService.instance.getWordByEnglish(english);
+          turkish = word?.turkish;
+        } catch (_) {
+          // Word not in JSON, will try Personal Echo
+        }
+      }
+
+      // If still not found and Personal Echo is active, try from WordSet
+      if (turkish == null) {
+        final config = ref.read(wordEchoConfigProvider);
+        if (config.isPersonalEchoActive && config.selectedWordSetId != null) {
+          try {
+            final repo = await ref.read(wordMatchRepoProvider.future);
+            final pairs = await repo.fetchPairs(config.selectedWordSetId!);
+            final pair = pairs.firstWhere(
+              (p) => p.english.toLowerCase() == english.toLowerCase(),
+              orElse: () => throw StateError('Word not found in set'),
+            );
+            turkish = pair.turkish;
+          } catch (_) {
+            // Word not in set either
+          }
+        }
+      }
+
+      if (turkish == null || turkish.isEmpty) {
+        throw StateError('Turkish translation not found for: $english');
+      }
 
       final repository = ref.read(gameSavedWordsRepositoryProvider);
       final saved = await repository.saveToWordsFromGames(
-        english: word.english,
-        turkish: word.turkish,
+        english: english,
+        turkish: turkish,
         sourceGame: 'word_echo',
       );
 
@@ -440,6 +487,10 @@ class _WordEchoPageState extends ConsumerState<WordEchoPage> {
   }
 
   Future<void> _showSummary(BuildContext context, WordEchoState state) async {
+    if (!mounted) return;
+    final navigator = Navigator.of(context);
+    final router = GoRouter.of(context);
+
     final result = await showDialog<String>(
       context: context,
       barrierDismissible: false,
@@ -461,10 +512,10 @@ class _WordEchoPageState extends ConsumerState<WordEchoPage> {
       );
     } else if (result == 'back') {
       if (!mounted) return;
-      context.go('/mini-games');
+      router.go('/mini-games');
     } else {
       if (!mounted) return;
-      context.pop();
+      navigator.pop();
     }
   }
 }

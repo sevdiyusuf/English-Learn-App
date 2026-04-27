@@ -11,10 +11,11 @@ class OppositesService {
   static final OppositesService instance = OppositesService._();
 
   Map<String, List<OppositeWord>>? _oppositesByLevel;
-  List<String>? _wrongAnswers;
+  List<String>? _wrongAnswers; // Old format support
+  List<Map<String, String>>? _wrongAnswersWithTranslate; // New format with translate
 
   Future<void> loadData() async {
-    if (_oppositesByLevel != null && _wrongAnswers != null) {
+    if (_oppositesByLevel != null && _wrongAnswers != null && _wrongAnswersWithTranslate != null) {
       return; // Already loaded
     }
 
@@ -34,16 +35,40 @@ class OppositesService {
       }
 
       if (jsonMap['wrong_answers'] != null) {
-        _wrongAnswers = (jsonMap['wrong_answers'] as List<dynamic>)
-            .map((item) => item as String)
-            .toList();
+        final wrongAnswersList = jsonMap['wrong_answers'] as List<dynamic>;
+        
+        // Check if it's new format (objects with word and translate) or old format (strings)
+        if (wrongAnswersList.isNotEmpty && wrongAnswersList[0] is Map) {
+          // New format: list of objects with "word" and "translate"
+          _wrongAnswersWithTranslate = wrongAnswersList
+              .map((item) {
+                final map = item as Map<String, dynamic>;
+                return <String, String>{
+                  'word': map['word'] as String,
+                  'translate': map['translate'] as String,
+                };
+              })
+              .toList();
+          // Also create string list for backward compatibility
+          _wrongAnswers = _wrongAnswersWithTranslate!
+              .map((item) => item['word']!)
+              .toList();
+        } else {
+          // Old format: list of strings
+          _wrongAnswers = wrongAnswersList
+              .map((item) => item as String)
+              .toList();
+          _wrongAnswersWithTranslate = [];
+        }
       } else {
         _wrongAnswers = [];
+        _wrongAnswersWithTranslate = [];
       }
 
       if (kDebugMode) {
         debugPrint('Loaded opposites data: ${_oppositesByLevel?.length} levels');
         debugPrint('Wrong answers count: ${_wrongAnswers?.length}');
+        debugPrint('Wrong answers with translate count: ${_wrongAnswersWithTranslate?.length}');
       }
     } catch (e) {
       if (kDebugMode) {
@@ -74,6 +99,37 @@ class OppositesService {
 
     final random = Random();
     final selected = <String>[];
+    final usedIndices = <int>{};
+
+    while (selected.length < count && usedIndices.length < available.length) {
+      final index = random.nextInt(available.length);
+      if (!usedIndices.contains(index)) {
+        usedIndices.add(index);
+        selected.add(available[index]);
+      }
+    }
+
+    return selected;
+  }
+
+  /// Get wrong answers with translate (new format)
+  /// Returns list of maps with 'word' and 'translate' keys
+  List<Map<String, String>> getWrongAnswersWithTranslate(int count, {List<String>? exclude}) {
+    if (_wrongAnswersWithTranslate == null || _wrongAnswersWithTranslate!.isEmpty) {
+      return [];
+    }
+
+    final excludeSet = exclude?.toSet() ?? <String>{};
+    final available = _wrongAnswersWithTranslate!
+        .where((item) => !excludeSet.contains(item['word']))
+        .toList();
+    
+    if (available.length <= count) {
+      return available;
+    }
+
+    final random = Random();
+    final selected = <Map<String, String>>[];
     final usedIndices = <int>{};
 
     while (selected.length < count && usedIndices.length < available.length) {

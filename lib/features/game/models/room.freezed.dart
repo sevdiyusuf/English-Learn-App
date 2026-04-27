@@ -42,7 +42,14 @@ mixin _$Room {
   @TimestampConverter()
   DateTime get createdAt => throw _privateConstructorUsedError;
   @TimestampConverter()
-  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  DateTime? get updatedAt =>
+      throw _privateConstructorUsedError; // Word Battle game mode (Phase 1)
+  @GameModeConverter()
+  GameMode get gameMode => throw _privateConstructorUsedError;
+  bool get locked => throw _privateConstructorUsedError;
+  @GameRoomSettingsConverter()
+  GameRoomSettings? get settings => throw _privateConstructorUsedError;
+  Map<String, int> get scores => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -70,7 +77,11 @@ abstract class $RoomCopyWith<$Res> {
       String? winnerUid,
       String hostUid,
       @TimestampConverter() DateTime createdAt,
-      @TimestampConverter() DateTime? updatedAt});
+      @TimestampConverter() DateTime? updatedAt,
+      @GameModeConverter() GameMode gameMode,
+      bool locked,
+      @GameRoomSettingsConverter() GameRoomSettings? settings,
+      Map<String, int> scores});
 }
 
 /// @nodoc
@@ -102,6 +113,10 @@ class _$RoomCopyWithImpl<$Res, $Val extends Room>
     Object? hostUid = null,
     Object? createdAt = null,
     Object? updatedAt = freezed,
+    Object? gameMode = null,
+    Object? locked = null,
+    Object? settings = freezed,
+    Object? scores = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -168,6 +183,22 @@ class _$RoomCopyWithImpl<$Res, $Val extends Room>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      gameMode: null == gameMode
+          ? _value.gameMode
+          : gameMode // ignore: cast_nullable_to_non_nullable
+              as GameMode,
+      locked: null == locked
+          ? _value.locked
+          : locked // ignore: cast_nullable_to_non_nullable
+              as bool,
+      settings: freezed == settings
+          ? _value.settings
+          : settings // ignore: cast_nullable_to_non_nullable
+              as GameRoomSettings?,
+      scores: null == scores
+          ? _value.scores
+          : scores // ignore: cast_nullable_to_non_nullable
+              as Map<String, int>,
     ) as $Val);
   }
 }
@@ -195,7 +226,11 @@ abstract class _$$RoomImplCopyWith<$Res> implements $RoomCopyWith<$Res> {
       String? winnerUid,
       String hostUid,
       @TimestampConverter() DateTime createdAt,
-      @TimestampConverter() DateTime? updatedAt});
+      @TimestampConverter() DateTime? updatedAt,
+      @GameModeConverter() GameMode gameMode,
+      bool locked,
+      @GameRoomSettingsConverter() GameRoomSettings? settings,
+      Map<String, int> scores});
 }
 
 /// @nodoc
@@ -224,6 +259,10 @@ class __$$RoomImplCopyWithImpl<$Res>
     Object? hostUid = null,
     Object? createdAt = null,
     Object? updatedAt = freezed,
+    Object? gameMode = null,
+    Object? locked = null,
+    Object? settings = freezed,
+    Object? scores = null,
   }) {
     return _then(_$RoomImpl(
       id: freezed == id
@@ -290,6 +329,22 @@ class __$$RoomImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      gameMode: null == gameMode
+          ? _value.gameMode
+          : gameMode // ignore: cast_nullable_to_non_nullable
+              as GameMode,
+      locked: null == locked
+          ? _value.locked
+          : locked // ignore: cast_nullable_to_non_nullable
+              as bool,
+      settings: freezed == settings
+          ? _value.settings
+          : settings // ignore: cast_nullable_to_non_nullable
+              as GameRoomSettings?,
+      scores: null == scores
+          ? _value._scores
+          : scores // ignore: cast_nullable_to_non_nullable
+              as Map<String, int>,
     ));
   }
 }
@@ -313,10 +368,15 @@ class _$RoomImpl extends _Room with DiagnosticableTreeMixin {
       this.winnerUid,
       required this.hostUid,
       @TimestampConverter() required this.createdAt,
-      @TimestampConverter() this.updatedAt})
+      @TimestampConverter() this.updatedAt,
+      @GameModeConverter() this.gameMode = GameMode.core,
+      this.locked = false,
+      @GameRoomSettingsConverter() this.settings,
+      final Map<String, int> scores = const <String, int>{}})
       : _players = players,
         _playerNames = playerNames,
         _activePlayerIds = activePlayerIds,
+        _scores = scores,
         super._();
 
   factory _$RoomImpl.fromJson(Map<String, dynamic> json) =>
@@ -385,10 +445,29 @@ class _$RoomImpl extends _Room with DiagnosticableTreeMixin {
   @override
   @TimestampConverter()
   final DateTime? updatedAt;
+// Word Battle game mode (Phase 1)
+  @override
+  @JsonKey()
+  @GameModeConverter()
+  final GameMode gameMode;
+  @override
+  @JsonKey()
+  final bool locked;
+  @override
+  @GameRoomSettingsConverter()
+  final GameRoomSettings? settings;
+  final Map<String, int> _scores;
+  @override
+  @JsonKey()
+  Map<String, int> get scores {
+    if (_scores is EqualUnmodifiableMapView) return _scores;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_scores);
+  }
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Room(id: $id, roomCode: $roomCode, status: $status, players: $players, playerNames: $playerNames, activePlayerIds: $activePlayerIds, currentTurnIndex: $currentTurnIndex, currentTurnUid: $currentTurnUid, turnDeadlineAt: $turnDeadlineAt, turnDurationSeconds: $turnDurationSeconds, currentWordType: $currentWordType, currentVerb: $currentVerb, winnerUid: $winnerUid, hostUid: $hostUid, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Room(id: $id, roomCode: $roomCode, status: $status, players: $players, playerNames: $playerNames, activePlayerIds: $activePlayerIds, currentTurnIndex: $currentTurnIndex, currentTurnUid: $currentTurnUid, turnDeadlineAt: $turnDeadlineAt, turnDurationSeconds: $turnDurationSeconds, currentWordType: $currentWordType, currentVerb: $currentVerb, winnerUid: $winnerUid, hostUid: $hostUid, createdAt: $createdAt, updatedAt: $updatedAt, gameMode: $gameMode, locked: $locked, settings: $settings, scores: $scores)';
   }
 
   @override
@@ -411,7 +490,11 @@ class _$RoomImpl extends _Room with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('winnerUid', winnerUid))
       ..add(DiagnosticsProperty('hostUid', hostUid))
       ..add(DiagnosticsProperty('createdAt', createdAt))
-      ..add(DiagnosticsProperty('updatedAt', updatedAt));
+      ..add(DiagnosticsProperty('updatedAt', updatedAt))
+      ..add(DiagnosticsProperty('gameMode', gameMode))
+      ..add(DiagnosticsProperty('locked', locked))
+      ..add(DiagnosticsProperty('settings', settings))
+      ..add(DiagnosticsProperty('scores', scores));
   }
 
   @override
@@ -446,29 +529,40 @@ class _$RoomImpl extends _Room with DiagnosticableTreeMixin {
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+                other.updatedAt == updatedAt) &&
+            (identical(other.gameMode, gameMode) ||
+                other.gameMode == gameMode) &&
+            (identical(other.locked, locked) || other.locked == locked) &&
+            (identical(other.settings, settings) ||
+                other.settings == settings) &&
+            const DeepCollectionEquality().equals(other._scores, _scores));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      roomCode,
-      status,
-      const DeepCollectionEquality().hash(_players),
-      const DeepCollectionEquality().hash(_playerNames),
-      const DeepCollectionEquality().hash(_activePlayerIds),
-      currentTurnIndex,
-      currentTurnUid,
-      turnDeadlineAt,
-      turnDurationSeconds,
-      currentWordType,
-      currentVerb,
-      winnerUid,
-      hostUid,
-      createdAt,
-      updatedAt);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        roomCode,
+        status,
+        const DeepCollectionEquality().hash(_players),
+        const DeepCollectionEquality().hash(_playerNames),
+        const DeepCollectionEquality().hash(_activePlayerIds),
+        currentTurnIndex,
+        currentTurnUid,
+        turnDeadlineAt,
+        turnDurationSeconds,
+        currentWordType,
+        currentVerb,
+        winnerUid,
+        hostUid,
+        createdAt,
+        updatedAt,
+        gameMode,
+        locked,
+        settings,
+        const DeepCollectionEquality().hash(_scores)
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -501,7 +595,11 @@ abstract class _Room extends Room {
       final String? winnerUid,
       required final String hostUid,
       @TimestampConverter() required final DateTime createdAt,
-      @TimestampConverter() final DateTime? updatedAt}) = _$RoomImpl;
+      @TimestampConverter() final DateTime? updatedAt,
+      @GameModeConverter() final GameMode gameMode,
+      final bool locked,
+      @GameRoomSettingsConverter() final GameRoomSettings? settings,
+      final Map<String, int> scores}) = _$RoomImpl;
   const _Room._() : super._();
 
   factory _Room.fromJson(Map<String, dynamic> json) = _$RoomImpl.fromJson;
@@ -543,6 +641,16 @@ abstract class _Room extends Room {
   @override
   @TimestampConverter()
   DateTime? get updatedAt;
+  @override // Word Battle game mode (Phase 1)
+  @GameModeConverter()
+  GameMode get gameMode;
+  @override
+  bool get locked;
+  @override
+  @GameRoomSettingsConverter()
+  GameRoomSettings? get settings;
+  @override
+  Map<String, int> get scores;
   @override
   @JsonKey(ignore: true)
   _$$RoomImplCopyWith<_$RoomImpl> get copyWith =>

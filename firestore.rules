@@ -6,6 +6,15 @@ service cloud.firestore {
       return request.auth != null;
     }
     
+    // Helper function to check if user can write to a friendship document
+    // Allows write if authenticated user is either:
+    // 1. The owner of the friendship list (userId), OR
+    // 2. The friend being added/removed (friendUid)
+    function canWriteFriendship(userId, friendUid) {
+      return isAuthenticated() && 
+             (request.auth.uid == userId || request.auth.uid == friendUid);
+    }
+    
     // Helper function to check if user is the host of a room
     function isHost(roomData) {
       return isAuthenticated() && 
@@ -54,6 +63,145 @@ service cloud.firestore {
         allow read: if isAuthenticated();
         // Only Cloud Functions should write
         allow write: if false;
+      }
+    }
+
+    // Arena Rooms collection
+    match /arena_rooms/{roomId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated();
+      allow update: if isAuthenticated();
+      allow delete: if isAuthenticated();
+
+      // Answers subcollection
+      match /answers/{answerId} {
+        allow read: if isAuthenticated();
+        allow write: if isAuthenticated() && answerId.matches('.*_' + request.auth.uid);
+      }
+    }
+
+    
+    // User settings collection
+    match /user_settings/{userId} {
+      // Users can only read/write their own settings
+      allow read, write: if isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    // User stats collection
+    match /user_stats/{userId} {
+      // Users can only read/write their own stats
+      allow read, write: if isAuthenticated() && request.auth.uid == userId;
+      
+      // Trap words subcollection
+      match /trap_words/{wordId} {
+        // Users can only read/write their own trap words
+        allow read, write: if isAuthenticated() && request.auth.uid == userId;
+      }
+    }
+
+    // User word match sets (Phase 0 migration + future social features)
+    match /users/{userId} {
+      // Allow users to read their own user doc (public profile fields will be
+      // modelled here later; for now keep it simple)
+      allow read: if isAuthenticated();
+      allow create, update, delete: if isAuthenticated() && request.auth.uid == userId;
+
+      // Word Match Sets (Legacy path 'sets' is not used, we use 'word_match_sets')
+      match /word_match_sets/{setId} {
+        // Owner has full access
+        allow write: if isAuthenticated() && request.auth.uid == userId;
+        
+        // Read access:
+        // 1. Owner
+        // 2. Public sets
+        // 3. Friends-only sets (if requester is friend)
+        allow read: if isAuthenticated() && (
+          request.auth.uid == userId ||
+          resource.data.visibility == 'public' ||
+          (resource.data.visibility == 'friendsOnly' && 
+           exists(/databases/$(database)/documents/friendships/$(userId)/friends/$(request.auth.uid)))
+        );
+      }
+
+      match /sets/{setId} {
+        // Owner full access; visibility-based public access will be added later
+        allow read, write: if isAuthenticated() && request.auth.uid == userId;
+
+        match /pairs/{pairId} {
+          allow read, write: if isAuthenticated() && request.auth.uid == userId;
+        }
+      }
+
+      // Game Invitations
+      match /invitations/{invitationId} {
+        allow create: if isAuthenticated();
+        allow read, write: if isAuthenticated() && request.auth.uid == userId;
+      }
+    }
+
+    // Shared Word Match sets
+    match /shares/{shareId} {
+      // Anyone can read (if they have the link ID)
+      allow read: if true;
+      
+      // Authenticated users can create shares.
+      // We allow any authenticated user (including anonymous) to create.
+      allow create: if request.auth != null; 
+      
+      // Only the owner can delete
+      allow delete: if request.auth != null && resource.data.ownerUid == request.auth.uid;
+      
+      // No updates allowed to shared sets (immutable snapshots)
+      allow update: if false; 
+    }
+
+    // Friend requests
+    match /friend_requests/{requestId} {
+      // Create: Sender creates the request
+      allow create: if isAuthenticated() &&
+                    request.resource.data.fromUid == request.auth.uid;
+
+      // Read/Update/Delete: Both sender and receiver can access
+      // Simplified into one rule for robustness
+      allow read, write: if isAuthenticated() &&
+        (request.auth.uid == resource.data.fromUid ||
+         request.auth.uid == resource.data.toUid);
+    }
+
+    // Friendships: stored under friendships/{userId}/friends/{friendUid}
+    match /friendships/{userId} {
+      match /friends/{friendUid} {
+        // Use helper function for consistency and clarity
+        // This explicitly handles batch writes where:
+        // - Path 1: /friendships/{fromUid}/friends/{toUid} where currentUser = toUid
+        //   → userId = fromUid, friendUid = toUid → passes because request.auth.uid == toUid == friendUid
+        // - Path 2: /friendships/{toUid}/friends/{fromUid} where currentUser = toUid  
+        //   → userId = toUid, friendUid = fromUid → passes because request.auth.uid == toUid == userId
+        allow read, write: if canWriteFriendship(userId, friendUid);
+      }
+    }
+
+    // Arena Rooms
+    match /arena_rooms/{roomId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated() && request.resource.data.hostId == request.auth.uid;
+      
+      // Update rules:
+      // 1. Host can update everything
+      // 2. Guest can join (update guestId/guest if null)
+      // 3. Guest can update their own presence (guest field)
+      allow update: if isAuthenticated() && (
+        resource.data.hostId == request.auth.uid || 
+        (resource.data.guestId == null && request.resource.data.guestId == request.auth.uid) ||
+        (resource.data.guestId == request.auth.uid)
+      );
+      
+      // Answers subcollection
+      match /answers/{answerId} {
+        allow read: if isAuthenticated();
+        // Allow write if the docId ends with the user's UID (format: {round}_{uid})
+        // We use a regex to ensure it ends with _UID
+        allow write: if isAuthenticated() && answerId.matches('.*_' + request.auth.uid);
       }
     }
   }

@@ -1,0 +1,166 @@
+{
+    "schema_version": "1.0",
+    "level": "B2",
+    "lesson_id": "B2-PASSIVE-02-lesson",
+    "title": "Passive Advanced (Perfect & Modals)",
+    "topic_tags": [
+        "passive",
+        "present_perfect_passive",
+        "modals_passive"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Tamamlanmış eylemleri edilgen çatıda ifade etmeyi (Present Perfect Passive) öğreneceğiz.",
+                    "Zorunluluk, tavsiye ve ihtimal bildiren yardımcı fiillerle (Modals) edilgen yapı kurmayı kavrayacağız.",
+                    "Cümle yapısına göre 'be', 'been' ve 'being' yardımcı fiilleri arasından doğru seçimi yapma becerisi kazanacağız."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Present Perfect Passive: Tamamlanmış Eylemler",
+                "bullets": [
+                    "**Kullanım**: Bir eylemin belirsiz bir geçmişte tamamlandığını ve sonucunun şu an önemli olduğunu belirtmek için kullanılır.",
+                    "**Yapı**: Özneye göre 'has' veya 'have' yardımcı fiilinden sonra mutlaka 'been' getirilir ve fiilin 3. hali (V3) kullanılır."
+                ],
+                "examples": [
+                    "The work has been finished. (İş bitirildi/tamamlandı.)",
+                    "The tickets have been sold. (Biletler satıldı.)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "Modal Passive: Yardımcı Fiillerle Edilgenlik",
+                "bullets": [
+                    "**Kullanım**: Zorunluluk (must), tavsiye (should) veya gelecek planı (will) gibi anlamlar taşıyan cümleleri edilgen yapmak için kullanılır.",
+                    "**Yapı**: Modal yardımcı fiilden sonra her zaman 'be' getirilir ve fiilin 3. hali (V3) eklenir."
+                ],
+                "examples": [
+                    "The documents must be signed today. (Belgeler bugün imzalanmalı.)",
+                    "The email should be sent now. (E-posta şimdi gönderilmeli.)"
+                ]
+            },
+            {
+                "id": "formula",
+                "type": "formula",
+                "title": "Yapı Formülleri",
+                "bullets": [
+                    "Cümle kurarken zaman ve kip ayrımına dikkat edin:"
+                ],
+                "formula": [
+                    "Present Perfect Passive: Subject + has/have + been + V3",
+                    "Modal Passive: Subject + modal (must/should/will) + be + V3"
+                ]
+            },
+            {
+                "id": "c4",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Be ve Been Karıştırmak**: Present Perfect yapısında 'has be' kullanılmaz; mutlaka 'been' gelmelidir.",
+                    "**Modal ile Been Kullanmak**: 'Must been' hatalıdır. Modals doğrudan yalın haldeki 'be' ile kullanılır.",
+                    "**Düzensiz Fiiller**: 'Stealed' veya 'selled' gibi hatalardan kaçınılmalı, 'stolen' ve 'sold' gibi V3 halleri doğru kullanılmalıdır."
+                ],
+                "examples": [
+                    "Hatalı: The car has be stolen. ✗",
+                    "Doğru: The car has **been stolen**. ✓",
+                    "Hatalı: The report will been published. ✗",
+                    "Doğru: The report will **be published**. ✓"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "Choose the correct form: 'The package ____ by courier.'",
+                "options": [
+                    "has been delivered",
+                    "has be delivered",
+                    "must been delivered"
+                ],
+                "answer": "has been delivered",
+                "explain": "Present Perfect Passive yapısında 'has been + V3' dizilimi zorunludur."
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Modern Ofis Yönetimi",
+        "intro_bullets": [
+            "Bir lojistik merkezindeki günlük operasyonları ve tamamlanması gereken işleri takip et.",
+            "Cümlelerdeki zorunluluk ve tamamlanmışlık anlamlarına göre doğru edilgen yapıyı seç."
+        ],
+        "items": [
+            {
+                "engine": "fill",
+                "prompt": "Update: The new project report ____ ____ (write) and is ready for review.",
+                "answer": [
+                    "has been written"
+                ],
+                "explain": "Tamamlanmış bir eylemi Present Perfect Passive ile 'has been written' şeklinde ifade ederiz."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "Attention! These rules ____ clearly to all employees tomorrow.",
+                "options": [
+                    "must be explained",
+                    "must been explained",
+                    "have been explain"
+                ],
+                "answer": "must be explained",
+                "explain": "Geleceğe yönelik bir zorunluluk/kural bildirirken modal passive (must be + V3) kullanılır."
+            },
+            {
+                "engine": "transform",
+                "prompt": "Make it passive: 'Someone will repair the road near the office.'",
+                "steps": [
+                    {
+                        "type": "select",
+                        "label": "Subject",
+                        "options": [
+                            "The road"
+                        ],
+                        "answer": "The road"
+                    },
+                    {
+                        "type": "select",
+                        "label": "Passive form",
+                        "options": [
+                            "will be repaired"
+                        ],
+                        "answer": "will be repaired"
+                    }
+                ],
+                "final_template": "{subject} {passive}.",
+                "final_answer": "The road will be repaired.",
+                "explain": "Gelecek zaman edilgen yapısı 'will be + V3' şeklinde kurulur."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "Is the car ready? Yes, it ____ (stolen) last week but finally recovered.",
+                "options": [
+                    "had been stolen",
+                    "has been stolen",
+                    "stolen"
+                ],
+                "answer": "has been stolen",
+                "explain": "Eylemin gerçekleşmiş olması ve sonucunun güncelliği için Present Perfect Passive uygundur."
+            }
+        ],
+        "recap_bullets": [
+            "Present Perfect: has/have + been + V3.",
+            "Modals: modal + be + V3.",
+            "Düzensiz fiillerin 3. hallerine (stolen, written, built) dikkat et.",
+            "Noktalama ve 'be/been' farkını mutlaka kontrol et."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "B2-PASSIVE-02"
+    }
+}

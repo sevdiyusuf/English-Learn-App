@@ -1,0 +1,200 @@
+{
+    "schema_version": "1.0",
+    "level": "B1",
+    "lesson_id": "B1-COND-01-lesson",
+    "title": "Conditionals: Zero & First",
+    "topic_tags": [
+        "conditionals",
+        "zero_conditional",
+        "first_conditional",
+        "if",
+        "when"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Bir durumun sonucunu belirten koşul (If) cümlelerini öğreneceğiz.",
+                    "Genel gerçekler (Zero) ile gelecekteki ihtimaller (First) arasındaki farkı kavrayacağız.",
+                    "Doğru zaman yapılarını (Tenses) yerleştirmeyi pekiştireceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Zero Conditional: Genel Doğrular",
+                "bullets": [
+                    "**Kullanım**: Bilimsel gerçekler, genel doğrular ve değişmez alışkanlıklar için kullanılır.",
+                    "Her iki taraf da Geniş Zaman (Present Simple) ile kurulur."
+                ],
+                "formula": [
+                    "If + Present Simple, Present Simple"
+                ],
+                "examples": [
+                    "If you heat ice, it **melts**.",
+                    "When water reaches 100°C, it **boils**."
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "First Conditional: Gelecek Olasılıklar",
+                "bullets": [
+                    "**Kullanım**: Gelecekte gerçekleşmesi muhtemel, gerçekçi durumlar ve sonuçları için kullanılır.",
+                    "Koşul kısmı Geniş Zaman, sonuç kısmı Gelecek Zaman (Will) olur."
+                ],
+                "formula": [
+                    "If + Present Simple, Will + V1"
+                ],
+                "examples": [
+                    "If it rains tomorrow, we **will stay** at home.",
+                    "If we study hard, we **will pass**."
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "Choose the correct form: 'If you mix red and blue, you ____ purple.'",
+                "options": [
+                    "get",
+                    "will get"
+                ],
+                "answer": "get",
+                "explain": "Bu genel bir renk karışımı gerçeğidir (Zero Conditional), bu yüzden her iki taraf da geniş zaman olur."
+            },
+            {
+                "id": "c4",
+                "type": "rule",
+                "title": "If vs. When",
+                "bullets": [
+                    "**If**: Bir şeyin olma ihtimali vardır ama kesin değildir.",
+                    "**When**: Bir şeyin gerçekleşeceğinden eminizdir, sadece zamanı beklenmektedir."
+                ],
+                "examples": [
+                    "If I see Tom, I'll tell him. (Görürsem söylerim.)",
+                    "When I drink coffee, I feel awake. (İçtiğim her zaman.)"
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**If Kısmında Will Kullanmak**: 'If it will rain' hatalıdır. Koşul cümlesinde asla 'will' kullanılmaz.",
+                    "**Virgül Unutmak**: 'If' cümlesi başta gelirse araya virgül konur; 'If' ortadaysa virgül kullanılmaz."
+                ],
+                "examples": [
+                    "Hatalı: If I will see Tom, I will tell him. ✗",
+                    "Doğru: If I **see** Tom, I will tell him. ✓"
+                ]
+            },
+            {
+                "id": "q2",
+                "type": "checkpoint",
+                "engine": "fill",
+                "prompt": "If you ____ (not / hurry), you will miss the bus.",
+                "answer": [
+                    "don't hurry"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Geleceğe dair bir uyarı (First Conditional) yapılıyor. Koşul kısmı olumsuz geniş zaman olmalıdır."
+            },
+            {
+                "id": "c6",
+                "type": "tip",
+                "title": "Pratik İpucu",
+                "bullets": [
+                    "Cümlede 'always' (her zaman) veya 'usually' (genellikle) anlamı varsa: **Zero Conditional**.",
+                    "Cümlede 'tomorrow' veya 'next week' gibi gelecek vurgusu varsa: **First Conditional**."
+                ]
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Kontekst: Hafta Sonu Planı",
+        "intro_bullets": [
+            "Arkadaşlarınla dışarı çıkmak için hava durumunu ve hazırlıkları konuşuyorsun.",
+            "Gerçekçi ihtimaller ile genel alışkanlıkların farkına odaklan."
+        ],
+        "items": [
+            {
+                "engine": "tap",
+                "prompt": "Sarah: 'If the weather is sunny tomorrow, we ___ to the park.'",
+                "bank": [
+                    "will go",
+                    "go",
+                    "went"
+                ],
+                "answer": "will go",
+                "explain": "Geleceğe dair belirli bir ihtimalden bahsedildiği için First Conditional kullanılır."
+            },
+            {
+                "engine": "fill",
+                "prompt": "Mark: 'I agree. But you know me, if it ___ (rain), I usually stay at home.'",
+                "answer": [
+                    "rains"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Burada genel bir alışkanlıktan (Zero Conditional) bahsedilmektedir."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "Sarah: 'If we ___ early, we will have time for coffee before the movie.'",
+                "options": [
+                    "finish",
+                    "will finish"
+                ],
+                "answer": "finish",
+                "explain": "If bağlacının bulunduğu yan cümlede 'will' kullanılmaz; geniş zaman tercih edilir."
+            },
+            {
+                "engine": "order",
+                "prompt": "Cümleyi kur: 'Eğer çalışmazsan, sınavda başarısız olacaksın.'",
+                "tokens": [
+                    "If",
+                    "you",
+                    "don't",
+                    "study,",
+                    "you",
+                    "will",
+                    "fail",
+                    "the",
+                    "exam"
+                ],
+                "answer_tokens": [
+                    "If",
+                    "you",
+                    "don't",
+                    "study,",
+                    "you",
+                    "will",
+                    "fail",
+                    "the",
+                    "exam"
+                ],
+                "explain": "First Conditional yapısında olumsuz koşul ve gelecek zaman sonucu."
+            }
+        ],
+        "recap_bullets": [
+            "Hatırla: Bilimsel gerçekler ve alışkanlıklar için Present + Present (Zero) kullan.",
+            "Hatırla: Gelecek ihtimalleri için Present + Will (First) yapısını kur.",
+            "Hatırla: 'If' yan cümlesine asla 'will' yardımcı fiilini getirme."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "B1-COND-01"
+    }
+}

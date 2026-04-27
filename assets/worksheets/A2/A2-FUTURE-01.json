@@ -1,0 +1,276 @@
+{
+    "schema_version": "1.0",
+    "level": "A2",
+    "worksheet_id": "A2-FUTURE-01",
+    "title": "Will vs Be going to",
+    "topic_tags": [
+        "future",
+        "will",
+        "going_to",
+        "prediction",
+        "plan",
+        "evidence"
+    ],
+    "subskills": [
+        "recognize_prediction_vs_evidence",
+        "choose_form",
+        "produce_short_future"
+    ],
+    "difficulty": 2,
+    "engine_sequence": [
+        {
+            "engine": "mcq",
+            "count": 8,
+            "rules": {
+                "shuffle_options": true,
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "fill",
+            "count": 6,
+            "rules": {
+                "case_sensitive": false,
+                "allow_contractions": true
+            }
+        }
+    ],
+    "items": [
+        {
+            "id": "mcq1",
+            "engine": "mcq",
+            "prompt": "I think it ____ rain tomorrow.",
+            "translation_tr": "Bence yarın yağmur yağacak.",
+            "options": [
+                "will",
+                "is going to"
+            ],
+            "answer": "will",
+            "hint": "Opinion prediction (I think) → will.",
+            "tags": [
+                "prediction"
+            ]
+        },
+        {
+            "id": "mcq2",
+            "engine": "mcq",
+            "prompt": "Look at those clouds! It ____ rain.",
+            "translation_tr": "Şu bulutlara bak! Yağmur yağmak üzere.",
+            "options": [
+                "will",
+                "is going to"
+            ],
+            "answer": "is going to",
+            "hint": "Evidence now → going to.",
+            "tags": [
+                "evidence"
+            ]
+        },
+        {
+            "id": "mcq3",
+            "engine": "mcq",
+            "prompt": "We ____ visit my grandparents this weekend. (plan)",
+            "translation_tr": "Bu hafta sonu büyükanne ve büyükbabamı ziyaret edeceğiz.",
+            "options": [
+                "will",
+                "are going to"
+            ],
+            "answer": "are going to",
+            "hint": "Plan/intention → going to.",
+            "tags": [
+                "plan"
+            ]
+        },
+        {
+            "id": "mcq4",
+            "engine": "mcq",
+            "prompt": "Wait, I ____ help you! (spontaneous decision)",
+            "translation_tr": "Bekle, sana yardım edeceğim!",
+            "options": [
+                "will",
+                "am going to"
+            ],
+            "answer": "will",
+            "hint": "Spontaneous decision → will.",
+            "tags": [
+                "spontaneous"
+            ]
+        },
+        {
+            "id": "mcq5",
+            "engine": "mcq",
+            "prompt": "She’s bought a ticket. She ____ travel next week.",
+            "translation_tr": "Bilet aldı. Gelecek hafta seyahat edecek.",
+            "options": [
+                "will",
+                "is going to"
+            ],
+            "answer": "is going to",
+            "hint": "Preparation already → going to.",
+            "tags": [
+                "plan",
+                "preparation"
+            ]
+        },
+        {
+            "id": "mcq6",
+            "engine": "mcq",
+            "prompt": "I’m sure you ____ pass the exam.",
+            "translation_tr": "Eminim sınavı geçeceksin.",
+            "options": [
+                "will",
+                "are going to"
+            ],
+            "answer": "will",
+            "hint": "Strong belief/opinion → will.",
+            "tags": [
+                "prediction"
+            ]
+        },
+        {
+            "id": "mcq7",
+            "engine": "mcq",
+            "prompt": "Be careful! You ____ fall!",
+            "translation_tr": "Dikkat et! Düşmek üzeresin!",
+            "options": [
+                "will",
+                "are going to"
+            ],
+            "answer": "are going to",
+            "hint": "Evidence in the situation → going to.",
+            "tags": [
+                "evidence"
+            ]
+        },
+        {
+            "id": "mcq8",
+            "engine": "mcq",
+            "prompt": "I ____ call you tonight. (promise)",
+            "translation_tr": "Bu gece seni arayacağım.",
+            "options": [
+                "will",
+                "am going to"
+            ],
+            "answer": "will",
+            "hint": "Promise → will.",
+            "tags": [
+                "promise"
+            ]
+        },
+        {
+            "id": "fill1",
+            "engine": "fill",
+            "prompt": "I think they ____ (win) the match.",
+            "translation_tr": "Bence maçı kazanacaklar.",
+            "answer": [
+                "will win",
+                "they'll win"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces",
+                "accept_contractions"
+            ],
+            "tags": [
+                "prediction"
+            ]
+        },
+        {
+            "id": "fill2",
+            "engine": "fill",
+            "prompt": "Look! He ____ (drop) the glass.",
+            "translation_tr": "Bak! Bardağı düşürecek.",
+            "answer": [
+                "is going to drop",
+                "he's going to drop"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces",
+                "accept_contractions"
+            ],
+            "tags": [
+                "evidence"
+            ]
+        },
+        {
+            "id": "fill3",
+            "engine": "fill",
+            "prompt": "We ____ (not / go) out tonight. (plan)",
+            "translation_tr": "Bu gece dışarı çıkmayacağız.",
+            "answer": [
+                "are not going to go",
+                "aren't going to go"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces",
+                "accept_contractions"
+            ],
+            "tags": [
+                "plan",
+                "negative"
+            ]
+        },
+        {
+            "id": "fill4",
+            "engine": "fill",
+            "prompt": "Don’t worry. I ____ help you. (promise)",
+            "translation_tr": "Merak etme. Sana yardım edeceğim.",
+            "answer": [
+                "will help",
+                "i'll help"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces",
+                "accept_contractions"
+            ],
+            "tags": [
+                "promise"
+            ]
+        },
+        {
+            "id": "fill5",
+            "engine": "fill",
+            "prompt": "She ____ (visit) the dentist tomorrow. (intention)",
+            "translation_tr": "O yarın dişçiye gidecek.",
+            "answer": [
+                "is going to visit",
+                "she's going to visit"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces",
+                "accept_contractions"
+            ],
+            "tags": [
+                "plan"
+            ]
+        },
+        {
+            "id": "fill6",
+            "engine": "fill",
+            "prompt": "I can’t carry this. I ____ (get) a taxi. (spontaneous decision)",
+            "translation_tr": "Bunu taşıyamam. Bir taksi çağıracağım.",
+            "answer": [
+                "will get",
+                "i'll get"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces",
+                "accept_contractions"
+            ],
+            "tags": [
+                "spontaneous"
+            ]
+        }
+    ]
+}

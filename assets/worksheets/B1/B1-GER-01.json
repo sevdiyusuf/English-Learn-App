@@ -1,0 +1,259 @@
+{
+    "schema_version": "1.0",
+    "level": "B1",
+    "worksheet_id": "B1-GER-01",
+    "title": "Gerunds vs Infinitives: Meaning Change",
+    "topic_tags": [
+        "gerunds",
+        "infinitives",
+        "verb_patterns",
+        "meaning_change"
+    ],
+    "subskills": [
+        "distinguishing_meaning_shifts",
+        "past_memories_vs_future_tasks",
+        "interrupting_actions_vs_quitting"
+    ],
+    "difficulty": 3,
+    "engine_sequence": [
+        {
+            "engine": "mcq",
+            "count": 4,
+            "rules": {
+                "shuffle_options": true,
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "tap",
+            "count": 3,
+            "rules": {
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "fill",
+            "count": 3,
+            "rules": {
+                "case_sensitive": false,
+                "allow_contractions": true
+            }
+        },
+        {
+            "engine": "order",
+            "count": 2,
+            "rules": {}
+        }
+    ],
+    "items": [
+        {
+            "id": "ger_mcq1",
+            "engine": "mcq",
+            "prompt": "I was walking home, but I stopped ____ some bread at the bakery.",
+            "translation_tr": "Eve yürüyordum ama fırından ekmek almak için durdum.",
+            "options": [
+                "to buy",
+                "buying"
+            ],
+            "answer": "to buy",
+            "hint": "Did I stop the walk to do something else, or did I quit buying bread forever?",
+            "explain": "'Stop + to-infinitive' means you interrupt an action to do something else.",
+            "tags": [
+                "stop"
+            ]
+        },
+        {
+            "id": "ger_mcq2",
+            "engine": "mcq",
+            "prompt": "I clearly remember ____ the door. I am sure it is locked.",
+            "translation_tr": "Kapıyı kilitlediğimi açıkça hatırlıyorum. Kilitli olduğuna eminim.",
+            "options": [
+                "locking",
+                "to lock"
+            ],
+            "answer": "locking",
+            "hint": "Is this a memory of the past or a task for the future?",
+            "explain": "'Remember + gerund (-ing)' is used for memories of past actions.",
+            "tags": [
+                "remember"
+            ]
+        },
+        {
+            "id": "ger_mcq3",
+            "engine": "mcq",
+            "prompt": "Oh no! I forgot ____ the oven. I must go back home!",
+            "translation_tr": "Ah hayır! Fırını kapatmayı unuttum. Eve geri dönmeliyim!",
+            "options": [
+                "to turn off",
+                "turning off"
+            ],
+            "answer": "to turn off",
+            "hint": "Did I fail to do a task?",
+            "explain": "'Forget + to-infinitive' means you didn't do something you were supposed to do.",
+            "tags": [
+                "forget"
+            ]
+        },
+        {
+            "id": "ger_mcq4",
+            "engine": "mcq",
+            "prompt": "If you have a headache, try ____ an aspirin. It might help.",
+            "translation_tr": "Başın ağrıyorsa bir aspirin almayı dene. Faydalı olabilir.",
+            "options": [
+                "taking",
+                "to take"
+            ],
+            "answer": "taking",
+            "hint": "Is this an experiment/suggestion or a difficult effort?",
+            "explain": "'Try + gerund (-ing)' means to do something as an experiment to see if it works.",
+            "tags": [
+                "try"
+            ]
+        },
+        {
+            "id": "ger_tap1",
+            "engine": "tap",
+            "prompt": "He stopped ____ years ago. He is much healthier now.",
+            "translation_tr": "Yıllar önce sigarayı bıraktı. Şimdi çok daha sağlıklı.",
+            "bank": [
+                "smoking",
+                "to smoke",
+                "smoke",
+                "smoked"
+            ],
+            "answer": "smoking",
+            "hint": "He quit the habit completely.",
+            "explain": "'Stop + gerund' means to quit a habit or a continuous action.",
+            "tags": [
+                "stop"
+            ]
+        },
+        {
+            "id": "ger_tap2",
+            "engine": "tap",
+            "prompt": "Please remember ____ your umbrella. It's going to rain.",
+            "translation_tr": "Lütfen şemsiyeni almayı unutma. Yağmur yağacak.",
+            "bank": [
+                "to take",
+                "taking",
+                "take",
+                "took"
+            ],
+            "answer": "to take",
+            "hint": "Don't forget to do this task in the future.",
+            "explain": "'Remember + to-infinitive' means to not forget to do a required task.",
+            "tags": [
+                "remember"
+            ]
+        },
+        {
+            "id": "ger_tap3",
+            "engine": "tap",
+            "prompt": "I'll never forget ____ the Dalai Lama in person. It was amazing.",
+            "translation_tr": "Dalai Lama ile yüz yüze tanışmayı asla unutmayacağım. Harikaydı.",
+            "bank": [
+                "meeting",
+                "to meet",
+                "meet",
+                "met"
+            ],
+            "answer": "meeting",
+            "hint": "This is a memory of a past event.",
+            "explain": "We use 'forget + gerund' (usually in negative) for vivid memories of the past.",
+            "tags": [
+                "forget"
+            ]
+        },
+        {
+            "id": "ger_fill1",
+            "engine": "fill",
+            "prompt": "I tried ____ (lift) the heavy table, but I wasn't strong enough.",
+            "translation_tr": "Ağır masayı kaldırmayı denedim ama yeterince güçlü değildim.",
+            "answer": [
+                "to lift"
+            ],
+            "explain": "'Try + to-infinitive' means to make an effort to do something difficult.",
+            "tags": [
+                "try"
+            ]
+        },
+        {
+            "id": "ger_fill2",
+            "engine": "fill",
+            "prompt": "She stopped ____ (talk) when the movie started.",
+            "translation_tr": "Film başladığında konuşmayı bıraktı.",
+            "answer": [
+                "talking"
+            ],
+            "explain": "She ended the action of talking.",
+            "tags": [
+                "stop"
+            ]
+        },
+        {
+            "id": "ger_fill3",
+            "engine": "fill",
+            "prompt": "Did you remember ____ (call) your mother on her birthday?",
+            "translation_tr": "Anneni doğum gününde aramayı hatırladın mı?",
+            "answer": [
+                "to call"
+            ],
+            "explain": "A question about whether a task was remembered and performed.",
+            "tags": [
+                "remember"
+            ]
+        },
+        {
+            "id": "ger_order1",
+            "engine": "order",
+            "bank": [
+                "to",
+                "I",
+                "lock",
+                "forgot",
+                "the",
+                "car."
+            ],
+            "answer": [
+                "I",
+                "forgot",
+                "to",
+                "lock",
+                "the",
+                "car."
+            ],
+            "translation_tr": "Arabayı kilitlemeyi unuttum.",
+            "explain": "Structure: Subject + forgot + to-infinitive (failure to perform a task).",
+            "tags": [
+                "forget",
+                "order"
+            ]
+        },
+        {
+            "id": "ger_order2",
+            "engine": "order",
+            "bank": [
+                "stopped",
+                "to",
+                "He",
+                "his",
+                "check",
+                "map."
+            ],
+            "answer": [
+                "He",
+                "stopped",
+                "to",
+                "check",
+                "his",
+                "map."
+            ],
+            "translation_tr": "Haritasına bakmak için durdu.",
+            "explain": "Structure: He interrupted his journey (stopped) in order to check the map.",
+            "tags": [
+                "stop",
+                "order"
+            ]
+        }
+    ]
+}

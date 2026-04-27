@@ -1,0 +1,259 @@
+{
+    "schema_version": "1.0",
+    "level": "A1",
+    "worksheet_id": "A1-TOBE-01",
+    "title": "To Be: Am, Is, Are",
+    "topic_tags": [
+        "to_be",
+        "pronouns",
+        "basic_sentences"
+    ],
+    "subskills": [
+        "subject_verb_agreement",
+        "negative_forms",
+        "question_order"
+    ],
+    "difficulty": 1,
+    "engine_sequence": [
+        {
+            "engine": "mcq",
+            "count": 4,
+            "rules": {
+                "shuffle_options": true,
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "tap",
+            "count": 3,
+            "rules": {
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "fill",
+            "count": 3,
+            "rules": {
+                "case_sensitive": false,
+                "allow_contractions": true
+            }
+        },
+        {
+            "engine": "order",
+            "count": 2,
+            "rules": {}
+        }
+    ],
+    "items": [
+        {
+            "id": "tobe_mcq1",
+            "engine": "mcq",
+            "prompt": "I ____ a student.",
+            "translation_tr": "Ben bir öğrenciyim.",
+            "options": [
+                "am",
+                "is",
+                "are"
+            ],
+            "answer": "am",
+            "hint": "Use 'am' with 'I'.",
+            "explain": "Subject 'I' always takes 'am' in the present tense.",
+            "tags": [
+                "affirmative"
+            ]
+        },
+        {
+            "id": "tobe_mcq2",
+            "engine": "mcq",
+            "prompt": "They ____ from Turkey.",
+            "translation_tr": "Onlar Türkiye'den.",
+            "options": [
+                "am",
+                "is",
+                "are"
+            ],
+            "answer": "are",
+            "hint": "Plural subjects take 'are'.",
+            "explain": "We use 'are' for 'They', 'We', and 'You'.",
+            "tags": [
+                "affirmative"
+            ]
+        },
+        {
+            "id": "tobe_mcq3",
+            "engine": "mcq",
+            "prompt": "It ____ a beautiful day.",
+            "translation_tr": "Güzel bir gün.",
+            "options": [
+                "am",
+                "is",
+                "are"
+            ],
+            "answer": "is",
+            "hint": "Singular objects/it take 'is'.",
+            "explain": "Third-person singular (He, She, It) takes 'is'.",
+            "tags": [
+                "affirmative"
+            ]
+        },
+        {
+            "id": "tobe_mcq4",
+            "engine": "mcq",
+            "prompt": "We ____ hungry.",
+            "translation_tr": "Açız.",
+            "options": [
+                "am",
+                "is",
+                "are"
+            ],
+            "answer": "are",
+            "hint": "More than one person (We).",
+            "explain": "'We' is a plural pronoun and requires 'are'.",
+            "tags": [
+                "plural"
+            ]
+        },
+        {
+            "id": "tobe_tap1",
+            "engine": "tap",
+            "prompt": "She ____ my best friend.",
+            "translation_tr": "O benim en iyi arkadaşım.",
+            "bank": [
+                "am",
+                "is",
+                "are",
+                "be"
+            ],
+            "answer": "is",
+            "hint": "Think about 'She'.",
+            "explain": "Female singular subject uses 'is'.",
+            "tags": [
+                "singular"
+            ]
+        },
+        {
+            "id": "tobe_tap2",
+            "engine": "tap",
+            "prompt": "You ____ very kind.",
+            "translation_tr": "Sen çok naziksin.",
+            "bank": [
+                "am",
+                "is",
+                "are",
+                "be"
+            ],
+            "answer": "are",
+            "hint": "You always takes the plural form of to-be.",
+            "explain": "'You' uses 'are' whether it is singular or plural.",
+            "tags": [
+                "pronoun"
+            ]
+        },
+        {
+            "id": "tobe_tap3",
+            "engine": "tap",
+            "prompt": "The cats ____ on the sofa.",
+            "translation_tr": "Kediler kanepede.",
+            "bank": [
+                "am",
+                "is",
+                "are",
+                "be"
+            ],
+            "answer": "are",
+            "hint": "The cats = They.",
+            "explain": "Plural nouns like 'cats' take 'are'.",
+            "tags": [
+                "plural_noun"
+            ]
+        },
+        {
+            "id": "tobe_fill1",
+            "engine": "fill",
+            "prompt": "I ____ (not) a doctor.",
+            "translation_tr": "Ben doktor değilim.",
+            "answer": [
+                "am not",
+                "I'm not"
+            ],
+            "explain": "Negative form: am + not.",
+            "tags": [
+                "negative"
+            ]
+        },
+        {
+            "id": "tobe_fill2",
+            "engine": "fill",
+            "prompt": "____ he your brother?",
+            "translation_tr": "O senin kardeşin mi?",
+            "answer": [
+                "is"
+            ],
+            "explain": "In questions, 'To Be' comes before the subject.",
+            "tags": [
+                "question"
+            ]
+        },
+        {
+            "id": "tobe_fill3",
+            "engine": "fill",
+            "prompt": "We ____ (not) late.",
+            "translation_tr": "Geç kalmadık.",
+            "answer": [
+                "are not",
+                "aren't",
+                "we're not"
+            ],
+            "explain": "Negative form of are: are not or aren't.",
+            "tags": [
+                "negative"
+            ]
+        },
+        {
+            "id": "tobe_order1",
+            "engine": "order",
+            "bank": [
+                "are",
+                "Where",
+                "from?",
+                "you"
+            ],
+            "answer": [
+                "Where",
+                "are",
+                "you",
+                "from?"
+            ],
+            "translation_tr": "Nerelisin?",
+            "explain": "Question structure: Wh-word + be + subject.",
+            "tags": [
+                "question",
+                "order"
+            ]
+        },
+        {
+            "id": "tobe_order2",
+            "engine": "order",
+            "bank": [
+                "is",
+                "not",
+                "He",
+                "at",
+                "home."
+            ],
+            "answer": [
+                "He",
+                "is",
+                "not",
+                "at",
+                "home."
+            ],
+            "translation_tr": "O evde değil.",
+            "explain": "Negative structure: Subject + be + not.",
+            "tags": [
+                "negative",
+                "order"
+            ]
+        }
+    ]
+}

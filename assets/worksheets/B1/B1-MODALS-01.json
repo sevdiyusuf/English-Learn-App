@@ -1,0 +1,336 @@
+{
+    "schema_version": "1.0",
+    "level": "B1",
+    "worksheet_id": "B1-MODALS-01",
+    "title": "Modals: should / must / have to / don't have to",
+    "topic_tags": [
+        "modals",
+        "advice",
+        "obligation",
+        "no_obligation"
+    ],
+    "subskills": [
+        "choose_modal_meaning",
+        "advice_vs_rule",
+        "negative_meanings"
+    ],
+    "difficulty": 3,
+    "engine_sequence": [
+        {
+            "engine": "mcq",
+            "count": 12,
+            "rules": {
+                "shuffle_options": true,
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "fill",
+            "count": 6,
+            "rules": {
+                "case_sensitive": false,
+                "allow_contractions": true
+            }
+        }
+    ],
+    "items": [
+        {
+            "id": "mcq1",
+            "engine": "mcq",
+            "prompt": "You ____ see a doctor. (advice)",
+            "translation_tr": "Doktora görünmelisin.",
+            "options": [
+                "should",
+                "must",
+                "have to",
+                "don't have to"
+            ],
+            "answer": "should",
+            "hint": "Advice → should.",
+            "tags": [
+                "advice"
+            ]
+        },
+        {
+            "id": "mcq2",
+            "engine": "mcq",
+            "prompt": "You ____ wear a helmet. It’s the law. (rule)",
+            "translation_tr": "Kask takmak zorundasın. Bu bir kural.",
+            "options": [
+                "should",
+                "must",
+                "have to",
+                "don't have to"
+            ],
+            "answer": "have to",
+            "hint": "External rule/law → have to.",
+            "tags": [
+                "obligation_external"
+            ]
+        },
+        {
+            "id": "mcq3",
+            "engine": "mcq",
+            "prompt": "I ____ study tonight. I have an exam tomorrow. (strong necessity)",
+            "translation_tr": "Bu akşam çalışmalıyım. Yarın sınavım var.",
+            "options": [
+                "should",
+                "must",
+                "have to",
+                "don't have to"
+            ],
+            "answer": "must",
+            "hint": "Strong necessity (speaker feels it) → must.",
+            "tags": [
+                "obligation_internal"
+            ]
+        },
+        {
+            "id": "mcq4",
+            "engine": "mcq",
+            "prompt": "You ____ pay for this. It’s free. (no obligation)",
+            "translation_tr": "Bunun için ödeme yapmak zorunda değilsin. Ücretsiz.",
+            "options": [
+                "should",
+                "must",
+                "have to",
+                "don't have to"
+            ],
+            "answer": "don't have to",
+            "tags": [
+                "no_obligation"
+            ]
+        },
+        {
+            "id": "mcq5",
+            "engine": "mcq",
+            "prompt": "You ____ smoke here. (prohibition)",
+            "translation_tr": "Burada sigara içmemelisin / içmek yasak.",
+            "options": [
+                "mustn't",
+                "don't have to",
+                "shouldn't"
+            ],
+            "answer": "mustn't",
+            "hint": "Mustn't = not allowed.",
+            "tags": [
+                "prohibition"
+            ]
+        },
+        {
+            "id": "mcq6",
+            "engine": "mcq",
+            "prompt": "You ____ be late. (advice)",
+            "translation_tr": "Geç kalmamalısın.",
+            "options": [
+                "shouldn't",
+                "mustn't",
+                "don't have to"
+            ],
+            "answer": "shouldn't",
+            "tags": [
+                "advice_negative"
+            ]
+        },
+        {
+            "id": "mcq7",
+            "engine": "mcq",
+            "prompt": "Do I ____ bring my passport? (rule)",
+            "translation_tr": "Pasaportumu getirmek zorunda mıyım?",
+            "options": [
+                "must",
+                "have to",
+                "should"
+            ],
+            "answer": "have to",
+            "tags": [
+                "question_rule"
+            ]
+        },
+        {
+            "id": "mcq8",
+            "engine": "mcq",
+            "prompt": "I ____ to get up early for work. (routine obligation)",
+            "translation_tr": "İş için erken kalkmak zorundayım.",
+            "options": [
+                "have to",
+                "should",
+                "mustn't"
+            ],
+            "answer": "have to",
+            "tags": [
+                "obligation_external"
+            ]
+        },
+        {
+            "id": "mcq9",
+            "engine": "mcq",
+            "prompt": "You ____ try this restaurant. It’s great! (recommendation)",
+            "translation_tr": "Bu restoranı denemelisin. Harika!",
+            "options": [
+                "should",
+                "mustn't",
+                "don't have to"
+            ],
+            "answer": "should",
+            "tags": [
+                "advice"
+            ]
+        },
+        {
+            "id": "mcq10",
+            "engine": "mcq",
+            "prompt": "Employees ____ wear an ID badge. (company rule)",
+            "translation_tr": "Çalışanlar kimlik kartı takmak zorunda.",
+            "options": [
+                "have to",
+                "should",
+                "don't have to"
+            ],
+            "answer": "have to",
+            "tags": [
+                "obligation_external"
+            ]
+        },
+        {
+            "id": "mcq11",
+            "engine": "mcq",
+            "prompt": "I ____ call my mom. I promised. (strong feeling)",
+            "translation_tr": "Annemı aramalıyım. Söz verdim.",
+            "options": [
+                "must",
+                "should",
+                "don't have to"
+            ],
+            "answer": "must",
+            "tags": [
+                "obligation_internal"
+            ]
+        },
+        {
+            "id": "mcq12",
+            "engine": "mcq",
+            "prompt": "You ____ study today if you don’t want to. (no obligation)",
+            "translation_tr": "İstemiyorsan bugün ders çalışmak zorunda değilsin.",
+            "options": [
+                "mustn't",
+                "don't have to",
+                "should"
+            ],
+            "answer": "don't have to",
+            "tags": [
+                "no_obligation"
+            ]
+        },
+        {
+            "id": "fill1",
+            "engine": "fill",
+            "prompt": "You ____ drink more water. (advice)",
+            "translation_tr": "Daha fazla su içmelisin.",
+            "answer": [
+                "should"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "advice"
+            ]
+        },
+        {
+            "id": "fill2",
+            "engine": "fill",
+            "prompt": "You ____ park here. It’s not allowed. (prohibition)",
+            "translation_tr": "Buraya park etmemelisin. Buna izin verilmiyor.",
+            "answer": [
+                "mustn't",
+                "must not"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces",
+                "accept_contractions"
+            ],
+            "tags": [
+                "prohibition"
+            ]
+        },
+        {
+            "id": "fill3",
+            "engine": "fill",
+            "prompt": "I ____ get up early tomorrow. I have a meeting. (necessity)",
+            "translation_tr": "Yarın erken kalkmalıyım. Toplantım var.",
+            "answer": [
+                "have to",
+                "must"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "obligation"
+            ]
+        },
+        {
+            "id": "fill4",
+            "engine": "fill",
+            "prompt": "You ____ bring food. We have enough. (no obligation)",
+            "translation_tr": "Yiyecek getirmen gerekmiyor. Yeterince var.",
+            "answer": [
+                "don't have to",
+                "do not have to"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces",
+                "accept_contractions"
+            ],
+            "tags": [
+                "no_obligation"
+            ]
+        },
+        {
+            "id": "fill5",
+            "engine": "fill",
+            "prompt": "____ I have to show my ID? (question)",
+            "translation_tr": "Kimliğimi göstermek zorunda mıyım?",
+            "answer": [
+                "do",
+                "do?"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "question"
+            ]
+        },
+        {
+            "id": "fill6",
+            "engine": "fill",
+            "prompt": "You ____ be rude to people. (advice negative)",
+            "translation_tr": "İnsanlara karşı kaba olmamalısın.",
+            "answer": [
+                "shouldn't",
+                "should not"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces",
+                "accept_contractions"
+            ],
+            "tags": [
+                "advice_negative"
+            ]
+        }
+    ]
+}

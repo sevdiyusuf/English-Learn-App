@@ -1,0 +1,363 @@
+{
+  "schema_version": "1.0",
+  "level": "B1",
+  "worksheet_id": "B1-USED-01",
+  "title": "Used to vs Past Simple",
+  "topic_tags": [
+    "used_to",
+    "past_simple",
+    "habits",
+    "states"
+  ],
+  "subskills": [
+    "choose_used_to",
+    "choose_past_simple",
+    "negatives_questions"
+  ],
+  "difficulty": 3,
+  "engine_sequence": [
+    {
+      "engine": "mcq",
+      "count": 10,
+      "rules": {
+        "shuffle_options": true,
+        "allow_hint": true
+      }
+    },
+    {
+      "engine": "transform",
+      "count": 6,
+      "rules": {
+        "allow_hint": true
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "mcq1",
+      "engine": "mcq",
+      "prompt": "When I was a child, I ____ play outside every day.",
+      "translation_tr": "Çocukken her gün dışarıda oynardım.",
+      "options": [
+        "used to",
+        "played"
+      ],
+      "answer": "used to",
+      "hint": "Past habit (repeated) → used to.",
+      "tags": [
+        "habit"
+      ]
+    },
+    {
+      "id": "mcq2",
+      "engine": "mcq",
+      "prompt": "Yesterday, I ____ football with my friends.",
+      "translation_tr": "Dün arkadaşlarımla futbol oynadım.",
+      "options": [
+        "used to play",
+        "played"
+      ],
+      "answer": "played",
+      "hint": "Single past time (yesterday) → Past Simple.",
+      "tags": [
+        "single_event"
+      ]
+    },
+    {
+      "id": "mcq3",
+      "engine": "mcq",
+      "prompt": "She ____ have long hair, but now it’s short.",
+      "translation_tr": "Eskiden uzun saçları vardı ama şimdi kısa.",
+      "options": [
+        "used to",
+        "was"
+      ],
+      "answer": "used to",
+      "tags": [
+        "past_state"
+      ]
+    },
+    {
+      "id": "mcq4",
+      "engine": "mcq",
+      "prompt": "Last weekend, we ____ to İzmir.",
+      "translation_tr": "Geçen hafta sonu İzmir’e gittik.",
+      "options": [
+        "used to go",
+        "went"
+      ],
+      "answer": "went",
+      "tags": [
+        "single_event"
+      ]
+    },
+    {
+      "id": "mcq5",
+      "engine": "mcq",
+      "prompt": "He ____ be shy, but now he’s confident.",
+      "translation_tr": "Eskiden utangaçtı ama şimdi özgüvenli.",
+      "options": [
+        "used to",
+        "did"
+      ],
+      "answer": "used to",
+      "tags": [
+        "past_state"
+      ]
+    },
+    {
+      "id": "mcq6",
+      "engine": "mcq",
+      "prompt": "I ____ my keys an hour ago.",
+      "translation_tr": "Bir saat önce anahtarlarımı kaybettim.",
+      "options": [
+        "used to lose",
+        "lost"
+      ],
+      "answer": "lost",
+      "tags": [
+        "single_event"
+      ]
+    },
+    {
+      "id": "mcq7",
+      "engine": "mcq",
+      "prompt": "They ____ live in a small flat.",
+      "translation_tr": "Eskiden küçük bir dairede yaşarlardı.",
+      "options": [
+        "used to",
+        "lived"
+      ],
+      "answer": "used to",
+      "tags": [
+        "past_state"
+      ]
+    },
+    {
+      "id": "mcq8",
+      "engine": "mcq",
+      "prompt": "I ____ her at the café yesterday.",
+      "translation_tr": "Onu dün kafede gördüm.",
+      "options": [
+        "used to see",
+        "saw"
+      ],
+      "answer": "saw",
+      "tags": [
+        "single_event"
+      ]
+    },
+    {
+      "id": "mcq9",
+      "engine": "mcq",
+      "prompt": "We ____ eat fast food, but now we cook at home.",
+      "translation_tr": "Eskiden fast food yerdik ama şimdi evde yemek yapıyoruz.",
+      "options": [
+        "used to",
+        "ate"
+      ],
+      "answer": "used to",
+      "tags": [
+        "habit"
+      ]
+    },
+    {
+      "id": "mcq10",
+      "engine": "mcq",
+      "prompt": "He ____ a new phone last month.",
+      "translation_tr": "Geçen ay yeni bir telefon aldı.",
+      "options": [
+        "used to buy",
+        "bought"
+      ],
+      "answer": "bought",
+      "tags": [
+        "single_event"
+      ]
+    },
+    {
+      "id": "tr1",
+      "engine": "transform",
+      "prompt": "Change to 'used to': I played video games every day when I was 10.",
+      "translation_tr": "Bunu 'used to' ile yaz: 10 yaşındayken her gün video oyunu oynadım.",
+      "steps": [
+        {
+          "type": "select",
+          "label": "Choose start",
+          "options": [
+            "I used to",
+            "I used"
+          ],
+          "answer": "I used to"
+        },
+        {
+          "type": "select",
+          "label": "Choose base verb",
+          "options": [
+            "play",
+            "played",
+            "playing"
+          ],
+          "answer": "play"
+        }
+      ],
+      "final_template": "{start} {verb} video games every day when I was 10.",
+      "final_answer": "I used to play video games every day when I was 10.",
+      "tags": [
+        "transform",
+        "habit"
+      ]
+    },
+    {
+      "id": "tr2",
+      "engine": "transform",
+      "prompt": "Make it negative: I used to drink tea.",
+      "translation_tr": "Olumsuz yap: Eskiden çay içerdim.",
+      "steps": [
+        {
+          "type": "select",
+          "label": "Negative form",
+          "options": [
+            "I didn’t use to",
+            "I don’t used to"
+          ],
+          "answer": "I didn’t use to"
+        },
+        {
+          "type": "select",
+          "label": "Base verb",
+          "options": [
+            "drink",
+            "drank"
+          ],
+          "answer": "drink"
+        }
+      ],
+      "final_template": "{neg} {verb} tea.",
+      "final_answer": "I didn’t use to drink tea.",
+      "tags": [
+        "transform",
+        "negative"
+      ]
+    },
+    {
+      "id": "tr3",
+      "engine": "transform",
+      "prompt": "Make a question: She used to live here.",
+      "translation_tr": "Soru yap: Eskiden burada yaşardı.",
+      "steps": [
+        {
+          "type": "select",
+          "label": "Question start",
+          "options": [
+            "Did she use to",
+            "Does she used to"
+          ],
+          "answer": "Did she use to"
+        },
+        {
+          "type": "select",
+          "label": "Base verb",
+          "options": [
+            "live",
+            "lived"
+          ],
+          "answer": "live"
+        }
+      ],
+      "final_template": "{q} {verb} here?",
+      "final_answer": "Did she use to live here?",
+      "tags": [
+        "transform",
+        "question"
+      ]
+    },
+    {
+      "id": "tr4",
+      "engine": "transform",
+      "prompt": "Change to Past Simple (single event): I used to go to the gym.",
+      "translation_tr": "Tekil olay olacak şekilde Past Simple’a çevir: Eskiden spor salonuna giderdim.",
+      "steps": [
+        {
+          "type": "select",
+          "label": "Time word",
+          "options": [
+            "yesterday",
+            "every day"
+          ],
+          "answer": "yesterday"
+        },
+        {
+          "type": "select",
+          "label": "Verb form",
+          "options": [
+            "went",
+            "go"
+          ],
+          "answer": "went"
+        }
+      ],
+      "final_template": "I {verb} to the gym {time}.",
+      "final_answer": "I went to the gym yesterday.",
+      "tags": [
+        "transform",
+        "single_event"
+      ]
+    },
+    {
+      "id": "tr5",
+      "engine": "transform",
+      "prompt": "Change to 'used to': He was quiet when he was younger.",
+      "translation_tr": "'used to' ile yaz: Gençken sessizdi.",
+      "steps": [
+        {
+          "type": "select",
+          "label": "Start",
+          "options": [
+            "He used to be",
+            "He used to"
+          ],
+          "answer": "He used to be"
+        }
+      ],
+      "final_template": "{start} quiet when he was younger.",
+      "final_answer": "He used to be quiet when he was younger.",
+      "tags": [
+        "transform",
+        "past_state"
+      ]
+    },
+    {
+      "id": "tr6",
+      "engine": "transform",
+      "prompt": "Make it negative: They used to live in Ankara.",
+      "translation_tr": "Olumsuz yap: Eskiden Ankara’da yaşarlardı.",
+      "steps": [
+        {
+          "type": "select",
+          "label": "Negative form",
+          "options": [
+            "They didn’t use to",
+            "They didn’t used to"
+          ],
+          "answer": "They didn’t use to"
+        },
+        {
+          "type": "select",
+          "label": "Base verb",
+          "options": [
+            "live",
+            "lived"
+          ],
+          "answer": "live"
+        }
+      ],
+      "final_template": "{neg} {verb} in Ankara.",
+      "final_answer": "They didn’t use to live in Ankara.",
+      "tags": [
+        "transform",
+        "negative"
+      ]
+    }
+  ]
+}

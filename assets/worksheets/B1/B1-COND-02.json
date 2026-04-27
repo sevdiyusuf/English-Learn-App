@@ -1,0 +1,272 @@
+{
+    "schema_version": "1.0",
+    "level": "B1",
+    "worksheet_id": "B1-COND-02",
+    "title": "Conditionals: Type 2 (Imaginary Situations)",
+    "topic_tags": [
+        "conditionals",
+        "type_2",
+        "imaginary_situations",
+        "unreal_present"
+    ],
+    "subskills": [
+        "forming_hypothetical_sentences",
+        "using_were_with_all_subjects",
+        "expressing_wishes_and_advice"
+    ],
+    "difficulty": 3,
+    "engine_sequence": [
+        {
+            "engine": "mcq",
+            "count": 4,
+            "rules": {
+                "shuffle_options": true,
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "tap",
+            "count": 3,
+            "rules": {
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "fill",
+            "count": 3,
+            "rules": {
+                "case_sensitive": false,
+                "allow_contractions": true
+            }
+        },
+        {
+            "engine": "order",
+            "count": 2,
+            "rules": {}
+        }
+    ],
+    "items": [
+        {
+            "id": "cond2_mcq1",
+            "engine": "mcq",
+            "prompt": "If I ____ a lot of money, I ____ a private jet.",
+            "translation_tr": "Eğer çok param olsaydı özel bir jet alırdım.",
+            "options": [
+                "had / would buy",
+                "have / will buy",
+                "had / will buy"
+            ],
+            "answer": "had / would buy",
+            "hint": "This is an imaginary situation in the present.",
+            "explain": "Type 2 Conditionals use: If + Past Simple, ... would + Verb.",
+            "tags": [
+                "structure"
+            ]
+        },
+        {
+            "id": "cond2_mcq2",
+            "engine": "mcq",
+            "prompt": "If I ____ you, I wouldn't go to that party.",
+            "translation_tr": "Senin yerinde olsaydım o partiye gitmezdim.",
+            "options": [
+                "were",
+                "am",
+                "was"
+            ],
+            "answer": "were",
+            "hint": "In Type 2, we usually use 'were' for all subjects (I/He/She/It).",
+            "explain": "For advice and hypothetical situations, 'were' is preferred over 'was' with 'I'.",
+            "tags": [
+                "advice",
+                "were_rule"
+            ]
+        },
+        {
+            "id": "cond2_mcq3",
+            "engine": "mcq",
+            "prompt": "If she ____ more time, she would learn Japanese.",
+            "translation_tr": "Daha fazla zamanı olsaydı Japonca öğrenirdi.",
+            "options": [
+                "had",
+                "has",
+                "would have"
+            ],
+            "answer": "had",
+            "hint": "The 'if' clause needs the Past Simple form.",
+            "explain": "We use the past tense in the 'if' clause to show the situation is unreal.",
+            "tags": [
+                "structure"
+            ]
+        },
+        {
+            "id": "cond2_mcq4",
+            "engine": "mcq",
+            "prompt": "What ____ you ____ if you saw a ghost?",
+            "translation_tr": "Bir hayalet görsen ne yapardın?",
+            "options": [
+                "would / do",
+                "will / do",
+                "did / do"
+            ],
+            "answer": "would / do",
+            "hint": "Saw (past) suggests a Type 2 question.",
+            "explain": "Question structure: (Wh) + would + subject + verb + if...?",
+            "tags": [
+                "question"
+            ]
+        },
+        {
+            "id": "cond2_tap1",
+            "engine": "tap",
+            "prompt": "They ____ travel the world if they were rich.",
+            "translation_tr": "Zengin olsalardı dünyayı gezerlerdi.",
+            "bank": [
+                "would",
+                "will",
+                "did",
+                "are"
+            ],
+            "answer": "would",
+            "hint": "Look at the 'if' clause: 'were rich' (Type 2).",
+            "explain": "The main clause of Type 2 uses 'would' to show a hypothetical result.",
+            "tags": [
+                "hypothetical"
+            ]
+        },
+        {
+            "id": "cond2_tap2",
+            "engine": "tap",
+            "prompt": "If it ____ tomorrow, we wouldn't go to the beach.",
+            "translation_tr": "Yarın kar yağsa plaja gitmezdik.",
+            "bank": [
+                "snowed",
+                "snows",
+                "is snowing",
+                "would snow"
+            ],
+            "answer": "snowed",
+            "hint": "We are imagining a very unlikely situation.",
+            "explain": "Type 2 uses Past Simple in the 'if' clause even for future possibilities that are unlikely.",
+            "tags": [
+                "unlikely_event"
+            ]
+        },
+        {
+            "id": "cond2_tap3",
+            "engine": "tap",
+            "prompt": "I ____ happy if you stayed with us.",
+            "translation_tr": "Bizimle kalsaydın mutlu olurdum.",
+            "bank": [
+                "would be",
+                "will be",
+                "am",
+                "was"
+            ],
+            "answer": "would be",
+            "hint": "'Stayed' (past) in the second part requires 'would'.",
+            "explain": "Main clause: would + be.",
+            "tags": [
+                "structure"
+            ]
+        },
+        {
+            "id": "cond2_fill1",
+            "engine": "fill",
+            "prompt": "If I ____ (be) the president, I would change the law.",
+            "translation_tr": "Başkan olsaydım yasayı değiştirirdim.",
+            "answer": [
+                "were",
+                "was"
+            ],
+            "explain": "In formal English, we use 'were' for all persons in Type 2, though 'was' is common in speech.",
+            "tags": [
+                "hypothetical"
+            ]
+        },
+        {
+            "id": "cond2_fill2",
+            "engine": "fill",
+            "prompt": "If he ____ (study) harder, he would pass the exam easily.",
+            "translation_tr": "Daha çok çalışsaydı sınavı kolayca geçerdi.",
+            "answer": [
+                "studied"
+            ],
+            "explain": "'If' clause requires Past Simple (studied).",
+            "tags": [
+                "structure"
+            ]
+        },
+        {
+            "id": "cond2_fill3",
+            "engine": "fill",
+            "prompt": "Where would you live if you ____ (can) live anywhere?",
+            "translation_tr": "Herhangi bir yerde yaşayabilseydin nerede yaşardın?",
+            "answer": [
+                "could"
+            ],
+            "explain": "The past form of 'can' in conditionals is 'could'.",
+            "tags": [
+                "modal_past"
+            ]
+        },
+        {
+            "id": "cond2_order1",
+            "engine": "order",
+            "bank": [
+                "you,",
+                "If",
+                "I",
+                "were",
+                "tell",
+                "truth.",
+                "would",
+                "the"
+            ],
+            "answer": [
+                "If",
+                "I",
+                "were",
+                "you,",
+                "I",
+                "would",
+                "tell",
+                "the",
+                "truth."
+            ],
+            "translation_tr": "Senin yerinde olsaydım gerçeği söylerdim.",
+            "explain": "A common phrase for giving advice: If I were you, I would...",
+            "tags": [
+                "advice",
+                "order"
+            ]
+        },
+        {
+            "id": "cond2_order2",
+            "engine": "order",
+            "bank": [
+                "would",
+                "she",
+                "knew",
+                "be",
+                "If",
+                "sad.",
+                "she"
+            ],
+            "answer": [
+                "If",
+                "she",
+                "knew,",
+                "she",
+                "would",
+                "be",
+                "sad."
+            ],
+            "translation_tr": "Bunu bilse üzülürdü.",
+            "explain": "Structure: If + subject + V2, subject + would + V1.",
+            "tags": [
+                "structure",
+                "order"
+            ]
+        }
+    ]
+}

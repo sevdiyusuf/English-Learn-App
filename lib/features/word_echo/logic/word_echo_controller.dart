@@ -1,18 +1,28 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../core/repositories/user_stats_repo.dart';
+import '../../auth/logic/auth_controller.dart';
+import '../../flash_opposites/data/opposites_service.dart';
+import '../../word_match/data/word_match_providers.dart';
 import '../data/word_echo_service.dart';
+import '../models/word_echo_config.dart';
 import '../models/word_echo_state.dart';
 import '../models/word_echo_word.dart';
 
 class WordEchoController extends StateNotifier<WordEchoState> {
-  WordEchoController({required this.speed, required this.setName})
-    : super(const WordEchoState()) {
+  WordEchoController({
+    required this.speed,
+    required this.setName,
+    required this.ref,
+  }) : super(const WordEchoState()) {
     _initialize();
   }
 
   final WordEchoSpeed speed;
   final String setName;
+  final Ref ref;
   Timer? _gameTimer;
   Timer? _responseTimer;
   final List<WordEchoWord> _availableWords = [];
@@ -24,6 +34,7 @@ class WordEchoController extends StateNotifier<WordEchoState> {
     state = state.copyWith(isLoading: true);
     try {
       await WordEchoService.instance.loadWords();
+      await OppositesService.instance.loadData(); // Load wrong answers
       final allWords = WordEchoService.instance.getWords();
       _availableWords.addAll(allWords);
       _isInitialized = true;
@@ -79,22 +90,149 @@ class WordEchoController extends StateNotifier<WordEchoState> {
       return;
     }
 
-    // 1. Rastgele 4 kelime seç
-    final selectedWords = WordEchoService.instance.getRandomWords(4);
-    final shuffledWords = selectedWords.toList()..shuffle();
+    // Check Personal Echo config
+    final config = ref.read(wordEchoConfigProvider);
+    WordEchoWord correctWord;
+    List<String> wrongAnswerWords;
+
+    if (config.isPersonalEchoActive && config.selectedWordSetId != null) {
+      // Personal Echo: Get 1 correct word from selected WordSet, 3 wrong from opposites.json
+      try {
+        final repo = await ref.read(wordMatchRepoProvider.future);
+        final pairs = await repo.fetchPairs(config.selectedWordSetId!);
+
+        if (pairs.isEmpty) {
+          // Not enough words in set - end game with error
+          _endGame();
+          return;
+        }
+
+        // Select 1 correct word from the set
+        final correctPair = pairs[_random.nextInt(pairs.length)];
+        correctWord = WordEchoWord(
+          english: correctPair.english,
+          turkish: correctPair.turkish,
+        );
+
+        // Get 3 wrong answers from opposites.json, excluding the correct word
+        // Try new format first (with translate), fallback to old format
+        final wrongAnswersWithTranslate = OppositesService.instance
+            .getWrongAnswersWithTranslate(3, exclude: [correctWord.english]);
+        if (wrongAnswersWithTranslate.isNotEmpty) {
+          wrongAnswerWords =
+              wrongAnswersWithTranslate.map((item) => item['word']!).toList();
+        } else {
+          wrongAnswerWords = OppositesService.instance.getWrongAnswers(
+            3,
+            exclude: [correctWord.english],
+          );
+        }
+      } catch (e) {
+        // Error loading from WordSet - end game
+        _endGame();
+        return;
+      }
+    } else {
+      // Global: Get 1 correct word from JSON, 3 wrong from opposites.json
+      final allWords = WordEchoService.instance.getRandomWords(1);
+      correctWord = allWords[0];
+
+      // Get 3 wrong answers from opposites.json, excluding the correct word
+      // Try new format first (with translate), fallback to old format
+      final wrongAnswersWithTranslate = OppositesService.instance
+          .getWrongAnswersWithTranslate(3, exclude: [correctWord.english]);
+      if (wrongAnswersWithTranslate.isNotEmpty) {
+        wrongAnswerWords =
+            wrongAnswersWithTranslate.map((item) => item['word']!).toList();
+      } else {
+        wrongAnswerWords = OppositesService.instance.getWrongAnswers(
+          3,
+          exclude: [correctWord.english],
+        );
+      }
+    }
+
+    // If we don't have enough wrong answers, fill with random words from JSON
+    if (wrongAnswerWords.length < 3) {
+      final needed = 3 - wrongAnswerWords.length;
+      final excludeSet = {correctWord.english, ...wrongAnswerWords};
+      final additionalWords =
+          WordEchoService.instance
+              .getWords()
+              .where((w) => !excludeSet.contains(w.english))
+              .toList()
+            ..shuffle();
+
+      for (int i = 0; i < needed && i < additionalWords.length; i++) {
+        wrongAnswerWords.add(additionalWords[i].english);
+      }
+    }
+
+    // Create WordEchoWord objects for wrong answers
+    // First try to get translate from opposites.json (new format)
+    final wrongWords = <WordEchoWord>[];
+    final wrongAnswersWithTranslate = OppositesService.instance
+        .getWrongAnswersWithTranslate(3, exclude: [correctWord.english]);
+
+    if (wrongAnswersWithTranslate.isNotEmpty &&
+        wrongAnswersWithTranslate.length >= 3) {
+      // Use translate from opposites.json
+      for (final wrongItem in wrongAnswersWithTranslate.take(3)) {
+        wrongWords.add(
+          WordEchoWord(
+            english: wrongItem['word']!,
+            turkish: wrongItem['translate']!,
+          ),
+        );
+      }
+    } else {
+      // Fallback: try to find Turkish translation from WordEchoService
+      final excludeSet = {correctWord.english, ...wrongAnswerWords};
+      for (final wrongEnglish in wrongAnswerWords.take(3)) {
+        // Try to find Turkish translation from WordEchoService
+        final wordFromService = WordEchoService.instance.getWordByEnglish(
+          wrongEnglish,
+        );
+        if (wordFromService != null) {
+          wrongWords.add(wordFromService);
+        } else {
+          // If not found, get a random word from WordEchoService that's not the correct word
+          final availableWords =
+              WordEchoService.instance
+                  .getWords()
+                  .where((w) => !excludeSet.contains(w.english))
+                  .toList();
+          if (availableWords.isNotEmpty) {
+            final randomWord =
+                availableWords[_random.nextInt(availableWords.length)];
+            wrongWords.add(randomWord);
+            excludeSet.add(randomWord.english); // Avoid duplicates
+          } else {
+            // Last resort: create with empty Turkish
+            wrongWords.add(WordEchoWord(english: wrongEnglish, turkish: ''));
+          }
+        }
+      }
+    }
+
+    // Combine correct word with wrong words and shuffle
+    final allWords = [correctWord, ...wrongWords]..shuffle();
+
+    // Find the correct slot index after shuffling
+    final correctSlotIndex = allWords.indexWhere(
+      (w) => w.english == correctWord.english,
+    );
+
+    // Ensure we found the correct word
+    assert(correctSlotIndex != -1, 'Correct word not found after shuffle');
 
     // 2. Slotları hazırla (İçlerine İngilizce kelimeleri koy)
     final slots = List.generate(4, (index) {
-      return WordEchoSlot(englishWord: shuffledWords[index].english);
+      return WordEchoSlot(englishWord: allWords[index].english);
     });
 
-    // 3. Doğru slotu rastgele seç (0, 1, 2 veya 3)
-    final correctSlotIndex = _random.nextInt(4);
-
-    // 4. KRİTİK DÜZELTME: Hedef kelimenin Türkçesini ŞİMDİ alıyoruz.
-    // Sonraya bırakmıyoruz. shuffledWords listesi elimizdeyken alıyoruz.
-    final correctWordObj = shuffledWords[correctSlotIndex];
-    final turkishHint = correctWordObj.turkish;
+    // 3. Doğru kelimenin Türkçesini al
+    final turkishHint = correctWord.turkish;
 
     // Debug: Türkçe ipucunun boş olmadığından emin ol
     assert(turkishHint.isNotEmpty, 'Turkish hint should not be empty');
@@ -107,7 +245,7 @@ class WordEchoController extends StateNotifier<WordEchoState> {
       // İpucunu state'e kaydediyoruz ama UI bunu phase 'waitingForAnswer' olana kadar göstermeyecek
       currentTurkishHint: turkishHint,
       currentCorrectSlotIndex: correctSlotIndex,
-      currentCorrectEnglishWord: correctWordObj.english,
+      currentCorrectEnglishWord: correctWord.english,
     );
 
     // 5. Animasyonu başlat
@@ -267,6 +405,36 @@ class WordEchoController extends StateNotifier<WordEchoState> {
     _gameTimer?.cancel();
     _responseTimer?.cancel();
     state = state.copyWith(phase: WordEchoPhase.finished);
+    // Record stats (fire-and-forget)
+    _recordSessionStats();
+  }
+
+  Future<void> _recordSessionStats() async {
+    try {
+      final authState = ref.read(authControllerProvider);
+      final user = authState.valueOrNull;
+      if (user == null) return;
+
+      final statsRepo = ref.read(userStatsRepoProvider);
+      // Calculate duration (60 seconds - remaining time)
+      final duration = Duration(seconds: 60 - state.timeRemaining);
+
+      // Calculate practiced words (total questions answered)
+      final practicedWords = state.correctCount + state.wrongCount;
+
+      await statsRepo.recordSession(
+        user: user,
+        modeId: 'word_echo_classic',
+        practicedWords: practicedWords,
+        correctAnswers: state.correctCount,
+        wrongAnswers: state.wrongCount,
+        duration: duration,
+        score: state.score,
+      );
+    } catch (e) {
+      // Don't break the game if stats recording fails
+      debugPrint('Failed to record word echo stats: $e');
+    }
   }
 
   @override
@@ -282,7 +450,11 @@ final wordEchoControllerProvider = StateNotifierProvider.autoDispose
       ref,
       params,
     ) {
-      return WordEchoController(speed: params.speed, setName: params.setName);
+      return WordEchoController(
+        speed: params.speed,
+        setName: params.setName,
+        ref: ref,
+      );
     });
 
 class WordEchoControllerParams {

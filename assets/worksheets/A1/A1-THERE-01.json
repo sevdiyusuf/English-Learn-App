@@ -1,0 +1,277 @@
+{
+    "schema_version": "1.0",
+    "level": "A1",
+    "worksheet_id": "A1-THERE-01",
+    "title": "There is / There are + some/any",
+    "topic_tags": [
+        "there_is_are",
+        "some_any",
+        "questions",
+        "negatives"
+    ],
+    "subskills": [
+        "choose_is_are",
+        "choose_some_any",
+        "basic_question_form"
+    ],
+    "difficulty": 1,
+    "engine_sequence": [
+        {
+            "engine": "mcq",
+            "count": 8,
+            "rules": {
+                "shuffle_options": true,
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "fill",
+            "count": 6,
+            "rules": {
+                "case_sensitive": false,
+                "allow_contractions": true
+            }
+        }
+    ],
+    "items": [
+        {
+            "id": "mcq1",
+            "engine": "mcq",
+            "prompt": "____ a cat in the garden.",
+            "translation_tr": "Bahçede bir kedi var.",
+            "options": [
+                "There is",
+                "There are"
+            ],
+            "answer": "There is",
+            "hint": "Singular → is.",
+            "explain": "Use 'There is' with singular nouns.",
+            "tags": [
+                "is",
+                "singular"
+            ]
+        },
+        {
+            "id": "mcq2",
+            "engine": "mcq",
+            "prompt": "____ two chairs in the room.",
+            "translation_tr": "Odada iki sandalye var.",
+            "options": [
+                "There is",
+                "There are"
+            ],
+            "answer": "There are",
+            "hint": "Plural → are.",
+            "tags": [
+                "are",
+                "plural"
+            ]
+        },
+        {
+            "id": "mcq3",
+            "engine": "mcq",
+            "prompt": "There aren't ____ apples.",
+            "translation_tr": "Hiç elma yok.",
+            "options": [
+                "some",
+                "any"
+            ],
+            "answer": "any",
+            "hint": "Negatives usually use 'any'.",
+            "tags": [
+                "any",
+                "negative"
+            ]
+        },
+        {
+            "id": "mcq4",
+            "engine": "mcq",
+            "prompt": "There is ____ milk in the fridge.",
+            "translation_tr": "Buzdolabında biraz süt var.",
+            "options": [
+                "some",
+                "any"
+            ],
+            "answer": "some",
+            "hint": "Affirmative sentence → some.",
+            "tags": [
+                "some",
+                "affirmative"
+            ]
+        },
+        {
+            "id": "mcq5",
+            "engine": "mcq",
+            "prompt": "____ any students in the classroom?",
+            "translation_tr": "Sınıfta hiç öğrenci var mı?",
+            "options": [
+                "Is there",
+                "Are there"
+            ],
+            "answer": "Are there",
+            "hint": "Students = plural.",
+            "tags": [
+                "question",
+                "plural"
+            ]
+        },
+        {
+            "id": "mcq6",
+            "engine": "mcq",
+            "prompt": "Is there ____ water?",
+            "translation_tr": "Hiç su var mı?",
+            "options": [
+                "some",
+                "any"
+            ],
+            "answer": "any",
+            "hint": "Questions usually use 'any'.",
+            "tags": [
+                "any",
+                "question"
+            ]
+        },
+        {
+            "id": "mcq7",
+            "engine": "mcq",
+            "prompt": "There ____ a book on the table.",
+            "translation_tr": "Masada bir kitap var.",
+            "options": [
+                "is",
+                "are"
+            ],
+            "answer": "is",
+            "tags": [
+                "is",
+                "singular"
+            ]
+        },
+        {
+            "id": "mcq8",
+            "engine": "mcq",
+            "prompt": "There ____ three windows.",
+            "translation_tr": "Üç pencere var.",
+            "options": [
+                "is",
+                "are"
+            ],
+            "answer": "are",
+            "tags": [
+                "are",
+                "plural"
+            ]
+        },
+        {
+            "id": "fill1",
+            "engine": "fill",
+            "prompt": "There ____ (be) a dog in the park.",
+            "translation_tr": "Parkta bir köpek var.",
+            "answer": [
+                "is"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "explain": "Singular noun → 'is'.",
+            "tags": [
+                "is"
+            ]
+        },
+        {
+            "id": "fill2",
+            "engine": "fill",
+            "prompt": "There ____ (be) many books on the shelf.",
+            "translation_tr": "Rafın üzerinde birçok kitap var.",
+            "answer": [
+                "are"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "are"
+            ]
+        },
+        {
+            "id": "fill3",
+            "engine": "fill",
+            "prompt": "There ____ ____ (not / be) any juice.",
+            "translation_tr": "Hiç meyve suyu yok.",
+            "answer": [
+                "isn't",
+                "is not"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces",
+                "accept_contractions"
+            ],
+            "explain": "Negative: There is not / There isn't.",
+            "tags": [
+                "negative"
+            ]
+        },
+        {
+            "id": "fill4",
+            "engine": "fill",
+            "prompt": "There ____ ____ (not / be) any cars.",
+            "translation_tr": "Hiç araba yok.",
+            "answer": [
+                "aren't",
+                "are not"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces",
+                "accept_contractions"
+            ],
+            "tags": [
+                "negative",
+                "plural"
+            ]
+        },
+        {
+            "id": "fill5",
+            "engine": "fill",
+            "prompt": "____ ____ (be) any eggs?",
+            "translation_tr": "Hiç yumurta var mı?",
+            "answer": [
+                "are there",
+                "are there?"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "explain": "Question plural: Are there ... ?",
+            "tags": [
+                "question",
+                "plural"
+            ]
+        },
+        {
+            "id": "fill6",
+            "engine": "fill",
+            "prompt": "There is ____ bread. (some/any)",
+            "translation_tr": "Biraz ekmek var.",
+            "answer": [
+                "some"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "some"
+            ]
+        }
+    ]
+}

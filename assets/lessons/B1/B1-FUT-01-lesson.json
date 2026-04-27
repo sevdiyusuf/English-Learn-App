@@ -1,0 +1,216 @@
+{
+    "schema_version": "1.0",
+    "level": "B1",
+    "lesson_id": "B1-FUT-01-lesson",
+    "title": "Future Perfect vs Future Continuous - lesson",
+    "topic_tags": [
+        "future_perfect",
+        "future_continuous",
+        "by_time",
+        "at_time",
+        "will_have_v3",
+        "will_be_ving"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Gelecekte belirli bir anda 'yapıyor olacağımız' işleri (Future Continuous) anlatmayı öğreneceğiz.",
+                    "Gelecekte belirli bir vakte kadar 'tamamlamış olacağımız' eylemleri (Future Perfect) ifade etmeyi kavrayacağız.",
+                    "Anlamı belirleyen 'By' ve 'At' gibi zaman belirteçlerini ayırt edeceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "formula",
+                "title": "Future Continuous: O An Ne Yapıyor Olacağız?",
+                "bullets": [
+                    "Gelecekteki bir zaman noktasında devam etmekte olan eylemler için kullanılır.",
+                    "Vurgu eylemin tamamlanmasında değil, o andaki 'süreçtedir'."
+                ],
+                "formula": [
+                    "Subject + will be + Verb-ing"
+                ],
+                "examples": [
+                    "At 6 p.m., I **will be doing** my homework. (Saat 6'da ödevimi yapıyor olacağım.)",
+                    "This time tomorrow, we **will be flying**. (Yarın bu vakitlerde uçuyor olacağız.)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "formula",
+                "title": "Future Perfect: O Vakte Kadar Ne Bitmiş Olacak?",
+                "bullets": [
+                    "Gelecekteki bir zamandan önce bitmiş/tamamlanmış olacak eylemler için kullanılır.",
+                    "Vurgu eylemin o vakit geldiğinde 'halledilmiş' olmasındadır."
+                ],
+                "formula": [
+                    "Subject + will have + Verb (V3)"
+                ],
+                "examples": [
+                    "By 6 p.m., I **will have finished** my homework. (Saat 6'ya kadar ödevimi bitirmiş olacağım.)",
+                    "By next week, she **will have completed** the project. (Gelecek haftaya kadar projeyi tamamlamış olacak.)"
+                ]
+            },
+            {
+                "id": "c4",
+                "type": "rule",
+                "title": "Anahtar Kelimeler: At vs. By",
+                "bullets": [
+                    "**At + zaman**: Tam o anda eylemin ortasında olduğunuzu gösterir (Continuous).",
+                    "**By + zaman**: O vakit gelmeden eylemin çoktan bittiğini gösterir (Perfect)."
+                ],
+                "examples": [
+                    "**At** midnight = Gece yarısı tam o an.",
+                    "**By** midnight = Gece yarısından önce, en geç gece yarısı."
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "Choose the correct tense: \n'Don't call me at 8 p.m. because I ____ dinner.'",
+                "options": [
+                    "will be eating",
+                    "will have eaten"
+                ],
+                "answer": "will be eating",
+                "explain": "Arama anında yemek yeme sürecinde olunacağı için Continuous yapısı uygundur."
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Will Be + V3 Karıştırmak**: 'Will be finished' edilgen bir yapıdır; 'yapıyor olacağım' demek için mutlaka 'will be finish**ing**' denmelidir.",
+                    "**By ile Süreç Belirtmek**: 'By tomorrow I will be working' yerine 'By tomorrow I will have worked' veya 'At this time tomorrow I will be working' tercih edilmelidir.",
+                    "**V3 Formunu Yanlış Kullanmak**: Future Perfect yapısında 'have'den sonra fiilin mutlaka 3. hali gelmelidir."
+                ],
+                "examples": [
+                    "Hatalı: By 5 p.m., I will be finish. ✗",
+                    "Doğru: By 5 p.m., I **will have finished**. ✓"
+                ]
+            },
+            {
+                "id": "q2",
+                "type": "checkpoint",
+                "engine": "fill",
+                "prompt": "By the time you arrive, we ____ (leave).",
+                "answer": [
+                    "will have left"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Siz gelene kadar ayrılma eylemi tamamlanmış olacağı için Future Perfect kullanılır."
+            },
+            {
+                "id": "c6",
+                "type": "tip",
+                "title": "Pratik İpucu",
+                "bullets": [
+                    "**Future Continuous**: Bir fotoğraf karesi gibidir; eylemin ortasındasınızdır.",
+                    "**Future Perfect**: Bir onay kutucuğu (checklist) gibidir; eylem tamamlanmış ve yanına tik atılmıştır."
+                ]
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Kontekst: Uzay Görevi Hazırlığı",
+        "intro_bullets": [
+            "Bir astronot olarak Mars görevine hazırlanıyorsun.",
+            "Gelecekteki programını kontrol merkezine bildirmen gerekiyor.",
+            "Süreç ve tamamlanma vurgularına dikkat et!"
+        ],
+        "items": [
+            {
+                "engine": "mcq",
+                "prompt": "Captain: 'At this time tomorrow, we ____ towards the Red Planet.'",
+                "options": [
+                    "will be flying",
+                    "will have flown"
+                ],
+                "answer": "will be flying",
+                "explain": "Yarın bu vakitlerde uçuş eylemi devam ediyor olacağı için Continuous kullanılır."
+            },
+            {
+                "engine": "fill",
+                "prompt": "Captain: 'By next month, the crew ____ (reach) the space station.'",
+                "answer": [
+                    "will have reached"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Gelecek aya kadar varış eylemi tamamlanmış olacağı için Perfect kullanılır."
+            },
+            {
+                "engine": "tap",
+                "prompt": "Captain: 'Don't worry, by the end of the year, we ____ back on Earth.'",
+                "bank": [
+                    "will have landed",
+                    "will be landing",
+                    "land"
+                ],
+                "answer": "will have landed",
+                "explain": "Yıl sonuna kadar iniş eylemi çoktan bitmiş olacaktır."
+            },
+            {
+                "engine": "order",
+                "prompt": "Cümleyi kur: 'Bu gece saat 10'da film izliyor olacaklar.'",
+                "tokens": [
+                    "At",
+                    "10",
+                    "tonight,",
+                    "they",
+                    "will",
+                    "be",
+                    "watching",
+                    "a",
+                    "movie"
+                ],
+                "answer_tokens": [
+                    "At",
+                    "10",
+                    "tonight,",
+                    "they",
+                    "will",
+                    "be",
+                    "watching",
+                    "a",
+                    "movie"
+                ],
+                "explain": "'At' ile belirtilen belirli bir anda eylemin ortasında olunacaktır."
+            },
+            {
+                "engine": "fill",
+                "prompt": "Captain: 'By 2030, they ____ (build) a new base on Mars.'",
+                "answer": [
+                    "will have built"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "2030 yılına gelindiğinde inşaat eylemi tamamlanmış olacaktır."
+            }
+        ],
+        "recap_bullets": [
+            "Hatırla: 'At' ile süreç (will be -ing), 'By' ile tamamlanma (will have V3) anlatılır.",
+            "Hatırla: Future Perfect eylemin bitmiş olacağını garanti eder.",
+            "Hatırla: Future Continuous gelecekteki bir ana büyüteçle bakmak gibidir."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "B1-FUT-01"
+    }
+}

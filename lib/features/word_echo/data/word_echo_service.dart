@@ -10,6 +10,7 @@ class WordEchoService {
   static final WordEchoService instance = WordEchoService._();
 
   List<WordEchoWord>? _words;
+  Map<String, WordEchoWord>? _wordsByEnglish;
 
   Future<void> loadWords() async {
     if (_words != null) return;
@@ -21,6 +22,11 @@ class WordEchoService {
       _words = wordsList
           .map((word) => WordEchoWord.fromJson(word as Map<String, dynamic>))
           .toList();
+      
+      // Build lookup map for quick access by English word
+      _wordsByEnglish = {
+        for (var word in _words!) word.english.toLowerCase(): word,
+      };
     } catch (e) {
       throw Exception('Failed to load word echo words: $e');
     }
@@ -62,5 +68,14 @@ class WordEchoService {
       (word) => word.turkish.toLowerCase() == turkish.toLowerCase(),
       orElse: () => throw StateError('Word not found: $turkish'),
     );
+  }
+
+  /// Get word by English word (for Personal Echo - finding wrong answers from JSON)
+  WordEchoWord? getWordByEnglish(String english) {
+    if (_wordsByEnglish == null) {
+      loadWords();
+      return null;
+    }
+    return _wordsByEnglish![english.toLowerCase()];
   }
 }

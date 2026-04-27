@@ -1,0 +1,330 @@
+{
+    "schema_version": "1.0",
+    "level": "B1",
+    "worksheet_id": "B1-COND-01",
+    "title": "Conditionals: Zero & First",
+    "topic_tags": [
+        "conditionals",
+        "zero_conditional",
+        "first_conditional",
+        "if",
+        "when"
+    ],
+    "subskills": [
+        "build_if_clause",
+        "zero_vs_first",
+        "choose_correct_verb_forms"
+    ],
+    "difficulty": 3,
+    "engine_sequence": [
+        {
+            "engine": "mcq",
+            "count": 10,
+            "rules": {
+                "shuffle_options": true,
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "fill",
+            "count": 8,
+            "rules": {
+                "case_sensitive": false,
+                "allow_contractions": true
+            }
+        }
+    ],
+    "items": [
+        {
+            "id": "mcq1",
+            "engine": "mcq",
+            "prompt": "If you heat ice, it ____.",
+            "translation_tr": "Eğer buzu ısıtırsan erir.",
+            "options": [
+                "melts",
+                "will melt"
+            ],
+            "answer": "melts",
+            "hint": "Zero conditional = facts (present + present).",
+            "tags": [
+                "zero"
+            ]
+        },
+        {
+            "id": "mcq2",
+            "engine": "mcq",
+            "prompt": "If it rains tomorrow, we ____ at home.",
+            "translation_tr": "Yarın yağmur yağarsa evde kalacağız.",
+            "options": [
+                "stay",
+                "will stay"
+            ],
+            "answer": "will stay",
+            "hint": "First conditional = real future (present + will).",
+            "tags": [
+                "first"
+            ]
+        },
+        {
+            "id": "mcq3",
+            "engine": "mcq",
+            "prompt": "If I’m late, my teacher ____ angry.",
+            "translation_tr": "Eğer geç kalırsam öğretmenim sinirlenir.",
+            "options": [
+                "gets",
+                "will get"
+            ],
+            "answer": "gets",
+            "tags": [
+                "zero",
+                "habit"
+            ]
+        },
+        {
+            "id": "mcq4",
+            "engine": "mcq",
+            "prompt": "If you don’t study, you ____ the exam.",
+            "translation_tr": "Eğer çalışmazsan sınavı kaybedersin / kalırsın.",
+            "options": [
+                "fail",
+                "will fail"
+            ],
+            "answer": "will fail",
+            "tags": [
+                "first"
+            ]
+        },
+        {
+            "id": "mcq5",
+            "engine": "mcq",
+            "prompt": "If people eat too much sugar, they ____ weight.",
+            "translation_tr": "İnsanlar çok fazla şeker yerse kilo alırlar.",
+            "options": [
+                "gain",
+                "will gain"
+            ],
+            "answer": "gain",
+            "tags": [
+                "zero",
+                "fact"
+            ]
+        },
+        {
+            "id": "mcq6",
+            "engine": "mcq",
+            "prompt": "If we finish early, we ____ a coffee.",
+            "translation_tr": "Erken bitirirsek kahve içeceğiz.",
+            "options": [
+                "have",
+                "will have"
+            ],
+            "answer": "will have",
+            "tags": [
+                "first"
+            ]
+        },
+        {
+            "id": "mcq7",
+            "engine": "mcq",
+            "prompt": "When water reaches 100°C, it ____.",
+            "translation_tr": "Su 100 dereceye ulaştığında kaynar.",
+            "options": [
+                "boils",
+                "will boil"
+            ],
+            "answer": "boils",
+            "hint": "When + present = general truth.",
+            "tags": [
+                "zero",
+                "when"
+            ]
+        },
+        {
+            "id": "mcq8",
+            "engine": "mcq",
+            "prompt": "If you press this button, the computer ____.",
+            "translation_tr": "Bu düğmeye basarsan bilgisayar açılır.",
+            "options": [
+                "starts",
+                "will start"
+            ],
+            "answer": "starts",
+            "hint": "This can be a general fact (zero).",
+            "tags": [
+                "zero"
+            ]
+        },
+        {
+            "id": "mcq9",
+            "engine": "mcq",
+            "prompt": "If I see Tom, I ____ him.",
+            "translation_tr": "Tom’u görürsem ona söyleyeceğim.",
+            "options": [
+                "tell",
+                "will tell"
+            ],
+            "answer": "will tell",
+            "tags": [
+                "first"
+            ]
+        },
+        {
+            "id": "mcq10",
+            "engine": "mcq",
+            "prompt": "If it’s sunny, we usually ____ outside.",
+            "translation_tr": "Hava güneşliyse genellikle dışarıda otururuz.",
+            "options": [
+                "sit",
+                "will sit"
+            ],
+            "answer": "sit",
+            "tags": [
+                "zero",
+                "habit"
+            ]
+        },
+        {
+            "id": "fill1",
+            "engine": "fill",
+            "prompt": "If you ____ (mix) red and blue, you get purple. (zero)",
+            "translation_tr": "Eğer kırmızı ve maviyi karıştırırsan mor elde edersin.",
+            "answer": [
+                "mix"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "zero"
+            ]
+        },
+        {
+            "id": "fill2",
+            "engine": "fill",
+            "prompt": "If it ____ (rain), we will cancel the picnic. (first)",
+            "translation_tr": "Eğer yağmur yağarsa pikniği iptal edeceğiz.",
+            "answer": [
+                "rains"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "first"
+            ]
+        },
+        {
+            "id": "fill3",
+            "engine": "fill",
+            "prompt": "If you ____ (not / sleep) enough, you feel tired. (zero)",
+            "translation_tr": "Yeterince uyumazsan kendini yorgun hissedersin.",
+            "answer": [
+                "don't sleep",
+                "do not sleep"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces",
+                "accept_contractions"
+            ],
+            "tags": [
+                "zero",
+                "negative"
+            ]
+        },
+        {
+            "id": "fill4",
+            "engine": "fill",
+            "prompt": "If we ____ (study) hard, we will pass. (first)",
+            "translation_tr": "Sıkı çalışırsak geçeceğiz.",
+            "answer": [
+                "study"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "first"
+            ]
+        },
+        {
+            "id": "fill5",
+            "engine": "fill",
+            "prompt": "If he ____ (be) late, his boss gets angry. (zero)",
+            "translation_tr": "Geç kalırsa patronu sinirlenir.",
+            "answer": [
+                "is"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "zero"
+            ]
+        },
+        {
+            "id": "fill6",
+            "engine": "fill",
+            "prompt": "If you ____ (not / hurry), you will miss the bus. (first)",
+            "translation_tr": "Ace­le etmezsen otobüsü kaçıracaksın.",
+            "answer": [
+                "don't hurry",
+                "do not hurry"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces",
+                "accept_contractions"
+            ],
+            "tags": [
+                "first",
+                "negative"
+            ]
+        },
+        {
+            "id": "fill7",
+            "engine": "fill",
+            "prompt": "When I ____ (drink) coffee, I feel awake. (general)",
+            "translation_tr": "Kahve içtiğimde kendimi uyanık hissederim.",
+            "answer": [
+                "drink"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "zero",
+                "when"
+            ]
+        },
+        {
+            "id": "fill8",
+            "engine": "fill",
+            "prompt": "If I ____ (finish) my homework, I will play games. (first)",
+            "translation_tr": "Ödevimi bitirirsem oyun oynayacağım.",
+            "answer": [
+                "finish"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "first"
+            ]
+        }
+    ]
+}

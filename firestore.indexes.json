@@ -1,6 +1,20 @@
 {
   "indexes": [
     {
+      "collectionGroup": "arena_rooms",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "roomCode",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "status",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
       "collectionGroup": "rooms",
       "queryScope": "COLLECTION",
       "fields": [

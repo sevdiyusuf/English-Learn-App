@@ -1,0 +1,351 @@
+{
+  "schema_version": "1.0",
+  "level": "A1",
+  "worksheet_id": "A1-ART-01",
+  "title": "Articles: a/an/the + zero (basic)",
+  "topic_tags": [
+    "articles",
+    "a_an",
+    "the",
+    "zero_article"
+  ],
+  "subskills": [
+    "choose_a_an",
+    "choose_the",
+    "choose_zero_article"
+  ],
+  "difficulty": 1,
+  "engine_sequence": [
+    {
+      "engine": "tap",
+      "count": 6,
+      "rules": {
+        "allow_hint": true
+      }
+    },
+    {
+      "engine": "mcq",
+      "count": 8,
+      "rules": {
+        "shuffle_options": true,
+        "allow_hint": true
+      }
+    },
+    {
+      "engine": "fill",
+      "count": 4,
+      "rules": {
+        "case_sensitive": false,
+        "allow_contractions": true
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "tap1",
+      "engine": "tap",
+      "prompt": "Choose the correct article: ____ apple",
+      "translation_tr": "Doğru artikeli seç: ____ elma",
+      "bank": [
+        "a",
+        "an",
+        "the",
+        "—"
+      ],
+      "answer": "an",
+      "hint": "Vowel sound → an.",
+      "tags": [
+        "a_an"
+      ]
+    },
+    {
+      "id": "tap2",
+      "engine": "tap",
+      "prompt": "Choose the correct article: ____ university",
+      "translation_tr": "Doğru artikeli seç: ____ üniversite",
+      "bank": [
+        "a",
+        "an",
+        "the",
+        "—"
+      ],
+      "answer": "a",
+      "hint": "‘university’ starts with /juː/ (y-sound) → a.",
+      "tags": [
+        "a_an"
+      ]
+    },
+    {
+      "id": "tap3",
+      "engine": "tap",
+      "prompt": "Choose the correct article: ____ sun",
+      "translation_tr": "Doğru artikeli seç: ____ güneş",
+      "bank": [
+        "a",
+        "an",
+        "the",
+        "—"
+      ],
+      "answer": "the",
+      "hint": "There is one sun for us → the.",
+      "tags": [
+        "the"
+      ]
+    },
+    {
+      "id": "tap4",
+      "engine": "tap",
+      "prompt": "Choose the correct article: I like ____ music.",
+      "translation_tr": "Doğru artikeli seç: Müzik ____ severim.",
+      "bank": [
+        "a",
+        "an",
+        "the",
+        "—"
+      ],
+      "answer": "—",
+      "hint": "General meaning → no article (zero).",
+      "tags": [
+        "zero_article"
+      ]
+    },
+    {
+      "id": "tap5",
+      "engine": "tap",
+      "prompt": "Choose the correct article: ____ book on the table",
+      "translation_tr": "Doğru artikeli seç: Masanın üzerindeki ____ kitap",
+      "bank": [
+        "a",
+        "an",
+        "the",
+        "—"
+      ],
+      "answer": "the",
+      "hint": "Specific (on the table) → the.",
+      "tags": [
+        "the"
+      ]
+    },
+    {
+      "id": "tap6",
+      "engine": "tap",
+      "prompt": "Choose the correct article: She is ____ doctor.",
+      "translation_tr": "Doğru artikeli seç: O ____ doktor.",
+      "bank": [
+        "a",
+        "an",
+        "the",
+        "—"
+      ],
+      "answer": "a",
+      "hint": "Jobs → a/an.",
+      "tags": [
+        "a_an"
+      ]
+    },
+    {
+      "id": "mcq1",
+      "engine": "mcq",
+      "prompt": "I have ____ idea.",
+      "translation_tr": "Bir fikrim var.",
+      "options": [
+        "a",
+        "an",
+        "the",
+        "—"
+      ],
+      "answer": "an",
+      "hint": "‘idea’ starts with a vowel sound.",
+      "tags": [
+        "a_an"
+      ]
+    },
+    {
+      "id": "mcq2",
+      "engine": "mcq",
+      "prompt": "Can you open ____ window, please? (a specific one here)",
+      "translation_tr": "Şu pencereyi açar mısın lütfen?",
+      "options": [
+        "a",
+        "an",
+        "the",
+        "—"
+      ],
+      "answer": "the",
+      "hint": "Specific window (here/now) → the.",
+      "tags": [
+        "the"
+      ]
+    },
+    {
+      "id": "mcq3",
+      "engine": "mcq",
+      "prompt": "He goes to ____ school every day.",
+      "translation_tr": "O her gün okula gider.",
+      "options": [
+        "a",
+        "an",
+        "the",
+        "—"
+      ],
+      "answer": "—",
+      "hint": "School = general activity → zero article.",
+      "tags": [
+        "zero_article"
+      ]
+    },
+    {
+      "id": "mcq4",
+      "engine": "mcq",
+      "prompt": "This is ____ best day of my life!",
+      "translation_tr": "Bu hayatımın en iyi günü!",
+      "options": [
+        "a",
+        "an",
+        "the",
+        "—"
+      ],
+      "answer": "the",
+      "hint": "Superlative → the.",
+      "tags": [
+        "the"
+      ]
+    },
+    {
+      "id": "mcq5",
+      "engine": "mcq",
+      "prompt": "I want ____ sandwich.",
+      "translation_tr": "Bir sandviç istiyorum.",
+      "options": [
+        "a",
+        "an",
+        "the",
+        "—"
+      ],
+      "answer": "a",
+      "hint": "First time / not specific → a/an.",
+      "tags": [
+        "a_an"
+      ]
+    },
+    {
+      "id": "mcq6",
+      "engine": "mcq",
+      "prompt": "Look! ____ dog is running! (the dog we can see)",
+      "translation_tr": "Bak! Köpek koşuyor!",
+      "options": [
+        "a",
+        "an",
+        "the",
+        "—"
+      ],
+      "answer": "the",
+      "hint": "We can see it → specific → the.",
+      "tags": [
+        "the"
+      ]
+    },
+    {
+      "id": "mcq7",
+      "engine": "mcq",
+      "prompt": "She drinks ____ water.",
+      "translation_tr": "O su içer.",
+      "options": [
+        "a",
+        "an",
+        "the",
+        "—"
+      ],
+      "answer": "—",
+      "hint": "Uncountable, general meaning → zero article.",
+      "tags": [
+        "zero_article"
+      ]
+    },
+    {
+      "id": "mcq8",
+      "engine": "mcq",
+      "prompt": "He is ____ engineer.",
+      "translation_tr": "O bir mühendistir.",
+      "options": [
+        "a",
+        "an",
+        "the",
+        "—"
+      ],
+      "answer": "an",
+      "hint": "‘engineer’ starts with a vowel sound.",
+      "tags": [
+        "a_an"
+      ]
+    },
+    {
+      "id": "fill1",
+      "engine": "fill",
+      "prompt": "I saw ____ elephant. (a/an)",
+      "translation_tr": "Bir fil gördüm.",
+      "answer": [
+        "an"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "a_an"
+      ]
+    },
+    {
+      "id": "fill2",
+      "engine": "fill",
+      "prompt": "____ moon is bright tonight. (a/an/the/—)",
+      "translation_tr": "Bu gece ay parlak.",
+      "answer": [
+        "the"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "the"
+      ]
+    },
+    {
+      "id": "fill3",
+      "engine": "fill",
+      "prompt": "I like ____ tea. (a/an/the/—)",
+      "translation_tr": "Çay severim.",
+      "answer": [
+        "—",
+        ""
+      ],
+      "normalize": [
+        "trim"
+      ],
+      "hint": "General meaning → zero article.",
+      "tags": [
+        "zero_article"
+      ]
+    },
+    {
+      "id": "fill4",
+      "engine": "fill",
+      "prompt": "She has ____ new phone. (a/an)",
+      "translation_tr": "Onun yeni bir telefonu var.",
+      "answer": [
+        "a"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "a_an"
+      ]
+    }
+  ]
+}

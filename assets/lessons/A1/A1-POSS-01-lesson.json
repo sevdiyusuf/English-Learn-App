@@ -1,0 +1,210 @@
+{
+    "schema_version": "1.0",
+    "level": "A1",
+    "lesson_id": "A1-POSS-01-lesson",
+    "title": "my/your/his/her/our/their + ’s",
+    "topic_tags": [
+        "possessives",
+        "possessive_adjectives",
+        "apostrophe_s"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Bir nesnenin kime ait olduğunu belirtmeyi öğreneceğiz.",
+                    "İyelik sıfatlarını (benim, senin, onun...) doğru kullanmayı kavrayacağız.",
+                    "İsimlere eklenen kesme işareti ('s) ile sahiplik bildirmeyi göreceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "İyelik Sıfatları (Possessive Adjectives)",
+                "bullets": [
+                    "Bu kelimeler her zaman bir **isimden önce** gelir.",
+                    "Özneye göre şekil değiştirirler; yani 'benim' demek için 'my', 'senin' demek için 'your' kullanırız."
+                ],
+                "examples": [
+                    "I → **my** book (benim kitabım)",
+                    "You → **your** pen (senin kalemin)",
+                    "We → **our** house (bizim evimiz)",
+                    "They → **their** car (onların arabası)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "Onun: His, Her ve Its Ayrımı",
+                "bullets": [
+                    "İngilizcede 'onun' demek için nesneye değil, **sahibine** bakarız.",
+                    "**His**: Erkek sahipler için kullanılır.",
+                    "**Her**: Kadın sahipler için kullanılır.",
+                    "**Its**: Hayvanlar veya cansız varlıklar için kullanılır."
+                ],
+                "examples": [
+                    "Ali's phone → **his** phone",
+                    "Ayşe's bag → **her** bag",
+                    "The dog's tail → **its** tail"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "Suna has a red dress. It is ____ dress.",
+                "options": [
+                    "his",
+                    "her",
+                    "its"
+                ],
+                "answer": "her",
+                "explain": "Sahibi kadın (Suna) olduğu için 'her' iyelik sıfatı kullanılır."
+            },
+            {
+                "id": "c4",
+                "type": "rule",
+                "title": "Kesme İşareti ile Sahiplik ('s)",
+                "bullets": [
+                    "Özel isimlere veya tekil isimlere **'s** ekleyerek sahiplik anlamı katarız.",
+                    "Bu ek, Türkçedeki '-ın, -in, -un, -ün' eklerine karşılık gelir."
+                ],
+                "examples": [
+                    "Ahmet's car (Ahmet'in arabası)",
+                    "My father's computer (Babamın bilgisayarı)",
+                    "The cat's milk (Kedinin sütü)"
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**It's vs. Its**: 'It's' (it is) bir kısaltmadır; 'Its' ise sahiplik bildirir. Karıştırmayın!",
+                    "**Sıfatı Unutmak**: 'I car' denmez, 'My car' denmelidir.",
+                    "**'s ve Çoğul Eki**: 'Ali's' bir sahiplik belirtir, 'Alis' ise (yanlış bir şekilde) çoğul gibi görünür."
+                ],
+                "examples": [
+                    "Hatalı: The dog wagged it's tail. ✗",
+                    "Doğru: The dog wagged **its** tail. ✓",
+                    "Hatalı: This is she bag. ✗",
+                    "Doğru: This is **her** bag. ✓"
+                ]
+            },
+            {
+                "id": "q2",
+                "type": "checkpoint",
+                "engine": "fill",
+                "prompt": "This is my ____ office. (brother)",
+                "answer": [
+                    "brother's"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Kardeşimin ofisi demek için ismin sonuna 's eklenmelidir."
+            },
+            {
+                "id": "c6",
+                "type": "tip",
+                "title": "Pratik İpucu: Çoğul İsimlerde Kesme İşareti",
+                "bullets": [
+                    "Eğer isim zaten '-s' ile biten bir çoğul ise (örneğin 'students'), sadece kesme işareti (') eklemek yeterlidir."
+                ],
+                "examples": [
+                    "The students' books (Öğrencilerin kitapları)",
+                    "My parents' room (Ebeveynlerimin odası)"
+                ]
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Kontekst: Kayıp Eşyalar",
+        "intro_bullets": [
+            "Bir sınıftasın ve masanın üzerinde unutulmuş eşyalar var.",
+            "Bu eşyaların kime ait olduğunu bulmaya çalışıyorsun.",
+            "İyelik sıfatlarını ve isim tamlamalarını doğru kullan!"
+        ],
+        "items": [
+            {
+                "engine": "fill",
+                "prompt": "I found a pen. Is this ___ pen, Mark?",
+                "answer": [
+                    "your"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Mark'a 'senin kalemin mi' diye sormak için 'your' kullanılır."
+            },
+            {
+                "engine": "tap",
+                "prompt": "No, it's not mine. Look, it has Sarah's name on it. It is ___ pen.",
+                "bank": [
+                    "her",
+                    "his",
+                    "their"
+                ],
+                "answer": "her",
+                "explain": "Sarah bir kadın ismi olduğu için 'onun' anlamında 'her' kullanılır."
+            },
+            {
+                "engine": "fill",
+                "prompt": "What about this bag? Is it ____ bag? (Tom)",
+                "answer": [
+                    "Tom's"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Tom'un çantası demek için ismin sonuna 's getirilir."
+            },
+            {
+                "engine": "order",
+                "prompt": "Cümleyi kur: 'Bu bizim sınıfımız.'",
+                "tokens": [
+                    "This",
+                    "is",
+                    "our",
+                    "classroom"
+                ],
+                "answer_tokens": [
+                    "This",
+                    "is",
+                    "our",
+                    "classroom"
+                ],
+                "explain": "'Bizim' anlamını 'our' iyelik sıfatı sağlar."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "The students left ____ coats in the hall.",
+                "options": [
+                    "their",
+                    "his",
+                    "our"
+                ],
+                "answer": "their",
+                "explain": "'Students' çoğul olduğu için 'onların' anlamındaki 'their' kullanılır."
+            }
+        ],
+        "recap_bullets": [
+            "Hatırla: 'His' erkek, 'Her' kadın, 'Its' cansız/hayvan için 'onun' demektir.",
+            "Hatırla: Bir ismin sonuna gelen 's eki sahiplik bildirir (Mehmet'in).",
+            "Hatırla: İyelik sıfatlarından (my, your...) sonra mutlaka bir isim gelmelidir."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "A1-POSS-01"
+    }
+}

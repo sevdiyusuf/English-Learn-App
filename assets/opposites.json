@@ -698,116 +698,445 @@
         }
     ],
     "wrong_answers": [
-        "mountain",
-        "celebrate",
-        "bicycle",
-        "language",
-        "pillow",
-        "keyboard",
-        "ocean",
-        "library",
-        "metaphor",
-        "structure",
-        "inquiry",
-        "alliance",
-        "fragment",
-        "ambiguity",
-        "compass",
-        "harmony",
-        "spectrum",
-        "resonance",
-        "migration",
-        "reflection",
-        "transit",
-        "continuum",
-        "verdict",
-        "provision",
-        "circuit",
-        "threshold",
-        "vessel",
-        "domain",
-        "catalyst",
-        "terrain",
-        "equation",
-        "cascade",
-        "synthesis",
-        "artifact",
-        "dimension",
-        "protocol",
-        "interval",
-        "priority",
-        "passage",
-        "segment",
-        "transition",
-        "adviser",
-        "sequence",
-        "commerce",
-        "tribute",
-        "fragrance",
-        "notion",
-        "veracity",
-        "momentum",
-        "archive",
-        "impulse",
-        "basket",
-        "sunset",
-        "curious",
-        "pencil",
-        "garden",
-        "planet",
-        "whisper",
-        "traffic",
-        "mirror",
-        "blanket",
-        "festival",
-        "orange",
-        "sandwich",
-        "battery",
-        "airport",
-        "blank",
-        "adventure",
-        "island",
-        "puzzle",
-        "river",
-        "candle",
-        "forest",
-        "camera",
-        "ticket",
-        "bridge",
-        "pocket",
-        "rainbow",
-        "musician",
-        "market",
-        "thunder",
-        "shampoo",
-        "hunger",
-        "sincere",
-        "energy",
-        "drawer",
-        "solitude",
-        "heritage",
-        "turbulent",
-        "endeavor",
-        "friction",
-        "signal",
-        "lantern",
-        "companion",
-        "fabric",
-        "harbor",
-        "volume",
-        "ceiling",
-        "fiction",
-        "gesture",
-        "harvest",
-        "journey",
-        "stadium",
-        "climate",
-        "engine",
-        "gravity",
-        "legend",
-        "meadow",
-        "pattern",
-        "sculpture",
-        "voyage"
+        {
+            "word": "mountain",
+            "translate": "dağ"
+        },
+        {
+            "word": "celebrate",
+            "translate": "kutlamak"
+        },
+        {
+            "word": "bicycle",
+            "translate": "bisiklet"
+        },
+        {
+            "word": "language",
+            "translate": "dil"
+        },
+        {
+            "word": "pillow",
+            "translate": "yastık"
+        },
+        {
+            "word": "keyboard",
+            "translate": "klavye"
+        },
+        {
+            "word": "ocean",
+            "translate": "okyanus"
+        },
+        {
+            "word": "library",
+            "translate": "kütüphane"
+        },
+        {
+            "word": "metaphor",
+            "translate": "metafor"
+        },
+        {
+            "word": "structure",
+            "translate": "yapı"
+        },
+        {
+            "word": "inquiry",
+            "translate": "soruşturma"
+        },
+        {
+            "word": "alliance",
+            "translate": "ittifak"
+        },
+        {
+            "word": "fragment",
+            "translate": "parça"
+        },
+        {
+            "word": "ambiguity",
+            "translate": "belirsizlik"
+        },
+        {
+            "word": "compass",
+            "translate": "pusula"
+        },
+        {
+            "word": "harmony",
+            "translate": "uyum"
+        },
+        {
+            "word": "spectrum",
+            "translate": "tayf"
+        },
+        {
+            "word": "resonance",
+            "translate": "rezonans"
+        },
+        {
+            "word": "migration",
+            "translate": "göç"
+        },
+        {
+            "word": "reflection",
+            "translate": "yansıma"
+        },
+        {
+            "word": "transit",
+            "translate": "geçiş"
+        },
+        {
+            "word": "continuum",
+            "translate": "süreklilik"
+        },
+        {
+            "word": "verdict",
+            "translate": "hüküm"
+        },
+        {
+            "word": "provision",
+            "translate": "tedarik"
+        },
+        {
+            "word": "circuit",
+            "translate": "devre"
+        },
+        {
+            "word": "threshold",
+            "translate": "eşik"
+        },
+        {
+            "word": "vessel",
+            "translate": "kap"
+        },
+        {
+            "word": "domain",
+            "translate": "alan"
+        },
+        {
+            "word": "catalyst",
+            "translate": "katalizör"
+        },
+        {
+            "word": "terrain",
+            "translate": "arazi"
+        },
+        {
+            "word": "equation",
+            "translate": "denklem"
+        },
+        {
+            "word": "cascade",
+            "translate": "şelale"
+        },
+        {
+            "word": "synthesis",
+            "translate": "sentez"
+        },
+        {
+            "word": "artifact",
+            "translate": "eser"
+        },
+        {
+            "word": "dimension",
+            "translate": "boyut"
+        },
+        {
+            "word": "protocol",
+            "translate": "protokol"
+        },
+        {
+            "word": "interval",
+            "translate": "aralık"
+        },
+        {
+            "word": "priority",
+            "translate": "öncelik"
+        },
+        {
+            "word": "passage",
+            "translate": "geçit"
+        },
+        {
+            "word": "segment",
+            "translate": "bölüm"
+        },
+        {
+            "word": "transition",
+            "translate": "geçiş"
+        },
+        {
+            "word": "adviser",
+            "translate": "danışman"
+        },
+        {
+            "word": "sequence",
+            "translate": "dizi"
+        },
+        {
+            "word": "commerce",
+            "translate": "ticaret"
+        },
+        {
+            "word": "tribute",
+            "translate": "övgü"
+        },
+        {
+            "word": "fragrance",
+            "translate": "güzel koku"
+        },
+        {
+            "word": "notion",
+            "translate": "fikir"
+        },
+        {
+            "word": "veracity",
+            "translate": "doğruluk"
+        },
+        {
+            "word": "momentum",
+            "translate": "momentum"
+        },
+        {
+            "word": "archive",
+            "translate": "arşiv"
+        },
+        {
+            "word": "impulse",
+            "translate": "dürtü"
+        },
+        {
+            "word": "basket",
+            "translate": "sepet"
+        },
+        {
+            "word": "sunset",
+            "translate": "gün batımı"
+        },
+        {
+            "word": "curious",
+            "translate": "meraklı"
+        },
+        {
+            "word": "garden",
+            "translate": "bahçe"
+        },
+        {
+            "word": "planet",
+            "translate": "gezegen"
+        },
+        {
+            "word": "whisper",
+            "translate": "fısıltı"
+        },
+        {
+            "word": "traffic",
+            "translate": "trafik"
+        },
+        {
+            "word": "mirror",
+            "translate": "ayna"
+        },
+        {
+            "word": "blanket",
+            "translate": "battaniye"
+        },
+        {
+            "word": "festival",
+            "translate": "festival"
+        },
+        {
+            "word": "orange",
+            "translate": "portakal"
+        },
+        {
+            "word": "sandwich",
+            "translate": "sandviç"
+        },
+        {
+            "word": "battery",
+            "translate": "pil"
+        },
+        {
+            "word": "airport",
+            "translate": "havaalanı"
+        },
+        {
+            "word": "blank",
+            "translate": "boş"
+        },
+        {
+            "word": "adventure",
+            "translate": "macera"
+        },
+        {
+            "word": "island",
+            "translate": "ada"
+        },
+        {
+            "word": "puzzle",
+            "translate": "bulmaca"
+        },
+        {
+            "word": "river",
+            "translate": "nehir"
+        },
+        {
+            "word": "candle",
+            "translate": "mum"
+        },
+        {
+            "word": "forest",
+            "translate": "orman"
+        },
+        {
+            "word": "camera",
+            "translate": "kamera"
+        },
+        {
+            "word": "ticket",
+            "translate": "bilet"
+        },
+        {
+            "word": "bridge",
+            "translate": "köprü"
+        },
+        {
+            "word": "pocket",
+            "translate": "cep"
+        },
+        {
+            "word": "rainbow",
+            "translate": "gökkuşağı"
+        },
+        {
+            "word": "musician",
+            "translate": "müzisyen"
+        },
+        {
+            "word": "market",
+            "translate": "pazar"
+        },
+        {
+            "word": "thunder",
+            "translate": "gök gürültüsü"
+        },
+        {
+            "word": "shampoo",
+            "translate": "şampuan"
+        },
+        {
+            "word": "hunger",
+            "translate": "açlık"
+        },
+        {
+            "word": "sincere",
+            "translate": "samimi"
+        },
+        {
+            "word": "energy",
+            "translate": "enerji"
+        },
+        {
+            "word": "drawer",
+            "translate": "çekmece"
+        },
+        {
+            "word": "solitude",
+            "translate": "yalnızlık"
+        },
+        {
+            "word": "heritage",
+            "translate": "miras"
+        },
+        {
+            "word": "turbulent",
+            "translate": "çalkantılı"
+        },
+        {
+            "word": "endeavor",
+            "translate": "çaba"
+        },
+        {
+            "word": "friction",
+            "translate": "sürtünme"
+        },
+        {
+            "word": "signal",
+            "translate": "sinyal"
+        },
+        {
+            "word": "lantern",
+            "translate": "fener"
+        },
+        {
+            "word": "companion",
+            "translate": "yoldaş"
+        },
+        {
+            "word": "fabric",
+            "translate": "kumaş"
+        },
+        {
+            "word": "harbor",
+            "translate": "liman"
+        },
+        {
+            "word": "volume",
+            "translate": "hacim"
+        },
+        {
+            "word": "ceiling",
+            "translate": "tavan"
+        },
+        {
+            "word": "fiction",
+            "translate": "kurgu"
+        },
+        {
+            "word": "gesture",
+            "translate": "jest"
+        },
+        {
+            "word": "harvest",
+            "translate": "hasat"
+        },
+        {
+            "word": "journey",
+            "translate": "yolculuk"
+        },
+        {
+            "word": "stadium",
+            "translate": "stadyum"
+        },
+        {
+            "word": "climate",
+            "translate": "iklim"
+        },
+        {
+            "word": "engine",
+            "translate": "motor"
+        },
+        {
+            "word": "gravity",
+            "translate": "yerçekimi"
+        },
+        {
+            "word": "legend",
+            "translate": "efsane"
+        },
+        {
+            "word": "meadow",
+            "translate": "çayır"
+        },
+        {
+            "word": "pattern",
+            "translate": "desen"
+        },
+        {
+            "word": "sculpture",
+            "translate": "heykel"
+        },
+        {
+            "word": "voyage",
+            "translate": "seyahat"
+        }
     ]
 }

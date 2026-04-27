@@ -1,0 +1,345 @@
+{
+  "schema_version": "1.0",
+  "level": "A2",
+  "worksheet_id": "A2-COMP-02",
+  "title": "Comparatives & Superlatives (mixed practice)",
+  "topic_tags": [
+    "comparatives",
+    "superlatives",
+    "irregular",
+    "spelling_rules"
+  ],
+  "subskills": [
+    "choose_er_more",
+    "use_than",
+    "use_the_superlative",
+    "irregular_forms",
+    "spelling_changes"
+  ],
+  "difficulty": 2,
+  "engine_sequence": [
+    {
+      "engine": "mcq",
+      "count": 10,
+      "rules": {
+        "shuffle_options": true,
+        "allow_hint": true
+      }
+    },
+    {
+      "engine": "fill",
+      "count": 8,
+      "rules": {
+        "case_sensitive": false,
+        "allow_contractions": true
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "mcq1",
+      "engine": "mcq",
+      "prompt": "This street is ____ than the main road. (narrow)",
+      "translation_tr": "Bu sokak ana yoldan daha dardır.",
+      "options": [
+        "narrower",
+        "more narrow"
+      ],
+      "answer": "narrower",
+      "hint": "1-syllable adjectives usually take -er.",
+      "tags": [
+        "comparative",
+        "spelling_rules"
+      ]
+    },
+    {
+      "id": "mcq2",
+      "engine": "mcq",
+      "prompt": "My backpack is ____ than yours. (heavy)",
+      "translation_tr": "Sırt çantam seninkinden daha ağır.",
+      "options": [
+        "heavier",
+        "more heavy"
+      ],
+      "answer": "heavier",
+      "hint": "heavy → heavier (y → i + er).",
+      "tags": [
+        "comparative",
+        "spelling_rules"
+      ]
+    },
+    {
+      "id": "mcq3",
+      "engine": "mcq",
+      "prompt": "That problem is ____ than it looks. (easy)",
+      "translation_tr": "O sorun göründüğünden daha kolay.",
+      "options": [
+        "easier",
+        "more easy"
+      ],
+      "answer": "easier",
+      "hint": "easy → easier.",
+      "tags": [
+        "comparative",
+        "spelling_rules"
+      ]
+    },
+    {
+      "id": "mcq4",
+      "engine": "mcq",
+      "prompt": "This café is the ____ in our neighbourhood. (popular)",
+      "translation_tr": "Bu kafe mahallemizdeki en popüler kafedir.",
+      "options": [
+        "most popular",
+        "popularest"
+      ],
+      "answer": "most popular",
+      "hint": "Longer adjectives use most.",
+      "tags": [
+        "superlative",
+        "most"
+      ]
+    },
+    {
+      "id": "mcq5",
+      "engine": "mcq",
+      "prompt": "She is ____ than her brother. (careful)",
+      "translation_tr": "O kardeşinden daha dikkatlidir.",
+      "options": [
+        "more careful",
+        "carefuller"
+      ],
+      "answer": "more careful",
+      "hint": "Two+ syllables often use more.",
+      "tags": [
+        "comparative",
+        "more"
+      ]
+    },
+    {
+      "id": "mcq6",
+      "engine": "mcq",
+      "prompt": "This is the ____ room in the house. (quiet)",
+      "translation_tr": "Bu, evdeki en sessiz oda.",
+      "options": [
+        "quietest",
+        "most quiet"
+      ],
+      "answer": "quietest",
+      "hint": "quiet → quietest.",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "id": "mcq7",
+      "engine": "mcq",
+      "prompt": "I feel ____ today than yesterday. (good)",
+      "translation_tr": "Bugün dünden daha iyi hissediyorum.",
+      "options": [
+        "better",
+        "gooder"
+      ],
+      "answer": "better",
+      "hint": "good → better.",
+      "tags": [
+        "irregular",
+        "comparative"
+      ]
+    },
+    {
+      "id": "mcq8",
+      "engine": "mcq",
+      "prompt": "This is the ____ test we’ve had this year. (bad)",
+      "translation_tr": "Bu, bu yıl olduğumuz en kötü sınav.",
+      "options": [
+        "worst",
+        "baddest"
+      ],
+      "answer": "worst",
+      "hint": "bad → worse → worst.",
+      "tags": [
+        "irregular",
+        "superlative"
+      ]
+    },
+    {
+      "id": "mcq9",
+      "engine": "mcq",
+      "prompt": "A bicycle is ____ than a car in the city centre. (cheap)",
+      "translation_tr": "Şehir merkezinde bisiklet arabadan daha ucuzdur.",
+      "options": [
+        "cheaper",
+        "more cheap"
+      ],
+      "answer": "cheaper",
+      "hint": "cheap → cheaper.",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "id": "mcq10",
+      "engine": "mcq",
+      "prompt": "June is usually ____ than January here. (hot)",
+      "translation_tr": "Burada haziran genellikle ocaktan daha sıcaktır.",
+      "options": [
+        "hotter",
+        "more hot"
+      ],
+      "answer": "hotter",
+      "hint": "hot → hotter (double consonant).",
+      "tags": [
+        "comparative",
+        "spelling_rules"
+      ]
+    },
+    {
+      "id": "fill1",
+      "engine": "fill",
+      "prompt": "This chair is ____ (comfortable) than that one.",
+      "translation_tr": "Bu sandalye, şu olandan daha rahattır.",
+      "answer": [
+        "more comfortable"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "hint": "comfortable is long → more + adjective.",
+      "tags": [
+        "more"
+      ]
+    },
+    {
+      "id": "fill2",
+      "engine": "fill",
+      "prompt": "My phone is ____ (new) than yours.",
+      "translation_tr": "Telefonum seninkinden daha yeni.",
+      "answer": [
+        "newer"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "hint": "new → newer.",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "id": "fill3",
+      "engine": "fill",
+      "prompt": "This is the ____ (small) bag in the shop.",
+      "translation_tr": "Bu, dükkândaki en küçük çanta.",
+      "answer": [
+        "smallest"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "hint": "small → smallest.",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "id": "fill4",
+      "engine": "fill",
+      "prompt": "Today is ____ (cold) than yesterday.",
+      "translation_tr": "Bugün dünden daha soğuk.",
+      "answer": [
+        "colder"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "hint": "cold → colder.",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "id": "fill5",
+      "engine": "fill",
+      "prompt": "He is the ____ (funny) person in my class.",
+      "translation_tr": "O sınıfımdaki en komik kişi.",
+      "answer": [
+        "funniest"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "hint": "funny → funniest (y → i + est).",
+      "tags": [
+        "superlative",
+        "spelling_rules"
+      ]
+    },
+    {
+      "id": "fill6",
+      "engine": "fill",
+      "prompt": "This exercise is ____ (difficult) than the first one.",
+      "translation_tr": "Bu alıştırma ilkinden daha zordur.",
+      "answer": [
+        "more difficult"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "hint": "difficult → more difficult.",
+      "tags": [
+        "more"
+      ]
+    },
+    {
+      "id": "fill7",
+      "engine": "fill",
+      "prompt": "My sister is ____ (tall) than me.",
+      "translation_tr": "Kız kardeşim benden daha uzundur.",
+      "answer": [
+        "taller"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "hint": "tall → taller.",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "id": "fill8",
+      "engine": "fill",
+      "prompt": "It is the ____ (far) I have ever walked.",
+      "translation_tr": "Bu, şimdiye kadar yürüdüğüm en uzak mesafe.",
+      "answer": [
+        "farthest",
+        "furthest"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "hint": "far → farthest/furthest are both acceptable.",
+      "tags": [
+        "irregular",
+        "superlative"
+      ]
+    }
+  ]
+}

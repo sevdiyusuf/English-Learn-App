@@ -1,0 +1,210 @@
+{
+    "schema_version": "1.0",
+    "level": "A2",
+    "lesson_id": "A2-FUTURE-02-lesson",
+    "title": "Present Continuous (future) vs Going to",
+    "topic_tags": [
+        "future",
+        "present_continuous",
+        "going_to",
+        "arrangements",
+        "plans"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Geleceğe dair niyetler ile önceden kesinleştirilmiş planları (arrangements) ayırmayı öğreneceğiz.",
+                    "Hangi durumlarda 'be going to', hangi durumlarda 'am/is/are -ing' kullanacağımızı kavrayacağız.",
+                    "Zamanı ve yeri belli olan eylemleri anlatmayı pekiştireceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Niyetler: Be Going To",
+                "bullets": [
+                    "Bir şeyi yapmaya karar verdiğimizde ama henüz detaylarını (tam zaman, bilet, yer) kesinleştirmediğimizde kullanılır.",
+                    "Henüz 'ajandaya işlenmemiş' genel planlar ve hedefler için uygundur."
+                ],
+                "examples": [
+                    "We **are going to travel** to Spain one day. (Bir gün gitmeyi planlıyoruz.)",
+                    "He **is going to study** harder this term. (Bu dönem daha çok çalışmaya niyetli.)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "Kesinleşmiş İşler: Present Continuous",
+                "bullets": [
+                    "Gelecekteki eylemin zamanı ve yeri başkalarıyla ayarlanmış veya bilet/rezervasyon gibi işlemlerle kesinleşmişse kullanılır.",
+                    "Bu yapıyı kullandığımızda, eylemin gerçekleşmesi neredeyse garantidir."
+                ],
+                "examples": [
+                    "I **am meeting** my dentist at 4 p.m. tomorrow. (Randevu alındı, zamanı belli.)",
+                    "I **am flying** to Ankara on Monday. (Bilet alındı.)"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "Soru: 'They ____ dinner with us on Saturday.' (Zaman ve kişiler ayarlanmışsa hangisi uygundur?)",
+                "options": [
+                    "are having",
+                    "are going to have"
+                ],
+                "answer": "are having",
+                "explain": "Eğer başkalarıyla (with us) bir etkinlik organize edilmişse Present Continuous tercih edilir.",
+                "hint": "Organizasyon (arrangement) vurgusuna bak."
+            },
+            {
+                "id": "c4",
+                "type": "formula",
+                "title": "Yapı Karşılaştırması",
+                "bullets": [
+                    "Her iki yapıda da 'be' (am/is/are) yardımcı fiilinin mutlaka olması gerektiğini unutmayın."
+                ],
+                "formula": [
+                    "Plan: Subject + am/is/are + going to + V1",
+                    "Arrangement: Subject + am/is/are + V-ing"
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Uzak Hedeflerde -ing Kullanmak**: 'I am living in USA one day' hatalıdır. Kesinleşmemiş bir niyet olduğu için 'going to' kullanılmalıdır.",
+                    "**Yardımcı Fiil Eksikliği**: 'I going to buy' yerine 'I **am** going to buy' denmelidir."
+                ],
+                "examples": [
+                    "Hatalı: I visiting my dentist tomorrow. ✗",
+                    "Doğru: I **am visiting** my dentist tomorrow. ✓"
+                ]
+            },
+            {
+                "id": "q2",
+                "type": "checkpoint",
+                "engine": "fill",
+                "prompt": "We ____ ____ ____ (buy) a new laptop soon. (We decided but didn't pick the model yet.)",
+                "answer": [
+                    "are going to buy"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Sadece bir niyet/karar (intention) olduğu için 'be going to' yapısı uygundur."
+            },
+            {
+                "id": "c6",
+                "type": "tip",
+                "title": "Pratik İpucu: Takvim Testi",
+                "bullets": [
+                    "Eğer eylemi takviminize tam saatiyle ve yeriyle not edebiliyorsanız: **Present Continuous**.",
+                    "Eğer sadece bir yapılacaklar listesinde (to-do list) maddelerden biriyse: **Be Going To**."
+                ]
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Kontekst: Hafta Sonu Organizasyonu",
+        "intro_bullets": [
+            "Jane ve Tom hafta sonu planları hakkında konuşuyorlar.",
+            "Hangisinin sadece bir niyet, hangisinin kesin bir randevu olduğunu anlamaya çalış.",
+            "Doğru yapıları seçerek diyaloğu tamamla!"
+        ],
+        "items": [
+            {
+                "engine": "fill",
+                "prompt": "Jane: 'I ___ (meet) my teacher tomorrow at 10. We have a meeting.'",
+                "answer": [
+                    "am meeting",
+                    "i'm meeting"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces",
+                    "accept_contractions"
+                ],
+                "explain": "Zamanı (tomorrow at 10) belli bir organizasyon olduğu için Continuous kullanılır."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "Tom: 'That's good. I ____ buy a new phone soon, maybe next week.'",
+                "options": [
+                    "am going to",
+                    "am buying"
+                ],
+                "answer": "am going to",
+                "explain": "Henüz kesinleşmemiş, sadece bir niyet/plan olduğu için 'going to' kullanılır."
+            },
+            {
+                "engine": "fill",
+                "prompt": "Jane: 'Great! By the way, we ___ (have) dinner with Sarah on Saturday. Join us!'",
+                "answer": [
+                    "are having"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Başkalarıyla ayarlanmış bir etkinlik (arrangement) anlatılıyor."
+            },
+            {
+                "engine": "tap",
+                "prompt": "Tom: 'I'd love to, but I ___ to London on Saturday morning. I have my ticket!'",
+                "bank": [
+                    "am flying",
+                    "am going to fly",
+                    "fly"
+                ],
+                "answer": "am flying",
+                "explain": "Bilet alındığı için bu eylem kesinleşmiş bir organizasyondur."
+            },
+            {
+                "engine": "order",
+                "prompt": "Cümleyi kur: 'Bu yıl İngilizceyi daha iyi öğrenmeyi hedefliyorum.'",
+                "tokens": [
+                    "I",
+                    "am",
+                    "going",
+                    "to",
+                    "learn",
+                    "English",
+                    "better",
+                    "this",
+                    "year"
+                ],
+                "answer_tokens": [
+                    "I",
+                    "am",
+                    "going",
+                    "to",
+                    "learn",
+                    "English",
+                    "better",
+                    "this",
+                    "year"
+                ],
+                "explain": "Kişisel bir hedef ve niyet 'be going to' ile kurulur."
+            }
+        ],
+        "recap_bullets": [
+            "Hatırla: Kesinleşmiş organizasyonlar ve randevular için Present Continuous (-ing) kullan.",
+            "Hatırla: Henüz kesinleşmemiş niyetler ve genel planlar için 'be going to' tercih et.",
+            "Hatırla: Cümlede tam zaman (at 8 p.m.) verilmişse genellikle Continuous yapısı ön plandadır."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "A2-FUTURE-02"
+    }
+}

@@ -1,0 +1,265 @@
+{
+  "schema_version": "1.0",
+  "level": "A2",
+  "worksheet_id": "A2-PPC-01",
+  "title": "Present Perfect Continuous",
+  "topic_tags": [
+    "present_perfect_continuous",
+    "for",
+    "since",
+    "how_long",
+    "been_ving"
+  ],
+  "subskills": [
+    "form_have_been_ving",
+    "use_for_since",
+    "ask_how_long"
+  ],
+  "difficulty": 2,
+  "engine_sequence": [
+    {
+      "engine": "mcq",
+      "count": 8,
+      "rules": {
+        "shuffle_options": true,
+        "allow_hint": true
+      }
+    },
+    {
+      "engine": "fill",
+      "count": 6,
+      "rules": {
+        "case_sensitive": false,
+        "allow_contractions": true
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "mcq1",
+      "engine": "mcq",
+      "prompt": "I ____ studying for two hours.",
+      "translation_tr": "İki saattir ders çalışıyorum.",
+      "options": [
+        "have been",
+        "am"
+      ],
+      "answer": "have been",
+      "hint": "Present Perfect Continuous: have/has been + V-ing.",
+      "tags": [
+        "form"
+      ]
+    },
+    {
+      "id": "mcq2",
+      "engine": "mcq",
+      "prompt": "She ____ working since 9 a.m.",
+      "translation_tr": "Saat 9’dan beri çalışıyor.",
+      "options": [
+        "has been",
+        "is"
+      ],
+      "answer": "has been",
+      "tags": [
+        "form"
+      ]
+    },
+    {
+      "id": "mcq3",
+      "engine": "mcq",
+      "prompt": "We have been waiting ____ 30 minutes.",
+      "translation_tr": "Otuz dakikadır bekliyoruz.",
+      "options": [
+        "for",
+        "since"
+      ],
+      "answer": "for",
+      "hint": "for + period (30 minutes).",
+      "tags": [
+        "for_since"
+      ]
+    },
+    {
+      "id": "mcq4",
+      "engine": "mcq",
+      "prompt": "He has been living here ____ 2020.",
+      "translation_tr": "2020’den beri burada yaşıyor.",
+      "options": [
+        "for",
+        "since"
+      ],
+      "answer": "since",
+      "hint": "since + starting point (2020).",
+      "tags": [
+        "for_since"
+      ]
+    },
+    {
+      "id": "mcq5",
+      "engine": "mcq",
+      "prompt": "How long ____ you been learning English?",
+      "translation_tr": "Ne zamandır İngilizce öğreniyorsun?",
+      "options": [
+        "have",
+        "do"
+      ],
+      "answer": "have",
+      "hint": "How long + have/has + subject + been...",
+      "tags": [
+        "how_long"
+      ]
+    },
+    {
+      "id": "mcq6",
+      "engine": "mcq",
+      "prompt": "It has been raining ____ this morning.",
+      "translation_tr": "Bu sabahtan beri yağmur yağıyor.",
+      "options": [
+        "since",
+        "for"
+      ],
+      "answer": "since",
+      "tags": [
+        "for_since"
+      ]
+    },
+    {
+      "id": "mcq7",
+      "engine": "mcq",
+      "prompt": "They ____ playing football for an hour.",
+      "translation_tr": "Bir saattir futbol oynuyorlar.",
+      "options": [
+        "have been",
+        "are"
+      ],
+      "answer": "have been",
+      "tags": [
+        "form"
+      ]
+    },
+    {
+      "id": "mcq8",
+      "engine": "mcq",
+      "prompt": "I’m tired. I ____ running.",
+      "translation_tr": "Yorgunum. Koşuyordum.",
+      "options": [
+        "have been",
+        "have"
+      ],
+      "answer": "have been",
+      "hint": "Running is an action in progress.",
+      "tags": [
+        "meaning"
+      ]
+    },
+    {
+      "id": "fill1",
+      "engine": "fill",
+      "prompt": "He ____ ____ (work) all day.",
+      "translation_tr": "Bütün gün çalışıyor.",
+      "answer": [
+        "has been working",
+        "he's been working"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces",
+        "accept_contractions"
+      ],
+      "tags": [
+        "form"
+      ]
+    },
+    {
+      "id": "fill2",
+      "engine": "fill",
+      "prompt": "We ____ ____ (study) for three hours.",
+      "translation_tr": "Üç saattir ders çalışıyoruz.",
+      "answer": [
+        "have been studying",
+        "we've been studying"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces",
+        "accept_contractions"
+      ],
+      "tags": [
+        "form"
+      ]
+    },
+    {
+      "id": "fill3",
+      "engine": "fill",
+      "prompt": "She has been sleeping ____ 10 p.m. (for/since)",
+      "translation_tr": "Saat 10’dan beri uyuyor.",
+      "answer": [
+        "since"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "for_since"
+      ]
+    },
+    {
+      "id": "fill4",
+      "engine": "fill",
+      "prompt": "I have been waiting ____ five minutes. (for/since)",
+      "translation_tr": "Beş dakikadır bekliyorum.",
+      "answer": [
+        "for"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "for_since"
+      ]
+    },
+    {
+      "id": "fill5",
+      "engine": "fill",
+      "prompt": "How long ____ you been here? (have/has)",
+      "translation_tr": "Ne zamandır buradasın?",
+      "answer": [
+        "have"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "how_long"
+      ]
+    },
+    {
+      "id": "fill6",
+      "engine": "fill",
+      "prompt": "It ____ ____ (rain) since yesterday.",
+      "translation_tr": "Dünden beri yağmur yağıyor.",
+      "answer": [
+        "has been raining",
+        "it's been raining"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces",
+        "accept_contractions"
+      ],
+      "tags": [
+        "form",
+        "for_since"
+      ]
+    }
+  ]
+}

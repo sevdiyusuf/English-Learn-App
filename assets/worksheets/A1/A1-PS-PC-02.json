@@ -1,0 +1,285 @@
+{
+  "schema_version": "1.0",
+  "level": "A1",
+  "worksheet_id": "A1-PS-PC-02",
+  "title": "Present Simple vs Present Continuous (new set)",
+  "topic_tags": [
+    "present_simple",
+    "present_continuous",
+    "time_expressions"
+  ],
+  "subskills": [
+    "recognize_time_words",
+    "choose_tense",
+    "conjugate_be_plus_ving"
+  ],
+  "difficulty": 1,
+  "engine_sequence": [
+    {
+      "engine": "mcq",
+      "count": 8,
+      "rules": {
+        "shuffle_options": true,
+        "allow_hint": true
+      }
+    },
+    {
+      "engine": "fill",
+      "count": 6,
+      "rules": {
+        "case_sensitive": false,
+        "allow_contractions": true
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "mcq1",
+      "engine": "mcq",
+      "prompt": "My dad ____ to work by bus.",
+      "translation_tr": "Babam işe otobüsle gider.",
+      "options": [
+        "goes",
+        "is going"
+      ],
+      "answer": "goes",
+      "hint": "Routines = Present Simple.",
+      "explain": "We use Present Simple for daily routines and habits.",
+      "tags": [
+        "routine"
+      ]
+    },
+    {
+      "id": "mcq2",
+      "engine": "mcq",
+      "prompt": "Listen! The phone ____.",
+      "translation_tr": "Dinle! Telefon çalıyor.",
+      "options": [
+        "rings",
+        "is ringing"
+      ],
+      "answer": "is ringing",
+      "hint": "Listen!/Look! = happening now.",
+      "explain": "Present Continuous is for actions happening at the moment of speaking.",
+      "tags": [
+        "now"
+      ]
+    },
+    {
+      "id": "mcq3",
+      "engine": "mcq",
+      "prompt": "She ____ English on Mondays.",
+      "translation_tr": "O pazartesileri İngilizce çalışır.",
+      "options": [
+        "studies",
+        "is studying"
+      ],
+      "answer": "studies",
+      "hint": "On Mondays = routine.",
+      "explain": "Fixed schedules (on Mondays, every week) usually use Present Simple.",
+      "tags": [
+        "routine"
+      ]
+    },
+    {
+      "id": "mcq4",
+      "engine": "mcq",
+      "prompt": "I ____ a sandwich right now.",
+      "translation_tr": "Şu anda bir sandviç yiyorum.",
+      "options": [
+        "eat",
+        "am eating"
+      ],
+      "answer": "am eating",
+      "hint": "Right now = Present Continuous.",
+      "explain": "Right now shows an action in progress.",
+      "tags": [
+        "now"
+      ]
+    },
+    {
+      "id": "mcq5",
+      "engine": "mcq",
+      "prompt": "We always ____ our room on Saturdays.",
+      "translation_tr": "Biz cumartesileri odamızı her zaman temizleriz.",
+      "options": [
+        "clean",
+        "are cleaning"
+      ],
+      "answer": "clean",
+      "hint": "Always + day/time = routine.",
+      "explain": "Frequency words (always/often/usually) → Present Simple.",
+      "tags": [
+        "adverb_frequency"
+      ]
+    },
+    {
+      "id": "mcq6",
+      "engine": "mcq",
+      "prompt": "Be quiet! The teacher ____.",
+      "translation_tr": "Sessiz ol! Öğretmen konuşuyor.",
+      "options": [
+        "talks",
+        "is talking"
+      ],
+      "answer": "is talking",
+      "hint": "Be quiet! = happening now.",
+      "explain": "Present Continuous fits actions happening now.",
+      "tags": [
+        "now"
+      ]
+    },
+    {
+      "id": "mcq7",
+      "engine": "mcq",
+      "prompt": "My parents ____ in Ankara.",
+      "translation_tr": "Ailem Ankara'da yaşıyor.",
+      "options": [
+        "live",
+        "are living"
+      ],
+      "answer": "live",
+      "hint": "Permanent situation = Present Simple.",
+      "explain": "We usually use Present Simple for permanent situations like where someone lives.",
+      "tags": [
+        "permanent"
+      ]
+    },
+    {
+      "id": "mcq8",
+      "engine": "mcq",
+      "prompt": "At the moment, we ____ for the bus.",
+      "translation_tr": "Şu anda otobüsü bekliyoruz.",
+      "options": [
+        "wait",
+        "are waiting"
+      ],
+      "answer": "are waiting",
+      "hint": "At the moment = Present Continuous.",
+      "explain": "At the moment indicates an action happening now.",
+      "tags": [
+        "now"
+      ]
+    },
+    {
+      "id": "fill1",
+      "engine": "fill",
+      "prompt": "She ____ (get up) early every day.",
+      "translation_tr": "O her gün erken kalkar.",
+      "answer": [
+        "gets up"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "explain": "Every day → Present Simple.",
+      "tags": [
+        "routine"
+      ]
+    },
+    {
+      "id": "fill2",
+      "engine": "fill",
+      "prompt": "He ____ (cook) dinner now.",
+      "translation_tr": "O şimdi akşam yemeğini pişiriyor.",
+      "answer": [
+        "is cooking",
+        "he's cooking"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces",
+        "accept_contractions"
+      ],
+      "explain": "Now → Present Continuous (be + V-ing).",
+      "tags": [
+        "now"
+      ]
+    },
+    {
+      "id": "fill3",
+      "engine": "fill",
+      "prompt": "They ____ (not watch) TV at the moment.",
+      "translation_tr": "Onlar şu anda televizyon izlemiyor.",
+      "answer": [
+        "are not watching",
+        "aren't watching"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces",
+        "accept_contractions"
+      ],
+      "explain": "Negative Present Continuous: be + not + V-ing.",
+      "tags": [
+        "now",
+        "negative"
+      ]
+    },
+    {
+      "id": "fill4",
+      "engine": "fill",
+      "prompt": "I ____ (not understand) this question.",
+      "translation_tr": "Bu soruyu anlamıyorum.",
+      "answer": [
+        "don't understand",
+        "do not understand"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces",
+        "accept_contractions"
+      ],
+      "explain": "Stative verbs like 'understand' are usually Present Simple.",
+      "tags": [
+        "stative",
+        "negative"
+      ]
+    },
+    {
+      "id": "fill5",
+      "engine": "fill",
+      "prompt": "Where ____ she ____ (work)?",
+      "translation_tr": "O nerede çalışıyor?",
+      "answer": [
+        "does she work",
+        "where does she work"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "explain": "Question Present Simple: (Wh) + do/does + subject + base verb.",
+      "tags": [
+        "question",
+        "routine"
+      ]
+    },
+    {
+      "id": "fill6",
+      "engine": "fill",
+      "prompt": "What ____ you ____ (do) at the moment?",
+      "translation_tr": "Şu anda ne yapıyorsun?",
+      "answer": [
+        "are you doing",
+        "what are you doing"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "explain": "Question Present Continuous: (Wh) + be + subject + V-ing.",
+      "tags": [
+        "question",
+        "now"
+      ]
+    }
+  ]
+}

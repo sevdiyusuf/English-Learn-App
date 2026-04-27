@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "my-english-project-f25ff",
     "public": "build/web",
     "ignore": [
       "firebase.json",

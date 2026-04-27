@@ -1,0 +1,195 @@
+{
+  "schema_version": "1.0",
+  "level": "B2",
+  "worksheet_id": "B2-LINK-01",
+  "title": "Linking words",
+  "topic_tags": [
+    "linking_words",
+    "contrast",
+    "however",
+    "whereas",
+    "despite",
+    "in_spite_of"
+  ],
+  "subskills": [
+    "choose_linker",
+    "despite_plus_ing_or_noun",
+    "sentence_contrast"
+  ],
+  "difficulty": 4,
+  "engine_sequence": [
+    {
+      "engine": "matching",
+      "count": 8,
+      "rules": {
+        "allow_hint": true
+      }
+    },
+    {
+      "engine": "fill",
+      "count": 6,
+      "rules": {
+        "case_sensitive": false,
+        "allow_contractions": true
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "match1",
+      "engine": "matching",
+      "prompt": "Match the linker to the meaning.",
+      "translation_tr": "Bağlaçları anlamlarıyla eşleştir.",
+      "pairs": [
+        {
+          "left": "however",
+          "right": "contrast between two sentences"
+        },
+        {
+          "left": "whereas",
+          "right": "contrast in one sentence"
+        },
+        {
+          "left": "despite",
+          "right": "contrast + noun/-ing"
+        },
+        {
+          "left": "in spite of",
+          "right": "contrast + noun/-ing"
+        },
+        {
+          "left": "although",
+          "right": "contrast + clause"
+        },
+        {
+          "left": "because of",
+          "right": "reason + noun"
+        },
+        {
+          "left": "so",
+          "right": "result"
+        },
+        {
+          "left": "therefore",
+          "right": "formal result"
+        }
+      ],
+      "answer_key": {
+        "however": "contrast between two sentences",
+        "whereas": "contrast in one sentence",
+        "despite": "contrast + noun/-ing",
+        "in spite of": "contrast + noun/-ing",
+        "although": "contrast + clause",
+        "because of": "reason + noun",
+        "so": "result",
+        "therefore": "formal result"
+      },
+      "tags": [
+        "matching"
+      ]
+    },
+    {
+      "id": "fill1",
+      "engine": "fill",
+      "prompt": "He studied a lot. ____, he failed the exam. (however)",
+      "translation_tr": "Çok çalıştı. Ancak sınavda kaldı. (however)",
+      "answer": [
+        "however"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "however"
+      ]
+    },
+    {
+      "id": "fill2",
+      "engine": "fill",
+      "prompt": "I like coffee, ____ my sister prefers tea. (whereas)",
+      "translation_tr": "Ben kahve severim, oysa kız kardeşim çayı tercih eder. (whereas)",
+      "answer": [
+        "whereas"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "whereas"
+      ]
+    },
+    {
+      "id": "fill3",
+      "engine": "fill",
+      "prompt": "____ being tired, she kept working. (despite)",
+      "translation_tr": "Yorgun olmasına rağmen çalışmaya devam etti. (despite)",
+      "answer": [
+        "despite"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "despite"
+      ]
+    },
+    {
+      "id": "fill4",
+      "engine": "fill",
+      "prompt": "In spite of ____ hard, he didn’t win. (try)",
+      "translation_tr": "Çok çalışmasına rağmen kazanamadı. (in spite of)",
+      "answer": [
+        "trying"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "in_spite_of"
+      ]
+    },
+    {
+      "id": "fill5",
+      "engine": "fill",
+      "prompt": "Although it was raining, we went out. (replace Although with However + punctuation)",
+      "translation_tr": "Yağmur yağıyordu, yine de dışarı çıktık. (Although → However yap)",
+      "answer": [
+        "it was raining; however, we went out.",
+        "it was raining. however, we went out."
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "however_structure"
+      ]
+    },
+    {
+      "id": "fill6",
+      "engine": "fill",
+      "prompt": "We were late because of ____ traffic. (heavy)",
+      "translation_tr": "Yoğun trafik yüzünden geç kaldık.",
+      "answer": [
+        "heavy"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "because_of"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+    "schema_version": "1.0",
+    "level": "A1",
+    "lesson_id": "A1-TOBE-01-lesson",
+    "title": "To Be: Am, Is, Are",
+    "topic_tags": [
+        "to_be",
+        "pronouns",
+        "basic_sentences"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "İngilizcenin en temel yapı taşı olan 'olmak' (to be) fiilini öğreneceğiz.",
+                    "Öznelerle (I, You, He, She, It, We, They) hangi yardımcı fiilin kullanılacağını kavrayacağız.",
+                    "Kendimizi tanıtmayı, durum ve konum bildirmeyi öğreneceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Özne ve Yardımcı Fiil Uyumu",
+                "bullets": [
+                    "**I**: Sadece 'am' ile kullanılır (I am).",
+                    "**He, She, It**: Tekil özneler 'is' ile kullanılır.",
+                    "**You, We, They**: Çoğul özneler 'are' ile kullanılır."
+                ],
+                "examples": [
+                    "I am a teacher. (Ben bir öğretmenim.)",
+                    "She is happy. (O mutlu.)",
+                    "They are in London. (Onlar Londra'dalar.)"
+                ]
+            },
+            {
+                "id": "formula",
+                "type": "formula",
+                "title": "Cümle Yapıları",
+                "bullets": [
+                    "Olumlu, olumsuz ve soru cümlelerinde dizilim şu şekildedir:"
+                ],
+                "formula": [
+                    "Positive: Subject + am/is/are (I am / You are)",
+                    "Negative: Subject + am/is/are + not (I am not / You aren't)",
+                    "Question: Am/Is/Are + Subject? (Are you? / Is he?)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Özne Karıştırmak**: 'They is' hatalıdır. Doğrusu 'They **are**' olmalıdır.",
+                    "**Soru Sıralaması**: 'You are happy?' bir soru değildir. Doğrusu '**Are you** happy?' olmalıdır.",
+                    "**Kısaltmalar**: 'I'm' doğruyken 'I is' gibi bir kısaltma yoktur."
+                ],
+                "examples": [
+                    "Hatalı: It are a cat. ✗",
+                    "Doğru: It **is** a cat. ✓",
+                    "Hatalı: We am students. ✗",
+                    "Doğru: We **are** students. ✓"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "My friend ____ very talented.",
+                "options": [
+                    "is",
+                    "am",
+                    "are"
+                ],
+                "answer": "is",
+                "explain": "'My friend' tekil bir özne (He veya She) olduğu için 'is' kullanılır."
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Yeni Bir Arkadaş",
+        "intro_bullets": [
+            "Alex, yeni sınıf arkadaşıyla tanışıyor. Cümleleri tamamla."
+        ],
+        "items": [
+            {
+                "engine": "fill",
+                "prompt": "Hello! I ___ Alex. What is your name?",
+                "answer": [
+                    "am",
+                    "i'm"
+                ],
+                "explain": "Kendimizi tanıtırken 'I' öznesiyle 'am' kullanırız."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "____ you a new student here?",
+                "options": [
+                    "Are",
+                    "Is",
+                    "Am"
+                ],
+                "answer": "Are",
+                "explain": "Soru cümlelerinde 'you' öznesi için 'Are' başa gelir."
+            },
+            {
+                "engine": "order",
+                "prompt": "Cümleyi kur: 'O çok yardımsever.'",
+                "tokens": [
+                    "She",
+                    "is",
+                    "very",
+                    "helpful."
+                ],
+                "answer_tokens": [
+                    "She",
+                    "is",
+                    "very",
+                    "helpful."
+                ],
+                "explain": "Olumlu cümlede dizilim: Özne + be + sıfat."
+            }
+        ],
+        "recap_bullets": [
+            "I + am",
+            "He/She/It + is",
+            "You/We/They + are",
+            "Soru yaparken yardımcı fiili başa almayı unutma!"
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "A1-TOBE-01"
+    }
+}

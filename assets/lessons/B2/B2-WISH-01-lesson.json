@@ -1,0 +1,190 @@
+{
+    "schema_version": "1.0",
+    "level": "B2",
+    "lesson_id": "B2-WISH-01-lesson",
+    "title": "Wish and If only (Keşkeler ve Pişmanlıklar)",
+    "topic_tags": [
+        "wish",
+        "if_only",
+        "regrets",
+        "present_unreal",
+        "past_regret"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Şu anki gerçekliği değiştirme arzumuzu (Present Unreal) ifade etmeyi öğreneceğiz.",
+                    "Geçmişte yaşanmış ve bitmiş olaylara dair pişmanlıklarımızı (Past Regret) dile getirmeyi kavrayacağız.",
+                    "Daha güçlü bir vurgu için 'If only' yapısını nasıl kullanacağımızı göreceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Present Unreal: Şimdiki Zaman Keşkeleri",
+                "bullets": [
+                    "**Kullanım**: Mevcut bir durumun farklı olmasını istediğimizde kullanılır. Durum şu anki zamanı kapsasa da dilbilgisi olarak bir derece geçmişe gidilir.",
+                    "**Yapı**: I wish / If only + Subject + Past Simple.",
+                    "**Anlam**: Gerçeğin tam tersini hayal ederiz."
+                ],
+                "examples": [
+                    "I wish I had a car. (Keşke bir arabam olsaydı - Ama şu an yok.)",
+                    "If only it wasn't raining. (Keşke yağmur yağmasaydı - Ama şu an yağıyor.)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "Past Regret: Geçmişteki Pişmanlıklar",
+                "bullets": [
+                    "**Kullanım**: Geçmişte yapılmış veya yapılmamış bir eylemden duyulan pişmanlığı anlatmak için kullanılır.",
+                    "**Yapı**: I wish / If only + Subject + Past Perfect (had + V3).",
+                    "**Anlam**: Geçmiş artık değişemez, sadece hayali bir 'olsaydı' durumu kurulur."
+                ],
+                "examples": [
+                    "I wish I had studied. (Keşke çalışsaydım - Ama çalışmadım.)",
+                    "If only we had not missed the bus. (Keşke otobüsü kaçırmasaydık - Ama kaçırdık.)"
+                ]
+            },
+            {
+                "id": "c4",
+                "type": "rule",
+                "title": "Önemli Yapılar: Were ve Could",
+                "bullets": [
+                    "**Were**: Resmi ve standart kullanımda, tüm öznelerle (I, He, She, It) 'was' yerine 'were' tercih edilir.",
+                    "**Could**: Bir yetenek veya imkanın farklı olmasını istediğimizde 'can' yerine kullanılır."
+                ],
+                "examples": [
+                    "If only I were taller. (Keşke daha uzun olsaydım.)",
+                    "I wish I could speak Spanish. (Keşke İspanyolca konuşabilseydim.)"
+                ]
+            },
+            {
+                "id": "formula",
+                "type": "formula",
+                "title": "Zaman Dönüşüm Tablosu",
+                "bullets": [
+                    "Keşke derken zamanlar her zaman 'bir derece geçmişe' kayar:"
+                ],
+                "formula": [
+                    "Gerçek: Present Simple → Keşke: Past Simple",
+                    "Gerçek: Past Simple → Keşke: Past Perfect",
+                    "Gerçek: Can → Keşke: Could"
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Geniş Zaman Kullanmak**: 'I wish I have' hatalıdır. Gerçek olmayan durumlar için mutlaka Past yapı kullanılmalıdır.",
+                    "**Zamanları Karıştırmak**: Şimdiki zaman keşkesi için 'had V3' kullanmak, eylemi geçmişe hapseder. Olayın ne zaman olduğuna dikkat edin.",
+                    "**Olumsuzluklar**: Pişmanlıklarda anlamın tersine göre 'not' eklemeyi unutmayın."
+                ],
+                "examples": [
+                    "Hatalı: I wish I don't live far. ✗",
+                    "Doğru: I wish I **didn't** live far. ✓",
+                    "Hatalı: If only I knew the truth then. ✗ (O zaman bilseydim demek için Past Perfect gerekir.)",
+                    "Doğru: If only I **had known** the truth then. ✓"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "Choose the past regret: 'I failed the test. I wish I ____ more.'",
+                "options": [
+                    "had studied",
+                    "studied",
+                    "have studied"
+                ],
+                "answer": "had studied",
+                "explain": "Sınav geçmişte yaşanmış ve bitmiş bir olaydır. Geçmişe dair pişmanlıklar Past Perfect (had + V3) ile ifade edilir."
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Eski Günler ve Yeni Hayaller",
+        "intro_bullets": [
+            "Bir karakterin geçmiş kararları ve şu anki hayatına dair iç döküşlerini incele.",
+            "Gerçekleşmiş olaylar ile hayal edilen durumlar arasındaki farklara odaklan."
+        ],
+        "items": [
+            {
+                "engine": "transform",
+                "prompt": "Make a wish: I don't have enough time for my hobbies.",
+                "steps": [
+                    {
+                        "type": "select",
+                        "label": "Starter",
+                        "options": [
+                            "I wish",
+                            "If only"
+                        ],
+                        "answer": "I wish"
+                    },
+                    {
+                        "type": "select",
+                        "label": "Form",
+                        "options": [
+                            "I had",
+                            "I have",
+                            "I would have"
+                        ],
+                        "answer": "I had"
+                    }
+                ],
+                "final_template": "{start} {form} enough time.",
+                "final_answer": "I wish I had enough time.",
+                "explain": "Şu anki bir durumun farklı olması istendiğinde Past Simple kullanılır."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "'I am very short. If only I ____ taller.'",
+                "options": [
+                    "were",
+                    "am",
+                    "wasn't"
+                ],
+                "answer": "were",
+                "explain": "Hayali ve imkansız durumlarda (unreal) 'be' fiili tüm öznelerle 'were' olur."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "'I said something rude yesterday. I wish I ____ it.'",
+                "options": [
+                    "hadn't said",
+                    "didn't say",
+                    "don't say"
+                ],
+                "answer": "hadn't said",
+                "explain": "Geçmişte yapılmış olumsuz bir eylemden duyulan pişmanlık Past Perfect negative ile kurulur."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "'I live far from my family. I wish I ____ closer to them.'",
+                "options": [
+                    "lived",
+                    "live",
+                    "had lived"
+                ],
+                "answer": "lived",
+                "explain": "Şu anki yerleşim durumuna dair bir 'keşke' cümlesi Past Simple (lived) gerektirir."
+            }
+        ],
+        "recap_bullets": [
+            "Şu an için: I wish + Past Simple (had, lived, were).",
+            "Geçmiş pişmanlıklar için: I wish + Past Perfect (had studied, had known).",
+            "Yetenek ricaları için: I wish + could.",
+            "Daha güçlü bir duygu için 'I wish' yerine 'If only' kullanabilirsin."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "B2-WISH-01"
+    }
+}

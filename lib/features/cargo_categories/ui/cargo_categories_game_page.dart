@@ -311,6 +311,14 @@ class _CargoCategoriesGamePageState
               .read(cargoCategoriesControllerProvider.notifier)
               .handleTimeout(timedOutWord);
         },
+        onDragStart: (word) {
+          ref
+              .read(cargoCategoriesControllerProvider.notifier)
+              .onDragStart(word);
+        },
+        onDragEnd: (word) {
+          ref.read(cargoCategoriesControllerProvider.notifier).onDragEnd(word);
+        },
       ),
     );
   }

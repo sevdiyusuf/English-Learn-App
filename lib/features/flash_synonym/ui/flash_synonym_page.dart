@@ -1,15 +1,18 @@
-import 'dart:ui'; // Blur efekti için gerekli
+import 'dart:math' as math; // Random açı için gerekli
+import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/repositories/user_stats_repo.dart';
 import '../../../core/repositories/game_saved_words_repository.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../auth/logic/auth_controller.dart';
 import '../logic/adaptive_difficulty_helper.dart';
-import '../logic/flash_synonym_controller.dart'; // Dikkat: Synonym Controller
-import '../models/flash_synonym_state.dart'; // Dikkat: Synonym State
+import '../logic/flash_synonym_controller.dart';
+import '../models/flash_synonym_state.dart';
 import 'widgets/score_dialog.dart';
 
 class FlashSynonymPage extends ConsumerStatefulWidget {
@@ -25,6 +28,9 @@ class FlashSynonymPage extends ConsumerStatefulWidget {
 
 class _FlashSynonymPageState extends ConsumerState<FlashSynonymPage> {
   bool _scoreDialogShown = false;
+
+  // Her kelime için rastgele bir dönüş açısı saklamak için map
+  final Map<String, double> _wordRotations = {};
 
   @override
   void initState() {
@@ -43,6 +49,8 @@ class _FlashSynonymPageState extends ConsumerState<FlashSynonymPage> {
     final gameState = ref.watch(flashSynonymControllerProvider(widget.level));
 
     if (gameState.isGameFinished && !_scoreDialogShown) {
+      // Record stats
+      _recordGameStats(gameState);
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _scoreDialogShown = true;
         _showScoreDialog(context, gameState);
@@ -108,7 +116,6 @@ class _FlashSynonymPageState extends ConsumerState<FlashSynonymPage> {
             ),
           ),
           // 1. KATMAN: Arka plan karartma (Vignette)
-          // Lacivert arka planın çok parlak kısımlarını bastırır
           const SizedBox.expand(
             child: DecoratedBox(
               decoration: BoxDecoration(
@@ -266,8 +273,8 @@ class _FlashSynonymPageState extends ConsumerState<FlashSynonymPage> {
             scale: isAlive ? 1.0 : 0.8,
             child: SvgPicture.asset(
               'assets/icons/heart.svg',
-              width: 28,
-              height: 28,
+              width: 26,
+              height: 26,
               colorFilter: ColorFilter.mode(
                 isAlive ? const Color(0xFFFF5252) : Colors.white24,
                 BlendMode.srcIn,
@@ -330,6 +337,9 @@ class _FlashSynonymPageState extends ConsumerState<FlashSynonymPage> {
     );
   }
 
+  // ---------------------------------------------------------------------------
+  // ANIMASYONLU ALAN
+  // ---------------------------------------------------------------------------
   Widget _buildFallingWordsArea(FlashSynonymState gameState) {
     final options = gameState.options;
     return LayoutBuilder(
@@ -344,7 +354,6 @@ class _FlashSynonymPageState extends ConsumerState<FlashSynonymPage> {
         const horizontalSpacing = 50.0;
         const verticalSpacing = 80.0;
 
-        // Üst satırdaki 3 kartı ekranın ortasında, eşit aralıklı hizala
         final topRowWidth =
             (buttonWidth * topRowCount) +
             (horizontalSpacing * (topRowCount - 1));
@@ -358,9 +367,11 @@ class _FlashSynonymPageState extends ConsumerState<FlashSynonymPage> {
 
         return Stack(
           alignment: Alignment.center,
+          clipBehavior: Clip.none,
           children: [
             if (gameState.showLevelUpBanner)
               Positioned(top: 10, child: _buildLevelUpBanner(gameState.stage)),
+
             ...options.asMap().entries.map((entry) {
               final index = entry.key;
               final option = entry.value;
@@ -382,54 +393,42 @@ class _FlashSynonymPageState extends ConsumerState<FlashSynonymPage> {
               final color = gameState.wordColors[option];
               final isSelected = gameState.selectedOption == option;
 
-              // Üst satırdaki en sağdaki kart (rowIndex == 2) için mobilde özel hizalama
-              // Web/PC'de tüm kartlar baseX ile hizalanır
+              // Rastgele dönüş açısı (Rotation)
+              if (!_wordRotations.containsKey(option)) {
+                _wordRotations[option] =
+                    (math.Random().nextDouble() - 0.5) * 0.1;
+              }
+              final rotation = _wordRotations[option] ?? 0.0;
+
+              // Yeni Space Card tasarımı
+              Widget childWidget = _buildSpaceCard(
+                word: option,
+                color: color,
+                isSelected: isSelected,
+                isEnabled: gameState.selectedOption == null,
+                onTap: () {
+                  if (gameState.selectedOption == null) {
+                    ref
+                        .read(
+                          flashSynonymControllerProvider(widget.level).notifier,
+                        )
+                        .selectAnswer(option);
+                  }
+                },
+              );
+
+              // Hafif dönüş uygula
+              childWidget = Transform.rotate(
+                angle: rotation,
+                child: childWidget,
+              );
+
+              // Mobilde sağ üst köşe hizalaması
               if (isTopRow && rowIndex == 2 && !kIsWeb) {
-                return Positioned(
-                  top: actualY,
-                  right: 2.0,
-                  child: _buildWordButton(
-                    option,
-                    color,
-                    isSelected,
-                    gameState.selectedOption == null,
-                    () {
-                      if (gameState.selectedOption == null) {
-                        ref
-                            .read(
-                              flashSynonymControllerProvider(
-                                widget.level,
-                              ).notifier,
-                            )
-                            .selectAnswer(option);
-                      }
-                    },
-                  ),
-                );
+                return Positioned(top: actualY, right: 2.0, child: childWidget);
               }
 
-              // Diğer kartlar ve web/PC'deki tüm kartlar soldan hesaplanan baseX ile hizalanıyor.
-              return Positioned(
-                top: actualY,
-                left: baseX,
-                child: _buildWordButton(
-                  option,
-                  color,
-                  isSelected,
-                  gameState.selectedOption == null,
-                  () {
-                    if (gameState.selectedOption == null) {
-                      ref
-                          .read(
-                            flashSynonymControllerProvider(
-                              widget.level,
-                            ).notifier,
-                          )
-                          .selectAnswer(option);
-                    }
-                  },
-                ),
-              );
+              return Positioned(top: actualY, left: baseX, child: childWidget);
             }),
           ],
         );
@@ -437,98 +436,133 @@ class _FlashSynonymPageState extends ConsumerState<FlashSynonymPage> {
     );
   }
 
-  // --- KRİTİK BÖLÜM: Yüksek Kontrastlı Buton Tasarımı ---
-  Widget _buildWordButton(
-    String word,
-    Color? color,
-    bool isSelected,
-    bool isEnabled,
-    VoidCallback onTap,
-  ) {
+  // ---------------------------------------------------------------------------
+  // YENİ TASARIM: NEON SPACE CARD (SYNONYM VERSION)
+  // ---------------------------------------------------------------------------
+  Widget _buildSpaceCard({
+    required String word,
+    required Color? color,
+    required bool isSelected,
+    required bool isEnabled,
+    required VoidCallback onTap,
+  }) {
+    // Özel renk (Doğru/Yanlış) durumu
     final bool hasCustomColor = color != null;
+
+    // Tema Rengi: Cevaplanmışsa kendi rengi, değilse Neon Mor
+    final Color themeColor =
+        hasCustomColor ? color : const Color(0xFFD946EF); // Neon Mor/Fuşya
+    final Color secondaryColor = const Color(0xFF4C1D95); // Koyu Mor
 
     return GestureDetector(
       onTap: isEnabled ? onTap : null,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        width: 110,
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 14),
-        decoration: BoxDecoration(
-          // Parlaklık için %15 varsayılan beyaz, renkli ise tam renk
-          color: color ?? Colors.white.withValues(alpha: 0.15),
-          borderRadius: BorderRadius.circular(16),
-          // Gradient: Sol üstten parlak beyaz ışık vuruyor gibi
-          gradient:
-              hasCustomColor
-                  ? null
-                  : LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
+      child: Stack(
+        clipBehavior: Clip.none,
+        alignment: Alignment.center,
+        children: [
+          // 1. KATMAN: HIZ İZİ (SPEED TRAIL)
+          if (!hasCustomColor && !isSelected)
+            Positioned(
+              top: -80, // Uzun iz
+              bottom: 30,
+              left: 25,
+              right: 25,
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
                     colors: [
-                      Colors.white.withValues(
-                        alpha: 0.4,
-                      ), // Yüksek Kontrast (Parlak)
-                      Colors.white.withValues(alpha: 0.1), // Şeffaf
+                      themeColor.withValues(alpha: 0.8), // Başlangıç opak
+                      Colors.transparent,
                     ],
+                    stops: const [0.0, 0.7],
                   ),
-          // Kalın kenarlık, kartı arka plandan ayırır
-          border: Border.all(
-            color:
-                hasCustomColor
-                    ? Colors.white
-                    : Colors.white.withValues(alpha: 0.6),
-            width: hasCustomColor ? 2.5 : 1.5,
-          ),
-          // Gölgeler
-          boxShadow: [
-            if (isSelected || hasCustomColor)
-              BoxShadow(
-                color: (color ?? Colors.white).withValues(alpha: 0.8),
-                blurRadius: 20,
-                spreadRadius: 2,
-              )
-            else
-              // Arka plan koyu olduğu için siyah gölge ile derinlik ver
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.5),
-                blurRadius: 12,
-                offset: const Offset(0, 4),
-              ),
-            // Ekstra glow
-            BoxShadow(
-              color: Colors.white.withValues(alpha: 0.1),
-              blurRadius: 8,
-              spreadRadius: 0,
-            ),
-          ],
-        ),
-        child: Center(
-          child: Text(
-            word,
-            style: TextStyle(
-              color: const Color.fromARGB(255, 255, 255, 255),
-              fontSize: 17,
-              fontWeight: FontWeight.w800, // Kalın font
-              letterSpacing: 0.5,
-              // Metin Gölgeleri: Yazının her türlü zeminde okunmasını sağlar
-              shadows: [
-                Shadow(
-                  blurRadius: 2,
-                  color: Colors.black.withValues(alpha: 0.8),
-                  offset: const Offset(1, 1),
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                const Shadow(
-                  blurRadius: 8,
-                  color: Colors.black,
-                  offset: Offset(0, 2),
+              ),
+            ),
+
+          // 2. KATMAN: KARTIN KENDİSİ
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            width: 110,
+            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 12),
+            decoration: ShapeDecoration(
+              // "Tok" ve Şeffaf Arka Plan
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors:
+                    hasCustomColor
+                        ? [
+                          themeColor.withValues(alpha: 0.8),
+                          themeColor.withValues(alpha: 0.6),
+                        ]
+                        : [
+                          const Color(0xFF1E1B4B).withValues(alpha: 0.85),
+                          secondaryColor.withValues(alpha: 0.7),
+                        ],
+              ),
+              // Şekil
+              shape: BeveledRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+                side: BorderSide(
+                  color: themeColor.withValues(
+                    alpha: isSelected || hasCustomColor ? 1.0 : 0.4,
+                  ),
+                  width: isSelected || hasCustomColor ? 2.0 : 1.0,
+                ),
+              ),
+              // Glow
+              shadows: [
+                BoxShadow(
+                  color: themeColor.withValues(
+                    alpha: isSelected || hasCustomColor ? 0.5 : 0.2,
+                  ),
+                  blurRadius: isSelected ? 20 : 15,
+                  spreadRadius: isSelected ? 2 : 0,
                 ),
               ],
             ),
-            textAlign: TextAlign.center,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
+            alignment: Alignment.center,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  word,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 0.8,
+                    shadows: [
+                      Shadow(
+                        blurRadius: 4,
+                        color: themeColor.withValues(alpha: 0.5),
+                        offset: Offset.zero,
+                      ),
+                    ],
+                  ),
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                // Alt bar
+                if (!hasCustomColor)
+                  Container(
+                    margin: const EdgeInsets.only(top: 6),
+                    width: 30,
+                    height: 2,
+                    decoration: BoxDecoration(
+                      color: themeColor.withValues(alpha: 0.5),
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+              ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -544,7 +578,7 @@ class _FlashSynonymPageState extends ConsumerState<FlashSynonymPage> {
         child: Container(
           padding: const EdgeInsets.fromLTRB(24, 32, 24, 24),
           decoration: BoxDecoration(
-            color: Colors.black.withValues(alpha: 0.6), // Koyu panel arka planı
+            color: Colors.black.withValues(alpha: 0.6),
             border: Border(
               top: BorderSide(
                 color: Colors.white.withValues(alpha: 0.1),
@@ -565,7 +599,12 @@ class _FlashSynonymPageState extends ConsumerState<FlashSynonymPage> {
                         Text(
                           currentWord.word,
                           style: const TextStyle(
-                            color: Color.fromARGB(255, 123, 239, 148),
+                            color: Color.fromARGB(
+                              255,
+                              123,
+                              239,
+                              148,
+                            ), // Synonym için yeşilimsi ton
                             fontSize: 36,
                             fontWeight: FontWeight.bold,
                             letterSpacing: 1.2,
@@ -620,7 +659,7 @@ class _FlashSynonymPageState extends ConsumerState<FlashSynonymPage> {
 
               const SizedBox(height: 32),
 
-              // Pass Button (Modern Pill Shape)
+              // Pass Button
               SizedBox(
                 width: double.infinity,
                 height: 56,
@@ -727,18 +766,9 @@ class _FlashSynonymPageState extends ConsumerState<FlashSynonymPage> {
   }
 
   void _showScoreDialog(BuildContext context, FlashSynonymState gameState) {
-    // Calculate final score with time bonus
-    // Faster completion = higher bonus
-    // Formula: baseScore * (1 + timeBonusMultiplier)
-    // Time bonus decreases as time increases
     final baseScore = gameState.score;
     final elapsedSeconds = gameState.elapsedDuration.inSeconds;
 
-    // Time bonus: maximum 2x for very fast games, decreases with time
-    // For games under 60 seconds: 2.0x
-    // For games 60-120 seconds: 1.5x
-    // For games 120-180 seconds: 1.2x
-    // For games over 180 seconds: 1.0x (no bonus)
     double timeBonusMultiplier = 1.0;
     if (elapsedSeconds < 60) {
       timeBonusMultiplier = 2.0;
@@ -791,6 +821,29 @@ class _FlashSynonymPageState extends ConsumerState<FlashSynonymPage> {
         return 'Uzman';
       default:
         return level;
+    }
+  }
+
+  Future<void> _recordGameStats(FlashSynonymState gameState) async {
+    try {
+      final authState = ref.read(authControllerProvider);
+      final user = authState.valueOrNull;
+      if (user == null) return;
+
+      final statsRepo = ref.read(userStatsRepoProvider);
+      final duration = gameState.elapsedDuration;
+      final practicedWords = gameState.correctCount + gameState.wrongCount;
+
+      await statsRepo.recordSession(
+        user: user,
+        modeId: 'flash_synonym',
+        practicedWords: practicedWords,
+        correctAnswers: gameState.correctCount,
+        wrongAnswers: gameState.wrongCount,
+        duration: duration,
+      );
+    } catch (e) {
+      debugPrint('Failed to record flash synonym stats: $e');
     }
   }
 }

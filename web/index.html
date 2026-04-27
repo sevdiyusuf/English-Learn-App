@@ -3,6 +3,13 @@
 
 <head>
   <base href="$FLUTTER_BASE_HREF">
+
+  <script>
+    // Sayfa yüklenir yüklenmez, tarayıcıdaki o anki URL'i (hash dahil) global bir değişkene atıyoruz.
+    // Flutter ne kadar geç açılırsa açılsın, bu değişken değişmeyecek.
+    window.appStartUrl = window.location.hash;
+    console.log("JS: Başlangıç Linki Kaydedildi -> " + window.appStartUrl);
+  </script>
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -11,6 +18,10 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="yunoo">
+  <!-- Google Sign-In Web Client ID - Firebase Console'dan alınmalı -->
+  <!-- Firebase Console > Authentication > Sign-in method > Google > Web SDK configuration -->
+  <meta name="google-signin-client_id"
+    content="55568769953-9si2n1e4tmf31bj11kirkf8l5cm7l2fu.apps.googleusercontent.com">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="manifest" href="manifest.json">

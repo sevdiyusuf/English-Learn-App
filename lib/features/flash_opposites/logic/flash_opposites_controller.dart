@@ -4,47 +4,47 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/repositories/user_stats_repo.dart';
+import '../../auth/logic/auth_controller.dart';
 import '../data/opposites_service.dart';
 import '../models/flash_opposites_state.dart';
 import '../models/opposite_word.dart';
 import 'adaptive_difficulty_helper.dart';
 
 class FlashOppositesController extends StateNotifier<FlashOppositesState> {
-  FlashOppositesController(this.level) : super(const FlashOppositesState()) {
+  FlashOppositesController(this.level, this.ref)
+    : super(const FlashOppositesState()) {
     _initialize();
   }
 
   final String level;
+  final Ref ref;
   final Random _random = Random();
   // ignore: prefer_final_fields
   List<OppositeWord> _usedWords = [];
   final Map<String, Timer> _fallingWordTimers = {};
   Timer? _gameTimer; // Timer for visual display only (doesn't end game)
-  
+
   // Adaptive difficulty pools
   Map<DifficultyLevel, List<OppositeWord>> _wordsByDifficulty = {};
 
   Future<void> _initialize() async {
     await OppositesService.instance.loadData();
-    
+
     // Initialize words by difficulty for adaptive system
     _wordsByDifficulty = {
-      DifficultyLevel.easy: OppositesService.instance
-          .getWordsByLevel('easy')
-          .toList()
-        ..shuffle(_random),
-      DifficultyLevel.medium: OppositesService.instance
-          .getWordsByLevel('medium')
-          .toList()
-        ..shuffle(_random),
-      DifficultyLevel.upper: OppositesService.instance
-          .getWordsByLevel('upper')
-          .toList()
-        ..shuffle(_random),
-      DifficultyLevel.expert: OppositesService.instance
-          .getWordsByLevel('expert')
-          .toList()
-        ..shuffle(_random),
+      DifficultyLevel.easy:
+          OppositesService.instance.getWordsByLevel('easy').toList()
+            ..shuffle(_random),
+      DifficultyLevel.medium:
+          OppositesService.instance.getWordsByLevel('medium').toList()
+            ..shuffle(_random),
+      DifficultyLevel.upper:
+          OppositesService.instance.getWordsByLevel('upper').toList()
+            ..shuffle(_random),
+      DifficultyLevel.expert:
+          OppositesService.instance.getWordsByLevel('expert').toList()
+            ..shuffle(_random),
     };
   }
 
@@ -82,7 +82,9 @@ class FlashOppositesController extends StateNotifier<FlashOppositesState> {
         timer.cancel();
         return;
       }
-      final elapsed = DateTime.now().difference(state.gameStartTime ?? DateTime.now());
+      final elapsed = DateTime.now().difference(
+        state.gameStartTime ?? DateTime.now(),
+      );
       state = state.copyWith(elapsedDuration: elapsed);
     });
 
@@ -103,10 +105,15 @@ class FlashOppositesController extends StateNotifier<FlashOppositesState> {
     final difficultyWords = _wordsByDifficulty[nextDifficulty] ?? [];
     if (difficultyWords.isEmpty) {
       // Reshuffle if pool is empty
-      _wordsByDifficulty[nextDifficulty] = OppositesService.instance
-          .getWordsByLevel(AdaptiveDifficultyHelper.difficultyLevelToString(nextDifficulty))
-          .toList()
-        ..shuffle(_random);
+      _wordsByDifficulty[nextDifficulty] =
+          OppositesService.instance
+              .getWordsByLevel(
+                AdaptiveDifficultyHelper.difficultyLevelToString(
+                  nextDifficulty,
+                ),
+              )
+              .toList()
+            ..shuffle(_random);
     }
 
     final availablePool = _wordsByDifficulty[nextDifficulty]!;
@@ -220,10 +227,7 @@ class FlashOppositesController extends StateNotifier<FlashOppositesState> {
       _handleWrongAnswer();
     }
 
-    state = state.copyWith(
-      selectedOption: selectedWord,
-      wordColors: colors,
-    );
+    state = state.copyWith(selectedOption: selectedWord, wordColors: colors);
 
     // Load next question after delay
     Timer(const Duration(milliseconds: 1500), () {
@@ -242,7 +246,9 @@ class FlashOppositesController extends StateNotifier<FlashOppositesState> {
     if (currentDifficulty == null) return;
 
     // Get score based on difficulty
-    final baseScore = AdaptiveDifficultyHelper.getScoreForDifficulty(currentDifficulty);
+    final baseScore = AdaptiveDifficultyHelper.getScoreForDifficulty(
+      currentDifficulty,
+    );
     final newScore = state.score + baseScore;
     final newCorrectCount = state.correctCount + 1;
     final newStreak = state.streak + 1;
@@ -289,14 +295,13 @@ class FlashOppositesController extends StateNotifier<FlashOppositesState> {
   }
 
   void passQuestion() {
-    if (state.hasPassUsed || !state.isGameActive || state.selectedOption != null) {
+    if (state.hasPassUsed ||
+        !state.isGameActive ||
+        state.selectedOption != null) {
       return; // Already used pass or already answered
     }
 
-    state = state.copyWith(
-      passCount: state.passCount + 1,
-      hasPassUsed: true,
-    );
+    state = state.copyWith(passCount: state.passCount + 1, hasPassUsed: true);
 
     // Load next question after short delay
     Timer(const Duration(milliseconds: 500), () {
@@ -315,15 +320,46 @@ class FlashOppositesController extends StateNotifier<FlashOppositesState> {
     _gameTimer = null;
 
     // Calculate final elapsed time
-    final finalElapsed = state.gameStartTime != null
-        ? DateTime.now().difference(state.gameStartTime!)
-        : state.elapsedDuration;
+    final finalElapsed =
+        state.gameStartTime != null
+            ? DateTime.now().difference(state.gameStartTime!)
+            : state.elapsedDuration;
 
     state = state.copyWith(
       isGameActive: false,
       isGameFinished: true,
       elapsedDuration: finalElapsed,
     );
+
+    // Record stats (fire-and-forget)
+    _recordSessionStats();
+  }
+
+  Future<void> _recordSessionStats() async {
+    try {
+      final authState = ref.read(authControllerProvider);
+      final user = authState.valueOrNull;
+      if (user == null) return;
+
+      final statsRepo = ref.read(userStatsRepoProvider);
+      final duration = state.elapsedDuration;
+
+      // Calculate practiced words (total questions answered)
+      final practicedWords = state.correctCount + state.wrongCount;
+
+      await statsRepo.recordSession(
+        user: user,
+        modeId: 'flash_opposites',
+        practicedWords: practicedWords,
+        correctAnswers: state.correctCount,
+        wrongAnswers: state.wrongCount,
+        duration: duration,
+        score: state.score,
+      );
+    } catch (e) {
+      // Don't break the game if stats recording fails
+      debugPrint('Failed to record flash opposites stats: $e');
+    }
   }
 
   void reset() {
@@ -335,13 +371,16 @@ class FlashOppositesController extends StateNotifier<FlashOppositesState> {
     _gameTimer = null;
 
     _usedWords.clear();
-    
+
     // Reset difficulty pools
     for (final difficulty in DifficultyLevel.values) {
-      _wordsByDifficulty[difficulty] = OppositesService.instance
-          .getWordsByLevel(AdaptiveDifficultyHelper.difficultyLevelToString(difficulty))
-          .toList()
-        ..shuffle(_random);
+      _wordsByDifficulty[difficulty] =
+          OppositesService.instance
+              .getWordsByLevel(
+                AdaptiveDifficultyHelper.difficultyLevelToString(difficulty),
+              )
+              .toList()
+            ..shuffle(_random);
     }
 
     state = const FlashOppositesState();
@@ -359,8 +398,10 @@ class FlashOppositesController extends StateNotifier<FlashOppositesState> {
   }
 }
 
-final flashOppositesControllerProvider =
-    StateNotifierProvider.autoDispose.family<FlashOppositesController,
-        FlashOppositesState, String>((ref, level) {
-  return FlashOppositesController(level);
-});
+final flashOppositesControllerProvider = StateNotifierProvider.autoDispose
+    .family<FlashOppositesController, FlashOppositesState, String>((
+      ref,
+      level,
+    ) {
+      return FlashOppositesController(level, ref);
+    });

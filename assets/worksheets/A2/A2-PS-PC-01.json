@@ -1,0 +1,292 @@
+{
+    "schema_version": "1.0",
+    "level": "A2",
+    "worksheet_id": "A2-PS-PC-01",
+    "title": "Past Simple vs Past Continuous (when/while)",
+    "topic_tags": [
+        "past_simple",
+        "past_continuous",
+        "when",
+        "while"
+    ],
+    "subskills": [
+        "choose_ps_pc",
+        "use_when_while",
+        "two_clause_sentences"
+    ],
+    "difficulty": 2,
+    "engine_sequence": [
+        {
+            "engine": "mcq",
+            "count": 8,
+            "rules": {
+                "shuffle_options": true,
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "fill",
+            "count": 8,
+            "rules": {
+                "case_sensitive": false,
+                "allow_contractions": true
+            }
+        }
+    ],
+    "items": [
+        {
+            "id": "mcq1",
+            "engine": "mcq",
+            "prompt": "I ____ TV when he arrived.",
+            "translation_tr": "O geldiğinde televizyon izliyordum.",
+            "options": [
+                "was watching",
+                "watched"
+            ],
+            "answer": "was watching",
+            "hint": "Long action + when + short action.",
+            "tags": [
+                "pc_with_when"
+            ]
+        },
+        {
+            "id": "mcq2",
+            "engine": "mcq",
+            "prompt": "He ____ in when I was studying.",
+            "translation_tr": "Ben ders çalışırken içeri girdi.",
+            "options": [
+                "came",
+                "was coming"
+            ],
+            "answer": "came",
+            "hint": "Short action interrupts → Past Simple.",
+            "tags": [
+                "ps_interrupt"
+            ]
+        },
+        {
+            "id": "mcq3",
+            "engine": "mcq",
+            "prompt": "While I ____ dinner, the phone rang.",
+            "translation_tr": "Ben akşam yemeğini hazırlarken telefon çaldı.",
+            "options": [
+                "was cooking",
+                "cooked"
+            ],
+            "answer": "was cooking",
+            "tags": [
+                "while_pc"
+            ]
+        },
+        {
+            "id": "mcq4",
+            "engine": "mcq",
+            "prompt": "They ____ home at 9 pm.",
+            "translation_tr": "Onlar saat 9’da eve geldiler.",
+            "options": [
+                "were arriving",
+                "arrived"
+            ],
+            "answer": "arrived",
+            "hint": "Finished time point → Past Simple.",
+            "tags": [
+                "ps_finished"
+            ]
+        },
+        {
+            "id": "mcq5",
+            "engine": "mcq",
+            "prompt": "She ____ a book when I saw her.",
+            "translation_tr": "Onu gördüğümde kitap okuyordu.",
+            "options": [
+                "was reading",
+                "read"
+            ],
+            "answer": "was reading",
+            "tags": [
+                "pc_background"
+            ]
+        },
+        {
+            "id": "mcq6",
+            "engine": "mcq",
+            "prompt": "I ____ my keys yesterday. (completed action)",
+            "translation_tr": "Dün anahtarlarımı kaybettim.",
+            "options": [
+                "was losing",
+                "lost"
+            ],
+            "answer": "lost",
+            "tags": [
+                "ps_completed"
+            ]
+        },
+        {
+            "id": "mcq7",
+            "engine": "mcq",
+            "prompt": "When he called, we ____ lunch.",
+            "translation_tr": "O aradığında öğle yemeği yiyorduk.",
+            "options": [
+                "were having",
+                "had"
+            ],
+            "answer": "were having",
+            "tags": [
+                "pc_background"
+            ]
+        },
+        {
+            "id": "mcq8",
+            "engine": "mcq",
+            "prompt": "While they were walking, it ____ to rain.",
+            "translation_tr": "Onlar yürürken yağmur yağmaya başladı.",
+            "options": [
+                "started",
+                "was starting"
+            ],
+            "answer": "started",
+            "tags": [
+                "ps_interrupt"
+            ]
+        },
+        {
+            "id": "fill1",
+            "engine": "fill",
+            "prompt": "I ____ (sleep) when you called.",
+            "translation_tr": "Sen aradığında uyuyordum.",
+            "answer": [
+                "was sleeping"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "pc"
+            ]
+        },
+        {
+            "id": "fill2",
+            "engine": "fill",
+            "prompt": "She ____ (fall) while she was running.",
+            "translation_tr": "Koşarken düştü.",
+            "answer": [
+                "fell"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "ps"
+            ]
+        },
+        {
+            "id": "fill3",
+            "engine": "fill",
+            "prompt": "While we ____ (drive), we saw an accident.",
+            "translation_tr": "Araba sürerken bir kaza gördük.",
+            "answer": [
+                "were driving"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "pc"
+            ]
+        },
+        {
+            "id": "fill4",
+            "engine": "fill",
+            "prompt": "They ____ (not / listen) when the teacher entered.",
+            "translation_tr": "Öğretmen sınıfa girdiğinde dinlemiyorlardı.",
+            "answer": [
+                "weren't listening",
+                "were not listening"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces",
+                "accept_contractions"
+            ],
+            "tags": [
+                "pc",
+                "negative"
+            ]
+        },
+        {
+            "id": "fill5",
+            "engine": "fill",
+            "prompt": "He ____ (break) his phone yesterday.",
+            "translation_tr": "Dün telefonunu kırdı.",
+            "answer": [
+                "broke"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "ps"
+            ]
+        },
+        {
+            "id": "fill6",
+            "engine": "fill",
+            "prompt": "When I ____ (arrive), they were dancing.",
+            "translation_tr": "Ben vardığımda dans ediyorlardı.",
+            "answer": [
+                "arrived"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "ps"
+            ]
+        },
+        {
+            "id": "fill7",
+            "engine": "fill",
+            "prompt": "We ____ (have) dinner when the lights went out.",
+            "translation_tr": "Işıklar söndüğünde akşam yemeği yiyorduk.",
+            "answer": [
+                "were having"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "pc"
+            ]
+        },
+        {
+            "id": "fill8",
+            "engine": "fill",
+            "prompt": "While she was talking, I ____ (take) notes.",
+            "translation_tr": "O konuşurken ben not alıyordum.",
+            "answer": [
+                "was taking"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "pc"
+            ]
+        }
+    ]
+}

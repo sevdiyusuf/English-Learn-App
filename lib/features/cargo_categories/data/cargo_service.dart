@@ -163,7 +163,7 @@ class CargoService {
     switch (level) {
       case 'beginner':
         // 2 easy + 1 medium
-        if (easyCategories.length < 2 || mediumCategories.length < 1) {
+        if (easyCategories.length < 2 || mediumCategories.isEmpty) {
           throw StateError('Not enough categories for beginner level');
         }
         // Use random indices instead of just taking first ones
@@ -175,7 +175,7 @@ class CargoService {
         break;
       case 'normal':
         // 2 medium + 1 easy
-        if (mediumCategories.length < 2 || easyCategories.length < 1) {
+        if (mediumCategories.length < 2 || easyCategories.isEmpty) {
           throw StateError('Not enough categories for normal level');
         }
         final mediumIndices = List<int>.generate(mediumCategories.length, (i) => i)..shuffle(random);
@@ -186,7 +186,7 @@ class CargoService {
         break;
       case 'advanced':
         // 2 medium + 1 hard
-        if (mediumCategories.length < 2 || hardCategories.length < 1) {
+        if (mediumCategories.length < 2 || hardCategories.isEmpty) {
           throw StateError('Not enough categories for advanced level');
         }
         final mediumIndices = List<int>.generate(mediumCategories.length, (i) => i)..shuffle(random);
@@ -197,7 +197,7 @@ class CargoService {
         break;
       case 'expert':
         // 2 hard + 1 medium
-        if (hardCategories.length < 2 || mediumCategories.length < 1) {
+        if (hardCategories.length < 2 || mediumCategories.isEmpty) {
           throw StateError('Not enough categories for expert level');
         }
         final hardIndices = List<int>.generate(hardCategories.length, (i) => i)..shuffle(random);

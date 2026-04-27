@@ -1,0 +1,170 @@
+{
+    "schema_version": "1.0",
+    "level": "B1",
+    "lesson_id": "B1-COND-02-lesson",
+    "title": "Conditionals: Type 2 (Imaginary Situations)",
+    "topic_tags": [
+        "conditionals",
+        "type_2",
+        "imaginary_situations",
+        "hypothetical"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Şu an için gerçek olmayan, hayali durumları ifade etmeyi öğreneceğiz.",
+                    "Gerçekleşme ihtimali çok düşük olan olaylar hakkında konuşmayı kavrayacağız.",
+                    "Başkalarına 'Senin yerinde olsam...' diyerek tavsiye vermeyi öğreneceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Type 2: Hayaller ve İhtimaller",
+                "bullets": [
+                    "**Kullanım**: Şu anki durumun tam tersini veya hayali bir senaryoyu anlatırken kullanılır.",
+                    "**Anlam**: Geçmiş zaman (Past Simple) kullanılmasına rağmen anlam ŞİMDİKİ zamandır.",
+                    "**Fark**: Type 1 gerçekçi ihtimalleri, Type 2 ise hayalleri anlatır."
+                ],
+                "examples": [
+                    "If I had a million dollars, I would travel the world. (Milyon dolarım olsa dünyayı gezerdim - Ama şu an yok.)",
+                    "If I were a bird, I would fly to you. (Kuş olsam sana uçardım - Ama insanım.)"
+                ]
+            },
+            {
+                "id": "formula",
+                "type": "formula",
+                "title": "Cümle Yapısı",
+                "bullets": [
+                    "If tarafında geçmiş zaman, ana cümlede 'would' kullanılır."
+                ],
+                "formula": [
+                    "If Clause: If + Subject + V2 (Past Simple)",
+                    "Main Clause: Subject + would + V1",
+                    "Örnek: If I lived in Tokyo, I would eat sushi every day."
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "Önemli Kural: 'Were' Kullanımı",
+                "bullets": [
+                    "Type 2'de 'be' fiili kullanılırken, tüm özneler için (I, He, She, It) genellikle **'were'** tercih edilir.",
+                    "**If I were you...** (Senin yerinde olsam) kalıbı tavsiye vermek için en yaygın yoldur."
+                ],
+                "examples": [
+                    "If I were you, I would study harder. (Senin yerinde olsam daha çok çalışırdım.)",
+                    "If he were here, he would help us. (O burada olsaydı bize yardım ederdi.)"
+                ]
+            },
+            {
+                "id": "c4",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**If Kısmında Would Kullanmak**: 'If I would have money' yanlıştır. Doğrusu 'If I **had** money' olmalıdır.",
+                    "**Zaman Karıştırmak**: Type 1 ile karıştırmayın. 'If I win' (kazanırsam - olabilir), 'If I won' (kazansaydım - hayal).",
+                    "**Fiil Halini Unutmak**: 'Would'dan sonra fiil her zaman yalın (V1) gelir."
+                ],
+                "examples": [
+                    "Hatalı: If I won the lottery, I will buy a car. ✗",
+                    "Doğru: If I won the lottery, I **would** buy a car. ✓"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "If she ____ his number, she ____ him.",
+                "options": [
+                    "knew / would call",
+                    "knows / will call",
+                    "knew / calls"
+                ],
+                "answer": "knew / would call",
+                "explain": "Gerçekleşmemiş bir durumu (numarasını bilseydi arardı) anlattığı için Type 2 yapısı gereklidir."
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Piyango Hayalleri",
+        "intro_bullets": [
+            "İki arkadaşın piyangoyu kazanmaları durumunda ne yapacaklarına dair sohbetlerini takip et."
+        ],
+        "items": [
+            {
+                "engine": "fill",
+                "prompt": "Tom: 'If I ___ (win) the lottery today, I would quit my job immediately.'",
+                "answer": [
+                    "won"
+                ],
+                "explain": "Hayali bir senaryo olduğu için 'if' kısmında V2 (won) kullanılır."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "Sarah: 'Really? If I were rich, I ____ a big house for my parents.'",
+                "options": [
+                    "would buy",
+                    "will buy",
+                    "bought"
+                ],
+                "answer": "would buy",
+                "explain": "Hayali sonucun ana cümlesinde 'would + V1' kullanılır."
+            },
+            {
+                "engine": "tap",
+                "prompt": "Tom: 'What about the cat? If we moved, ____ it be happy?'",
+                "bank": [
+                    "would",
+                    "did",
+                    "will",
+                    "was"
+                ],
+                "answer": "would",
+                "explain": "Type 2 soru cümlelerinde yardımcı fiil 'would' başa gelir."
+            },
+            {
+                "engine": "order",
+                "prompt": "Sarah'nın tavsiyesi: 'Senin yerinde olsam tüm parayı harcamazdım.'",
+                "tokens": [
+                    "If",
+                    "I",
+                    "were",
+                    "you,",
+                    "I",
+                    "would",
+                    "not",
+                    "spend",
+                    "it",
+                    "all."
+                ],
+                "answer_tokens": [
+                    "If",
+                    "I",
+                    "were",
+                    "you,",
+                    "I",
+                    "would",
+                    "not",
+                    "spend",
+                    "it",
+                    "all."
+                ],
+                "explain": "Tavsiye kalıbı: If I were you + I would not + V1."
+            }
+        ],
+        "recap_bullets": [
+            "Hayali durumlar için: If + Past Simple, ... would + V1.",
+            "Tüm özneler için 'were' kullanmaya özen göster.",
+            "Bu yapının geçmişi değil, 'ŞU ANKI hayali' anlattığını unutma."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "B1-COND-02"
+    }
+}

@@ -1,0 +1,1808 @@
+{
+    "B1_Easy": [
+        {
+            "en": "achievement",
+            "tr": "başarı"
+        },
+        {
+            "en": "admire",
+            "tr": "hayran kalmak"
+        },
+        {
+            "en": "advertise",
+            "tr": "reklam yapmak"
+        },
+        {
+            "en": "advice",
+            "tr": "tavsiye"
+        },
+        {
+            "en": "afford",
+            "tr": "maddi gücü yetmek"
+        },
+        {
+            "en": "aim",
+            "tr": "amaç/hedef"
+        },
+        {
+            "en": "amazing",
+            "tr": "şaşırtıcı/harika"
+        },
+        {
+            "en": "ambition",
+            "tr": "hırs/ideal"
+        },
+        {
+            "en": "ancient",
+            "tr": "antik/eski"
+        },
+        {
+            "en": "announce",
+            "tr": "duyurmak"
+        },
+        {
+            "en": "appearance",
+            "tr": "görünüş"
+        },
+        {
+            "en": "appointment",
+            "tr": "randevu"
+        },
+        {
+            "en": "arrange",
+            "tr": "düzenlemek"
+        },
+        {
+            "en": "artist",
+            "tr": "sanatçı"
+        },
+        {
+            "en": "ashamed",
+            "tr": "utanmış"
+        },
+        {
+            "en": "attitude",
+            "tr": "tavır/tutum"
+        },
+        {
+            "en": "attract",
+            "tr": "cezbetmek"
+        },
+        {
+            "en": "audience",
+            "tr": "izleyici"
+        },
+        {
+            "en": "average",
+            "tr": "ortalama"
+        },
+        {
+            "en": "avoid",
+            "tr": "kaçınmak"
+        },
+        {
+            "en": "background",
+            "tr": "arka plan"
+        },
+        {
+            "en": "ban",
+            "tr": "yasaklamak"
+        },
+        {
+            "en": "beauty",
+            "tr": "güzellik"
+        },
+        {
+            "en": "behave",
+            "tr": "davranmak"
+        },
+        {
+            "en": "benefit",
+            "tr": "fayda"
+        },
+        {
+            "en": "blame",
+            "tr": "suçlamak"
+        },
+        {
+            "en": "blank",
+            "tr": "boşluk"
+        },
+        {
+            "en": "blood",
+            "tr": "kan"
+        },
+        {
+            "en": "board",
+            "tr": "yönetim kurulu/tahta"
+        },
+        {
+            "en": "brave",
+            "tr": "cesur"
+        },
+        {
+            "en": "breath",
+            "tr": "nefes"
+        },
+        {
+            "en": "bridge",
+            "tr": "köprü"
+        },
+        {
+            "en": "brief",
+            "tr": "kısa/öz"
+        },
+        {
+            "en": "broad",
+            "tr": "geniş"
+        },
+        {
+            "en": "budget",
+            "tr": "bütçe"
+        },
+        {
+            "en": "button",
+            "tr": "düğme/buton"
+        },
+        {
+            "en": "cancel",
+            "tr": "iptal etmek"
+        },
+        {
+            "en": "career",
+            "tr": "kariyer"
+        },
+        {
+            "en": "celebrate",
+            "tr": "kutlamak"
+        },
+        {
+            "en": "certain",
+            "tr": "kesin"
+        },
+        {
+            "en": "challenge",
+            "tr": "meydan okuma/zorluk"
+        },
+        {
+            "en": "character",
+            "tr": "karakter"
+        },
+        {
+            "en": "charge",
+            "tr": "ücret/şarj"
+        },
+        {
+            "en": "charity",
+            "tr": "hayır kurumu"
+        },
+        {
+            "en": "chemical",
+            "tr": "kimyasal"
+        },
+        {
+            "en": "choice",
+            "tr": "seçim"
+        },
+        {
+            "en": "climate",
+            "tr": "iklim"
+        },
+        {
+            "en": "coach",
+            "tr": "antrenör"
+        },
+        {
+            "en": "collect",
+            "tr": "toplamak"
+        },
+        {
+            "en": "colleague",
+            "tr": "iş arkadaşı"
+        },
+        {
+            "en": "comfort",
+            "tr": "konfor"
+        },
+        {
+            "en": "common",
+            "tr": "yaygın/ortak"
+        },
+        {
+            "en": "community",
+            "tr": "topluluk"
+        },
+        {
+            "en": "compare",
+            "tr": "karşılaştırmak"
+        },
+        {
+            "en": "complain",
+            "tr": "şikayet etmek"
+        },
+        {
+            "en": "completely",
+            "tr": "tamamen"
+        },
+        {
+            "en": "condition",
+            "tr": "durum/koşul"
+        },
+        {
+            "en": "confident",
+            "tr": "kendinden emin"
+        },
+        {
+            "en": "confirm",
+            "tr": "onaylamak"
+        },
+        {
+            "en": "confused",
+            "tr": "kafa karışıklığı"
+        },
+        {
+            "en": "connect",
+            "tr": "bağlanmak"
+        },
+        {
+            "en": "consider",
+            "tr": "düşünmek/göz önünde bulundurmak"
+        },
+        {
+            "en": "contain",
+            "tr": "içermek"
+        },
+        {
+            "en": "continue",
+            "tr": "devam etmek"
+        },
+        {
+            "en": "control",
+            "tr": "kontrol etmek"
+        },
+        {
+            "en": "cook",
+            "tr": "pişirmek"
+        },
+        {
+            "en": "copy",
+            "tr": "kopyalamak"
+        },
+        {
+            "en": "correct",
+            "tr": "doğru"
+        },
+        {
+            "en": "count",
+            "tr": "saymak"
+        },
+        {
+            "en": "couple",
+            "tr": "çift"
+        },
+        {
+            "en": "creative",
+            "tr": "yaratıcı"
+        },
+        {
+            "en": "crew",
+            "tr": "mürettebat/ekip"
+        },
+        {
+            "en": "crime",
+            "tr": "suç"
+        },
+        {
+            "en": "criminal",
+            "tr": "suçlu"
+        },
+        {
+            "en": "culture",
+            "tr": "kültür"
+        },
+        {
+            "en": "currency",
+            "tr": "para birimi"
+        },
+        {
+            "en": "custom",
+            "tr": "gelenek"
+        },
+        {
+            "en": "damage",
+            "tr": "zarar"
+        },
+        {
+            "en": "danger",
+            "tr": "tehlike"
+        },
+        {
+            "en": "deaf",
+            "tr": "sağır"
+        },
+        {
+            "en": "deal",
+            "tr": "anlaşma"
+        },
+        {
+            "en": "death",
+            "tr": "ölüm"
+        },
+        {
+            "en": "decision",
+            "tr": "karar"
+        },
+        {
+            "en": "decorate",
+            "tr": "dekore etmek"
+        },
+        {
+            "en": "deep",
+            "tr": "derin"
+        },
+        {
+            "en": "define",
+            "tr": "tanımlamak"
+        },
+        {
+            "en": "definite",
+            "tr": "kesin"
+        },
+        {
+            "en": "degree",
+            "tr": "derece/diploma"
+        },
+        {
+            "en": "delay",
+            "tr": "gecikme"
+        },
+        {
+            "en": "delicious",
+            "tr": "lezzetli"
+        },
+        {
+            "en": "deliver",
+            "tr": "teslim etmek"
+        },
+        {
+            "en": "depart",
+            "tr": "ayrılmak"
+        },
+        {
+            "en": "describe",
+            "tr": "betimlemek"
+        },
+        {
+            "en": "design",
+            "tr": "tasarım"
+        },
+        {
+            "en": "destroy",
+            "tr": "yok etmek"
+        },
+        {
+            "en": "detail",
+            "tr": "detay"
+        },
+        {
+            "en": "develop",
+            "tr": "geliştirmek"
+        },
+        {
+            "en": "diet",
+            "tr": "diyet"
+        },
+        {
+            "en": "difference",
+            "tr": "fark"
+        },
+        {
+            "en": "difficulty",
+            "tr": "zorluk"
+        },
+        {
+            "en": "digital",
+            "tr": "dijital"
+        },
+        {
+            "en": "direct",
+            "tr": "doğrudan"
+        },
+        {
+            "en": "disappear",
+            "tr": "gözden kaybolmak"
+        },
+        {
+            "en": "disappointed",
+            "tr": "hayal kırıklığına uğramış"
+        },
+        {
+            "en": "discover",
+            "tr": "keşfetmek"
+        },
+        {
+            "en": "discuss",
+            "tr": "tartışmak"
+        },
+        {
+            "en": "disease",
+            "tr": "hastalık"
+        },
+        {
+            "en": "distance",
+            "tr": "mesafe"
+        },
+        {
+            "en": "district",
+            "tr": "bölge/semt"
+        },
+        {
+            "en": "divide",
+            "tr": "bölmek"
+        },
+        {
+            "en": "double",
+            "tr": "çift"
+        },
+        {
+            "en": "doubt",
+            "tr": "şüphe"
+        },
+        {
+            "en": "drama",
+            "tr": "drama"
+        },
+        {
+            "en": "dream",
+            "tr": "rüya"
+        },
+        {
+            "en": "due",
+            "tr": "vadesi dolmuş"
+        },
+        {
+            "en": "dust",
+            "tr": "toz"
+        },
+        {
+            "en": "duty",
+            "tr": "görev"
+        },
+        {
+            "en": "earn",
+            "tr": "kazanmak (para)"
+        },
+        {
+            "en": "earthquake",
+            "tr": "deprem"
+        },
+        {
+            "en": "education",
+            "tr": "eğitim"
+        },
+        {
+            "en": "effect",
+            "tr": "etki"
+        },
+        {
+            "en": "effort",
+            "tr": "çaba"
+        },
+        {
+            "en": "elderly",
+            "tr": "yaşlı"
+        },
+        {
+            "en": "election",
+            "tr": "seçim"
+        },
+        {
+            "en": "electric",
+            "tr": "elektrikli"
+        },
+        {
+            "en": "embarrassed",
+            "tr": "utanmış"
+        },
+        {
+            "en": "emergency",
+            "tr": "acil durum"
+        },
+        {
+            "en": "emotion",
+            "tr": "duygu"
+        },
+        {
+            "en": "employ",
+            "tr": "işe almak"
+        },
+        {
+            "en": "encourage",
+            "tr": "teşvik etmek"
+        },
+        {
+            "en": "energy",
+            "tr": "enerji"
+        },
+        {
+            "en": "engine",
+            "tr": "motor"
+        },
+        {
+            "en": "enormous",
+            "tr": "muazzam/kocaman"
+        },
+        {
+            "en": "entertainment",
+            "tr": "eğlence"
+        },
+        {
+            "en": "environment",
+            "tr": "çevre"
+        },
+        {
+            "en": "equal",
+            "tr": "eşit"
+        },
+        {
+            "en": "equipment",
+            "tr": "ekipman"
+        },
+        {
+            "en": "escape",
+            "tr": "kaçmak"
+        },
+        {
+            "en": "essential",
+            "tr": "temel/gerekli"
+        },
+        {
+            "en": "event",
+            "tr": "etkinlik"
+        },
+        {
+            "en": "exactly",
+            "tr": "kesinlikle"
+        },
+        {
+            "en": "examine",
+            "tr": "incelemek"
+        },
+        {
+            "en": "excellent",
+            "tr": "mükemmel"
+        },
+        {
+            "en": "exchange",
+            "tr": "takas/döviz"
+        },
+        {
+            "en": "exciting",
+            "tr": "heyecan verici"
+        },
+        {
+            "en": "exercise",
+            "tr": "egzersiz"
+        },
+        {
+            "en": "exhibition",
+            "tr": "sergi"
+        },
+        {
+            "en": "exist",
+            "tr": "var olmak"
+        },
+        {
+            "en": "expect",
+            "tr": "beklemek/ummak"
+        },
+        {
+            "en": "experience",
+            "tr": "deneyim"
+        }
+    ],
+    "B1_Medium": [
+        {
+            "en": "ability",
+            "tr": "yetenek"
+        },
+        {
+            "en": "abroad",
+            "tr": "yurt dışı"
+        },
+        {
+            "en": "absolute",
+            "tr": "mutlak/kesin"
+        },
+        {
+            "en": "academic",
+            "tr": "akademik"
+        },
+        {
+            "en": "accent",
+            "tr": "aksan"
+        },
+        {
+            "en": "accept",
+            "tr": "kabul etmek"
+        },
+        {
+            "en": "access",
+            "tr": "erişim"
+        },
+        {
+            "en": "accommodation",
+            "tr": "konaklama"
+        },
+        {
+            "en": "accurate",
+            "tr": "doğru/kesin"
+        },
+        {
+            "en": "accuse",
+            "tr": "suçlamak"
+        },
+        {
+            "en": "adapt",
+            "tr": "uyum sağlamak"
+        },
+        {
+            "en": "additional",
+            "tr": "ek/ilave"
+        },
+        {
+            "en": "adjust",
+            "tr": "ayarlamak"
+        },
+        {
+            "en": "administration",
+            "tr": "yönetim"
+        },
+        {
+            "en": "admit",
+            "tr": "itiraf etmek"
+        },
+        {
+            "en": "adopt",
+            "tr": "evlat edinmek/benimsemek"
+        },
+        {
+            "en": "advanced",
+            "tr": "ileri"
+        },
+        {
+            "en": "advantage",
+            "tr": "avantaj"
+        },
+        {
+            "en": "adventure",
+            "tr": "macera"
+        },
+        {
+            "en": "agency",
+            "tr": "ajans"
+        },
+        {
+            "en": "agenda",
+            "tr": "gündem"
+        },
+        {
+            "en": "aggressive",
+            "tr": "saldırgan"
+        },
+        {
+            "en": "agreement",
+            "tr": "anlaşma"
+        },
+        {
+            "en": "agriculture",
+            "tr": "tarım"
+        },
+        {
+            "en": "alarm",
+            "tr": "alarm"
+        },
+        {
+            "en": "alternative",
+            "tr": "alternatif"
+        },
+        {
+            "en": "amount",
+            "tr": "miktar"
+        },
+        {
+            "en": "analyze",
+            "tr": "analiz etmek"
+        },
+        {
+            "en": "anniversary",
+            "tr": "yıl dönümü"
+        },
+        {
+            "en": "annual",
+            "tr": "yıllık"
+        },
+        {
+            "en": "anxious",
+            "tr": "endişeli"
+        },
+        {
+            "en": "apologize",
+            "tr": "özür dilemek"
+        },
+        {
+            "en": "application",
+            "tr": "uygulama"
+        },
+        {
+            "en": "appointment",
+            "tr": "randevu"
+        },
+        {
+            "en": "appreciate",
+            "tr": "takdir etmek"
+        },
+        {
+            "en": "approval",
+            "tr": "onay"
+        },
+        {
+            "en": "architect",
+            "tr": "mimar"
+        },
+        {
+            "en": "argument",
+            "tr": "tartışma"
+        },
+        {
+            "en": "artificial",
+            "tr": "yapay"
+        },
+        {
+            "en": "aspect",
+            "tr": "yön/açı"
+        },
+        {
+            "en": "assessment",
+            "tr": "değerlendirme"
+        },
+        {
+            "en": "assignment",
+            "tr": "ödev/atama"
+        },
+        {
+            "en": "assist",
+            "tr": "yardım etmek"
+        },
+        {
+            "en": "associate",
+            "tr": "ilişkilendirmek"
+        },
+        {
+            "en": "assume",
+            "tr": "varsaymak"
+        },
+        {
+            "en": "attempt",
+            "tr": "girişim"
+        },
+        {
+            "en": "attraction",
+            "tr": "cazibe"
+        },
+        {
+            "en": "authority",
+            "tr": "yetki/otorite"
+        },
+        {
+            "en": "available",
+            "tr": "mevcut/müsait"
+        },
+        {
+            "en": "aware",
+            "tr": "farkında"
+        },
+        {
+            "en": "balance",
+            "tr": "denge"
+        },
+        {
+            "en": "barrier",
+            "tr": "bariyer/engel"
+        },
+        {
+            "en": "basic",
+            "tr": "temel"
+        },
+        {
+            "en": "battle",
+            "tr": "savaş"
+        },
+        {
+            "en": "behavior",
+            "tr": "davranış"
+        },
+        {
+            "en": "belong",
+            "tr": "ait olmak"
+        },
+        {
+            "en": "besides",
+            "tr": "yanı sıra"
+        },
+        {
+            "en": "biological",
+            "tr": "biyolojik"
+        },
+        {
+            "en": "blame",
+            "tr": "suçlamak"
+        },
+        {
+            "en": "bond",
+            "tr": "bağ"
+        },
+        {
+            "en": "border",
+            "tr": "sınır"
+        },
+        {
+            "en": "borrow",
+            "tr": "ödünç almak"
+        },
+        {
+            "en": "boundary",
+            "tr": "sınır/limit"
+        },
+        {
+            "en": "branch",
+            "tr": "dal/şube"
+        },
+        {
+            "en": "brand",
+            "tr": "marka"
+        },
+        {
+            "en": "broadcast",
+            "tr": "yayın"
+        },
+        {
+            "en": "calculate",
+            "tr": "hesaplamak"
+        },
+        {
+            "en": "campaign",
+            "tr": "kampanya"
+        },
+        {
+            "en": "candidate",
+            "tr": "aday"
+        },
+        {
+            "en": "capacity",
+            "tr": "kapasite"
+        },
+        {
+            "en": "caption",
+            "tr": "altyazı/başlık"
+        },
+        {
+            "en": "capture",
+            "tr": "yakalamak"
+        },
+        {
+            "en": "cash",
+            "tr": "nakit"
+        },
+        {
+            "en": "category",
+            "tr": "kategori"
+        },
+        {
+            "en": "celebrity",
+            "tr": "ünlü"
+        },
+        {
+            "en": "ceremony",
+            "tr": "tören"
+        },
+        {
+            "en": "certainly",
+            "tr": "kesinlikle"
+        },
+        {
+            "en": "certificate",
+            "tr": "sertifika"
+        },
+        {
+            "en": "channel",
+            "tr": "kanal"
+        },
+        {
+            "en": "chapter",
+            "tr": "bölüm (kitap)"
+        },
+        {
+            "en": "characteristic",
+            "tr": "özellik"
+        },
+        {
+            "en": "charity",
+            "tr": "hayırseverlik"
+        },
+        {
+            "en": "charming",
+            "tr": "büyüleyici"
+        },
+        {
+            "en": "cheerful",
+            "tr": "neşeli"
+        },
+        {
+            "en": "citizen",
+            "tr": "vatandaş"
+        },
+        {
+            "en": "civilization",
+            "tr": "medeniyet"
+        },
+        {
+            "en": "classic",
+            "tr": "klasik"
+        },
+        {
+            "en": "client",
+            "tr": "müşteri/müvekkil"
+        },
+        {
+            "en": "clinic",
+            "tr": "klinik"
+        },
+        {
+            "en": "clue",
+            "tr": "ipucu"
+        },
+        {
+            "en": "collection",
+            "tr": "koleksiyon"
+        },
+        {
+            "en": "combination",
+            "tr": "kombinasyon"
+        },
+        {
+            "en": "comfort",
+            "tr": "rahatlık"
+        },
+        {
+            "en": "command",
+            "tr": "komut/emir"
+        },
+        {
+            "en": "commercial",
+            "tr": "ticari/reklam"
+        },
+        {
+            "en": "commitment",
+            "tr": "bağlılık/taahhüt"
+        },
+        {
+            "en": "committee",
+            "tr": "komite"
+        },
+        {
+            "en": "companion",
+            "tr": "refakatçi/arkadaş"
+        },
+        {
+            "en": "comparison",
+            "tr": "karşılaştırma"
+        },
+        {
+            "en": "competition",
+            "tr": "yarışma"
+        },
+        {
+            "en": "competitive",
+            "tr": "rekabetçi"
+        },
+        {
+            "en": "complaint",
+            "tr": "şikayet"
+        },
+        {
+            "en": "complex",
+            "tr": "karmaşık"
+        },
+        {
+            "en": "component",
+            "tr": "bileşen"
+        },
+        {
+            "en": "concentration",
+            "tr": "konsantrasyon"
+        },
+        {
+            "en": "concept",
+            "tr": "kavram"
+        },
+        {
+            "en": "concern",
+            "tr": "endişe"
+        },
+        {
+            "en": "conclusion",
+            "tr": "sonuç"
+        },
+        {
+            "en": "conference",
+            "tr": "konferans"
+        },
+        {
+            "en": "confidence",
+            "tr": "güven"
+        },
+        {
+            "en": "conflict",
+            "tr": "çatışma"
+        },
+        {
+            "en": "confusion",
+            "tr": "karışıklık"
+        },
+        {
+            "en": "congress",
+            "tr": "kongre"
+        },
+        {
+            "en": "conscious",
+            "tr": "bilinçli"
+        },
+        {
+            "en": "consequence",
+            "tr": "sonuç/netice"
+        },
+        {
+            "en": "consideration",
+            "tr": "düşünce/değerlendirme"
+        },
+        {
+            "en": "consist",
+            "tr": "oluşmak"
+        },
+        {
+            "en": "constant",
+            "tr": "sürekli/sabit"
+        },
+        {
+            "en": "construction",
+            "tr": "inşaat"
+        },
+        {
+            "en": "consumer",
+            "tr": "tüketici"
+        },
+        {
+            "en": "content",
+            "tr": "içerik"
+        },
+        {
+            "en": "contest",
+            "tr": "yarışma"
+        },
+        {
+            "en": "context",
+            "tr": "bağlam"
+        },
+        {
+            "en": "continent",
+            "tr": "kıta"
+        },
+        {
+            "en": "contrast",
+            "tr": "zıtlık"
+        },
+        {
+            "en": "contribution",
+            "tr": "katkı"
+        },
+        {
+            "en": "convenient",
+            "tr": "uygun/elverişli"
+        },
+        {
+            "en": "convince",
+            "tr": "ikna etmek"
+        },
+        {
+            "en": "corporate",
+            "tr": "kurumsal"
+        },
+        {
+            "en": "council",
+            "tr": "konsey"
+        },
+        {
+            "en": "courage",
+            "tr": "cesaret"
+        },
+        {
+            "en": "creative",
+            "tr": "yaratıcı"
+        },
+        {
+            "en": "creature",
+            "tr": "yaratık"
+        },
+        {
+            "en": "crisis",
+            "tr": "kriz"
+        },
+        {
+            "en": "critical",
+            "tr": "kritik"
+        },
+        {
+            "en": "crucial",
+            "tr": "çok önemli"
+        },
+        {
+            "en": "curious",
+            "tr": "meraklı"
+        },
+        {
+            "en": "currently",
+            "tr": "şu anda"
+        },
+        {
+            "en": "custom",
+            "tr": "gelenek"
+        },
+        {
+            "en": "cycle",
+            "tr": "döngü"
+        },
+        {
+            "en": "daily",
+            "tr": "günlük"
+        },
+        {
+            "en": "database",
+            "tr": "veritabanı"
+        },
+        {
+            "en": "deadline",
+            "tr": "teslim tarihi"
+        },
+        {
+            "en": "debate",
+            "tr": "münazara/tartışma"
+        },
+        {
+            "en": "decade",
+            "tr": "on yıl"
+        },
+        {
+            "en": "declare",
+            "tr": "ilan etmek"
+        },
+        {
+            "en": "decline",
+            "tr": "reddetmek/düşüş"
+        }
+    ],
+    "B1_Hard": [
+        {
+            "en": "abandon",
+            "tr": "terk etmek"
+        },
+        {
+            "en": "abstract",
+            "tr": "soyut"
+        },
+        {
+            "en": "academic",
+            "tr": "akademik"
+        },
+        {
+            "en": "accommodation",
+            "tr": "konaklama"
+        },
+        {
+            "en": "accompany",
+            "tr": "eşlik etmek"
+        },
+        {
+            "en": "accomplish",
+            "tr": "başarmak"
+        },
+        {
+            "en": "accordingly",
+            "tr": "buna göre/uygun şekilde"
+        },
+        {
+            "en": "accountant",
+            "tr": "muhasebeci"
+        },
+        {
+            "en": "accurate",
+            "tr": "doğru/isabetli"
+        },
+        {
+            "en": "acknowledge",
+            "tr": "onaylamak/kabul etmek"
+        },
+        {
+            "en": "acquire",
+            "tr": "edinmek/kazanmak"
+        },
+        {
+            "en": "actual",
+            "tr": "gerçek/asıl"
+        },
+        {
+            "en": "adequate",
+            "tr": "yeterli"
+        },
+        {
+            "en": "adjust",
+            "tr": "ayarlamak"
+        },
+        {
+            "en": "administration",
+            "tr": "yönetim"
+        },
+        {
+            "en": "adopt",
+            "tr": "benimsemek"
+        },
+        {
+            "en": "advance",
+            "tr": "ilerlemek"
+        },
+        {
+            "en": "adverse",
+            "tr": "olumsuz/ters"
+        },
+        {
+            "en": "advocate",
+            "tr": "savunmak"
+        },
+        {
+            "en": "aesthetic",
+            "tr": "estetik"
+        },
+        {
+            "en": "affection",
+            "tr": "şefkat"
+        },
+        {
+            "en": "afford",
+            "tr": "karşılamak"
+        },
+        {
+            "en": "afterwards",
+            "tr": "sonradan"
+        },
+        {
+            "en": "agenda",
+            "tr": "gündem"
+        },
+        {
+            "en": "agreement",
+            "tr": "anlaşma"
+        },
+        {
+            "en": "agriculture",
+            "tr": "tarım"
+        },
+        {
+            "en": "alert",
+            "tr": "uyarı"
+        },
+        {
+            "en": "alien",
+            "tr": "yabancı/uzaylı"
+        },
+        {
+            "en": "alignment",
+            "tr": "hizalama"
+        },
+        {
+            "en": "alike",
+            "tr": "benzer"
+        },
+        {
+            "en": "allegation",
+            "tr": "iddia"
+        },
+        {
+            "en": "allocate",
+            "tr": "tahsis etmek"
+        },
+        {
+            "en": "allowance",
+            "tr": "ödenek/harçlık"
+        },
+        {
+            "en": "alter",
+            "tr": "değiştirmek"
+        },
+        {
+            "en": "alternative",
+            "tr": "alternatif"
+        },
+        {
+            "en": "altogether",
+            "tr": "tamamen"
+        },
+        {
+            "en": "amateur",
+            "tr": "amatör"
+        },
+        {
+            "en": "ambassador",
+            "tr": "büyükelçi"
+        },
+        {
+            "en": "ambiguity",
+            "tr": "belirsizlik"
+        },
+        {
+            "en": "ambitious",
+            "tr": "hırslı"
+        },
+        {
+            "en": "amendment",
+            "tr": "değişiklik/düzeltme"
+        },
+        {
+            "en": "amount",
+            "tr": "miktar"
+        },
+        {
+            "en": "analysis",
+            "tr": "analiz"
+        },
+        {
+            "en": "ancestor",
+            "tr": "ata"
+        },
+        {
+            "en": "anniversary",
+            "tr": "yıldönümü"
+        },
+        {
+            "en": "annual",
+            "tr": "yıllık"
+        },
+        {
+            "en": "anticipate",
+            "tr": "beklemek/ummak"
+        },
+        {
+            "en": "anxiety",
+            "tr": "kaygı"
+        },
+        {
+            "en": "apparent",
+            "tr": "belirgin"
+        },
+        {
+            "en": "appeal",
+            "tr": "temyiz/başvuru"
+        },
+        {
+            "en": "applicant",
+            "tr": "aday"
+        },
+        {
+            "en": "appoint",
+            "tr": "atamak"
+        },
+        {
+            "en": "appreciation",
+            "tr": "takdir/beğeni"
+        },
+        {
+            "en": "approach",
+            "tr": "yaklaşım"
+        },
+        {
+            "en": "appropriate",
+            "tr": "uygun"
+        },
+        {
+            "en": "approval",
+            "tr": "onay"
+        },
+        {
+            "en": "approximate",
+            "tr": "yaklaşık"
+        },
+        {
+            "en": "arbitrary",
+            "tr": "keyfi"
+        },
+        {
+            "en": "architect",
+            "tr": "mimar"
+        },
+        {
+            "en": "arise",
+            "tr": "ortaya çıkmak"
+        },
+        {
+            "en": "arrangement",
+            "tr": "düzenleme"
+        },
+        {
+            "en": "artificial",
+            "tr": "yapay"
+        },
+        {
+            "en": "aspect",
+            "tr": "yön"
+        },
+        {
+            "en": "assertion",
+            "tr": "iddia/sav"
+        },
+        {
+            "en": "assess",
+            "tr": "değerlendirmek"
+        },
+        {
+            "en": "asset",
+            "tr": "varlık"
+        },
+        {
+            "en": "assignment",
+            "tr": "ödev"
+        },
+        {
+            "en": "assist",
+            "tr": "yardım etmek"
+        },
+        {
+            "en": "association",
+            "tr": "dernek"
+        },
+        {
+            "en": "assume",
+            "tr": "varsaymak"
+        },
+        {
+            "en": "assurance",
+            "tr": "güvence"
+        },
+        {
+            "en": "atmosphere",
+            "tr": "atmosfer"
+        },
+        {
+            "en": "attach",
+            "tr": "iliştirmek"
+        },
+        {
+            "en": "attain",
+            "tr": "ulaşmak/elde etmek"
+        },
+        {
+            "en": "attempt",
+            "tr": "girişim"
+        },
+        {
+            "en": "attract",
+            "tr": "çekmek"
+        },
+        {
+            "en": "attribute",
+            "tr": "özellik/atfetmek"
+        },
+        {
+            "en": "authority",
+            "tr": "otorite"
+        },
+        {
+            "en": "available",
+            "tr": "mevcut"
+        },
+        {
+            "en": "average",
+            "tr": "ortalama"
+        },
+        {
+            "en": "avoid",
+            "tr": "kaçınmak"
+        },
+        {
+            "en": "aware",
+            "tr": "farkında"
+        },
+        {
+            "en": "awkward",
+            "tr": "garip/beceriksiz"
+        },
+        {
+            "en": "barrier",
+            "tr": "engel"
+        },
+        {
+            "en": "base",
+            "tr": "temel"
+        },
+        {
+            "en": "behalf",
+            "tr": "adına"
+        },
+        {
+            "en": "behavior",
+            "tr": "davranış"
+        },
+        {
+            "en": "belief",
+            "tr": "inanç"
+        },
+        {
+            "en": "benchmark",
+            "tr": "kıyaslama"
+        },
+        {
+            "en": "beneficial",
+            "tr": "yararlı"
+        },
+        {
+            "en": "betray",
+            "tr": "ihanet etmek"
+        },
+        {
+            "en": "bias",
+            "tr": "önyargı"
+        },
+        {
+            "en": "bid",
+            "tr": "teklif"
+        },
+        {
+            "en": "bill",
+            "tr": "fatura"
+        },
+        {
+            "en": "bitter",
+            "tr": "acı"
+        },
+        {
+            "en": "blame",
+            "tr": "suçlamak"
+        },
+        {
+            "en": "blessing",
+            "tr": "nimet"
+        },
+        {
+            "en": "blind",
+            "tr": "kör"
+        },
+        {
+            "en": "block",
+            "tr": "blok/engellemek"
+        },
+        {
+            "en": "boast",
+            "tr": "övünmek"
+        },
+        {
+            "en": "bold",
+            "tr": "cesur/kalın"
+        },
+        {
+            "en": "bond",
+            "tr": "bağ"
+        },
+        {
+            "en": "border",
+            "tr": "sınır"
+        },
+        {
+            "en": "borrow",
+            "tr": "ödünç almak"
+        },
+        {
+            "en": "bother",
+            "tr": "rahatsız etmek"
+        },
+        {
+            "en": "boundary",
+            "tr": "sınır"
+        },
+        {
+            "en": "bravery",
+            "tr": "cesaret"
+        },
+        {
+            "en": "breakdown",
+            "tr": "ariza/bozulma"
+        },
+        {
+            "en": "breathtaking",
+            "tr": "nefes kesici"
+        },
+        {
+            "en": "brief",
+            "tr": "kısa"
+        },
+        {
+            "en": "brilliant",
+            "tr": "parlak"
+        },
+        {
+            "en": "broad",
+            "tr": "geniş"
+        },
+        {
+            "en": "broadcast",
+            "tr": "yayın yapmak"
+        },
+        {
+            "en": "budget",
+            "tr": "bütçe"
+        },
+        {
+            "en": "burden",
+            "tr": "yük"
+        },
+        {
+            "en": "cabinet",
+            "tr": "kabine/dolap"
+        },
+        {
+            "en": "calculate",
+            "tr": "hesaplamak"
+        },
+        {
+            "en": "campaign",
+            "tr": "kampanya"
+        },
+        {
+            "en": "candidate",
+            "tr": "aday"
+        },
+        {
+            "en": "capable",
+            "tr": "yetenekli"
+        },
+        {
+            "en": "capacity",
+            "tr": "kapasite"
+        },
+        {
+            "en": "capital",
+            "tr": "başkent/sermaye"
+        },
+        {
+            "en": "caption",
+            "tr": "altyazı"
+        },
+        {
+            "en": "carbon",
+            "tr": "karbon"
+        },
+        {
+            "en": "careless",
+            "tr": "dikkatsiz"
+        },
+        {
+            "en": "cargo",
+            "tr": "kargo"
+        },
+        {
+            "en": "case",
+            "tr": "vaka/durum"
+        },
+        {
+            "en": "cashier",
+            "tr": "kasiyer"
+        },
+        {
+            "en": "cast",
+            "tr": "oyuncu kadrosu"
+        },
+        {
+            "en": "casual",
+            "tr": "gündelik"
+        },
+        {
+            "en": "catalog",
+            "tr": "katalog"
+        },
+        {
+            "en": "catchy",
+            "tr": "akılda kalıcı"
+        },
+        {
+            "en": "category",
+            "tr": "kategori"
+        },
+        {
+            "en": "cattle",
+            "tr": "sığır"
+        },
+        {
+            "en": "cause",
+            "tr": "sebep"
+        },
+        {
+            "en": "caution",
+            "tr": "dikkat"
+        },
+        {
+            "en": "celebrity",
+            "tr": "ünlü"
+        },
+        {
+            "en": "cell",
+            "tr": "hücre"
+        },
+        {
+            "en": "cemetery",
+            "tr": "mezarlık"
+        },
+        {
+            "en": "census",
+            "tr": "nüfus sayımı"
+        },
+        {
+            "en": "certainly",
+            "tr": "kesinlikle"
+        },
+        {
+            "en": "certificate",
+            "tr": "sertifika"
+        },
+        {
+            "en": "chain",
+            "tr": "zincir"
+        },
+        {
+            "en": "chairman",
+            "tr": "başkan"
+        },
+        {
+            "en": "challenge",
+            "tr": "zorluk"
+        },
+        {
+            "en": "chamber",
+            "tr": "oda/oda meclisi"
+        },
+        {
+            "en": "champion",
+            "tr": "şampiyon"
+        },
+        {
+            "en": "chaos",
+            "tr": "kaos"
+        },
+        {
+            "en": "characteristic",
+            "tr": "özellik"
+        },
+        {
+            "en": "charge",
+            "tr": "şarj/ücret"
+        },
+        {
+            "en": "charitable",
+            "tr": "hayırsever"
+        },
+        {
+            "en": "chart",
+            "tr": "grafik"
+        },
+        {
+            "en": "chase",
+            "tr": "kovalamak"
+        }
+    ]
+}

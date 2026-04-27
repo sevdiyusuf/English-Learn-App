@@ -1,0 +1,212 @@
+{
+    "schema_version": "1.0",
+    "level": "A2",
+    "lesson_id": "A2-COMP-01-lesson",
+    "title": "Comparatives & Superlatives",
+    "topic_tags": [
+        "comparatives",
+        "superlatives",
+        "irregular"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "İki şeyi birbiriyle kıyaslamayı (Comparative)",
+                    "Bir grubu içindeki 'en' olanı belirtmeyi (Superlative)",
+                    "Kurallara uymayan düzensiz sıfatları öğreneceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Kısa Sıfatlar (Kıyaslama)",
+                "bullets": [
+                    "Tek heceli sıfatların sonuna **-er** takısı gelir.",
+                    "Cümlede kıyaslama yaparken mutlaka **than** kelimesini kullanırız.",
+                    "Sıfat sessiz-sesli-sessiz bitiyorsa son harf çift yazılır."
+                ],
+                "examples": [
+                    "Fast → Fast**er**",
+                    "Big → Big**ger**",
+                    "This car is faster **than** that one."
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "Uzun Sıfatlar (Kıyaslama)",
+                "bullets": [
+                    "İki veya daha fazla heceli sıfatların başına **more** kelimesi getirilir.",
+                    "Sıfatın kendisinde hiçbir değişiklik yapılmaz."
+                ],
+                "examples": [
+                    "Beautiful → **More** beautiful",
+                    "Interesting → **More** interesting",
+                    "This book is more interesting than the movie."
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "Hangisi doğrudur?\n'English is ____ than Maths.'",
+                "options": [
+                    "easyer",
+                    "easier",
+                    "more easy"
+                ],
+                "answer": "easier",
+                "explain": "Sonu 'y' ile biten sıfatlarda 'y' düşer ve '-ier' gelir."
+            },
+            {
+                "id": "c4",
+                "type": "formula",
+                "title": "En İyisi: Superlatives",
+                "bullets": [
+                    "Bir gruptaki 'en' sıfatı belirtirken kullanılır.",
+                    "Sıfatın başında mutlaka **the** kullanılır."
+                ],
+                "formula": [
+                    "Kısa: the + adjective + **-est** (the smallest)",
+                    "Uzun: the + **most** + adjective (the most expensive)"
+                ],
+                "examples": [
+                    "He is the tallest student in the class.",
+                    "This is the most beautiful place in the world."
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "rule",
+                "title": "Düzensiz Sıfatlar",
+                "bullets": [
+                    "Bazı sıfatlar kurallara uymaz, tamamen değişirler. Bunları ezberlemek gerekir."
+                ],
+                "examples": [
+                    "Good → Better → The Best",
+                    "Bad → Worse → The Worst",
+                    "Far → Farther/Further → The Farthest"
+                ]
+            },
+            {
+                "id": "q2",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "Direct: 'My grade is bad, but your grade is ____.'",
+                "options": [
+                    "badder",
+                    "worse",
+                    "worst"
+                ],
+                "answer": "worse",
+                "hint": "'Bad' sıfatının comparative hali 'worse'dur."
+            },
+            {
+                "id": "c6",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Double Comparative**: Hem 'more' hem '-er' aynı anda kullanılmaz (More taller ✗).",
+                    "**Than vs Then**: Kıyaslama yaparken 'than' kullanılır, 'then' zaman bildirir.",
+                    "**The Unutmak**: Superlative yaparken 'the' koymayı unutmayın."
+                ],
+                "examples": [
+                    "Hatalı: She is more smarter than me. ✗",
+                    "Doğru: She is smarter than me. ✓"
+                ]
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Kontekst: Yeni Bir Telefon Almak",
+        "intro_bullets": [
+            "Teknoloji mağazasında iki farklı telefonu karşılaştırıyorsun.",
+            "Müşteri temsilcisi sana en iyi seçenekleri sunuyor.",
+            "Kıyaslama ve üstünlük yapılarını kullanarak kararını ver."
+        ],
+        "items": [
+            {
+                "engine": "fill",
+                "prompt": "This phone is ___ (cheap) than the iPhone.",
+                "answer": [
+                    "cheaper"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Kısa sıfatlarda kıyaslama için -er takısı kullanılır."
+            },
+            {
+                "engine": "tap",
+                "prompt": "But the iPhone has a ___ camera than this one.",
+                "bank": [
+                    "better",
+                    "gooder",
+                    "best"
+                ],
+                "answer": "better",
+                "explain": "'Good' sıfatı düzensizdir ve comparative hali 'better'dır."
+            },
+            {
+                "engine": "fill",
+                "prompt": "In fact, it is the ___ (expensive) phone in our store.",
+                "answer": [
+                    "most expensive"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Uzun sıfatlarda 'en' demek için 'the most' kullanılır."
+            },
+            {
+                "engine": "order",
+                "prompt": "Cümleyi kur: 'Bu şimdiye kadarki en kötü günüm.'",
+                "tokens": [
+                    "This",
+                    "is",
+                    "the",
+                    "worst",
+                    "day",
+                    "ever"
+                ],
+                "answer_tokens": [
+                    "This",
+                    "is",
+                    "the",
+                    "worst",
+                    "day",
+                    "ever"
+                ],
+                "explain": "'Bad' sıfatının superlative (en) hali 'the worst'tür."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "I want to buy the ____ one.",
+                "options": [
+                    "fastest",
+                    "faster",
+                    "more fast"
+                ],
+                "answer": "fastest",
+                "explain": "Mağazadaki tüm telefonlar içinden 'en hızlısını' istediği için superlative kullanılır."
+            }
+        ],
+        "recap_bullets": [
+            "Hatırla: Kısa sıfatlar -er/-est, uzun sıfatlar more/most alır.",
+            "Hatırla: Good-Better ve Bad-Worse değişimlerini unutma.",
+            "Hatırla: Kıyaslama yaparken 'than', en iyiyi söylerken 'the' kullan."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "A2-COMP-01"
+    }
+}

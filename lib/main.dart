@@ -7,9 +7,35 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'app/app.dart';
 import 'app/di.dart';
 import 'core/utils/error_logger.dart';
+import 'features/dictionary/load_dictionary.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // --- KRİTİK DEĞİŞİKLİK: Veritabanı (Isar) Başlatma (Force Await) ---
+  // Uygulama açılmadan önce veritabanının hazır olmasını bekliyoruz.
+  // Bu sayede Deep Link ile gelen kullanıcılar "Isar null" hatası almayacak.
+  try {
+    debugPrint('🚀 Isar Başlatılıyor (Force Await)...');
+
+    // Web veya Mobil fark etmeksizin Isar'ı başlatmaya zorluyoruz.
+    if (kIsWeb) {
+      // 5 saniye yerine sadece 200ms bekle, sonra pes et ve devam et
+      await openDictionaryStore().timeout(
+        const Duration(milliseconds: 200),
+        onTimeout: () => throw TimeoutException('Web WASM eksik'),
+      );
+    } else {
+      await openDictionaryStore();
+    }
+
+    debugPrint('✅ Isar Başarıyla Başlatıldı!');
+  } catch (e) {
+    debugPrint('❌ Isar Başlatma Hatası (WASM eksik olabilir): $e');
+    // debugPrint('$stack'); // Stack trace'i gizle, kullanıcıyı korkutma
+    // Hata olsa bile uygulama açılmaya devam etsin (Sessizce)
+  }
+  // -----------------------------------------------------
 
   // Show app immediately with loading state
   final bootstrapFuture = bootstrapApp();
@@ -171,7 +197,7 @@ class _BootstrapWrapperState extends ConsumerState<BootstrapWrapper> {
         ),
       );
     }
-    
+
     return ProviderScope(
       overrides: [
         dictionaryServiceProvider.overrideWithValue(

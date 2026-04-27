@@ -22,8 +22,8 @@ subprojects {
       ) {
         extensions.configure<BaseExtension> {
           // Uygulamayla aynı seviyeye çek
-          compileSdkVersion(34)
-          buildToolsVersion("34.0.0")
+          compileSdkVersion(35)
+          buildToolsVersion("35.0.0")
 
           // namespace tanımlı değilse group değerinden üret
           if (namespace == null) {
@@ -31,6 +31,9 @@ subprojects {
           }
         }
       }
+      
+      // Kotlin projeleri için JVM target zaten app/build.gradle.kts'de ayarlanıyor
+      // Burada tekrar ayarlamaya gerek yok
     }
 }
 

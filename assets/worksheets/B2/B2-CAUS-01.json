@@ -1,0 +1,267 @@
+{
+    "schema_version": "1.0",
+    "level": "B2",
+    "worksheet_id": "B2-CAUS-01",
+    "title": "Causatives: Have & Get",
+    "topic_tags": [
+        "causatives",
+        "active_causative",
+        "passive_causative",
+        "advanced_grammar"
+    ],
+    "subskills": [
+        "distinguishing_have_vs_get",
+        "forming_passive_causatives",
+        "correct_verb_forms"
+    ],
+    "difficulty": 4,
+    "engine_sequence": [
+        {
+            "engine": "mcq",
+            "count": 4,
+            "rules": {
+                "shuffle_options": true,
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "tap",
+            "count": 3,
+            "rules": {
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "fill",
+            "count": 3,
+            "rules": {
+                "case_sensitive": false,
+                "allow_contractions": true
+            }
+        },
+        {
+            "engine": "order",
+            "count": 2,
+            "rules": {}
+        }
+    ],
+    "items": [
+        {
+            "id": "caus_mcq1",
+            "engine": "mcq",
+            "prompt": "I’ll have the technician ____ my computer tomorrow.",
+            "translation_tr": "Yarın teknisyene bilgisayarımı tamir ettireceğim.",
+            "options": [
+                "fix",
+                "to fix",
+                "fixed"
+            ],
+            "answer": "fix",
+            "hint": "Have + person + [verb form?]",
+            "explain": "In active causative with 'have', we use the base form of the verb (V1).",
+            "tags": [
+                "active_have"
+            ]
+        },
+        {
+            "id": "caus_mcq2",
+            "engine": "mcq",
+            "prompt": "I finally managed to get the gardener ____ the hedges.",
+            "translation_tr": "Sonunda bahçıvana çitleri budattırmayı başardım.",
+            "options": [
+                "to trim",
+                "trim",
+                "trimmed"
+            ],
+            "answer": "to trim",
+            "hint": "Get + person + [verb form?]",
+            "explain": "In active causative with 'get', we must use the to-infinitive.",
+            "tags": [
+                "active_get"
+            ]
+        },
+        {
+            "id": "caus_mcq3",
+            "engine": "mcq",
+            "prompt": "We need to have our roof ____ before winter starts.",
+            "translation_tr": "Kış başlamadan önce çatımızı tamir ettirmemiz gerekiyor.",
+            "options": [
+                "repaired",
+                "repair",
+                "to repair"
+            ],
+            "answer": "repaired",
+            "hint": "Have + object + [verb form?]",
+            "explain": "In passive causatives (have something done), we always use the Past Participle (V3).",
+            "tags": [
+                "passive_causative"
+            ]
+        },
+        {
+            "id": "caus_mcq4",
+            "engine": "mcq",
+            "prompt": "She got her hair ____ at the new salon yesterday.",
+            "translation_tr": "Dün yeni kuaförde saçlarını kestirdi.",
+            "options": [
+                "cut",
+                "to cut",
+                "cutting"
+            ],
+            "answer": "cut",
+            "hint": "Check the Past Participle of 'cut'.",
+            "explain": "Even with 'get', passive causatives (get something done) require the V3 form.",
+            "tags": [
+                "passive_causative"
+            ]
+        },
+        {
+            "id": "caus_tap1",
+            "engine": "tap",
+            "prompt": "Why don't you have your assistant ____ the meeting?",
+            "translation_tr": "Neden asistanına toplantıyı organize ettirmiyorsun?",
+            "bank": [
+                "organize",
+                "to organize",
+                "organized",
+                "organizing"
+            ],
+            "answer": "organize",
+            "hint": "Active 'have' structure.",
+            "explain": "Subject + have + person + base verb.",
+            "tags": [
+                "active_have"
+            ]
+        },
+        {
+            "id": "caus_tap2",
+            "engine": "tap",
+            "prompt": "He got his brother ____ him move the furniture.",
+            "translation_tr": "Kardeşine mobilyaları taşımada yardım ettirmeyi başardı.",
+            "bank": [
+                "to help",
+                "help",
+                "helped",
+                "helping"
+            ],
+            "answer": "to help",
+            "hint": "Active 'get' structure.",
+            "explain": "Subject + get + person + to-infinitive.",
+            "tags": [
+                "active_get"
+            ]
+        },
+        {
+            "id": "caus_tap3",
+            "engine": "tap",
+            "prompt": "I am going to get my car ____ this afternoon.",
+            "translation_tr": "Bu öğleden sonra arabamı yıkatacağım.",
+            "bank": [
+                "washed",
+                "wash",
+                "to wash",
+                "washing"
+            ],
+            "answer": "washed",
+            "hint": "The car cannot wash itself.",
+            "explain": "This is a passive causative. Something is done by someone else.",
+            "tags": [
+                "passive_causative"
+            ]
+        },
+        {
+            "id": "caus_fill1",
+            "engine": "fill",
+            "prompt": "The manager had the employees ____ (sign) the new contract.",
+            "translation_tr": "Müdür çalışanlara yeni sözleşmeyi imzalattı.",
+            "answer": [
+                "sign"
+            ],
+            "explain": "Active 'have' takes the base form.",
+            "tags": [
+                "active_have"
+            ]
+        },
+        {
+            "id": "caus_fill2",
+            "engine": "fill",
+            "prompt": "It's difficult to get him ____ (listen) to advice.",
+            "translation_tr": "Ona nasihatleri dinletmek zor.",
+            "answer": [
+                "to listen"
+            ],
+            "explain": "Active 'get' takes the to-infinitive.",
+            "tags": [
+                "active_get"
+            ]
+        },
+        {
+            "id": "caus_fill3",
+            "engine": "fill",
+            "prompt": "You should have your eyes ____ (test) regularly.",
+            "translation_tr": "Gözlerini düzenli olarak kontrol ettirmelisin.",
+            "answer": [
+                "tested"
+            ],
+            "explain": "Passive causative: have + object + V3.",
+            "tags": [
+                "passive_causative"
+            ]
+        },
+        {
+            "id": "caus_order1",
+            "engine": "order",
+            "bank": [
+                "had",
+                "my",
+                "yesterday.",
+                "I",
+                "house",
+                "painted"
+            ],
+            "answer": [
+                "I",
+                "had",
+                "my",
+                "house",
+                "painted",
+                "yesterday."
+            ],
+            "translation_tr": "Dün evimi boyattım.",
+            "explain": "Passive causative order: Subject + have + object + V3.",
+            "tags": [
+                "order",
+                "passive"
+            ]
+        },
+        {
+            "id": "caus_order2",
+            "engine": "order",
+            "bank": [
+                "to",
+                "the",
+                "clean",
+                "get",
+                "Did",
+                "you",
+                "room?",
+                "him"
+            ],
+            "answer": [
+                "Did",
+                "you",
+                "get",
+                "him",
+                "to",
+                "clean",
+                "the",
+                "room?"
+            ],
+            "translation_tr": "Ona odayı temizlettin mi?",
+            "explain": "Active get question: Did + subject + get + person + to-V1.",
+            "tags": [
+                "order",
+                "active"
+            ]
+        }
+    ]
+}

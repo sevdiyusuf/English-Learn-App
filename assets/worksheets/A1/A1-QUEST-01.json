@@ -1,0 +1,295 @@
+{
+    "schema_version": "1.0",
+    "level": "A1",
+    "worksheet_id": "A1-QUEST-01",
+    "title": "Questions (5W1H + do/does order)",
+    "topic_tags": [
+        "questions",
+        "5w1h",
+        "do_does",
+        "word_order"
+    ],
+    "subskills": [
+        "choose_wh_word",
+        "build_question_order",
+        "do_does_usage"
+    ],
+    "difficulty": 1,
+    "engine_sequence": [
+        {
+            "engine": "tap",
+            "count": 6,
+            "rules": {
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "order",
+            "count": 6,
+            "rules": {
+                "allow_hint": true
+            }
+        }
+    ],
+    "items": [
+        {
+            "id": "tap1",
+            "engine": "tap",
+            "prompt": "____ do you live?",
+            "translation_tr": "Nerede yaşıyorsun?",
+            "bank": [
+                "Where",
+                "When",
+                "Who",
+                "What",
+                "How",
+                "Why"
+            ],
+            "answer": "Where",
+            "hint": "Place = Where.",
+            "tags": [
+                "wh:where"
+            ]
+        },
+        {
+            "id": "tap2",
+            "engine": "tap",
+            "prompt": "____ is your birthday?",
+            "translation_tr": "Doğum günün ne zaman?",
+            "bank": [
+                "Where",
+                "When",
+                "Who",
+                "What",
+                "How",
+                "Why"
+            ],
+            "answer": "When",
+            "hint": "Time/date = When.",
+            "tags": [
+                "wh:when"
+            ]
+        },
+        {
+            "id": "tap3",
+            "engine": "tap",
+            "prompt": "____ is that man?",
+            "translation_tr": "O adam kim?",
+            "bank": [
+                "Where",
+                "When",
+                "Who",
+                "What",
+                "How",
+                "Why"
+            ],
+            "answer": "Who",
+            "hint": "Person = Who.",
+            "tags": [
+                "wh:who"
+            ]
+        },
+        {
+            "id": "tap4",
+            "engine": "tap",
+            "prompt": "____ do you go to school? (Because...)",
+            "translation_tr": "Neden okula gidiyorsun?",
+            "bank": [
+                "Where",
+                "When",
+                "Who",
+                "What",
+                "How",
+                "Why"
+            ],
+            "answer": "Why",
+            "hint": "Because... = Why.",
+            "tags": [
+                "wh:why"
+            ]
+        },
+        {
+            "id": "tap5",
+            "engine": "tap",
+            "prompt": "____ do you spell your name?",
+            "translation_tr": "İsmini nasıl hecelersin?",
+            "bank": [
+                "Where",
+                "When",
+                "Who",
+                "What",
+                "How",
+                "Why"
+            ],
+            "answer": "How",
+            "hint": "Method/way = How.",
+            "tags": [
+                "wh:how"
+            ]
+        },
+        {
+            "id": "tap6",
+            "engine": "tap",
+            "prompt": "____ is your phone number?",
+            "translation_tr": "Telefon numaran kaç?",
+            "bank": [
+                "Where",
+                "When",
+                "Who",
+                "What",
+                "How",
+                "Why"
+            ],
+            "answer": "What",
+            "hint": "Information = What.",
+            "tags": [
+                "wh:what"
+            ]
+        },
+        {
+            "id": "ord1",
+            "engine": "order",
+            "prompt": "Make a Present Simple question:",
+            "translation_tr": "Çaydan hoşlanıyor musun?",
+            "tokens": [
+                "do",
+                "you",
+                "like",
+                "tea",
+                "?"
+            ],
+            "answer_tokens": [
+                "do",
+                "you",
+                "like",
+                "tea",
+                "?"
+            ],
+            "hint": "Do + subject + verb...",
+            "tags": [
+                "do_question"
+            ]
+        },
+        {
+            "id": "ord2",
+            "engine": "order",
+            "prompt": "Make a Present Simple question:",
+            "translation_tr": "O nerede yaşıyor?",
+            "tokens": [
+                "she",
+                "does",
+                "where",
+                "live",
+                "?"
+            ],
+            "answer_tokens": [
+                "where",
+                "does",
+                "she",
+                "live",
+                "?"
+            ],
+            "hint": "Wh + does + subject + base verb",
+            "tags": [
+                "does_question",
+                "wh_order"
+            ]
+        },
+        {
+            "id": "ord3",
+            "engine": "order",
+            "prompt": "Make a question:",
+            "translation_tr": "Ne istiyorsun?",
+            "tokens": [
+                "you",
+                "what",
+                "do",
+                "want",
+                "?"
+            ],
+            "answer_tokens": [
+                "what",
+                "do",
+                "you",
+                "want",
+                "?"
+            ],
+            "hint": "Wh-word comes first.",
+            "tags": [
+                "wh_order"
+            ]
+        },
+        {
+            "id": "ord4",
+            "engine": "order",
+            "prompt": "Make a question:",
+            "translation_tr": "Saat kaç?",
+            "tokens": [
+                "time",
+                "is",
+                "it",
+                "what",
+                "?"
+            ],
+            "answer_tokens": [
+                "what",
+                "time",
+                "is",
+                "it",
+                "?"
+            ],
+            "hint": "Wh + noun + be...",
+            "tags": [
+                "be_question"
+            ]
+        },
+        {
+            "id": "ord5",
+            "engine": "order",
+            "prompt": "Make a question:",
+            "translation_tr": "Onlar ne zaman gelir?",
+            "tokens": [
+                "do",
+                "when",
+                "they",
+                "arrive",
+                "?"
+            ],
+            "answer_tokens": [
+                "when",
+                "do",
+                "they",
+                "arrive",
+                "?"
+            ],
+            "hint": "When + do + subject + verb",
+            "tags": [
+                "wh_order"
+            ]
+        },
+        {
+            "id": "ord6",
+            "engine": "order",
+            "prompt": "Make a question:",
+            "translation_tr": "Adın ne?",
+            "tokens": [
+                "your",
+                "name",
+                "is",
+                "what",
+                "?"
+            ],
+            "answer_tokens": [
+                "what",
+                "is",
+                "your",
+                "name",
+                "?"
+            ],
+            "hint": "What + be + subject",
+            "tags": [
+                "be_question"
+            ]
+        }
+    ]
+}

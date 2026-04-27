@@ -1,0 +1,186 @@
+{
+    "schema_version": "1.0",
+    "level": "B2",
+    "lesson_id": "B2-COND-01-lesson",
+    "title": "Conditionals: Second, Third & Mixed",
+    "topic_tags": [
+        "conditionals",
+        "second",
+        "third",
+        "mixed"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Şu anki hayali durumları (Second Conditional) ifade etmeyi pekiştireceğiz.",
+                    "Geçmişte kalan pişmanlıkları ve 'olsaydı ne olurdu' senaryolarını (Third Conditional) öğreneceğiz.",
+                    "Geçmişteki bir olayın günümüzdeki sonucunu (Mixed Conditionals) anlatmayı kavrayacağız."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Second Conditional: Şimdiki Hayaller",
+                "bullets": [
+                    "**Kullanım**: Şu an için gerçek olmayan veya gerçekleşme ihtimali düşük durumlar.",
+                    "**Önemli**: 'I' öznesiyle 'was' yerine genellikle 'were' tercih edilir (If I were you...).",
+                    "**Yapı**: if + past, would + V."
+                ],
+                "examples": [
+                    "If I were you, I would apologize. (Senin yerinde olsam özür dilerdim.)",
+                    "If we were rich, we would travel the world. (Zengin olsaydık dünyayı gezerdik.)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "Third Conditional: Geçmiş Pişmanlıklar",
+                "bullets": [
+                    "**Kullanım**: Geçmişte gerçekleşmiş bir olayın tam tersini hayal etmek (pişmanlıklar/eleştiriler).",
+                    "**Yapı**: if + past perfect, would have + V3.",
+                    "**Anlam**: Olay artık değişemez, tamamen geçmişte kalmıştır."
+                ],
+                "examples": [
+                    "If I had known, I would have told you. (Bilseydim sana söylerdim.)",
+                    "If they had left earlier, they would have arrived on time. (Daha erken ayrılsalardı vaktinde varırlardı.)"
+                ]
+            },
+            {
+                "id": "c4",
+                "type": "rule",
+                "title": "Mixed Conditionals: Geçmişten Bugüne",
+                "bullets": [
+                    "**Kullanım**: Geçmişteki bir eylemin (veya eylemsizliğin) şu anki durumumuzu nasıl etkilediğini anlatır.",
+                    "**Yaygın Yapı**: if + past perfect (geçmiş neden), would + V (şimdiki sonuç)."
+                ],
+                "examples": [
+                    "If I had studied medicine, I would be a doctor now. (Tıp okusaydım şu an doktor olurdum.)",
+                    "If I hadn't missed the bus, I would be here now. (Otobüsü kaçırmasaydım şu an burada olurdum.)"
+                ]
+            },
+            {
+                "id": "formula",
+                "type": "formula",
+                "title": "Yapı Karşılaştırması",
+                "bullets": [
+                    "Zamanlar arası geçişleri doğru formüllerle yapın:"
+                ],
+                "formula": [
+                    "Second: If + Past Simple → Would + V1",
+                    "Third: If + Past Perfect → Would Have + V3",
+                    "Mixed: If + Past Perfect → Would + V1"
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**If Kısmında Would Kullanmak**: 'If I would have known' yanlıştır. Doğrusu 'If I **had known**' olmalıdır.",
+                    "**Third vs. Mixed**: Eğer sonuç şimdiyse 'would + V1', sonuç da geçmişte kalmışsa 'would have + V3' kullanılır.",
+                    "**Be Fiili**: 'If she is more confident' (Type 1), 'If she **were** more confident' (Type 2)."
+                ],
+                "examples": [
+                    "Hatalı: If I had studied harder, I would have been more confident now. ✗",
+                    "Doğru: If I had studied harder, I would **be** more confident now. ✓ (Şimdiki sonuç)"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "Choose the Mixed Conditional: 'If he had saved money, he ____ rich now.'",
+                "options": [
+                    "would be",
+                    "would have been",
+                    "will be"
+                ],
+                "answer": "would be",
+                "explain": "Geçmişteki bir nedenin (para biriktirmek) şu anki sonucunu (zengin olmak) anlattığı için Mixed Conditional kullanılır."
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Eski Bir Arkadaşla Karşılaşma",
+        "intro_bullets": [
+            "Mark, yıllar sonra eski bir dostuyla karşılaşıyor ve geçmişe dair kararlarını tartışıyor.",
+            "Cümlelerin geçmişi mi yoksa şu anı mı etkilediğine dikkat et."
+        ],
+        "items": [
+            {
+                "engine": "mcq",
+                "prompt": "Mark: 'I sometimes think about my university years. If I ____ (study) harder, I would be a manager now.'",
+                "options": [
+                    "had studied",
+                    "studied",
+                    "have studied"
+                ],
+                "answer": "had studied",
+                "explain": "Geçmişteki bir eylemin şu anki etkisinden bahsedildiği için 'if' kısmında Past Perfect gerekir."
+            },
+            {
+                "engine": "fill",
+                "prompt": "Friend: 'True, but if you ____ (be) me, would you have chosen a different path?'",
+                "answer": [
+                    "were"
+                ],
+                "explain": "Second Conditional yapısında 'be' fiili özneden bağımsız olarak genellikle 'were' olur."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "Mark: 'Maybe. If I had known about this job earlier, I ____ (apply) for it last year.'",
+                "options": [
+                    "would have applied",
+                    "would apply",
+                    "will apply"
+                ],
+                "answer": "would have applied",
+                "explain": "Tamamen geçmişte kalmış bir ihtimalden (geçen yıl başvurmak) bahsettiği için Third Conditional kullanılır."
+            },
+            {
+                "engine": "order",
+                "prompt": "Cümleyi kur: 'Otobüsü kaçırmasaydım şu an burada olurdum.'",
+                "tokens": [
+                    "If",
+                    "I",
+                    "hadn't",
+                    "missed",
+                    "the",
+                    "bus,",
+                    "I",
+                    "would",
+                    "be",
+                    "here",
+                    "now."
+                ],
+                "answer_tokens": [
+                    "If",
+                    "I",
+                    "hadn't",
+                    "missed",
+                    "the",
+                    "bus,",
+                    "I",
+                    "would",
+                    "be",
+                    "here",
+                    "now."
+                ],
+                "explain": "Past cause + present result (Mixed Conditional) dizilimi."
+            }
+        ],
+        "recap_bullets": [
+            "Second Conditional: Hayali bugün/gelecek (if + past, would + V).",
+            "Third Conditional: Hayali geçmiş (if + past perfect, would have + V3).",
+            "Mixed Conditional: Geçmiş neden, şimdiki sonuç (if + past perfect, would + V)."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "B2-COND-01"
+    }
+}

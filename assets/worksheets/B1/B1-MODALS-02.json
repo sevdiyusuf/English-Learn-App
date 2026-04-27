@@ -1,0 +1,341 @@
+{
+  "schema_version": "1.0",
+  "level": "B1",
+  "worksheet_id": "B1-MODALS-02",
+  "title": "Modals: should / must / have to / don't have to (new set)",
+  "topic_tags": [
+    "modals",
+    "advice",
+    "obligation",
+    "no_obligation",
+    "prohibition"
+  ],
+  "subskills": [
+    "choose_modal_meaning",
+    "advice_vs_rule",
+    "negative_meanings",
+    "question_forms"
+  ],
+  "difficulty": 3,
+  "engine_sequence": [
+    {
+      "engine": "mcq",
+      "count": 12,
+      "rules": {
+        "shuffle_options": true,
+        "allow_hint": true
+      }
+    },
+    {
+      "engine": "fill",
+      "count": 6,
+      "rules": {
+        "case_sensitive": false,
+        "allow_contractions": true
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "mcq1",
+      "engine": "mcq",
+      "prompt": "You ____ take an umbrella. It’s going to rain. (advice)",
+      "translation_tr": "Şemsiye almalısın. Yağmur yağacak.",
+      "options": [
+        "should",
+        "must",
+        "have to",
+        "don't have to"
+      ],
+      "answer": "should",
+      "hint": "Advice → should.",
+      "tags": [
+        "advice"
+      ]
+    },
+    {
+      "id": "mcq2",
+      "engine": "mcq",
+      "prompt": "Visitors ____ leave before 9 p.m. (museum rule)",
+      "translation_tr": "Ziyaretçilerin saat 9’dan önce ayrılması gerekiyor. (müze kuralı)",
+      "options": [
+        "should",
+        "must",
+        "have to",
+        "don't have to"
+      ],
+      "answer": "have to",
+      "hint": "External rule → have to.",
+      "tags": [
+        "obligation_external"
+      ]
+    },
+    {
+      "id": "mcq3",
+      "engine": "mcq",
+      "prompt": "I ____ finish this report tonight. I really need to. (strong necessity)",
+      "translation_tr": "Bu raporu bu akşam bitirmeliyim. Gerçekten gerekli.",
+      "options": [
+        "should",
+        "must",
+        "have to",
+        "don't have to"
+      ],
+      "answer": "must",
+      "hint": "Strong necessity (speaker feels it) → must.",
+      "tags": [
+        "obligation_internal"
+      ]
+    },
+    {
+      "id": "mcq4",
+      "engine": "mcq",
+      "prompt": "You ____ buy a ticket. Entry is free. (no obligation)",
+      "translation_tr": "Bilet almak zorunda değilsin. Giriş ücretsiz.",
+      "options": [
+        "should",
+        "must",
+        "have to",
+        "don't have to"
+      ],
+      "answer": "don't have to",
+      "tags": [
+        "no_obligation"
+      ]
+    },
+    {
+      "id": "mcq5",
+      "engine": "mcq",
+      "prompt": "You ____ use your phone during the exam. (prohibition)",
+      "translation_tr": "Sınav sırasında telefonunu kullanmamalısın / yasak.",
+      "options": [
+        "mustn't",
+        "don't have to",
+        "shouldn't"
+      ],
+      "answer": "mustn't",
+      "hint": "Mustn't = not allowed.",
+      "tags": [
+        "prohibition"
+      ]
+    },
+    {
+      "id": "mcq6",
+      "engine": "mcq",
+      "prompt": "You ____ eat so fast. (advice negative)",
+      "translation_tr": "Bu kadar hızlı yememelisin.",
+      "options": [
+        "shouldn't",
+        "mustn't",
+        "don't have to"
+      ],
+      "answer": "shouldn't",
+      "hint": "Advice not to do something → shouldn't.",
+      "tags": [
+        "advice_negative"
+      ]
+    },
+    {
+      "id": "mcq7",
+      "engine": "mcq",
+      "prompt": "Do we ____ wear uniforms at this school? (rule)",
+      "translation_tr": "Bu okulda üniforma giymek zorunda mıyız?",
+      "options": [
+        "must",
+        "have to",
+        "should"
+      ],
+      "answer": "have to",
+      "hint": "Question about external rule → have to.",
+      "tags": [
+        "question_rule"
+      ]
+    },
+    {
+      "id": "mcq8",
+      "engine": "mcq",
+      "prompt": "I ____ work on Saturdays. It’s part of my job. (routine obligation)",
+      "translation_tr": "Cumartesi günleri çalışmak zorundayım. İşimin bir parçası.",
+      "options": [
+        "have to",
+        "should",
+        "mustn't"
+      ],
+      "answer": "have to",
+      "tags": [
+        "obligation_external"
+      ]
+    },
+    {
+      "id": "mcq9",
+      "engine": "mcq",
+      "prompt": "You ____ check the spelling before you send the email. (recommendation)",
+      "translation_tr": "E-postayı göndermeden önce yazım hatalarını kontrol etmelisin.",
+      "options": [
+        "should",
+        "mustn't",
+        "don't have to"
+      ],
+      "answer": "should",
+      "tags": [
+        "advice"
+      ]
+    },
+    {
+      "id": "mcq10",
+      "engine": "mcq",
+      "prompt": "All passengers ____ wear a seat belt. (law)",
+      "translation_tr": "Tüm yolcular emniyet kemeri takmak zorunda. (yasa)",
+      "options": [
+        "have to",
+        "should",
+        "don't have to"
+      ],
+      "answer": "have to",
+      "hint": "Law = external obligation.",
+      "tags": [
+        "obligation_external"
+      ]
+    },
+    {
+      "id": "mcq11",
+      "engine": "mcq",
+      "prompt": "I ____ call him back. I promised. (strong feeling)",
+      "translation_tr": "Onu geri aramalıyım. Söz verdim.",
+      "options": [
+        "must",
+        "should",
+        "don't have to"
+      ],
+      "answer": "must",
+      "tags": [
+        "obligation_internal"
+      ]
+    },
+    {
+      "id": "mcq12",
+      "engine": "mcq",
+      "prompt": "You ____ come with us if you’re tired. (no obligation)",
+      "translation_tr": "Yorgunsan bizimle gelmek zorunda değilsin.",
+      "options": [
+        "mustn't",
+        "don't have to",
+        "should"
+      ],
+      "answer": "don't have to",
+      "tags": [
+        "no_obligation"
+      ]
+    },
+    {
+      "id": "fill1",
+      "engine": "fill",
+      "prompt": "You ____ go to bed earlier. (advice)",
+      "translation_tr": "Daha erken yatmalısın.",
+      "answer": [
+        "should"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "advice"
+      ]
+    },
+    {
+      "id": "fill2",
+      "engine": "fill",
+      "prompt": "You ____ enter this area. It’s forbidden. (prohibition)",
+      "translation_tr": "Bu alana girmemelisin. Yasak.",
+      "answer": [
+        "mustn't",
+        "must not"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces",
+        "accept_contractions"
+      ],
+      "tags": [
+        "prohibition"
+      ]
+    },
+    {
+      "id": "fill3",
+      "engine": "fill",
+      "prompt": "I ____ be at the airport at 6 a.m. (necessity)",
+      "translation_tr": "Sabah 6’da havaalanında olmalıyım.",
+      "answer": [
+        "have to",
+        "must"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "obligation"
+      ]
+    },
+    {
+      "id": "fill4",
+      "engine": "fill",
+      "prompt": "You ____ bring your laptop. I can share mine. (no obligation)",
+      "translation_tr": "Dizüstü bilgisayarını getirmen gerekmiyor. Ben kendi bilgisayarımı paylaşabilirim.",
+      "answer": [
+        "don't have to",
+        "do not have to"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces",
+        "accept_contractions"
+      ],
+      "tags": [
+        "no_obligation"
+      ]
+    },
+    {
+      "id": "fill5",
+      "engine": "fill",
+      "prompt": "____ we have to sign here? (question)",
+      "translation_tr": "Buraya imza atmak zorunda mıyız?",
+      "answer": [
+        "do",
+        "do?"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "question"
+      ]
+    },
+    {
+      "id": "fill6",
+      "engine": "fill",
+      "prompt": "You ____ forget to lock the door. (advice negative)",
+      "translation_tr": "Kapıyı kilitlemeyi unutmamalısın.",
+      "answer": [
+        "shouldn't",
+        "should not"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces",
+        "accept_contractions"
+      ],
+      "tags": [
+        "advice_negative"
+      ]
+    }
+  ]
+}

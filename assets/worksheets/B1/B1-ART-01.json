@@ -1,0 +1,248 @@
+{
+  "schema_version": "1.0",
+  "level": "B1",
+  "worksheet_id": "B1-ART-01",
+  "title": "Articles and meaning",
+  "topic_tags": [
+    "articles",
+    "the",
+    "zero_article",
+    "meaning_difference",
+    "school_hospital_work"
+  ],
+  "subskills": [
+    "choose_article",
+    "recognize_meaning_change",
+    "correct_common_errors"
+  ],
+  "difficulty": 3,
+  "engine_sequence": [
+    {
+      "engine": "mcq",
+      "count": 10,
+      "rules": {
+        "shuffle_options": true,
+        "allow_hint": true
+      }
+    },
+    {
+      "engine": "error_spotting",
+      "count": 6,
+      "rules": {
+        "allow_hint": true
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "mcq1",
+      "engine": "mcq",
+      "prompt": "I go to ____ school every day. (as a student)",
+      "translation_tr": "Her gün okula giderim. (öğrenci olarak)",
+      "options": [
+        "—",
+        "the"
+      ],
+      "answer": "—",
+      "hint": "go to school = activity (student).",
+      "tags": [
+        "zero_article"
+      ]
+    },
+    {
+      "id": "mcq2",
+      "engine": "mcq",
+      "prompt": "I went to ____ school to meet the teacher.",
+      "translation_tr": "Öğretmenle görüşmek için okula gittim.",
+      "options": [
+        "—",
+        "the"
+      ],
+      "answer": "the",
+      "hint": "the school = the building.",
+      "tags": [
+        "the"
+      ]
+    },
+    {
+      "id": "mcq3",
+      "engine": "mcq",
+      "prompt": "She is in ____ hospital. (as a patient)",
+      "translation_tr": "O hastanede. (hasta olarak)",
+      "options": [
+        "—",
+        "the"
+      ],
+      "answer": "—",
+      "tags": [
+        "zero_article"
+      ]
+    },
+    {
+      "id": "mcq4",
+      "engine": "mcq",
+      "prompt": "I went to ____ hospital to visit my friend.",
+      "translation_tr": "Arkadaşımı ziyaret etmek için hastaneye gittim.",
+      "options": [
+        "—",
+        "the"
+      ],
+      "answer": "the",
+      "tags": [
+        "the"
+      ]
+    },
+    {
+      "id": "mcq5",
+      "engine": "mcq",
+      "prompt": "He goes to ____ work by metro.",
+      "translation_tr": "Metroyla işe gider.",
+      "options": [
+        "—",
+        "the"
+      ],
+      "answer": "—",
+      "tags": [
+        "zero_article"
+      ]
+    },
+    {
+      "id": "mcq6",
+      "engine": "mcq",
+      "prompt": "We met outside ____ work.",
+      "translation_tr": "İş yerinin dışında buluştuk.",
+      "options": [
+        "—",
+        "the"
+      ],
+      "answer": "the",
+      "tags": [
+        "the"
+      ]
+    },
+    {
+      "id": "mcq7",
+      "engine": "mcq",
+      "prompt": "They are at ____ home now.",
+      "translation_tr": "Şu anda evdeler.",
+      "options": [
+        "—",
+        "the"
+      ],
+      "answer": "—",
+      "hint": "at home (no article).",
+      "tags": [
+        "fixed_phrase"
+      ]
+    },
+    {
+      "id": "mcq8",
+      "engine": "mcq",
+      "prompt": "He is at ____ university in Ankara.",
+      "translation_tr": "Ankara’da bir üniversitede okuyor.",
+      "options": [
+        "—",
+        "the"
+      ],
+      "answer": "—",
+      "hint": "as a student (general) → zero.",
+      "tags": [
+        "zero_article"
+      ]
+    },
+    {
+      "id": "mcq9",
+      "engine": "mcq",
+      "prompt": "We visited ____ university yesterday.",
+      "translation_tr": "Dün üniversiteyi ziyaret ettik.",
+      "options": [
+        "—",
+        "the"
+      ],
+      "answer": "the",
+      "tags": [
+        "the"
+      ]
+    },
+    {
+      "id": "mcq10",
+      "engine": "mcq",
+      "prompt": "I’m going to ____ bed.",
+      "translation_tr": "Yatmaya gidiyorum.",
+      "options": [
+        "—",
+        "the"
+      ],
+      "answer": "—",
+      "hint": "go to bed (fixed phrase).",
+      "tags": [
+        "fixed_phrase"
+      ]
+    },
+    {
+      "id": "err1",
+      "engine": "error_spotting",
+      "prompt": "I go to the school every day.",
+      "translation_tr": "Her gün okula giderim.",
+      "answer": "I go to school every day.",
+      "hint": "Student activity → no article.",
+      "tags": [
+        "zero_article_fix"
+      ]
+    },
+    {
+      "id": "err2",
+      "engine": "error_spotting",
+      "prompt": "She is in the hospital. (patient)",
+      "translation_tr": "O hastanede. (hasta olarak)",
+      "answer": "She is in hospital.",
+      "hint": "If you teach British-style usage: in hospital = as a patient.",
+      "tags": [
+        "meaning_fix"
+      ]
+    },
+    {
+      "id": "err3",
+      "engine": "error_spotting",
+      "prompt": "We met at home the evening.",
+      "translation_tr": "Akşam evde buluştuk.",
+      "answer": "We met at home in the evening.",
+      "hint": "Use 'in the evening' for time.",
+      "tags": [
+        "time_phrase"
+      ]
+    },
+    {
+      "id": "err4",
+      "engine": "error_spotting",
+      "prompt": "He went to bed the midnight.",
+      "translation_tr": "Gece yarısı yatağa gitti.",
+      "answer": "He went to bed at midnight.",
+      "tags": [
+        "time_phrase"
+      ]
+    },
+    {
+      "id": "err5",
+      "engine": "error_spotting",
+      "prompt": "I went to hospital to visit my uncle.",
+      "translation_tr": "Amcamı ziyaret etmek için hastaneye gittim.",
+      "answer": "I went to the hospital to visit my uncle.",
+      "hint": "Visit = specific building → the hospital.",
+      "tags": [
+        "the_fix"
+      ]
+    },
+    {
+      "id": "err6",
+      "engine": "error_spotting",
+      "prompt": "They went to the university to study.",
+      "translation_tr": "Çalışmak için üniversiteye gittiler.",
+      "answer": "They went to university to study.",
+      "hint": "Study activity → zero article.",
+      "tags": [
+        "zero_article_fix"
+      ]
+    }
+  ]
+}

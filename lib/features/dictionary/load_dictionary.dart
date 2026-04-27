@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
@@ -11,95 +12,277 @@ import 'models/dict_entry.dart';
 
 const _isarInstanceName = 'dictionary';
 
+// Singleton pattern: prevent concurrent initialization
+Completer<Isar?>? _initializationCompleter;
+bool _isInitializing = false;
+
 Future<Isar?> openDictionaryStore() async {
+  // Check if instance already exists
+  final existing = Isar.getInstance(_isarInstanceName);
+  if (existing != null) {
+    debugPrint('Found existing Isar instance, verifying...');
+
+    // Try to warm up collections with transaction
+    for (var attempt = 0; attempt < 5; attempt++) {
+      try {
+        if (attempt > 0) {
+          await Future.delayed(Duration(milliseconds: 500 * attempt));
+        }
+
+        // Warmup via transaction
+        await existing.writeTxn(() async {
+          await existing.wordSets.count();
+          await existing.wordPairs.count();
+          await existing.dictEntrys.count();
+        });
+
+        // Verify outside transaction
+        await Future.delayed(const Duration(milliseconds: 300));
+        await existing.wordSets.count();
+        await existing.wordPairs.count();
+        await existing.dictEntrys.count();
+
+        debugPrint('Existing instance is valid and ready');
+        return existing;
+      } catch (e) {
+        if (e.toString().contains('has not been initialized')) {
+          debugPrint(
+            'Existing instance collections not ready, attempt ${attempt + 1}/5',
+          );
+          if (attempt == 4) {
+            // Last attempt failed - instance is broken, need to close and reopen
+            debugPrint(
+              'Existing instance is broken, will try to close and reopen',
+            );
+            try {
+              await existing.close(deleteFromDisk: false);
+              await Future.delayed(const Duration(seconds: 1));
+              // Continue to create new instance
+            } catch (closeError) {
+              debugPrint('Error closing broken instance: $closeError');
+              // Continue anyway
+            }
+            break;
+          }
+          continue;
+        }
+        // Other error - instance might be working
+        debugPrint('Existing instance verification error: $e');
+        return existing;
+      }
+    }
+  }
+
+  // WEB İÇİN ÖZEL KORUMA
   if (kIsWeb) {
-    // Isar 3.x doesn't support web. Return null for web platform.
-    debugPrint('Web platform detected: Isar is not supported on web');
+    debugPrint("⚠️ Web platformu algılandı. WASM dosyası eksik olduğu için Isar ATLANIYOR.");
+    // Burada Isar'ı hiç açmıyoruz veya sadece bellek içi (in-memory) açmayı deniyoruz.
+    // Eğer illa açman gerekiyorsa WASM olmadan açılmaz.
+    // Bu yüzden burayı boş bırakıp uygulamanın çökmesini engelliyoruz.
     return null;
   }
 
+  // If initialization is already in progress, wait for it
+  if (_isInitializing && _initializationCompleter != null) {
+    debugPrint('Isar initialization already in progress, waiting...');
+    try {
+      return await _initializationCompleter!.future;
+    } catch (e) {
+      debugPrint('Waited initialization failed: $e');
+      _isInitializing = false;
+      _initializationCompleter = null;
+    }
+  }
+
+  // Start new initialization
+  _isInitializing = true;
+  _initializationCompleter = Completer<Isar?>();
+
   try {
-    final existing = Isar.getInstance(_isarInstanceName);
-    if (existing != null) {
-      debugPrint('Using existing Isar instance');
-      return existing;
+    // Double-check: maybe another thread opened it
+    final doubleCheck = Isar.getInstance(_isarInstanceName);
+    if (doubleCheck != null) {
+      debugPrint('Instance was opened by another thread');
+      _isInitializing = false;
+      _initializationCompleter!.complete(doubleCheck);
+      _initializationCompleter = null;
+      return doubleCheck;
     }
 
-    final dir = await getApplicationSupportDirectory();
-    final dirPath = dir.path;
-    debugPrint('Non-web platform, using directory: $dirPath');
+    String dirPath = '';
+    if (!kIsWeb) {
+      debugPrint('Getting application support directory...');
+      final dir = await getApplicationSupportDirectory();
+      dirPath = dir.path;
+      debugPrint('Directory: $dirPath');
+
+      // Ensure directory exists
+      try {
+        if (!await dir.exists()) {
+          await dir.create(recursive: true);
+        }
+      } catch (e) {
+        debugPrint('Warning: Could not create directory: $e');
+      }
+    }
 
     debugPrint('Opening Isar database...');
+    if (!kIsWeb) {
+      await Future.delayed(const Duration(milliseconds: 1500));
+    }
 
-    final isar = await Isar.open(
-      [DictEntrySchema, WordSetSchema, WordPairSchema],
-      name: _isarInstanceName,
-      directory: dirPath,
-      inspector: false,
-    );
+    Isar isar;
+    try {
+      isar = await Isar.open(
+        [DictEntrySchema, WordSetSchema, WordPairSchema],
+        name: _isarInstanceName,
+        directory: dirPath,
+        inspector: !kIsWeb, // Inspector not supported on web in some versions
+      );
+      debugPrint('Isar opened successfully');
+    } catch (e, stackTrace) {
+      debugPrint('ERROR: Failed to open Isar: $e');
+      debugPrint('Stack trace: $stackTrace');
 
-    debugPrint('Isar database opened successfully');
+      // Check if error is "already opened"
+      if (e.toString().contains('already been opened') ||
+          e.toString().contains('already opened')) {
+        final existingInstance = Isar.getInstance(_isarInstanceName);
+        if (existingInstance != null) {
+          debugPrint('Retrieved existing instance after error');
+          _isInitializing = false;
+          _initializationCompleter!.complete(existingInstance);
+          _initializationCompleter = null;
+          return existingInstance;
+        }
+      }
 
-    // APK'da collections'ların tamamen başlatılması için daha uzun bekleme ve doğrulama
-    // Retry mekanizması ile collections'ların hazır olduğundan emin ol
-    for (var attempt = 0; attempt < 10; attempt++) {
+      await Future.delayed(const Duration(seconds: 2));
+      final retryExisting = Isar.getInstance(_isarInstanceName);
+      if (retryExisting != null) {
+        debugPrint('Found instance after retry delay');
+        _isInitializing = false;
+        _initializationCompleter!.complete(retryExisting);
+        _initializationCompleter = null;
+        return retryExisting;
+      }
+
+      throw StateError('Failed to open Isar database: $e');
+    }
+
+    // CRITICAL: Force collections initialization via multiple methods
+    // Android APK'da native library loading çok yavaş olabilir
+    if (!kIsWeb) {
+      debugPrint('Initializing collections...');
+
+      // İlk olarak native library'lerin yüklenmesi için uzun bir bekleme
+      debugPrint('Waiting for native libraries to load (Android APK)...');
+      await Future.delayed(const Duration(seconds: 3));
+
+      // Method 1: Transaction warmup (most reliable)
+      // APK için daha fazla deneme ve daha uzun bekleme süreleri
+      bool collectionsInitialized = false;
+      for (var attempt = 0; attempt < 20; attempt++) {
+        try {
+          if (attempt > 0) {
+            // Her attempt'te daha uzun bekle (APK için)
+            await Future.delayed(
+              Duration(milliseconds: 1000 + (attempt * 300)),
+            );
+          }
+
+          debugPrint('Warmup attempt ${attempt + 1}/20: Transaction...');
+
+          // Use collection() method directly instead of extension getters
+          // This forces initialization on Android APK
+          await isar.writeTxn(() async {
+            // Use collection() method directly - more reliable than extension getters
+            final wordSetsCol = isar.collection<WordSet>();
+            final wordPairsCol = isar.collection<WordPair>();
+            final dictEntrysCol = isar.collection<DictEntry>();
+
+            // Access collections via collection() method
+            await wordSetsCol.count();
+            await wordPairsCol.count();
+            await dictEntrysCol.count();
+
+            // Also try extension getters to ensure both work
+            await isar.wordSets.count();
+            await isar.wordPairs.count();
+            await isar.dictEntrys.count();
+          });
+
+          // Verify outside transaction - APK için daha uzun bekleme
+          await Future.delayed(const Duration(milliseconds: 500));
+          await isar.wordSets.count();
+          collectionsInitialized = true;
+          debugPrint('Collections initialized successfully!');
+          break;
+        } catch (e) {
+          debugPrint('Warmup attempt ${attempt + 1} failed: $e');
+        }
+      }
+
+      if (!collectionsInitialized) {
+        debugPrint(
+          'WARNING: Collections warmup failed after 20 attempts. Returning anyway, but might crash.',
+        );
+      }
+    } else {
+      // Web warmup (lighter)
       try {
-        // Wait progressively longer for each attempt
-        await Future.delayed(Duration(milliseconds: 200 + (attempt * 100)));
-
-        // Verify collections are accessible (using extension methods from generated files)
-        // Try to access collections to ensure they're initialized
         await isar.wordSets.count();
         await isar.wordPairs.count();
         await isar.dictEntrys.count();
-
-        debugPrint('Isar collections verified on attempt ${attempt + 1}');
-        break; // Success, exit retry loop
+        debugPrint('Web collections ready');
       } catch (e) {
-        debugPrint(
-          'Warning: Isar collections not ready yet, attempt ${attempt + 1}: $e',
-        );
-        if (attempt == 9) {
-          // Last attempt failed, but continue anyway - might work later
-          debugPrint(
-            'Isar collections verification failed after 10 attempts, but continuing...',
-          );
-        }
+        debugPrint('Web warmup warning: $e');
       }
     }
 
     debugPrint('Seeding dictionary if empty...');
-
     await _seedDictionaryIfEmpty(isar);
 
     debugPrint('Dictionary seeding completed');
+
+    _isInitializing = false;
+    _initializationCompleter!.complete(isar);
+    _initializationCompleter = null;
 
     return isar;
   } catch (e, stackTrace) {
     debugPrint('Error opening Isar database: $e');
     debugPrint('Stack trace: $stackTrace');
+
+    _isInitializing = false;
+
+    if (_initializationCompleter != null &&
+        !_initializationCompleter!.isCompleted) {
+      _initializationCompleter!.completeError(e, stackTrace);
+    }
+    _initializationCompleter = null;
+
     rethrow;
   }
 }
 
 Future<void> _seedDictionaryIfEmpty(Isar isar) async {
   try {
-    debugPrint('Checking dictionary entry count...');
     final count = await isar.dictEntrys.count();
     debugPrint('Dictionary entry count: $count');
 
     if (count > 0) {
-      debugPrint('Dictionary already seeded, skipping...');
+      debugPrint('Dictionary already seeded');
       return;
     }
 
-    debugPrint('Loading dictionary.json from assets...');
-    final jsonString = await rootBundle.loadString('assets/dictionary.json');
+    debugPrint('Loading dictionary.json...');
+    final jsonString = await rootBundle.loadString('assets/word_battle/dictionary.json');
     debugPrint('Dictionary.json loaded, length: ${jsonString.length}');
 
     debugPrint('Parsing JSON...');
     final List<dynamic> jsonList = json.decode(jsonString) as List<dynamic>;
-    debugPrint('JSON parsed, entries count: ${jsonList.length}');
+    debugPrint('JSON parsed, entries: ${jsonList.length}');
 
     debugPrint('Mapping entries...');
     final entries = jsonList
@@ -118,19 +301,19 @@ Future<void> _seedDictionaryIfEmpty(Isar isar) async {
             }
             return null;
           } catch (e) {
-            debugPrint('Error mapping dictionary entry: $e, map: $map');
+            debugPrint('Error mapping entry: $e');
             return null;
           }
         })
         .whereType<DictEntry>()
         .toList(growable: false);
-    debugPrint('Entries mapped, count: ${entries.length}');
+    debugPrint('Entries mapped: ${entries.length}');
 
-    debugPrint('Writing entries to Isar database...');
+    debugPrint('Writing entries to database...');
     await isar.writeTxn(() async {
       await isar.dictEntrys.putAll(entries);
     });
-    debugPrint('Entries written to database successfully');
+    debugPrint('Entries written successfully');
   } catch (e, stackTrace) {
     debugPrint('Error seeding dictionary: $e');
     debugPrint('Stack trace: $stackTrace');

@@ -1,0 +1,405 @@
+{
+  "schema_version": "1.0",
+  "level": "B2",
+  "worksheet_id": "B2-WISH-01",
+  "title": "Wish and If only",
+  "topic_tags": [
+    "wish",
+    "if_only",
+    "regrets",
+    "present_unreal",
+    "past_regret"
+  ],
+  "subskills": [
+    "choose_wish_structure",
+    "use_were",
+    "use_had_v3"
+  ],
+  "difficulty": 4,
+  "engine_sequence": [
+    {
+      "engine": "transform",
+      "count": 8,
+      "rules": {
+        "allow_hint": true
+      }
+    },
+    {
+      "engine": "mcq",
+      "count": 8,
+      "rules": {
+        "shuffle_options": true,
+        "allow_hint": true
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "tr1",
+      "engine": "transform",
+      "prompt": "Make a wish (present): I don't have a car.",
+      "translation_tr": "Dilek cümlesi yap (şimdi): Arabam yok.",
+      "steps": [
+        {
+          "type": "select",
+          "label": "Choose starter",
+          "options": [
+            "I wish",
+            "If only"
+          ],
+          "answer": "I wish"
+        },
+        {
+          "type": "select",
+          "label": "Choose verb form",
+          "options": [
+            "I had",
+            "I have",
+            "I will have"
+          ],
+          "answer": "I had"
+        }
+      ],
+      "final_template": "{start} {form} a car.",
+      "final_answer": "I wish I had a car.",
+      "tags": [
+        "present_unreal"
+      ]
+    },
+    {
+      "id": "tr2",
+      "engine": "transform",
+      "prompt": "Make a wish (present): I am not taller.",
+      "translation_tr": "Dilek cümlesi yap (şimdi): Uzun boylu değilim.",
+      "steps": [
+        {
+          "type": "select",
+          "label": "Starter",
+          "options": [
+            "I wish",
+            "If only"
+          ],
+          "answer": "If only"
+        },
+        {
+          "type": "select",
+          "label": "Be form",
+          "options": [
+            "I were",
+            "I was"
+          ],
+          "answer": "I were"
+        }
+      ],
+      "final_template": "{start} {be} taller.",
+      "final_answer": "If only I were taller.",
+      "tags": [
+        "were"
+      ]
+    },
+    {
+      "id": "tr3",
+      "engine": "transform",
+      "prompt": "Make a wish (past regret): I didn't study.",
+      "translation_tr": "Dilek cümlesi yap (geçmiş pişmanlık): Ders çalışmadım.",
+      "steps": [
+        {
+          "type": "select",
+          "label": "Starter",
+          "options": [
+            "I wish",
+            "If only"
+          ],
+          "answer": "I wish"
+        },
+        {
+          "type": "select",
+          "label": "Past perfect",
+          "options": [
+            "I had studied",
+            "I studied"
+          ],
+          "answer": "I had studied"
+        }
+      ],
+      "final_template": "{start} {form}.",
+      "final_answer": "I wish I had studied.",
+      "tags": [
+        "past_regret"
+      ]
+    },
+    {
+      "id": "tr4",
+      "engine": "transform",
+      "prompt": "Make a wish (past regret): We missed the bus.",
+      "translation_tr": "Dilek cümlesi yap (geçmiş pişmanlık): Otobüsü kaçırdık.",
+      "steps": [
+        {
+          "type": "select",
+          "label": "Starter",
+          "options": [
+            "If only",
+            "I wish"
+          ],
+          "answer": "If only"
+        },
+        {
+          "type": "select",
+          "label": "Past perfect",
+          "options": [
+            "we had not missed",
+            "we didn't miss"
+          ],
+          "answer": "we had not missed"
+        }
+      ],
+      "final_template": "{start} {form} the bus.",
+      "final_answer": "If only we had not missed the bus.",
+      "tags": [
+        "past_regret",
+        "negative"
+      ]
+    },
+    {
+      "id": "tr5",
+      "engine": "transform",
+      "prompt": "Make a wish (present): I can't speak Spanish.",
+      "translation_tr": "Dilek cümlesi yap (şimdi): İspanyolca konuşamıyorum.",
+      "steps": [
+        {
+          "type": "select",
+          "label": "Starter",
+          "options": [
+            "I wish",
+            "If only"
+          ],
+          "answer": "I wish"
+        },
+        {
+          "type": "select",
+          "label": "Form",
+          "options": [
+            "I could speak",
+            "I can speak"
+          ],
+          "answer": "I could speak"
+        }
+      ],
+      "final_template": "{start} {form} Spanish.",
+      "final_answer": "I wish I could speak Spanish.",
+      "tags": [
+        "present_unreal",
+        "could"
+      ]
+    },
+    {
+      "id": "tr6",
+      "engine": "transform",
+      "prompt": "Make a wish (present): It's raining.",
+      "translation_tr": "Dilek cümlesi yap (şimdi): Yağmur yağıyor.",
+      "steps": [
+        {
+          "type": "select",
+          "label": "Starter",
+          "options": [
+            "I wish",
+            "If only"
+          ],
+          "answer": "If only"
+        },
+        {
+          "type": "select",
+          "label": "Past form",
+          "options": [
+            "it wasn't",
+            "it isn't"
+          ],
+          "answer": "it wasn't"
+        }
+      ],
+      "final_template": "{start} {form} raining.",
+      "final_answer": "If only it wasn't raining.",
+      "tags": [
+        "present_unreal"
+      ]
+    },
+    {
+      "id": "tr7",
+      "engine": "transform",
+      "prompt": "Make a wish (past regret): She said something rude.",
+      "translation_tr": "Dilek cümlesi yap (geçmiş pişmanlık): Kaba bir şey söyledi.",
+      "steps": [
+        {
+          "type": "select",
+          "label": "Starter",
+          "options": [
+            "I wish",
+            "If only"
+          ],
+          "answer": "I wish"
+        },
+        {
+          "type": "select",
+          "label": "Past perfect",
+          "options": [
+            "she hadn't said",
+            "she didn't say"
+          ],
+          "answer": "she hadn't said"
+        }
+      ],
+      "final_template": "{start} {form} something rude.",
+      "final_answer": "I wish she hadn't said something rude.",
+      "tags": [
+        "past_regret",
+        "negative"
+      ]
+    },
+    {
+      "id": "tr8",
+      "engine": "transform",
+      "prompt": "Make a wish (present): I live far from my friends.",
+      "translation_tr": "Dilek cümlesi yap (şimdi): Arkadaşlarımdan uzakta yaşıyorum.",
+      "steps": [
+        {
+          "type": "select",
+          "label": "Starter",
+          "options": [
+            "If only",
+            "I wish"
+          ],
+          "answer": "I wish"
+        },
+        {
+          "type": "select",
+          "label": "Past form",
+          "options": [
+            "I didn't live",
+            "I don't live"
+          ],
+          "answer": "I didn't live"
+        }
+      ],
+      "final_template": "{start} {form} far from my friends.",
+      "final_answer": "I wish I didn't live far from my friends.",
+      "tags": [
+        "present_unreal"
+      ]
+    },
+    {
+      "id": "mcq1",
+      "engine": "mcq",
+      "prompt": "I wish I ____ more time.",
+      "translation_tr": "Keşke daha fazla zamanım ____ .",
+      "options": [
+        "had",
+        "have"
+      ],
+      "answer": "had",
+      "hint": "Wish (present) → past form.",
+      "tags": [
+        "present_unreal"
+      ]
+    },
+    {
+      "id": "mcq2",
+      "engine": "mcq",
+      "prompt": "If only I ____ the truth earlier.",
+      "translation_tr": "Keşke gerçeği daha önce ____ .",
+      "options": [
+        "had known",
+        "knew"
+      ],
+      "answer": "had known",
+      "hint": "Past regret → had + V3.",
+      "tags": [
+        "past_regret"
+      ]
+    },
+    {
+      "id": "mcq3",
+      "engine": "mcq",
+      "prompt": "I wish it ____ so cold.",
+      "translation_tr": "Keşke hava o kadar soğuk ____ .",
+      "options": [
+        "wasn't",
+        "isn't"
+      ],
+      "answer": "wasn't",
+      "tags": [
+        "present_unreal"
+      ]
+    },
+    {
+      "id": "mcq4",
+      "engine": "mcq",
+      "prompt": "I wish I ____ her.",
+      "translation_tr": "Keşke onu ____ .",
+      "options": [
+        "hadn't called",
+        "don't call"
+      ],
+      "answer": "hadn't called",
+      "tags": [
+        "past_regret"
+      ]
+    },
+    {
+      "id": "mcq5",
+      "engine": "mcq",
+      "prompt": "If only he ____ more careful.",
+      "translation_tr": "Keşke daha dikkatli ____ .",
+      "options": [
+        "were",
+        "is"
+      ],
+      "answer": "were",
+      "hint": "Formal/unreal: were.",
+      "tags": [
+        "were"
+      ]
+    },
+    {
+      "id": "mcq6",
+      "engine": "mcq",
+      "prompt": "I wish we ____ go now, but we can’t.",
+      "translation_tr": "Keşke şimdi gide____ ama gidemiyoruz.",
+      "options": [
+        "could",
+        "can"
+      ],
+      "answer": "could",
+      "tags": [
+        "could"
+      ]
+    },
+    {
+      "id": "mcq7",
+      "engine": "mcq",
+      "prompt": "I wish they ____ earlier.",
+      "translation_tr": "Keşke daha erken ____ .",
+      "options": [
+        "had arrived",
+        "arrived"
+      ],
+      "answer": "had arrived",
+      "tags": [
+        "past_regret"
+      ]
+    },
+    {
+      "id": "mcq8",
+      "engine": "mcq",
+      "prompt": "If only I ____ closer to my job.",
+      "translation_tr": "Keşke işime daha yakın ____ .",
+      "options": [
+        "lived",
+        "live"
+      ],
+      "answer": "lived",
+      "tags": [
+        "present_unreal"
+      ]
+    }
+  ]
+}

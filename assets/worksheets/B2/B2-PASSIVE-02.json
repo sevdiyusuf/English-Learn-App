@@ -1,0 +1,458 @@
+{
+    "schema_version": "1.0",
+    "level": "B2",
+    "worksheet_id": "B2-PASSIVE-02",
+    "title": "Passive Advanced (perfect + modals)",
+    "topic_tags": [
+        "passive",
+        "present_perfect_passive",
+        "modals_passive"
+    ],
+    "subskills": [
+        "build_perfect_passive",
+        "build_modal_passive",
+        "choose_be_been_being"
+    ],
+    "difficulty": 4,
+    "engine_sequence": [
+        {
+            "engine": "mcq",
+            "count": 10,
+            "rules": {
+                "shuffle_options": true,
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "fill",
+            "count": 8,
+            "rules": {
+                "case_sensitive": false,
+                "allow_contractions": true
+            }
+        },
+        {
+            "engine": "transform",
+            "count": 4,
+            "rules": {
+                "allow_hint": true
+            }
+        }
+    ],
+    "items": [
+        {
+            "id": "mcq1",
+            "engine": "mcq",
+            "prompt": "The work has ____ finished. (passive)",
+            "translation_tr": "İş çoktan tamamlanmış durumda. (passive)",
+            "options": [
+                "been",
+                "be",
+                "being"
+            ],
+            "answer": "been",
+            "hint": "Present perfect passive: has/have been + V3",
+            "tags": [
+                "pp_passive"
+            ]
+        },
+        {
+            "id": "mcq2",
+            "engine": "mcq",
+            "prompt": "The documents ____ be signed today. (modal passive)",
+            "translation_tr": "Belgeler bugün imzalanmak zorunda. (modal passive)",
+            "options": [
+                "must",
+                "must been",
+                "must be"
+            ],
+            "answer": "must be",
+            "hint": "Modal passive: modal + be + V3",
+            "tags": [
+                "modal_passive"
+            ]
+        },
+        {
+            "id": "mcq3",
+            "engine": "mcq",
+            "prompt": "The email should ____ sent now.",
+            "translation_tr": "E-posta şimdi gönderilmiş olmalı.",
+            "options": [
+                "be",
+                "been",
+                "being"
+            ],
+            "answer": "be",
+            "tags": [
+                "modal_passive"
+            ]
+        },
+        {
+            "id": "mcq4",
+            "engine": "mcq",
+            "prompt": "A new bridge will ____ built next year.",
+            "translation_tr": "Gelecek yıl yeni bir köprü inşa edilecek.",
+            "options": [
+                "be",
+                "been",
+                "being"
+            ],
+            "answer": "be",
+            "tags": [
+                "future_passive"
+            ]
+        },
+        {
+            "id": "mcq5",
+            "engine": "mcq",
+            "prompt": "The car has been ____ (steal).",
+            "translation_tr": "Araba çalınmış.",
+            "options": [
+                "stolen",
+                "stealed"
+            ],
+            "answer": "stolen",
+            "tags": [
+                "v3"
+            ]
+        },
+        {
+            "id": "mcq6",
+            "engine": "mcq",
+            "prompt": "The report will be ____ tomorrow.",
+            "translation_tr": "Rapor yarın yayımlanacak.",
+            "options": [
+                "published",
+                "publish"
+            ],
+            "answer": "published",
+            "tags": [
+                "v3"
+            ]
+        },
+        {
+            "id": "mcq7",
+            "engine": "mcq",
+            "prompt": "The meeting must be ____ (cancel).",
+            "translation_tr": "Toplantı iptal edilmiş olmalı.",
+            "options": [
+                "cancelled",
+                "cancelling"
+            ],
+            "answer": "cancelled",
+            "tags": [
+                "v3"
+            ]
+        },
+        {
+            "id": "mcq8",
+            "engine": "mcq",
+            "prompt": "The tickets have been ____ (sell).",
+            "translation_tr": "Biletler satılmış.",
+            "options": [
+                "sold",
+                "selled"
+            ],
+            "answer": "sold",
+            "tags": [
+                "v3"
+            ]
+        },
+        {
+            "id": "mcq9",
+            "engine": "mcq",
+            "prompt": "The food should be ____ (prepare) earlier.",
+            "translation_tr": "Yemek daha önce hazırlanmış olmalıydı.",
+            "options": [
+                "prepared",
+                "preparing"
+            ],
+            "answer": "prepared",
+            "tags": [
+                "v3"
+            ]
+        },
+        {
+            "id": "mcq10",
+            "engine": "mcq",
+            "prompt": "The package has been ____ by courier.",
+            "translation_tr": "Paket kurye tarafından teslim edildi.",
+            "options": [
+                "delivered",
+                "deliver"
+            ],
+            "answer": "delivered",
+            "tags": [
+                "pp_passive"
+            ]
+        },
+        {
+            "id": "fill1",
+            "engine": "fill",
+            "prompt": "The work ____ ____ finished. (present perfect passive)",
+            "translation_tr": "İş ____ ____ bitirilmiş. (present perfect passive)",
+            "answer": [
+                "has been"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "pp_passive"
+            ]
+        },
+        {
+            "id": "fill2",
+            "engine": "fill",
+            "prompt": "The documents must ____ ____ today. (sign)",
+            "translation_tr": "Belgeler bugün ____ ____ . (sign)",
+            "answer": [
+                "be signed"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "modal_passive"
+            ]
+        },
+        {
+            "id": "fill3",
+            "engine": "fill",
+            "prompt": "The email should ____ ____ now. (send)",
+            "translation_tr": "E-posta şimdi ____ ____ . (send)",
+            "answer": [
+                "be sent"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "modal_passive"
+            ]
+        },
+        {
+            "id": "fill4",
+            "engine": "fill",
+            "prompt": "A new bridge will ____ ____ next year. (build)",
+            "translation_tr": "Gelecek yıl yeni bir köprü ____ ____ . (build)",
+            "answer": [
+                "be built"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "future_passive"
+            ]
+        },
+        {
+            "id": "fill5",
+            "engine": "fill",
+            "prompt": "The tickets have ____ ____ (sell).",
+            "translation_tr": "Biletler ____ ____ . (sell)",
+            "answer": [
+                "been sold"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "pp_passive"
+            ]
+        },
+        {
+            "id": "fill6",
+            "engine": "fill",
+            "prompt": "The report has ____ ____ (write).",
+            "translation_tr": "Rapor ____ ____ . (write)",
+            "answer": [
+                "been written"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "pp_passive"
+            ]
+        },
+        {
+            "id": "fill7",
+            "engine": "fill",
+            "prompt": "The rules should ____ ____ clearly. (explain)",
+            "translation_tr": "Kurallar açıkça ____ ____ . (explain)",
+            "answer": [
+                "be explained"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "modal_passive"
+            ]
+        },
+        {
+            "id": "fill8",
+            "engine": "fill",
+            "prompt": "The car has been ____ (steal).",
+            "translation_tr": "Araba ____ . (steal)",
+            "answer": [
+                "stolen"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "v3"
+            ]
+        },
+        {
+            "id": "tr1",
+            "engine": "transform",
+            "prompt": "Make a modal passive: 'People must follow the rules.'",
+            "translation_tr": "Modal pasif yap: 'People must follow the rules.'",
+            "steps": [
+                {
+                    "type": "select",
+                    "label": "Subject",
+                    "options": [
+                        "The rules"
+                    ],
+                    "answer": "The rules"
+                },
+                {
+                    "type": "select",
+                    "label": "Modal",
+                    "options": [
+                        "must"
+                    ],
+                    "answer": "must"
+                },
+                {
+                    "type": "select",
+                    "label": "Passive form",
+                    "options": [
+                        "be followed"
+                    ],
+                    "answer": "be followed"
+                }
+            ],
+            "final_template": "{subject} {modal} {passive}.",
+            "final_answer": "The rules must be followed.",
+            "tags": [
+                "modal_passive"
+            ]
+        },
+        {
+            "id": "tr2",
+            "engine": "transform",
+            "prompt": "Make a present perfect passive: 'They have completed the project.'",
+            "translation_tr": "Present perfect passive yap: 'They have completed the project.'",
+            "steps": [
+                {
+                    "type": "select",
+                    "label": "Subject",
+                    "options": [
+                        "The project"
+                    ],
+                    "answer": "The project"
+                },
+                {
+                    "type": "select",
+                    "label": "Perfect passive",
+                    "options": [
+                        "has been completed"
+                    ],
+                    "answer": "has been completed"
+                }
+            ],
+            "final_template": "{subject} {pp}.",
+            "final_answer": "The project has been completed.",
+            "tags": [
+                "pp_passive"
+            ]
+        },
+        {
+            "id": "tr3",
+            "engine": "transform",
+            "prompt": "Make a passive: 'Someone will repair the road.'",
+            "translation_tr": "Pasif yap: 'Someone will repair the road.'",
+            "steps": [
+                {
+                    "type": "select",
+                    "label": "Subject",
+                    "options": [
+                        "The road"
+                    ],
+                    "answer": "The road"
+                },
+                {
+                    "type": "select",
+                    "label": "Future passive",
+                    "options": [
+                        "will be repaired"
+                    ],
+                    "answer": "will be repaired"
+                }
+            ],
+            "final_template": "{subject} {future}.",
+            "final_answer": "The road will be repaired.",
+            "tags": [
+                "future_passive"
+            ]
+        },
+        {
+            "id": "tr4",
+            "engine": "transform",
+            "prompt": "Make a modal passive: 'They should clean the room.'",
+            "translation_tr": "Modal pasif yap: 'They should clean the room.'",
+            "steps": [
+                {
+                    "type": "select",
+                    "label": "Subject",
+                    "options": [
+                        "The room"
+                    ],
+                    "answer": "The room"
+                },
+                {
+                    "type": "select",
+                    "label": "Modal",
+                    "options": [
+                        "should"
+                    ],
+                    "answer": "should"
+                },
+                {
+                    "type": "select",
+                    "label": "Passive form",
+                    "options": [
+                        "be cleaned"
+                    ],
+                    "answer": "be cleaned"
+                }
+            ],
+            "final_template": "{subject} {modal} {passive}.",
+            "final_answer": "The room should be cleaned.",
+            "tags": [
+                "modal_passive"
+            ]
+        }
+    ]
+}

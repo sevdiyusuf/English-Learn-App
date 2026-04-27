@@ -128,7 +128,9 @@ class _CountdownWidgetState extends State<CountdownWidget> {
                   const SizedBox(height: 4),
                   LinearProgressIndicator(
                     value: isWaiting ? null : progress,
-                    minHeight: 4,
+                    minHeight: 6,
+                    borderRadius: BorderRadius.circular(3),
+                    color: secondsRemaining <= 3 ? Colors.red : null,
                   ),
                 ],
               ),

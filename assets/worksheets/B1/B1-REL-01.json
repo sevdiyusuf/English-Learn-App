@@ -1,0 +1,355 @@
+{
+    "schema_version": "1.0",
+    "level": "B1",
+    "worksheet_id": "B1-REL-02",
+    "title": "Relative Clauses (defining vs non-defining)",
+    "topic_tags": [
+        "relative_clauses",
+        "defining",
+        "non_defining",
+        "commas"
+    ],
+    "subskills": [
+        "use_commas",
+        "choose_who_which_where",
+        "understand_extra_info"
+    ],
+    "difficulty": 3,
+    "engine_sequence": [
+        {
+            "engine": "mcq",
+            "count": 8,
+            "rules": {
+                "shuffle_options": true,
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "order",
+            "count": 4,
+            "rules": {
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "fill",
+            "count": 4,
+            "rules": {
+                "case_sensitive": false
+            }
+        }
+    ],
+    "items": [
+        {
+            "id": "mcq1",
+            "engine": "mcq",
+            "prompt": "My brother, ____ lives in Izmir, is a doctor. (extra info)",
+            "translation_tr": "Kardeşim, İzmir’de yaşayan, bir doktordur. (ek bilgi)",
+            "options": [
+                "who",
+                "which",
+                "where"
+            ],
+            "answer": "who",
+            "hint": "Non-defining uses commas + who/which.",
+            "tags": [
+                "non_defining"
+            ]
+        },
+        {
+            "id": "mcq2",
+            "engine": "mcq",
+            "prompt": "The man ____ lives next door is friendly. (important info)",
+            "translation_tr": "Yan dairede yaşayan adam arkadaş canlısıdır. (önemli bilgi)",
+            "options": [
+                "who",
+                "which",
+                "where"
+            ],
+            "answer": "who",
+            "tags": [
+                "defining"
+            ]
+        },
+        {
+            "id": "mcq3",
+            "engine": "mcq",
+            "prompt": "This phone, ____ I bought yesterday, is expensive. (extra info)",
+            "translation_tr": "Bu telefon, dün aldığım, pahalı. (ek bilgi)",
+            "options": [
+                "which",
+                "who",
+                "where"
+            ],
+            "answer": "which",
+            "tags": [
+                "non_defining"
+            ]
+        },
+        {
+            "id": "mcq4",
+            "engine": "mcq",
+            "prompt": "The book ____ you recommended is great.",
+            "translation_tr": "Önerdiğin kitap harika.",
+            "options": [
+                "which",
+                "who",
+                "where"
+            ],
+            "answer": "which",
+            "tags": [
+                "defining"
+            ]
+        },
+        {
+            "id": "mcq5",
+            "engine": "mcq",
+            "prompt": "Paris, ____ is in France, is beautiful. (extra info)",
+            "translation_tr": "Fransa’da bulunan Paris çok güzeldir. (ek bilgi)",
+            "options": [
+                "which",
+                "where",
+                "who"
+            ],
+            "answer": "which",
+            "tags": [
+                "non_defining"
+            ]
+        },
+        {
+            "id": "mcq6",
+            "engine": "mcq",
+            "prompt": "That’s the cafe ____ we met.",
+            "translation_tr": "Burası tanıştığımız kafe.",
+            "options": [
+                "where",
+                "which",
+                "who"
+            ],
+            "answer": "where",
+            "tags": [
+                "defining"
+            ]
+        },
+        {
+            "id": "mcq7",
+            "engine": "mcq",
+            "prompt": "My father, ____ is 50, likes chess. (extra info)",
+            "translation_tr": "Babam, 50 yaşında olan, satranç sever. (ek bilgi)",
+            "options": [
+                "who",
+                "which",
+                "where"
+            ],
+            "answer": "who",
+            "tags": [
+                "non_defining"
+            ]
+        },
+        {
+            "id": "mcq8",
+            "engine": "mcq",
+            "prompt": "The city ____ I was born is Ankara. (place)",
+            "translation_tr": "Doğduğum şehir Ankara.",
+            "options": [
+                "where",
+                "which",
+                "who"
+            ],
+            "answer": "where",
+            "tags": [
+                "defining"
+            ]
+        },
+        {
+            "id": "ord1",
+            "engine": "order",
+            "prompt": "Make the sentence (non-defining):",
+            "translation_tr": "Cümleyi (non-defining) olarak kur.",
+            "tokens": [
+                "My",
+                "car",
+                ",",
+                "which",
+                "is",
+                "old",
+                ",",
+                "still",
+                "works",
+                "."
+            ],
+            "answer_tokens": [
+                "My",
+                "car",
+                ",",
+                "which",
+                "is",
+                "old",
+                ",",
+                "still",
+                "works",
+                "."
+            ],
+            "tags": [
+                "commas"
+            ]
+        },
+        {
+            "id": "ord2",
+            "engine": "order",
+            "prompt": "Make the sentence (defining):",
+            "translation_tr": "Cümleyi (defining) olarak kur.",
+            "tokens": [
+                "The",
+                "man",
+                "who",
+                "called",
+                "me",
+                "is",
+                "here",
+                "."
+            ],
+            "answer_tokens": [
+                "The",
+                "man",
+                "who",
+                "called",
+                "me",
+                "is",
+                "here",
+                "."
+            ],
+            "tags": [
+                "defining"
+            ]
+        },
+        {
+            "id": "ord3",
+            "engine": "order",
+            "prompt": "Make the sentence (non-defining):",
+            "translation_tr": "Cümleyi (non-defining) olarak kur.",
+            "tokens": [
+                "Istanbul",
+                ",",
+                "which",
+                "is",
+                "big",
+                ",",
+                "is",
+                "crowded",
+                "."
+            ],
+            "answer_tokens": [
+                "Istanbul",
+                ",",
+                "which",
+                "is",
+                "big",
+                ",",
+                "is",
+                "crowded",
+                "."
+            ],
+            "tags": [
+                "non_defining"
+            ]
+        },
+        {
+            "id": "ord4",
+            "engine": "order",
+            "prompt": "Make the sentence (defining):",
+            "translation_tr": "Cümleyi (defining) olarak kur.",
+            "tokens": [
+                "The",
+                "place",
+                "where",
+                "we",
+                "study",
+                "is",
+                "quiet",
+                "."
+            ],
+            "answer_tokens": [
+                "The",
+                "place",
+                "where",
+                "we",
+                "study",
+                "is",
+                "quiet",
+                "."
+            ],
+            "tags": [
+                "defining"
+            ]
+        },
+        {
+            "id": "fill1",
+            "engine": "fill",
+            "prompt": "My friend, ____ lives in Bursa, is coming. (who/which/where)",
+            "translation_tr": "Bursa’da yaşayan arkadaşım geliyor.",
+            "answer": [
+                "who"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "non_defining"
+            ]
+        },
+        {
+            "id": "fill2",
+            "engine": "fill",
+            "prompt": "The laptop ____ I use is fast. (who/which/where)",
+            "translation_tr": "Kullandığım dizüstü bilgisayar hızlı.",
+            "answer": [
+                "which"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "defining"
+            ]
+        },
+        {
+            "id": "fill3",
+            "engine": "fill",
+            "prompt": "That’s the school ____ I studied. (who/which/where)",
+            "translation_tr": "Burası okuduğum okul.",
+            "answer": [
+                "where"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "defining"
+            ]
+        },
+        {
+            "id": "fill4",
+            "engine": "fill",
+            "prompt": "My mother, ____ is a teacher, is kind. (who/which/where)",
+            "translation_tr": "Öğretmen olan annem naziktir.",
+            "answer": [
+                "who"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "non_defining"
+            ]
+        }
+    ]
+}

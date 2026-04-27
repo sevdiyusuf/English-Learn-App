@@ -1,12 +1,15 @@
-import 'dart:ui'; // Blur efekti için gerekli
+import 'dart:math' as math; // Random açı için gerekli
+import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/repositories/user_stats_repo.dart';
 import '../../../core/repositories/game_saved_words_repository.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../auth/logic/auth_controller.dart';
 import '../logic/adaptive_difficulty_helper.dart';
 import '../logic/flash_opposites_controller.dart';
 import '../models/flash_opposites_state.dart';
@@ -26,6 +29,9 @@ class FlashOppositesPage extends ConsumerStatefulWidget {
 class _FlashOppositesPageState extends ConsumerState<FlashOppositesPage> {
   bool _scoreDialogShown = false;
 
+  // Her kelime için rastgele bir dönüş açısı saklamak için map
+  final Map<String, double> _wordRotations = {};
+
   @override
   void initState() {
     super.initState();
@@ -43,6 +49,8 @@ class _FlashOppositesPageState extends ConsumerState<FlashOppositesPage> {
     final gameState = ref.watch(flashOppositesControllerProvider(widget.level));
 
     if (gameState.isGameFinished && !_scoreDialogShown) {
+      // Record stats
+      _recordGameStats(gameState);
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _scoreDialogShown = true;
         _showScoreDialog(context, gameState);
@@ -62,11 +70,10 @@ class _FlashOppositesPageState extends ConsumerState<FlashOppositesPage> {
     }
 
     return Scaffold(
-      // Arka plan resminin görünmesi için scaffold şeffaf
       backgroundColor: Colors.transparent,
-      extendBodyBehindAppBar: true, // AppBar arkasına taşma
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.transparent, // Şeffaf AppBar
+        backgroundColor: Colors.transparent,
         elevation: 0,
         leading: Container(
           margin: const EdgeInsets.all(8),
@@ -108,24 +115,20 @@ class _FlashOppositesPageState extends ConsumerState<FlashOppositesPage> {
               fit: BoxFit.cover,
             ),
           ),
-          // 1. KATMAN: Arka plan karartma (Vignette)
-          // Arka plan resmi çok parlaksa metinlerin okunmasını sağlar
+          // Vignette effect
           const SizedBox.expand(
             child: DecoratedBox(
               decoration: BoxDecoration(
                 gradient: RadialGradient(
                   center: Alignment.center,
                   radius: 1.5,
-                  colors: [
-                    Colors.transparent,
-                    Colors.black54, // Kenarlarda kararma
-                  ],
+                  colors: [Colors.transparent, Colors.black54],
                 ),
               ),
             ),
           ),
 
-          // 2. KATMAN: Oyun İçeriği
+          // Game Content
           gameState.isGameFinished
               ? _buildGameFinishedView()
               : gameState.isGameActive
@@ -149,7 +152,7 @@ class _FlashOppositesPageState extends ConsumerState<FlashOppositesPage> {
     return SafeArea(
       child: Column(
         children: [
-          // Top bar: HUD (Heads-Up Display)
+          // HUD
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
             child: _buildTopBar(gameState),
@@ -158,7 +161,7 @@ class _FlashOppositesPageState extends ConsumerState<FlashOppositesPage> {
           // Falling words area
           Expanded(child: _buildFallingWordsArea(gameState)),
 
-          // Bottom: Question word and Pass button
+          // Bottom Controls
           _buildBottomSection(gameState),
         ],
       ),
@@ -171,12 +174,15 @@ class _FlashOppositesPageState extends ConsumerState<FlashOppositesPage> {
       borderRadius: 24,
       child: Row(
         children: [
-          // Timer (left)
+          // Timer
           Expanded(
             child: Align(
               alignment: Alignment.centerLeft,
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.blue.withValues(alpha: 0.3),
                   borderRadius: BorderRadius.circular(20),
@@ -204,15 +210,18 @@ class _FlashOppositesPageState extends ConsumerState<FlashOppositesPage> {
             ),
           ),
 
-          // Lives (center)
+          // Lives
           _buildLivesIndicator(gameState.livesLeft),
 
-          // Score (right)
+          // Score
           Expanded(
             child: Align(
               alignment: Alignment.centerRight,
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   color: AppColors.primary,
                   borderRadius: BorderRadius.circular(20),
@@ -278,10 +287,7 @@ class _FlashOppositesPageState extends ConsumerState<FlashOppositesPage> {
   }
 
   Widget _buildLevelUpBanner(AdaptiveStage? stage) {
-    // TopBar'ın içinde çağırmak yerine Stack içinde overlay olarak kullanmak daha iyi olur
-    // Ancak mevcut yapıyı bozmadan şık bir tasarım ekliyoruz.
     if (stage == null) return const SizedBox.shrink();
-
     return Container(
       margin: const EdgeInsets.only(top: 8),
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
@@ -330,7 +336,9 @@ class _FlashOppositesPageState extends ConsumerState<FlashOppositesPage> {
     );
   }
 
-  // Falling Words Logic remains mostly same, just styled buttons
+  // ---------------------------------------------------------------------------
+  // ANIMASYONLU ALAN BURADA BAŞLIYOR
+  // ---------------------------------------------------------------------------
   Widget _buildFallingWordsArea(FlashOppositesState gameState) {
     final options = gameState.options;
     return LayoutBuilder(
@@ -345,7 +353,6 @@ class _FlashOppositesPageState extends ConsumerState<FlashOppositesPage> {
         const horizontalSpacing = 50.0;
         const verticalSpacing = 80.0;
 
-        // Üst satırdaki 3 kartı ekranın ortasında, eşit aralıklı hizala
         final topRowWidth =
             (buttonWidth * topRowCount) +
             (horizontalSpacing * (topRowCount - 1));
@@ -359,8 +366,8 @@ class _FlashOppositesPageState extends ConsumerState<FlashOppositesPage> {
 
         return Stack(
           alignment: Alignment.center,
+          clipBehavior: Clip.none, // İzler dışarı taşarsa kesilmesin
           children: [
-            // Level Banner'ı burada gösterebiliriz (oyun alanının üstünde)
             if (gameState.showLevelUpBanner)
               Positioned(top: 10, child: _buildLevelUpBanner(gameState.stage)),
 
@@ -385,54 +392,45 @@ class _FlashOppositesPageState extends ConsumerState<FlashOppositesPage> {
               final color = gameState.wordColors[option];
               final isSelected = gameState.selectedOption == option;
 
-              // Üst satırdaki en sağdaki kart (rowIndex == 2) için mobilde özel hizalama
-              // Web/PC'de tüm kartlar baseX ile hizalanır
+              // Her kelimeye benzersiz bir hafif eğim verelim
+              if (!_wordRotations.containsKey(option)) {
+                // -0.05 ile +0.05 radyan arasında çok hafif rastgele açı (daha stabil)
+                _wordRotations[option] =
+                    (math.Random().nextDouble() - 0.5) * 0.1;
+              }
+              final rotation = _wordRotations[option] ?? 0.0;
+
+              // Pozisyonlama Logic'i
+              Widget childWidget = _buildSpaceCard(
+                word: option,
+                color: color,
+                isSelected: isSelected,
+                isEnabled: gameState.selectedOption == null,
+                onTap: () {
+                  if (gameState.selectedOption == null) {
+                    ref
+                        .read(
+                          flashOppositesControllerProvider(
+                            widget.level,
+                          ).notifier,
+                        )
+                        .selectAnswer(option);
+                  }
+                },
+              );
+
+              // Kartı hafif döndürerek yerçekimsiz ortam hissi ver
+              childWidget = Transform.rotate(
+                angle: rotation,
+                child: childWidget,
+              );
+
+              // Sağ üst köşe özel konumu (Mobil için)
               if (isTopRow && rowIndex == 2 && !kIsWeb) {
-                return Positioned(
-                  top: actualY,
-                  right: 2.0,
-                  child: _buildWordButton(
-                    option,
-                    color,
-                    isSelected,
-                    gameState.selectedOption == null,
-                    () {
-                      if (gameState.selectedOption == null) {
-                        ref
-                            .read(
-                              flashOppositesControllerProvider(
-                                widget.level,
-                              ).notifier,
-                            )
-                            .selectAnswer(option);
-                      }
-                    },
-                  ),
-                );
+                return Positioned(top: actualY, right: 2.0, child: childWidget);
               }
 
-              // Diğer kartlar ve web/PC'deki tüm kartlar soldan hesaplanan baseX ile hizalanıyor.
-              return Positioned(
-                top: actualY,
-                left: baseX,
-                child: _buildWordButton(
-                  option,
-                  color,
-                  isSelected,
-                  gameState.selectedOption == null,
-                  () {
-                    if (gameState.selectedOption == null) {
-                      ref
-                          .read(
-                            flashOppositesControllerProvider(
-                              widget.level,
-                            ).notifier,
-                          )
-                          .selectAnswer(option);
-                    }
-                  },
-                ),
-              );
+              return Positioned(top: actualY, left: baseX, child: childWidget);
             }),
           ],
         );
@@ -440,123 +438,149 @@ class _FlashOppositesPageState extends ConsumerState<FlashOppositesPage> {
     );
   }
 
-  // ... (Önceki kodların aynısı, sadece _buildWordButton kısmını aşağıdakine göre güncelle)
-
-  Widget _buildWordButton(
-    String word,
-    Color? color,
-    bool isSelected,
-    bool isEnabled,
-    VoidCallback onTap,
-  ) {
-    // Özel renk (doğru/yanlış durumu) var mı?
+  // ---------------------------------------------------------------------------
+  // YENİ TASARIM: NEON SPACE CARD (GÜNCELLENMİŞ)
+  // ---------------------------------------------------------------------------
+  Widget _buildSpaceCard({
+    required String word,
+    required Color? color,
+    required bool isSelected,
+    required bool isEnabled,
+    required VoidCallback onTap,
+  }) {
+    // Özel renk (Doğru/Yanlış) durumu
     final bool hasCustomColor = color != null;
+
+    // Tema Rengi: Cevaplanmışsa kendi rengi, değilse Neon Mor
+    final Color themeColor =
+        hasCustomColor ? color : const Color(0xFFD946EF); // Neon Mor/Fuşya
+    final Color secondaryColor = const Color(0xFF4C1D95); // Koyu Mor
 
     return GestureDetector(
       onTap: isEnabled ? onTap : null,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        width: 110, // Genişliği biraz artırdık, daha rahat görünsün
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 14),
-        decoration: BoxDecoration(
-          // KART ARKA PLANI:
-          // Eğer özel renk yoksa, "Milky Glass" (Sütlü Cam) efekti uyguluyoruz.
-          // Arka plan lacivert olduğu için beyaz ağırlıklı yarı saydam bir katman patlayacaktır.
-          color: color ?? Colors.white.withValues(alpha: 0.15),
-
-          borderRadius: BorderRadius.circular(16),
-
-          // GRADYAN:
-          // Kartın üst kısmı daha parlak, altı daha şeffaf. Derinlik hissi verir.
-          gradient:
-              hasCustomColor
-                  ? null // Özel renk varsa (yeşil/kırmızı) gradyanı kapat
-                  : LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
+      child: Stack(
+        clipBehavior: Clip.none,
+        alignment: Alignment.center,
+        children: [
+          // 1. KATMAN: HIZ İZİ (SPEED TRAIL) - GÜNCELLENDİ
+          // Daha görünür ve uzun
+          if (!hasCustomColor && !isSelected)
+            Positioned(
+              top: -80, // İz boyu uzatıldı (daha dramatik düşüş)
+              bottom: 30, // Kartın içine gömülsün
+              left: 25, // Biraz daraltıldı, lazer gibi dursun
+              right: 25,
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
                     colors: [
-                      Colors.white.withValues(
-                        alpha: 0.4,
-                      ), // Sol üst daha parlak
-                      Colors.white.withValues(
-                        alpha: 0.1,
-                      ), // Sağ alt daha şeffaf
+                      themeColor.withValues(
+                        alpha: 0.8,
+                      ), // BAŞLANGIÇ ÇOK DAHA BELİRGİN
+                      Colors.transparent,
                     ],
+                    stops: const [0.0, 0.7], // Renk daha yukarı kadar taşınıyor
                   ),
-
-          // KENARLIK (BORDER):
-          // Kartı arka plandan kesip ayırmak için güçlü bir beyaz çerçeve.
-          border: Border.all(
-            color:
-                hasCustomColor
-                    ? Colors
-                        .white // Renkli durumda tam beyaz çerçeve
-                    : Colors.white.withValues(
-                      alpha: 0.6,
-                    ), // Normalde %60 opak beyaz
-            width: hasCustomColor ? 2.5 : 1.5, // Çerçeveyi kalınlaştırdık
-          ),
-
-          // GÖLGELER (SHADOWS):
-          boxShadow: [
-            if (isSelected || hasCustomColor)
-              // Seçiliyse veya cevaplandıysa güçlü bir neon parlama
-              BoxShadow(
-                color: (color ?? Colors.white).withValues(alpha: 0.8),
-                blurRadius: 20,
-                spreadRadius: 2,
-              )
-            else
-              // Normal durumda kartın arkasına siyah gölge atarak onu zeminden kaldırıyoruz
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.5), // Koyu gölge
-                blurRadius: 12,
-                offset: const Offset(0, 4),
-              ),
-            // Ekstra: Kartın etrafında çok hafif beyaz bir hale (Outer Glow)
-            BoxShadow(
-              color: Colors.white.withValues(alpha: 0.1),
-              blurRadius: 8,
-              spreadRadius: 0,
-            ),
-          ],
-        ),
-        child: Center(
-          child: Text(
-            word,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 17, // Fontu bir tık büyüttük
-              fontWeight:
-                  FontWeight.w800, // Daha kalın font (Bold -> ExtraBold)
-              letterSpacing: 0.5,
-              // METİN GÖLGESİ (CRITICAL):
-              // Arka plan ne kadar karışık olursa olsun metni okutur.
-              shadows: [
-                // Sert siyah gölge (Outline etkisi yaratır)
-                Shadow(
-                  blurRadius: 2,
-                  color: Colors.black.withValues(alpha: 0.8),
-                  offset: const Offset(1, 1),
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                // Yumuşak siyah gölge (Okunabilirlik için)
-                Shadow(
-                  blurRadius: 8,
-                  color: Colors.black,
-                  offset: const Offset(0, 2),
+              ),
+            ),
+
+          // 2. KATMAN: KARTIN KENDİSİ - GÜNCELLENDİ
+          // "Şeffaf ve Tok" ayarı
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            width: 110,
+            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 12),
+            decoration: ShapeDecoration(
+              // Arka plan: Biraz daha şeffaf ama "tok" (doygun) renkler
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors:
+                    hasCustomColor
+                        ? [
+                          themeColor.withValues(alpha: 0.8), // Cevaplandıysa
+                          themeColor.withValues(alpha: 0.6),
+                        ]
+                        : [
+                          const Color(0xFF1E1B4B).withValues(
+                            alpha: 0.85,
+                          ), // Normalde tok bir lacivert (hafif şeffaf)
+                          secondaryColor.withValues(
+                            alpha: 0.7,
+                          ), // Alt taraf daha şeffaf
+                        ],
+              ),
+              // Şekil: Köşeler bir tık yumuşatıldı
+              shape: BeveledRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+                side: BorderSide(
+                  // Kenarlık inceltildi ve opaklığı düşürüldü (göz yormaması için)
+                  color: themeColor.withValues(
+                    alpha: isSelected || hasCustomColor ? 1.0 : 0.4,
+                  ),
+                  width: isSelected || hasCustomColor ? 2.0 : 1.0,
+                ),
+              ),
+              // Gölge/Glow: Yayılımı azaltıldı, daha soft yapıldı
+              shadows: [
+                BoxShadow(
+                  color: themeColor.withValues(
+                    alpha: isSelected || hasCustomColor ? 0.5 : 0.2,
+                  ),
+                  blurRadius:
+                      isSelected
+                          ? 20
+                          : 15, // Glow radius korundu ama alpha düştü
+                  spreadRadius: isSelected ? 2 : 0,
                 ),
               ],
             ),
-            textAlign: TextAlign.center,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
+            alignment: Alignment.center,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  word,
+                  style: TextStyle(
+                    color: Colors.white, // Metin her zaman parlak beyaz
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 0.8,
+                    shadows: [
+                      // Metin gölgesi de hafifletildi
+                      Shadow(
+                        blurRadius: 4,
+                        color: themeColor.withValues(alpha: 0.5),
+                        offset: Offset.zero,
+                      ),
+                    ],
+                  ),
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                // Alt tarafta ufak teknolojik detay barı
+                if (!hasCustomColor)
+                  Container(
+                    margin: const EdgeInsets.only(top: 6),
+                    width: 30,
+                    height: 2,
+                    decoration: BoxDecoration(
+                      color: themeColor.withValues(alpha: 0.5),
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+              ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
-
-  // ... (Geri kalan kodlar aynı)
 
   Widget _buildBottomSection(FlashOppositesState gameState) {
     final currentWord = gameState.currentWord;
@@ -618,7 +642,7 @@ class _FlashOppositesPageState extends ConsumerState<FlashOppositesPage> {
                     ),
                   ),
 
-                  // Save Button (Minimalist)
+                  // Save Button
                   IconButton(
                     onPressed:
                         () => _saveWord(
@@ -645,7 +669,7 @@ class _FlashOppositesPageState extends ConsumerState<FlashOppositesPage> {
 
               const SizedBox(height: 32),
 
-              // Pass Button (Modern Pill)
+              // Pass Button
               SizedBox(
                 width: double.infinity,
                 height: 56,
@@ -699,12 +723,6 @@ class _FlashOppositesPageState extends ConsumerState<FlashOppositesPage> {
     );
   }
 
-  // ... (Diğer metodlar: _saveWord, _buildGameFinishedView, _showScoreDialog, _getLevelName aynı kalabilir)
-
-  // Önceki metodların aynısı, sadece tasarım değiştiği için tekrar yazmadım
-  // _saveWord, _buildGameFinishedView, _showScoreDialog, _getLevelName fonksiyonlarını
-  // orijinal kodunuzdan buraya ekleyebilirsiniz.
-
   Future<void> _saveWord(
     BuildContext context,
     String english,
@@ -748,18 +766,9 @@ class _FlashOppositesPageState extends ConsumerState<FlashOppositesPage> {
   }
 
   void _showScoreDialog(BuildContext context, FlashOppositesState gameState) {
-    // Calculate final score with time bonus
-    // Faster completion = higher bonus
-    // Formula: baseScore * (1 + timeBonusMultiplier)
-    // Time bonus decreases as time increases
     final baseScore = gameState.score;
     final elapsedSeconds = gameState.elapsedDuration.inSeconds;
 
-    // Time bonus: maximum 2x for very fast games, decreases with time
-    // For games under 60 seconds: 2.0x
-    // For games 60-120 seconds: 1.5x
-    // For games 120-180 seconds: 1.2x
-    // For games over 180 seconds: 1.0x (no bonus)
     double timeBonusMultiplier = 1.0;
     if (elapsedSeconds < 60) {
       timeBonusMultiplier = 2.0;
@@ -814,9 +823,31 @@ class _FlashOppositesPageState extends ConsumerState<FlashOppositesPage> {
         return level;
     }
   }
+
+  Future<void> _recordGameStats(FlashOppositesState gameState) async {
+    try {
+      final authState = ref.read(authControllerProvider);
+      final user = authState.valueOrNull;
+      if (user == null) return;
+
+      final statsRepo = ref.read(userStatsRepoProvider);
+      final duration = gameState.elapsedDuration;
+      final practicedWords = gameState.correctCount + gameState.wrongCount;
+
+      await statsRepo.recordSession(
+        user: user,
+        modeId: 'flash_opposites',
+        practicedWords: practicedWords,
+        correctAnswers: gameState.correctCount,
+        wrongAnswers: gameState.wrongCount,
+        duration: duration,
+      );
+    } catch (e) {
+      debugPrint('Failed to record flash opposites stats: $e');
+    }
+  }
 }
 
-// YARDIMCI WIDGET: Cam Efekti Konteyneri
 class _GlassContainer extends StatelessWidget {
   final Widget child;
   final EdgeInsetsGeometry padding;
@@ -837,11 +868,9 @@ class _GlassContainer extends StatelessWidget {
         child: Container(
           padding: padding,
           decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: 0.1), // Çok hafif beyaz
+            color: Colors.white.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(borderRadius),
-            border: Border.all(
-              color: Colors.white.withValues(alpha: 0.2), // Cam kenarlığı
-            ),
+            border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
           ),
           child: child,
         ),

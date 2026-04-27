@@ -1,0 +1,283 @@
+{
+  "schema_version": "1.0",
+  "level": "A1",
+  "worksheet_id": "A1-POSS-01",
+  "title": "my/your/his/her/our/their + ’s",
+  "topic_tags": [
+    "possessives",
+    "possessive_adjectives",
+    "apostrophe_s"
+  ],
+  "subskills": [
+    "choose_possessive_adjective",
+    "use_apostrophe_s"
+  ],
+  "difficulty": 1,
+  "engine_sequence": [
+    {
+      "engine": "matching",
+      "count": 6,
+      "rules": {
+        "allow_hint": true
+      }
+    },
+    {
+      "engine": "mcq",
+      "count": 8,
+      "rules": {
+        "shuffle_options": true,
+        "allow_hint": true
+      }
+    },
+    {
+      "engine": "fill",
+      "count": 4,
+      "rules": {
+        "case_sensitive": false,
+        "allow_contractions": true
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "match1",
+      "engine": "matching",
+      "prompt": "Match the pronoun to the possessive adjective.",
+      "translation_tr": "Zamiri iyelik sıfatıyla eşleştir.",
+      "pairs": [
+        {
+          "left": "I",
+          "right": "my"
+        },
+        {
+          "left": "you",
+          "right": "your"
+        },
+        {
+          "left": "he",
+          "right": "his"
+        },
+        {
+          "left": "she",
+          "right": "her"
+        },
+        {
+          "left": "we",
+          "right": "our"
+        },
+        {
+          "left": "they",
+          "right": "their"
+        }
+      ],
+      "answer_key": {
+        "I": "my",
+        "you": "your",
+        "he": "his",
+        "she": "her",
+        "we": "our",
+        "they": "their"
+      },
+      "tags": [
+        "possessive_adjectives"
+      ]
+    },
+    {
+      "id": "mcq1",
+      "engine": "mcq",
+      "prompt": "This is ____ book. (I)",
+      "translation_tr": "Bu benim kitabım.",
+      "options": [
+        "my",
+        "his",
+        "her",
+        "their"
+      ],
+      "answer": "my",
+      "tags": [
+        "possessive_adjectives"
+      ]
+    },
+    {
+      "id": "mcq2",
+      "engine": "mcq",
+      "prompt": "That is ____ car. (she)",
+      "translation_tr": "Şu onun arabası.",
+      "options": [
+        "her",
+        "his",
+        "our",
+        "your"
+      ],
+      "answer": "her",
+      "tags": [
+        "possessive_adjectives"
+      ]
+    },
+    {
+      "id": "mcq3",
+      "engine": "mcq",
+      "prompt": "These are ____ shoes. (they)",
+      "translation_tr": "Bunlar onların ayakkabıları.",
+      "options": [
+        "their",
+        "our",
+        "his",
+        "my"
+      ],
+      "answer": "their",
+      "tags": [
+        "possessive_adjectives"
+      ]
+    },
+    {
+      "id": "mcq4",
+      "engine": "mcq",
+      "prompt": "Ali has a bike. It is ____ bike.",
+      "translation_tr": "Ali'nin bir bisikleti var. O Ali'nin bisikletidir.",
+      "options": [
+        "Ali's",
+        "Alis'",
+        "Ali"
+      ],
+      "answer": "Ali's",
+      "hint": "Name + 's",
+      "tags": [
+        "apostrophe_s"
+      ]
+    },
+    {
+      "id": "mcq5",
+      "engine": "mcq",
+      "prompt": "We have a house. It is ____ house.",
+      "translation_tr": "Bizim bir evimiz var. O bizim evimiz.",
+      "options": [
+        "our",
+        "their",
+        "your",
+        "his"
+      ],
+      "answer": "our",
+      "tags": [
+        "possessive_adjectives"
+      ]
+    },
+    {
+      "id": "mcq6",
+      "engine": "mcq",
+      "prompt": "Merve has a cat. It is ____ cat.",
+      "translation_tr": "Merve'nin bir kedisi var. O Merve'nin kedisi.",
+      "options": [
+        "Merve's",
+        "Merves",
+        "Merve"
+      ],
+      "answer": "Merve's",
+      "tags": [
+        "apostrophe_s"
+      ]
+    },
+    {
+      "id": "mcq7",
+      "engine": "mcq",
+      "prompt": "You have a pen. It is ____ pen.",
+      "translation_tr": "Senin bir kalemin var. O senin kalemin.",
+      "options": [
+        "your",
+        "my",
+        "his",
+        "our"
+      ],
+      "answer": "your",
+      "tags": [
+        "possessive_adjectives"
+      ]
+    },
+    {
+      "id": "mcq8",
+      "engine": "mcq",
+      "prompt": "He has a phone. It is ____ phone.",
+      "translation_tr": "Onun bir telefonu var. O onun telefonu.",
+      "options": [
+        "his",
+        "her",
+        "their",
+        "my"
+      ],
+      "answer": "his",
+      "tags": [
+        "possessive_adjectives"
+      ]
+    },
+    {
+      "id": "fill1",
+      "engine": "fill",
+      "prompt": "This is ____ bag. (she)",
+      "translation_tr": "Bu onun çantası.",
+      "answer": [
+        "her"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "possessive_adjectives"
+      ]
+    },
+    {
+      "id": "fill2",
+      "engine": "fill",
+      "prompt": "That is ____ room. (we)",
+      "translation_tr": "Şu bizim odamız.",
+      "answer": [
+        "our"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "possessive_adjectives"
+      ]
+    },
+    {
+      "id": "fill3",
+      "engine": "fill",
+      "prompt": "It is Ahmet____ book. (’s)",
+      "translation_tr": "Bu Ahmet'in kitabı.",
+      "answer": [
+        "ahmet's",
+        "ahmet’s"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "hint": "Add 's after the name.",
+      "tags": [
+        "apostrophe_s"
+      ]
+    },
+    {
+      "id": "fill4",
+      "engine": "fill",
+      "prompt": "They have a dog. It is ____ dog.",
+      "translation_tr": "Onların bir köpeği var. O onların köpeği.",
+      "answer": [
+        "their"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "possessive_adjectives"
+      ]
+    }
+  ]
+}

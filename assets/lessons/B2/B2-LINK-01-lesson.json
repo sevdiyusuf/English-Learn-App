@@ -1,0 +1,184 @@
+{
+    "schema_version": "1.0",
+    "level": "B2",
+    "lesson_id": "B2-LINK-01-lesson",
+    "title": "Linking Words (Bağlaçlar)",
+    "topic_tags": [
+        "linking_words",
+        "contrast",
+        "however",
+        "whereas",
+        "despite",
+        "in_spite_of"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Fikirler arasında zıtlık (contrast), neden (reason) ve sonuç (result) ilişkisi kurmayı öğreneceğiz.",
+                    "Anlamca benzer olsalar da dilbilgisi yapısı farklı olan bağlaçları (Although vs. Despite) ayırt edeceğiz.",
+                    "Akademik ve profesyonel yazımda noktalama işaretlerinin bağlaçlarla kullanımını kavrayacağız."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Zıtlık Bağlaçları 1: Although vs. However",
+                "bullets": [
+                    "**Although**: Kendisinden sonra tam bir cümle (özne + fiil) gelir. Genellikle cümlenin başında veya ortasında yer alır.",
+                    "**However**: İki bağımsız cümle arasındaki zıtlığı belirtmek için kullanılır. Kendisinden sonra virgül gelmesi zorunludur."
+                ],
+                "examples": [
+                    "Although it was raining, we went out. (Yağmur yağmasına rağmen dışarı çıktık.)",
+                    "He studied a lot. However, he failed the exam. (Çok çalıştı. Ancak, sınavda başarısız oldu.)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "Zıtlık Bağlaçları 2: Despite & In Spite Of",
+                "bullets": [
+                    "Bu iki bağlaçtan sonra asla tam cümle gelmez. Ya bir **isim (noun)** ya da bir **gerund (-ing)** gelmelidir.",
+                    "Anlam olarak 'rağmen' demektir ve her iki kullanım da birbirinin yerine geçebilir."
+                ],
+                "examples": [
+                    "Despite being tired, she kept working. (Yorgun olmasına rağmen çalışmaya devam etti.)",
+                    "In spite of trying hard, he didn’t win. (Çok çabalamasına rağmen kazanamadı.)"
+                ]
+            },
+            {
+                "id": "c4",
+                "type": "rule",
+                "title": "Zıtlık Bağlaçları 3: Whereas",
+                "bullets": [
+                    "İki farklı durumu, kişiyi veya fikri tek bir cümle içinde karşılaştırmak için kullanılır.",
+                    "Anlam olarak 'oysaki' veya 'iken' karşılığını verir."
+                ],
+                "examples": [
+                    "I like coffee, whereas my sister prefers tea. (Ben kahve severim, oysaki kız kardeşim çayı tercih eder.)"
+                ]
+            },
+            {
+                "id": "formula",
+                "type": "formula",
+                "title": "Yapı Formülleri",
+                "bullets": [
+                    "Cümle kurarken aşağıdaki yapıları takip edin:"
+                ],
+                "formula": [
+                    "Although + Clause (S+V)",
+                    "Despite / In spite of + Noun / V-ing",
+                    "Sentence 1. However, + Sentence 2.",
+                    "Because of + Noun"
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Despite of**: 'Despite' kelimesinden sonra 'of' gelmez. Sadece 'In spite of' kalıbında 'of' kullanılır.",
+                    "**Noktalama**: 'However' cümle başında kullanıldığında mutlaka virgül ile ayrılmalıdır.",
+                    "**Because vs. Because of**: 'Because'dan sonra cümle, 'Because of'dan sonra isim gelir."
+                ],
+                "examples": [
+                    "Hatalı: Despite of the rain... ✗",
+                    "Doğru: Despite the rain... ✓",
+                    "Hatalı: We were late because of it was raining. ✗",
+                    "Doğru: We were late because of heavy traffic. ✓"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "Choose the correct continuation: 'The team played well. ____, they lost the game.'",
+                "options": [
+                    "However",
+                    "Although",
+                    "Despite"
+                ],
+                "answer": "However",
+                "explain": "İki ayrı cümle arasındaki zıtlığı belirtmek için ve noktalamaya uygun olarak 'However' kullanılır."
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Şirket Raporu",
+        "intro_bullets": [
+            "Bir şirketin yıllık performans raporundaki bağlaçları incele.",
+            "Resmi yazışmalarda hangi bağlacın hangi yapıyla kullanıldığına dikkat et."
+        ],
+        "items": [
+            {
+                "engine": "fill",
+                "prompt": "Sales increased this year. ____, profits remained the same due to high costs.",
+                "answer": [
+                    "however"
+                ],
+                "explain": "İki cümle arasındaki zıtlığı vurgulamak için 'However' kullanılır."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "____ the economic crisis, our company managed to grow.",
+                "options": [
+                    "Despite",
+                    "Although",
+                    "Whereas"
+                ],
+                "answer": "Despite",
+                "explain": "'The economic crisis' bir isim öbeği olduğu için 'Despite' kullanımı uygundur."
+            },
+            {
+                "engine": "fill",
+                "prompt": "We were successful because of ____ (plan) everything in advance.",
+                "answer": [
+                    "planning"
+                ],
+                "explain": "'Because of' bağlacından sonra fiil gelirse -ing takısı alarak isimleşmelidir."
+            },
+            {
+                "engine": "order",
+                "prompt": "Cümleyi kur: 'Ben ofiste çalışırım, oysaki o evden çalışır.'",
+                "tokens": [
+                    "I",
+                    "work",
+                    "in",
+                    "the",
+                    "office,",
+                    "whereas",
+                    "she",
+                    "works",
+                    "from",
+                    "home."
+                ],
+                "answer_tokens": [
+                    "I",
+                    "work",
+                    "in",
+                    "the",
+                    "office,",
+                    "whereas",
+                    "she",
+                    "works",
+                    "from",
+                    "home."
+                ],
+                "explain": "'Whereas' iki farklı durumu tek bir cümle içinde karşılaştırmak için kullanılır."
+            }
+        ],
+        "recap_bullets": [
+            "Zıtlık cümleleri arasında: However (virgül ile).",
+            "Zıtlık + Cümle: Although.",
+            "Zıtlık + İsim/V-ing: Despite veya In spite of.",
+            "Neden + İsim: Because of."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "B2-LINK-01"
+    }
+}

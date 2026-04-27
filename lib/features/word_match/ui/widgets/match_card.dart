@@ -1,5 +1,7 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../../../core/theme/app_colors.dart';
 
 enum MatchCardVisualState { normal, correct, wrong }
 
@@ -25,99 +27,110 @@ class MatchCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final background = switch (visualState) {
-      MatchCardVisualState.correct => colorScheme.primaryContainer,
-      MatchCardVisualState.wrong => colorScheme.errorContainer,
-      MatchCardVisualState.normal => colorScheme.surfaceContainerHighest,
-    };
-    final borderColor =
-        isSelected
-            ? colorScheme.primary
-            : colorScheme.outline.withValues(alpha: 0.4);
+    final isCorrect = visualState == MatchCardVisualState.correct;
+    final isWrong = visualState == MatchCardVisualState.wrong;
 
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 180),
-      curve: Curves.easeOut,
-      decoration: BoxDecoration(
-        color:
-            isSolved
-                ? colorScheme.primaryContainer.withValues(alpha: 0.7)
-                : background,
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(
-          color: isSolved ? colorScheme.primary : borderColor,
-          width: isSelected ? 2.2 : 1.2,
+    Color cardColor;
+    Color borderColor;
+    List<BoxShadow> shadows = [];
+
+    // Durumlara göre renk ve efekt yönetimi
+    if (isSolved || isCorrect) {
+      cardColor = AppColors.success.withValues(alpha: 0.2);
+      borderColor = AppColors.success;
+      shadows = [
+        BoxShadow(
+          color: AppColors.success.withValues(alpha: 0.3),
+          blurRadius: 10,
+          spreadRadius: 1,
         ),
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: Stack(
-          children: [
-            InkWell(
-              borderRadius: BorderRadius.circular(18),
-              onTap: isSolved ? null : onTap,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16.0,
-                  vertical: 18.0,
-                ),
-                child: Center(
-                  child: Text(
-                    text,
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color:
-                          isSolved
-                              ? colorScheme.onPrimaryContainer.withValues(
-                                alpha: 0.8,
-                              )
-                              : colorScheme.onSurface,
-                      decoration: isSolved ? TextDecoration.lineThrough : null,
-                    ),
-                  ),
-                ),
-              ),
+      ];
+    } else if (isWrong) {
+      cardColor = Colors.redAccent.withValues(alpha: 0.2);
+      borderColor = Colors.redAccent;
+      shadows = [
+        BoxShadow(
+          color: Colors.redAccent.withValues(alpha: 0.3),
+          blurRadius: 10,
+          spreadRadius: 1,
+        ),
+      ];
+    } else if (isSelected) {
+      cardColor = Colors.cyanAccent.withValues(alpha: 0.15);
+      borderColor = Colors.cyanAccent;
+      shadows = [
+        BoxShadow(
+          color: Colors.cyanAccent.withValues(alpha: 0.4),
+          blurRadius: 12,
+          spreadRadius: 2,
+        ),
+      ];
+    } else {
+      cardColor = Colors.white30.withValues(alpha: 0.12);
+      borderColor = Colors.white.withValues(alpha: 0.45);
+    }
+
+    return AnimatedScale(
+      scale: isSelected ? 1.02 : 1.0,
+      duration: const Duration(milliseconds: 200),
+      child: GestureDetector(
+        onTap: isSolved ? null : onTap,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+          decoration: BoxDecoration(
+            color: cardColor,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(
+              color: borderColor,
+              width: isSelected || isCorrect || isWrong ? 2 : 1,
             ),
-            // ⭐ toggle icon - only show on solved cards
-            if (isSolved && onLearnedToggle != null)
-              Positioned(
-                top: 8,
-                right: 8,
-                child: Material(
-                  color: Colors.transparent,
-                  child: Tooltip(
-                    message: isLearned ? 'Öğrendiğim kelime' : 'Öğrenmediğim kelime',
-                    child: InkWell(
-                      onTap: onLearnedToggle,
-                      borderRadius: BorderRadius.circular(20),
-                      child: Padding(
-                        padding: const EdgeInsets.all(4),
-                        child: isLearned
-                            ? SvgPicture.asset(
-                                'assets/icons/star.svg',
-                                width: 20,
-                                height: 20,
-                                colorFilter: const ColorFilter.mode(
-                                  Colors.amber,
-                                  BlendMode.srcIn,
-                                ),
-                              )
-                            : SvgPicture.asset(
-                                'assets/icons/star_empty.svg',
-                                width: 20,
-                                height: 20,
-                                colorFilter: ColorFilter.mode(
-                                  colorScheme.onSurface.withValues(alpha: 0.6),
-                                  BlendMode.srcIn,
-                                ),
-                              ),
+            boxShadow: shadows,
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 20,
+                    ),
+                    child: Text(
+                      text,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight:
+                            isSelected ? FontWeight.bold : FontWeight.w600,
+                        color: isSolved ? Colors.white38 : Colors.white,
+                        decoration:
+                            isSolved ? TextDecoration.lineThrough : null,
                       ),
                     ),
                   ),
-                ),
+                  // Sağ üstteki yıldız butonu
+                  if (onLearnedToggle != null)
+                    Positioned(
+                      top: 0,
+                      right: 0,
+                      child: IconButton(
+                        onPressed: onLearnedToggle,
+                        icon: Icon(
+                          isLearned ? Icons.star : Icons.star_border,
+                          color:
+                              isLearned ? Colors.amberAccent : Colors.white24,
+                          size: 20,
+                        ),
+                      ),
+                    ),
+                ],
               ),
-          ],
+            ),
+          ),
         ),
       ),
     );

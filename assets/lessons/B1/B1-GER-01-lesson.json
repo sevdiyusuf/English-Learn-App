@@ -1,0 +1,157 @@
+{
+    "schema_version": "1.0",
+    "level": "B1",
+    "lesson_id": "B1-GER-01-lesson",
+    "title": "Gerunds vs Infinitives: Meaning Change",
+    "topic_tags": [
+        "gerunds",
+        "infinitives",
+        "verb_patterns",
+        "meaning_change"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Bazı fiillerin (stop, remember, forget, try) her iki takıyı da (-ing ve to) alabildiğini göreceğiz.",
+                    "Hangi takının anlamı nasıl değiştirdiğini fark edeceğiz.",
+                    "Anlam kaymalarını günlük hayattaki örneklerle kavrayacağız."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Stop: Durmak mı, Bırakmak mı?",
+                "bullets": [
+                    "**Stop + -ing**: Bir alışkanlığı veya o anki eylemi tamamen bırakmak.",
+                    "**Stop + to-V1**: Bir eylemi, başka bir eylemi yapmak amacıyla yarıda kesmek."
+                ],
+                "examples": [
+                    "He stopped smoking. (Sigara içmeyi bıraktı.)",
+                    "He stopped to smoke. (Sigara içmek için durdu/mola verdi.)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "Remember & Forget: Hafıza Yolculuğu",
+                "bullets": [
+                    "**Verb + -ing**: Geçmişe bakmak (Bir hatırayı hatırlamak veya unutmamak).",
+                    "**Verb + to-V1**: Geleceğe bakmak (Yapılması gereken bir görevi hatırlamak veya unutmak)."
+                ],
+                "examples": [
+                    "I remember locking the door. (Kapıyı kilitlediğimi hatırlıyorum - Hatıra.)",
+                    "Please remember to lock the door. (Lütfen kapıyı kilitlemeyi unutma - Görev.)"
+                ]
+            },
+            {
+                "id": "c4",
+                "type": "rule",
+                "title": "Try: Deney vs. Çaba",
+                "bullets": [
+                    "**Try + -ing**: Bir çözüm yolu olarak bir şeyi denemek (deney/öneri).",
+                    "**Try + to-V1**: Çok zor bir şeyi yapmaya çalışmak (çaba/gayret)."
+                ],
+                "examples": [
+                    "Try drinking herbal tea for your cough. (Öksürüğün için bitki çayı içmeyi dene.)",
+                    "I tried to lift the table, but it was too heavy. (Masayı kaldırmaya çalıştım ama çok ağırdı.)"
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Geçmiş Hatıralarda 'to' Kullanmak**: 'I'll never forget to visit Paris' derseniz, gelecekte gitmeyi unutmayacağınızı söylemiş olursunuz. Eğer hatıradan bahsediyorsanız 'visiting' demelisiniz.",
+                    "**Mola Vermeyi 'ing' ile Anlatmak**: Bir şey yapmak için durduğunuzda 'to' kullanmayı unutmayın."
+                ],
+                "examples": [
+                    "Hatalı: I stopped smoking to buy bread. ✗ (Ekmek almak için sigarayı bıraktım - Mantıksız)",
+                    "Doğru: I stopped to buy some bread. ✓ (Ekmek almak için durdum.)"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "I was late for work because I stopped ____ some gas.",
+                "options": [
+                    "to get",
+                    "getting"
+                ],
+                "answer": "to get",
+                "explain": "İşe giderken 'yakıt almak amacıyla' durduğunuz için 'stop + to' kullanılır."
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Mutfaktaki Felaket",
+        "intro_bullets": [
+            "Mutfakta yemek yapmaya çalışan birinin maceralarına eşlik et.",
+            "Fiillerden sonra gelen eklerin anlamı nasıl değiştirdiğine dikkat et!"
+        ],
+        "items": [
+            {
+                "engine": "fill",
+                "prompt": "I was making pasta, but I stopped ____ (check) my phone.",
+                "answer": [
+                    "to check"
+                ],
+                "explain": "Yemek yapma eylemini telefonuna bakmak amacıyla böldüğü için 'to' kullanılır."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "Oh no! I forgot ____ some salt in the water. The pasta is tasteless!",
+                "options": [
+                    "to put",
+                    "putting"
+                ],
+                "answer": "to put",
+                "explain": "Yapılması gereken bir görevi (tuz atmak) yapmayı unuttuğu için 'to' kullanılır."
+            },
+            {
+                "engine": "tap",
+                "prompt": "The sauce is too spicy. I tried ____ sugar, but it didn't help.",
+                "options": [
+                    "adding",
+                    "to add"
+                ],
+                "answer": "adding",
+                "explain": "Acıyı azaltmak için bir 'yöntem denediği' (deney/öneri) için -ing kullanılır."
+            },
+            {
+                "engine": "order",
+                "prompt": "Cümleyi kur: 'Ocağı kapatmayı hatırlıyorum.'",
+                "tokens": [
+                    "I",
+                    "remember",
+                    "turning",
+                    "off",
+                    "the",
+                    "stove."
+                ],
+                "answer_tokens": [
+                    "I",
+                    "remember",
+                    "turning",
+                    "off",
+                    "the",
+                    "stove."
+                ],
+                "explain": "Eylemin yapıldığına dair bir geçmiş hatırasından bahsedildiği için -ing yapısı kurulur."
+            }
+        ],
+        "recap_bullets": [
+            "Stop + to = Ara vermek | Stop + -ing = Bırakmak",
+            "Remember + to = Gelecek (Görev) | Remember + -ing = Geçmiş (Hatıra)",
+            "Try + to = Çabalamak | Try + -ing = Denemek (Çözüm aramak)"
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "B1-GER-01"
+    }
+}

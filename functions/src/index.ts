@@ -5,8 +5,24 @@ import * as admin from 'firebase-admin';
 import { onCall, HttpsError } from 'firebase-functions/v2/https';
 
 import dictionary from './dictionary.json';
+import easyPack from './easy_pack.json';
+import mediumPack from './medium_pack.json';
+import hardPack from './hard_pack.json';
 
 admin.initializeApp();
+
+type PackJson = { level: string; packs: Array<{ id: string; title: string; words: string[] }> };
+const allPacks: PackJson[] = [easyPack as PackJson, mediumPack as PackJson, hardPack as PackJson];
+const packIdToWords = new Map<string, Set<string>>();
+for (const packFile of allPacks) {
+    for (const pack of packFile.packs ?? []) {
+        const words = new Set<string>();
+        for (const w of pack.words ?? []) {
+            words.add(String(w).toLowerCase());
+        }
+        packIdToWords.set(pack.id, words);
+    }
+}
 
 type RoomData = {
     status: string;
@@ -16,10 +32,13 @@ type RoomData = {
     currentTurnUid?: string | null;
     turnDeadlineAt?: FirebaseFirestore.Timestamp | null;
     turnDurationSeconds: number;
-    currentWordType?: string | null; // 'verb' or 'adjective'
-    currentVerb?: string | null; // Deprecated - no longer used, kept for backward compatibility
+    currentWordType?: string | null; // 'verb' or 'adjective' etc.
+    currentVerb?: string | null;
     winnerUid?: string | null;
     hostUid: string;
+    gameMode?: string | null; // 'THEME' | 'CORE'
+    locked?: boolean;
+    settings?: { theme?: { difficulty: string; packId: string; packTitle: string }; core?: { posType: string } } | null;
 };
 
 const db = admin.firestore();
@@ -81,7 +100,7 @@ const resolveTimeoutInternal = async (roomId: string): Promise<boolean> => {
         const active = Array.isArray(room.activePlayerIds) ? [...room.activePlayerIds] : [];
         const currentUid = room.currentTurnUid ?? null;
         const currentIndex = currentUid ? active.indexOf(currentUid) : -1;
-        
+
         const updates: FirebaseFirestore.UpdateData<FirebaseFirestore.DocumentData> = {
             updatedAt: now,
         };
@@ -89,21 +108,19 @@ const resolveTimeoutInternal = async (roomId: string): Promise<boolean> => {
         // Remove player who timed out
         if (currentIndex !== -1) active.splice(currentIndex, 1);
         updates['activePlayerIds'] = active;
-        
-        // Determine next word type based on current state
-        // If timeout was on verb, next player should submit adjective
-        // If timeout was on adjective, next player should submit verb
-        if (room.currentWordType === 'verb') {
-            // Timeout on verb - next player submits adjective
+        updates['currentVerb'] = null;
+
+        // Word Battle: THEME/CORE use single type per game; legacy verb/adjective alternate
+        const gameMode = (room as RoomData).gameMode;
+        if (gameMode === 'THEME' || gameMode === 'CORE') {
+            updates['currentWordType'] = room.currentWordType ?? 'word';
+        } else if (room.currentWordType === 'verb') {
             updates['currentWordType'] = 'adjective';
         } else if (room.currentWordType === 'adjective') {
-            // Timeout on adjective - next player submits verb
             updates['currentWordType'] = 'verb';
         } else {
-            // Default to verb
             updates['currentWordType'] = 'verb';
         }
-        updates['currentVerb'] = null;
 
         if (active.length <= 1) {
             updates['status'] = 'finished';
@@ -141,15 +158,18 @@ export const getServerTime = onCall({ region: 'us-central1' }, async (_req) => {
 // Alias for backward compatibility
 export const getServerTimeV2 = getServerTime;
 
-type StartGameInput = { roomId?: string };
+type StartGameInput = {
+    roomId?: string;
+    gameMode?: string; // 'THEME' | 'CORE'
+    settings?: { theme?: { difficulty: string; packId: string; packTitle: string }; core?: { posType: string } };
+};
 
 export const startGame = onCall({ region: 'us-central1' }, async (req) => {
-    const { roomId } = (req.data as StartGameInput) ?? {};
+    const { roomId, gameMode, settings } = (req.data as StartGameInput) ?? {};
     if (!roomId) throw new HttpsError('invalid-argument', 'roomId gerekli');
     if (!req.auth) throw new HttpsError('unauthenticated', 'Oturum bulunamadı');
 
     await withTransactionRoom(roomId, async (tx, roomRef, room) => {
-        // Allow starting game if status is 'waiting' or 'finished' (for replay)
         if (room.status !== 'waiting' && room.status !== 'finished') {
             throw new HttpsError('failed-precondition', 'Oyun zaten başlamış');
         }
@@ -174,17 +194,29 @@ export const startGame = onCall({ region: 'us-central1' }, async (req) => {
             now.toMillis() + duration * 1000,
         );
 
-        tx.update(roomRef, {
+        const mode = (gameMode ?? 'CORE').toUpperCase();
+        const currentWordType = mode === 'THEME'
+            ? 'word'
+            : (settings?.core?.posType?.toLowerCase() ?? 'verb');
+
+        const updatePayload: FirebaseFirestore.UpdateData<FirebaseFirestore.DocumentData> = {
             status: 'active',
             activePlayerIds: active,
             currentTurnIndex: randomIndex,
             currentTurnUid: nextUid,
             turnDeadlineAt: deadline,
-            currentWordType: 'verb', // Start with verb input
+            currentWordType,
             currentVerb: null,
-            winnerUid: null, // Clear winner when restarting game
+            winnerUid: null,
             updatedAt: now,
-        });
+            locked: true,
+            gameMode: mode,
+        };
+        if (settings != null) {
+            updatePayload['settings'] = settings;
+        }
+
+        tx.update(roomRef, updatePayload);
 
         const usedDoc = roomRef.collection('meta').doc('usedWords');
         tx.set(usedDoc, { used: {} }, { merge: true });
@@ -196,7 +228,7 @@ export const startGame = onCall({ region: 'us-central1' }, async (req) => {
         .collection('rooms')
         .doc(roomId)
         .collection('playedWords');
-    
+
     const playedWordsSnapshot = await playedWordsRef.get();
     if (!playedWordsSnapshot.empty) {
         const batch = admin.firestore().batch();
@@ -222,7 +254,110 @@ export const resolveTimeout = onCall({ region: 'us-central1' }, async (req) => {
 // Alias for backward compatibility
 export const resolveTimeoutV2 = resolveTimeout;
 
-// Two-phase word submission: verb first, then adjective
+// Unified word submission for THEME and CORE modes (single word per turn)
+type SubmitWordInput = { roomId?: string; word?: string };
+
+export const submitWord = onCall({ region: 'us-central1' }, async (req) => {
+    const { roomId, word: rawWord } = (req.data as SubmitWordInput) ?? {};
+    const word = normalizeWord(rawWord);
+
+    if (!roomId || !word) {
+        throw new HttpsError('invalid-argument', 'roomId ve kelime gerekli');
+    }
+    if (!req.auth) {
+        throw new HttpsError('unauthenticated', 'Oturum bulunamadı');
+    }
+
+    await withTransactionRoom(roomId, async (tx, roomRef, room) => {
+        const now = nowTimestamp();
+        const deadline = room.turnDeadlineAt;
+        if (deadline && deadline.toMillis() <= now.toMillis()) {
+            throw new HttpsError('deadline-exceeded', 'TIMEOUT');
+        }
+        if (room.status !== 'active') {
+            throw new HttpsError('failed-precondition', 'GAME_NOT_STARTED');
+        }
+        if (room.currentTurnUid !== req.auth!.uid) {
+            throw new HttpsError('permission-denied', 'Sıran geldiğinde kelime gönderebilirsin');
+        }
+
+        const settings = room.settings;
+        const gameMode = (room.gameMode ?? 'CORE').toUpperCase();
+
+        if (gameMode === 'THEME') {
+            const packId = settings?.theme?.packId;
+            if (!packId) {
+                throw new HttpsError('failed-precondition', 'GAME_NOT_LOCKED');
+            }
+            const packWords = packIdToWords.get(packId);
+            if (!packWords?.has(word)) {
+                throw new HttpsError('invalid-argument', 'NOT_IN_PACK');
+            }
+        } else {
+            const posType = settings?.core?.posType ?? 'verb';
+            if (!validateDictionaryWord(word, posType)) {
+                let inAnyType = false;
+                for (const set of dictionaryMap.values()) {
+                    if (set.has(word)) {
+                        inAnyType = true;
+                        break;
+                    }
+                }
+                throw new HttpsError(
+                    'invalid-argument',
+                    inAnyType ? 'WRONG_TYPE' : 'NOT_IN_DICTIONARY',
+                );
+            }
+        }
+
+        const active = Array.isArray(room.activePlayerIds) ? [...room.activePlayerIds] : [];
+        if (active.length === 0) {
+            throw new HttpsError('failed-precondition', 'Aktif oyuncu bulunmuyor');
+        }
+
+        const usedDoc = roomRef.collection('meta').doc('usedWords');
+        const usedSnap = await tx.get(usedDoc);
+        const usedMap = usedSnap.exists
+            ? (usedSnap.get('used') as Record<string, boolean> | undefined) ?? {}
+            : {};
+        if (usedMap[word]) {
+            throw new HttpsError('already-exists', 'DUPLICATE');
+        }
+
+        const playedWordsRef = roomRef.collection('playedWords');
+        const typeForDoc = gameMode === 'THEME' ? 'word' : (room.currentWordType ?? 'verb');
+        tx.create(playedWordsRef.doc(), {
+            word,
+            type: typeForDoc,
+            byUid: req.auth!.uid,
+            at: now,
+        });
+
+        tx.set(
+            usedDoc,
+            { used: { ...usedMap, [word]: true } },
+            { merge: true },
+        );
+
+        const currentIndex = active.indexOf(req.auth!.uid);
+        const nextIndex = (currentIndex + 1) % active.length;
+        const nextUid = active[nextIndex];
+        const duration = room.turnDurationSeconds ?? 12;
+        const nextDeadline = admin.firestore.Timestamp.fromMillis(
+            now.toMillis() + duration * 1000,
+        );
+
+        tx.update(roomRef, {
+            currentTurnIndex: nextIndex,
+            currentTurnUid: nextUid,
+            turnDeadlineAt: nextDeadline,
+            currentWordType: room.currentWordType ?? typeForDoc,
+            updatedAt: now,
+        });
+    });
+});
+
+// Two-phase word submission: verb first, then adjective (legacy CORE verb+adjective alternating)
 type SubmitVerbInput = { roomId?: string; verb?: string };
 type SubmitAdjectiveInput = { roomId?: string; adjective?: string };
 
@@ -308,7 +443,7 @@ export const submitVerb = onCall({ region: 'us-central1' }, async (req) => {
             { merge: true },
         );
 
-        // Switch to next player for adjective
+        // Switch to next player for verb (ensure single word turn)
         const currentIndex = active.indexOf(req.auth!.uid);
         const nextIndex = (currentIndex + 1) % active.length;
         const nextUid = active[nextIndex];
@@ -320,7 +455,7 @@ export const submitVerb = onCall({ region: 'us-central1' }, async (req) => {
         tx.update(roomRef, {
             currentTurnIndex: nextIndex,
             currentTurnUid: nextUid,
-            currentWordType: 'adjective',
+            currentWordType: 'verb',
             currentVerb: null, // No longer needed
             turnDeadlineAt: nextDeadline,
             updatedAt: now,
@@ -425,15 +560,14 @@ export const submitAdjective = onCall({ region: 'us-central1' }, async (req) => 
     });
 });
 
-// Legacy submitWord function - keeps backward compatibility
-// This function is deprecated - use submitVerb + submitAdjective separately
-type SubmitWordInput = { roomId?: string; verb?: string; adjective?: string };
+// Legacy submitWord function (verb+adjective at once) - backward compatibility only
+type SubmitWordLegacyInput = { roomId?: string; verb?: string; adjective?: string };
 
-export const submitWord = onCall({ region: 'us-central1' }, async (req) => {
-    // This is deprecated - should not be used in new code
+export const submitWordLegacy = onCall({ region: 'us-central1' }, async (req) => {
+    // Deprecated - use submitWord (THEME/CORE) or submitVerb+submitAdjective (legacy)
     // It's kept for backward compatibility only
     // New code should use submitVerb + submitAdjective separately
-    const { roomId, verb: rawVerb, adjective: rawAdj } = (req.data as SubmitWordInput) ?? {};
+    const { roomId, verb: rawVerb, adjective: rawAdj } = (req.data as SubmitWordLegacyInput) ?? {};
     const verb = normalizeWord(rawVerb);
     const adjective = normalizeWord(rawAdj);
 

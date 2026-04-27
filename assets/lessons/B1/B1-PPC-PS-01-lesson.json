@@ -1,0 +1,208 @@
+{
+    "schema_version": "1.0",
+    "level": "B1",
+    "lesson_id": "B1-PPC-PS-01-lesson",
+    "title": "Past Perfect Continuous vs Past Simple",
+    "topic_tags": [
+        "past_perfect_continuous",
+        "past_simple",
+        "cause_result",
+        "had_been_ving"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Geçmişteki bir noktadan önce ne kadar süredir bir eylemin devam ettiğini (Duration) anlatmayı öğreneceğiz.",
+                    "Geçmişteki bir durumun 'sebebini' vurgularken (Cause & Result) bu zamanı nasıl kullanacağımızı kavrayacağız.",
+                    "Past Simple ile arasındaki temel farkları örneklerle göreceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Past Perfect Continuous: Geçmişin Süreci",
+                "bullets": [
+                    "Geçmişte başka bir olay gerçekleşmeden hemen önce devam etmekte olan eylemleri vurgular.",
+                    "Bu yapıda vurgu eylemin 'kendisi' ve 'süresi' (for hours, all day) üzerindedir."
+                ],
+                "formula": [
+                    "Subject + had been + Verb-ing"
+                ],
+                "examples": [
+                    "I was tired because I **had been walking** for hours.",
+                    "They were wet because it **had been raining** all day."
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "Past Simple: Tamamlanmış Eylemler",
+                "bullets": [
+                    "Geçmişte birbiri ardına gerçekleşen, tamamlanmış ve süresi vurgulanmayan eylemler için kullanılır.",
+                    "Daha çok olayların sıralamasını anlatır."
+                ],
+                "examples": [
+                    "She **found** her keys and **went** home.",
+                    "He **finished** his homework, then he played games."
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "Choose the correct form: 'Her eyes were red because she ____.'",
+                "options": [
+                    "had been crying",
+                    "cried"
+                ],
+                "answer": "had been crying",
+                "explain": "Gözlerin kırmızı olması geçmişteki bir sürecin (ağlama eylemi) sonucudur; bu yüzden Continuous yapısı tercih edilir."
+            },
+            {
+                "id": "c4",
+                "type": "rule",
+                "title": "Sebep ve Sonuç (Cause & Result)",
+                "bullets": [
+                    "Past Perfect Continuous, geçmişte gördüğümüz bir sonucun 'nedenini' açıklamak için mükemmeldir.",
+                    "Eylem bitmiş olsa bile, izleri geçmişin o anında hâlâ tazedir."
+                ],
+                "examples": [
+                    "They were angry because we **had been waiting** too long.",
+                    "They were dirty because they **had been playing** in the garden."
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Past Perfect (had V3) ile Karıştırmak**: Süreç vurgulanmıyorsa sadece 'had + V3' kullanılır.",
+                    "**Fiil Halini Yanlış Yapmak**: 'Had been wrote' hatalıdır. Mutlaka fiile '-ing' eklenmelidir.",
+                    "**Anlık Eylemlerde Kullanmak**: Otobüsü kaçırmak (miss) gibi anlık eylemler için Continuous kullanılmaz."
+                ],
+                "examples": [
+                    "Hatalı: I was late because I had been missed the bus. ✗",
+                    "Doğru: I was late because I **had missed** the bus. ✓",
+                    "Hatalı: He had been wrote emails all morning. ✗",
+                    "Doğru: He **had been writing** emails all morning. ✓"
+                ]
+            },
+            {
+                "id": "q2",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "By 6 p.m., I ____ for three hours.",
+                "options": [
+                    "had been studying",
+                    "studied"
+                ],
+                "answer": "had been studying",
+                "explain": "Geçmişteki bir zamandan (6 p.m.) önceki 'süreç' (three hours) vurgulandığı için Continuous yapısı kullanılır."
+            },
+            {
+                "id": "c6",
+                "type": "tip",
+                "title": "Pratik İpucu",
+                "bullets": [
+                    "Cümlede 'for' veya 'since' ile bir süre belirtiliyorsa ve bu geçmişteki bir durumu açıklıyorsa: **Had been + ing**.",
+                    "Eğer sadece olaylar listeleniyorsa: **Past Simple (V2)**."
+                ]
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Kontekst: Dağınık Bir Mutfak",
+        "intro_bullets": [
+            "Dün eve geldiğinde her yerin dağınık olduğunu gördün.",
+            "Ev arkadaşlarının senden önce neler yaptığını anlamaya çalışıyorsun.",
+            "Süreç ve sonuç ilişkilerini doğru zamanlarla kur!"
+        ],
+        "items": [
+            {
+                "engine": "fill",
+                "prompt": "The kitchen was a mess because my roommates ___ (cook) for hours.",
+                "answer": [
+                    "had been cooking"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Mutfağın dağınık olma sebebini süregelen bir eylemle açıklıyoruz."
+            },
+            {
+                "engine": "tap",
+                "prompt": "I ___ a big pizza box on the table and felt hungry.",
+                "bank": [
+                    "saw",
+                    "had been seeing",
+                    "seen"
+                ],
+                "answer": "saw",
+                "explain": "Görmek eylemi o andaki tamamlanmış bir gözlemdir."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "They were exhausted because they ___ the whole house.",
+                "options": [
+                    "had been cleaning",
+                    "cleaned"
+                ],
+                "answer": "had been cleaning",
+                "explain": "Yorgunluğun sebebi olan uzun süreli eylem için Continuous kullanılır."
+            },
+            {
+                "engine": "order",
+                "prompt": "Cümleyi kur: 'Sabahtan beri e-posta yazıyordu.'",
+                "tokens": [
+                    "He",
+                    "had",
+                    "been",
+                    "writing",
+                    "emails",
+                    "since",
+                    "this",
+                    "morning"
+                ],
+                "answer_tokens": [
+                    "He",
+                    "had",
+                    "been",
+                    "writing",
+                    "emails",
+                    "since",
+                    "this",
+                    "morning"
+                ],
+                "explain": "Geçmişteki bir ana kadar süren eylemi 'had been V-ing' ile kurarız."
+            },
+            {
+                "engine": "fill",
+                "prompt": "She was happy because she ___ (pass) her exams with high scores.",
+                "answer": [
+                    "had passed"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Sınavı geçmek anlık bir başarıdır; bu yüzden Past Perfect (had V3) kullanılır."
+            }
+        ],
+        "recap_bullets": [
+            "Hatırla: Geçmişte bir olaydan önceki 'süreç' vurgusu için 'had been + ing' kullan.",
+            "Hatırla: Geçmişteki durumların nedenlerini açıklarken sürece odaklan.",
+            "Hatırla: Sıralı ve tamamlanmış eylemler için Past Simple (V2) her zaman yanındadır."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "B1-PPC-PS-01"
+    }
+}

@@ -1,0 +1,153 @@
+{
+  "@@locale": "tr",
+  "settingsTitle": "Ayarlar",
+  "accountSection": "Hesap",
+  "guestUser": "Misafir Kullanıcı",
+  "signIn": "Giriş Yap",
+  "signOut": "Çıkış Yap",
+  "deleteAccount": "Hesabımı Sil",
+  "appLanguage": "Uygulama Dili",
+  "dailyGoalType": "Günlük Hedef Tipi",
+  "dailyGoalValue": "Günlük Hedef Değeri",
+  "wordCount": "Kelime Sayısı",
+  "minutes": "Dakika",
+  "words": "kelime",
+  "min": "dk",
+  "theme": "Tema",
+  "system": "Sistem",
+  "light": "Açık",
+  "dark": "Koyu",
+  "notifications": "Bildirimler",
+  "sound": "Ses Efektleri",
+  "vibration": "Titreşim",
+  "reminders": "Hatırlatıcılar",
+  "reminderTime": "Hatırlatma Saati",
+  "feedback": "Geri Bildirim",
+  "rateApp": "Uygulamayı Oyla",
+  "contactUs": "Bize Ulaşın",
+  "privacyPolicy": "Gizlilik Politikası",
+  "termsOfService": "Kullanım Koşulları",
+  "version": "Sürüm",
+  "errorUpdate": "Ayar güncellenemedi: {error}",
+  "@errorUpdate": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "general": "Genel",
+  "preferences": "Tercihler",
+  "about": "Hakkında",
+  "profileAndSettings": "Profil & Ayarlar",
+  "appearance": "Görünüm",
+  "soundAndVibration": "Ses & Titreşim",
+  "soundSubtitle": "Oyun seslerini aç/kapat",
+  "vibrationSubtitle": "Haptic feedback aç/kapat",
+  "dailyGoal": "Günlük Hedef",
+  "goalType": "Hedef Türü",
+  "duration": "Süre",
+  "dailyGoalDescription": "Günlük hedef, istatistik ekranında takip edilecek.",
+  "dailyReminder": "Günlük Hatırlatma",
+  "dailyReminderSubtitle": "Her gün belirlenen saatte hatırlatma gönder",
+  "statistics": "İstatistikler",
+  "progressAndStats": "İlerleme & İstatistikler",
+  "progressAndStatsSubtitle": "Oyun istatistiklerinizi görüntüleyin",
+  "dataAndPrivacy": "Veri & Gizlilik",
+  "resetProgress": "Tüm İlerlemeyi Sıfırla",
+  "resetProgressSubtitle": "Yerel ilerleme verilerini sil",
+  "deleteAccountSubtitle": "Hesabınızı ve tüm verilerinizi kalıcı olarak silin",
+  "privacyPolicySubtitle": "Gizlilik politikamızı okuyun",
+  "privacyPolicyComingSoon": "Gizlilik politikası yakında eklenecek",
+  "user": "Kullanıcı",
+  "changeName": "İsim Değiştir",
+  "displayName": "Görünen İsim",
+  "enterName": "İsminizi girin",
+  "cancel": "İptal",
+  "save": "Kaydet",
+  "nameUpdated": "İsim güncellendi",
+  "errorOccurred": "Hata: {error}",
+  "@errorOccurred": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "addFriend": "Arkadaş Ekle",
+  "friendCode": "Arkadaş kodu",
+  "sendRequest": "İstek gönder",
+  "friendRequestSent": "Arkadaşlık isteği gönderildi",
+  "friendRequestFailed": "İstek gönderilemedi: {error}",
+  "@friendRequestFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "resetProgressDialogTitle": "İlerlemeyi Sıfırla",
+  "resetProgressDialogContent": "Tüm yerel ilerleme verileriniz silinecek. Bu işlem geri alınamaz. Devam etmek istiyor musunuz?",
+  "reset": "Sıfırla",
+  "progressResetSuccess": "İlerleme başarıyla sıfırlandı",
+  "userNotFound": "Kullanıcı bulunamadı",
+  "progressResetFailed": "İlerleme sıfırlama başarısız: {error}",
+  "@progressResetFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteAccountDialogContent": "Hesabınız ve tüm verileriniz kalıcı olarak silinecek. Bu işlem geri alınamaz. Devam etmek istiyor musunuz?",
+  "delete": "Sil",
+  "finalConfirmation": "Son Onay",
+  "deleteAccountFinalConfirmation": "Bu işlem geri alınamaz. Hesabınızı silmek istediğinizden emin misiniz?",
+  "yesDelete": "Evet, Sil",
+  "accountDeletedSuccess": "Hesap başarıyla silindi",
+  "accountDeleteFailed": "Hesap silme başarısız: {error}",
+  "@accountDeleteFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "userCode": "Kullanıcı Kodu: {code}",
+  "@userCode": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "linkAccount": "Hesap Bağla",
+  "myFriends": "Arkadaşlarım",
+  "welcome": "Hoş Geldiniz!",
+  "welcomeSubtitle": "Sıkılmadan İngilizce kelimeler öğrenin!",
+  "wordMatchTitle": "Kelime Pratiği 📚",
+  "wordMatchCardTitle": "Word Practice",
+  "wordMatchCardSubtitle": "Kendi kartlarınızla pratik yapın",
+  "trainingTitle": "Eğitim (Gramer) 📝",
+  "trainingCardTitle": "Gramer",
+  "trainingCardSubtitle": "A1, A2, B1, B2 Seviye Çalışmaları",
+  "miniGamesTitle": "Eğlence Zamanı 🎮",
+  "miniGamesCardTitle": "Mini Games",
+  "miniGamesCardSubtitle": "Kelime bilginizi oyunlarla test edin",
+  "arenaTitle": "Gramer Arenası",
+  "createRoom": "Oda Oluştur",
+  "joinRoom": "Odaya Katıl",
+  "roomCode": "Oda Kodu",
+  "waitingForHost": "Kurucunun başlatması bekleniyor...",
+  "startGame": "Oyunu Başlat",
+  "victory": "ZAFER!",
+  "defeat": "YENİLGİ",
+  "draw": "BERABERE!",
+  "you": "SEN",
+  "opponent": "RAKİP",
+  "round": "TUR",
+  "backToHome": "ANA EKRANA DÖN",
+  "copied": "Kopyalandı!",
+  "wrongAnswerTryAgain": "Yanlış cevap! Tekrar dene.",
+  "wrongAnswerLocked": "Yanlış cevap! Kilitlendi."
+}

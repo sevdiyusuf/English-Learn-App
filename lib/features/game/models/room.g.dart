@@ -34,6 +34,16 @@ _$RoomImpl _$$RoomImplFromJson(Map<String, dynamic> json) => _$RoomImpl(
       hostUid: json['hostUid'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: const TimestampConverter().fromJson(json['updatedAt']),
+      gameMode: json['gameMode'] == null
+          ? GameMode.core
+          : const GameModeConverter().fromJson(json['gameMode'] as String),
+      locked: json['locked'] as bool? ?? false,
+      settings: const GameRoomSettingsConverter()
+          .fromJson(json['settings'] as Map<String, dynamic>?),
+      scores: (json['scores'] as Map<String, dynamic>?)?.map(
+            (k, e) => MapEntry(k, (e as num).toInt()),
+          ) ??
+          const <String, int>{},
     );
 
 Map<String, dynamic> _$$RoomImplToJson(_$RoomImpl instance) =>
@@ -54,4 +64,8 @@ Map<String, dynamic> _$$RoomImplToJson(_$RoomImpl instance) =>
       'hostUid': instance.hostUid,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': const TimestampConverter().toJson(instance.updatedAt),
+      'gameMode': const GameModeConverter().toJson(instance.gameMode),
+      'locked': instance.locked,
+      'settings': const GameRoomSettingsConverter().toJson(instance.settings),
+      'scores': instance.scores,
     };

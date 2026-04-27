@@ -16,6 +16,8 @@ class ConveyorArea extends StatefulWidget {
     required this.currentWord,
     required this.travelDuration,
     required this.onTimeout,
+    this.onDragStart,
+    this.onDragEnd,
     super.key,
   });
 
@@ -23,6 +25,8 @@ class ConveyorArea extends StatefulWidget {
   final Duration travelDuration;
   final Function(CargoWord)
   onTimeout; // Changed to accept the word that timed out
+  final Function(CargoWord)? onDragStart; // Called when drag starts
+  final Function(CargoWord)? onDragEnd; // Called when drag ends (cancelled)
 
   @override
   State<ConveyorArea> createState() => _ConveyorAreaState();
@@ -218,6 +222,16 @@ class _ConveyorAreaState extends State<ConveyorArea> {
                     child: Draggable<CargoWord>(
                       data: _activeWordData!.fullWord,
 
+                      // Drag başladığında
+                      onDragStarted: () {
+                        if (mounted && _activeWordData != null) {
+                          debugPrint(
+                            "ConveyorArea: Drag Started - ${_activeWordData!.id}",
+                          );
+                          widget.onDragStart?.call(_activeWordData!.fullWord);
+                        }
+                      },
+
                       // Başarıyla bırakıldığında (CategoryDock veya SaveBar kabul ederse)
                       onDragCompleted: () {
                         if (mounted) {
@@ -240,6 +254,8 @@ class _ConveyorAreaState extends State<ConveyorArea> {
                           debugPrint(
                             "ConveyorArea: Drag End - Kelime bırakılmadı, animasyon devam ediyor",
                           );
+                          // Notify controller that drag ended (word not dropped)
+                          widget.onDragEnd?.call(_activeWordData!.fullWord);
                           // Animasyon devam edecek, timeout normal şekilde çalışacak
                         }
                       },

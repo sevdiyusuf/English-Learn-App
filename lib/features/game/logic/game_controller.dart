@@ -85,58 +85,151 @@ class GameController extends AutoDisposeFamilyAsyncNotifier<GameState, String> {
     return GameState(room: room, playedWords: words, usedWords: used);
   }
 
+  /// Submit single word for THEME or CORE mode.
+  Future<void> submitWord({required String word}) async {
+    final current = state.value;
+    if (current == null) throw StateError('Oyun durumu mevcut değil');
+
+    final userUid = ref.read(authControllerProvider).value?.uid;
+    if (userUid == null) throw StateError('Kullanıcı oturumu açılmamış');
+
+    // Extra check: Is it really this user's turn?
+    if (current.room.currentTurnUid != userUid) {
+      throw StateError('Sıra sizde değil!');
+    }
+
+    // Normalize: trim, lowercase, remove extra spaces
+    final normalized = word.trim().toLowerCase().replaceAll(
+      RegExp(r'\s+'),
+      ' ',
+    );
+    if (normalized.isEmpty) {
+      throw ArgumentError('Kelime boş olamaz');
+    }
+
+    // Optimistic update
+    final type = current.room.currentWordType ?? 'word';
+    final wordType =
+        type == 'verb'
+            ? WordType.verb
+            : type == 'adjective'
+            ? WordType.adjective
+            : type == 'noun'
+            ? WordType.noun
+            : type == 'adverb'
+            ? WordType.adverb
+            : WordType.word;
+    final optimisticWord = PlayedWord(
+      word: normalized,
+      type: wordType,
+      byUid: userUid,
+      at: DateTime.now(),
+    );
+    
+    // Create updated room state for optimistic UI (optional but good)
+    // We don't change currentTurnUid here because that's server-side logic
+    // but we can update playedWords
+    final updatedWords = [...current.playedWords, optimisticWord];
+    state = AsyncValue.data(current.copyWith(playedWords: updatedWords));
+
+    await _repo.submitWord(roomId: _roomId, word: normalized);
+  }
+
   Future<void> submitVerb({required String verb}) async {
-    final normalizedVerb = verb.trim().toLowerCase();
+    final current = state.value;
+    if (current == null) throw StateError('Oyun durumu mevcut değil');
+
+    final userUid = ref.read(authControllerProvider).value?.uid;
+    if (userUid == null) throw StateError('Kullanıcı oturumu açılmamış');
+
+    if (current.room.currentTurnUid != userUid) {
+      throw StateError('Sıra sizde değil!');
+    }
+
+    final normalizedVerb = verb.trim().toLowerCase().replaceAll(
+          RegExp(r'\s+'),
+          ' ',
+        );
     if (normalizedVerb.isEmpty) {
       throw ArgumentError('Fiil boş olamaz');
     }
 
-    // Optimistic update - add word immediately to UI
+    // Optimistic update
+    final optimisticWord = PlayedWord(
+      word: normalizedVerb,
+      type: WordType.verb,
+      byUid: userUid,
+      at: DateTime.now(),
+    );
+    final updatedWords = [...current.playedWords, optimisticWord];
+    state = AsyncValue.data(current.copyWith(playedWords: updatedWords));
+
+    await _repo.submitVerb(roomId: _roomId, verb: normalizedVerb);
+  }
+
+  /// Handles word submission based on current game mode and state.
+  /// Returns the type of submission ('verb', 'adjective', 'word') for UI feedback.
+  Future<String> handleWordSubmission(String word) async {
     final current = state.value;
-    if (current != null) {
-      final userUid = ref.read(authControllerProvider).value?.uid;
-      if (userUid != null) {
-        final optimisticWord = PlayedWord(
-          word: normalizedVerb,
-          type: WordType.verb,
-          byUid: userUid,
-          at: DateTime.now(),
-        );
-        final updatedWords = [...current.playedWords, optimisticWord];
-        state = AsyncValue.data(current.copyWith(playedWords: updatedWords));
-      }
+    if (current == null) throw StateError('Game state not available');
+
+    final userUid = ref.read(authControllerProvider).value?.uid;
+    if (userUid == null) throw StateError('Kullanıcı oturumu açılmamış');
+
+    // CRITICAL: Double check turn before allowing submission
+    if (current.room.currentTurnUid != userUid) {
+      throw StateError('Sıra sizde değil!');
     }
 
-    // Submit to backend - real data will replace optimistic update
-    await _repo.submitVerb(
-      roomId: _roomId,
-      verb: normalizedVerb,
-    );
+    final mode = current.room.gameMode;
+    
+    if (mode == GameMode.theme || mode == GameMode.core) {
+      await submitWord(word: word);
+      return 'word';
+    } else {
+      // Legacy mode
+      final isVerb = current.room.currentWordType == 'verb' || 
+                     current.room.currentWordType == null;
+      
+      if (isVerb) {
+        await submitVerb(verb: word);
+        return 'verb';
+      } else {
+        await submitAdjective(adjective: word);
+        return 'adjective';
+      }
+    }
   }
 
   Future<void> submitAdjective({required String adjective}) async {
-    final normalizedAdjective = adjective.trim().toLowerCase();
+    final current = state.value;
+    if (current == null) throw StateError('Oyun durumu mevcut değil');
+
+    final userUid = ref.read(authControllerProvider).value?.uid;
+    if (userUid == null) throw StateError('Kullanıcı oturumu açılmamış');
+
+    if (current.room.currentTurnUid != userUid) {
+      throw StateError('Sıra sizde değil!');
+    }
+
+    final normalizedAdjective = adjective.trim().toLowerCase().replaceAll(
+      RegExp(r'\s+'),
+      ' ',
+    );
     if (normalizedAdjective.isEmpty) {
       throw ArgumentError('Sıfat boş olamaz');
     }
 
-    // Optimistic update - add word immediately to UI
-    final current = state.value;
-    if (current != null) {
-      final userUid = ref.read(authControllerProvider).value?.uid;
-      if (userUid != null) {
-        final optimisticWord = PlayedWord(
-          word: normalizedAdjective,
-          type: WordType.adjective,
-          byUid: userUid,
-          at: DateTime.now(),
-        );
-        final updatedWords = [...current.playedWords, optimisticWord];
-        state = AsyncValue.data(current.copyWith(playedWords: updatedWords));
-      }
-    }
+    // Optimistic update
+    final optimisticWord = PlayedWord(
+      word: normalizedAdjective,
+      type: WordType.adjective,
+      byUid: userUid,
+      at: DateTime.now(),
+    );
+    final updatedWords = [...current.playedWords, optimisticWord];
+    state = AsyncValue.data(current.copyWith(playedWords: updatedWords));
 
-    // Submit to backend - real data will replace optimistic update
     await _repo.submitAdjective(
       roomId: _roomId,
       adjective: normalizedAdjective,

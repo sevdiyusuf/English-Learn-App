@@ -1,0 +1,214 @@
+{
+    "schema_version": "1.0",
+    "level": "A1",
+    "lesson_id": "A1-ART-01-lesson",
+    "title": "Articles: a/an/the + zero",
+    "topic_tags": [
+        "articles",
+        "a_an",
+        "the",
+        "zero_article"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "İngilizcedeki 'a, an, the' belirteçlerini ve nerede hiçbir şey kullanmayacağımızı (zero article) öğreneceğiz.",
+                    "Tekil ve çoğul isimlerle hangi belirteçlerin geldiğini ayırt edeceğiz.",
+                    "Genel ve özel durumlar arasındaki farkı kavrayacağız."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "A vs. An (Belirsiz Belirteçler)",
+                "bullets": [
+                    "**A**: Sayılabilen tekil isimlerden önce, eğer kelime **sessiz bir harf sesiyle** başlıyorsa kullanılır.",
+                    "**An**: Sayılabilen tekil isimlerden önce, eğer kelime **sesli bir harf sesiyle** başlıyorsa kullanılır.",
+                    "Önemli: Kural yazılışla değil, kelimenin ağzımızdan çıkan **ilk sesiyle** ilgilidir."
+                ],
+                "examples": [
+                    "a **c**at (kedi)",
+                    "an **a**pple (elma)",
+                    "a **u**niversity ('y' sesiyle başlar)",
+                    "an **h**our ('h' okunmaz, 'o' sesiyle başlar)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "The (Belirli Belirteç)",
+                "bullets": [
+                    "**Özel/Bilinen Şeyler**: Karşımızdaki kişinin hangi nesneden bahsettiğimizi bildiği durumlarda kullanılır.",
+                    "**Benzersiz Varlıklar**: Dünyada tek olan varlıklar (Güneş, Ay) için kullanılır.",
+                    "**Sıfatların En Üst Derecesi**: 'The best', 'the biggest' gibi yapılarda zorunludur."
+                ],
+                "examples": [
+                    "The Sun (Güneş)",
+                    "Open **the** window. (Odada bilinen pencereyi aç.)",
+                    "This is **the** best book. (Bu en iyi kitap.)"
+                ]
+            },
+            {
+                "id": "c4",
+                "type": "rule",
+                "title": "Zero Article (Hiçbir Belirteç Kullanılmayan Durumlar)",
+                "bullets": [
+                    "**Genel Anlam**: Bir gruptan genel olarak bahsederken çoğul isimlerde 'the' kullanılmaz.",
+                    "**Sayılamayan İsimler**: Su, müzik, sevgi gibi genel kavramlardan bahsederken kullanılmaz.",
+                    "**Sabit İfadeler**: Okula gitmek (go to school), işe gitmek (go to work) gibi ifadelerde genellikle boş bırakılır."
+                ],
+                "examples": [
+                    "I like music. (Genel olarak müziği severim.)",
+                    "Dogs are friendly. (Genel olarak köpekler dost canlısıdır.)",
+                    "He goes to school by bus."
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Sese Değil Harfe Bakmak**: 'University' U ile başladığı için 'an' koymak yanlıştır; çünkü 'y' sesiyle okunur. 'Hour' H ile başladığı için 'a' koymak yanlıştır; çünkü 'h' okunmaz.",
+                    "**Genel Çoğullarda 'The' Kullanmak**: 'The cats are cute' derseniz sadece belirli bir gruptan bahsedersiniz. Genel olarak kedileri seviyorsanız sadece 'Cats are cute' demelisiniz.",
+                    "**Mesleklerde Belirteci Unutmak**: İngilizcede mesleklerden önce mutlaka 'a/an' kullanılır."
+                ],
+                "examples": [
+                    "Hatalı: She is teacher. ✗",
+                    "Doğru: She is **a** teacher. ✓",
+                    "Hatalı: An university. ✗",
+                    "Doğru: **A** university. ✓"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "Choose the correct sentence:",
+                "options": [
+                    "I want to be an engineer.",
+                    "I want to be a engineer.",
+                    "I want to be engineer."
+                ],
+                "answer": "I want to be an engineer.",
+                "explain": "'Engineer' kelimesi sesli harf (e) sesiyle başladığı için 'an' kullanılmalıdır."
+            },
+            {
+                "id": "c6",
+                "type": "tip",
+                "title": "Pratik İpucu: İlk Bahsediş vs. İkinci Bahsediş",
+                "bullets": [
+                    "Bir şeyden **ilk kez** bahsederken 'a/an' kullanırız.",
+                    "Aynı şeyden **ikinci kez** bahsederken, artık o şey bilindiği için 'the' kullanırız."
+                ],
+                "examples": [
+                    "I saw **a** dog. **The** dog was very big. (Bir köpek gördüm. Gördüğüm o köpek çok büyüktü.)"
+                ]
+            },
+            {
+                "id": "q2",
+                "type": "checkpoint",
+                "engine": "fill",
+                "prompt": "____ moon is very bright tonight.",
+                "answer": [
+                    "The"
+                ],
+                "normalize": [
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Dünyada tek ve benzersiz olan varlıklar için 'the' kullanılır."
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Kontekst: Kafede Bir Gün",
+        "intro_bullets": [
+            "Bugün güzel bir kafeye gittin.",
+            "Sipariş verirken ve etrafı gözlemlerken doğru belirteçleri seçmeye çalış.",
+            "Genel ve özel durumlar arasındaki farka dikkat et!"
+        ],
+        "items": [
+            {
+                "engine": "fill",
+                "prompt": "I am in ___ cafe right now.",
+                "answer": [
+                    "a"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Herhangi bir kafeden (ilk kez) bahsedildiği için 'a' kullanılır."
+            },
+            {
+                "engine": "tap",
+                "prompt": "I want to order ___ sandwich and an orange juice.",
+                "bank": [
+                    "a",
+                    "an",
+                    "the",
+                    "-"
+                ],
+                "answer": "a",
+                "explain": "'Sandwich' sessiz bir sesle başlar ve belirsiz bir tanesini istiyoruz."
+            },
+            {
+                "engine": "fill",
+                "prompt": "___ sandwich is very delicious!",
+                "answer": [
+                    "The"
+                ],
+                "normalize": [
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Artık sipariş ettiğimiz o belirli sandviçten bahsettiğimiz için 'the' diyoruz."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "I usually drink ___ water with my meal.",
+                "options": [
+                    "-",
+                    "a",
+                    "an",
+                    "the"
+                ],
+                "answer": "-",
+                "explain": "Genel anlamda sayılamayan (water) isimlerde belirteç kullanılmaz."
+            },
+            {
+                "engine": "order",
+                "prompt": "Look! The sun is shining.",
+                "tokens": [
+                    "Look!",
+                    "The",
+                    "sun",
+                    "is",
+                    "shining"
+                ],
+                "answer_tokens": [
+                    "Look!",
+                    "The",
+                    "sun",
+                    "is",
+                    "shining"
+                ],
+                "explain": "Güneş tek ve benzersiz olduğu için 'the' ile kullanılır."
+            }
+        ],
+        "recap_bullets": [
+            "Hatırla: 'A/An' herhangi bir, 'The' ise belirli bir tanedir.",
+            "Hatırla: Mesleklerden önce 'a/an' kullanmayı unutma (a doctor).",
+            "Hatırla: Genel şeylerden çoğul bahsederken belirteç kullanma (I like cats)."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "A1-ART-01"
+    }
+}

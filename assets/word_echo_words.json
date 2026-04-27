@@ -9,8 +9,20 @@
             "turkish": "gelir"
         },
         {
-            "english": "prefer",
-            "turkish": "tercih etmek"
+            "english": "estimate",
+            "turkish": "tahmin etmek"
+        },
+        {
+            "english": "evaluate",
+            "turkish": "değerlendirmek"
+        },
+        {
+            "english": "dependable",
+            "turkish": "güvenilir"
+        },
+        {
+            "english": "slightly",
+            "turkish": "hafifçe, azıcık"
         },
         {
             "english": "expert",
@@ -129,18 +141,6 @@
             "turkish": "unutulmaz"
         },
         {
-            "english": "young",
-            "turkish": "genç"
-        },
-        {
-            "english": "old",
-            "turkish": "yaşlı, eski"
-        },
-        {
-            "english": "huge",
-            "turkish": "kocaman"
-        },
-        {
             "english": "avoid",
             "turkish": "kaçınmak"
         },
@@ -151,14 +151,6 @@
         {
             "english": "wrong",
             "turkish": "yanlış"
-        },
-        {
-            "english": "early",
-            "turkish": "erken"
-        },
-        {
-            "english": "late",
-            "turkish": "geç"
         },
         {
             "english": "continue",
@@ -223,6 +215,290 @@
         {
             "english": "contribute",
             "turkish": "katkı sağlamak"
+        },
+        {
+            "english": "improve",
+            "turkish": "geliştirmek"
+        },
+        {
+            "english": "decrease",
+            "turkish": "azalmak, azaltmak"
+        },
+        {
+            "english": "increase",
+            "turkish": "artmak, artırmak"
+        },
+        {
+            "english": "decide",
+            "turkish": "karar vermek"
+        },
+        {
+            "english": "suggest",
+            "turkish": "önermek"
+        },
+        {
+            "english": "complain",
+            "turkish": "şikayet etmek"
+        },
+        {
+            "english": "compare",
+            "turkish": "karşılaştırmak"
+        },
+        {
+            "english": "promise",
+            "turkish": "söz vermek"
+        },
+        {
+            "english": "cancel",
+            "turkish": "iptal etmek"
+        },
+        {
+            "english": "crowded",
+            "turkish": "kalabalık"
+        },
+        {
+            "english": "quiet",
+            "turkish": "sessiz, sakin"
+        },
+        {
+            "english": "noisy",
+            "turkish": "gürültülü"
+        },
+        {
+            "english": "convenient",
+            "turkish": "elverişli, uygun"
+        },
+        {
+            "english": "uncomfortable",
+            "turkish": "rahatsız"
+        },
+        {
+            "english": "helpful",
+            "turkish": "yardımcı, faydalı"
+        },
+        {
+            "english": "customer",
+            "turkish": "müşteri"
+        },
+        {
+            "english": "owner",
+            "turkish": "sahip"
+        },
+        {
+            "english": "employee",
+            "turkish": "çalışan"
+        },
+        {
+            "english": "employer",
+            "turkish": "işveren"
+        },
+        {
+            "english": "neighbour",
+            "turkish": "komşu"
+        },
+        {
+            "english": "stranger",
+            "turkish": "yabancı (kişi)"
+        },
+        {
+            "english": "advantage",
+            "turkish": "avantaj"
+        },
+        {
+            "english": "disadvantage",
+            "turkish": "dezavantaj"
+        },
+        {
+            "english": "opportunity",
+            "turkish": "fırsat"
+        },
+        {
+            "english": "experience",
+            "turkish": "deneyim"
+        },
+        {
+            "english": "knowledge",
+            "turkish": "bilgi"
+        },
+        {
+            "english": "skill",
+            "turkish": "beceri"
+        },
+        {
+            "english": "effort",
+            "turkish": "çaba"
+        },
+        {
+            "english": "opinion",
+            "turkish": "fikir, görüş"
+        },
+        {
+            "english": "decision",
+            "turkish": "karar"
+        },
+        {
+            "english": "progress",
+            "turkish": "ilerleme"
+        },
+        {
+            "english": "schedule",
+            "turkish": "program"
+        },
+        {
+            "english": "appointment",
+            "turkish": "randevu"
+        },
+        {
+            "english": "traffic",
+            "turkish": "trafik"
+        },
+        {
+            "english": "pollution",
+            "turkish": "kirlilik"
+        },
+        {
+            "english": "climate",
+            "turkish": "iklim"
+        },
+        {
+            "english": "forecast",
+            "turkish": "tahmin"
+        },
+        {
+            "english": "discover",
+            "turkish": "keşfetmek"
+        },
+        {
+            "english": "explore",
+            "turkish": "keşfetmek"
+        },
+        {
+            "english": "celebrate",
+            "turkish": "kutlamak"
+        },
+        {
+            "english": "invite",
+            "turkish": "davet etmek"
+        },
+        {
+            "english": "prepare",
+            "turkish": "hazırlamak"
+        },
+        {
+            "english": "deliver",
+            "turkish": "teslim etmek"
+        },
+        {
+            "english": "repair",
+            "turkish": "tamir etmek"
+        },
+        {
+            "english": "protect",
+            "turkish": "korumak"
+        },
+        {
+            "english": "waste",
+            "turkish": "israf etmek"
+        },
+        {
+            "english": "achieve",
+            "turkish": "başarmak"
+        },
+        {
+            "english": "describe",
+            "turkish": "tanımlamak"
+        },
+        {
+            "english": "explain",
+            "turkish": "açıklamak"
+        },
+        {
+            "english": "budget",
+            "turkish": "bütçe"
+        },
+        {
+            "english": "destination",
+            "turkish": "varış noktası"
+        },
+        {
+            "english": "souvenir",
+            "turkish": "hediyelik eşya"
+        },
+        {
+            "english": "receipt",
+            "turkish": "fiş, makbuz"
+        },
+        {
+            "english": "refund",
+            "turkish": "para iadesi"
+        },
+        {
+            "english": "queue",
+            "turkish": "sıra, kuyruk"
+        },
+        {
+            "english": "habit",
+            "turkish": "alışkanlık"
+        },
+        {
+            "english": "balance",
+            "turkish": "bakiye, denge"
+        },
+        {
+            "english": "satisfied",
+            "turkish": "memnun"
+        },
+        {
+            "english": "comfortable",
+            "turkish": "rahat, konforlu"
+        },
+        {
+            "english": "disappointed",
+            "turkish": "hayal kırıklığına uğramış"
+        },
+        {
+            "english": "issue",
+            "turkish": "sorun, mesele"
+        },
+        {
+            "english": "safety",
+            "turkish": "güvenlik"
+        },
+        {
+            "english": "contact",
+            "turkish": "iletişime geçmek, temas"
+        },
+        {
+            "english": "delay",
+            "turkish": "gecikme, geciktirmek"
+        },
+        {
+            "english": "arrive",
+            "turkish": "varmak"
+        },
+        {
+            "english": "depart",
+            "turkish": "ayrılmak, hareket etmek"
+        },
+        {
+            "english": "environment",
+            "turkish": "çevre"
+        },
+        {
+            "english": "include",
+            "turkish": "içermek, dahil etmek"
+        },
+        {
+            "english": "immediately",
+            "turkish": "hemen, derhal"
+        },
+        {
+            "english": "probably",
+            "turkish": "muhtemelen"
+        },
+        {
+            "english": "recently",
+            "turkish": "son zamanlarda"
         }
     ]
 }

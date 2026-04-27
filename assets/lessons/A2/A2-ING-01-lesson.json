@@ -1,0 +1,207 @@
+{
+    "schema_version": "1.0",
+    "level": "A2",
+    "lesson_id": "A2-ING-01-lesson",
+    "title": "Gerunds (-ing)",
+    "topic_tags": [
+        "gerund",
+        "ing_form",
+        "like_love_hate",
+        "after_prepositions"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Fiillere '-ing' eki getirerek onları nasıl isim gibi (Gerund) kullanacağımızı öğreneceğiz.",
+                    "Sevdiğimiz veya nefret ettiğimiz eylemlerden bahsetmeyi kavrayacağız.",
+                    "Edatlardan (at, in, of, for vb.) sonra gelen fiillerin kuralını göreceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Duygu Bildiren Fiiller",
+                "bullets": [
+                    "**Like, Love, Hate, Enjoy** gibi fiillerden sonra bir eylem gelirse, o eylem '-ing' takısı alır.",
+                    "Buradaki '-ing' eki, eylemi bir 'aktivite adı' haline getirir."
+                ],
+                "examples": [
+                    "I love **swimming**. (Yüzmeyi severim.)",
+                    "She hates **getting up** early. (Erken kalkmaktan nefret eder.)",
+                    "They enjoy **traveling**. (Seyahat etmekten keyif alırlar.)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "formula",
+                "title": "Temel Yapı",
+                "bullets": [
+                    "Gerund yapısı oluşturmak oldukça basittir; fiilin yalın haline ek getirilir."
+                ],
+                "formula": [
+                    "Verb + -ing = Gerund (İsim-fiil)"
+                ],
+                "examples": [
+                    "Read + ing = Reading",
+                    "Write + ing = Writing (Sondaki 'e' düşer)"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "I don't like ____ horror movies alone.",
+                "options": [
+                    "watching",
+                    "watch",
+                    "to watching"
+                ],
+                "answer": "watching",
+                "explain": "'Like' fiilinden sonra gelen eylem '-ing' takısı alarak isimleşir."
+            },
+            {
+                "id": "c4",
+                "type": "rule",
+                "title": "Edatlardan (Prepositions) Sonra Kullanım",
+                "bullets": [
+                    "İngilizcede bir **edattan** (in, on, at, for, of, about, with...) sonra fiil gelirse, bu fiil mutlaka '-ing' takısı almalıdır.",
+                    "Bu kural, 'bir şeyde iyi olmak' veya 'bir şey için teşekkür etmek' gibi kalıplarda çok yaygındır."
+                ],
+                "examples": [
+                    "I am good **at** cooking. (Yemek yapmada iyiyimdir.)",
+                    "Thanks **for** helping me. (Yardım ettiğin için teşekkürler.)",
+                    "She is interested **in** learning English. (İngilizce öğrenmekle ilgileniyor.)"
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Fiili Yalın Bırakmak**: 'I like play tennis' hatalıdır. Doğrusu 'I like play**ing** tennis' olmalıdır.",
+                    "**Edattan Sonra Yalın Fiil**: 'Interested in learn' hatalıdır. Doğrusu 'Interested in learn**ing**' olmalıdır.",
+                    "**He/She için '-ings' Demek**: '-ing' eki şahsa göre değişmez; her zaman aynı kalır."
+                ],
+                "examples": [
+                    "Hatalı: He is afraid of drive. ✗",
+                    "Doğru: He is afraid of **driving**. ✓"
+                ]
+            },
+            {
+                "id": "q2",
+                "type": "checkpoint",
+                "engine": "fill",
+                "prompt": "Are you excited about ____ (meet) your new teacher?",
+                "answer": [
+                    "meeting"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "'About' bir edattır (preposition) ve kendisinden sonra gelen fiil '-ing' almalıdır."
+            },
+            {
+                "id": "c6",
+                "type": "tip",
+                "title": "Pratik İpucu: Korkular ve Hobiler",
+                "bullets": [
+                    "Bir şeyden korktuğunuzu (afraid of) veya bir şeye heyecanlandığınızı (excited about) söylerken her zaman '-ing' kullanın.",
+                    "Bu kalıplar günlük konuşmada en çok Gerund kullanılan yerlerdir."
+                ],
+                "examples": [
+                    "I'm tired of **waiting**. (Beklemekten yoruldum.)"
+                ]
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Kontekst: Yeni Bir Hobi",
+        "intro_bullets": [
+            "Tom, yeni bir hobi edinmek istiyor ve seçeneklerini değerlendiriyor.",
+            "Nelerden hoşlandığını ve nelerden korktuğunu anlatıyor.",
+            "Gerund (-ing) yapılarını doğru yerlere yerleştir!"
+        ],
+        "items": [
+            {
+                "engine": "fill",
+                "prompt": "Tom: 'I am really interested in ___ (learn) how to paint.'",
+                "answer": [
+                    "learning"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "'Interested in' kalıbından sonra fiil '-ing' alır."
+            },
+            {
+                "engine": "tap",
+                "prompt": "Tom: 'I'm not very good at ___ , but I want to try.'",
+                "bank": [
+                    "drawing",
+                    "draw",
+                    "to draw"
+                ],
+                "answer": "drawing",
+                "explain": "'At' edatından sonra fiil Gerund (-ing) yapısında olmalıdır."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "Tom: 'My sister loves ____ photos of nature.'",
+                "options": [
+                    "taking",
+                    "take",
+                    "to taking"
+                ],
+                "answer": "taking",
+                "explain": "'Love' fiili genellikle arkasından '-ing' alan bir fiil getirir."
+            },
+            {
+                "engine": "order",
+                "prompt": "Cümleyi kur: 'Yardım ettiğin için teşekkürler.'",
+                "tokens": [
+                    "Thanks",
+                    "for",
+                    "helping",
+                    "me"
+                ],
+                "answer_tokens": [
+                    "Thanks",
+                    "for",
+                    "helping",
+                    "me"
+                ],
+                "explain": "'For' edatından sonra 'helping' gelmelidir."
+            },
+            {
+                "engine": "fill",
+                "prompt": "Tom: 'I'm a bit afraid of ___ (fail), but I will start tomorrow.'",
+                "answer": [
+                    "failing"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "'Afraid of' kalıbından sonra fiile '-ing' eklenir."
+            }
+        ],
+        "recap_bullets": [
+            "Hatırla: Like, love, hate ve enjoy'dan sonra '-ing' gelir.",
+            "Hatırla: Tüm edatlardan (at, in, of, for...) sonra '-ing' gelir.",
+            "Hatırla: İsim-fiil yapısı eylemi bir aktivite adına dönüştürür."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "A2-ING-01"
+    }
+}

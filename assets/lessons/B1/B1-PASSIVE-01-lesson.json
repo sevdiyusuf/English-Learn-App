@@ -1,0 +1,263 @@
+{
+    "schema_version": "1.0",
+    "level": "B1",
+    "lesson_id": "B1-PASSIVE-01-lesson",
+    "title": "Passive Voice (Present/Past Simple Passive) - lesson",
+    "topic_tags": [
+        "passive",
+        "be_v3",
+        "present_simple_passive",
+        "past_simple_passive",
+        "by_agent"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Cümlede eylemi yapan kişiyi değil, eylemden etkilenen nesneyi vurgulamayı öğreneceğiz.",
+                    "Present Simple (Geniş Zaman) ve Past Simple (Geçmiş Zaman) cümleleri edilgen yapıya çevirmeyi kavrayacağız.",
+                    "Fiillerin 3. hallerini (Past Participle) bu yapıda nasıl kullanacağımızı göreceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Aktif vs. Pasif: Odak Değişimi",
+                "bullets": [
+                    "**Active (Etken)**: İşi yapan kişi (özne) önemlidir. Örn: 'Ali camı kırdı.'",
+                    "**Passive (Edilgen)**: Yapılan iş veya etkilenen nesne önemlidir. Örn: 'Cam kırıldı.'",
+                    "Eylemi kimin yaptığı bilinmiyorsa veya önemsizse bu yapıyı kullanırız."
+                ],
+                "examples": [
+                    "Active: They build houses. (Ev inşa ederler.)",
+                    "Passive: Houses are built. (Evler inşa edilir.)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "formula",
+                "title": "Present Simple Passive Formülü",
+                "bullets": [
+                    "Genel gerçekler, rutinler veya süreçler anlatılırken kullanılır.",
+                    "Nesne tekilse 'is', çoğulsa 'are' yardımcı fiili seçilir."
+                ],
+                "formula": [
+                    "$$Am / Is / Are + Verb_3 (Past Participle)$$"
+                ],
+                "examples": [
+                    "English **is spoken** in many countries.",
+                    "New roads **are built** every year."
+                ]
+            },
+            {
+                "id": "c4",
+                "type": "formula",
+                "title": "Past Simple Passive Formülü",
+                "bullets": [
+                    "Geçmişte yaşanmış ve tamamlanmış olayları anlatırken kullanılır.",
+                    "Yardımcı fiil geçmiş zamana (was/were) dönüşür."
+                ],
+                "formula": [
+                    "$$Was / Were + Verb_3 (Past Participle)$$"
+                ],
+                "examples": [
+                    "The letter **was sent** yesterday.",
+                    "Many letters **were written** by her."
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "Choose the correct form: 'The homework ____ by the teacher every day.'",
+                "options": [
+                    "is checked",
+                    "was checked",
+                    "checks"
+                ],
+                "answer": "is checked",
+                "explain": "'Every day' geniş zaman (Present Simple) bildirdiği için 'is + V3' yapısı kullanılır.",
+                "hint": "Zaman belirtecine (every day) dikkat et."
+            },
+            {
+                "id": "c5",
+                "type": "rule",
+                "title": "'By' Kullanımı: Eylemi Yapanı Belirtmek",
+                "bullets": [
+                    "Edilgen cümlede eylemi kimin yaptığını hâlâ söylemek istiyorsak cümlenin sonuna **'by'** (tarafından) ekleriz.",
+                    "Eğer yapan kişi önemsizse bu kısmı atabiliriz."
+                ],
+                "examples": [
+                    "The report was written **by Tom**.",
+                    "This movie is watched **by millions of people**."
+                ]
+            },
+            {
+                "id": "c6",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**'Be' Fiilini Unutmak**: 'The house built' derseniz 'Ev inşa etti' gibi yanlış bir anlam çıkar. Mutlaka 'is/was' eklenmelidir.",
+                    "**Yanlış Fiil Hali**: Pasif yapıda fiil her zaman 3. haldedir. 'Was wrote' hatalıdır, 'was written' olmalıdır.",
+                    "**Zaman Karışıklığı**: Geçmişteki bir olay için 'is' kullanmak (is written yesterday) büyük bir hatadır."
+                ],
+                "examples": [
+                    "Hatalı: The room cleaned every day. ✗",
+                    "Doğru: The room **is cleaned** every day. ✓",
+                    "Hatalı: The letter was send. ✗",
+                    "Doğru: The letter was **sent**. ✓"
+                ]
+            },
+            {
+                "id": "q2",
+                "type": "checkpoint",
+                "engine": "fill",
+                "prompt": "Many books ____ (read) by students last semester.",
+                "answer": [
+                    "were read"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "'Last semester' geçmiş zaman bildirdiği için ve 'books' çoğul olduğu için 'were read' (V3) kullanılır.",
+                "hint": "Read fiilinin 2. ve 3. hali aynı yazılır ama farklı okunur."
+            },
+            {
+                "id": "c7",
+                "type": "tip",
+                "title": "Pratik İpucu: Pasif Yapı Dedektifi",
+                "bullets": [
+                    "Cümle başında bir 'insan' yerine 'cansız bir nesne' (mektup, yol, araba) varsa, o cümlenin edilgen (pasif) olma ihtimali %90'dır.",
+                    "Çünkü bu nesneler kendi kendine bir iş yapamaz, onlara bir iş yapılması gerekir!"
+                ]
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Kontekst: Müzede Bir Soygun",
+        "intro_bullets": [
+            "Şehir müzesinde gizemli bir olay yaşandı.",
+            "Dedektif olay yerini inceliyor ve bulguları edilgen yapıyla raporluyor.",
+            "Olayların ne zaman yaşandığına dikkat ederek yapıları tamamla!"
+        ],
+        "items": [
+            {
+                "engine": "fill",
+                "prompt": "Detective: 'The museum ____ (visit) by hundreds of people every day, but last night was different.'",
+                "answer": [
+                    "is visited"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Genel bir durum (every day) anlatıldığı için Present Passive kullanılır."
+            },
+            {
+                "engine": "tap",
+                "prompt": "Detective: 'We found that a famous painting ___ from the main hall last night.'",
+                "bank": [
+                    "was stolen",
+                    "is stolen",
+                    "stole"
+                ],
+                "answer": "was stolen",
+                "explain": "Geçmişte yaşanmış tek seferlik bir olaydan (last night) bahsettiğimiz için Past Passive kullanılır."
+            },
+            {
+                "engine": "fill",
+                "prompt": "Detective: 'The security cameras ____ (not / check) before the theft.'",
+                "answer": [
+                    "were not checked",
+                    "weren't checked"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces",
+                    "accept_contractions"
+                ],
+                "explain": "Kameralar (çoğul) kontrol edilmediği için 'were not + V3' kullanılır."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "Detective: 'Luckily, some fingerprints ____ on the glass this morning.'",
+                "options": [
+                    "were found",
+                    "are found",
+                    "was found"
+                ],
+                "answer": "were found",
+                "explain": "Parmak izleri (çoğul) bu sabah bulunduğu için Past Passive (were + V3) kullanılır."
+            },
+            {
+                "engine": "order",
+                "prompt": "Detective report: (Raporu tamamla: Hırsız polis tarafından yakalandı.)",
+                "tokens": [
+                    "The",
+                    "thief",
+                    "was",
+                    "caught",
+                    "by",
+                    "the",
+                    "police"
+                ],
+                "answer_tokens": [
+                    "The",
+                    "thief",
+                    "was",
+                    "caught",
+                    "by",
+                    "the",
+                    "police"
+                ],
+                "explain": "Eylemi yapanı (police) belirtmek için 'by' kullanılır."
+            },
+            {
+                "engine": "transform",
+                "prompt": "Active: The cleaners clean the room every morning.",
+                "steps": [
+                    {
+                        "type": "select",
+                        "label": "Choose BE",
+                        "options": [
+                            "is",
+                            "are"
+                        ],
+                        "answer": "is"
+                    },
+                    {
+                        "type": "select",
+                        "label": "Choose V3",
+                        "options": [
+                            "cleaned",
+                            "cleans"
+                        ],
+                        "answer": "cleaned"
+                    }
+                ],
+                "final_template": "The room {be} {v3} every morning.",
+                "final_answer": "The room is cleaned every morning.",
+                "tags": [
+                    "transform",
+                    "present_passive"
+                ]
+            }
+        ],
+        "recap_bullets": [
+            "Hatırla: Pasif yapının olmazsa olmazı 'Be' fiili ve fiilin 3. halidir.",
+            "Hatırla: Zamanı (am/is/are veya was/were) cümlenin gerçekleştiği ana göre seç.",
+            "Hatırla: Eylemi yapan kişiyi belirtmek istersen 'by' kelimesini kullan."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "B1-PASSIVE-01"
+    }
+}

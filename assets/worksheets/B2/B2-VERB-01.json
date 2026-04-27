@@ -1,0 +1,341 @@
+{
+    "schema_version": "1.0",
+    "level": "B2",
+    "worksheet_id": "B2-VERB-01",
+    "title": "Verb Patterns (gerund vs infinitive)",
+    "topic_tags": [
+        "gerund",
+        "infinitive",
+        "verb_patterns"
+    ],
+    "subskills": [
+        "choose_gerund",
+        "choose_infinitive",
+        "meaning_change_stop_remember"
+    ],
+    "difficulty": 4,
+    "engine_sequence": [
+        {
+            "engine": "mcq",
+            "count": 12,
+            "rules": {
+                "shuffle_options": true,
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "fill",
+            "count": 8,
+            "rules": {
+                "case_sensitive": false,
+                "allow_contractions": true
+            }
+        }
+    ],
+    "items": [
+        {
+            "id": "mcq1",
+            "engine": "mcq",
+            "prompt": "I enjoy ____ movies.",
+            "translation_tr": "Film izlemekten hoşlanırım.",
+            "options": [
+                "watching",
+                "to watch"
+            ],
+            "answer": "watching",
+            "tags": [
+                "gerund"
+            ]
+        },
+        {
+            "id": "mcq2",
+            "engine": "mcq",
+            "prompt": "I decided ____ abroad.",
+            "translation_tr": "Yurtdışında okumaya karar verdim.",
+            "options": [
+                "to study",
+                "studying"
+            ],
+            "answer": "to study",
+            "tags": [
+                "infinitive"
+            ]
+        },
+        {
+            "id": "mcq3",
+            "engine": "mcq",
+            "prompt": "She wants ____ a new phone.",
+            "translation_tr": "Yeni bir telefon almak istiyor.",
+            "options": [
+                "to buy",
+                "buying"
+            ],
+            "answer": "to buy",
+            "tags": [
+                "infinitive"
+            ]
+        },
+        {
+            "id": "mcq4",
+            "engine": "mcq",
+            "prompt": "He avoided ____ late.",
+            "translation_tr": "Geç kalmaktan kaçındı.",
+            "options": [
+                "being",
+                "to be"
+            ],
+            "answer": "being",
+            "tags": [
+                "gerund"
+            ]
+        },
+        {
+            "id": "mcq5",
+            "engine": "mcq",
+            "prompt": "Stop ____! (You were smoking; now stop it.)",
+            "translation_tr": "Sigara içmeyi bırak! (İçiyordun; şimdi bırak.)",
+            "options": [
+                "smoking",
+                "to smoke"
+            ],
+            "answer": "smoking",
+            "tags": [
+                "meaning_change"
+            ]
+        },
+        {
+            "id": "mcq6",
+            "engine": "mcq",
+            "prompt": "Stop ____ and listen. (Stop what you’re doing to do this.)",
+            "translation_tr": "Konuşmayı bırak ve dinle. (Bunu yapmak için yaptığını bırak.)",
+            "options": [
+                "to talk",
+                "talking"
+            ],
+            "answer": "to talk",
+            "tags": [
+                "meaning_change"
+            ]
+        },
+        {
+            "id": "mcq7",
+            "engine": "mcq",
+            "prompt": "I forgot ____ the door. (I didn’t do it.)",
+            "translation_tr": "Kapıyı kilitlemeyi unuttum. (Yapmadım.)",
+            "options": [
+                "to lock",
+                "locking"
+            ],
+            "answer": "to lock",
+            "tags": [
+                "meaning_change"
+            ]
+        },
+        {
+            "id": "mcq8",
+            "engine": "mcq",
+            "prompt": "I remember ____ him last year. (I did it; I remember the memory.)",
+            "translation_tr": "Onunla geçen yıl tanıştığımı hatırlıyorum. (Yaptım, anıyı hatırlıyorum.)",
+            "options": [
+                "meeting",
+                "to meet"
+            ],
+            "answer": "meeting",
+            "tags": [
+                "meaning_change"
+            ]
+        },
+        {
+            "id": "mcq9",
+            "engine": "mcq",
+            "prompt": "They suggested ____ a taxi.",
+            "translation_tr": "Taksiye binmeyi önerdiler.",
+            "options": [
+                "taking",
+                "to take"
+            ],
+            "answer": "taking",
+            "tags": [
+                "gerund"
+            ]
+        },
+        {
+            "id": "mcq10",
+            "engine": "mcq",
+            "prompt": "I hope ____ you soon.",
+            "translation_tr": "Umarım seni yakında görürüm.",
+            "options": [
+                "to see",
+                "seeing"
+            ],
+            "answer": "to see",
+            "tags": [
+                "infinitive"
+            ]
+        },
+        {
+            "id": "mcq11",
+            "engine": "mcq",
+            "prompt": "She finished ____ the report.",
+            "translation_tr": "Raporu yazmayı bitirdi.",
+            "options": [
+                "writing",
+                "to write"
+            ],
+            "answer": "writing",
+            "tags": [
+                "gerund"
+            ]
+        },
+        {
+            "id": "mcq12",
+            "engine": "mcq",
+            "prompt": "He agreed ____ us.",
+            "translation_tr": "Bize yardım etmeyi kabul etti.",
+            "options": [
+                "to help",
+                "helping"
+            ],
+            "answer": "to help",
+            "tags": [
+                "infinitive"
+            ]
+        },
+        {
+            "id": "fill1",
+            "engine": "fill",
+            "prompt": "I enjoy ____ (read) books.",
+            "translation_tr": "Kitap okumaktan hoşlanırım.",
+            "answer": [
+                "reading"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "gerund"
+            ]
+        },
+        {
+            "id": "fill2",
+            "engine": "fill",
+            "prompt": "She decided ____ (leave) early.",
+            "translation_tr": "Erken ayrılmaya karar verdi.",
+            "answer": [
+                "to leave"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "infinitive"
+            ]
+        },
+        {
+            "id": "fill3",
+            "engine": "fill",
+            "prompt": "They suggested ____ (go) by bus.",
+            "translation_tr": "Otobüsle gitmeyi önerdiler.",
+            "answer": [
+                "going"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "gerund"
+            ]
+        },
+        {
+            "id": "fill4",
+            "engine": "fill",
+            "prompt": "I hope ____ (see) you again.",
+            "translation_tr": "Umarım seni tekrar görürüm.",
+            "answer": [
+                "to see"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "infinitive"
+            ]
+        },
+        {
+            "id": "fill5",
+            "engine": "fill",
+            "prompt": "Stop ____ (talk)! (You are talking.)",
+            "translation_tr": "Konuşmayı bırak! (Şu anda konuşuyorsun.)",
+            "answer": [
+                "talking"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "meaning_change"
+            ]
+        },
+        {
+            "id": "fill6",
+            "engine": "fill",
+            "prompt": "Stop ____ (talk) to me. (You stopped something else to talk.)",
+            "translation_tr": "Bana konuşmak için yaptığın şeyi bırak. (Başka bir şeyi bırakıp konuşuyorsun.)",
+            "answer": [
+                "to talk"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "meaning_change"
+            ]
+        },
+        {
+            "id": "fill7",
+            "engine": "fill",
+            "prompt": "I forgot ____ (call) her. (I didn’t do it.)",
+            "translation_tr": "Onu aramayı unuttum. (Yapmadım.)",
+            "answer": [
+                "to call"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "meaning_change"
+            ]
+        },
+        {
+            "id": "fill8",
+            "engine": "fill",
+            "prompt": "I remember ____ (meet) him before.",
+            "translation_tr": "Onunla daha önce tanıştığımı hatırlıyorum.",
+            "answer": [
+                "meeting"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "meaning_change"
+            ]
+        }
+    ]
+}

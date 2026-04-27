@@ -1,0 +1,223 @@
+{
+    "schema_version": "1.0",
+    "level": "A1",
+    "lesson_id": "A1-CU-01-lesson",
+    "title": "Countable and Uncountable",
+    "topic_tags": [
+        "countable",
+        "uncountable",
+        "a_an",
+        "some_any",
+        "much_many"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Hangi nesnelerin tek tek sayılabileceğini, hangilerinin ise kütle olarak görüldüğünü öğreneceğiz.",
+                    "Miktarları belirtirken 'some' ve 'any' kelimelerini doğru yerlerde kullanmayı kavrayacağız.",
+                    "Soru sorarken 'how much' ve 'how many' arasındaki farkı göreceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Sayılabilen İsimler (Countable)",
+                "bullets": [
+                    "Tanesini tek tek sayabildiğimiz nesnelerdir: 1 elma, 2 elma gibi.",
+                    "Tekil olduklarında başlarına 'a' veya 'an' gelir.",
+                    "Çoğul hale gelebilirler (apples, chairs, books)."
+                ],
+                "examples": [
+                    "an apple (bir elma)",
+                    "a chair (bir sandalye)",
+                    "three books (üç kitap)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "Sayılamayan İsimler (Uncountable)",
+                "bullets": [
+                    "Tek tek sayamadığımız sıvı, gaz veya toz halindeki maddelerdir.",
+                    "Başlarına 'a' veya 'an' **gelmez**; 'bir su' diyemeyiz.",
+                    "Her zaman tekil kabul edilirler, sonlarına '-s' takısı almazlar."
+                ],
+                "examples": [
+                    "water (su)",
+                    "rice (pirinç)",
+                    "bread (ekmek)"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "Hangisi İngilizcede sayılamayan (uncountable) bir isimdir?",
+                "options": [
+                    "Egg",
+                    "Money",
+                    "Book"
+                ],
+                "answer": "Money",
+                "explain": "İngilizcede 'money' (para) kavram olarak sayılamaz kabul edilir. Madeni paraları (coins) sayabiliriz ama para kelimesi 'uncountable'dır."
+            },
+            {
+                "id": "formula",
+                "type": "formula",
+                "title": "Miktar Soruları: Much vs. Many",
+                "bullets": [
+                    "Bir şeyin miktarını sormak için ismin türüne göre farklı kalıplar kullanırız."
+                ],
+                "formula": [
+                    "How many + Çoğul Sayılabilen İsim (How many apples?)",
+                    "How much + Sayılamayan İsim (How much water?)"
+                ]
+            },
+            {
+                "id": "c4",
+                "type": "rule",
+                "title": "Some ve Any Kullanımı",
+                "bullets": [
+                    "**Some (Biraz/Birkaç)**: Genellikle olumlu cümlelerde hem sayılabilen hem sayılamayanlarla kullanılır.",
+                    "**Any (Hiç)**: Olumsuz cümlelerde ve sorularda tercih edilir."
+                ],
+                "examples": [
+                    "I have some milk. (Olumlu)",
+                    "There aren't any eggs. (Olumsuz)",
+                    "Is there any sugar? (Soru)"
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Bread (Ekmek) Kelimesi**: Türkçede 'bir ekmek' deriz ancak İngilizcede 'bread' sayılamaz. Doğrusu 'some bread' veya 'a loaf of bread'dir.",
+                    "**Information/Advice**: Bu kelimeler asla '-s' almaz. 'Informations' yanlış bir kullanımdır.",
+                    "**Sayılamayanlarla 'A/An'**: 'A water' demek yanlıştır, 'some water' denmelidir."
+                ],
+                "examples": [
+                    "Hatalı: How many money? ✗",
+                    "Doğru: How much money? ✓",
+                    "Hatalı: I have a bread. ✗",
+                    "Doğru: I have some bread. ✓"
+                ]
+            },
+            {
+                "id": "q2",
+                "type": "checkpoint",
+                "engine": "tap",
+                "prompt": "Boşluğa uygun olan kelimeyi seçin: 'I need ____ information.'",
+                "bank": [
+                    "a",
+                    "an",
+                    "some"
+                ],
+                "answer": "some",
+                "explain": "Information sayılamayan bir isim olduğu için 'a/an' ile kullanılamaz; 'some' uygundur."
+            },
+            {
+                "id": "c6",
+                "type": "tip",
+                "title": "Pratik İpucu: Teklif ve Ricalar",
+                "bullets": [
+                    "Normalde sorularda 'any' kullanılır ancak birine bir şey **teklif ederken** veya birinden bir şey **rica ederken** soru olsa bile 'some' kullanırız."
+                ],
+                "examples": [
+                    "Would you like some tea? (Teklif - Çay ister misiniz?)",
+                    "Can I have some water, please? (Rica - Biraz su alabilir miyim?)"
+                ]
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Kontekst: Mutfakta Hazırlık",
+        "intro_bullets": [
+            "Akşam yemeği için alışveriş listesi yapıyorsun.",
+            "Dolapta neler var, neler eksik kontrol ediyorsun.",
+            "Sayılabilen ve sayılamayan isimlerin miktarını doğru belirt!"
+        ],
+        "items": [
+            {
+                "engine": "fill",
+                "prompt": "How ___ apples do we have in the fridge?",
+                "answer": [
+                    "many"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Elmalar sayılabilir olduğu için 'many' kullanılır."
+            },
+            {
+                "engine": "tap",
+                "prompt": "We have ___ water, but we need more juice.",
+                "bank": [
+                    "some",
+                    "any",
+                    "many"
+                ],
+                "answer": "some",
+                "explain": "Olumlu bir cümlede sayılamayan bir isimle 'some' kullanılır."
+            },
+            {
+                "engine": "fill",
+                "prompt": "How ___ bread do we need for breakfast?",
+                "answer": [
+                    "much"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Ekmek (bread) İngilizcede sayılamaz kabul edilir, bu yüzden 'much' ile sorulur."
+            },
+            {
+                "engine": "order",
+                "prompt": "Cümleyi kur: 'Hiç şekerimiz yok.'",
+                "tokens": [
+                    "We",
+                    "don't",
+                    "have",
+                    "any",
+                    "sugar"
+                ],
+                "answer_tokens": [
+                    "We",
+                    "don't",
+                    "have",
+                    "any",
+                    "sugar"
+                ],
+                "explain": "Olumsuz cümlelerde miktar belirtmek için 'any' kullanılır."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "Would you like ___ milk with your coffee?",
+                "options": [
+                    "some",
+                    "any",
+                    "a"
+                ],
+                "answer": "some",
+                "explain": "Bu bir teklif sorusu olduğu için 'any' yerine 'some' kullanılır."
+            }
+        ],
+        "recap_bullets": [
+            "Hatırla: Tek tek sayabildiklerinle 'many', sayamadıklarınla 'much' kullan.",
+            "Hatırla: Olumsuzlarda 'any', olumlularda 'some' tercih edilir.",
+            "Hatırla: Ekmek (bread) ve para (money) İngilizcede her zaman sayılamaz kategorisindedir."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "A1-CU-01"
+    }
+}

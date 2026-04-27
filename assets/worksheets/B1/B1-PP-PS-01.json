@@ -1,0 +1,325 @@
+{
+    "schema_version": "1.0",
+    "level": "B1",
+    "worksheet_id": "B1-PP-PS-02",
+    "title": "Present Perfect vs Past Simple (for/since/how long)",
+    "topic_tags": [
+        "present_perfect",
+        "past_simple",
+        "for",
+        "since",
+        "how_long"
+    ],
+    "subskills": [
+        "use_for_since",
+        "choose_pp_vs_ps",
+        "form_questions"
+    ],
+    "difficulty": 3,
+    "engine_sequence": [
+        {
+            "engine": "mcq",
+            "count": 10,
+            "rules": {
+                "shuffle_options": true,
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "fill",
+            "count": 8,
+            "rules": {
+                "case_sensitive": false,
+                "allow_contractions": true
+            }
+        }
+    ],
+    "items": [
+        {
+            "id": "mcq1",
+            "engine": "mcq",
+            "prompt": "I ____ here for 5 years.",
+            "translation_tr": "Beş yıldır burada yaşıyorum.",
+            "options": [
+                "live",
+                "have lived",
+                "lived"
+            ],
+            "answer": "have lived",
+            "hint": "for + duration → Present Perfect.",
+            "tags": [
+                "for"
+            ]
+        },
+        {
+            "id": "mcq2",
+            "engine": "mcq",
+            "prompt": "She ____ in 2022.",
+            "translation_tr": "2022’de taşındı.",
+            "options": [
+                "has moved",
+                "moved"
+            ],
+            "answer": "moved",
+            "hint": "Finished time → Past Simple.",
+            "tags": [
+                "finished_time"
+            ]
+        },
+        {
+            "id": "mcq3",
+            "engine": "mcq",
+            "prompt": "We ____ each other since 2019.",
+            "translation_tr": "2019’dan beri birbirimizi tanıyoruz.",
+            "options": [
+                "know",
+                "have known",
+                "knew"
+            ],
+            "answer": "have known",
+            "tags": [
+                "since"
+            ]
+        },
+        {
+            "id": "mcq4",
+            "engine": "mcq",
+            "prompt": "How long ____ you ____ English?",
+            "translation_tr": "Ne zamandır İngilizce çalışıyorsun?",
+            "options": [
+                "do / study",
+                "have / studied"
+            ],
+            "answer": "have / studied",
+            "tags": [
+                "how_long"
+            ]
+        },
+        {
+            "id": "mcq5",
+            "engine": "mcq",
+            "prompt": "I ____ him last week.",
+            "translation_tr": "Onu geçen hafta gördüm.",
+            "options": [
+                "have seen",
+                "saw"
+            ],
+            "answer": "saw",
+            "tags": [
+                "past_time"
+            ]
+        },
+        {
+            "id": "mcq6",
+            "engine": "mcq",
+            "prompt": "They ____ married for ten years.",
+            "translation_tr": "On yıldır evliler.",
+            "options": [
+                "are",
+                "have been",
+                "were"
+            ],
+            "answer": "have been",
+            "tags": [
+                "for"
+            ]
+        },
+        {
+            "id": "mcq7",
+            "engine": "mcq",
+            "prompt": "He ____ (not) to Ankara since May.",
+            "translation_tr": "Mayıs’tan beri Ankara’ya gitmedi.",
+            "options": [
+                "didn't go",
+                "hasn't gone"
+            ],
+            "answer": "hasn't gone",
+            "tags": [
+                "since",
+                "negative"
+            ]
+        },
+        {
+            "id": "mcq8",
+            "engine": "mcq",
+            "prompt": "She ____ this job in 2020.",
+            "translation_tr": "Bu işe 2020’de başladı.",
+            "options": [
+                "started",
+                "has started"
+            ],
+            "answer": "started",
+            "tags": [
+                "finished_time"
+            ]
+        },
+        {
+            "id": "mcq9",
+            "engine": "mcq",
+            "prompt": "I ____ this laptop for two months.",
+            "translation_tr": "İki aydır bu dizüstü bilgisayara sahibim.",
+            "options": [
+                "have had",
+                "had"
+            ],
+            "answer": "have had",
+            "tags": [
+                "for"
+            ]
+        },
+        {
+            "id": "mcq10",
+            "engine": "mcq",
+            "prompt": "____ you ever ____ abroad? (experience)",
+            "translation_tr": "Hiç yurt dışına çıktın mı?",
+            "options": [
+                "Did / travel",
+                "Have / travelled"
+            ],
+            "answer": "Have / travelled",
+            "tags": [
+                "experience"
+            ]
+        },
+        {
+            "id": "fill1",
+            "engine": "fill",
+            "prompt": "I ____ ____ (live) in Istanbul since 2021.",
+            "translation_tr": "2021’den beri İstanbul’da yaşıyorum.",
+            "answer": [
+                "have lived"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "since"
+            ]
+        },
+        {
+            "id": "fill2",
+            "engine": "fill",
+            "prompt": "We ____ (meet) yesterday.",
+            "translation_tr": "Biz dün buluştuk.",
+            "answer": [
+                "met"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "past_simple"
+            ]
+        },
+        {
+            "id": "fill3",
+            "engine": "fill",
+            "prompt": "How long ____ you ____ (know) him?",
+            "translation_tr": "Onu ne zamandır tanıyorsun?",
+            "answer": [
+                "have you known"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "how_long"
+            ]
+        },
+        {
+            "id": "fill4",
+            "engine": "fill",
+            "prompt": "She ____ ____ (not / finish) it yet. (PP negative)",
+            "translation_tr": "Henüz bitirmedi.",
+            "answer": [
+                "hasn't finished",
+                "has not finished"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces",
+                "accept_contractions"
+            ],
+            "tags": [
+                "negative"
+            ]
+        },
+        {
+            "id": "fill5",
+            "engine": "fill",
+            "prompt": "They ____ (buy) this house in 2018.",
+            "translation_tr": "Bu evi 2018’de aldılar.",
+            "answer": [
+                "bought"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "finished_time"
+            ]
+        },
+        {
+            "id": "fill6",
+            "engine": "fill",
+            "prompt": "I ____ ____ (have) this phone for a year.",
+            "translation_tr": "Bir yıldır bu telefona sahibim.",
+            "answer": [
+                "have had"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "for"
+            ]
+        },
+        {
+            "id": "fill7",
+            "engine": "fill",
+            "prompt": "He ____ ____ (not / see) her since June.",
+            "translation_tr": "Haziran’dan beri onu görmedi.",
+            "answer": [
+                "hasn't seen",
+                "has not seen"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces",
+                "accept_contractions"
+            ],
+            "tags": [
+                "since"
+            ]
+        },
+        {
+            "id": "fill8",
+            "engine": "fill",
+            "prompt": "We ____ (go) there last month.",
+            "translation_tr": "Geçen ay oraya gittik.",
+            "answer": [
+                "went"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "past_time"
+            ]
+        }
+    ]
+}

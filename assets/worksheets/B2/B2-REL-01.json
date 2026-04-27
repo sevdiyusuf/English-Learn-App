@@ -1,0 +1,310 @@
+{
+    "schema_version": "1.0",
+    "level": "B2",
+    "worksheet_id": "B2-REL-03",
+    "title": "Relative Clauses Advanced (non-defining + reduced)",
+    "topic_tags": [
+        "relative_clauses",
+        "non_defining",
+        "reduced",
+        "whose"
+    ],
+    "subskills": [
+        "use_non_defining",
+        "reduce_relative",
+        "use_whose"
+    ],
+    "difficulty": 4,
+    "engine_sequence": [
+        {
+            "engine": "mcq",
+            "count": 10,
+            "rules": {
+                "shuffle_options": true,
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "transform",
+            "count": 6,
+            "rules": {
+                "allow_hint": true
+            }
+        }
+    ],
+    "items": [
+        {
+            "id": "mcq1",
+            "engine": "mcq",
+            "prompt": "My friend, ____ lives in Ankara, is visiting. (non-defining)",
+            "translation_tr": "Ankara’da yaşayan arkadaşım bizi ziyarete geliyor. (non-defining)",
+            "options": [
+                "who",
+                "that"
+            ],
+            "answer": "who",
+            "hint": "Non-defining: no 'that'.",
+            "tags": [
+                "non_defining"
+            ]
+        },
+        {
+            "id": "mcq2",
+            "engine": "mcq",
+            "prompt": "This is Mr. Lee, ____ daughter is a doctor.",
+            "translation_tr": "Bu, kızı doktor olan Bay Lee.",
+            "options": [
+                "whose",
+                "who"
+            ],
+            "answer": "whose",
+            "tags": [
+                "whose"
+            ]
+        },
+        {
+            "id": "mcq3",
+            "engine": "mcq",
+            "prompt": "The man ____ I met yesterday is here. (defining)",
+            "translation_tr": "Dün tanıştığım adam burada. (defining)",
+            "options": [
+                "who",
+                "which"
+            ],
+            "answer": "who",
+            "tags": [
+                "defining"
+            ]
+        },
+        {
+            "id": "mcq4",
+            "engine": "mcq",
+            "prompt": "Non-defining clauses usually use commas.",
+            "translation_tr": "Belirtisiz (non-defining) sıfat cümlecikleri genelde virgülle ayrılır.",
+            "options": [
+                "True",
+                "False"
+            ],
+            "answer": "True",
+            "tags": [
+                "rule"
+            ]
+        },
+        {
+            "id": "mcq5",
+            "engine": "mcq",
+            "prompt": "Reduced relative: 'The man who is talking' →",
+            "translation_tr": "Kısaltılmış relative: 'The man who is talking' →",
+            "options": [
+                "The man talking",
+                "The man talked"
+            ],
+            "answer": "The man talking",
+            "tags": [
+                "reduced"
+            ]
+        },
+        {
+            "id": "mcq6",
+            "engine": "mcq",
+            "prompt": "Reduced relative: 'The book which was written in 1990' →",
+            "translation_tr": "Kısaltılmış relative: 'The book which was written in 1990' →",
+            "options": [
+                "The book written in 1990",
+                "The book writing in 1990"
+            ],
+            "answer": "The book written in 1990",
+            "tags": [
+                "reduced"
+            ]
+        },
+        {
+            "id": "mcq7",
+            "engine": "mcq",
+            "prompt": "My car, ____ is very old, still runs.",
+            "translation_tr": "Arabam, çok eski olmasına rağmen, hâlâ çalışıyor.",
+            "options": [
+                "which",
+                "that"
+            ],
+            "answer": "which",
+            "tags": [
+                "non_defining"
+            ]
+        },
+        {
+            "id": "mcq8",
+            "engine": "mcq",
+            "prompt": "The woman ____ husband works abroad is my teacher.",
+            "translation_tr": "Kocası yurt dışında çalışan kadın öğretmenim.",
+            "options": [
+                "whose",
+                "which"
+            ],
+            "answer": "whose",
+            "tags": [
+                "whose"
+            ]
+        },
+        {
+            "id": "mcq9",
+            "engine": "mcq",
+            "prompt": "Reduced relative is often used in writing to be shorter.",
+            "translation_tr": "Kısaltılmış relative cümlecikleri yazıda daha kısa olmak için sık kullanılır.",
+            "options": [
+                "True",
+                "False"
+            ],
+            "answer": "True",
+            "tags": [
+                "rule"
+            ]
+        },
+        {
+            "id": "mcq10",
+            "engine": "mcq",
+            "prompt": "Non-defining: 'My brother, ___ lives in Izmir, ...'",
+            "translation_tr": "Belirtisiz: 'İzmir’de yaşayan kardeşim, ...'",
+            "options": [
+                "who",
+                "where"
+            ],
+            "answer": "who",
+            "tags": [
+                "non_defining"
+            ]
+        },
+        {
+            "id": "tr1",
+            "engine": "transform",
+            "prompt": "Reduce the clause: 'The man who is talking is my uncle.'",
+            "translation_tr": "Cümleyi kısalt: 'The man who is talking is my uncle.'",
+            "steps": [
+                {
+                    "type": "select",
+                    "label": "Reduced form",
+                    "options": [
+                        "The man talking is my uncle.",
+                        "The man talked is my uncle."
+                    ],
+                    "answer": "The man talking is my uncle."
+                }
+            ],
+            "final_template": "{result}",
+            "final_answer": "The man talking is my uncle.",
+            "tags": [
+                "reduced"
+            ]
+        },
+        {
+            "id": "tr2",
+            "engine": "transform",
+            "prompt": "Reduce the clause: 'The book which was written in 1990 is famous.'",
+            "translation_tr": "Cümleyi kısalt: 'The book which was written in 1990 is famous.'",
+            "steps": [
+                {
+                    "type": "select",
+                    "label": "Reduced form",
+                    "options": [
+                        "The book written in 1990 is famous.",
+                        "The book writing in 1990 is famous."
+                    ],
+                    "answer": "The book written in 1990 is famous."
+                }
+            ],
+            "final_template": "{result}",
+            "final_answer": "The book written in 1990 is famous.",
+            "tags": [
+                "reduced"
+            ]
+        },
+        {
+            "id": "tr3",
+            "engine": "transform",
+            "prompt": "Choose correct 'whose': 'I met a man. His son is a pilot.'",
+            "translation_tr": "Doğru 'whose' cümlesini seç: 'Bir adamla tanıştım. Oğulu pilot.'",
+            "steps": [
+                {
+                    "type": "select",
+                    "label": "Sentence",
+                    "options": [
+                        "I met a man whose son is a pilot.",
+                        "I met a man who son is a pilot."
+                    ],
+                    "answer": "I met a man whose son is a pilot."
+                }
+            ],
+            "final_template": "{result}",
+            "final_answer": "I met a man whose son is a pilot.",
+            "tags": [
+                "whose"
+            ]
+        },
+        {
+            "id": "tr4",
+            "engine": "transform",
+            "prompt": "Choose correct non-defining: 'My phone is new. I bought it yesterday.'",
+            "translation_tr": "Doğru non-defining cümleyi seç: 'Telefonum yeni. Onu dün aldım.'",
+            "steps": [
+                {
+                    "type": "select",
+                    "label": "Sentence",
+                    "options": [
+                        "My phone, which I bought yesterday, is new.",
+                        "My phone that I bought yesterday is new,"
+                    ],
+                    "answer": "My phone, which I bought yesterday, is new."
+                }
+            ],
+            "final_template": "{result}",
+            "final_answer": "My phone, which I bought yesterday, is new.",
+            "tags": [
+                "non_defining"
+            ]
+        },
+        {
+            "id": "tr5",
+            "engine": "transform",
+            "prompt": "Reduce the clause: 'People who live in cities are busy.'",
+            "translation_tr": "Cümleyi kısalt: 'People who live in cities are busy.'",
+            "steps": [
+                {
+                    "type": "select",
+                    "label": "Reduced form",
+                    "options": [
+                        "People living in cities are busy.",
+                        "People lived in cities are busy."
+                    ],
+                    "answer": "People living in cities are busy."
+                }
+            ],
+            "final_template": "{result}",
+            "final_answer": "People living in cities are busy.",
+            "tags": [
+                "reduced"
+            ]
+        },
+        {
+            "id": "tr6",
+            "engine": "transform",
+            "prompt": "Choose correct 'whose': 'She has a friend. Her mother is a lawyer.'",
+            "translation_tr": "Doğru 'whose' cümlesini seç: 'Onun bir arkadaşı var. Annesi avukat.'",
+            "steps": [
+                {
+                    "type": "select",
+                    "label": "Sentence",
+                    "options": [
+                        "She has a friend whose mother is a lawyer.",
+                        "She has a friend who mother is a lawyer."
+                    ],
+                    "answer": "She has a friend whose mother is a lawyer."
+                }
+            ],
+            "final_template": "{result}",
+            "final_answer": "She has a friend whose mother is a lawyer.",
+            "tags": [
+                "whose"
+            ]
+        }
+    ]
+}

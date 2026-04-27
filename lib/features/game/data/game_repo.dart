@@ -27,21 +27,27 @@ class GameRepository {
         .snapshots()
         .map((snapshot) {
           if (kDebugMode) {
-            debugPrint('GameRepository: Received ${snapshot.docs.length} playedWords documents');
+            debugPrint(
+              'GameRepository: Received ${snapshot.docs.length} playedWords documents',
+            );
           }
           final words = snapshot.docs
               .map((doc) {
                 try {
                   final data = doc.data();
                   if (kDebugMode) {
-                    debugPrint('GameRepository: Parsing word: ${data['word']} (${data['type']})');
+                    debugPrint(
+                      'GameRepository: Parsing word: ${data['word']} (${data['type']})',
+                    );
                   }
                   // Convert Firestore Timestamp to DateTime for 'at' field
                   final processedData = Map<String, dynamic>.from(data);
                   if (data['at'] is Timestamp) {
-                    processedData['at'] = (data['at'] as Timestamp).toDate().toIso8601String();
+                    processedData['at'] =
+                        (data['at'] as Timestamp).toDate().toIso8601String();
                   } else if (data['at'] is DateTime) {
-                    processedData['at'] = (data['at'] as DateTime).toIso8601String();
+                    processedData['at'] =
+                        (data['at'] as DateTime).toIso8601String();
                   }
                   return PlayedWord.fromJson(processedData);
                 } catch (e) {
@@ -56,7 +62,9 @@ class GameRepository {
               .whereType<PlayedWord>()
               .toList(growable: false);
           if (kDebugMode) {
-            debugPrint('GameRepository: Successfully parsed ${words.length} playedWords');
+            debugPrint(
+              'GameRepository: Successfully parsed ${words.length} playedWords',
+            );
           }
           return words;
         });
@@ -86,30 +94,72 @@ class GameRepository {
     });
   }
 
+  /// Unified submit for THEME and CORE modes (single word per turn).
+  Future<void> submitWord({
+    required String roomId,
+    required String word,
+  }) async {
+    try {
+      final callable = _functions.httpsCallable('submitWord');
+      await callable.call({'roomId': roomId, 'word': word});
+    } on FirebaseFunctionsException catch (e) {
+      if (kDebugMode) {
+        debugPrint('Firebase Functions Error [submitWord]: ${e.code} - ${e.message}');
+        debugPrint('Details: ${e.details}');
+      }
+      rethrow;
+    } catch (e) {
+      if (kDebugMode) {
+        debugPrint('Unexpected Error [submitWord]: $e');
+      }
+      rethrow;
+    }
+  }
+
   Future<void> submitVerb({
     required String roomId,
     required String verb,
   }) async {
-    final callable = _functions.httpsCallable('submitVerb');
-    await callable.call({
-      'roomId': roomId,
-      'verb': verb,
-    });
+    try {
+      final callable = _functions.httpsCallable('submitVerb');
+      await callable.call({'roomId': roomId, 'verb': verb});
+    } on FirebaseFunctionsException catch (e) {
+      if (kDebugMode) {
+        debugPrint('Firebase Functions Error [submitVerb]: ${e.code} - ${e.message}');
+        debugPrint('Details: ${e.details}');
+      }
+      rethrow;
+    } catch (e) {
+      if (kDebugMode) {
+        debugPrint('Unexpected Error [submitVerb]: $e');
+      }
+      rethrow;
+    }
   }
 
   Future<void> submitAdjective({
     required String roomId,
     required String adjective,
   }) async {
-    final callable = _functions.httpsCallable('submitAdjective');
-    await callable.call({
-      'roomId': roomId,
-      'adjective': adjective,
-    });
+    try {
+      final callable = _functions.httpsCallable('submitAdjective');
+      await callable.call({'roomId': roomId, 'adjective': adjective});
+    } on FirebaseFunctionsException catch (e) {
+      if (kDebugMode) {
+        debugPrint('Firebase Functions Error [submitAdjective]: ${e.code} - ${e.message}');
+        debugPrint('Details: ${e.details}');
+      }
+      rethrow;
+    } catch (e) {
+      if (kDebugMode) {
+        debugPrint('Unexpected Error [submitAdjective]: $e');
+      }
+      rethrow;
+    }
   }
 
   // Legacy method - keeps backward compatibility
-  Future<void> submitWord({
+  Future<void> submitLegacyTurn({
     required String roomId,
     required String verb,
     required String adjective,

@@ -1,0 +1,230 @@
+{
+    "schema_version": "1.0",
+    "level": "B1",
+    "lesson_id": "B1-REL-01-lesson",
+    "title": "Relative Clauses (defining vs non-defining)",
+    "topic_tags": [
+        "relative_clauses",
+        "defining",
+        "non_defining",
+        "commas"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Cümlede hayati önem taşıyan bilgiler ile sadece 'ekstra' olan bilgileri ayırmayı öğreneceğiz.",
+                    "Virgül kullanımının anlamı nasıl tamamen değiştirebileceğini göreceğiz.",
+                    "Hangi durumlarda 'that' kelimesini kullanabileceğimizi (veya kullanamayacağımızı) kavrayacağız."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Defining (Tanımlayan) Cümlecikler",
+                "bullets": [
+                    "**Zorunlu Bilgi**: Hangi nesneden veya kişiden bahsettiğimizi anlamak için bu bilgiye ihtiyaç vardır.",
+                    "Cümleden çıkarılırsa anlam bozulur veya kim olduğu belirsiz kalır.",
+                    "**Noktalama**: Virgül kullanılmaz."
+                ],
+                "examples": [
+                    "The man **who lives next door** is friendly. (Hangi adam? Yan komşu olan.)",
+                    "The laptop **which I use** is fast. (Hangi laptop? Benim kullandığım.)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "Non-defining (Ek Bilgi Veren) Cümlecikler",
+                "bullets": [
+                    "**Ekstra Bilgi**: Bahsedilen kişi veya şey zaten bellidir; cümledeki bilgi sadece 'ek' niteliğindedir.",
+                    "Cümleden çıkarılırsa temel anlam bozulmaz.",
+                    "**Noktalama**: Her iki tarafına mutlaka **virgül** konur."
+                ],
+                "examples": [
+                    "My brother, **who lives in Izmir**, is a doctor. (Zaten bir kardeşim var, sadece nerede yaşadığını ekliyorum.)",
+                    "Paris, **which is in France**, is beautiful. (Paris zaten bellidir.)"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "Hangi cümlede verilen bilgi cümleden çıkarılırsa 'kimden' bahsedildiği belirsiz kalır?",
+                "options": [
+                    "My father, who is 50, likes chess.",
+                    "The man who called me is here.",
+                    "Istanbul, which is big, is crowded."
+                ],
+                "answer": "The man who called me is here.",
+                "explain": "Bu bir 'Defining' cümledir. 'Who called me' bilgisi olmazsa hangi adamdan bahsettiğimiz belli olmaz."
+            },
+            {
+                "id": "c4",
+                "type": "rule",
+                "title": "Kritik Fark: 'That' Kullanımı",
+                "bullets": [
+                    "**Defining**: 'Who' veya 'Which' yerine 'That' kullanılabilir.",
+                    "**Non-defining**: Asla 'That' kullanılamaz! Sadece 'Who' veya 'Which' kullanılır.",
+                    "Virgülden sonra 'that' gelmez kuralını unutmayın."
+                ],
+                "examples": [
+                    "The book **that** you recommended is great. (Doğru - Defining)",
+                    "My car, **that** is old, still works. (Yanlış! - Virgül varsa 'which' gelmeli.)"
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Virgülleri Unutmak**: Ek bilgi verirken virgül koymamak anlam kaymasına yol açar.",
+                    "**Where ve Which Karıştırmak**: Bir yerin 'ne olduğunu' söylüyorsanız 'which', orada 'ne yapıldığını' söylüyorsanız 'where' kullanın."
+                ],
+                "examples": [
+                    "Hatalı: My friend who lives in Bursa is coming. (Sadece bir arkadaşım varsa hatalı, virgül gerekir.)",
+                    "Doğru: My friend, **who lives in Bursa**, is coming. ✓"
+                ]
+            },
+            {
+                "id": "q2",
+                "type": "checkpoint",
+                "engine": "order",
+                "prompt": "Cümleyi doğru noktalama ile kurun: (Eski olan arabam hala çalışıyor.)",
+                "tokens": [
+                    "My",
+                    "car",
+                    ",",
+                    "which",
+                    "is",
+                    "old",
+                    ",",
+                    "still",
+                    "works",
+                    "."
+                ],
+                "answer_tokens": [
+                    "My",
+                    "car",
+                    ",",
+                    "which",
+                    "is",
+                    "old",
+                    ",",
+                    "still",
+                    "works",
+                    "."
+                ],
+                "explain": "Arabanız zaten bellidir (my car), 'old' olması ek bilgidir ve virgüllerle ayrılmalıdır."
+            },
+            {
+                "id": "c6",
+                "type": "tip",
+                "title": "Pratik İpucu: Parmak Testi",
+                "bullets": [
+                    "Relative clause kısmını parmağınızla kapatın.",
+                    "Cümle hala mantıklı ve kime hitap ettiği belliyse: **Virgül Koy (Non-defining)**.",
+                    "Cümle anlamsızlaşıyor veya 'hangi?' sorusu havada kalıyorsa: **Virgül Koyma (Defining)**."
+                ]
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Kontekst: Şehir Turu",
+        "intro_bullets": [
+            "Bir rehber eşliğinde tarihi bir şehri geziyorsun.",
+            "Gördüğün yerler ve tanıştığın kişiler hakkında bilgiler alıyorsun.",
+            "Zorunlu ve ek bilgileri doğru yapılarla ayırt et!"
+        ],
+        "items": [
+            {
+                "engine": "fill",
+                "prompt": "Guide: 'The building ___ you see on the left is the National Library.'",
+                "answer": [
+                    "which",
+                    "that"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Hangi bina olduğunu tanımladığı için (Defining) virgül yoktur ve 'which/that' ikisi de olabilir."
+            },
+            {
+                "engine": "tap",
+                "prompt": "Guide: 'Our city, ___ was founded in 1200, is famous for its history.'",
+                "bank": [
+                    "which",
+                    "that",
+                    "where"
+                ],
+                "answer": "which",
+                "explain": "Şehir (our city) zaten bellidir, kuruluş yılı ek bilgidir. Virgül olduğu için 'that' kullanılamaz."
+            },
+            {
+                "engine": "fill",
+                "prompt": "Guide: 'That's the school ___ I studied when I was young.'",
+                "answer": [
+                    "where"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Bir mekanda yapılan eylemden bahsedildiği için 'where' kullanılır."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "Guide: 'My mother, ____ is a famous architect, designed this hall.'",
+                "options": [
+                    "who",
+                    "that",
+                    "which"
+                ],
+                "answer": "who",
+                "explain": "İnsanlar için ek bilgi verirken virgüllü yapıda sadece 'who' kullanılır."
+            },
+            {
+                "engine": "order",
+                "prompt": "Cümleyi kur: 'Aradığın yer burası.'",
+                "tokens": [
+                    "This",
+                    "is",
+                    "the",
+                    "place",
+                    "where",
+                    "you",
+                    "are",
+                    "looking",
+                    "for"
+                ],
+                "answer_tokens": [
+                    "This",
+                    "is",
+                    "the",
+                    "place",
+                    "where",
+                    "you",
+                    "are",
+                    "looking",
+                    "for"
+                ],
+                "explain": "Belirli bir mekanı tanımlayan (Defining) yapı."
+            }
+        ],
+        "recap_bullets": [
+            "Hatırla: 'Defining' bilgi hayati önem taşır ve virgül almaz.",
+            "Hatırla: 'Non-defining' sadece ek bilgidir ve virgüllerle ayrılır.",
+            "Hatırla: Virgüllü (ek bilgi) cümlelerde asla 'that' kullanma."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "B1-REL-01"
+    }
+}

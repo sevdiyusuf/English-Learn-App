@@ -1,0 +1,263 @@
+{
+    "schema_version": "1.0",
+    "level": "A1",
+    "worksheet_id": "A1-ADV-01",
+    "title": "Adverbs of Frequency",
+    "topic_tags": [
+        "adverbs_of_frequency",
+        "present_simple",
+        "routines"
+    ],
+    "subskills": [
+        "word_order",
+        "meaning_frequency",
+        "be_vs_verbs"
+    ],
+    "difficulty": 1,
+    "engine_sequence": [
+        {
+            "engine": "mcq",
+            "count": 4,
+            "rules": {
+                "shuffle_options": true,
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "tap",
+            "count": 3,
+            "rules": {
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "fill",
+            "count": 3,
+            "rules": {
+                "case_sensitive": false,
+                "allow_contractions": true
+            }
+        },
+        {
+            "engine": "order",
+            "count": 2,
+            "rules": {}
+        }
+    ],
+    "items": [
+        {
+            "id": "adv_mcq1",
+            "engine": "mcq",
+            "prompt": "I ____ drink coffee in the morning. (100%)",
+            "translation_tr": "Sabahları her zaman kahve içerim.",
+            "options": [
+                "always",
+                "never",
+                "sometimes"
+            ],
+            "answer": "always",
+            "hint": "100% means it happens every time.",
+            "explain": "'Always' indicates 100% frequency.",
+            "tags": [
+                "vocabulary"
+            ]
+        },
+        {
+            "id": "adv_mcq2",
+            "engine": "mcq",
+            "prompt": "He ____ late for school.",
+            "translation_tr": "O okula hep geç kalır.",
+            "options": [
+                "is always",
+                "always is",
+                "always"
+            ],
+            "answer": "is always",
+            "hint": "Adverbs come AFTER the verb 'to be'.",
+            "explain": "With the verb 'to be' (am/is/are), the adverb comes after the verb.",
+            "tags": [
+                "word_order",
+                "be_verb"
+            ]
+        },
+        {
+            "id": "adv_mcq3",
+            "engine": "mcq",
+            "prompt": "They ____ football on Sundays.",
+            "translation_tr": "Onlar pazar günleri genellikle futbol oynar.",
+            "options": [
+                "usually play",
+                "play usually",
+                "are usually"
+            ],
+            "answer": "usually play",
+            "hint": "Adverbs come BEFORE normal verbs.",
+            "explain": "For most verbs, the frequency adverb goes before the main verb.",
+            "tags": [
+                "word_order",
+                "main_verb"
+            ]
+        },
+        {
+            "id": "adv_mcq4",
+            "engine": "mcq",
+            "prompt": "It ____ rains in the desert. (0%)",
+            "translation_tr": "Çölde asla yağmur yağmaz.",
+            "options": [
+                "never",
+                "often",
+                "sometimes"
+            ],
+            "answer": "never",
+            "hint": "0% means it doesn't happen.",
+            "explain": "'Never' is used for 0% frequency.",
+            "tags": [
+                "vocabulary"
+            ]
+        },
+        {
+            "id": "adv_tap1",
+            "engine": "tap",
+            "prompt": "She ____ eats breakfast at 7 AM.",
+            "translation_tr": "O sabah saat 7’de sık sık kahvaltı eder.",
+            "bank": [
+                "often",
+                "is",
+                "are",
+                "never"
+            ],
+            "answer": "often",
+            "hint": "Choose a word that describes how often.",
+            "explain": "'Often' is a frequency adverb that fits before the verb 'eats'.",
+            "tags": [
+                "main_verb"
+            ]
+        },
+        {
+            "id": "adv_tap2",
+            "engine": "tap",
+            "prompt": "We ____ happy to see you.",
+            "translation_tr": "Seni gördüğümüze her zaman mutluyuz.",
+            "bank": [
+                "are always",
+                "always are",
+                "always",
+                "am"
+            ],
+            "answer": "are always",
+            "hint": "Verb 'be' + adverb.",
+            "explain": "For 'We', we use 'are', and the adverb 'always' follows it.",
+            "tags": [
+                "be_verb"
+            ]
+        },
+        {
+            "id": "adv_tap3",
+            "engine": "tap",
+            "prompt": "I ____ go to the gym on Mondays.",
+            "translation_tr": "Pazartesileri bazen spor salonuna giderim.",
+            "bank": [
+                "sometimes",
+                "am",
+                "is",
+                "always is"
+            ],
+            "answer": "sometimes",
+            "hint": "Occasional action (about 50%).",
+            "explain": "'Sometimes' fits the sentence structure before 'go'.",
+            "tags": [
+                "vocabulary"
+            ]
+        },
+        {
+            "id": "adv_fill1",
+            "engine": "fill",
+            "prompt": "I ____ (never / be) late.",
+            "translation_tr": "Ben hiçbir zaman geç kalmam.",
+            "answer": [
+                "am never",
+                "i'm never"
+            ],
+            "explain": "Verb 'to be' comes before the adverb 'never'.",
+            "tags": [
+                "be_verb",
+                "word_order"
+            ]
+        },
+        {
+            "id": "adv_fill2",
+            "engine": "fill",
+            "prompt": "He ____ (usually / watch) TV at night.",
+            "translation_tr": "O genellikle gece televizyon izler.",
+            "answer": [
+                "usually watches"
+            ],
+            "explain": "Adverb + Verb. Don't forget the '-s' for 'He'!",
+            "tags": [
+                "main_verb",
+                "present_simple"
+            ]
+        },
+        {
+            "id": "adv_fill3",
+            "engine": "fill",
+            "prompt": "They ____ (often / go) to the park.",
+            "translation_tr": "Onlar sık sık parka gider.",
+            "answer": [
+                "often go"
+            ],
+            "explain": "The adverb 'often' goes before the verb 'go'.",
+            "tags": [
+                "main_verb"
+            ]
+        },
+        {
+            "id": "adv_order1",
+            "engine": "order",
+            "bank": [
+                "is",
+                "He",
+                "usually",
+                "at",
+                "home."
+            ],
+            "answer": [
+                "He",
+                "is",
+                "usually",
+                "at",
+                "home."
+            ],
+            "translation_tr": "O genellikle evdedir.",
+            "explain": "Subject + be + adverb + complement.",
+            "tags": [
+                "order",
+                "be_verb"
+            ]
+        },
+        {
+            "id": "adv_order2",
+            "engine": "order",
+            "bank": [
+                "always",
+                "I",
+                "my",
+                "teeth.",
+                "brush"
+            ],
+            "answer": [
+                "I",
+                "always",
+                "brush",
+                "my",
+                "teeth."
+            ],
+            "translation_tr": "Dişlerimi her zaman fırçalarım.",
+            "explain": "Subject + adverb + verb + object.",
+            "tags": [
+                "order",
+                "main_verb"
+            ]
+        }
+    ]
+}

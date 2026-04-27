@@ -1,0 +1,206 @@
+{
+    "schema_version": "1.0",
+    "level": "A2",
+    "lesson_id": "A2-QUANT-01-lesson",
+    "title": "Quantifiers",
+    "topic_tags": [
+        "quantifiers",
+        "much_many",
+        "a_lot_of",
+        "a_few",
+        "a_little"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Nesnelerin miktarını belirtmek için kullanılan 'biraz', 'çok', 'birkaç' gibi ifadeleri öğreneceğiz.",
+                    "İsimlerin sayılabilir (Countable) veya sayılamayan (Uncountable) olmasına göre hangi belirteci seçeceğimizi kavrayacağız.",
+                    "Günlük konuşmada miktar sorma ve belirtme kalıplarını pekiştireceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Çok: Many vs. Much",
+                "bullets": [
+                    "**Many**: Sadece sayılabilen çoğul isimlerle (books, friends) kullanılır.",
+                    "**Much**: Sadece sayılamayan isimlerle (time, money, water) kullanılır.",
+                    "Bu yapılar genellikle olumsuz cümlelerde ve sorularda tercih edilir."
+                ],
+                "examples": [
+                    "I have **many** friends. (Birçok arkadaşım var.)",
+                    "We don't have **much** time. (Fazla vaktimiz yok.)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "Az: A few vs. A little",
+                "bullets": [
+                    "**A few**: Sayılabilen çoğul isimlerle 'birkaç' anlamında kullanılır.",
+                    "**A little**: Sayılamayan isimlerle 'biraz' anlamında kullanılır."
+                ],
+                "examples": [
+                    "I have **a few** minutes. (Birkaç dakikam var.)",
+                    "There is **a little** milk in the fridge. (Buzdolabında biraz süt var.)"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "She doesn't have ____ homework today.",
+                "options": [
+                    "many",
+                    "much",
+                    "a few"
+                ],
+                "answer": "much",
+                "explain": "Homework (ev ödevi) sayılamayan bir isimdir, bu yüzden miktar için 'much' kullanılır."
+            },
+            {
+                "id": "c4",
+                "type": "rule",
+                "title": "Esnek Belirteç: A lot of",
+                "bullets": [
+                    "**A lot of / Lots of**: Hem sayılabilen hem de sayılamayan isimlerle kullanılır.",
+                    "Genellikle olumlu cümlelerde 'çok' anlamında tercih edilir."
+                ],
+                "examples": [
+                    "I bought **a lot of** apples. (Birçok elma aldım.)",
+                    "She has **a lot of** free time. (Çok fazla boş vakti var.)"
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Much ve Çoğul İsim**: 'Much friends' hatalıdır. Doğrusu 'many friends' olmalıdır.",
+                    "**A little ve Çoğul İsim**: 'A little books' denmez. Doğrusu 'a few books'tur.",
+                    "**Money ile Many**: 'Many money' yanlıştır, çünkü para birimleri sayılsa da 'money' kelimesi sayılamaz kabul edilir."
+                ],
+                "examples": [
+                    "Hatalı: I have much chairs. ✗",
+                    "Doğru: I have **many** chairs. ✓"
+                ]
+            },
+            {
+                "id": "q2",
+                "type": "checkpoint",
+                "engine": "fill",
+                "prompt": "How ____ students are in your class?",
+                "answer": [
+                    "many"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Sayılabilecek nesnelerin miktarını sorarken 'How many' yapısını kullanırız."
+            },
+            {
+                "id": "c6",
+                "type": "tip",
+                "title": "Pratik İpucu: Seçim Yapmak",
+                "bullets": [
+                    "Eğer kelime '-s' takısı alabiliyorsa (books, cars, students) **many/a few** kullanın.",
+                    "Eğer kelime kütle halindeyse veya soyutsa (water, sugar, information, time) **much/a little** kullanın."
+                ]
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Kontekst: Akşam Yemeği Hazırlığı",
+        "intro_bullets": [
+            "Mutfaktasın ve bir pasta yapmak istiyorsun.",
+            "Malzemelerini kontrol ederken miktar belirteçlerini doğru kullan.",
+            "Sayılamayan malzemelere ekstra dikkat et!"
+        ],
+        "items": [
+            {
+                "engine": "tap",
+                "prompt": "I want to bake a cake, but I don't have ___ sugar.",
+                "bank": [
+                    "much",
+                    "many",
+                    "a few"
+                ],
+                "answer": "much",
+                "explain": "Sugar sayılamayan bir isim olduğu için olumsuz cümlede 'much' ile kullanılır."
+            },
+            {
+                "engine": "fill",
+                "prompt": "Don't worry, there are ___ (a lot of) eggs in the fridge.",
+                "answer": [
+                    "a lot of",
+                    "lots of"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Yumurta sayılabilir bir isimdir ve 'a lot of' her iki türle de uyumludur."
+            },
+            {
+                "engine": "fill",
+                "prompt": "I only need ___ (a little) water for the mixture.",
+                "answer": [
+                    "a little"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Sayılamayan sıvılarla az miktar belirtirken 'a little' kullanılır."
+            },
+            {
+                "engine": "order",
+                "prompt": "Cümleyi kur: 'Sadece birkaç elmam var.'",
+                "tokens": [
+                    "I",
+                    "only",
+                    "have",
+                    "a",
+                    "few",
+                    "apples"
+                ],
+                "answer_tokens": [
+                    "I",
+                    "only",
+                    "have",
+                    "a",
+                    "few",
+                    "apples"
+                ],
+                "explain": "Apples sayılabilir olduğu için 'a few' (birkaç) kullanılır."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "How ____ flour do we need for this recipe?",
+                "options": [
+                    "much",
+                    "many"
+                ],
+                "answer": "much",
+                "explain": "Un (flour) sayılamaz, miktarını sorarken 'How much' kalıbı kullanılır."
+            }
+        ],
+        "recap_bullets": [
+            "Hatırla: Sayılabilenlerle 'many' ve 'a few', sayılamayanlarla 'much' ve 'a little' kullanılır.",
+            "Hatırla: 'A lot of' jokerdir, her iki durumda da kullanılabilir.",
+            "Hatırla: Soru sorarken 'How many' (sayılabilen) veya 'How much' (sayılamayan) seçilir."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "A2-QUANT-01"
+    }
+}

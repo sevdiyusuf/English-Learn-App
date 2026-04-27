@@ -1,0 +1,177 @@
+{
+    "schema_version": "1.0",
+    "level": "B2",
+    "lesson_id": "B2-PART-01-lesson",
+    "title": "Participle Clauses (Cümle Kısaltmaları)",
+    "topic_tags": [
+        "participle_clauses",
+        "reduced_clauses",
+        "advanced_grammar",
+        "academic_writing"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "İki cümleyi, ortak özneden yola çıkarak kısaltmayı ve birleştirmeyi öğreneceğiz.",
+                    "Etken (Active), Edilgen (Passive) ve Zaman sırası bildiren kısaltmaları ayırt edeceğiz.",
+                    "Akademik metinlerde sıkça karşılaşılan profesyonel yapıları cümlelerimize dahil edeceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Present Participle (-ing): Etken Kısaltma",
+                "bullets": [
+                    "**Kullanım**: Eylem etken (active) bir anlam taşıyorsa veya iki eylem aynı anda gerçekleşiyorsa kullanılır.",
+                    "**Sıfat Cümleciği Kısaltması**: 'Who is/that is' yapılarını kaldırmak için kullanılır."
+                ],
+                "examples": [
+                    "The man waiting at the bus stop is my teacher. (Durakta bekleyen adam öğretmenimdir.)",
+                    "Opening the door, he realized he had left his keys. (Kapıyı açarken, anahtarlarını unuttuğunu fark etti.)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "Past Participle (-V3): Edilgen Kısaltma",
+                "bullets": [
+                    "**Kullanım**: Eylem edilgen (passive) bir anlam taşıyorsa kullanılır.",
+                    "**Anlam**: Bir şey tarafından etkilenen veya maruz kalan durumları anlatır."
+                ],
+                "examples": [
+                    "Shocked by the news, everyone started to cry. (Haberle sarsılan herkes ağlamaya başladı.)",
+                    "The books recommended by the professor are in the library. (Profesör tarafından önerilen kitaplar kütüphanededir.)"
+                ]
+            },
+            {
+                "id": "c4",
+                "type": "rule",
+                "title": "Perfect Participle: Zaman Sıralaması",
+                "bullets": [
+                    "**Kullanım**: Bir eylemin diğerinden daha önce tamamlandığını vurgulamak için kullanılır.",
+                    "**Yapı**: 'Having + V3' (Having finished, Having lived vb.)."
+                ],
+                "examples": [
+                    "Having finished her homework, she went out. (Ödevini bitirdikten sonra dışarı çıktı.)",
+                    "Having lived here for ten years, she knows the city well. (Burada on yıl yaşamış olduğu için şehri iyi biliyor.)"
+                ]
+            },
+            {
+                "id": "formula",
+                "type": "formula",
+                "title": "Kısaltma Formülleri",
+                "bullets": [
+                    "Kısaltma yaparken cümlenin anlamına göre şu yapıları takip edin:"
+                ],
+                "formula": [
+                    "Active Meaning: V-ing (Waiting, Opening)",
+                    "Passive Meaning: V3 (Shocked, Recommended)",
+                    "Completed Earlier: Having + V3 (Having finished)"
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Özne Uyumu**: Kısaltılmış cümledeki eylemi yapan kişi, ana cümledeki özne ile aynı olmalıdır.",
+                    "**Yanlış Zaman Seçimi**: Eğer eylemler arasında belirgin bir öncelik-sonralık varsa sadece '-ing' kullanmak anlamı bozabilir; 'Having V3' tercih edilmelidir.",
+                    "**Olumsuz Yapı**: Olumsuzluk eki 'not', her zaman en başa gelir (Not knowing... )."
+                ],
+                "examples": [
+                    "Hatalı: Knowing not what to do... ✗",
+                    "Doğru: **Not knowing** what to do... ✓"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "Choose the correct sequence: '____ the film before, I didn't want to watch it again.'",
+                "options": [
+                    "Having seen",
+                    "Seeing",
+                    "Seen"
+                ],
+                "answer": "Having seen",
+                "explain": "Filmi daha önce izlemiş olma eylemi bittiği ve şimdiki kararı etkilediği için Perfect Participle kullanılır."
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Akademik Bir Yolculuk",
+        "intro_bullets": [
+            "Başarılı bir araştırmacının hikayesini takip et.",
+            "Cümlelerin nasıl daha kısa ve öz bir hale getirildiğine dikkat et."
+        ],
+        "items": [
+            {
+                "engine": "mcq",
+                "prompt": "____ her research, Dr. Smith presented the results to the board.",
+                "options": [
+                    "Having completed",
+                    "Completing",
+                    "Completed"
+                ],
+                "answer": "Having completed",
+                "explain": "Araştırmayı bitirmek, sunumdan önce tamamlanan bir eylemdir."
+            },
+            {
+                "engine": "fill",
+                "prompt": "The car ____ (park) outside the laboratory belongs to the director.",
+                "answer": [
+                    "parked"
+                ],
+                "explain": "Araba kendi kendini park edemez; 'park edilmiş olan' anlamı için edilgen kısaltma (V3) gerekir."
+            },
+            {
+                "engine": "tap",
+                "prompt": "____ a scientist, she spends most of her time in the lab.",
+                "bank": [
+                    "Being",
+                    "Been",
+                    "Having been"
+                ],
+                "answer": "Being",
+                "explain": "'Bir bilim insanı olduğu için' anlamında sebep bildiren etken bir kısaltmadır."
+            },
+            {
+                "engine": "order",
+                "prompt": "Cümleyi kur: 'Haberle sarsılarak beni aradı.'",
+                "tokens": [
+                    "Shocked",
+                    "by",
+                    "the",
+                    "news,",
+                    "she",
+                    "called",
+                    "me."
+                ],
+                "answer_tokens": [
+                    "Shocked",
+                    "by",
+                    "the",
+                    "news,",
+                    "she",
+                    "called",
+                    "me."
+                ],
+                "explain": "Edilgen bir durum bildirirken cümle Past Participle ile başlar."
+            }
+        ],
+        "recap_bullets": [
+            "Eylemler eş zamanlı ve etkense: V-ing.",
+            "Eylem edilgense: V3.",
+            "Bir eylem bitip diğeri başlıyorsa: Having + V3.",
+            "Olumsuzluklarda 'Not' kelimesini en başa koymayı unutma."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "B2-PART-01"
+    }
+}

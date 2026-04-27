@@ -127,13 +127,14 @@ class __$$GameStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$GameStateImpl implements _GameState {
+class _$GameStateImpl extends _GameState {
   const _$GameStateImpl(
       {required this.room,
       final List<PlayedWord> playedWords = const <PlayedWord>[],
       final Map<String, bool> usedWords = const <String, bool>{}})
       : _playedWords = playedWords,
-        _usedWords = usedWords;
+        _usedWords = usedWords,
+        super._();
 
   @override
   final Room room;
@@ -186,11 +187,12 @@ class _$GameStateImpl implements _GameState {
       __$$GameStateImplCopyWithImpl<_$GameStateImpl>(this, _$identity);
 }
 
-abstract class _GameState implements GameState {
+abstract class _GameState extends GameState {
   const factory _GameState(
       {required final Room room,
       final List<PlayedWord> playedWords,
       final Map<String, bool> usedWords}) = _$GameStateImpl;
+  const _GameState._() : super._();
 
   @override
   Room get room;

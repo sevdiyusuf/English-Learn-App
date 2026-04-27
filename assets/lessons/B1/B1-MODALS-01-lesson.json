@@ -1,0 +1,213 @@
+{
+    "schema_version": "1.0",
+    "level": "B1",
+    "lesson_id": "B1-MODALS-01-lesson",
+    "title": "Modals: should / must / have to / don't have to - lesson",
+    "topic_tags": [
+        "modals",
+        "advice",
+        "obligation",
+        "no_obligation"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "İngilizcedeki tavsiye, zorunluluk ve yasak bildiren yapıları öğreneceğiz.",
+                    "Kişisel zorunluluklar (must) ile dışarıdan gelen kurallar (have to) arasındaki farkı kavrayacağız.",
+                    "Yasaklar (mustn't) ile zorunluluk olmayan durumları (don't have to) ayırt etmeyi pekiştireceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Should: Tavsiye Vermek",
+                "bullets": [
+                    "Birine ne yapmasının iyi olacağını söylemek için kullanılır.",
+                    "Güçlü bir kural değil, bir öneridir."
+                ],
+                "examples": [
+                    "You **should** see a doctor. (Bir doktora görünmelisin.)",
+                    "You **shouldn't** be late. (Geç kalmamalısın - Tavsiye.)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "Must vs. Have to: Zorunluluklar",
+                "bullets": [
+                    "**Must**: Genellikle konuşan kişinin kendi hissettiği veya başkasına dayattığı 'içsel' zorunluluktur.",
+                    "**Have to**: Kanunlar, şirket kuralları veya okul yönetmeliği gibi 'dışsal' kuralları ifade eder."
+                ],
+                "examples": [
+                    "I **must** study tonight. I want to pass. (Kendi isteğim/zorunluluğum)",
+                    "You **have to** wear a helmet. It's the law. (Dış kural/Kanun)"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "Employees ____ wear an ID badge. (It's a company rule.)",
+                "options": [
+                    "should",
+                    "have to",
+                    "don't have to"
+                ],
+                "answer": "have to",
+                "explain": "Şirket kuralları gibi dışarıdan gelen zorunluluklar 'have to' ile belirtilir."
+            },
+            {
+                "id": "c4",
+                "type": "rule",
+                "title": "Don't have to vs. Mustn't",
+                "bullets": [
+                    "**Mustn't**: Yasak! Yapılmasına izin verilmiyor demektir.",
+                    "**Don't have to**: Zorunluluk yok! İstersen yapabilirsin ama gerek yok demektir."
+                ],
+                "examples": [
+                    "You **mustn't** smoke here. (Yasak!)",
+                    "You **don't have to** pay for this. It's free. (Gerek yok.)"
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Modal + to Kullanımı**: 'Should to go' veya 'Must to stay' hatalıdır. Modal fiillerden sonra fiil yalın gelir (have to hariç).",
+                    "**Mustn't ve Don't have to Karıştırmak**: 'Gerek yok' derken 'mustn't' kullanmak anlamı tamamen bozar.",
+                    "**Sorularda Must Kullanımı**: Modern İngilizcede sorularda 'Must I...?' yerine genellikle 'Do I have to...?' tercih edilir."
+                ],
+                "examples": [
+                    "Hatalı: You mustn't bring food, but you can if you want. ✗",
+                    "Doğru: You **don't have to** bring food, but you can if you want. ✓"
+                ]
+            },
+            {
+                "id": "q2",
+                "type": "checkpoint",
+                "engine": "fill",
+                "prompt": "You ____ (not / park) here. It's not allowed.",
+                "answer": [
+                    "mustn't",
+                    "must not"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces",
+                    "accept_contractions"
+                ],
+                "explain": "İzin verilmeyen (not allowed) durumlar 'mustn't' ile ifade edilir."
+            },
+            {
+                "id": "c6",
+                "type": "tip",
+                "title": "Pratik İpucu",
+                "bullets": [
+                    "Öneri/Fikir -> **Should**",
+                    "Zorunluluk -> **Must / Have to**",
+                    "Zorunluluk Yok -> **Don't have to**",
+                    "Yasak -> **Mustn't**"
+                ]
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Kontekst: Yeni Bir Ofis Günü",
+        "intro_bullets": [
+            "Yeni bir işe başladın ve müdürün sana ofis kurallarını anlatıyor.",
+            "Kelimeleri seçerken tavsiye mi, zorunluluk mu yoksa yasak mı olduğuna dikkat et!"
+        ],
+        "items": [
+            {
+                "engine": "mcq",
+                "prompt": "Manager: 'Welcome! First, you ___ arrive on time every day. It is our rule.'",
+                "options": [
+                    "have to",
+                    "should",
+                    "don't have to"
+                ],
+                "answer": "have to",
+                "explain": "Şirket kuralları dışsal bir zorunluluktur."
+            },
+            {
+                "engine": "fill",
+                "prompt": "Manager: 'You ___ (not / smoke) inside the building. It is strictly forbidden.'",
+                "answer": [
+                    "mustn't",
+                    "must not"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces",
+                    "accept_contractions"
+                ],
+                "explain": "Kesin yasaklar 'mustn't' ile belirtilir."
+            },
+            {
+                "engine": "tap",
+                "prompt": "Manager: 'You ___ bring your own lunch. We have a cafeteria that is free for employees.'",
+                "bank": [
+                    "don't have to",
+                    "mustn't",
+                    "should"
+                ],
+                "answer": "don't have to",
+                "explain": "Gerek yok ama istersen getirebilirsin anlamı katıyor."
+            },
+            {
+                "engine": "fill",
+                "prompt": "Manager: 'However, you ___ (try) the lasagna in the cafeteria. It's great!'",
+                "answer": [
+                    "should"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Bu bir tavsiye/öneridir."
+            },
+            {
+                "engine": "order",
+                "prompt": "Sor: (ID kartımı göstermek zorunda mıyım?)",
+                "tokens": [
+                    "Do",
+                    "I",
+                    "have",
+                    "to",
+                    "show",
+                    "my",
+                    "ID",
+                    "?"
+                ],
+                "answer_tokens": [
+                    "Do",
+                    "I",
+                    "have",
+                    "to",
+                    "show",
+                    "my",
+                    "ID",
+                    "?"
+                ],
+                "explain": "Sorularda 'have to' yapısı 'do/does' ile kullanılır."
+            }
+        ],
+        "recap_bullets": [
+            "Hatırla: 'Mustn't' yapamazsın demekken, 'don't have to' yapmana gerek yok demektir.",
+            "Hatırla: Tavsiyeler için 'should', yasaklar için 'mustn't' kullan.",
+            "Hatırla: Dışarıdan gelen kurallar için 'have to' her zaman güvenli bir limandır."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "B1-MODALS-01"
+    }
+}

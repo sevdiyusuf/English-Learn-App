@@ -1,0 +1,163 @@
+{
+    "schema_version": "1.0",
+    "level": "B2",
+    "lesson_id": "B2-FIP-01-lesson",
+    "title": "Future in the Past: Was/Were going to & Would",
+    "topic_tags": [
+        "future_in_the_past",
+        "unfulfilled_plans",
+        "past_intentions",
+        "was_going_to"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Geçmiş bir noktadan geleceğe bakmayı ve geçmişteki niyetlerimizi ifade etmeyi öğreneceğiz.",
+                    "Gerçekleşmeyen veya değişen planları (Was/Were going to) anlatmayı kavrayacağız.",
+                    "Geçmişte yapılan tahminleri ve verilen sözleri (Would) nasıl aktaracağımızı göreceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Was/Were going to: Yarım Kalan Planlar",
+                "bullets": [
+                    "**Kullanım**: Geçmişte bir şeyi yapmaya niyetlendiğimizde ancak genellikle bir engel çıktığında kullanılır.",
+                    "**Anlam**: Genelde cümlede 'yapacaktım ama yapamadım' alt metni vardır.",
+                    "**Kanıt**: Geçmişteki bir kanıta dayanarak yapılan tahminlerde de kullanılır."
+                ],
+                "examples": [
+                    "I was going to call you, but I completely forgot. (Seni arayacaktım ama tamamen unuttum.)",
+                    "They were going to get married in June, but they postponed it. (Haziran'da evleneceklerdi ama ertelediler.)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "Would: Geçmişteki Tahminler ve Sözler",
+                "bullets": [
+                    "**Kullanım**: 'Will' yardımcı fiilinin geçmiş hali olarak kullanılır.",
+                    "**Tahmin**: Geçmişteki bir bakış açısıyla gelecekte ne olacağını düşündüğümüzde kullanılır.",
+                    "**Sözler**: Geçmişte verilen sözleri aktarırken (Reported Speech) tercih edilir."
+                ],
+                "examples": [
+                    "We knew the concert would be amazing. (Konserin harika olacağını biliyorduk.)",
+                    "He promised he would help me. (Bana yardım edeceğine söz verdi.)"
+                ]
+            },
+            {
+                "id": "formula",
+                "type": "formula",
+                "title": "Yapı Formülleri",
+                "bullets": [
+                    "Cümle dizilimlerinde fiilin her zaman yalın hali (V1) kullanılır:"
+                ],
+                "formula": [
+                    "Planlar: Subject + was/were + going to + V1",
+                    "Tahminler: Subject + would + V1"
+                ]
+            },
+            {
+                "id": "c4",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Zaman Kayması**: Geçmişten bahsederken 'will' veya 'am going to' kullanmak hatadır.",
+                    "**Would to**: 'Would' yardımcı fiilinden sonra asla 'to' gelmez (I would call, NOT I would to call).",
+                    "**Was vs Were**: Özne çoğulsa (They, We) mutlaka 'were' kullanılmalıdır."
+                ],
+                "examples": [
+                    "Hatalı: I thought it will rain. ✗",
+                    "Doğru: I thought it **would** rain. ✓",
+                    "Hatalı: We was going to go. ✗",
+                    "Doğru: We **were** going to go. ✓"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "I ____ to the gym, but I felt too tired.",
+                "options": [
+                    "was going to go",
+                    "would go",
+                    "am going to go"
+                ],
+                "answer": "was going to go",
+                "explain": "Gerçekleşmeyen bir niyetten bahsedildiği için 'was going to' yapısı uygundur."
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "İptal Olan Tatil",
+        "intro_bullets": [
+            "Sarah'nın planladığı ama aksilikler yüzünden değişen tatil hikayesini takip et."
+        ],
+        "items": [
+            {
+                "engine": "fill",
+                "prompt": "Sarah ____ (go) to Italy last summer, but she broke her leg.",
+                "answer": [
+                    "was going to go"
+                ],
+                "explain": "Geçmişte planlanan ama gerçekleşmeyen bir eylem için 'was going to + V1' kullanılır."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "She knew the trip ____ be expensive, so she saved a lot of money.",
+                "options": [
+                    "would",
+                    "will",
+                    "was going"
+                ],
+                "answer": "would",
+                "explain": "Geçmişteki bir tahmini (will'in past hali) ifade etmek için 'would' kullanılır."
+            },
+            {
+                "engine": "tap",
+                "prompt": "Her friends ____ visit her in the hospital every day.",
+                "bank": [
+                    "promised they would",
+                    "are going to",
+                    "would to"
+                ],
+                "answer": "promised they would",
+                "explain": "Geçmişte verilen bir sözü aktarırken 'would' yapısı kullanılır."
+            },
+            {
+                "engine": "order",
+                "prompt": "Cümleyi kur: 'Sana haber verecektim.'",
+                "tokens": [
+                    "I",
+                    "was",
+                    "going",
+                    "to",
+                    "tell",
+                    "you."
+                ],
+                "answer_tokens": [
+                    "I",
+                    "was",
+                    "going",
+                    "to",
+                    "tell",
+                    "you."
+                ],
+                "explain": "Geçmiş niyet dizilimi: Subject + was going to + V1."
+            }
+        ],
+        "recap_bullets": [
+            "Niyet ve gerçekleşmeyen planlar: Was/Were going to.",
+            "Geçmişteki tahmin ve sözler: Would.",
+            "Bu yapıların her ikisinden sonra da fiilin yalın hali gelir."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "B2-FIP-01"
+    }
+}

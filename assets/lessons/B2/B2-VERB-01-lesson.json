@@ -1,0 +1,164 @@
+{
+    "schema_version": "1.0",
+    "level": "B2",
+    "lesson_id": "B2-VERB-01-lesson",
+    "title": "Verb Patterns: Gerunds vs Infinitives",
+    "topic_tags": [
+        "gerund",
+        "infinitive",
+        "verb_patterns",
+        "meaning_change"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Hangi fiillerden sonra '-ing' (Gerund), hangilerinden sonra 'to' (Infinitive) geldiğini öğreneceğiz.",
+                    "Aynı fiilin iki farklı takı alarak nasıl anlam değiştirdiğini (Stop, Remember, Forget) kavrayacağız.",
+                    "Cümlelerimizi daha doğal ve akıcı hale getiren fiil dizilimlerini pekiştireceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Gerund Alan Fiiller (-ing)",
+                "bullets": [
+                    "Bazı fiiller kendilerinden sonra gelen eylemi isimleştirmek için '-ing' takısı isterler.",
+                    "**Yaygın Fiiller**: Enjoy (hoşlanmak), Suggest (önermek), Avoid (kaçınmak), Finish (bitirmek)."
+                ],
+                "examples": [
+                    "I enjoy watching movies. (Film izlemekten zevk alırım.)",
+                    "They suggested taking a taxi. (Taksiye binmeyi önerdiler.)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "Infinitive Alan Fiiller (to + V1)",
+                "bullets": [
+                    "Bazı fiiller kendilerinden sonra gelen eylemi 'to' mastar ekiyle bağlarlar.",
+                    "**Yaygın Fiiller**: Decide (karar vermek), Want (istemek), Hope (ummak), Agree (katılmak/anlaşmak)."
+                ],
+                "examples": [
+                    "I decided to study abroad. (Yurt dışında okumaya karar verdim.)",
+                    "I hope to see you soon. (Seni yakında görmeyi umuyorum.)"
+                ]
+            },
+            {
+                "id": "c4",
+                "type": "rule",
+                "title": "Kritik Fark: Anlam Değiştirenler",
+                "bullets": [
+                    "**Stop + -ing**: Bir alışkanlığı veya o an yapılan işi tamamen bırakmak.",
+                    "**Stop + to**: Başka bir işi yapmak amacıyla mevcut işi yarıda kesmek (mola vermek).",
+                    "**Remember/Forget + -ing**: Geçmişteki bir anıyı hatırlamak/unutmak.",
+                    "**Remember/Forget + to**: Yapılması gereken bir görevi hatırlamak/unutmak."
+                ],
+                "examples": [
+                    "Stop talking! (Konuşmayı kesin! - Konuşma eylemini bitir.)",
+                    "Stop to talk. (Konuşmak için dur/mola ver.)"
+                ]
+            },
+            {
+                "id": "formula",
+                "type": "formula",
+                "title": "Yapı Formülleri",
+                "bullets": [
+                    "Fiil dizilimlerini şu kalıplarla kurun:"
+                ],
+                "formula": [
+                    "Verb + V-ing (Enjoy reading)",
+                    "Verb + to + V1 (Decide to leave)",
+                    "Stop + V-ing (Eylemi bırakmak)",
+                    "Stop + to-V1 (Bir amaç için durmak)"
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Yanlış Takı**: 'I want watching' hatalıdır. 'Want' her zaman 'to' ile kullanılır.",
+                    "**Anlam Karışıklığı**: 'I forgot meeting him' (Onunla tanıştığımı unuttum - Anı) ile 'I forgot to meet him' (Onunla buluşmayı unuttum - Görev) arasındaki farkı karıştırmayın.",
+                    "**Avoid Kullanımı**: 'Avoid'dan sonra asla 'to' gelmez; her zaman '-ing' gelir."
+                ],
+                "examples": [
+                    "Hatalı: She decided leaving early. ✗",
+                    "Doğru: She decided **to leave** early. ✓"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "I clearly remember ____ him last year. It was at a conference.",
+                "options": [
+                    "meeting",
+                    "to meet",
+                    "meet"
+                ],
+                "answer": "meeting",
+                "explain": "Geçmişe dair bir hatıradan (anıdan) bahsettiğimiz için 'Remember + -ing' kullanılır."
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Yeni Bir Başlangıç",
+        "intro_bullets": [
+            "Mark'ın kariyerindeki büyük değişim ve aldığı kararları takip et.",
+            "Neleri bıraktığına ve neleri yapmaya karar verdiğine dikkat et."
+        ],
+        "items": [
+            {
+                "engine": "fill",
+                "prompt": "After ten years, Mark finally decided ____ (leave) his boring job.",
+                "answer": [
+                    "to leave"
+                ],
+                "explain": "'Decide' fiili kendisinden sonra 'to + fiil' yapısını gerektirir."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "He wanted to start a business because he enjoyed ____ with people.",
+                "options": [
+                    "working",
+                    "to work",
+                    "work"
+                ],
+                "answer": "working",
+                "explain": "'Enjoy' fiili her zaman Gerund (-ing) ile kullanılır."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "On his last day, he stopped ____ to his boss for one final time.",
+                "options": [
+                    "to talk",
+                    "talking"
+                ],
+                "answer": "to talk",
+                "explain": "Ofisten ayrılırken konuşmak amacıyla (amaç bildirerek) durduğu için 'Stop + to' kullanılır."
+            },
+            {
+                "engine": "fill",
+                "prompt": "Mark said: 'I will never forget ____ (meet) all of you.'",
+                "answer": [
+                    "meeting"
+                ],
+                "explain": "Birlikte geçirilen zamanlara dair bir hatırayı (anıyı) unutmayacağını belirttiği için '-ing' kullanılır."
+            }
+        ],
+        "recap_bullets": [
+            "Enjoy, avoid, suggest -> -ing.",
+            "Want, hope, decide -> to + V1.",
+            "Mola vermek için 'Stop to', eylemi bırakmak için 'Stop -ing'.",
+            "Anılar için 'Remember -ing', görevler için 'Remember to'."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "B2-VERB-01"
+    }
+}

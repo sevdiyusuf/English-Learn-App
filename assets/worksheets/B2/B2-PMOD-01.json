@@ -1,0 +1,256 @@
+{
+  "schema_version": "1.0",
+  "level": "B2",
+  "worksheet_id": "B2-PMOD-01",
+  "title": "Perfect modals",
+  "topic_tags": [
+    "perfect_modals",
+    "past_speculation",
+    "must_have",
+    "might_have",
+    "cant_have"
+  ],
+  "subskills": [
+    "choose_modal",
+    "choose_perfect_form",
+    "evidence_vs_guess"
+  ],
+  "difficulty": 4,
+  "engine_sequence": [
+    {
+      "engine": "mcq",
+      "count": 10,
+      "rules": {
+        "shuffle_options": true,
+        "allow_hint": true
+      }
+    },
+    {
+      "engine": "error_spotting",
+      "count": 6,
+      "rules": {
+        "allow_hint": true
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "mcq1",
+      "engine": "mcq",
+      "prompt": "He isn’t answering. He ____ forgotten his phone.",
+      "translation_tr": "Telefonu açmıyor. Telefonunu unutmuş olmalı.",
+      "options": [
+        "must have",
+        "might have",
+        "can't have"
+      ],
+      "answer": "must have",
+      "hint": "Strong evidence/very likely → must have.",
+      "tags": [
+        "must_have"
+      ]
+    },
+    {
+      "id": "mcq2",
+      "engine": "mcq",
+      "prompt": "I’m not sure, but she ____ left early.",
+      "translation_tr": "Emin değilim ama erken çıkmış olabilir.",
+      "options": [
+        "might have",
+        "must have",
+        "can't have"
+      ],
+      "answer": "might have",
+      "hint": "Not sure/possible → might have.",
+      "tags": [
+        "might_have"
+      ]
+    },
+    {
+      "id": "mcq3",
+      "engine": "mcq",
+      "prompt": "They ____ arrived yet. It’s only 7 a.m.",
+      "translation_tr": "Daha gelmiş olamazlar. Saat sadece yedi.",
+      "options": [
+        "can't have",
+        "must have",
+        "might have"
+      ],
+      "answer": "can't have",
+      "hint": "Impossible → can't have.",
+      "tags": [
+        "cant_have"
+      ]
+    },
+    {
+      "id": "mcq4",
+      "engine": "mcq",
+      "prompt": "The lights are off. They ____ gone to bed.",
+      "translation_tr": "Işıklar kapalı. Yatmaya gitmiş olmalılar.",
+      "options": [
+        "must have",
+        "can't have",
+        "might have"
+      ],
+      "answer": "must have",
+      "tags": [
+        "must_have"
+      ]
+    },
+    {
+      "id": "mcq5",
+      "engine": "mcq",
+      "prompt": "He ____ taken the wrong train. He looks confused.",
+      "translation_tr": "Yanlış trene binmiş olabilir. Kafası karışmış görünüyor.",
+      "options": [
+        "might have",
+        "can't have",
+        "must have"
+      ],
+      "answer": "might have",
+      "tags": [
+        "might_have"
+      ]
+    },
+    {
+      "id": "mcq6",
+      "engine": "mcq",
+      "prompt": "She ____ stolen it. She was with me all day.",
+      "translation_tr": "Onu çalmış olamaz. Tüm gün benimleydi.",
+      "options": [
+        "can't have",
+        "might have",
+        "must have"
+      ],
+      "answer": "can't have",
+      "tags": [
+        "cant_have"
+      ]
+    },
+    {
+      "id": "mcq7",
+      "engine": "mcq",
+      "prompt": "Your keys are on the table. You ____ put them there.",
+      "translation_tr": "Anahtarların masada. Onları oraya sen koymuş olmalısın.",
+      "options": [
+        "must have",
+        "might have",
+        "can't have"
+      ],
+      "answer": "must have",
+      "tags": [
+        "must_have"
+      ]
+    },
+    {
+      "id": "mcq8",
+      "engine": "mcq",
+      "prompt": "We don’t know who did it. It ____ been Ali or Mert.",
+      "translation_tr": "Kimin yaptığını bilmiyoruz. Ali ya da Mert yapmış olabilir.",
+      "options": [
+        "might have",
+        "must have",
+        "can't have"
+      ],
+      "answer": "might have",
+      "tags": [
+        "might_have"
+      ]
+    },
+    {
+      "id": "mcq9",
+      "engine": "mcq",
+      "prompt": "He ____ heard the alarm. It was very loud.",
+      "translation_tr": "Alarmı duymuş olmalı. Çok gürültülüydü.",
+      "options": [
+        "must have",
+        "might have",
+        "can't have"
+      ],
+      "answer": "must have",
+      "tags": [
+        "must_have"
+      ]
+    },
+    {
+      "id": "mcq10",
+      "engine": "mcq",
+      "prompt": "They ____ finished already. They started five minutes ago.",
+      "translation_tr": "Şimdiden bitirmiş olamazlar. Beş dakika önce başladılar.",
+      "options": [
+        "can't have",
+        "must have",
+        "might have"
+      ],
+      "answer": "can't have",
+      "tags": [
+        "cant_have"
+      ]
+    },
+    {
+      "id": "err1",
+      "engine": "error_spotting",
+      "prompt": "He must has forgotten his password.",
+      "translation_tr": "Şifresini unutmuş olmalı.",
+      "answer": "He must have forgotten his password.",
+      "hint": "Perfect modal form: must/might/can't + have + V3.",
+      "tags": [
+        "form_fix"
+      ]
+    },
+    {
+      "id": "err2",
+      "engine": "error_spotting",
+      "prompt": "She might have went home early.",
+      "translation_tr": "Erken eve gitmiş olabilir.",
+      "answer": "She might have gone home early.",
+      "hint": "Use V3 (gone), not past simple (went).",
+      "tags": [
+        "v3_fix"
+      ]
+    },
+    {
+      "id": "err3",
+      "engine": "error_spotting",
+      "prompt": "They can’t have to finished the test.",
+      "translation_tr": "Testi bitirmiş olmaları imkânsız.",
+      "answer": "They can’t have finished the test.",
+      "hint": "No 'to' after have in perfect modals.",
+      "tags": [
+        "form_fix"
+      ]
+    },
+    {
+      "id": "err4",
+      "engine": "error_spotting",
+      "prompt": "I’m sure he might have missed the bus.",
+      "translation_tr": "Eminim otobüsü kaçırmış olmalı.",
+      "answer": "I’m sure he must have missed the bus.",
+      "hint": "Sure/strong certainty → must have.",
+      "tags": [
+        "meaning_fix"
+      ]
+    },
+    {
+      "id": "err5",
+      "engine": "error_spotting",
+      "prompt": "It can't have be her. She was in class.",
+      "translation_tr": "O olamazdı. Dersteydi.",
+      "answer": "It can't have been her. She was in class.",
+      "hint": "Use V3: been.",
+      "tags": [
+        "v3_fix"
+      ]
+    },
+    {
+      "id": "err6",
+      "engine": "error_spotting",
+      "prompt": "He must have forget his wallet.",
+      "translation_tr": "Cüzdanını unutmuş olmalı.",
+      "answer": "He must have forgotten his wallet.",
+      "tags": [
+        "v3_fix"
+      ]
+    }
+  ]
+}

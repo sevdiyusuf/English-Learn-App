@@ -1,0 +1,244 @@
+{
+  "schema_version": "1.0",
+  "level": "B1",
+  "worksheet_id": "B1-PPC-PS-01",
+  "title": "Past Perfect Continuous vs Past Simple",
+  "topic_tags": [
+    "past_perfect_continuous",
+    "past_simple",
+    "cause_result",
+    "had_been_ving"
+  ],
+  "subskills": [
+    "choose_tense",
+    "use_had_been_ving",
+    "recognize_duration_cause"
+  ],
+  "difficulty": 3,
+  "engine_sequence": [
+    {
+      "engine": "mcq",
+      "count": 10,
+      "rules": {
+        "shuffle_options": true,
+        "allow_hint": true
+      }
+    },
+    {
+      "engine": "error_spotting",
+      "count": 6,
+      "rules": {
+        "allow_hint": true
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "mcq1",
+      "engine": "mcq",
+      "prompt": "I was tired because I ____ for hours.",
+      "translation_tr": "Saatlerce yürüdüğüm için yorgundum.",
+      "options": [
+        "had been walking",
+        "walked"
+      ],
+      "answer": "had been walking",
+      "hint": "Duration before a past moment → had been + V-ing.",
+      "tags": [
+        "ppc"
+      ]
+    },
+    {
+      "id": "mcq2",
+      "engine": "mcq",
+      "prompt": "She ____ her keys and went home.",
+      "translation_tr": "Anahtarlarını buldu ve eve gitti.",
+      "options": [
+        "found",
+        "had been finding"
+      ],
+      "answer": "found",
+      "hint": "Completed action → Past Simple.",
+      "tags": [
+        "past_simple"
+      ]
+    },
+    {
+      "id": "mcq3",
+      "engine": "mcq",
+      "prompt": "They were wet because it ____ all day.",
+      "translation_tr": "Bütün gün yağmur yağdığı için ıslaktılar.",
+      "options": [
+        "had been raining",
+        "rained"
+      ],
+      "answer": "had been raining",
+      "tags": [
+        "ppc"
+      ]
+    },
+    {
+      "id": "mcq4",
+      "engine": "mcq",
+      "prompt": "He ____ the email and replied immediately.",
+      "translation_tr": "E-postayı okudu ve hemen cevap verdi.",
+      "options": [
+        "read",
+        "had been reading"
+      ],
+      "answer": "read",
+      "tags": [
+        "past_simple"
+      ]
+    },
+    {
+      "id": "mcq5",
+      "engine": "mcq",
+      "prompt": "By 6 p.m., I ____ for three hours.",
+      "translation_tr": "Saat 6’ya kadar üç saattir çalışıyor olacaktım.",
+      "options": [
+        "had been studying",
+        "studied"
+      ],
+      "answer": "had been studying",
+      "tags": [
+        "ppc"
+      ]
+    },
+    {
+      "id": "mcq6",
+      "engine": "mcq",
+      "prompt": "The match ended at 5. We ____ it.",
+      "translation_tr": "Maç saat 5’te bitti. Biz maçı izledik.",
+      "options": [
+        "watched",
+        "had been watching"
+      ],
+      "answer": "watched",
+      "hint": "Finished event → Past Simple.",
+      "tags": [
+        "past_simple"
+      ]
+    },
+    {
+      "id": "mcq7",
+      "engine": "mcq",
+      "prompt": "Her eyes were red because she ____.",
+      "translation_tr": "Gözleri kızarmıştı çünkü ağlıyordu.",
+      "options": [
+        "had been crying",
+        "cried"
+      ],
+      "answer": "had been crying",
+      "tags": [
+        "ppc"
+      ]
+    },
+    {
+      "id": "mcq8",
+      "engine": "mcq",
+      "prompt": "I ____ the door and saw a surprise.",
+      "translation_tr": "Kapıyı açtım ve bir sürpriz gördüm.",
+      "options": [
+        "opened",
+        "had been opening"
+      ],
+      "answer": "opened",
+      "tags": [
+        "past_simple"
+      ]
+    },
+    {
+      "id": "mcq9",
+      "engine": "mcq",
+      "prompt": "They were angry because we ____ too long.",
+      "translation_tr": "Çok uzun süre beklediğimiz için kızgındılar.",
+      "options": [
+        "had been waiting",
+        "waited"
+      ],
+      "answer": "had been waiting",
+      "tags": [
+        "ppc"
+      ]
+    },
+    {
+      "id": "mcq10",
+      "engine": "mcq",
+      "prompt": "He ____ his homework, then he played games.",
+      "translation_tr": "Ödevini bitirdi, sonra oyun oynadı.",
+      "options": [
+        "finished",
+        "had been finishing"
+      ],
+      "answer": "finished",
+      "tags": [
+        "past_simple"
+      ]
+    },
+    {
+      "id": "err1",
+      "engine": "error_spotting",
+      "prompt": "I was tired because I had walked for three hours.",
+      "translation_tr": "Üç saat yürüdüğüm için yorgundum.",
+      "answer": "I was tired because I had been walking for three hours.",
+      "hint": "Use Past Perfect Continuous for duration before a past moment.",
+      "tags": [
+        "ppc_fix"
+      ]
+    },
+    {
+      "id": "err2",
+      "engine": "error_spotting",
+      "prompt": "She had been finished her work when I called.",
+      "translation_tr": "Ben aradığımda işini bitirmişti.",
+      "answer": "She had finished her work when I called.",
+      "hint": "Past Perfect uses had + V3 (not been + V3).",
+      "tags": [
+        "past_perfect_fix"
+      ]
+    },
+    {
+      "id": "err3",
+      "engine": "error_spotting",
+      "prompt": "They were dirty because they played in the garden for hours.",
+      "translation_tr": "Saatlerce bahçede oynadıkları için üstleri kirliydi.",
+      "answer": "They were dirty because they had been playing in the garden for hours.",
+      "tags": [
+        "ppc_fix"
+      ]
+    },
+    {
+      "id": "err4",
+      "engine": "error_spotting",
+      "prompt": "He had been wrote emails all morning.",
+      "translation_tr": "Tüm sabah e-posta yazıyordu.",
+      "answer": "He had been writing emails all morning.",
+      "hint": "had been + V-ing",
+      "tags": [
+        "ppc_form"
+      ]
+    },
+    {
+      "id": "err5",
+      "engine": "error_spotting",
+      "prompt": "I was late because I had been missed the bus.",
+      "translation_tr": "Otobüsü kaçırdığım için geç kaldım.",
+      "answer": "I was late because I had missed the bus.",
+      "hint": "Missed bus = one completed action → Past Perfect (had missed).",
+      "tags": [
+        "tense_choice"
+      ]
+    },
+    {
+      "id": "err6",
+      "engine": "error_spotting",
+      "prompt": "She was happy because she had been pass the exam.",
+      "translation_tr": "Sınavı geçtiği için mutluydu.",
+      "answer": "She was happy because she had passed the exam.",
+      "tags": [
+        "past_perfect_fix"
+      ]
+    }
+  ]
+}

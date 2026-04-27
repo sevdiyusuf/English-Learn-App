@@ -1,0 +1,317 @@
+{
+    "schema_version": "1.0",
+    "level": "B1",
+    "worksheet_id": "B1-PASSIVE-01",
+    "title": "Passive Voice (present/past simple passive)",
+    "topic_tags": [
+        "passive",
+        "be",
+        "v3",
+        "present_simple",
+        "past_simple"
+    ],
+    "subskills": [
+        "recognize_object_focus",
+        "choose_be_form",
+        "choose_v3"
+    ],
+    "difficulty": 3,
+    "engine_sequence": [
+        {
+            "engine": "fill",
+            "count": 8,
+            "rules": {
+                "case_sensitive": false,
+                "allow_contractions": true
+            }
+        },
+        {
+            "engine": "transform",
+            "count": 4,
+            "rules": {
+                "allow_hint": true
+            }
+        }
+    ],
+    "items": [
+        {
+            "id": "fill1",
+            "engine": "fill",
+            "prompt": "English ____ (speak) in many countries.",
+            "translation_tr": "İngilizce birçok ülkede konuşulur.",
+            "answer": [
+                "is spoken"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "hint": "Present simple passive: am/is/are + V3",
+            "tags": [
+                "present_passive"
+            ]
+        },
+        {
+            "id": "fill2",
+            "engine": "fill",
+            "prompt": "New roads ____ (build) every year.",
+            "translation_tr": "Her yıl yeni yollar inşa edilir.",
+            "answer": [
+                "are built"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "present_passive",
+                "plural"
+            ]
+        },
+        {
+            "id": "fill3",
+            "engine": "fill",
+            "prompt": "The homework ____ (check) by the teacher.",
+            "translation_tr": "Ödev öğretmen tarafından kontrol edilir.",
+            "answer": [
+                "is checked"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "present_passive"
+            ]
+        },
+        {
+            "id": "fill4",
+            "engine": "fill",
+            "prompt": "The room ____ (clean) every day.",
+            "translation_tr": "Oda her gün temizlenir.",
+            "answer": [
+                "is cleaned"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "present_passive"
+            ]
+        },
+        {
+            "id": "fill5",
+            "engine": "fill",
+            "prompt": "This movie ____ (watch) by millions of people.",
+            "translation_tr": "Bu film milyonlarca insan tarafından izlenir.",
+            "answer": [
+                "is watched"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "present_passive"
+            ]
+        },
+        {
+            "id": "fill6",
+            "engine": "fill",
+            "prompt": "The letter ____ (send) yesterday.",
+            "translation_tr": "Mektup dün gönderildi.",
+            "answer": [
+                "was sent"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "hint": "Past simple passive: was/were + V3",
+            "tags": [
+                "past_passive"
+            ]
+        },
+        {
+            "id": "fill7",
+            "engine": "fill",
+            "prompt": "The report ____ (write) by Tom.",
+            "translation_tr": "Rapor Tom tarafından yazıldı.",
+            "answer": [
+                "was written"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "past_passive"
+            ]
+        },
+        {
+            "id": "fill8",
+            "engine": "fill",
+            "prompt": "Many books ____ (read) by students.",
+            "translation_tr": "Birçok kitap öğrenciler tarafından okunur.",
+            "answer": [
+                "are read"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "present_passive"
+            ]
+        },
+        {
+            "id": "tr1",
+            "engine": "transform",
+            "prompt": "Active: The teacher explains the lesson.",
+            "translation_tr": "Ders öğretmen tarafından açıklanır.",
+            "steps": [
+                {
+                    "type": "select",
+                    "label": "Choose BE",
+                    "options": [
+                        "is",
+                        "are",
+                        "was",
+                        "were"
+                    ],
+                    "answer": "is"
+                },
+                {
+                    "type": "select",
+                    "label": "Choose V3",
+                    "options": [
+                        "explained",
+                        "explains",
+                        "explaining"
+                    ],
+                    "answer": "explained"
+                }
+            ],
+            "final_template": "The lesson {be} {v3} (by the teacher).",
+            "final_answer": "The lesson is explained (by the teacher).",
+            "tags": [
+                "transform",
+                "present_passive"
+            ]
+        },
+        {
+            "id": "tr2",
+            "engine": "transform",
+            "prompt": "Active: They build houses every year.",
+            "translation_tr": "Her yıl evler inşa edilir.",
+            "steps": [
+                {
+                    "type": "select",
+                    "label": "Choose BE",
+                    "options": [
+                        "is",
+                        "are",
+                        "was",
+                        "were"
+                    ],
+                    "answer": "are"
+                },
+                {
+                    "type": "select",
+                    "label": "Choose V3",
+                    "options": [
+                        "built",
+                        "build",
+                        "building"
+                    ],
+                    "answer": "built"
+                }
+            ],
+            "final_template": "Houses {be} {v3} every year.",
+            "final_answer": "Houses are built every year.",
+            "tags": [
+                "transform",
+                "present_passive"
+            ]
+        },
+        {
+            "id": "tr3",
+            "engine": "transform",
+            "prompt": "Active: She wrote many letters.",
+            "translation_tr": "Birçok mektup onun tarafından yazıldı.",
+            "steps": [
+                {
+                    "type": "select",
+                    "label": "Choose BE",
+                    "options": [
+                        "is",
+                        "are",
+                        "was",
+                        "were"
+                    ],
+                    "answer": "were"
+                },
+                {
+                    "type": "select",
+                    "label": "Choose V3",
+                    "options": [
+                        "written",
+                        "wrote",
+                        "writing"
+                    ],
+                    "answer": "written"
+                }
+            ],
+            "final_template": "Many letters {be} {v3} (by her).",
+            "final_answer": "Many letters were written (by her).",
+            "tags": [
+                "transform",
+                "past_passive"
+            ]
+        },
+        {
+            "id": "tr4",
+            "engine": "transform",
+            "prompt": "Active: We watch movies every weekend.",
+            "translation_tr": "Her hafta sonu filmler izlenir.",
+            "steps": [
+                {
+                    "type": "select",
+                    "label": "Choose BE",
+                    "options": [
+                        "is",
+                        "are",
+                        "was",
+                        "were"
+                    ],
+                    "answer": "are"
+                },
+                {
+                    "type": "select",
+                    "label": "Choose V3",
+                    "options": [
+                        "watched",
+                        "watch",
+                        "watching"
+                    ],
+                    "answer": "watched"
+                }
+            ],
+            "final_template": "Movies {be} {v3} every weekend.",
+            "final_answer": "Movies are watched every weekend.",
+            "tags": [
+                "transform",
+                "present_passive"
+            ]
+        }
+    ]
+}

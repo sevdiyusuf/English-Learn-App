@@ -9,11 +9,13 @@ import '../../features/lobby/ui/room_lobby_page.dart';
 /// Lobby-related routes
 List<RouteBase> get lobbyRoutes => [
       GoRoute(
-        path: '/',
+        path: '/lobby',
         name: LobbyHomePage.routeName,
         pageBuilder: (context, state) => CustomTransitionPage(
           key: state.pageKey,
-          child: const LobbyHomePage(),
+          child: LobbyHomePage(
+            from: state.uri.queryParameters['from'],
+          ),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(
               opacity: animation,

@@ -1,0 +1,215 @@
+{
+    "schema_version": "1.0",
+    "level": "A2",
+    "lesson_id": "A2-PP-PS-01-lesson",
+    "title": "Present Perfect vs Past Simple",
+    "topic_tags": [
+        "present_perfect",
+        "past_simple",
+        "just",
+        "already",
+        "yet",
+        "ever",
+        "never"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Geçmişte bitmiş net eylemler ile hayat deneyimleri arasındaki farkı öğreneceğiz.",
+                    "Zaman belirteçlerine (yesterday, since, ago vb.) bakarak doğru zamanı seçmeyi kavrayacağız.",
+                    "Just, Already ve Yet kelimelerinin cümle içindeki yerlerini pekiştireceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Past Simple: Zaman Bellidir",
+                "bullets": [
+                    "**Net Zaman**: Eylemin ne zaman yapıldığı tam olarak belirtilir.",
+                    "**İpuçları**: Yesterday, ago, last week, in 2020.",
+                    "Eylem tamamen bitmiştir ve geçmişte kalmıştır."
+                ],
+                "examples": [
+                    "I met him **yesterday**. (Dün onunla buluştum.)",
+                    "We went to Italy **in 2020**. (2020'de İtalya'ya gittik.)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "Present Perfect: Zaman Belirsizdir",
+                "bullets": [
+                    "**Deneyim/Etki**: Önemli olan eylemin 'ne zaman' yapıldığı değil, yapılmış olmasıdır.",
+                    "**İpuçları**: Ever, never, before, yet, already, just.",
+                    "Zaman belirtilmezse genellikle bu yapı tercih edilir."
+                ],
+                "examples": [
+                    "I **have read** this book before. (Bu kitabı daha önce okudum.)",
+                    "Have you **ever** tried sushi? (Hiç suşi denedin mi?)"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "She ____ to the shop an hour ago.",
+                "options": [
+                    "went",
+                    "has gone"
+                ],
+                "answer": "went",
+                "explain": "'An hour ago' (bir saat önce) net bir geçmiş zaman ifadesidir, bu yüzden Past Simple kullanılır."
+            },
+            {
+                "id": "c4",
+                "type": "formula",
+                "title": "Özel Belirteçler: Just, Already, Yet",
+                "bullets": [
+                    "**Just**: Az önce (Yeni bitmiş).",
+                    "**Already**: Çoktan (Beklenenden erken).",
+                    "**Yet**: Henüz (Olumsuz ve sorularda, cümlenin sonunda)."
+                ],
+                "formula": [
+                    "Have/Has + **just/already** + V3",
+                    "Have/Has + not + V3 ... **yet**"
+                ],
+                "examples": [
+                    "She has **just** arrived. (Az önce vardı.)",
+                    "I haven't finished my homework **yet**. (Henüz bitirmedim.)"
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Net Zamanla Have Kullanmak**: 'I have seen him yesterday' denmez. Yesterday varsa 'saw' denmelidir.",
+                    "**Ago vs. Before**: 'Ago' Past Simple ile, 'Before' genellikle Present Perfect ile kullanılır.",
+                    "**Soru Yapısı**: Did you see? (V1) vs. Have you seen? (V3) farkına dikkat edin."
+                ],
+                "examples": [
+                    "Hatalı: I have met her two days ago. ✗",
+                    "Doğru: I met her two days ago. ✓"
+                ]
+            },
+            {
+                "id": "q2",
+                "type": "checkpoint",
+                "engine": "fill",
+                "prompt": "____ you ever ____ (try) bungee jumping?",
+                "answer": [
+                    "have you ever tried"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Hayat deneyimi sorulduğu ve 'ever' kullanıldığı için Present Perfect soru yapısı kurulur."
+            },
+            {
+                "id": "c6",
+                "type": "tip",
+                "title": "Pratik İpucu: 'Bitti mi?' Testi",
+                "bullets": [
+                    "Cümlede 'ne zaman?' sorusuna net bir cevap (dün, geçen yıl vb.) varsa **V2**'yi seç.",
+                    "Cümle 'şu anki' durumu veya genel deneyimi anlatıyorsa **Have/Has V3**'e git."
+                ]
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Kontekst: Dünya Turu Planı",
+        "intro_bullets": [
+            "Alex ve Mia gezdikleri yerler ve gelecek planları hakkında konuşuyorlar.",
+            "Zaman belirteçlerine dikkat ederek diyalogdaki boşlukları doldur.",
+            "Bitmiş olaylar ile genel deneyimleri ayırt et!"
+        ],
+        "items": [
+            {
+                "engine": "fill",
+                "prompt": "Alex: 'I ___ (visit) many countries in Europe so far.'",
+                "answer": [
+                    "have visited"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "'So far' (şu ana kadar) genel bir süreci belirttiği için Present Perfect kullanılır."
+            },
+            {
+                "engine": "tap",
+                "prompt": "Mia: 'That's great! I ___ to London last summer.'",
+                "bank": [
+                    "went",
+                    "have been",
+                    "go"
+                ],
+                "answer": "went",
+                "explain": "'Last summer' (geçen yaz) net bir geçmiş zaman noktasıdır."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "Alex: 'Have you ____ been to Paris?'",
+                "options": [
+                    "ever",
+                    "yet",
+                    "just"
+                ],
+                "answer": "ever",
+                "explain": "Deneyim sormak için sorularda 'ever' kullanılır."
+            },
+            {
+                "engine": "order",
+                "prompt": "Mia: (Cümleyi kur: Henüz oraya gitmedim.)",
+                "tokens": [
+                    "I",
+                    "have",
+                    "not",
+                    "been",
+                    "there",
+                    "yet"
+                ],
+                "answer_tokens": [
+                    "I",
+                    "have",
+                    "not",
+                    "been",
+                    "there",
+                    "yet"
+                ],
+                "explain": "Olumsuz cümlelerde 'yet' cümlenin sonuna gelir."
+            },
+            {
+                "engine": "fill",
+                "prompt": "Alex: 'I ___ just ___ (buy) a ticket for my next trip!'",
+                "answer": [
+                    "have just bought",
+                    "i've just bought"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces",
+                    "accept_contractions"
+                ],
+                "explain": "'Just' (az önce) eylemin yeni bittiğini gösterir."
+            }
+        ],
+        "recap_bullets": [
+            "Hatırla: 'Yesterday, ago, in 2010' varsa Past Simple (V2) kullan.",
+            "Hatırla: 'Just, already, yet, ever, never' varsa Present Perfect (Have/Has V3) kullan.",
+            "Hatırla: 'Yet' olumsuz ve sorularda cümlenin sonundadır."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "A2-PP-PS-01"
+    }
+}

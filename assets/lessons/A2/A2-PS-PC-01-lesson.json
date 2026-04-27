@@ -1,0 +1,205 @@
+{
+    "schema_version": "1.0",
+    "level": "A2",
+    "lesson_id": "A2-PS-PC-01-lesson",
+    "title": "Past Simple vs Past Continuous",
+    "topic_tags": [
+        "past_simple",
+        "past_continuous",
+        "when",
+        "while",
+        "interrupted_actions"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Geçmişte devam eden bir eylem ile o eylemi kesen kısa eylemleri ayırmayı öğreneceğiz.",
+                    "Past Simple ve Past Continuous yapılarının birlikte kullanımını kavrayacağız.",
+                    "'When' ve 'While' bağlaçlarını doğru yerlerde kullanmayı pekiştireceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Süreç vs. Anlık Eylem",
+                "bullets": [
+                    "**Past Continuous**: Geçmişte belli bir süre devam eden 'uzun' eylemler için kullanılır (I was watching TV).",
+                    "**Past Simple**: Geçmişte olup biten, süreci değil 'anı' veya 'kesintiyi' vurgulayan eylemler için kullanılır (He arrived)."
+                ],
+                "examples": [
+                    "I **was sleeping** when the phone rang. (Uyuyordum - uzun eylem, telefon çaldı - kısa kesinti.)",
+                    "While they **were walking**, it started to rain. (Yürüyorlardı - süreç, yağmur başladı - anlık.)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "When ve While Kullanımı",
+                "bullets": [
+                    "**When**: Genellikle kendisinden sonra 'anlık' bir eylem (Past Simple) getirir. '...olduğunda' anlamı katar.",
+                    "**While**: Genellikle kendisinden sonra bir 'süreç' (Past Continuous) getirir. '...yapıyorken' anlamı katar."
+                ],
+                "examples": [
+                    "I was cooking **when** the lights went out.",
+                    "The lights went out **while** I was cooking."
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "Soru: 'He ____ (work) in the garden when it started to snow.' cümlesinde hangi yapı uygundur?",
+                "options": [
+                    "was working",
+                    "worked"
+                ],
+                "answer": "was working",
+                "explain": "Bahçede çalışmak bir süreçtir ve karın yağmaya başlaması bu süreci bölen bir olaydır.",
+                "hint": "Uzun eylem mi yoksa kısa eylem mi olduğuna karar ver."
+            },
+            {
+                "id": "c4",
+                "type": "formula",
+                "title": "Cümle Yapıları",
+                "bullets": [
+                    "Bağlaçların yerini değiştirseniz de anlamın bozulmadığını, sadece vurgunun değiştiğini unutmayın."
+                ],
+                "formula": [
+                    "While + Past Continuous , Past Simple",
+                    "Past Continuous + when + Past Simple"
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**İki Tarafı da Sürekli Yapmak**: Eğer bir eylem diğerini kesiyorsa, ikisi de -ing almaz. Biri mutlaka Past Simple olmalıdır.",
+                    "**When/While Karıştırmak**: 'While he arrived' (Yanlış) -> 'When he arrived' (Doğru)."
+                ],
+                "examples": [
+                    "Hatalı: I was reading while he was knocking. ✗",
+                    "Doğru: I **was reading** when he **knocked**. ✓"
+                ]
+            },
+            {
+                "id": "q2",
+                "type": "checkpoint",
+                "engine": "fill",
+                "prompt": "I saw an accident while I ____ ____ (wait) for the bus.",
+                "answer": [
+                    "was waiting"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Otobüs beklemek bir süreçtir, bu yüzden Past Continuous kullanılır.",
+                "hint": "Be + V-ing yapısını hatırla."
+            },
+            {
+                "id": "c6",
+                "type": "summary",
+                "title": "Özet",
+                "bullets": [
+                    "Arka plandaki uzun eylem -> Past Continuous (was/were + V-ing)",
+                    "Araya giren kısa eylem -> Past Simple (V2 / -ed)",
+                    "While + Süreç, When + Anlık Olay."
+                ]
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Kontekst: Elektrikler Kesildiğinde",
+        "intro_bullets": [
+            "Bir akşam arkadaşlarınla evdesin ve herkes farklı şeyler yapıyor.",
+            "Bir anda elektrikler kesiliyor ve o sırada neler olduğunu anlatıyorsun.",
+            "Arka plandaki uzun eylemler ile anlık olayları doğru zamanla ifade et."
+        ],
+        "items": [
+            {
+                "engine": "fill",
+                "prompt": "I ____ ____ (study) in my room when the lights went out.",
+                "answer": [
+                    "was studying"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Odadaki çalışma bir süreçtir, \"lights went out\" bu süreci kesen kısa olaydır. Bu yüzden arka plan için Past Continuous kullanılır."
+            },
+            {
+                "engine": "fill",
+                "prompt": "While my sister ____ ____ (cook) dinner, the TV suddenly turned off.",
+                "answer": [
+                    "was cooking"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "\"While\" sonrası uzun/arkaplan eylemi gelir. Yemek pişirme devam eden bir eylem olduğu için Past Continuous uygundur."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "My friends ____ in the living room when the power cut happened.",
+                "options": [
+                    "were talking",
+                    "talked"
+                ],
+                "answer": "were talking",
+                "explain": "Arkadaşların konuşması arka plandaki uzun eylemdir, elektrik kesintisi ise anlık bir olaydır."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "When the lights went out, I ____ my phone.",
+                "options": [
+                    "dropped",
+                    "was dropping"
+                ],
+                "answer": "dropped",
+                "explain": "Telefonu düşürmek anlık ve tamamlanmış bir olaydır, bu yüzden Past Simple kullanılır."
+            },
+            {
+                "engine": "fill",
+                "prompt": "We ____ ____ (sit) on the sofa while my dad was checking the fuse box.",
+                "answer": [
+                    "were sitting"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Koltukta oturmak da devam eden bir eylemdir, bu yüzden \"while\" ile birlikte Past Continuous kullanılır."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "While we were laughing about the situation, the lights ____ on again.",
+                "options": [
+                    "came",
+                    "were coming"
+                ],
+                "answer": "came",
+                "explain": "\"Lights came on\" tek seferlik, kısa bir olaydır; bu yüzden Past Simple kullanılır."
+            }
+        ],
+        "recap_bullets": [
+            "Arka plan / uzun eylemler için: was/were + V-ing (Past Continuous).",
+            "Anlık, tamamlanmış olaylar için: V2 / -ed (Past Simple).",
+            "\"While\" genellikle süren eylemi, \"when\" ise anlık olayı vurgular."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "A2-PS-PC-01"
+    }
+}

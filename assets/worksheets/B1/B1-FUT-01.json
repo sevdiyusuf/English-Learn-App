@@ -1,0 +1,284 @@
+{
+  "schema_version": "1.0",
+  "level": "B1",
+  "worksheet_id": "B1-FUT-01",
+  "title": "Future Perfect vs Future Continuous",
+  "topic_tags": [
+    "future_perfect",
+    "future_continuous",
+    "by_time",
+    "at_time",
+    "will_have_v3",
+    "will_be_ving"
+  ],
+  "subskills": [
+    "choose_future_perfect",
+    "choose_future_continuous",
+    "use_time_markers"
+  ],
+  "difficulty": 3,
+  "engine_sequence": [
+    {
+      "engine": "mcq",
+      "count": 10,
+      "rules": {
+        "shuffle_options": true,
+        "allow_hint": true
+      }
+    },
+    {
+      "engine": "fill",
+      "count": 6,
+      "rules": {
+        "case_sensitive": false,
+        "allow_contractions": true
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "mcq1",
+      "engine": "mcq",
+      "prompt": "By 6 p.m., I ____ my homework.",
+      "translation_tr": "Saat 6’ya kadar ödevimi bitirmiş olacağım.",
+      "options": [
+        "will have finished",
+        "will be finishing"
+      ],
+      "answer": "will have finished",
+      "hint": "By + time → Future Perfect (completed).",
+      "tags": [
+        "future_perfect"
+      ]
+    },
+    {
+      "id": "mcq2",
+      "engine": "mcq",
+      "prompt": "At 6 p.m., I ____ my homework.",
+      "translation_tr": "Saat 6’da ödevimi yapıyor olacağım.",
+      "options": [
+        "will have finished",
+        "will be doing"
+      ],
+      "answer": "will be doing",
+      "hint": "At + time → Future Continuous (in progress).",
+      "tags": [
+        "future_continuous"
+      ]
+    },
+    {
+      "id": "mcq3",
+      "engine": "mcq",
+      "prompt": "This time tomorrow, we ____ on the plane.",
+      "translation_tr": "Yarın bu saatlerde uçakta oluyor olacağız.",
+      "options": [
+        "will be flying",
+        "will have flown"
+      ],
+      "answer": "will be flying",
+      "tags": [
+        "future_continuous"
+      ]
+    },
+    {
+      "id": "mcq4",
+      "engine": "mcq",
+      "prompt": "By next week, she ____ the project.",
+      "translation_tr": "Gelecek haftaya kadar projeyi tamamlamış olacak.",
+      "options": [
+        "will have completed",
+        "will be completing"
+      ],
+      "answer": "will have completed",
+      "tags": [
+        "future_perfect"
+      ]
+    },
+    {
+      "id": "mcq5",
+      "engine": "mcq",
+      "prompt": "At 9 tonight, he ____ dinner.",
+      "translation_tr": "Bu akşam saat 9’da akşam yemeğini pişiriyor olacak.",
+      "options": [
+        "will be cooking",
+        "will have cooked"
+      ],
+      "answer": "will be cooking",
+      "tags": [
+        "future_continuous"
+      ]
+    },
+    {
+      "id": "mcq6",
+      "engine": "mcq",
+      "prompt": "By the time you arrive, we ____.",
+      "translation_tr": "Sen varana kadar biz gitmiş olacağız.",
+      "options": [
+        "will have left",
+        "will be leaving"
+      ],
+      "answer": "will have left",
+      "tags": [
+        "future_perfect"
+      ]
+    },
+    {
+      "id": "mcq7",
+      "engine": "mcq",
+      "prompt": "Tomorrow at 3, I ____ in a meeting.",
+      "translation_tr": "Yarın saat 3’te toplantıda oturuyor olacağım.",
+      "options": [
+        "will be sitting",
+        "will have sat"
+      ],
+      "answer": "will be sitting",
+      "tags": [
+        "future_continuous"
+      ]
+    },
+    {
+      "id": "mcq8",
+      "engine": "mcq",
+      "prompt": "By 2030, they ____ a new bridge.",
+      "translation_tr": "2030’a kadar yeni bir köprü inşa etmiş olacaklar.",
+      "options": [
+        "will have built",
+        "will be building"
+      ],
+      "answer": "will have built",
+      "tags": [
+        "future_perfect"
+      ]
+    },
+    {
+      "id": "mcq9",
+      "engine": "mcq",
+      "prompt": "At this time next Sunday, we ____ at home.",
+      "translation_tr": "Gelecek pazar bu saatte evde dinleniyor olacağız.",
+      "options": [
+        "will be relaxing",
+        "will have relaxed"
+      ],
+      "answer": "will be relaxing",
+      "tags": [
+        "future_continuous"
+      ]
+    },
+    {
+      "id": "mcq10",
+      "engine": "mcq",
+      "prompt": "By midnight, he ____ the book.",
+      "translation_tr": "Gece yarısına kadar kitabı bitirmiş olacak.",
+      "options": [
+        "will have read",
+        "will be reading"
+      ],
+      "answer": "will have read",
+      "tags": [
+        "future_perfect"
+      ]
+    },
+    {
+      "id": "fill1",
+      "engine": "fill",
+      "prompt": "By 5 p.m., I ____ ____ (finish) my work.",
+      "translation_tr": "Saat 5’e kadar işimi bitirmiş olacağım.",
+      "answer": [
+        "will have finished"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "future_perfect"
+      ]
+    },
+    {
+      "id": "fill2",
+      "engine": "fill",
+      "prompt": "At 5 p.m., I ____ ____ (work) on my project.",
+      "translation_tr": "Saat 5’te projem üzerinde çalışıyor olacağım.",
+      "answer": [
+        "will be working"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "future_continuous"
+      ]
+    },
+    {
+      "id": "fill3",
+      "engine": "fill",
+      "prompt": "This time tomorrow, she ____ ____ (drive) to school.",
+      "translation_tr": "Yarın bu saatte okula araba sürüyor olacak.",
+      "answer": [
+        "will be driving"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "future_continuous"
+      ]
+    },
+    {
+      "id": "fill4",
+      "engine": "fill",
+      "prompt": "By next month, we ____ ____ (save) enough money.",
+      "translation_tr": "Gelecek aya kadar yeterince para biriktirmiş olacağız.",
+      "answer": [
+        "will have saved"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "future_perfect"
+      ]
+    },
+    {
+      "id": "fill5",
+      "engine": "fill",
+      "prompt": "By the time you call, I ____ ____ (sleep).",
+      "translation_tr": "Sen aradığında ben uyumuş olacağım.",
+      "answer": [
+        "will have slept"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "future_perfect"
+      ]
+    },
+    {
+      "id": "fill6",
+      "engine": "fill",
+      "prompt": "At 10 tonight, they ____ ____ (watch) a movie.",
+      "translation_tr": "Bu akşam saat 10’da film izliyor olacaklar.",
+      "answer": [
+        "will be watching"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "future_continuous"
+      ]
+    }
+  ]
+}

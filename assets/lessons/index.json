@@ -1,0 +1,547 @@
+{
+    "levels": [
+        "A1",
+        "A2",
+        "B1",
+        "B2"
+    ],
+    "lessons": {
+        "A1": [
+            {
+                "lesson_id": "A1-ART-01-lesson",
+                "title": "Articles: a/an/the + zero",
+                "path": "A1/A1-ART-01-lesson.json",
+                "topic_tags": [
+                    "articles",
+                    "a_an",
+                    "the",
+                    "zero_article"
+                ],
+                "train_worksheet_id": "A1-ART-01"
+            },
+            {
+                "lesson_id": "A1-CAN-01-lesson",
+                "title": "Can / Can't (Ability & Possibility)",
+                "path": "A1/A1-CAN-01-lesson.json",
+                "topic_tags": [
+                    "can",
+                    "cant",
+                    "ability",
+                    "permission"
+                ],
+                "train_worksheet_id": "A1-CAN-01"
+            },
+            {
+                "lesson_id": "A1-CU-01-lesson",
+                "title": "Countable vs Uncountable Nouns",
+                "path": "A1/A1-CU-01-lesson.json",
+                "topic_tags": [
+                    "nouns",
+                    "countable",
+                    "uncountable"
+                ],
+                "train_worksheet_id": "A1-CU-01"
+            },
+            {
+                "lesson_id": "A1-POSS-01-lesson",
+                "title": "Possessive Adjectives & 's",
+                "path": "A1/A1-POSS-01-lesson.json",
+                "topic_tags": [
+                    "possessive",
+                    "adjectives",
+                    "genitive_s"
+                ],
+                "train_worksheet_id": "A1-POSS-01"
+            },
+            {
+                "lesson_id": "A1-PREP-01-lesson",
+                "title": "Prepositions of Place (In, On, At)",
+                "path": "A1/A1-PREP-01-lesson.json",
+                "topic_tags": [
+                    "prepositions",
+                    "place",
+                    "in_on_at"
+                ],
+                "train_worksheet_id": "A1-PREP-01"
+            },
+            {
+                "lesson_id": "A1-PS-PC-01-lesson",
+                "title": "Present Simple vs Continuous",
+                "path": "A1/A1-PS-PC-01-lesson.json",
+                "topic_tags": [
+                    "present_simple",
+                    "present_continuous",
+                    "tense_comparison"
+                ],
+                "train_worksheet_id": "A1-PS-PC-01"
+            },
+            {
+                "lesson_id": "A1-QUEST-01-lesson",
+                "title": "Question Words (Wh- Questions)",
+                "path": "A1/A1-QUEST-01-lesson.json",
+                "topic_tags": [
+                    "questions",
+                    "wh_words",
+                    "word_order"
+                ],
+                "train_worksheet_id": "A1-QUEST-01"
+            },
+            {
+                "lesson_id": "A1-THERE-01-lesson",
+                "title": "There is / There are",
+                "path": "A1/A1-THERE-01-lesson.json",
+                "topic_tags": [
+                    "there_is",
+                    "there_are",
+                    "existence"
+                ],
+                "train_worksheet_id": "A1-THERE-01"
+            },
+            {
+                "lesson_id": "A1-TOBE-01-lesson",
+                "title": "To Be: Am, Is, Are",
+                "path": "A1/A1-TOBE-01-lesson.json",
+                "topic_tags": [
+                    "to_be",
+                    "pronouns",
+                    "basic_sentences"
+                ],
+                "train_worksheet_id": "A1-TOBE-01"
+            },
+            {
+                "lesson_id": "A1-ADV-01-lesson",
+                "title": "Adverbs of Frequency",
+                "path": "A1/A1-ADV-01-lesson.json",
+                "topic_tags": [
+                    "adverbs_of_frequency",
+                    "present_simple",
+                    "routines"
+                ],
+                "train_worksheet_id": "A1-ADV-01"
+            }
+        ],
+        "A2": [
+            {
+                "lesson_id": "A2-COMP-01-lesson",
+                "title": "Comparatives & Superlatives",
+                "path": "A2/A2-COMP-01-lesson.json",
+                "topic_tags": [
+                    "comparatives",
+                    "superlatives",
+                    "adjectives"
+                ],
+                "train_worksheet_id": "A2-COMP-01"
+            },
+            {
+                "lesson_id": "A2-FUTURE-01-lesson",
+                "title": "Future with Will & Going to",
+                "path": "A2/A2-FUTURE-01-lesson.json",
+                "topic_tags": [
+                    "future",
+                    "will",
+                    "going_to"
+                ],
+                "train_worksheet_id": "A2-FUTURE-01"
+            },
+            {
+                "lesson_id": "A2-FUTURE-02-lesson",
+                "title": "Present Continuous (future) vs Going to",
+                "path": "A2/A2-FUTURE-02-lesson.json",
+                "topic_tags": [
+                    "future",
+                    "present_continuous",
+                    "going_to",
+                    "arrangements"
+                ],
+                "train_worksheet_id": "A2-FUTURE-02"
+            },
+            {
+                "lesson_id": "A2-ING-01-lesson",
+                "title": "Gerunds vs Infinitives",
+                "path": "A2/A2-ING-01-lesson.json",
+                "topic_tags": [
+                    "gerund",
+                    "infinitive",
+                    "verb_patterns"
+                ],
+                "train_worksheet_id": "A2-ING-01"
+            },
+            {
+                "lesson_id": "A2-PP-01-lesson",
+                "title": "Present Perfect Simple",
+                "path": "A2/A2-PP-01-lesson.json",
+                "topic_tags": [
+                    "present_perfect",
+                    "ever_never",
+                    "just_already_yet"
+                ],
+                "train_worksheet_id": "A2-PP-01"
+            },
+            {
+                "lesson_id": "A2-PS-PC-01-lesson",
+                "title": "Past Simple vs Past Continuous",
+                "path": "A2/A2-PS-PC-01-lesson.json",
+                "topic_tags": [
+                    "past_simple",
+                    "past_continuous",
+                    "when",
+                    "while"
+                ],
+                "train_worksheet_id": "A2-PS-PC-01"
+            },
+            {
+                "lesson_id": "A2-PP-PS-01-lesson",
+                "title": "Present Perfect vs Past Simple",
+                "path": "A2/A2-PP-PS-01-lesson.json",
+                "topic_tags": [
+                    "present_perfect",
+                    "past_simple",
+                    "tense_comparison"
+                ],
+                "train_worksheet_id": "A2-PP-PS-01"
+            },
+            {
+                "lesson_id": "A2-PPC-01-lesson",
+                "title": "Present Perfect Continuous",
+                "path": "A2/A2-PPC-01-lesson.json",
+                "topic_tags": [
+                    "present_perfect_continuous",
+                    "duration",
+                    "since_for"
+                ],
+                "train_worksheet_id": "A2-PPC-01"
+            },
+            {
+                "lesson_id": "A2-QUANT-01-lesson",
+                "title": "Quantifiers (Much, Many, A lot of)",
+                "path": "A2/A2-QUANT-01-lesson.json",
+                "topic_tags": [
+                    "quantifiers",
+                    "much_many",
+                    "a_few_a_little"
+                ],
+                "train_worksheet_id": "A2-QUANT-01"
+            },
+            {
+                "lesson_id": "A2-REL-01-lesson",
+                "title": "Relative Clauses (Who, Which, That)",
+                "path": "A2/A2-REL-01-lesson.json",
+                "topic_tags": [
+                    "relative_clauses",
+                    "defining",
+                    "who_which_that"
+                ],
+                "train_worksheet_id": "A2-REL-01"
+            },
+            {
+                "lesson_id": "A2-MOD-01-lesson",
+                "title": "Modals: Must, Have to, Should",
+                "path": "A2/A2-MOD-01-lesson.json",
+                "topic_tags": [
+                    "modals",
+                    "obligation",
+                    "advice",
+                    "prohibition"
+                ],
+                "train_worksheet_id": "A2-MOD-01"
+            },
+            {
+                "lesson_id": "A2-MAN-01-lesson",
+                "title": "Adverbs of Manner",
+                "path": "A2/A2-MAN-01-lesson.json",
+                "topic_tags": [
+                    "adverbs",
+                    "adverbs_of_manner",
+                    "word_formation"
+                ],
+                "train_worksheet_id": "A2-MAN-01"
+            }
+        ],
+        "B1": [
+            {
+                "lesson_id": "B1-ART-01-lesson",
+                "title": "Advanced Articles & Nouns",
+                "path": "B1/B1-ART-01-lesson.json",
+                "topic_tags": [
+                    "articles",
+                    "advanced",
+                    "exceptions"
+                ],
+                "train_worksheet_id": "B1-ART-01"
+            },
+            {
+                "lesson_id": "B1-COND-01-lesson",
+                "title": "Conditionals: Zero, 1st & 2nd",
+                "path": "B1/B1-COND-01-lesson.json",
+                "topic_tags": [
+                    "conditionals",
+                    "if_clauses",
+                    "hypothetical"
+                ],
+                "train_worksheet_id": "B1-COND-01"
+            },
+            {
+                "lesson_id": "B1-FUT-01-lesson",
+                "title": "Future Continuous & Future Perfect",
+                "path": "B1/B1-FUT-01-lesson.json",
+                "topic_tags": [
+                    "future_continuous",
+                    "future_perfect",
+                    "advanced_future"
+                ],
+                "train_worksheet_id": "B1-FUT-01"
+            },
+            {
+                "lesson_id": "B1-MODALS-01-lesson",
+                "title": "Modals of Deduction (Must, Can't, Might)",
+                "path": "B1/B1-MODALS-01-lesson.json",
+                "topic_tags": [
+                    "modals",
+                    "deduction",
+                    "speculation"
+                ],
+                "train_worksheet_id": "B1-MODALS-01"
+            },
+            {
+                "lesson_id": "B1-PASSIVE-01-lesson",
+                "title": "Passive Voice (Present/Past Simple)",
+                "path": "B1/B1-PASSIVE-01-lesson.json",
+                "topic_tags": [
+                    "passive",
+                    "be_v3",
+                    "voice"
+                ],
+                "train_worksheet_id": "B1-PASSIVE-01"
+            },
+            {
+                "lesson_id": "B1-PP-PS-02-lesson",
+                "title": "Present Perfect vs Past Simple - Part 2",
+                "path": "B1/B1-PP-PS-02-lesson.json",
+                "topic_tags": [
+                    "present_perfect",
+                    "past_simple",
+                    "tense_comparison"
+                ],
+                "train_worksheet_id": "B1-PP-PS-02"
+            },
+            {
+                "lesson_id": "B1-PPC-PS-01-lesson",
+                "title": "Past Perfect Continuous vs Past Simple",
+                "path": "B1/B1-PPC-PS-01-lesson.json",
+                "topic_tags": [
+                    "past_perfect_continuous",
+                    "past_simple",
+                    "narrative_tenses"
+                ],
+                "train_worksheet_id": "B1-PPC-PS-01"
+            },
+            {
+                "lesson_id": "B1-REL-01-lesson",
+                "title": "Defining & Non-Defining Relative Clauses",
+                "path": "B1/B1-REL-01-lesson.json",
+                "topic_tags": [
+                    "relative_clauses",
+                    "advanced",
+                    "punctuation"
+                ],
+                "train_worksheet_id": "B1-REL-01"
+            },
+            {
+                "lesson_id": "B1-REPORTED-01-lesson",
+                "title": "Reported Speech",
+                "path": "B1/B1-REPORTED-01-lesson.json",
+                "topic_tags": [
+                    "reported_speech",
+                    "say_tell",
+                    "tense_shift"
+                ],
+                "train_worksheet_id": "B1-REPORTED-01"
+            },
+            {
+                "lesson_id": "B1-USED-01-lesson",
+                "title": "Used to vs Would (Past Habits)",
+                "path": "B1/B1-USED-01-lesson.json",
+                "topic_tags": [
+                    "used_to",
+                    "would",
+                    "past_habits"
+                ],
+                "train_worksheet_id": "B1-USED-01"
+            },
+            {
+                "lesson_id": "B1-COND-02-lesson",
+                "title": "Conditionals: Type 2 (Imaginary Situations)",
+                "path": "B1/B1-COND-02-lesson.json",
+                "topic_tags": [
+                    "conditionals",
+                    "type_2",
+                    "imaginary_situations",
+                    "hypothetical"
+                ],
+                "train_worksheet_id": "B1-COND-02"
+            },
+            {
+                "lesson_id": "B1-GER-01-lesson",
+                "title": "Gerunds vs Infinitives: Meaning Change",
+                "path": "B1/B1-GER-01-lesson.json",
+                "topic_tags": [
+                    "gerunds",
+                    "infinitives",
+                    "verb_patterns",
+                    "meaning_change"
+                ],
+                "train_worksheet_id": "B1-GER-01"
+            }
+        ],
+        "B2": [
+            {
+                "lesson_id": "B2-PASSIVE-02-lesson",
+                "title": "Passive Advanced (Perfect & Modals)",
+                "path": "B2/B2-PASSIVE-02-lesson.json",
+                "topic_tags": [
+                    "passive",
+                    "present_perfect_passive",
+                    "modals_passive"
+                ],
+                "train_worksheet_id": "B2-PASSIVE-02"
+            },
+            {
+                "lesson_id": "B2-REPORTED-01-lesson",
+                "title": "Reported Speech: Questions & Commands",
+                "path": "B2/B2-REPORTED-01-lesson.json",
+                "topic_tags": [
+                    "reported_speech",
+                    "questions",
+                    "commands",
+                    "asked",
+                    "told"
+                ],
+                "train_worksheet_id": "B2-REPORTED-01"
+            },
+            {
+                "lesson_id": "B2-COND-01-lesson",
+                "title": "Conditionals: Second, Third & Mixed",
+                "path": "B2/B2-COND-01-lesson.json",
+                "topic_tags": [
+                    "conditionals",
+                    "second",
+                    "third",
+                    "mixed"
+                ],
+                "train_worksheet_id": "B2-COND-01"
+            },
+            {
+                "lesson_id": "B2-REL-01-lesson",
+                "title": "İleri Düzey Sıfat Cümlecikleri (Relative Clauses Advanced)",
+                "path": "B2/B2-REL-01-lesson.json",
+                "topic_tags": [
+                    "relative_clauses",
+                    "non_defining",
+                    "reduced",
+                    "whose"
+                ],
+                "train_worksheet_id": "B2-REL-01"
+            },
+            {
+                "lesson_id": "B2-VERB-01-lesson",
+                "title": "Verb Patterns: Gerunds vs Infinitives",
+                "path": "B2/B2-VERB-01-lesson.json",
+                "topic_tags": [
+                    "gerund",
+                    "infinitive",
+                    "verb_patterns",
+                    "meaning_change"
+                ],
+                "train_worksheet_id": "B2-VERB-01"
+            },
+            {
+                "lesson_id": "B2-PMOD-01-lesson",
+                "title": "Perfect Modals (Geçmişe Dair Tahminler)",
+                "path": "B2/B2-PMOD-01-lesson.json",
+                "topic_tags": [
+                    "perfect_modals",
+                    "past_speculation",
+                    "must_have",
+                    "might_have",
+                    "cant_have"
+                ],
+                "train_worksheet_id": "B2-PMOD-01"
+            },
+            {
+                "lesson_id": "B2-WISH-01-lesson",
+                "title": "Wish and If only (Keşkeler ve Pişmanlıklar)",
+                "path": "B2/B2-WISH-01-lesson.json",
+                "topic_tags": [
+                    "wish",
+                    "if_only",
+                    "regrets",
+                    "present_unreal",
+                    "past_regret"
+                ],
+                "train_worksheet_id": "B2-WISH-01"
+            },
+            {
+                "lesson_id": "B2-INV-01-lesson",
+                "title": "Inversion (Devrik Cümleler)",
+                "path": "B2/B2-INV-01-lesson.json",
+                "topic_tags": [
+                    "inversion",
+                    "negative_adverbials",
+                    "emphasis",
+                    "formal_english"
+                ],
+                "train_worksheet_id": "B2-INV-01"
+            },
+            {
+                "lesson_id": "B2-LINK-01-lesson",
+                "title": "Linking Words (Bağlaçlar)",
+                "path": "B2/B2-LINK-01-lesson.json",
+                "topic_tags": [
+                    "linking_words",
+                    "contrast",
+                    "however",
+                    "whereas",
+                    "despite",
+                    "in_spite_of"
+                ],
+                "train_worksheet_id": "B2-LINK-01"
+            },
+            {
+                "lesson_id": "B2-CAUS-01-lesson",
+                "title": "Causatives: Have & Get",
+                "path": "B2/B2-CAUS-01-lesson.json",
+                "topic_tags": [
+                    "causatives",
+                    "active_causative",
+                    "passive_causative",
+                    "advanced_grammar"
+                ],
+                "train_worksheet_id": "B2-CAUS-01"
+            },
+            {
+                "lesson_id": "B2-PART-01-lesson",
+                "title": "Participle Clauses (Cümle Kısaltmaları)",
+                "path": "B2/B2-PART-01-lesson.json",
+                "topic_tags": [
+                    "participle_clauses",
+                    "reduced_clauses",
+                    "advanced_grammar",
+                    "academic_writing"
+                ],
+                "train_worksheet_id": "B2-PART-01"
+            },
+            {
+                "lesson_id": "B2-FIP-01-lesson",
+                "title": "Future in the Past: Was/Were going to & Would",
+                "path": "B2/B2-FIP-01-lesson.json",
+                "topic_tags": [
+                    "future_in_the_past",
+                    "unfulfilled_plans",
+                    "past_intentions",
+                    "was_going_to"
+                ],
+                "train_worksheet_id": "B2-FIP-01"
+            }
+        ]
+    }
+}

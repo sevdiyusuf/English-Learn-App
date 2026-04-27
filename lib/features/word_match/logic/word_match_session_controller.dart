@@ -1,14 +1,38 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/repositories/user_stats_repo.dart';
+import '../../auth/logic/auth_controller.dart';
 import '../data/word_match_providers.dart';
 import '../data/word_match_repo_interface.dart';
 import '../models/word_pair.dart';
 import '../models/word_set.dart';
 
 enum MatchAttemptState { none, correct, wrong }
+
+class WordMatchSessionArgs {
+  const WordMatchSessionArgs({
+    required this.setId,
+    required this.usePassiveOnly,
+  });
+
+  final int setId;
+  final bool usePassiveOnly;
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is WordMatchSessionArgs &&
+        other.setId == setId &&
+        other.usePassiveOnly == usePassiveOnly;
+  }
+
+  @override
+  int get hashCode => Object.hash(setId, usePassiveOnly);
+}
 
 class WordMatchSetSnapshot {
   const WordMatchSetSnapshot({
@@ -176,36 +200,76 @@ class WordMatchSessionState {
 }
 
 class WordMatchSessionController
-    extends AutoDisposeFamilyAsyncNotifier<WordMatchSessionState, int> {
+    extends
+        AutoDisposeFamilyAsyncNotifier<
+          WordMatchSessionState,
+          WordMatchSessionArgs
+        > {
   WordMatchRepoInterface? _repo;
   final Random _random = Random();
   bool _selectionLocked = false;
   bool _isDisposed = false;
 
   @override
-  Future<WordMatchSessionState> build(int arg) async {
+  Future<WordMatchSessionState> build(WordMatchSessionArgs arg) async {
+    final setId = arg.setId;
+    final usePassiveOnly = arg.usePassiveOnly;
+
     final repo = await ref.watch(wordMatchRepoProvider.future);
     _repo = repo;
     ref.onDispose(() {
       _isDisposed = true;
     });
 
-    final set = await repo.getSet(arg);
+    final set = await repo.getSet(setId);
     if (set == null) {
       throw StateError('Set bulunamadı');
     }
-    final pairs = await repo.fetchPairs(arg);
+    final pairs = await repo.fetchPairs(setId);
     if (pairs.isEmpty) {
       throw StateError('Bu sette henüz kelime yok');
     }
-    // Learned kelimeleri filtrele - sadece aktif (öğrenilmemiş) kelimeleri göster
-    final learnedStatuses = await repo.getLearnedStatuses(arg);
-    final activePairs = pairs.where((pair) => !(learnedStatuses[pair.id] ?? false)).toList();
-    if (activePairs.isEmpty) {
-      throw StateError('Bu sette aktif kelime kalmadı. Tüm kelimeler öğrenilmiş.');
+
+    // Remove duplicates based on english+turkish combination
+    final seen = <String>{};
+    final uniquePairs = <WordPair>[];
+    for (final pair in pairs) {
+      final key =
+          '${pair.english.toLowerCase().trim()}_${pair.turkish.toLowerCase().trim()}';
+      if (!seen.contains(key) &&
+          pair.english.trim().isNotEmpty &&
+          pair.turkish.trim().isNotEmpty) {
+        seen.add(key);
+        uniquePairs.add(pair);
+      }
     }
+
+    if (uniquePairs.isEmpty) {
+      throw StateError('Bu sette geçerli kelime yok');
+    }
+
+    final learnedStatuses = await repo.getLearnedStatuses(setId);
+    var filteredPairs =
+        uniquePairs.where((pair) {
+          final isLearned = learnedStatuses[pair.id] ?? false;
+          return usePassiveOnly ? !isLearned : isLearned;
+        }).toList();
+
+    // Eğer seçilen grupta (pasif/aktif) kelime yoksa, önce diğer gruba,
+    // o da boşsa tüm kelimelere fallback yap.
+    if (filteredPairs.isEmpty) {
+      filteredPairs =
+          uniquePairs.where((pair) {
+            final isLearned = learnedStatuses[pair.id] ?? false;
+            return usePassiveOnly ? isLearned : !isLearned;
+          }).toList();
+    }
+    if (filteredPairs.isEmpty) {
+      filteredPairs = List<WordPair>.from(uniquePairs);
+    }
+
     // Her yeni session'da kelimeleri karıştır
-    final shuffledPairs = List<WordPair>.from(activePairs)..shuffle(_random);
+    final shuffledPairs = List<WordPair>.from(filteredPairs)..shuffle(_random);
     final totalPairs = shuffledPairs.length;
     final initialRound = shuffledPairs.take(8).toList();
     final remaining = shuffledPairs.skip(initialRound.length).toList();
@@ -399,6 +463,37 @@ class WordMatchSessionController
     state = AsyncValue.data(
       snapshot.copyWith(set: updatedSet, isComplete: true),
     );
+
+    // Record stats (fire-and-forget)
+    _recordSessionStats(snapshot);
+  }
+
+  Future<void> _recordSessionStats(WordMatchSessionState snapshot) async {
+    try {
+      final authState = ref.read(authControllerProvider);
+      final user = authState.valueOrNull;
+      if (user == null) return;
+
+      final statsRepo = ref.read(userStatsRepoProvider);
+      final sessionStartTime = snapshot.set.lastPracticedAt ?? DateTime.now();
+      final duration = DateTime.now().difference(sessionStartTime);
+
+      // Calculate practiced words (total pairs in session)
+      final practicedWords = snapshot.totalPairs;
+
+      await statsRepo.recordSession(
+        user: user,
+        modeId: 'word_match',
+        practicedWords: practicedWords,
+        correctAnswers: snapshot.correctAttempts,
+        wrongAnswers: snapshot.wrongAttempts,
+        duration: duration,
+        score: 0, // Word Match doesn't have score system
+      );
+    } catch (e) {
+      // Don't break the game if stats recording fails
+      debugPrint('Failed to record word match stats: $e');
+    }
   }
 }
 
@@ -406,5 +501,5 @@ final wordMatchSessionControllerProvider =
     AutoDisposeAsyncNotifierProviderFamily<
       WordMatchSessionController,
       WordMatchSessionState,
-      int
+      WordMatchSessionArgs
     >(WordMatchSessionController.new);

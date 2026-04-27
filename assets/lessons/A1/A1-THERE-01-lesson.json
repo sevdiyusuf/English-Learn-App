@@ -1,0 +1,205 @@
+{
+    "schema_version": "1.0",
+    "level": "A1",
+    "lesson_id": "A1-THERE-01-lesson",
+    "title": "There is / There are + some/any",
+    "topic_tags": [
+        "there_is_are",
+        "some_any",
+        "questions",
+        "negatives"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Bir şeyin var olduğunu veya nerede bulunduğunu söylemeyi öğreneceğiz.",
+                    "Tekil ve çoğul varlıklar için doğru yapıyı (Is/Are) seçmeyi kavrayacağız.",
+                    "Cümle içinde 'biraz' veya 'hiç' derken kullanacağımız 'some' ve 'any' kelimelerini öğreneceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Varlık Belirtme: There is vs. There are",
+                "bullets": [
+                    "**There is**: Sadece bir tane (tekil) nesneden bahsederken kullanılır.",
+                    "**There are**: Birden fazla (çoğul) nesneden bahsederken kullanılır."
+                ],
+                "examples": [
+                    "**There is** a cat in the garden. (Bahçede bir kedi var.)",
+                    "**There are** two cats in the garden. (Bahçede iki kedi var.)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "Some ve Any Farkı",
+                "bullets": [
+                    "**Some (Biraz/Birkaç)**: Genellikle olumlu cümlelerde kullanılır.",
+                    "**Any (Hiç)**: Olumsuz cümlelerde ve soru cümlelerinde kullanılır."
+                ],
+                "examples": [
+                    "There is **some** milk. (Biraz süt var.)",
+                    "There isn't **any** milk. (Hiç süt yok.)",
+                    "Is there **any** milk? (Hiç süt var mı?)"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "There ____ some students in the library.",
+                "options": [
+                    "is",
+                    "are"
+                ],
+                "answer": "are",
+                "explain": "'Students' çoğul olduğu için 'There are' kullanılması gerekir."
+            },
+            {
+                "id": "c4",
+                "type": "formula",
+                "title": "Soru ve Olumsuz Yapı",
+                "bullets": [
+                    "Soru sorarken 'Is' veya 'Are' kelimesi 'There'den önce gelir."
+                ],
+                "formula": [
+                    "Soru: Is there / Are there ... ?",
+                    "Olumsuz: There isn't / There aren't ..."
+                ],
+                "examples": [
+                    "**Are there** any chairs? (Hiç sandalye var mı?)",
+                    "**There isn't** an apple. (Bir elma yok.)"
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Olumsuz Cümlede Some Kullanmak**: 'There aren't some books' ifadesi yanlıştır. Doğrusu 'There aren't **any** books' olmalıdır.",
+                    "**Çoğul İsimde Is Kullanmak**: 'There is two pens' denmez, 'There **are** two pens' denir."
+                ],
+                "examples": [
+                    "Hatalı: There is any water. ✗",
+                    "Doğru: There is **some** water. ✓",
+                    "Hatalı: Is there some students? ✗",
+                    "Doğru: **Are** there **any** students? ✓"
+                ]
+            },
+            {
+                "id": "q2",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "There isn't ____ juice in the bottle.",
+                "options": [
+                    "some",
+                    "any",
+                    "a"
+                ],
+                "answer": "any",
+                "explain": "Cümle olumsuz (isn't) olduğu için 'hiç' anlamında 'any' kullanılır."
+            },
+            {
+                "id": "c6",
+                "type": "tip",
+                "title": "Pratik İpucu: Sayılamayan İsimler",
+                "bullets": [
+                    "Su (water), süt (milk), şeker (sugar) gibi sayılamayan kelimeler her zaman tekil kabul edilir ve 'There is' ile kullanılır."
+                ],
+                "examples": [
+                    "There is **some** sugar on the table."
+                ]
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Kontekst: Boş Bir Buzdolabı",
+        "intro_bullets": [
+            "Akşam yemeği yapacaksın ama buzdolabı biraz boş görünüyor.",
+            "İçeride ne olduğunu ve ne olmadığını kontrol ediyorsun.",
+            "Doğru miktarları ve varlık kalıplarını seç!"
+        ],
+        "items": [
+            {
+                "engine": "fill",
+                "prompt": "Let's see... There ___ (be) an egg on the shelf.",
+                "answer": [
+                    "is"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Bir tane (an egg) olduğu için 'is' kullanılır."
+            },
+            {
+                "engine": "tap",
+                "prompt": "Oh no! There aren't ___ tomatoes for the salad.",
+                "bank": [
+                    "any",
+                    "some",
+                    "a"
+                ],
+                "answer": "any",
+                "explain": "Olumsuz bir cümlede 'hiç' anlamını 'any' verir."
+            },
+            {
+                "engine": "fill",
+                "prompt": "Wait, there is ___ cheese in the box.",
+                "answer": [
+                    "some"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Olumlu cümlede miktar belirtirken 'some' kullanılır."
+            },
+            {
+                "engine": "order",
+                "prompt": "Sor: (Hiç süt var mı?)",
+                "tokens": [
+                    "Is",
+                    "there",
+                    "any",
+                    "milk",
+                    "?"
+                ],
+                "answer_tokens": [
+                    "Is",
+                    "there",
+                    "any",
+                    "milk",
+                    "?"
+                ],
+                "explain": "Sayılamayan isimlerde soru 'Is there any...' yapısıyla sorulur."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "There ____ many apples in the basket.",
+                "options": [
+                    "are",
+                    "is"
+                ],
+                "answer": "are",
+                "explain": "'Apples' çoğul olduğu için 'are' kullanılmalıdır."
+            }
+        ],
+        "recap_bullets": [
+            "Hatırla: Tekillerle 'is', çoğullarla 'are' kullanılır.",
+            "Hatırla: Olumlularda 'some', olumsuz ve sorularda 'any' tercih edilir.",
+            "Hatırla: Soru sormak için 'Is' veya 'Are' kelimesini başa çek!"
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "A1-THERE-01"
+    }
+}

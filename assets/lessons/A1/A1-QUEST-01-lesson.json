@@ -1,0 +1,223 @@
+{
+    "schema_version": "1.0",
+    "level": "A1",
+    "lesson_id": "A1-QUEST-01-lesson",
+    "title": "Questions (5W1H + do/does order)-lesson",
+    "topic_tags": [
+        "questions",
+        "5w1h",
+        "do_does",
+        "word_order"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Doğru bilgiye ulaşmak için hangi soru kelimesini (Kim, Ne, Nerede...) seçeceğimizi öğreneceğiz.",
+                    "İngilizcedeki 'soru dizilimi' mantığını kavrayarak kelimeleri doğru sıraya koyacağız.",
+                    "Present Simple (Geniş Zaman) sorularında 'Do' ve 'Does' yardımcı fiillerini ustaca kullanacağız."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "5W1H: Bilgi Anahtarları",
+                "bullets": [
+                    "**Who**: Kişileri sormak için kullanılır (Kim?).",
+                    "**What**: Nesneleri veya bilgileri sormak için kullanılır (Ne?).",
+                    "**Where**: Yer ve konum sormak için kullanılır (Nerede?).",
+                    "**When**: Zaman ve tarih sormak için kullanılır (Ne zaman?).",
+                    "**Why**: Sebep sormak için kullanılır; genellikle 'Because' ile cevaplanır (Neden?).",
+                    "**How**: Yöntem, durum veya 'nasıl' olduğunu sormak için kullanılır."
+                ],
+                "examples": [
+                    "**Who** is your teacher?",
+                    "**Where** do you live?",
+                    "**Why** are you happy?"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "formula",
+                "title": "Soru Dizilimi Formülü (QUASM)",
+                "bullets": [
+                    "İngilizcede soru sormak için genellikle şu sıralamayı takip ederiz:"
+                ],
+                "formula": [
+                    "Question Word (Wh-) + Auxiliary (Do/Does) + Subject (Özne) + Main Verb (Fiil)"
+                ],
+                "examples": [
+                    "Where + do + you + go?",
+                    "What + does + she + like?"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "A: ____ is your birthday? \nB: It's in June.",
+                "options": [
+                    "Where",
+                    "When",
+                    "Who"
+                ],
+                "answer": "When",
+                "explain": "Zaman (tarih) bilgisi istendiği için 'When' (Ne zaman) soru kelimesi kullanılmalıdır."
+            },
+            {
+                "id": "c4",
+                "type": "rule",
+                "title": "Do vs. Does",
+                "bullets": [
+                    "Soru sorarken özneye göre yardımcı fiil seçeriz.",
+                    "**Do**: I, You, We, They özneleriyle kullanılır.",
+                    "**Does**: He, She, It özneleriyle kullanılır.",
+                    "**Önemli**: 'Does' kullanılan soruda fiil her zaman yalın haldedir; fiile '-s' takısı gelmez!"
+                ],
+                "examples": [
+                    "**Do** they play football?",
+                    "**Does** he play football? (Does he plays? DENMEZ!)"
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Yardımcı Fiili Unutmak**: 'Where you live?' hatalıdır. Doğrusu 'Where **do** you live?' olmalıdır.",
+                    "**Does Kullanırken Fiile -s Eklemek**: Soru cümlesinde 'Does' zaten işi üstlenir, fiil yalın kalır.",
+                    "**Yanlış Kelime Dizilimi**: Soru kelimesini (Wh-) cümlenin başına koymayı unutmayın."
+                ],
+                "examples": [
+                    "Hatalı: What she wants? ✗",
+                    "Doğru: What **does** she **want**? ✓",
+                    "Hatalı: Where does he lives? ✗",
+                    "Doğru: Where does he **live**? ✓"
+                ]
+            },
+            {
+                "id": "q2",
+                "type": "checkpoint",
+                "engine": "order",
+                "prompt": "Kelimeleri doğru sıraya dizerek soruyu oluşturun:",
+                "tokens": [
+                    "do",
+                    "what",
+                    "you",
+                    "want",
+                    "?"
+                ],
+                "answer_tokens": [
+                    "what",
+                    "do",
+                    "you",
+                    "want",
+                    "?"
+                ],
+                "explain": "Soru kelimesi (What) + Yardımcı fiil (do) + Özne (you) + Fiil (want) sıralaması izlenir."
+            },
+            {
+                "id": "c6",
+                "type": "tip",
+                "title": "Pratik İpucu: Yes/No Soruları",
+                "bullets": [
+                    "Eğer bir 5W1H kelimesi yoksa, soru 'Do/Does' ile başlar ve cevabı 'Evet/Hayır' olur.",
+                    "Bilgi sorularında (Wh-) ise asla Yes/No ile cevap verilmez."
+                ],
+                "examples": [
+                    "Do you like pizza? -> Yes, I do.",
+                    "What do you like? -> I like pizza."
+                ]
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Kontekst: Yeni Bir Komşu",
+        "intro_bullets": [
+            "Apartmanınıza yeni bir komşu taşındı ve onunla tanışıyorsun.",
+            "Onu daha iyi tanımak için doğru soruları sorman gerekiyor.",
+            "Dizilimlere ve soru kelimelerine dikkat et!"
+        ],
+        "items": [
+            {
+                "engine": "tap",
+                "prompt": "You: 'Hi! I am your neighbor. ___ do you live? In flat 5?'",
+                "bank": [
+                    "Where",
+                    "What",
+                    "Who"
+                ],
+                "answer": "Where",
+                "explain": "Konum sorduğumuz için 'Where' (Nerede) doğru tercihtir."
+            },
+            {
+                "engine": "fill",
+                "prompt": "You: '___ do you spell your name? It is a bit difficult.'",
+                "answer": [
+                    "How"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "İsmin nasıl hecelendiğini (yöntem) sormak için 'How' kullanılır."
+            },
+            {
+                "engine": "fill",
+                "prompt": "You: '___ does the supermarket close today? I need some milk.'",
+                "answer": [
+                    "When"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Zaman (saat) sorduğumuz için 'When' kullanılır."
+            },
+            {
+                "engine": "order",
+                "prompt": "You: (Sor: Ne iş yapıyorsun?)",
+                "tokens": [
+                    "What",
+                    "do",
+                    "you",
+                    "do",
+                    "?"
+                ],
+                "answer_tokens": [
+                    "What",
+                    "do",
+                    "you",
+                    "do",
+                    "?"
+                ],
+                "explain": "'What do you do?' İngilizcede meslek sormanın standart kalıbıdır."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "You: '____ you like this neighborhood?' \nNeighbor: 'Yes, it is very quiet.'",
+                "options": [
+                    "Do",
+                    "Does",
+                    "What"
+                ],
+                "answer": "Do",
+                "explain": "Özne 'you' olduğu için yardımcı fiil 'Do' olmalıdır ve bu bir Yes/No sorusudur."
+            }
+        ],
+        "recap_bullets": [
+            "Hatırla: Bilgi soruları her zaman Wh- kelimesiyle başlar.",
+            "Hatırla: Özne He/She/It ise 'Does' kullan ama fiilin sonundaki -s takısını at.",
+            "Hatırla: Soru dizilimi her zaman 'Soru Kelimesi + Yardımcı Fiil + Özne + Fiil' şeklindedir."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "A1-QUEST-01"
+    }
+}

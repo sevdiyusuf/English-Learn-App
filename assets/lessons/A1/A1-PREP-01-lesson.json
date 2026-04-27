@@ -1,0 +1,212 @@
+{
+    "schema_version": "1.0",
+    "level": "A1",
+    "lesson_id": "A1-PREP-01-lesson",
+    "title": "Prepositions of place (in/on/under/next to/between)",
+    "topic_tags": [
+        "prepositions",
+        "place",
+        "in_on_under",
+        "next_to",
+        "between"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Nesnelerin, kişilerin veya yerlerin nerede olduğunu söylemeyi öğreneceğiz.",
+                    "İngilizcedeki en temel 5 yer edatını (in, on, under, next to, between) kavrayacağız.",
+                    "Konum bildirirken yapılan yaygın hatalardan kaçınmayı öğreneceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "In ve On Ayrımı",
+                "bullets": [
+                    "**In (İçinde)**: Bir kutu, oda veya sınırları belli bir alanın 'iç kısmını' ifade eder.",
+                    "**On (Üstünde)**: Bir yüzeye temas ederek, o yüzeyin üzerinde durma durumudur.",
+                    "**Önemli**: Duvara asılı resimler için de 'on' (on the wall) kullanılır."
+                ],
+                "examples": [
+                    "in the box (kutunun içinde)",
+                    "on the table (masanın üstünde)",
+                    "in the kitchen (mutfağın içinde)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "Under ve Next to",
+                "bullets": [
+                    "**Under (Altında)**: Bir nesnenin tam alt kısmında, aşağısında olma durumudur.",
+                    "**Next to (Yanında/Bitişiğinde)**: Bir şeyin hemen yanında, yan yana durma durumudur."
+                ],
+                "examples": [
+                    "The cat is **under** the chair. (Kedi sandalyenin altında.)",
+                    "The bank is **next to** the shop. (Banka dükkanın yanında.)"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "Where is the milk? \n(Süt buzdolabının içinde.)",
+                "options": [
+                    "It is on the fridge.",
+                    "It is in the fridge.",
+                    "It is under the fridge."
+                ],
+                "answer": "It is in the fridge.",
+                "explain": "Buzdolabı kapalı bir alan olduğu için içindeki nesneler için 'in' edatı kullanılır."
+            },
+            {
+                "id": "c4",
+                "type": "rule",
+                "title": "Between (Arasında)",
+                "bullets": [
+                    "**Between**: Bir nesnenin **iki farklı** şeyin ortasında olduğunu belirtmek için kullanılır.",
+                    "Bu edat kullanılırken genellikle 'and' bağlacı ile iki ayrı nesne belirtilir."
+                ],
+                "examples": [
+                    "between the car **and** the tree (araba ile ağacın arasında)",
+                    "The pen is **between** the book and the lamp."
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**On ve In Karıştırmak**: Masanın üstündeki bir şey için 'in the table' denmez, 'on the table' denir.",
+                    "**Between Kullanımı**: 'Between' edatından sonra tek bir nesne gelmez; mutlaka iki nesne veya çoğul bir isim gelmelidir.",
+                    "**Next to ve Near**: 'Next to' tam bitişiği, 'near' ise sadece yakınlığı belirtir."
+                ],
+                "examples": [
+                    "Hatalı: The book is in the table. ✗",
+                    "Doğru: The book is **on** the table. ✓",
+                    "Hatalı: I sit between my friend. ✗",
+                    "Doğru: I sit **next to** my friend. ✓"
+                ]
+            },
+            {
+                "id": "q2",
+                "type": "checkpoint",
+                "engine": "tap",
+                "prompt": "Choose the correct preposition: \n'The keys are ____ the sofa. (below)'",
+                "bank": [
+                    "on",
+                    "in",
+                    "under"
+                ],
+                "answer": "under",
+                "explain": "'Below' (aşağıda/altında) anlamını en iyi 'under' karşılar."
+            },
+            {
+                "id": "c6",
+                "type": "tip",
+                "title": "Görsel Hafıza İpucu",
+                "bullets": [
+                    "**On**: Üstünde (temas var)",
+                    "**Under**: Altında",
+                    "**In**: İçinde (çerçevelenmiş)",
+                    "**Next to**: Hemen yanında"
+                ],
+                "examples": [
+                    "The picture is **on** the wall. (Resim duvarda/duvarın yüzeyinde.)"
+                ]
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Kontekst: Kayıp Anahtarlar",
+        "intro_bullets": [
+            "Evden çıkmak üzeresin ama anahtarlarını bulamıyorsun.",
+            "Odadaki eşyalara bakarak anahtarların nerede olabileceğini kontrol et.",
+            "Yer edatlarını doğru kullanarak aramayı tamamla!"
+        ],
+        "items": [
+            {
+                "engine": "fill",
+                "prompt": "Are the keys ___ the table in the living room?",
+                "answer": [
+                    "on"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Masanın yüzeyinden bahsettiğimiz için 'on' kullanılır."
+            },
+            {
+                "engine": "tap",
+                "prompt": "Check the floor. Maybe they are ___ the sofa.",
+                "bank": [
+                    "under",
+                    "in",
+                    "between"
+                ],
+                "answer": "under",
+                "explain": "Yere düştüyse koltuğun 'altında' olabilir."
+            },
+            {
+                "engine": "fill",
+                "prompt": "I found them! They are ___ the bag and the book.",
+                "answer": [
+                    "between"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "İki nesnenin (çanta ve kitap) ortasında olduğu için 'between' kullanılır."
+            },
+            {
+                "engine": "order",
+                "prompt": "Cümleyi kur: 'Anahtarlarım çantamın içinde.'",
+                "tokens": [
+                    "My",
+                    "keys",
+                    "are",
+                    "in",
+                    "my",
+                    "bag"
+                ],
+                "answer_tokens": [
+                    "My",
+                    "keys",
+                    "are",
+                    "in",
+                    "my",
+                    "bag"
+                ],
+                "explain": "Çantanın iç hacminden bahsettiğimiz için 'in' kullanılır."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "The remote control is ____ the TV.",
+                "options": [
+                    "next to",
+                    "between",
+                    "in"
+                ],
+                "answer": "next to",
+                "explain": "Televizyonun hemen yanında duruyorsa 'next to' uygundur."
+            }
+        ],
+        "recap_bullets": [
+            "Hatırla: 'On' yüzey teması, 'In' iç hacim bildirir.",
+            "Hatırla: 'Between' için en az iki nesne gereklidir.",
+            "Hatırla: Hemen bitişiğinde olan şeyler için 'next to' kullan."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "A1-PREP-01"
+    }
+}

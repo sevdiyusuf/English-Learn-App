@@ -1,0 +1,255 @@
+{
+  "schema_version": "1.0",
+  "level": "A2",
+  "worksheet_id": "A2-QUANT-01",
+  "title": "Quantifiers",
+  "topic_tags": [
+    "quantifiers",
+    "much_many",
+    "a_lot_of",
+    "a_few",
+    "a_little"
+  ],
+  "subskills": [
+    "choose_quantifier",
+    "countable_vs_uncountable_review"
+  ],
+  "difficulty": 2,
+  "engine_sequence": [
+    {
+      "engine": "tap",
+      "count": 8,
+      "rules": {
+        "allow_hint": true
+      }
+    },
+    {
+      "engine": "fill",
+      "count": 6,
+      "rules": {
+        "case_sensitive": false,
+        "allow_contractions": true
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "tap1",
+      "engine": "tap",
+      "prompt": "Choose: I have ____ friends. (many / much)",
+      "translation_tr": "Birçok arkadaşım var.",
+      "bank": [
+        "many",
+        "much"
+      ],
+      "answer": "many",
+      "hint": "Friends = countable plural.",
+      "tags": [
+        "many"
+      ]
+    },
+    {
+      "id": "tap2",
+      "engine": "tap",
+      "prompt": "Choose: We don’t have ____ time. (many / much)",
+      "translation_tr": "Çok zamanımız yok.",
+      "bank": [
+        "many",
+        "much"
+      ],
+      "answer": "much",
+      "tags": [
+        "much"
+      ]
+    },
+    {
+      "id": "tap3",
+      "engine": "tap",
+      "prompt": "Choose: There is ____ milk in the fridge. (a few / a little)",
+      "translation_tr": "Buzdolabında biraz süt var.",
+      "bank": [
+        "a few",
+        "a little"
+      ],
+      "answer": "a little",
+      "tags": [
+        "a_little"
+      ]
+    },
+    {
+      "id": "tap4",
+      "engine": "tap",
+      "prompt": "Choose: I bought ____ apples. (a few / a little)",
+      "translation_tr": "Birkaç elma aldım.",
+      "bank": [
+        "a few",
+        "a little"
+      ],
+      "answer": "a few",
+      "tags": [
+        "a_few"
+      ]
+    },
+    {
+      "id": "tap5",
+      "engine": "tap",
+      "prompt": "Choose: She has ____ homework today. (a lot of / many)",
+      "translation_tr": "Onun bugün çok ödevi var.",
+      "bank": [
+        "a lot of",
+        "many"
+      ],
+      "answer": "a lot of",
+      "hint": "Homework is uncountable; a lot of works for both.",
+      "tags": [
+        "a_lot_of"
+      ]
+    },
+    {
+      "id": "tap6",
+      "engine": "tap",
+      "prompt": "Choose: We have ____ chairs in the room. (a lot of / much)",
+      "translation_tr": "Odada çok sandalye var.",
+      "bank": [
+        "a lot of",
+        "much"
+      ],
+      "answer": "a lot of",
+      "tags": [
+        "a_lot_of"
+      ]
+    },
+    {
+      "id": "tap7",
+      "engine": "tap",
+      "prompt": "Choose: I need ____ water. (a few / a little)",
+      "translation_tr": "Biraz suya ihtiyacım var.",
+      "bank": [
+        "a few",
+        "a little"
+      ],
+      "answer": "a little",
+      "tags": [
+        "a_little"
+      ]
+    },
+    {
+      "id": "tap8",
+      "engine": "tap",
+      "prompt": "Choose: There are ____ people here. (many / much)",
+      "translation_tr": "Burada birçok insan var.",
+      "bank": [
+        "many",
+        "much"
+      ],
+      "answer": "many",
+      "tags": [
+        "many"
+      ]
+    },
+    {
+      "id": "fill1",
+      "engine": "fill",
+      "prompt": "We don’t have ____ money. (much/many)",
+      "translation_tr": "Çok paramız yok.",
+      "answer": [
+        "much"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "much"
+      ]
+    },
+    {
+      "id": "fill2",
+      "engine": "fill",
+      "prompt": "There are ____ books on the shelf. (a lot of)",
+      "translation_tr": "Rafın üzerinde çok kitap var.",
+      "answer": [
+        "a lot of",
+        "lots of"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "a_lot_of"
+      ]
+    },
+    {
+      "id": "fill3",
+      "engine": "fill",
+      "prompt": "I have ____ minutes. (a few/a little)",
+      "translation_tr": "Birkaç dakikam var.",
+      "answer": [
+        "a few"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "a_few"
+      ]
+    },
+    {
+      "id": "fill4",
+      "engine": "fill",
+      "prompt": "Can I have ____ sugar? (a little)",
+      "translation_tr": "Biraz şeker alabilir miyim?",
+      "answer": [
+        "a little"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "a_little"
+      ]
+    },
+    {
+      "id": "fill5",
+      "engine": "fill",
+      "prompt": "How ____ students are in your class? (many/much)",
+      "translation_tr": "Sınıfında kaç öğrenci var?",
+      "answer": [
+        "many"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "many"
+      ]
+    },
+    {
+      "id": "fill6",
+      "engine": "fill",
+      "prompt": "She has ____ free time. (a lot of)",
+      "translation_tr": "Onun çok boş zamanı var.",
+      "answer": [
+        "a lot of",
+        "lots of"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "a_lot_of"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,263 @@
+{
+    "schema_version": "1.0",
+    "level": "B2",
+    "worksheet_id": "B2-PART-01",
+    "title": "Participle Clauses: Reduced Sentences",
+    "topic_tags": [
+        "participle_clauses",
+        "reduced_clauses",
+        "advanced_grammar",
+        "academic_writing"
+    ],
+    "subskills": [
+        "present_participle_active",
+        "past_participle_passive",
+        "perfect_participle_sequence"
+    ],
+    "difficulty": 4,
+    "engine_sequence": [
+        {
+            "engine": "mcq",
+            "count": 4,
+            "rules": {
+                "shuffle_options": true,
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "tap",
+            "count": 3,
+            "rules": {
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "fill",
+            "count": 3,
+            "rules": {
+                "case_sensitive": false,
+                "allow_contractions": true
+            }
+        },
+        {
+            "engine": "order",
+            "count": 2,
+            "rules": {}
+        }
+    ],
+    "items": [
+        {
+            "id": "part_mcq1",
+            "engine": "mcq",
+            "prompt": "____ her homework, she went out to play with her friends.",
+            "translation_tr": "Ödevini bitirdikten sonra arkadaşlarıyla oynamak için dışarı çıktı.",
+            "options": [
+                "Having finished",
+                "Finished",
+                "To finish"
+            ],
+            "answer": "Having finished",
+            "hint": "One action happened before the other. (Perfect Participle)",
+            "explain": "We use 'Having + V3' (Perfect Participle) to show that one action was completed before the next one started.",
+            "tags": [
+                "perfect_participle"
+            ]
+        },
+        {
+            "id": "part_mcq2",
+            "engine": "mcq",
+            "prompt": "The man ____ at the bus stop is my primary school teacher.",
+            "translation_tr": "Otobüs durağında bekleyen adam ilkokul öğretmenim.",
+            "options": [
+                "waiting",
+                "waited",
+                "having waited"
+            ],
+            "answer": "waiting",
+            "hint": "This replaces 'who is waiting'. (Active meaning)",
+            "explain": "A present participle (-ing) can replace a relative clause with an active meaning.",
+            "tags": [
+                "present_participle"
+            ]
+        },
+        {
+            "id": "part_mcq3",
+            "engine": "mcq",
+            "prompt": "____ by the news of his death, everyone started to cry.",
+            "translation_tr": "Onun ölüm haberiyle şok olan herkes ağlamaya başladı.",
+            "options": [
+                "Shocked",
+                "Shocking",
+                "Having shocked"
+            ],
+            "answer": "Shocked",
+            "hint": "The people were shocked by something. (Passive meaning)",
+            "explain": "A past participle (-ed) is used when the meaning is passive (Being shocked).",
+            "tags": [
+                "past_participle"
+            ]
+        },
+        {
+            "id": "part_mcq4",
+            "engine": "mcq",
+            "prompt": "____ the door, he realized he had left his keys on the table.",
+            "translation_tr": "Kapıyı açarken anahtarlarını masada unuttuğunu fark etti.",
+            "options": [
+                "Opening",
+                "Opened",
+                "Having opened"
+            ],
+            "answer": "Opening",
+            "hint": "These two actions happened almost at the same time.",
+            "explain": "We use the present participle (-ing) for actions that happen simultaneously or in quick succession.",
+            "tags": [
+                "present_participle"
+            ]
+        },
+        {
+            "id": "part_tap1",
+            "engine": "tap",
+            "prompt": "____ in the city for ten years, she knows all the shortcuts.",
+            "translation_tr": "On yıldır şehirde yaşadığı için tüm kestirme yolları biliyor.",
+            "bank": [
+                "Having lived",
+                "Living",
+                "Lived",
+                "To live"
+            ],
+            "answer": "Having lived",
+            "hint": "The ten years of living happened before 'knowing'.",
+            "explain": "Perfect participle emphasizes the duration or completion of the first action.",
+            "tags": [
+                "perfect_participle"
+            ]
+        },
+        {
+            "id": "part_tap2",
+            "engine": "tap",
+            "prompt": "The books ____ by the professor are available in the library.",
+            "translation_tr": "Profesör tarafından önerilen kitaplar kütüphanede mevcut.",
+            "bank": [
+                "recommended",
+                "recommending",
+                "recommend",
+                "recommends"
+            ],
+            "answer": "recommended",
+            "hint": "The books 'were recommended'. (Passive)",
+            "explain": "Past participles replace passive relative clauses (which were recommended).",
+            "tags": [
+                "past_participle"
+            ]
+        },
+        {
+            "id": "part_tap3",
+            "engine": "tap",
+            "prompt": "____ a teacher, I enjoy helping students solve problems.",
+            "translation_tr": "Öğretmen olduğum için öğrencilerin sorun çözmesine yardım etmekten hoşlanıyorum.",
+            "bank": [
+                "Being",
+                "Been",
+                "To be",
+                "Having been"
+            ],
+            "answer": "Being",
+            "hint": "Because I am a teacher...",
+            "explain": "Participle clauses can express a reason (Because/Since).",
+            "tags": [
+                "reason"
+            ]
+        },
+        {
+            "id": "part_fill1",
+            "engine": "fill",
+            "prompt": "____ (not / know) what to do, I called my father for advice.",
+            "translation_tr": "Ne yapacağımı bilmediğim için babamı arayıp tavsiye istedim.",
+            "answer": [
+                "Not knowing"
+            ],
+            "explain": "Negative participle clauses start with 'Not'.",
+            "tags": [
+                "negative",
+                "present_participle"
+            ]
+        },
+        {
+            "id": "part_fill2",
+            "engine": "fill",
+            "prompt": "____ (see) the film before, I didn't want to watch it again.",
+            "translation_tr": "Filmi daha önce izlediğim için tekrar izlemek istemedim.",
+            "answer": [
+                "Having seen"
+            ],
+            "explain": "Since I had seen the film already (Perfect Participle).",
+            "tags": [
+                "perfect_participle"
+            ]
+        },
+        {
+            "id": "part_fill3",
+            "engine": "fill",
+            "prompt": "The car ____ (park) outside belongs to my neighbor.",
+            "translation_tr": "Dışarıda park etmiş olan araba komşuma ait.",
+            "answer": [
+                "parked"
+            ],
+            "explain": "The car 'which is parked' (Passive reduction).",
+            "tags": [
+                "past_participle"
+            ]
+        },
+        {
+            "id": "part_order1",
+            "engine": "order",
+            "bank": [
+                "Watching",
+                "TV,",
+                "he",
+                "fell",
+                "asleep.",
+                "slowly"
+            ],
+            "answer": [
+                "Watching",
+                "TV,",
+                "he",
+                "fell",
+                "asleep."
+            ],
+            "translation_tr": "Televizyon izlerken uyuyakaldı.",
+            "explain": "Present participle clause showing two actions at once.",
+            "tags": [
+                "order"
+            ]
+        },
+        {
+            "id": "part_order2",
+            "engine": "order",
+            "bank": [
+                "Shocked",
+                "by",
+                "the",
+                "news,",
+                "she",
+                "called",
+                "me."
+            ],
+            "answer": [
+                "Shocked",
+                "by",
+                "the",
+                "news,",
+                "she",
+                "called",
+                "me."
+            ],
+            "translation_tr": "Haber karşısında şoka girmiş halde beni aradı.",
+            "explain": "Past participle clause expressing reason/state.",
+            "tags": [
+                "order"
+            ]
+        }
+    ]
+}

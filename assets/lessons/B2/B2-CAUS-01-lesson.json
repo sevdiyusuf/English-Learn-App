@@ -1,0 +1,166 @@
+{
+    "schema_version": "1.0",
+    "level": "B2",
+    "lesson_id": "B2-CAUS-01-lesson",
+    "title": "Causatives: Have & Get",
+    "topic_tags": [
+        "causatives",
+        "active_causative",
+        "passive_causative",
+        "advanced_grammar"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Bir işi kendimiz yapmak yerine başkasına yaptırmayı ifade etmeyi öğreneceğiz.",
+                    "Active Causative (Have ve Get) arasındaki yapı farkını kavrayacağız.",
+                    "Passive Causative (Have/Get something done) yapısını ve kullanım alanlarını göreceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Active Causative: Birine İş Yaptırmak",
+                "bullets": [
+                    "Bu yapıda işi kime yaptırdığımız bellidir.",
+                    "**Have**: Genelde birinden görev icabı bir şey yapmasını istediğimizde kullanılır. Fiil yalın (V1) gelir.",
+                    "**Get**: Genelde birini bir şeye ikna ettiğimizde kullanılır. Fiil 'to' eki (to-V1) ile gelir."
+                ],
+                "examples": [
+                    "I had the mechanic fix my car. (Tamirciye arabamı tamir ettirdim.)",
+                    "I got my brother to help me with the project. (Kardeşimi projede bana yardım etmeye ikna ettim/ettirdim.)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "Passive Causative: Bir Şeyi Yaptırmak",
+                "bullets": [
+                    "Bu yapıda işi yapan kişiden ziyade yapılan işe odaklanılır.",
+                    "Hem **Have** hem de **Get** kullanılabilir ve yapı aynıdır.",
+                    "Fiil her zaman **V3 (Past Participle)** halindedir."
+                ],
+                "examples": [
+                    "I had my hair cut. (Saçımı kestirdim.)",
+                    "We need to get the roof repaired. (Çatıyı tamir ettirmemiz gerekiyor.)"
+                ]
+            },
+            {
+                "id": "formula",
+                "type": "formula",
+                "title": "Yapı Karşılaştırması",
+                "bullets": [
+                    "Ettirgen yapıda kullanılan fiil formlarına dikkat edin:"
+                ],
+                "formula": [
+                    "Active Have: Subject + have + person + V1",
+                    "Active Get: Subject + get + person + to-V1",
+                    "Passive: Subject + have/get + object + V3"
+                ]
+            },
+            {
+                "id": "c4",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Have + to-V1**: 'I had him to fix' yanlıştır. Have ile 'to' kullanılmaz.",
+                    "**Get + V1**: 'I got him fix' yanlıştır. Get ile mutlaka 'to' kullanılmalıdır.",
+                    "**V3 Unutulması**: Pasif ettirgenlerde nesneden sonra mutlaka V3 (tested, painted vb.) gelmelidir."
+                ],
+                "examples": [
+                    "Hatalı: I had my car wash. ✗",
+                    "Doğru: I had my car **washed**. ✓",
+                    "Hatalı: I got him sign the paper. ✗",
+                    "Doğru: I got him **to sign** the paper. ✓"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "She finally got the plumber ____ the leaking pipe.",
+                "options": [
+                    "to fix",
+                    "fix",
+                    "fixed"
+                ],
+                "answer": "to fix",
+                "explain": "'Get' fiili active causative yapısında kendisinden sonra 'to + V1' gerektirir."
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Ev Yenileme Telaşı",
+        "intro_bullets": [
+            "John evini yeniliyor ve birçok profesyonelle çalışıyor.",
+            "Kimin hangi işi yaptığına ve cümle yapılarına dikkat et."
+        ],
+        "items": [
+            {
+                "engine": "fill",
+                "prompt": "John had the painter ____ (paint) the living room blue.",
+                "answer": [
+                    "paint"
+                ],
+                "explain": "Active 'have' yapısında person + V1 kuralı uygulanır."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "He also needed to have the windows ____ before winter.",
+                "options": [
+                    "cleaned",
+                    "clean",
+                    "to clean"
+                ],
+                "answer": "cleaned",
+                "explain": "Pencerelerin temizletilmesi (Passive Causative) için V3 formu gereklidir."
+            },
+            {
+                "engine": "tap",
+                "prompt": "He managed to get his friend ____ him move the sofa.",
+                "bank": [
+                    "to help",
+                    "help",
+                    "helped",
+                    "helping"
+                ],
+                "answer": "to help",
+                "explain": "Birini ikna edip bir şey yaptırmak (Active Get) yapısında 'to-V1' kullanılır."
+            },
+            {
+                "engine": "order",
+                "prompt": "Cümleyi kur: 'O, dün bilgisayarını tamir ettirdi.'",
+                "tokens": [
+                    "He",
+                    "had",
+                    "his",
+                    "computer",
+                    "repaired",
+                    "yesterday."
+                ],
+                "answer_tokens": [
+                    "He",
+                    "had",
+                    "his",
+                    "computer",
+                    "repaired",
+                    "yesterday."
+                ],
+                "explain": "Passive causative dizilimi: Subject + had + object + V3."
+            }
+        ],
+        "recap_bullets": [
+            "Have + kişi + V1 (Active)",
+            "Get + kişi + to-V1 (Active)",
+            "Have/Get + nesne + V3 (Passive)"
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "B2-CAUS-01"
+    }
+}

@@ -30,20 +30,34 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
   flutter_riverpod: ^2.6.1
   go_router: ^14.6.1
   freezed_annotation: ^2.4.4
   json_annotation: ^4.9.0
-  isar: ^3.1.0+1
-  xxf_isar_flutter_libs: ^3.1.0+2
+  isar: ^3.0.5
+  xxf_isar_flutter_libs: ^3.0.5
   firebase_core: ^3.7.0
   firebase_auth: ^5.3.0
   cloud_firestore: ^5.4.4
   cloud_functions: ^5.2.1
   path_provider: ^2.1.5
+  shared_preferences: ^2.2.3
   connectivity_plus: ^6.1.0
   flutter_svg: ^2.2.3
+  google_sign_in: ^6.2.1
+  sign_in_with_apple: ^6.1.3
+  share_plus: ^12.0.1
+  confetti: ^0.8.0
+  audioplayers: ^6.6.0
+  universal_html: ^2.3.0
+  intl: ^0.20.2
+  http: ^1.6.0
+  device_info_plus: ^12.4.0
+  package_info_plus: ^9.0.1
+  flutter_tts: ^4.2.5
 
 dev_dependencies:
   flutter_test:
@@ -78,14 +92,26 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  generate: true
 
   assets:
-    - assets/dictionary.json
     - assets/opposites.json
     - assets/synonym.json
     - assets/cargo_categories.json
+    - assets/ırregular_verbs.json
     - assets/word_echo_words.json
-    - assets/images/background.png
+    - assets/word_sets/
+    - assets/word_battle/
+    - assets/worksheets/
+    - assets/worksheets/A1/
+    - assets/worksheets/A2/
+    - assets/worksheets/B1/
+    - assets/worksheets/B2/
+    - assets/lessons/
+    - assets/lessons/A1/
+    - assets/lessons/A2/
+    - assets/lessons/B1/
+    - assets/lessons/B2/
     - assets/images/background2.png
     - assets/images/background3.png
     - assets/icons/bookmark.svg

@@ -1,0 +1,346 @@
+{
+    "schema_version": "1.0",
+    "level": "B2",
+    "worksheet_id": "B2-COND-02",
+    "title": "Conditionals (Second & Third + mixed)",
+    "topic_tags": [
+        "conditionals",
+        "second",
+        "third",
+        "mixed"
+    ],
+    "subskills": [
+        "form_second",
+        "form_third",
+        "recognize_mixed"
+    ],
+    "difficulty": 4,
+    "engine_sequence": [
+        {
+            "engine": "mcq",
+            "count": 12,
+            "rules": {
+                "shuffle_options": true,
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "fill",
+            "count": 8,
+            "rules": {
+                "case_sensitive": false,
+                "allow_contractions": true
+            }
+        }
+    ],
+    "items": [
+        {
+            "id": "mcq1",
+            "engine": "mcq",
+            "prompt": "If I ____ you, I would apologize. (be)",
+            "translation_tr": "Senin yerinde olsaydım özür dilerdim. (be)",
+            "options": [
+                "was",
+                "were"
+            ],
+            "answer": "were",
+            "hint": "Second conditional: If I were...",
+            "tags": [
+                "second"
+            ]
+        },
+        {
+            "id": "mcq2",
+            "engine": "mcq",
+            "prompt": "If he studied more, he ____ pass.",
+            "translation_tr": "Daha çok çalışsaydı geçerdi.",
+            "options": [
+                "will",
+                "would"
+            ],
+            "answer": "would",
+            "tags": [
+                "second"
+            ]
+        },
+        {
+            "id": "mcq3",
+            "engine": "mcq",
+            "prompt": "If I had known, I ____ told you.",
+            "translation_tr": "Bilseydim sana söylerdim.",
+            "options": [
+                "would have",
+                "would"
+            ],
+            "answer": "would have",
+            "tags": [
+                "third"
+            ]
+        },
+        {
+            "id": "mcq4",
+            "engine": "mcq",
+            "prompt": "If they had left earlier, they ____ on time.",
+            "translation_tr": "Daha erken ayrılsalardı zamanında varırlardı.",
+            "options": [
+                "would arrive",
+                "would have arrived"
+            ],
+            "answer": "would have arrived",
+            "tags": [
+                "third"
+            ]
+        },
+        {
+            "id": "mcq5",
+            "engine": "mcq",
+            "prompt": "If I had studied medicine, I ____ a doctor now. (mixed)",
+            "translation_tr": "Tıp okumuş olsaydım şimdi doktor olurdum. (mixed)",
+            "options": [
+                "would be",
+                "would have been"
+            ],
+            "answer": "would be",
+            "tags": [
+                "mixed"
+            ]
+        },
+        {
+            "id": "mcq6",
+            "engine": "mcq",
+            "prompt": "If she ____ more confident, she would speak. (be)",
+            "translation_tr": "Daha çok özgüveni olsaydı konuşurdu. (be)",
+            "options": [
+                "is",
+                "were"
+            ],
+            "answer": "were",
+            "tags": [
+                "second"
+            ]
+        },
+        {
+            "id": "mcq7",
+            "engine": "mcq",
+            "prompt": "If you had called me, I ____ helped.",
+            "translation_tr": "Beni aramış olsaydın yardım ederdim.",
+            "options": [
+                "would",
+                "would have"
+            ],
+            "answer": "would have",
+            "tags": [
+                "third"
+            ]
+        },
+        {
+            "id": "mcq8",
+            "engine": "mcq",
+            "prompt": "If we ____ rich, we would travel the world.",
+            "translation_tr": "Zengin olsaydık dünyayı gezerduk.",
+            "options": [
+                "were",
+                "had been"
+            ],
+            "answer": "were",
+            "tags": [
+                "second"
+            ]
+        },
+        {
+            "id": "mcq9",
+            "engine": "mcq",
+            "prompt": "If I hadn’t missed the bus, I ____ here now. (mixed)",
+            "translation_tr": "Otobüsü kaçırmamış olsaydım şimdi burada olurdum. (mixed)",
+            "options": [
+                "would be",
+                "would have been"
+            ],
+            "answer": "would be",
+            "tags": [
+                "mixed"
+            ]
+        },
+        {
+            "id": "mcq10",
+            "engine": "mcq",
+            "prompt": "Third conditional structure is:",
+            "translation_tr": "Üçüncü şart kipinin yapısı:",
+            "options": [
+                "if + past perfect, would have + V3",
+                "if + past, will + V"
+            ],
+            "answer": "if + past perfect, would have + V3",
+            "tags": [
+                "rule"
+            ]
+        },
+        {
+            "id": "mcq11",
+            "engine": "mcq",
+            "prompt": "Second conditional structure is:",
+            "translation_tr": "İkinci şart kipinin yapısı:",
+            "options": [
+                "if + past, would + V",
+                "if + present, will + V"
+            ],
+            "answer": "if + past, would + V",
+            "tags": [
+                "rule"
+            ]
+        },
+        {
+            "id": "mcq12",
+            "engine": "mcq",
+            "prompt": "Mixed conditional often combines:",
+            "translation_tr": "Karışık şart kipi genellikle şunları birleştirir:",
+            "options": [
+                "past cause + present result",
+                "present cause + past result"
+            ],
+            "answer": "past cause + present result",
+            "tags": [
+                "rule"
+            ]
+        },
+        {
+            "id": "fill1",
+            "engine": "fill",
+            "prompt": "If I ____ (be) you, I would study more.",
+            "translation_tr": "Senin yerinde olsaydım daha çok çalışırdım.",
+            "answer": [
+                "were"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "second"
+            ]
+        },
+        {
+            "id": "fill2",
+            "engine": "fill",
+            "prompt": "If he ____ (have) more time, he would help.",
+            "translation_tr": "Daha fazla zamanı olsaydı yardım ederdi.",
+            "answer": [
+                "had"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "second"
+            ]
+        },
+        {
+            "id": "fill3",
+            "engine": "fill",
+            "prompt": "If I had known, I would ____ (tell) you.",
+            "translation_tr": "Bilseydim sana söylerdim.",
+            "answer": [
+                "have told"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "third"
+            ]
+        },
+        {
+            "id": "fill4",
+            "engine": "fill",
+            "prompt": "If they had left earlier, they would have ____ (arrive) on time.",
+            "translation_tr": "Daha erken ayrılsalardı zamanında varmış olurlardı.",
+            "answer": [
+                "arrived"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "third"
+            ]
+        },
+        {
+            "id": "fill5",
+            "engine": "fill",
+            "prompt": "If I had studied harder, I would ____ (be) more confident now. (mixed)",
+            "translation_tr": "Daha çok çalışmış olsaydım şimdi daha özgüvenli olurdum. (mixed)",
+            "answer": [
+                "be"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "mixed"
+            ]
+        },
+        {
+            "id": "fill6",
+            "engine": "fill",
+            "prompt": "If you ____ (not / miss) the train, you would have arrived.",
+            "translation_tr": "Treni kaçırmasaydın varmış olurdun.",
+            "answer": [
+                "hadn't missed",
+                "had not missed"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces",
+                "accept_contractions"
+            ],
+            "tags": [
+                "third",
+                "negative"
+            ]
+        },
+        {
+            "id": "fill7",
+            "engine": "fill",
+            "prompt": "If she ____ (be) taller, she would play basketball.",
+            "translation_tr": "Daha uzun olsaydı basketbol oynardı.",
+            "answer": [
+                "were"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "second"
+            ]
+        },
+        {
+            "id": "fill8",
+            "engine": "fill",
+            "prompt": "If I ____ (call) you, would you have come?",
+            "translation_tr": "Seni aramış olsaydım gelir miydin?",
+            "answer": [
+                "had called"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "third"
+            ]
+        }
+    ]
+}

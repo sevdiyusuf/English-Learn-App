@@ -1,0 +1,538 @@
+{
+    "schema_version": "1.0",
+    "level": "B2",
+    "worksheet_id": "B2-REPORTED-02",
+    "title": "Reported Speech (questions & commands)",
+    "topic_tags": [
+        "reported_speech",
+        "questions",
+        "commands",
+        "asked",
+        "told"
+    ],
+    "subskills": [
+        "reported_questions_word_order",
+        "if_whether",
+        "to_infinitive_commands"
+    ],
+    "difficulty": 4,
+    "engine_sequence": [
+        {
+            "engine": "order",
+            "count": 4,
+            "rules": {
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "transform",
+            "count": 8,
+            "rules": {
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "mcq",
+            "count": 6,
+            "rules": {
+                "shuffle_options": true,
+                "allow_hint": true
+            }
+        }
+    ],
+    "items": [
+        {
+            "id": "ord1",
+            "engine": "order",
+            "prompt": "Reported question (word order):",
+            "translation_tr": "Dolaylı soru (kelime sırası):",
+            "tokens": [
+                "He",
+                "asked",
+                "me",
+                "where",
+                "I",
+                "lived",
+                "."
+            ],
+            "answer_tokens": [
+                "He",
+                "asked",
+                "me",
+                "where",
+                "I",
+                "lived",
+                "."
+            ],
+            "tags": [
+                "wh_question"
+            ]
+        },
+        {
+            "id": "ord2",
+            "engine": "order",
+            "prompt": "Reported question (no do/does):",
+            "translation_tr": "Dolaylı soru (do/does yok):",
+            "tokens": [
+                "She",
+                "asked",
+                "him",
+                "what",
+                "time",
+                "it",
+                "was",
+                "."
+            ],
+            "answer_tokens": [
+                "She",
+                "asked",
+                "him",
+                "what",
+                "time",
+                "it",
+                "was",
+                "."
+            ],
+            "tags": [
+                "wh_question"
+            ]
+        },
+        {
+            "id": "ord3",
+            "engine": "order",
+            "prompt": "Reported yes/no question:",
+            "translation_tr": "Dolaylı evet/hayır sorusu:",
+            "tokens": [
+                "They",
+                "asked",
+                "me",
+                "if",
+                "I",
+                "was",
+                "ready",
+                "."
+            ],
+            "answer_tokens": [
+                "They",
+                "asked",
+                "me",
+                "if",
+                "I",
+                "was",
+                "ready",
+                "."
+            ],
+            "tags": [
+                "yes_no"
+            ]
+        },
+        {
+            "id": "ord4",
+            "engine": "order",
+            "prompt": "Reported question:",
+            "translation_tr": "Dolaylı soru:",
+            "tokens": [
+                "He",
+                "asked",
+                "her",
+                "where",
+                "she",
+                "had",
+                "gone",
+                "."
+            ],
+            "answer_tokens": [
+                "He",
+                "asked",
+                "her",
+                "where",
+                "she",
+                "had",
+                "gone",
+                "."
+            ],
+            "tags": [
+                "tense_shift"
+            ]
+        },
+        {
+            "id": "tr1",
+            "engine": "transform",
+            "prompt": "Direct: “Where do you live?”",
+            "translation_tr": "Doğrudan: \"Nerede yaşıyorsun?\"",
+            "steps": [
+                {
+                    "type": "select",
+                    "label": "Reporting verb",
+                    "options": [
+                        "He asked me"
+                    ],
+                    "answer": "He asked me"
+                },
+                {
+                    "type": "select",
+                    "label": "Connector",
+                    "options": [
+                        "where"
+                    ],
+                    "answer": "where"
+                },
+                {
+                    "type": "select",
+                    "label": "Reported clause",
+                    "options": [
+                        "I lived",
+                        "did I live"
+                    ],
+                    "answer": "I lived"
+                }
+            ],
+            "final_template": "{rep} {conn} {clause}.",
+            "final_answer": "He asked me where I lived.",
+            "tags": [
+                "wh_question"
+            ]
+        },
+        {
+            "id": "tr2",
+            "engine": "transform",
+            "prompt": "Direct: “Do you like tea?”",
+            "translation_tr": "Doğrudan: \"Çayı sever misin?\"",
+            "steps": [
+                {
+                    "type": "select",
+                    "label": "Reporting verb",
+                    "options": [
+                        "She asked him"
+                    ],
+                    "answer": "She asked him"
+                },
+                {
+                    "type": "select",
+                    "label": "Connector",
+                    "options": [
+                        "if",
+                        "where"
+                    ],
+                    "answer": "if"
+                },
+                {
+                    "type": "select",
+                    "label": "Reported clause",
+                    "options": [
+                        "he liked tea",
+                        "did he like tea"
+                    ],
+                    "answer": "he liked tea"
+                }
+            ],
+            "final_template": "{rep} {conn} {clause}.",
+            "final_answer": "She asked him if he liked tea.",
+            "tags": [
+                "yes_no"
+            ]
+        },
+        {
+            "id": "tr3",
+            "engine": "transform",
+            "prompt": "Direct: “Don’t touch it!”",
+            "translation_tr": "Doğrudan: \"Ona dokunma!\"",
+            "steps": [
+                {
+                    "type": "select",
+                    "label": "Reporting verb",
+                    "options": [
+                        "She told me"
+                    ],
+                    "answer": "She told me"
+                },
+                {
+                    "type": "select",
+                    "label": "Command form",
+                    "options": [
+                        "not to touch it",
+                        "to not touched it"
+                    ],
+                    "answer": "not to touch it"
+                }
+            ],
+            "final_template": "{rep} {cmd}.",
+            "final_answer": "She told me not to touch it.",
+            "tags": [
+                "command"
+            ]
+        },
+        {
+            "id": "tr4",
+            "engine": "transform",
+            "prompt": "Direct: “Please help me.”",
+            "translation_tr": "Doğrudan: \"Lütfen bana yardım et.\"",
+            "steps": [
+                {
+                    "type": "select",
+                    "label": "Reporting verb",
+                    "options": [
+                        "He told her"
+                    ],
+                    "answer": "He told her"
+                },
+                {
+                    "type": "select",
+                    "label": "Command form",
+                    "options": [
+                        "to help him",
+                        "help him"
+                    ],
+                    "answer": "to help him"
+                }
+            ],
+            "final_template": "{rep} {cmd}.",
+            "final_answer": "He told her to help him.",
+            "tags": [
+                "command"
+            ]
+        },
+        {
+            "id": "tr5",
+            "engine": "transform",
+            "prompt": "Direct: “Are you coming tomorrow?”",
+            "translation_tr": "Doğrudan: \"Yarın geliyor musunuz?\"",
+            "steps": [
+                {
+                    "type": "select",
+                    "label": "Reporting verb",
+                    "options": [
+                        "They asked us"
+                    ],
+                    "answer": "They asked us"
+                },
+                {
+                    "type": "select",
+                    "label": "Connector",
+                    "options": [
+                        "if",
+                        "what"
+                    ],
+                    "answer": "if"
+                },
+                {
+                    "type": "select",
+                    "label": "Time shift",
+                    "options": [
+                        "the next day",
+                        "tomorrow"
+                    ],
+                    "answer": "the next day"
+                },
+                {
+                    "type": "select",
+                    "label": "Reported clause",
+                    "options": [
+                        "we were coming",
+                        "were we coming"
+                    ],
+                    "answer": "we were coming"
+                }
+            ],
+            "final_template": "{rep} {conn} {clause} {time}.",
+            "final_answer": "They asked us if we were coming the next day.",
+            "tags": [
+                "yes_no",
+                "time_shift"
+            ]
+        },
+        {
+            "id": "tr6",
+            "engine": "transform",
+            "prompt": "Direct: “What time does the train leave?”",
+            "translation_tr": "Doğrudan: \"Tren saat kaçta kalkıyor?\"",
+            "steps": [
+                {
+                    "type": "select",
+                    "label": "Reporting verb",
+                    "options": [
+                        "He asked"
+                    ],
+                    "answer": "He asked"
+                },
+                {
+                    "type": "select",
+                    "label": "Connector",
+                    "options": [
+                        "what time"
+                    ],
+                    "answer": "what time"
+                },
+                {
+                    "type": "select",
+                    "label": "Reported clause",
+                    "options": [
+                        "the train left",
+                        "did the train leave"
+                    ],
+                    "answer": "the train left"
+                }
+            ],
+            "final_template": "{rep} {conn} {clause}.",
+            "final_answer": "He asked what time the train left.",
+            "tags": [
+                "wh_question"
+            ]
+        },
+        {
+            "id": "tr7",
+            "engine": "transform",
+            "prompt": "Direct: “Can you swim?”",
+            "translation_tr": "Doğrudan: \"Yüzebiliyor musun?\"",
+            "steps": [
+                {
+                    "type": "select",
+                    "label": "Reporting verb",
+                    "options": [
+                        "She asked me"
+                    ],
+                    "answer": "She asked me"
+                },
+                {
+                    "type": "select",
+                    "label": "Connector",
+                    "options": [
+                        "if",
+                        "where"
+                    ],
+                    "answer": "if"
+                },
+                {
+                    "type": "select",
+                    "label": "Modal shift",
+                    "options": [
+                        "I could swim",
+                        "I can swim"
+                    ],
+                    "answer": "I could swim"
+                }
+            ],
+            "final_template": "{rep} {conn} {clause}.",
+            "final_answer": "She asked me if I could swim.",
+            "tags": [
+                "yes_no",
+                "modal_shift"
+            ]
+        },
+        {
+            "id": "tr8",
+            "engine": "transform",
+            "prompt": "Direct: “Open the window.”",
+            "translation_tr": "Doğrudan: \"Pencereyi aç.\"",
+            "steps": [
+                {
+                    "type": "select",
+                    "label": "Reporting verb",
+                    "options": [
+                        "He told us"
+                    ],
+                    "answer": "He told us"
+                },
+                {
+                    "type": "select",
+                    "label": "Command form",
+                    "options": [
+                        "to open the window",
+                        "open the window"
+                    ],
+                    "answer": "to open the window"
+                }
+            ],
+            "final_template": "{rep} {cmd}.",
+            "final_answer": "He told us to open the window.",
+            "tags": [
+                "command"
+            ]
+        },
+        {
+            "id": "mcq1",
+            "engine": "mcq",
+            "prompt": "Yes/No questions use ____ in reported speech.",
+            "translation_tr": "Evet/Hayır soruları dolaylı anlatımda genellikle ____ kullanır.",
+            "options": [
+                "if/whether",
+                "what/where"
+            ],
+            "answer": "if/whether",
+            "tags": [
+                "rule"
+            ]
+        },
+        {
+            "id": "mcq2",
+            "engine": "mcq",
+            "prompt": "Reported questions use normal question order (do/does)?",
+            "translation_tr": "Dolaylı sorularda normal soru sırası (do/does) kullanılır mı?",
+            "options": [
+                "Yes",
+                "No"
+            ],
+            "answer": "No",
+            "hint": "No do/does in reported clause.",
+            "tags": [
+                "rule"
+            ]
+        },
+        {
+            "id": "mcq3",
+            "engine": "mcq",
+            "prompt": "“Don’t touch it!” becomes:",
+            "translation_tr": "\"Ona dokunma!\" şu hale gelir:",
+            "options": [
+                "told me not to touch it",
+                "asked me if I touched it"
+            ],
+            "answer": "told me not to touch it",
+            "tags": [
+                "command"
+            ]
+        },
+        {
+            "id": "mcq4",
+            "engine": "mcq",
+            "prompt": "“Where do you live?” becomes:",
+            "translation_tr": "\"Nerede yaşıyorsun?\" şu hale gelir:",
+            "options": [
+                "asked where I lived",
+                "asked where did I live"
+            ],
+            "answer": "asked where I lived",
+            "tags": [
+                "wh_question"
+            ]
+        },
+        {
+            "id": "mcq5",
+            "engine": "mcq",
+            "prompt": "“Can you…?” often shifts to:",
+            "translation_tr": "\"Can you…?\" yapısı genelde şuna döner:",
+            "options": [
+                "could",
+                "must"
+            ],
+            "answer": "could",
+            "tags": [
+                "modal_shift"
+            ]
+        },
+        {
+            "id": "mcq6",
+            "engine": "mcq",
+            "prompt": "Commands often use:",
+            "translation_tr": "Emir cümleleri dolaylı anlatımda genellikle şunu kullanır:",
+            "options": [
+                "to + verb",
+                "verb + ing"
+            ],
+            "answer": "to + verb",
+            "tags": [
+                "rule"
+            ]
+        }
+    ]
+}

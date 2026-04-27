@@ -1,0 +1,344 @@
+{
+  "schema_version": "1.0",
+  "level": "A1",
+  "worksheet_id": "A1-PREP-01",
+  "title": "Prepositions of place (in/on/under/next to/between)",
+  "topic_tags": [
+    "prepositions",
+    "place",
+    "in_on_under",
+    "next_to",
+    "between"
+  ],
+  "subskills": [
+    "choose_preposition",
+    "recognize_place_phrases"
+  ],
+  "difficulty": 1,
+  "engine_sequence": [
+    {
+      "engine": "tap",
+      "count": 6,
+      "rules": {
+        "allow_hint": true
+      }
+    },
+    {
+      "engine": "mcq",
+      "count": 8,
+      "rules": {
+        "shuffle_options": true,
+        "allow_hint": true
+      }
+    },
+    {
+      "engine": "fill",
+      "count": 4,
+      "rules": {
+        "case_sensitive": false,
+        "allow_contractions": true
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "tap1",
+      "engine": "tap",
+      "prompt": "The cat is ____ the box. (inside)",
+      "translation_tr": "Kedi kutunun içinde.",
+      "bank": [
+        "in",
+        "on",
+        "under",
+        "next to",
+        "between"
+      ],
+      "answer": "in",
+      "hint": "Inside → in.",
+      "tags": [
+        "in"
+      ]
+    },
+    {
+      "id": "tap2",
+      "engine": "tap",
+      "prompt": "The book is ____ the table. (touching the top)",
+      "translation_tr": "Kitap masanın üzerinde.",
+      "bank": [
+        "in",
+        "on",
+        "under",
+        "next to",
+        "between"
+      ],
+      "answer": "on",
+      "tags": [
+        "on"
+      ]
+    },
+    {
+      "id": "tap3",
+      "engine": "tap",
+      "prompt": "My shoes are ____ the bed. (below it)",
+      "translation_tr": "Ayakkabılarım yatağın altında.",
+      "bank": [
+        "in",
+        "on",
+        "under",
+        "next to",
+        "between"
+      ],
+      "answer": "under",
+      "tags": [
+        "under"
+      ]
+    },
+    {
+      "id": "tap4",
+      "engine": "tap",
+      "prompt": "The bank is ____ the supermarket. (near, side by side)",
+      "translation_tr": "Banka süpermarketin yanında.",
+      "bank": [
+        "in",
+        "on",
+        "under",
+        "next to",
+        "between"
+      ],
+      "answer": "next to",
+      "tags": [
+        "next_to"
+      ]
+    },
+    {
+      "id": "tap5",
+      "engine": "tap",
+      "prompt": "The park is ____ the school and the hospital.",
+      "translation_tr": "Park okul ile hastanenin arasında.",
+      "bank": [
+        "in",
+        "on",
+        "under",
+        "next to",
+        "between"
+      ],
+      "answer": "between",
+      "tags": [
+        "between"
+      ]
+    },
+    {
+      "id": "tap6",
+      "engine": "tap",
+      "prompt": "My phone is ____ my bag.",
+      "translation_tr": "Telefonum çantamın içinde.",
+      "bank": [
+        "in",
+        "on",
+        "under",
+        "next to",
+        "between"
+      ],
+      "answer": "in",
+      "tags": [
+        "in"
+      ]
+    },
+    {
+      "id": "mcq1",
+      "engine": "mcq",
+      "prompt": "The picture is ____ the wall.",
+      "translation_tr": "Resim duvarda.",
+      "options": [
+        "in",
+        "on",
+        "under",
+        "between"
+      ],
+      "answer": "on",
+      "tags": [
+        "on"
+      ]
+    },
+    {
+      "id": "mcq2",
+      "engine": "mcq",
+      "prompt": "The keys are ____ the chair.",
+      "translation_tr": "Anahtarlar sandalyenin altında.",
+      "options": [
+        "under",
+        "on",
+        "in",
+        "between"
+      ],
+      "answer": "under",
+      "tags": [
+        "under"
+      ]
+    },
+    {
+      "id": "mcq3",
+      "engine": "mcq",
+      "prompt": "I sit ____ my friend in class. (side by side)",
+      "translation_tr": "Sınıfta arkadaşımın yanında oturuyorum.",
+      "options": [
+        "next to",
+        "between",
+        "under",
+        "in"
+      ],
+      "answer": "next to",
+      "tags": [
+        "next_to"
+      ]
+    },
+    {
+      "id": "mcq4",
+      "engine": "mcq",
+      "prompt": "The milk is ____ the fridge.",
+      "translation_tr": "Süt buzdolabının içinde.",
+      "options": [
+        "in",
+        "on",
+        "under",
+        "next to"
+      ],
+      "answer": "in",
+      "tags": [
+        "in"
+      ]
+    },
+    {
+      "id": "mcq5",
+      "engine": "mcq",
+      "prompt": "The ball is ____ the box and the chair.",
+      "translation_tr": "Top kutu ile sandalye arasında.",
+      "options": [
+        "between",
+        "on",
+        "in",
+        "under"
+      ],
+      "answer": "between",
+      "tags": [
+        "between"
+      ]
+    },
+    {
+      "id": "mcq6",
+      "engine": "mcq",
+      "prompt": "The laptop is ____ the desk. (on the surface)",
+      "translation_tr": "Dizüstü bilgisayar masanın üzerinde.",
+      "options": [
+        "on",
+        "in",
+        "under",
+        "between"
+      ],
+      "answer": "on",
+      "tags": [
+        "on"
+      ]
+    },
+    {
+      "id": "mcq7",
+      "engine": "mcq",
+      "prompt": "The dog is ____ the table. (below)",
+      "translation_tr": "Köpek masanın altında.",
+      "options": [
+        "under",
+        "in",
+        "on",
+        "next to"
+      ],
+      "answer": "under",
+      "tags": [
+        "under"
+      ]
+    },
+    {
+      "id": "mcq8",
+      "engine": "mcq",
+      "prompt": "The café is ____ the library. (next door)",
+      "translation_tr": "Kafe kütüphanenin yanında.",
+      "options": [
+        "next to",
+        "between",
+        "in",
+        "under"
+      ],
+      "answer": "next to",
+      "tags": [
+        "next_to"
+      ]
+    },
+    {
+      "id": "fill1",
+      "engine": "fill",
+      "prompt": "The pen is ____ the bag. (in/on/under)",
+      "translation_tr": "Kalem çantanın içinde.",
+      "answer": [
+        "in"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "in"
+      ]
+    },
+    {
+      "id": "fill2",
+      "engine": "fill",
+      "prompt": "The cup is ____ the table. (in/on/under)",
+      "translation_tr": "Fincan masanın üzerinde.",
+      "answer": [
+        "on"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "on"
+      ]
+    },
+    {
+      "id": "fill3",
+      "engine": "fill",
+      "prompt": "My cat is ____ the chair. (under/next to)",
+      "translation_tr": "Kedim sandalyenin altında.",
+      "answer": [
+        "under"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "under"
+      ]
+    },
+    {
+      "id": "fill4",
+      "engine": "fill",
+      "prompt": "The pharmacy is ____ the cinema and the bank. (between)",
+      "translation_tr": "Eczane sinema ile banka arasında.",
+      "answer": [
+        "between"
+      ],
+      "normalize": [
+        "lowercase",
+        "trim",
+        "collapse_spaces"
+      ],
+      "tags": [
+        "between"
+      ]
+    }
+  ]
+}

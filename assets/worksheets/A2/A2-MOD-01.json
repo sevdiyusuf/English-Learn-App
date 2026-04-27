@@ -1,0 +1,265 @@
+{
+    "schema_version": "1.0",
+    "level": "A2",
+    "worksheet_id": "A2-MOD-01",
+    "title": "Modals: Must, Have to, Should",
+    "topic_tags": [
+        "modals",
+        "obligation",
+        "advice",
+        "prohibition"
+    ],
+    "subskills": [
+        "giving_advice",
+        "expressing_necessity",
+        "understanding_rules"
+    ],
+    "difficulty": 2,
+    "engine_sequence": [
+        {
+            "engine": "mcq",
+            "count": 4,
+            "rules": {
+                "shuffle_options": true,
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "tap",
+            "count": 3,
+            "rules": {
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "fill",
+            "count": 3,
+            "rules": {
+                "case_sensitive": false,
+                "allow_contractions": true
+            }
+        },
+        {
+            "engine": "order",
+            "count": 2,
+            "rules": {}
+        }
+    ],
+    "items": [
+        {
+            "id": "mod_mcq1",
+            "engine": "mcq",
+            "prompt": "You look tired. I think you ____ see a doctor.",
+            "translation_tr": "Yorgun görünüyorsun. Bence bir doktora görünmelisin.",
+            "options": [
+                "should",
+                "mustn't",
+                "have to"
+            ],
+            "answer": "should",
+            "hint": "This is a piece of advice, not a strict rule.",
+            "explain": "We use 'should' to give advice or suggestions.",
+            "tags": [
+                "advice"
+            ]
+        },
+        {
+            "id": "mod_mcq2",
+            "engine": "mcq",
+            "prompt": "In a library, you ____ be quiet. It's the rule.",
+            "translation_tr": "Kütüphanede sessiz olmalısın. Bu bir kural.",
+            "options": [
+                "must",
+                "shouldn't",
+                "don't have to"
+            ],
+            "answer": "must",
+            "hint": "This is a strict rule.",
+            "explain": "We use 'must' for strong obligations and rules.",
+            "tags": [
+                "obligation"
+            ]
+        },
+        {
+            "id": "mod_mcq3",
+            "engine": "mcq",
+            "prompt": "You ____ smoke here. It is strictly forbidden!",
+            "translation_tr": "Burada sigara içmemelisin. Kesinlikle yasak!",
+            "options": [
+                "mustn't",
+                "don't have to",
+                "should"
+            ],
+            "answer": "mustn't",
+            "hint": "Forbidden means it's not allowed.",
+            "explain": "'Mustn't' is used for prohibition (things you are not allowed to do).",
+            "tags": [
+                "prohibition"
+            ]
+        },
+        {
+            "id": "mod_mcq4",
+            "engine": "mcq",
+            "prompt": "I ____ wear a uniform at my new school. Everyone does.",
+            "translation_tr": "Yeni okulumda üniforma giymek zorundayım. Herkes giyiyor.",
+            "options": [
+                "have to",
+                "should",
+                "mustn't"
+            ],
+            "answer": "have to",
+            "hint": "This is an external rule from the school.",
+            "explain": "'Have to' is used for obligations that come from outside (rules, laws, work).",
+            "tags": [
+                "external_obligation"
+            ]
+        },
+        {
+            "id": "mod_tap1",
+            "engine": "tap",
+            "prompt": "You ____ eat more vegetables. They are good for you.",
+            "translation_tr": "Daha fazla sebze yemelisin. Senin için iyiler.",
+            "bank": [
+                "should",
+                "mustn't",
+                "have",
+                "are"
+            ],
+            "answer": "should",
+            "hint": "A friendly suggestion for health.",
+            "explain": "'Should' is the best fit for health advice.",
+            "tags": [
+                "advice"
+            ]
+        },
+        {
+            "id": "mod_tap2",
+            "engine": "tap",
+            "prompt": "Stop! You ____ touch that. It's dangerous.",
+            "translation_tr": "Dur! Ona dokunmamalısın. Tehlikeli.",
+            "bank": [
+                "mustn't",
+                "should",
+                "have to",
+                "don't"
+            ],
+            "answer": "mustn't",
+            "hint": "Danger! Don't do it.",
+            "explain": "Prohibition is expressed with 'mustn't'.",
+            "tags": [
+                "prohibition"
+            ]
+        },
+        {
+            "id": "mod_tap3",
+            "engine": "tap",
+            "prompt": "Students ____ finish their homework on time.",
+            "translation_tr": "Öğrenciler ödevlerini zamanında bitirmek zorunda.",
+            "bank": [
+                "have to",
+                "mustn't",
+                "shouldn't",
+                "has to"
+            ],
+            "answer": "have to",
+            "hint": "This is a requirement for school.",
+            "explain": "Plural subjects (Students) use 'have to' for requirements.",
+            "tags": [
+                "obligation"
+            ]
+        },
+        {
+            "id": "mod_fill1",
+            "engine": "fill",
+            "prompt": "It's a secret. You ____ (not / tell) anyone.",
+            "translation_tr": "Bu bir sır. Kimseye söylememelisin.",
+            "answer": [
+                "must not tell",
+                "mustn't tell"
+            ],
+            "explain": "When something is secret, telling others is forbidden.",
+            "tags": [
+                "prohibition"
+            ]
+        },
+        {
+            "id": "mod_fill2",
+            "engine": "fill",
+            "prompt": "What ____ I ____ (do) to improve my English?",
+            "translation_tr": "İngilizcemi geliştirmek için ne yapmalıyım?",
+            "answer": [
+                "should i do"
+            ],
+            "explain": "Asking for advice: Should + subject + verb.",
+            "tags": [
+                "question",
+                "advice"
+            ]
+        },
+        {
+            "id": "mod_fill3",
+            "engine": "fill",
+            "prompt": "To drive a car, you ____ (have to) have a license.",
+            "translation_tr": "Araba kullanmak için ehliyetin olması gerekir.",
+            "answer": [
+                "have to"
+            ],
+            "explain": "This is a legal requirement (external obligation).",
+            "tags": [
+                "external_obligation"
+            ]
+        },
+        {
+            "id": "mod_order1",
+            "engine": "order",
+            "bank": [
+                "should",
+                "You",
+                "earlier.",
+                "go",
+                "to",
+                "bed"
+            ],
+            "answer": [
+                "You",
+                "should",
+                "go",
+                "to",
+                "bed",
+                "earlier."
+            ],
+            "translation_tr": "Daha erken yatmalısın.",
+            "explain": "Advice structure: Subject + should + verb.",
+            "tags": [
+                "order",
+                "advice"
+            ]
+        },
+        {
+            "id": "mod_order2",
+            "engine": "order",
+            "bank": [
+                "have",
+                "Do",
+                "to",
+                "I",
+                "now?",
+                "leave"
+            ],
+            "answer": [
+                "Do",
+                "I",
+                "have",
+                "to",
+                "leave",
+                "now?"
+            ],
+            "translation_tr": "Şimdi gitmek zorunda mıyım?",
+            "explain": "Question with have to: Do + subject + have to + verb.",
+            "tags": [
+                "order",
+                "question"
+            ]
+        }
+    ]
+}

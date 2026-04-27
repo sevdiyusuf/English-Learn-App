@@ -5,16 +5,17 @@ import '../../../core/utils/timestamp_converters.dart';
 part 'played_word.freezed.dart';
 part 'played_word.g.dart';
 
-enum WordType { verb, adjective }
+enum WordType { verb, adjective, noun, adverb, word }
 
 class WordTypeConverter extends JsonConverter<WordType, String> {
   const WordTypeConverter();
 
   @override
   WordType fromJson(String json) {
+    final lower = json.toLowerCase();
     return WordType.values.firstWhere(
-      (value) => value.name == json,
-      orElse: () => WordType.verb,
+      (value) => value.name == lower,
+      orElse: () => WordType.word,
     );
   }
 

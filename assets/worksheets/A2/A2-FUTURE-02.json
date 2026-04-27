@@ -1,0 +1,277 @@
+{
+    "schema_version": "1.0",
+    "level": "A2",
+    "worksheet_id": "A2-FUTURE-02",
+    "title": "Present Continuous (future) vs Going to",
+    "topic_tags": [
+        "future",
+        "present_continuous",
+        "going_to",
+        "arrangements",
+        "plans"
+    ],
+    "subskills": [
+        "recognize_arrangement",
+        "choose_form",
+        "produce_future_sentence"
+    ],
+    "difficulty": 2,
+    "engine_sequence": [
+        {
+            "engine": "mcq",
+            "count": 8,
+            "rules": {
+                "shuffle_options": true,
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "fill",
+            "count": 6,
+            "rules": {
+                "case_sensitive": false,
+                "allow_contractions": true
+            }
+        }
+    ],
+    "items": [
+        {
+            "id": "mcq1",
+            "engine": "mcq",
+            "prompt": "I ____ my dentist at 4 p.m. tomorrow. (fixed arrangement)",
+            "translation_tr": "Yarın saat 4’te dişçimle randevum var.",
+            "options": [
+                "am meeting",
+                "am going to meet"
+            ],
+            "answer": "am meeting",
+            "hint": "Fixed time/place arrangement → Present Continuous.",
+            "tags": [
+                "arrangement"
+            ]
+        },
+        {
+            "id": "mcq2",
+            "engine": "mcq",
+            "prompt": "We ____ travel to Spain one day. (general plan)",
+            "translation_tr": "Bir gün İspanya’ya seyahat etmeyi planlıyoruz.",
+            "options": [
+                "are visiting",
+                "are going to visit"
+            ],
+            "answer": "are going to visit",
+            "hint": "Plan/intention (not fixed) → going to.",
+            "tags": [
+                "plan"
+            ]
+        },
+        {
+            "id": "mcq3",
+            "engine": "mcq",
+            "prompt": "She ____ Tom tonight at 8. (arranged)",
+            "translation_tr": "O bu akşam saat 8’de Tom’la buluşuyor.",
+            "options": [
+                "is seeing",
+                "is going to see"
+            ],
+            "answer": "is seeing",
+            "hint": "Arranged meeting → Present Continuous.",
+            "tags": [
+                "arrangement"
+            ]
+        },
+        {
+            "id": "mcq4",
+            "engine": "mcq",
+            "prompt": "They ____ buy a new car soon. (intention)",
+            "translation_tr": "Yakında yeni bir araba almayı düşünüyorlar.",
+            "options": [
+                "are buying",
+                "are going to buy"
+            ],
+            "answer": "are going to buy",
+            "hint": "Intention/plan → going to.",
+            "tags": [
+                "plan"
+            ]
+        },
+        {
+            "id": "mcq5",
+            "engine": "mcq",
+            "prompt": "I ____ lunch with my friend on Friday. (already arranged)",
+            "translation_tr": "Cuma günü arkadaşımla öğle yemeği yiyeceğim.",
+            "options": [
+                "am having",
+                "am going to have"
+            ],
+            "answer": "am having",
+            "hint": "Already arranged → Present Continuous.",
+            "tags": [
+                "arrangement"
+            ]
+        },
+        {
+            "id": "mcq6",
+            "engine": "mcq",
+            "prompt": "He ____ study harder this term. (decision/intention)",
+            "translation_tr": "Bu dönem daha çok çalışmaya karar verdi.",
+            "options": [
+                "is studying",
+                "is going to study"
+            ],
+            "answer": "is going to study",
+            "hint": "Decision/intention → going to.",
+            "tags": [
+                "plan"
+            ]
+        },
+        {
+            "id": "mcq7",
+            "engine": "mcq",
+            "prompt": "We ____ at 6 a.m. (train booked)",
+            "translation_tr": "Trenimiz ayarlandı; saat 6’da yola çıkıyoruz.",
+            "options": [
+                "are leaving",
+                "are going to leave"
+            ],
+            "answer": "are leaving",
+            "hint": "Schedule/booking → Present Continuous.",
+            "tags": [
+                "arrangement"
+            ]
+        },
+        {
+            "id": "mcq8",
+            "engine": "mcq",
+            "prompt": "I ____ learn English better this year. (goal)",
+            "translation_tr": "Bu yıl İngilizcemi daha da geliştireceğim.",
+            "options": [
+                "am learning",
+                "am going to learn"
+            ],
+            "answer": "am going to learn",
+            "hint": "Goal/intention → going to.",
+            "tags": [
+                "plan"
+            ]
+        },
+        {
+            "id": "fill1",
+            "engine": "fill",
+            "prompt": "I ____ (meet) my teacher tomorrow at 10. (arrangement)",
+            "translation_tr": "Yarın saat 10’da öğretmenimle görüşüyorum.",
+            "answer": [
+                "am meeting",
+                "i'm meeting"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces",
+                "accept_contractions"
+            ],
+            "tags": [
+                "arrangement"
+            ]
+        },
+        {
+            "id": "fill2",
+            "engine": "fill",
+            "prompt": "She ____ (not / travel) next week. (no arrangement)",
+            "translation_tr": "O gelecek hafta seyahat etmeyecek.",
+            "answer": [
+                "is not travelling",
+                "isn't travelling",
+                "is not traveling",
+                "isn't traveling"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces",
+                "accept_contractions"
+            ],
+            "tags": [
+                "arrangement",
+                "negative"
+            ]
+        },
+        {
+            "id": "fill3",
+            "engine": "fill",
+            "prompt": "We ____ (buy) a new laptop soon. (intention)",
+            "translation_tr": "Yakında yeni bir dizüstü bilgisayar alacağız.",
+            "answer": [
+                "are going to buy",
+                "we're going to buy"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces",
+                "accept_contractions"
+            ],
+            "tags": [
+                "plan"
+            ]
+        },
+        {
+            "id": "fill4",
+            "engine": "fill",
+            "prompt": "They ____ (have) dinner with us on Saturday. (arranged)",
+            "translation_tr": "Cumartesi günü bizimle akşam yemeği yiyecekler.",
+            "answer": [
+                "are having",
+                "they're having"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces",
+                "accept_contractions"
+            ],
+            "tags": [
+                "arrangement"
+            ]
+        },
+        {
+            "id": "fill5",
+            "engine": "fill",
+            "prompt": "He ____ (not / buy) a car. (decision)",
+            "translation_tr": "Bir araba almamaya karar verdi.",
+            "answer": [
+                "is not going to buy",
+                "isn't going to buy"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces",
+                "accept_contractions"
+            ],
+            "tags": [
+                "plan",
+                "negative"
+            ]
+        },
+        {
+            "id": "fill6",
+            "engine": "fill",
+            "prompt": "I ____ (fly) to Ankara on Monday. (ticket booked)",
+            "translation_tr": "Pazartesi Ankara’ya uçuyorum; biletim alındı.",
+            "answer": [
+                "am flying",
+                "i'm flying"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces",
+                "accept_contractions"
+            ],
+            "tags": [
+                "arrangement"
+            ]
+        }
+    ]
+}

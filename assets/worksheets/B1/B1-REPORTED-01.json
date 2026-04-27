@@ -1,0 +1,522 @@
+{
+    "schema_version": "1.0",
+    "level": "B1",
+    "worksheet_id": "B1-REPORTED-01",
+    "title": "Reported Speech (statements)",
+    "topic_tags": [
+        "reported_speech",
+        "say",
+        "tell",
+        "tense_shift",
+        "pronouns",
+        "time_words"
+    ],
+    "subskills": [
+        "choose_say_tell",
+        "pronoun_shift",
+        "tense_shift",
+        "time_word_shift"
+    ],
+    "difficulty": 3,
+    "engine_sequence": [
+        {
+            "engine": "transform",
+            "count": 7,
+            "rules": {
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "order",
+            "count": 3,
+            "rules": {
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "mcq",
+            "count": 6,
+            "rules": {
+                "shuffle_options": true,
+                "allow_hint": true
+            }
+        }
+    ],
+    "items": [
+        {
+            "id": "tr1",
+            "engine": "transform",
+            "prompt": "Direct: “He works in a bank.”",
+            "translation_tr": "Doğrudan: \"O bir bankada çalışıyor.\"",
+            "steps": [
+                {
+                    "type": "select",
+                    "label": "Reporting",
+                    "options": [
+                        "She said (that)",
+                        "She told me (that)"
+                    ],
+                    "answer": "She said (that)"
+                },
+                {
+                    "type": "select",
+                    "label": "Tense shift",
+                    "options": [
+                        "works",
+                        "worked"
+                    ],
+                    "answer": "worked"
+                }
+            ],
+            "final_template": "{reporting} he {tense} in a bank.",
+            "final_answer": "She said (that) he worked in a bank.",
+            "tags": [
+                "present_to_past"
+            ]
+        },
+        {
+            "id": "tr2",
+            "engine": "transform",
+            "prompt": "Direct: “We went out last night.”",
+            "translation_tr": "Doğrudan: \"Dün gece dışarı çıktık.\"",
+            "steps": [
+                {
+                    "type": "select",
+                    "label": "Reporting",
+                    "options": [
+                        "She said (that)",
+                        "She told me (that)"
+                    ],
+                    "answer": "She told me (that)"
+                },
+                {
+                    "type": "select",
+                    "label": "Pronoun",
+                    "options": [
+                        "we",
+                        "they"
+                    ],
+                    "answer": "they"
+                },
+                {
+                    "type": "select",
+                    "label": "Tense shift",
+                    "options": [
+                        "went",
+                        "had gone"
+                    ],
+                    "answer": "had gone"
+                },
+                {
+                    "type": "select",
+                    "label": "Time shift",
+                    "options": [
+                        "last night",
+                        "the night before"
+                    ],
+                    "answer": "the night before"
+                }
+            ],
+            "final_template": "{reporting} {pronoun} {tense} out {time}.",
+            "final_answer": "She told me (that) they had gone out the night before.",
+            "tags": [
+                "past_to_past_perfect",
+                "time_shift"
+            ]
+        },
+        {
+            "id": "tr3",
+            "engine": "transform",
+            "prompt": "Direct: “I’m coming!”",
+            "translation_tr": "Doğrudan: \"Geliyorum!\"",
+            "steps": [
+                {
+                    "type": "select",
+                    "label": "Reporting",
+                    "options": [
+                        "She said (that)",
+                        "She told me (that)"
+                    ],
+                    "answer": "She said (that)"
+                },
+                {
+                    "type": "select",
+                    "label": "Pronoun",
+                    "options": [
+                        "I",
+                        "she"
+                    ],
+                    "answer": "she"
+                },
+                {
+                    "type": "select",
+                    "label": "Tense shift",
+                    "options": [
+                        "am coming",
+                        "was coming"
+                    ],
+                    "answer": "was coming"
+                }
+            ],
+            "final_template": "{reporting} {pronoun} {tense}.",
+            "final_answer": "She said (that) she was coming.",
+            "tags": [
+                "present_cont_to_past_cont"
+            ]
+        },
+        {
+            "id": "tr4",
+            "engine": "transform",
+            "prompt": "Direct: “I was waiting for the bus when he arrived.”",
+            "translation_tr": "Doğrudan: \"O geldiğinde otobüsü bekliyordum.\"",
+            "steps": [
+                {
+                    "type": "select",
+                    "label": "Reporting",
+                    "options": [
+                        "She said (that)",
+                        "She told me (that)"
+                    ],
+                    "answer": "She told me (that)"
+                },
+                {
+                    "type": "select",
+                    "label": "Pronoun",
+                    "options": [
+                        "I",
+                        "she"
+                    ],
+                    "answer": "she"
+                },
+                {
+                    "type": "select",
+                    "label": "Tense shift",
+                    "options": [
+                        "was waiting",
+                        "had been waiting"
+                    ],
+                    "answer": "had been waiting"
+                }
+            ],
+            "final_template": "{reporting} {pronoun} {tense} for the bus when he arrived.",
+            "final_answer": "She told me (that) she had been waiting for the bus when he arrived.",
+            "tags": [
+                "past_cont_to_past_perfect_cont"
+            ]
+        },
+        {
+            "id": "tr5",
+            "engine": "transform",
+            "prompt": "Direct: “I didn’t go to the party.”",
+            "translation_tr": "Doğrudan: \"Partiye gitmedim.\"",
+            "steps": [
+                {
+                    "type": "select",
+                    "label": "Reporting",
+                    "options": [
+                        "She said (that)",
+                        "She told me (that)"
+                    ],
+                    "answer": "She told me (that)"
+                },
+                {
+                    "type": "select",
+                    "label": "Pronoun",
+                    "options": [
+                        "I",
+                        "she"
+                    ],
+                    "answer": "she"
+                },
+                {
+                    "type": "select",
+                    "label": "Tense shift",
+                    "options": [
+                        "didn’t go",
+                        "hadn’t gone"
+                    ],
+                    "answer": "hadn’t gone"
+                }
+            ],
+            "final_template": "{reporting} {pronoun} {tense} to the party.",
+            "final_answer": "She told me (that) she hadn’t gone to the party.",
+            "tags": [
+                "past_to_past_perfect"
+            ]
+        },
+        {
+            "id": "tr6",
+            "engine": "transform",
+            "prompt": "Direct: “Lucy’ll come later.”",
+            "translation_tr": "Doğrudan: \"Lucy sonra gelecek.\"",
+            "steps": [
+                {
+                    "type": "select",
+                    "label": "Reporting",
+                    "options": [
+                        "She said (that)",
+                        "She told me (that)"
+                    ],
+                    "answer": "She said (that)"
+                },
+                {
+                    "type": "select",
+                    "label": "Modal shift",
+                    "options": [
+                        "will",
+                        "would"
+                    ],
+                    "answer": "would"
+                }
+            ],
+            "final_template": "{reporting} Lucy {modal} come later.",
+            "final_answer": "She said (that) Lucy would come later.",
+            "tags": [
+                "will_to_would"
+            ]
+        },
+        {
+            "id": "tr7",
+            "engine": "transform",
+            "prompt": "Direct: “I can help you tomorrow.”",
+            "translation_tr": "Doğrudan: \"Yarın sana yardım edebilirim.\"",
+            "steps": [
+                {
+                    "type": "select",
+                    "label": "Reporting",
+                    "options": [
+                        "She said (that)",
+                        "She told me (that)"
+                    ],
+                    "answer": "She said (that)"
+                },
+                {
+                    "type": "select",
+                    "label": "Modal shift",
+                    "options": [
+                        "can",
+                        "could"
+                    ],
+                    "answer": "could"
+                },
+                {
+                    "type": "select",
+                    "label": "Time word",
+                    "options": [
+                        "tomorrow",
+                        "the next day"
+                    ],
+                    "answer": "the next day"
+                }
+            ],
+            "final_template": "{reporting} she {modal} help me {time}.",
+            "final_answer": "She said (that) she could help me the next day.",
+            "tags": [
+                "can_to_could",
+                "time_shift"
+            ]
+        },
+        {
+            "id": "ord1",
+            "engine": "order",
+            "prompt": "Report this: “I won’t see you tomorrow.”",
+            "translation_tr": "Bunu aktar: \"Seni yarın görmeyeceğim.\"",
+            "tokens": [
+                "She",
+                "said",
+                "that",
+                "she",
+                "wouldn't",
+                "see",
+                "me",
+                "the",
+                "next",
+                "day",
+                "."
+            ],
+            "answer_tokens": [
+                "She",
+                "said",
+                "that",
+                "she",
+                "wouldn't",
+                "see",
+                "me",
+                "the",
+                "next",
+                "day",
+                "."
+            ],
+            "tags": [
+                "will_to_would",
+                "time_shift"
+            ]
+        },
+        {
+            "id": "ord2",
+            "engine": "order",
+            "prompt": "Report this: “I visited my parents at the weekend.”",
+            "translation_tr": "Bunu aktar: \"Hafta sonu ailemi ziyaret ettim.\"",
+            "tokens": [
+                "She",
+                "told",
+                "me",
+                "that",
+                "she",
+                "had",
+                "visited",
+                "her",
+                "parents",
+                "at",
+                "the",
+                "weekend",
+                "."
+            ],
+            "answer_tokens": [
+                "She",
+                "told",
+                "me",
+                "that",
+                "she",
+                "had",
+                "visited",
+                "her",
+                "parents",
+                "at",
+                "the",
+                "weekend",
+                "."
+            ],
+            "tags": [
+                "past_to_past_perfect"
+            ]
+        },
+        {
+            "id": "ord3",
+            "engine": "order",
+            "prompt": "Report this: “I’ll do the washing-up later.”",
+            "translation_tr": "Bunu aktar: \"Bulaşıkları sonra yıkayacağım.\"",
+            "tokens": [
+                "She",
+                "told",
+                "me",
+                "that",
+                "she",
+                "would",
+                "do",
+                "the",
+                "washing-up",
+                "later",
+                "."
+            ],
+            "answer_tokens": [
+                "She",
+                "told",
+                "me",
+                "that",
+                "she",
+                "would",
+                "do",
+                "the",
+                "washing-up",
+                "later",
+                "."
+            ],
+            "tags": [
+                "will_to_would"
+            ]
+        },
+        {
+            "id": "mcq1",
+            "engine": "mcq",
+            "prompt": "Choose the correct shift: 'will' → ____",
+            "translation_tr": "Doğru dönüşümü seç: 'will' → ____",
+            "options": [
+                "would",
+                "could",
+                "had"
+            ],
+            "answer": "would",
+            "hint": "will → would",
+            "tags": [
+                "shift_rule"
+            ]
+        },
+        {
+            "id": "mcq2",
+            "engine": "mcq",
+            "prompt": "Choose the correct shift: 'can' → ____",
+            "translation_tr": "Doğru dönüşümü seç: 'can' → ____",
+            "options": [
+                "could",
+                "would",
+                "might"
+            ],
+            "answer": "could",
+            "hint": "can → could",
+            "tags": [
+                "shift_rule"
+            ]
+        },
+        {
+            "id": "mcq3",
+            "engine": "mcq",
+            "prompt": "Choose the correct time word shift: 'tomorrow' → ____",
+            "translation_tr": "Doğru zaman ifadesi dönüşümünü seç: 'tomorrow' → ____",
+            "options": [
+                "the next day",
+                "yesterday",
+                "last week"
+            ],
+            "answer": "the next day",
+            "tags": [
+                "time_shift"
+            ]
+        },
+        {
+            "id": "mcq4",
+            "engine": "mcq",
+            "prompt": "Which one is correct with 'told me'?",
+            "translation_tr": "'told me' ile hangisi doğrudur?",
+            "options": [
+                "She told me he was late.",
+                "She told me that he was late.",
+                "Both are correct."
+            ],
+            "answer": "Both are correct.",
+            "tags": [
+                "tell_usage"
+            ]
+        },
+        {
+            "id": "mcq5",
+            "engine": "mcq",
+            "prompt": "Which one needs an object (me/him/us)?",
+            "translation_tr": "Hangisi bir nesneye (me/him/us) ihtiyaç duyar?",
+            "options": [
+                "say",
+                "tell"
+            ],
+            "answer": "tell",
+            "hint": "tell + someone",
+            "tags": [
+                "say_tell"
+            ]
+        },
+        {
+            "id": "mcq6",
+            "engine": "mcq",
+            "prompt": "Choose the correct shift: Present Simple → ____",
+            "translation_tr": "Doğru dönüşümü seç: Present Simple → ____",
+            "options": [
+                "Past Simple",
+                "Present Perfect",
+                "Future"
+            ],
+            "answer": "Past Simple",
+            "tags": [
+                "shift_rule"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,175 @@
+{
+    "schema_version": "1.0",
+    "level": "B2",
+    "lesson_id": "B2-INV-01-lesson",
+    "title": "Inversion (Devrik Cümleler)",
+    "topic_tags": [
+        "inversion",
+        "negative_adverbials",
+        "emphasis",
+        "formal_english"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Cümlede vurguyu artırmak için kullanılan 'Inversion' (devrik cümle) yapısını öğreneceğiz.",
+                    "Olumsuz anlam taşıyan zarflarla (Never, Rarely, Seldom vb.) nasıl devrik cümle kurulacağını kavrayacağız.",
+                    "Resmi ve edebi dilde kullanılan bu ileri düzey yapıyı cümlelerimize dahil edeceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Inversion Nedir?",
+                "bullets": [
+                    "Normalde İngilizcede cümle dizilimi 'Özne + Fiil' şeklindedir (I have never seen).",
+                    "Ancak vurguyu artırmak için bazı kelimeleri (özellikle negatif zarfları) cümlenin başına aldığımızda, yardımcı fiil özneden önce gelir (Never have I seen).",
+                    "Bu yapı tıpkı bir soru cümlesi kuruyormuşsunuz gibi hissettirir ama aslında vurgulu bir düz cümledir."
+                ],
+                "examples": [
+                    "Standard: I have never seen such a mess.",
+                    "Inverted: Never have I seen such a mess. (Vurgulu)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "Yaygın Kullanılan Zarflar",
+                "bullets": [
+                    "Aşağıdaki kelimeler cümle başına geldiğinde genellikle 'inversion' yapılır:",
+                    "**Never, Rarely, Seldom** (Asla, Nadiren)",
+                    "**Hardly, Scarcely, No sooner** (... yapar yapmaz)",
+                    "**Not only... but also** (Sadece ... değil, aynı zamanda ...)",
+                    "**Only then, At no time, Little**"
+                ],
+                "examples": [
+                    "Rarely do we eat out. (Nadiren dışarıda yeriz.)",
+                    "Little did he know what would happen. (Neler olacağını hiç bilmiyordu.)"
+                ]
+            },
+            {
+                "id": "formula",
+                "type": "formula",
+                "title": "Devrik Cümle Formülü",
+                "bullets": [
+                    "Dizilim her zaman yardımcı fiile göre şekillenir:"
+                ],
+                "formula": [
+                    "Negative Adverbial + Auxiliary Verb + Subject + Main Verb",
+                    "Örnek: Never (Zarf) + have (Yardımcı) + I (Özne) + seen (Fiil)...",
+                    "Örnek: Rarely (Zarf) + do (Yardımcı) + we (Özne) + eat (Fiil)..."
+                ]
+            },
+            {
+                "id": "c4",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Yardımcı Fiili Unutmak**: 'Never I have seen' yanlıştır. Doğrusu 'Never **have I** seen' olmalıdır.",
+                    "**Do/Does/Did Desteğini Unutmak**: Eğer cümlede 'be' veya 'have' gibi bir yardımcı fiil yoksa, devrik yapıda do/does/did kullanılmalıdır.",
+                    "**Fiil Halini Karıştırmak**: 'Does' veya 'did' kullanıldığında ana fiil her zaman yalın (V1) olmalıdır."
+                ],
+                "examples": [
+                    "Hatalı: Seldom she gets angry. ✗",
+                    "Doğru: Seldom **does she get** angry. ✓",
+                    "Hatalı: Only then I understood. ✗",
+                    "Doğru: Only then **did I understand**. ✓"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "Choose the correct sentence:",
+                "options": [
+                    "Not only did he apologize, but he also fixed it.",
+                    "Not only he apologized, but he also fixed it.",
+                    "Not only did he apologized, but he also fixed it."
+                ],
+                "answer": "Not only did he apologize, but he also fixed it.",
+                "explain": "'Not only' cümle başında devrik yapı gerektirir ve 'did' yardımcı fiilinden sonra ana fiil yalın gelir."
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Bir Dedektifin Günlüğü",
+        "intro_bullets": [
+            "Gizemli bir olayı araştıran bir dedektifin raporundaki vurgulu cümleleri incele.",
+            "Vurgu için kullanılan devrik yapılara dikkat et."
+        ],
+        "items": [
+            {
+                "engine": "fill",
+                "prompt": "Detective: 'Never ___ I seen such a strange case in my career.'",
+                "answer": [
+                    "have"
+                ],
+                "explain": "'Never' cümle başında olduğunda yardımcı fiil (have) özneden (I) önce gelmelidir."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "Detective: 'Rarely ____ evidence left so clearly at a crime scene.'",
+                "options": [
+                    "is",
+                    "was",
+                    "it is"
+                ],
+                "answer": "is",
+                "explain": "'Rarely' sıklık zarfı devrik yapı kurar; durum bildiren cümlede 'is' özneden önce gelir."
+            },
+            {
+                "engine": "tap",
+                "prompt": "Detective: '____ had I entered the room when the lights went out.'",
+                "bank": [
+                    "Hardly",
+                    "Never",
+                    "Seldom",
+                    "Not only"
+                ],
+                "answer": "Hardly",
+                "explain": "'... yapar yapmaz' anlamında kullanılan ve 'when' ile devam eden yapı 'Hardly had I...' kalıbıdır."
+            },
+            {
+                "engine": "order",
+                "prompt": "Raporu tamamla: 'Sadece yalan söylemekle kalmadı, aynı zamanda kaçtı.'",
+                "tokens": [
+                    "Not",
+                    "only",
+                    "did",
+                    "he",
+                    "lie,",
+                    "but",
+                    "he",
+                    "also",
+                    "escaped."
+                ],
+                "answer_tokens": [
+                    "Not",
+                    "only",
+                    "did",
+                    "he",
+                    "lie,",
+                    "but",
+                    "he",
+                    "also",
+                    "escaped."
+                ],
+                "explain": "'Not only' ile başlayan cümlelerde yardımcı fiil özneden önce gelir."
+            }
+        ],
+        "recap_bullets": [
+            "Inversion, resmi ve vurgulu dilde yaygındır.",
+            "Zarf + Yardımcı Fiil + Özne + Fiil dizilimini hatırla.",
+            "Never, Rarely ve Seldom en sık kullanılan başlatıcılardır.",
+            "Yardımcı fiil yoksa do/does/did desteğini mutlaka kullan."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "B2-INV-01"
+    }
+}

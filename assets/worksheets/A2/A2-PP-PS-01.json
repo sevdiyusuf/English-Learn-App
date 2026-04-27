@@ -1,0 +1,297 @@
+{
+    "schema_version": "1.0",
+    "level": "A2",
+    "worksheet_id": "A2-PP-PS-01",
+    "title": "Present Perfect vs Past Simple",
+    "topic_tags": [
+        "present_perfect",
+        "past_simple",
+        "just",
+        "already",
+        "yet",
+        "ever",
+        "never"
+    ],
+    "subskills": [
+        "recognize_time_words",
+        "choose_pp_ps",
+        "use_just_already_yet"
+    ],
+    "difficulty": 2,
+    "engine_sequence": [
+        {
+            "engine": "mcq",
+            "count": 10,
+            "rules": {
+                "shuffle_options": true,
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "fill",
+            "count": 6,
+            "rules": {
+                "case_sensitive": false,
+                "allow_contractions": true
+            }
+        }
+    ],
+    "items": [
+        {
+            "id": "mcq1",
+            "engine": "mcq",
+            "prompt": "I ____ him yesterday.",
+            "translation_tr": "Onunla dün tanıştım / karşılaştım.",
+            "options": [
+                "met",
+                "have met"
+            ],
+            "answer": "met",
+            "hint": "Yesterday → Past Simple.",
+            "tags": [
+                "time:yesterday"
+            ]
+        },
+        {
+            "id": "mcq2",
+            "engine": "mcq",
+            "prompt": "I ____ my homework yet.",
+            "translation_tr": "Henüz ödevimi bitirmedim.",
+            "options": [
+                "didn't finish",
+                "haven't finished"
+            ],
+            "answer": "haven't finished",
+            "hint": "Yet → Present Perfect (usually negative/questions).",
+            "tags": [
+                "yet"
+            ]
+        },
+        {
+            "id": "mcq3",
+            "engine": "mcq",
+            "prompt": "She ____ just ____ home.",
+            "translation_tr": "O az önce eve geldi.",
+            "options": [
+                "has / arrived",
+                "did / arrive"
+            ],
+            "answer": "has / arrived",
+            "hint": "Just → Present Perfect.",
+            "tags": [
+                "just"
+            ]
+        },
+        {
+            "id": "mcq4",
+            "engine": "mcq",
+            "prompt": "We ____ to Italy in 2020.",
+            "translation_tr": "2020’de İtalya’ya gittik.",
+            "options": [
+                "went",
+                "have been"
+            ],
+            "answer": "went",
+            "hint": "Finished time (2020) → Past Simple.",
+            "tags": [
+                "finished_time"
+            ]
+        },
+        {
+            "id": "mcq5",
+            "engine": "mcq",
+            "prompt": "Have you ____ eaten sushi?",
+            "translation_tr": "Hiç suşi yedin mi?",
+            "options": [
+                "ever",
+                "yesterday"
+            ],
+            "answer": "ever",
+            "tags": [
+                "ever"
+            ]
+        },
+        {
+            "id": "mcq6",
+            "engine": "mcq",
+            "prompt": "I ____ never ____ a horse.",
+            "translation_tr": "Hiç ata binmedim.",
+            "options": [
+                "have / ridden",
+                "did / ride"
+            ],
+            "answer": "have / ridden",
+            "tags": [
+                "never"
+            ]
+        },
+        {
+            "id": "mcq7",
+            "engine": "mcq",
+            "prompt": "He ____ already ____ lunch.",
+            "translation_tr": "O çoktan öğle yemeğini yedi.",
+            "options": [
+                "has / had",
+                "did / have"
+            ],
+            "answer": "has / had",
+            "tags": [
+                "already"
+            ]
+        },
+        {
+            "id": "mcq8",
+            "engine": "mcq",
+            "prompt": "Did you ____ the film last night?",
+            "translation_tr": "Dün gece filmi izledin mi?",
+            "options": [
+                "see",
+                "seen"
+            ],
+            "answer": "see",
+            "hint": "Past Simple question uses base verb.",
+            "tags": [
+                "past_question"
+            ]
+        },
+        {
+            "id": "mcq9",
+            "engine": "mcq",
+            "prompt": "I ____ this book before. (no finished time)",
+            "translation_tr": "Bu kitabı daha önce okudum.",
+            "options": [
+                "read",
+                "have read"
+            ],
+            "answer": "have read",
+            "tags": [
+                "experience"
+            ]
+        },
+        {
+            "id": "mcq10",
+            "engine": "mcq",
+            "prompt": "She ____ to the shop an hour ago.",
+            "translation_tr": "Bir saat önce dükkâna gitti.",
+            "options": [
+                "went",
+                "has gone"
+            ],
+            "answer": "went",
+            "hint": "Ago → Past Simple.",
+            "tags": [
+                "ago"
+            ]
+        },
+        {
+            "id": "fill1",
+            "engine": "fill",
+            "prompt": "I ____ ____ (not / finish) my project yet.",
+            "translation_tr": "Projemi henüz bitirmedim.",
+            "answer": [
+                "haven't finished",
+                "have not finished"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces",
+                "accept_contractions"
+            ],
+            "tags": [
+                "yet",
+                "negative"
+            ]
+        },
+        {
+            "id": "fill2",
+            "engine": "fill",
+            "prompt": "We ____ (visit) London last year.",
+            "translation_tr": "Geçen yıl Londra’yı ziyaret ettik.",
+            "answer": [
+                "visited"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "past_simple"
+            ]
+        },
+        {
+            "id": "fill3",
+            "engine": "fill",
+            "prompt": "She ____ just ____ (arrive).",
+            "translation_tr": "O az önce geldi.",
+            "answer": [
+                "has just arrived",
+                "she's just arrived"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces",
+                "accept_contractions"
+            ],
+            "tags": [
+                "just"
+            ]
+        },
+        {
+            "id": "fill4",
+            "engine": "fill",
+            "prompt": "____ you ever ____ (try) sushi?",
+            "translation_tr": "Hiç suşi denedin mi?",
+            "answer": [
+                "have you ever tried"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "ever",
+                "question"
+            ]
+        },
+        {
+            "id": "fill5",
+            "engine": "fill",
+            "prompt": "I ____ (see) him two days ago.",
+            "translation_tr": "Onu iki gün önce gördüm.",
+            "answer": [
+                "saw"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "ago"
+            ]
+        },
+        {
+            "id": "fill6",
+            "engine": "fill",
+            "prompt": "They ____ already ____ (eat) dinner.",
+            "translation_tr": "Onlar akşam yemeğini çoktan yediler.",
+            "answer": [
+                "have already eaten",
+                "they've already eaten"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces",
+                "accept_contractions"
+            ],
+            "tags": [
+                "already"
+            ]
+        }
+    ]
+}

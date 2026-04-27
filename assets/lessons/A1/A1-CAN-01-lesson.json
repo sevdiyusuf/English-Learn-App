@@ -1,0 +1,212 @@
+{
+    "schema_version": "1.0",
+    "level": "A1",
+    "lesson_id": "A1-CAN-01-lesson",
+    "title": "Can / Can't (Yetenek ve Rica)",
+    "topic_tags": [
+        "can",
+        "cant",
+        "ability",
+        "requests"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Elimizden gelen işleri (yeteneklerimizi) anlatmayı öğreneceğiz.",
+                    "Yapamadığımız, beceremediğimiz durumları ifade etmeyi kavrayacağız.",
+                    "Nazikçe bir şey rica etmeyi veya izin istemeyi göreceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Can ve Can't Kullanımı",
+                "bullets": [
+                    "**Can**: Bir şeyi yapabilme gücüne veya bilgisine sahip olduğumuzu belirtir.",
+                    "**Can't (Cannot)**: Bir şeyi yapamadığımızı veya o iş için yeteneğimizin olmadığını belirtir.",
+                    "Tüm öznelerde (I, You, He, She, It, We, They) 'can' kelimesi değişmeden aynı kalır."
+                ],
+                "examples": [
+                    "I **can** swim. (Yüzebilirim.)",
+                    "He **can't** drive. (O araba süremez.)",
+                    "They **can** speak English. (Onlar İngilizce konuşabilirler.)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "formula",
+                "title": "Cümle Yapısı",
+                "bullets": [
+                    "En önemli kural: 'Can'den sonra gelen fiil her zaman yalın haldedir (V1). Hiçbir ek almaz."
+                ],
+                "formula": [
+                    "Olumlu: Subject + can + V1",
+                    "Olumsuz: Subject + can't + V1",
+                    "Soru: Can + Subject + V1?"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "Hangisi dil bilgisi açısından doğrudur?",
+                "options": [
+                    "He can to play guitar.",
+                    "He can plays guitar.",
+                    "He can play guitar."
+                ],
+                "answer": "He can play guitar.",
+                "explain": "'Can' modal fiilinden sonra fiil ne 'to' alır ne de '-s' takısı alır. Fiil her zaman yalındır."
+            },
+            {
+                "id": "c4",
+                "type": "rule",
+                "title": "Rica ve İzin İstemek",
+                "bullets": [
+                    "Sadece yetenekler için değil, birinden bir şey yapmasını isterken de 'Can' kullanırız.",
+                    "Bir yere girmek veya bir şeyi kullanmak için izin isterken çok yaygındır."
+                ],
+                "examples": [
+                    "**Can** you help me? (Bana yardım edebilir misin? - Rica)",
+                    "**Can** I sit here? (Buraya oturabilir miyim? - İzin)"
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Fiile Ek Getirmek**: 'She can sings' demek hatalıdır. 'Can' varsa fiil her zaman 'sing' olarak kalır.",
+                    "**To Kullanımı**: 'I can to cook' ifadesi yanlıştır. 'Can' ve fiil arasına hiçbir şey girmez.",
+                    "**He/She için 'Cans' Demek**: 'Can' bir yardımcı fiildir ve şahsa göre asla değişmez."
+                ],
+                "examples": [
+                    "Hatalı: I can to run. ✗",
+                    "Doğru: I can run. ✓",
+                    "Hatalı: She cans jump. ✗",
+                    "Doğru: She can jump. ✓"
+                ]
+            },
+            {
+                "id": "q2",
+                "type": "checkpoint",
+                "engine": "fill",
+                "prompt": "I'm sorry, I ____ hear you. It's too noisy here!",
+                "answer": [
+                    "can't"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Duyamama durumu (yetenek/olasılık eksikliği) olduğu için olumsuz 'can't' kullanılır."
+            },
+            {
+                "id": "c6",
+                "type": "tip",
+                "title": "Soru Dizilimi (Question Structure)",
+                "bullets": [
+                    "Soru sorarken 'Can' kelimesi cümlenin en başına, öznenin önüne gelir.",
+                    "Kısa cevap verirken 'Yes, I can' veya 'No, I can't' yapısı kullanılır."
+                ],
+                "examples": [
+                    "**Can** you open the door? (Kapıyı açabilir misin?)",
+                    "Yes, I can. / No, I can't."
+                ]
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Kontekst: Yetenek Yarışması Hazırlığı",
+        "intro_bullets": [
+            "Okulda bir yetenek yarışması düzenleniyor.",
+            "Arkadaşlarınla neler yapabildiğiniz ve yapamadığınız hakkında konuşuyorsun.",
+            "Cümleleri doğru 'can' veya 'can't' yapılarıyla tamamla."
+        ],
+        "items": [
+            {
+                "engine": "fill",
+                "prompt": "Jack: 'I ___ play the guitar very well, so I will join the contest.'",
+                "answer": [
+                    "can"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Jack yarışmaya katılacağına göre gitar çalabiliyor demektir."
+            },
+            {
+                "engine": "tap",
+                "prompt": "Mary: 'I ___ sing, but I am a great dancer.'",
+                "bank": [
+                    "can't",
+                    "can",
+                    "could"
+                ],
+                "answer": "can't",
+                "explain": "'But' (ama) bağlacı zıtlık bildirir; dans edebiliyor ama şarkı söyleyemiyor."
+            },
+            {
+                "engine": "fill",
+                "prompt": "___ you help me with my dance moves, Mary?",
+                "answer": [
+                    "Can"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Bu bir rica cümlesidir ve 'Can' ile başlar."
+            },
+            {
+                "engine": "order",
+                "prompt": "Can I borrow your costume?",
+                "tokens": [
+                    "Can",
+                    "I",
+                    "borrow",
+                    "your",
+                    "costume",
+                    "?"
+                ],
+                "answer_tokens": [
+                    "Can",
+                    "I",
+                    "borrow",
+                    "your",
+                    "costume",
+                    "?"
+                ],
+                "explain": "İzin istemek için kullanılan düzgün bir soru yapısı."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "Teacher: 'The late students ____ enter the room now.'",
+                "options": [
+                    "can't",
+                    "can",
+                    "must"
+                ],
+                "answer": "can't",
+                "explain": "Geç kalanların (late) içeri girmesine izin verilmediği için 'can't' uygundur."
+            }
+        ],
+        "recap_bullets": [
+            "Hatırla: 'Can' yetenek ve ricalar için kullanılır.",
+            "Hatırla: Fiil her zaman yalındır, asla -s veya to almaz.",
+            "Hatırla: Sorularda 'Can' öznenin başına gelir."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "A1-CAN-01"
+    }
+}

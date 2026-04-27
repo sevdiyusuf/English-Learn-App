@@ -1,0 +1,203 @@
+{
+    "schema_version": "1.0",
+    "level": "B1",
+    "lesson_id": "B1-ART-01-lesson",
+    "title": "Articles and meaning",
+    "topic_tags": [
+        "articles",
+        "the",
+        "zero_article",
+        "meaning_difference",
+        "school_hospital_work"
+    ],
+    "micro_lesson": {
+        "cards": [
+            {
+                "id": "c1",
+                "type": "goal",
+                "title": "Neyi Öğreneceğiz?",
+                "bullets": [
+                    "Bazı mekan isimlerinin (school, hospital, university, bed) önüne 'the' gelip gelmemesinin anlamı nasıl değiştirdiğini öğreneceğiz.",
+                    "Kurumun 'asıl amacı' ile 'fiziksel binası' arasındaki farkı ayırt edeceğiz.",
+                    "Sabit kalıplaşmış belirteç kullanımlarını pekiştireceğiz."
+                ]
+            },
+            {
+                "id": "c2",
+                "type": "rule",
+                "title": "Asıl Amaç: Zero Article (Belirteçsiz)",
+                "bullets": [
+                    "Eğer bir mekana oranın **kurumsal amacı** için gidiyorsanız (öğrenci olarak okul, hasta olarak hastane), belirteç kullanılmaz.",
+                    "Bu kullanımda vurgu bina değil, yapılan aktivitedir."
+                ],
+                "examples": [
+                    "I go to **school** every day. (Öğrenci olarak okula giderim.)",
+                    "She is in **hospital**. (Hasta olarak hastanede yatıyor.)",
+                    "He went to **bed** early. (Uyumak için yattı.)"
+                ]
+            },
+            {
+                "id": "c3",
+                "type": "rule",
+                "title": "Fiziksel Bina: The Article",
+                "bullets": [
+                    "Eğer o mekana asıl amacı dışında, sadece **fiziksel binayı** veya **belirli bir noktayı** kast ederek gidiyorsanız 'the' kullanılır.",
+                    "Örneğin; hastaneye birini ziyarete gitmek veya bir binanın önünde buluşmak gibi."
+                ],
+                "examples": [
+                    "I went to **the school** to meet the teacher. (Veli/ziyaretçi olarak binaya gittim.)",
+                    "I went to **the hospital** to visit my friend. (Ziyaretçi olarak binaya gittim.)",
+                    "I sat on **the bed**. (Yatağın üstüne, bir eşya olarak oturdum.)"
+                ]
+            },
+            {
+                "id": "q1",
+                "type": "checkpoint",
+                "engine": "mcq",
+                "prompt": "Tom is a university student. Which sentence is correct?",
+                "options": [
+                    "He is at university.",
+                    "He is at the university."
+                ],
+                "answer": "He is at university.",
+                "explain": "Öğrenci olarak bir kurumda bulunulduğunda genel amaç kastedildiği için 'the' kullanılmaz."
+            },
+            {
+                "id": "c4",
+                "type": "rule",
+                "title": "İş ve Ev (Work & Home)",
+                "bullets": [
+                    "**Work**: 'Go to work' (İşe gitmek) veya 'at work' (işte olmak) ifadelerinde belirteç kullanılmaz.",
+                    "**Home**: 'Go home' veya 'at home' kalıplarında hiçbir zaman 'the' gelmez."
+                ],
+                "examples": [
+                    "He goes to **work** by metro.",
+                    "They are at **home** now."
+                ]
+            },
+            {
+                "id": "c5",
+                "type": "common_mistake",
+                "title": "Sık Yapılan Hatalar",
+                "bullets": [
+                    "**Öğrenciyken 'The School' Demek**: 'I go to the school every day' derseniz, her gün sadece binaya uğruyormuşsunuz gibi anlaşılır.",
+                    "**Sabit Zaman İfadeleri**: 'Midnight' ve 'Night' gibi kelimelerin önüne 'the' getirirken dikkatli olunmalıdır.",
+                    "**Ziyaretçi vs. Hasta Ayrımı**: Hasta yatağında yatan kişi için 'in hospital', onu görmeye gelen kişi için 'at/to the hospital' kullanılır."
+                ],
+                "examples": [
+                    "Hatalı: I go to the university to study. ✗",
+                    "Doğru: I go to **university** to study. ✓",
+                    "Hatalı: He went to bed the midnight. ✗",
+                    "Doğru: He went to bed **at midnight**. ✓"
+                ]
+            },
+            {
+                "id": "q2",
+                "type": "checkpoint",
+                "engine": "tap",
+                "prompt": "I need to visit my uncle. He is in ____ hospital.",
+                "bank": [
+                    "—",
+                    "the"
+                ],
+                "answer": "—",
+                "explain": "Amcanız hasta olarak (hasta yatağında) bulunduğu için burada sıfır belirteç (zero article) kullanılır."
+            },
+            {
+                "id": "c6",
+                "type": "tip",
+                "title": "Pratik İpucu",
+                "bullets": [
+                    "Eğer eylem o mekanın yapılma amacıyla (ders çalışmak, iyileşmek, uyumak) örtüşüyorsa: **Belirteç Yok**.",
+                    "Eğer eylem sadece bir konum bildirme veya bina ziyaretiyse: **The Kullanılır**."
+                ]
+            }
+        ]
+    },
+    "story_mode": {
+        "enabled": true,
+        "title": "Kontekst: Yoğun Bir Gün",
+        "intro_bullets": [
+            "Bugün ailen ve okulunla ilgili yapman gereken birkaç iş var.",
+            "Kelimeleri seçerken niyetine (amaca mı yoksa binaya mı gidiyorsun?) dikkat et!"
+        ],
+        "items": [
+            {
+                "engine": "mcq",
+                "prompt": "I usually go to ___ school by bus, because I have classes until 4 PM.",
+                "options": [
+                    "—",
+                    "the"
+                ],
+                "answer": "—",
+                "explain": "Derslere (öğrenci olarak) gittiğin için belirteç kullanılmaz."
+            },
+            {
+                "engine": "fill",
+                "prompt": "But today, my father is going to ___ school to meet my principal.",
+                "answer": [
+                    "the"
+                ],
+                "normalize": [
+                    "lowercase",
+                    "trim",
+                    "collapse_spaces"
+                ],
+                "explain": "Baba öğrenci değil, bir ziyaretçi olarak binaya gidiyor."
+            },
+            {
+                "engine": "tap",
+                "prompt": "After that, I have to go to ___ hospital to visit my friend who had surgery.",
+                "bank": [
+                    "the",
+                    "—"
+                ],
+                "answer": "the",
+                "explain": "Hastaneye hasta olarak değil, binayı ziyaret etmek için gidiyorsun."
+            },
+            {
+                "engine": "mcq",
+                "prompt": "I am so tired. I think I will go to ___ bed as soon as I get home.",
+                "options": [
+                    "—",
+                    "the"
+                ],
+                "answer": "—",
+                "explain": "Uyumak (asıl amaç) için gitmek belirteç gerektirmez."
+            },
+            {
+                "engine": "order",
+                "prompt": "Cümleyi kur: 'O her gün işe metroyla gider.'",
+                "tokens": [
+                    "He",
+                    "goes",
+                    "to",
+                    "work",
+                    "by",
+                    "metro",
+                    "every",
+                    "day"
+                ],
+                "answer_tokens": [
+                    "He",
+                    "goes",
+                    "to",
+                    "work",
+                    "by",
+                    "metro",
+                    "every",
+                    "day"
+                ],
+                "explain": "'Go to work' (İşe gitmek) belirteçsiz kullanılan sabit bir kalıptır."
+            }
+        ],
+        "recap_bullets": [
+            "Hatırla: Kurumun asıl amacı söz konusuysa 'the' kullanma (school, university, bed).",
+            "Hatırla: Sadece binayı veya ziyareti kastediyorsan 'the' kullan.",
+            "Hatırla: 'At home' ve 'at work' ifadelerinde belirteç kullanılmaz."
+        ]
+    },
+    "train_link": {
+        "worksheet_id": "B1-ART-01"
+    }
+}

@@ -1,0 +1,320 @@
+{
+    "schema_version": "1.0",
+    "level": "A1",
+    "worksheet_id": "A1-CU-01",
+    "title": "Countable vs Uncountable (basic)",
+    "topic_tags": [
+        "countable",
+        "uncountable",
+        "a_an",
+        "some_any",
+        "much_many"
+    ],
+    "subskills": [
+        "identify_countable",
+        "choose_a_an",
+        "choose_much_many"
+    ],
+    "difficulty": 1,
+    "engine_sequence": [
+        {
+            "engine": "tap",
+            "count": 6,
+            "rules": {
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "mcq",
+            "count": 8,
+            "rules": {
+                "shuffle_options": true,
+                "allow_hint": true
+            }
+        },
+        {
+            "engine": "fill",
+            "count": 4,
+            "rules": {
+                "case_sensitive": false,
+                "allow_contractions": true
+            }
+        }
+    ],
+    "items": [
+        {
+            "id": "tap1",
+            "engine": "tap",
+            "prompt": "Choose: apple (C or U?)",
+            "translation_tr": "Elma (sayılabilir mi, sayılamaz mı?)",
+            "bank": [
+                "C",
+                "U"
+            ],
+            "answer": "C",
+            "hint": "You can count apples: 1 apple, 2 apples.",
+            "tags": [
+                "countable"
+            ]
+        },
+        {
+            "id": "tap2",
+            "engine": "tap",
+            "prompt": "Choose: water (C or U?)",
+            "translation_tr": "Su (sayılabilir mi, sayılamaz mı?)",
+            "bank": [
+                "C",
+                "U"
+            ],
+            "answer": "U",
+            "hint": "You can’t count water (not 1 water).",
+            "tags": [
+                "uncountable"
+            ]
+        },
+        {
+            "id": "tap3",
+            "engine": "tap",
+            "prompt": "Choose: bread (C or U?)",
+            "translation_tr": "Ekmek (sayılabilir mi, sayılamaz mı?)",
+            "bank": [
+                "C",
+                "U"
+            ],
+            "answer": "U",
+            "tags": [
+                "uncountable"
+            ]
+        },
+        {
+            "id": "tap4",
+            "engine": "tap",
+            "prompt": "Choose: chair (C or U?)",
+            "translation_tr": "Sandalye (sayılabilir mi, sayılamaz mı?)",
+            "bank": [
+                "C",
+                "U"
+            ],
+            "answer": "C",
+            "tags": [
+                "countable"
+            ]
+        },
+        {
+            "id": "tap5",
+            "engine": "tap",
+            "prompt": "Choose: rice (C or U?)",
+            "translation_tr": "Pirinç (sayılabilir mi, sayılamaz mı?)",
+            "bank": [
+                "C",
+                "U"
+            ],
+            "answer": "U",
+            "tags": [
+                "uncountable"
+            ]
+        },
+        {
+            "id": "tap6",
+            "engine": "tap",
+            "prompt": "Choose: books (C or U?)",
+            "translation_tr": "Kitaplar (sayılabilir mi, sayılamaz mı?)",
+            "bank": [
+                "C",
+                "U"
+            ],
+            "answer": "C",
+            "tags": [
+                "countable"
+            ]
+        },
+        {
+            "id": "mcq1",
+            "engine": "mcq",
+            "prompt": "I have ____ apple.",
+            "translation_tr": "Bir elmam var.",
+            "options": [
+                "a",
+                "some"
+            ],
+            "answer": "a",
+            "hint": "Singular countable → a/an.",
+            "tags": [
+                "a_an"
+            ]
+        },
+        {
+            "id": "mcq2",
+            "engine": "mcq",
+            "prompt": "I have ____ water.",
+            "translation_tr": "Biraz suyum var.",
+            "options": [
+                "a",
+                "some"
+            ],
+            "answer": "some",
+            "hint": "Uncountable → some.",
+            "tags": [
+                "some_any"
+            ]
+        },
+        {
+            "id": "mcq3",
+            "engine": "mcq",
+            "prompt": "How ____ money do you have?",
+            "translation_tr": "Ne kadar paran var?",
+            "options": [
+                "many",
+                "much"
+            ],
+            "answer": "much",
+            "hint": "Money = uncountable → much.",
+            "tags": [
+                "much_many"
+            ]
+        },
+        {
+            "id": "mcq4",
+            "engine": "mcq",
+            "prompt": "How ____ books are there?",
+            "translation_tr": "Kaç tane kitap var?",
+            "options": [
+                "many",
+                "much"
+            ],
+            "answer": "many",
+            "hint": "Books = plural countable → many.",
+            "tags": [
+                "much_many"
+            ]
+        },
+        {
+            "id": "mcq5",
+            "engine": "mcq",
+            "prompt": "There isn’t ____ sugar.",
+            "translation_tr": "Hiç şeker yok.",
+            "options": [
+                "some",
+                "any"
+            ],
+            "answer": "any",
+            "tags": [
+                "some_any",
+                "negative"
+            ]
+        },
+        {
+            "id": "mcq6",
+            "engine": "mcq",
+            "prompt": "There are ____ eggs in the fridge.",
+            "translation_tr": "Buzdolabında birkaç yumurta var.",
+            "options": [
+                "some",
+                "any"
+            ],
+            "answer": "some",
+            "tags": [
+                "some_any",
+                "affirmative"
+            ]
+        },
+        {
+            "id": "mcq7",
+            "engine": "mcq",
+            "prompt": "Would you like ____ tea?",
+            "translation_tr": "Biraz çay ister misin?",
+            "options": [
+                "some",
+                "any"
+            ],
+            "answer": "some",
+            "hint": "Offers/requests often use 'some'.",
+            "tags": [
+                "some_any",
+                "offer"
+            ]
+        },
+        {
+            "id": "mcq8",
+            "engine": "mcq",
+            "prompt": "I need ____ information.",
+            "translation_tr": "Biraz bilgiye ihtiyacım var.",
+            "options": [
+                "a",
+                "some"
+            ],
+            "answer": "some",
+            "tags": [
+                "uncountable"
+            ]
+        },
+        {
+            "id": "fill1",
+            "engine": "fill",
+            "prompt": "I’d like ____ milk, please. (some/any)",
+            "translation_tr": "Biraz süt istiyorum lütfen.",
+            "answer": [
+                "some"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "offer"
+            ]
+        },
+        {
+            "id": "fill2",
+            "engine": "fill",
+            "prompt": "How ____ apples are there? (much/many)",
+            "translation_tr": "Kaç tane elma var?",
+            "answer": [
+                "many"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "much_many"
+            ]
+        },
+        {
+            "id": "fill3",
+            "engine": "fill",
+            "prompt": "How ____ bread do we need? (much/many)",
+            "translation_tr": "Ne kadar ekmeğe ihtiyacımız var?",
+            "answer": [
+                "much"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "much_many"
+            ]
+        },
+        {
+            "id": "fill4",
+            "engine": "fill",
+            "prompt": "I have ____ umbrella. (a/an)",
+            "translation_tr": "Bir şemsiyem var.",
+            "answer": [
+                "an"
+            ],
+            "normalize": [
+                "lowercase",
+                "trim",
+                "collapse_spaces"
+            ],
+            "tags": [
+                "a_an"
+            ]
+        }
+    ]
+}
