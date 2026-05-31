@@ -7,6 +7,7 @@ import '../../auth/logic/auth_controller.dart';
 import '../../auth/ui/account_sheet.dart';
 import '../../user_stats/logic/user_stats_controller.dart';
 import '../../profile_settings/logic/user_settings_controller.dart';
+import '../../../core/providers/accent_color_provider.dart';
 
 // --- Renk Paleti ve Sabitler ---
 const _backgroundColor = Color(
@@ -64,29 +65,10 @@ class ModeSelectPage extends ConsumerStatefulWidget {
 }
 
 class _ModeSelectPageState extends ConsumerState<ModeSelectPage> {
-  int _accentIndex = 0;
   bool _isAccentCollapsed = true;
 
-  Color get _currentAccent {
-    switch (_accentIndex) {
-      case 1:
-        return _accentPurple;
-      case 2:
-        return _accentCyan;
-      case 3:
-        return _accentRed;
-      default:
-        return _accentColor;
-    }
-  }
-
   void _onAccentChanged(int index) {
-    if (index == _accentIndex) {
-      return;
-    }
-    setState(() {
-      _accentIndex = index;
-    });
+    ref.read(accentColorProvider.notifier).setAccentIndex(index);
   }
 
   void _onAccentCollapsedToggle() {
@@ -111,7 +93,8 @@ class _ModeSelectPageState extends ConsumerState<ModeSelectPage> {
             ? '?'
             : username[0].toUpperCase();
 
-    final accentColor = _currentAccent;
+    final accentIndex = ref.watch(accentColorProvider);
+    final accentColor = ref.read(accentColorProvider.notifier).currentColor;
 
     return Scaffold(
       extendBody: true,
@@ -150,24 +133,13 @@ class _ModeSelectPageState extends ConsumerState<ModeSelectPage> {
                   username: username,
                   avatarInitial: avatarInitial,
                   accentColor: accentColor,
-                  accentIndex: _accentIndex,
+                  accentIndex: accentIndex,
                   onAccentChanged: _onAccentChanged,
                   isAccentCollapsed: _isAccentCollapsed,
                   onAccentCollapsedToggle: _onAccentCollapsedToggle,
                 ),
                 const SizedBox(height: 32),
-                const _SectionTitle(title: 'Kelime çalışmaları'),
-                const SizedBox(height: 16),
-                IntrinsicHeight(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Expanded(flex: 2, child: _WordMatchHeroCard(accentColor: accentColor)),
-                      const SizedBox(width: 16),
-                      Expanded(flex: 1, child: _IrregularVerbsHeroCard(accentColor: accentColor)),
-                    ],
-                  ),
-                ),
+                _WordMatchHeroCard(accentColor: accentColor),
                 const SizedBox(height: 24),
                 const _SectionTitle(title: 'Özellikler'),
                 const SizedBox(height: 16),
@@ -463,7 +435,7 @@ class _WordMatchHeroCard extends StatelessWidget {
                         'Word Practice',
                         style: TextStyle(
                           color: _primaryTextColor,
-                          fontSize: 22,
+                          fontSize: 26,
                           fontWeight: FontWeight.w800,
                           letterSpacing: -0.5,
                         ),
@@ -880,80 +852,6 @@ class _GlassBottomNavBar extends StatelessWidget {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-class _IrregularVerbsHeroCard extends StatelessWidget {
-  final Color accentColor;
-
-  const _IrregularVerbsHeroCard({required this.accentColor});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => context.go('/irregular-verbs'),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(32),
-          gradient: const LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [Color(0xFF1C1C1E), Color(0xFF050505)],
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.4),
-              blurRadius: 20,
-              offset: const Offset(0, 10),
-            ),
-          ],
-          border: Border.all(color: Colors.white.withOpacity(0.05), width: 1),
-        ),
-        child: Stack(
-          children: [
-            Positioned(
-              right: -10,
-              bottom: -10,
-              child: Icon(
-                Icons.auto_awesome_rounded,
-                size: 80,
-                color: Colors.blueAccent.withOpacity(0.15),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: Colors.blueAccent.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        child: const Text(
-                          'YENİ',
-                          style: TextStyle(color: Colors.blueAccent, fontSize: 8, fontWeight: FontWeight.w800),
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      const Text(
-                        'Irregular\nVerbs',
-                        style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w800, height: 1.1),
-                      ),
-                    ],
-                  ),
-                  const Icon(Icons.arrow_forward_rounded, color: Colors.white38, size: 20),
-                ],
-              ),
-            ),
-          ],
         ),
       ),
     );

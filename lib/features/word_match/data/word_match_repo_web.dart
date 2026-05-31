@@ -930,6 +930,29 @@ class WordMatchRepoWeb implements WordMatchRepoInterface {
   }
 
   @override
+  Future<void> ensureInitialUserSet() async {
+    final sets = _loadSets();
+    // Check if user has any custom sets
+    final customSetsCount = sets.where((s) => !s.isBuiltin).length;
+
+    if (customSetsCount > 0) {
+      return; // Already has sets
+    }
+
+    // Create the default set
+    final now = DateTime.now();
+    final initialSet = WordSet()
+      ..id = _getNextId()
+      ..name = 'Kelime Setim 1'
+      ..createdAt = now
+      ..updatedAt = now
+      ..isBuiltin = false;
+
+    sets.add(initialSet);
+    _saveSets(sets);
+  }
+
+  @override
   Future<void> ensureWordsFromGamesSet() async {
     final sets = _loadSets();
     try {

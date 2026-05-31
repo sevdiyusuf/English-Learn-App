@@ -524,6 +524,32 @@ class WordMatchRepo implements WordMatchRepoInterface {
     });
   }
 
+  /// Ensures the initial user set "Kelime Setim 1" exists if the user has no custom sets.
+  @override
+  Future<void> ensureInitialUserSet() async {
+    await _isar.writeTxn(() async {
+      // Check if user has any custom sets
+      final customSetsCount = await _isar.wordSets
+          .filter()
+          .isBuiltinEqualTo(false)
+          .count();
+          
+      if (customSetsCount > 0) {
+        return; // Already has sets
+      }
+
+      // Create the default set
+      final now = DateTime.now();
+      final initialSet = WordSet()
+        ..name = 'Kelime Setim 1'
+        ..createdAt = now
+        ..updatedAt = now
+        ..isBuiltin = false;
+
+      await _isar.wordSets.put(initialSet);
+    });
+  }
+
   /// Gets the ID of the "Words from Games" set.
   /// Returns null if the set doesn't exist.
   @override

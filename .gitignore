@@ -1,29 +1,4 @@
-# Miscellaneous
-*.class
-*.log
-*.pyc
-*.swp
-.DS_Store
-.atom/
-.build/
-.buildlog/
-.history
-.svn/
-.swiftpm/
-migrate_working_dir/
-
-# IntelliJ related
-*.iml
-*.ipr
-*.iws
-.idea/
-
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
-
-# Flutter/Dart/Pub related
+# === Flutter/Dart/Pub Varsayılan Geçici Dosyaları ===
 **/doc/api/
 **/ios/Flutter/.last_build_id
 .dart_tool/
@@ -32,15 +7,37 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.idea/
+.vscode/
+*.iml
+.metadata
 
-# Symbolication related
-app.*.symbols
+# === Firebase & Google Cloud Güvenlik Engellemeleri ===
+.firebase/
+.firebaserc
+functions/node_modules/
+functions/.env
+google-services.json
+GoogleService-Info.plist
+node_modules/
+package-lock.json
 
-# Obfuscation related
-app.*.map.json
+# === ÖZEL İSTEK: Tüm Ek Raporlar ve PowerShell Scriptleri Gizlensin ===
+# (Sadece ana README.md dosyasının gitmesine izin verir, diğer tüm .md'leri engeller)
+*.md
+!README.md
 
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
-node_modules
+# Tüm PowerShell (.ps1) otomasyon dosyalarını engeller
+*.ps1
+
+# Geçici analiz ve dummy klasörleri
+analyze_output.txt
+analyze_output_v2.txt
+analyze_v3.txt
+dummy/
+dummy2/

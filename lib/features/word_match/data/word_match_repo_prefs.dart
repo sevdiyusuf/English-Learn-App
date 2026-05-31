@@ -696,7 +696,7 @@ class WordMatchRepoPrefs implements WordMatchRepoInterface {
   Future<void> ensureWordsFromGamesSet() async {
     final sets = await _loadSets();
     try {
-      sets.firstWhere((s) => s.name == 'Words from Games');
+      sets.firstWhere((s) => s.name == 'Words from Games' && s.isBuiltin);
       return;
     } catch (_) {
       // Not found, continue to create
@@ -712,6 +712,29 @@ class WordMatchRepoPrefs implements WordMatchRepoInterface {
           ..isBuiltin = true;
 
     sets.add(wordsFromGamesSet);
+    await _saveSets(sets);
+  }
+
+  @override
+  Future<void> ensureInitialUserSet() async {
+    final sets = await _loadSets();
+    // Check if user has any custom sets
+    final customSetsCount = sets.where((s) => !s.isBuiltin).length;
+
+    if (customSetsCount > 0) {
+      return; // Already has sets
+    }
+
+    // Create the default set
+    final now = DateTime.now();
+    final initialSet = WordSet()
+      ..id = _getNextId()
+      ..name = 'Kelime Setim 1'
+      ..createdAt = now
+      ..updatedAt = now
+      ..isBuiltin = false;
+
+    sets.add(initialSet);
     await _saveSets(sets);
   }
 

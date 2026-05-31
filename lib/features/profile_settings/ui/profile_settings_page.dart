@@ -8,6 +8,7 @@ import 'package:yunoo/l10n/app_localizations.dart';
 import '../../../core/repositories/user_stats_repo.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/feedback_bottom_sheet.dart';
+import '../../../core/providers/accent_color_provider.dart';
 import '../../auth/data/auth_repo.dart';
 import '../../auth/logic/auth_controller.dart';
 import '../../auth/models/app_user.dart';
@@ -19,7 +20,6 @@ import '../models/user_settings.dart';
 
 // Ana Sayfa Tema Sabitleri
 const _backgroundColor = Color(0xFF050505);
-const _accentColor = Color(0xFF2997FF);
 const _stoneGradient = LinearGradient(
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,
@@ -51,69 +51,102 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
     );
     final l10n = AppLocalizations.of(context)!;
 
-    return Scaffold(
-      backgroundColor: _backgroundColor,
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: Text(
-          l10n.profileAndSettings,
-          style: const TextStyle(
-            color: _primaryTextColor,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 0.5,
+    final accentIndex = ref.watch(accentColorProvider);
+    final accentColor = ref.read(accentColorProvider.notifier).currentColor;
+
+    return Theme(
+      data: Theme.of(context).copyWith(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: accentColor,
+          brightness: Theme.of(context).brightness,
+          primary: accentColor,
+          secondary: accentColor,
+          surfaceTint: Colors.transparent,
+        ).copyWith(
+          primary: accentColor,
+          secondary: accentColor,
+        ),
+        segmentedButtonTheme: SegmentedButtonThemeData(
+          style: SegmentedButton.styleFrom(
+            selectedBackgroundColor: accentColor.withOpacity(0.2),
+            selectedForegroundColor: Colors.white,
+            side: BorderSide(color: accentColor.withOpacity(0.5)),
           ),
         ),
-        automaticallyImplyLeading: false,
+        chipTheme: Theme.of(context).chipTheme.copyWith(
+          selectedColor: accentColor.withOpacity(0.2),
+          secondarySelectedColor: accentColor.withOpacity(0.2),
+          checkmarkColor: accentColor,
+          labelStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          secondaryLabelStyle: TextStyle(color: accentColor),
+        ),
       ),
-      body: Stack(
-        children: [
-          // Arka plan blur (Ana Sayfa stili)
-          Positioned(
-            top: -100,
-            right: -50,
-            child: Container(
-              width: 300,
-              height: 300,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: _accentColor.withValues(alpha: 0.05),
-                boxShadow: [
-                  BoxShadow(
-                    color: _accentColor.withValues(alpha: 0.05),
-                    blurRadius: 100,
-                  ),
-                ],
-              ),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 50, sigmaY: 50),
-                child: Container(),
-              ),
+      child: Scaffold(
+        backgroundColor: _backgroundColor,
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: Text(
+            l10n.profileAndSettings,
+            style: const TextStyle(
+              color: _primaryTextColor,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 0.5,
             ),
           ),
-          SafeArea(
-            child: settingsAsync.when(
-              data: (settings) => _buildContent(
-                context,
-                authState.valueOrNull,
-                friendsState.profile,
-                settings,
-                settingsController,
+          automaticallyImplyLeading: false,
+        ),
+        body: Stack(
+          children: [
+            // Arka plan blur (Ana Sayfa stili)
+            Positioned(
+              top: -100,
+              right: -50,
+              child: Container(
+                width: 300,
+                height: 300,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: accentColor.withValues(alpha: 0.05),
+                  boxShadow: [
+                    BoxShadow(
+                      color: accentColor.withValues(alpha: 0.05),
+                      blurRadius: 100,
+                    ),
+                  ],
+                ),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 50, sigmaY: 50),
+                  child: Container(),
+                ),
               ),
-              loading: () => const Center(child: CircularProgressIndicator(color: _accentColor)),
-              error: (error, stack) {
-                return _buildContent(
+            ),
+            SafeArea(
+              child: settingsAsync.when(
+                data: (settings) => _buildContent(
                   context,
                   authState.valueOrNull,
                   friendsState.profile,
-                  UserSettings(),
-                  ref.read(userSettingsControllerProvider.notifier),
-                );
-              },
+                  settings,
+                  settingsController,
+                  accentColor,
+                ),
+                loading: () => Center(child: CircularProgressIndicator(color: accentColor)),
+                error: (error, stack) {
+                  return _buildContent(
+                    context,
+                    authState.valueOrNull,
+                    friendsState.profile,
+                    UserSettings(),
+                    ref.read(userSettingsControllerProvider.notifier),
+                    accentColor,
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -124,6 +157,7 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
     UserProfile? profile,
     UserSettings settings,
     UserSettingsController controller,
+    Color accentColor,
   ) {
     final l10n = AppLocalizations.of(context)!;
 
@@ -131,11 +165,11 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
       padding: const EdgeInsets.all(16),
       children: [
         // Profile Header
-        _buildProfileHeader(context, user, profile),
+        _buildProfileHeader(context, user, profile, accentColor),
         const SizedBox(height: 24),
 
         // Appearance Section
-        _buildSectionHeader(context, l10n.appearance),
+        _buildSectionHeader(context, l10n.appearance, accentColor),
         _buildEliteCard(
           child: Column(
             children: [
@@ -148,7 +182,7 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
         const SizedBox(height: 16),
 
         // Feedback Section
-        _buildSectionHeader(context, l10n.soundAndVibration),
+        _buildSectionHeader(context, l10n.soundAndVibration, accentColor),
         _buildEliteCard(
           child: Column(
             children: [
@@ -200,8 +234,8 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
         ),
         const SizedBox(height: 16),
 
-        // Daily Goal Section
-        _buildSectionHeader(context, l10n.dailyGoal),
+        // Daily Goals Section
+        _buildSectionHeader(context, l10n.dailyGoal, accentColor),
         _buildEliteCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -364,7 +398,7 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
         const SizedBox(height: 16),
 
         // Notifications Section
-        _buildSectionHeader(context, l10n.notifications),
+        _buildSectionHeader(context, l10n.notifications, accentColor),
         _buildEliteCard(
           child: Column(
             children: [
@@ -410,14 +444,14 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
         const SizedBox(height: 16),
 
         // Statistics Section
-        _buildSectionHeader(context, l10n.statistics),
+        _buildSectionHeader(context, l10n.statistics, accentColor),
         _buildEliteCard(
           child: ListTile(
             title: Text(l10n.progressAndStats),
             subtitle: Text(l10n.progressAndStatsSubtitle),
-            leading: const Icon(
+            leading: Icon(
               Icons.analytics_outlined,
-              color: AppColors.primary,
+              color: accentColor,
             ),
             trailing: const Icon(Icons.chevron_right),
             onTap: () => context.go('/stats'),
@@ -426,7 +460,7 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
         const SizedBox(height: 16),
 
         // Data & Privacy Section
-        _buildSectionHeader(context, l10n.dataAndPrivacy),
+        _buildSectionHeader(context, l10n.dataAndPrivacy, accentColor),
         _buildEliteCard(
           child: Column(
             children: [
@@ -466,12 +500,12 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
         ),
         // Feedback / Destek
         const SizedBox(height: 16),
-        _buildSectionHeader(context, 'DESTEK'),
+        _buildSectionHeader(context, 'DESTEK', accentColor),
         _buildEliteCard(
           child: ListTile(
             title: const Text('Geri Bildirim Gönder'),
             subtitle: const Text('Hata bildirimi veya öneride bulunun'),
-            leading: const Icon(Icons.feedback_outlined, color: _accentColor),
+            leading: Icon(Icons.feedback_outlined, color: accentColor),
             trailing: const Icon(Icons.chevron_right),
             onTap: () {
               FeedbackBottomSheet.show(context, pageName: 'Profil Sayfası');
@@ -487,6 +521,7 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
     BuildContext context,
     AppUser? user,
     UserProfile? profile,
+    Color accentColor,
   ) {
     final l10n = AppLocalizations.of(context)!;
 
@@ -497,7 +532,7 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
           children: [
             CircleAvatar(
               radius: 32,
-              backgroundColor: AppColors.primary.withValues(alpha: 0.2),
+              backgroundColor: accentColor.withValues(alpha: 0.2),
               backgroundImage:
                   user?.photoUrl != null ? NetworkImage(user!.photoUrl!) : null,
               child:
@@ -510,7 +545,7 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
                                 : '?')
                             .toUpperCase(),
                         style: TextStyle(
-                          color: AppColors.primary,
+                          color: accentColor,
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                         ),
@@ -535,10 +570,10 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
                       ),
                       if (user != null && !user.isGuestMode)
                         IconButton(
-                          icon: const Icon(
+                          icon: Icon(
                             Icons.edit,
                             size: 18,
-                            color: AppColors.primary,
+                            color: accentColor,
                           ),
                           onPressed:
                               () => _showEditNameDialog(
@@ -653,15 +688,15 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
     );
   }
 
-  Widget _buildSectionHeader(BuildContext context, String title) {
+  Widget _buildSectionHeader(BuildContext context, String title, Color accentColor) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(4, 0, 0, 16),
       child: Text(
         title.toUpperCase(),
-        style: const TextStyle(
-          color: _secondaryTextColor,
+        style: TextStyle(
+          color: accentColor.withOpacity(0.8),
           fontSize: 12,
-          fontWeight: FontWeight.w700,
+          fontWeight: FontWeight.w800,
           letterSpacing: 1.5,
         ),
       ),

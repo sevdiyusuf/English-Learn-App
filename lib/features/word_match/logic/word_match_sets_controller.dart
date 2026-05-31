@@ -77,6 +77,9 @@ class WordMatchSetsController
       // Fix any incorrect built-in sets (user request: only 2 specific sets should be built-in)
       await repo.fixBuiltinSets();
 
+      // Ensure initial user set exists
+      await repo.ensureInitialUserSet();
+
       final setsStream = repo.watchSets();
 
       // Use Completer to get initial value from single stream subscription

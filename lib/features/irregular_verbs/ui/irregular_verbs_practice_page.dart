@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../logic/irregular_verbs_provider.dart';
 
 class IrregularVerbsPracticePage extends ConsumerWidget {
@@ -41,7 +42,7 @@ class IrregularVerbsPracticePage extends ConsumerWidget {
                 children: [
                   IconButton(
                     icon: const Icon(Icons.close_rounded, color: Colors.white30),
-                    onPressed: () => Navigator.of(context).pop(),
+                    onPressed: () => GoRouter.of(context).go('/irregular-verbs'),
                   ),
                   Text(
                     'Score: ${state.score}',

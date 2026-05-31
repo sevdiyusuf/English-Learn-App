@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import '../logic/irregular_verbs_provider.dart';
 import '../models/irregular_verb.dart';
+import 'package:go_router/go_router.dart';
 
 class IrregularVerbsTutorialPage extends ConsumerStatefulWidget {
   const IrregularVerbsTutorialPage({super.key});
@@ -27,6 +28,7 @@ class _IrregularVerbsTutorialPageState extends ConsumerState<IrregularVerbsTutor
   }
 
   Future<void> _speak(String text) async {
+    await _flutterTts.setLanguage('en-US');
     await _flutterTts.speak(text);
   }
 
@@ -42,7 +44,7 @@ class _IrregularVerbsTutorialPageState extends ConsumerState<IrregularVerbsTutor
         title: const Text('Tutorial Mode'),
         leading: IconButton(
           icon: const Icon(Icons.close_rounded),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => context.go('/irregular-verbs'),
         ),
       ),
       body: verbsAsync.when(
@@ -59,6 +61,8 @@ class _IrregularVerbsTutorialPageState extends ConsumerState<IrregularVerbsTutor
                 title: key,
                 verbs: groupVerbs,
                 onSpeak: _speak,
+                index: index,
+                total: groupKeys.length,
               );
             },
           );
@@ -86,11 +90,15 @@ class _GroupView extends StatelessWidget {
   final String title;
   final List<IrregularVerb> verbs;
   final Function(String) onSpeak;
+  final int index;
+  final int total;
 
   const _GroupView({
     required this.title,
     required this.verbs,
     required this.onSpeak,
+    required this.index,
+    required this.total,
   });
 
   @override
@@ -99,13 +107,22 @@ class _GroupView extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 20),
-          child: Text(
-            title,
-            style: const TextStyle(
-              color: Colors.blueAccent,
-              fontSize: 24,
-              fontWeight: FontWeight.w800,
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (index > 0) const Icon(Icons.chevron_left_rounded, color: Colors.white54, size: 28),
+              if (index > 0) const SizedBox(width: 8),
+              Text(
+                title,
+                style: const TextStyle(
+                  color: Colors.blueAccent,
+                  fontSize: 24,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              if (index < total - 1) const SizedBox(width: 8),
+              if (index < total - 1) const Icon(Icons.chevron_right_rounded, color: Colors.white54, size: 28),
+            ],
           ),
         ),
         Expanded(

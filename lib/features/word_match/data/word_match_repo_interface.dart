@@ -37,6 +37,7 @@ abstract class WordMatchRepoInterface {
   Future<void> ensureLevelSets();
   Future<void> fixBuiltinSets();
   Future<void> ensureWordsFromGamesSet();
+  Future<void> ensureInitialUserSet();
   Future<int?> getWordsFromGamesSetId();
   Future<void> toggleLearned(int pairId, bool learned);
   Future<void> resetAllLearned(int setId);

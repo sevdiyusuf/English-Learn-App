@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:package_info_plus/package_info_plus.dart';
@@ -53,7 +54,11 @@ class _FeedbackBottomSheetState extends ConsumerState<FeedbackBottomSheet> {
       String deviceModel = 'Bilinmiyor';
       String osVersion = 'Bilinmiyor';
 
-      if (Platform.isAndroid) {
+      if (kIsWeb) {
+        final webInfo = await deviceInfo.webBrowserInfo;
+        deviceModel = webInfo.browserName.name;
+        osVersion = webInfo.platform ?? 'Web';
+      } else if (Platform.isAndroid) {
         final androidInfo = await deviceInfo.androidInfo;
         deviceModel = '${androidInfo.manufacturer} ${androidInfo.model}';
         osVersion = 'Android ${androidInfo.version.release} (SDK ${androidInfo.version.sdkInt})';

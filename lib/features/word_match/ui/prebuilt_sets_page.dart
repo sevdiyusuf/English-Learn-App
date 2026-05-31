@@ -85,7 +85,7 @@ class _PreBuiltSetsList extends ConsumerWidget {
 
     return ListView.builder(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      itemCount: levels.length + 1,
+      itemCount: levels.length + 2,
       itemBuilder: (context, index) {
         if (index == levels.length) {
           if (wordsFromGamesOverview == null) return const SizedBox.shrink();
@@ -94,6 +94,16 @@ class _PreBuiltSetsList extends ConsumerWidget {
               const SizedBox(height: 16),
               _WordsFromGamesCard(overview: wordsFromGamesOverview),
               const SizedBox(height: 16),
+            ],
+          );
+        }
+
+        if (index == levels.length + 1) {
+          return const Column(
+            children: [
+              SizedBox(height: 16),
+              _IrregularVerbsHeroCard(),
+              SizedBox(height: 32),
             ],
           );
         }
@@ -761,6 +771,93 @@ class _WordsFromGamesCard extends ConsumerWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class _IrregularVerbsHeroCard extends StatelessWidget {
+  const _IrregularVerbsHeroCard();
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => context.go('/irregular-verbs'),
+      child: Container(
+        height: 140,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
+          gradient: const LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Color(0xFF232526), Color(0xFF414345)],
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.4),
+              blurRadius: 15,
+              offset: const Offset(0, 8),
+            ),
+          ],
+          border: Border.all(color: Colors.white.withOpacity(0.1), width: 1),
+        ),
+        child: Stack(
+          children: [
+            Positioned(
+              right: -20,
+              bottom: -20,
+              child: Icon(
+                Icons.auto_awesome_rounded,
+                size: 120,
+                color: Colors.white.withOpacity(0.05),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(24),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                          decoration: BoxDecoration(
+                            color: Colors.amber.withOpacity(0.2),
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: const Text(
+                            'ÖZEL MOD',
+                            style: TextStyle(color: Colors.amber, fontSize: 10, fontWeight: FontWeight.w800),
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        const Text(
+                          'Irregular Verbs',
+                          style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w800, letterSpacing: -0.5),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          'Düzensiz fiilleri kolayca öğrenin',
+                          style: TextStyle(color: Colors.white.withOpacity(0.6), fontSize: 14),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.1),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(Icons.arrow_forward_ios_rounded, color: Colors.white, size: 20),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
