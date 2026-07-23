@@ -4,14 +4,14 @@ enum EngineType {
   tap,
   order,
   transform,
-  error_spotting,
+  errorSpotting,
   matching,
   unknown;
 
   static EngineType fromString(String value) {
-    final normalized = value.trim().toLowerCase();
+    final normalized = value.trim().toLowerCase().replaceAll('_', '');
     return EngineType.values.firstWhere(
-      (e) => e.name == normalized,
+      (e) => e.name.toLowerCase() == normalized,
       orElse: () => EngineType.unknown,
     );
   }

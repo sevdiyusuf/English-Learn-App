@@ -398,7 +398,7 @@ class _ArenaGamePageState extends ConsumerState<ArenaGamePage> {
     return type == EngineType.fill ||
         type == EngineType.order ||
         type == EngineType.transform ||
-        type == EngineType.error_spotting ||
+        type == EngineType.errorSpotting ||
         type == EngineType.matching;
   }
 
@@ -428,6 +428,7 @@ class _ArenaGamePageState extends ConsumerState<ArenaGamePage> {
     final attempt = (currentAnswer?.attempt ?? 0) + 1;
 
     final isCorrect = await controller.submitAnswer(value, attempt);
+    if (!mounted) return;
 
     if (isCorrect) {
       // Feedback? The EngineRenderer handles locked state if correct (via locked prop).

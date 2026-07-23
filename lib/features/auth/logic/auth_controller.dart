@@ -1,11 +1,15 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/utils/error_logger.dart';
+import '../../../core/utils/storage_service.dart';
 import '../../../core/repositories/user_stats_repo.dart';
 import '../../friends/data/friends_repo.dart';
 import '../../friends/logic/friends_controller.dart';
+import '../../profile_settings/logic/user_settings_controller.dart';
+import '../../user_stats/logic/user_stats_controller.dart';
 import '../../word_match/data/word_match_migration_service.dart';
 import '../data/auth_repo.dart';
 import '../models/app_user.dart';
@@ -211,6 +215,8 @@ class AuthController extends StateNotifier<AsyncValue<AppUser?>> {
   Future<void> signOut() async {
     try {
       await _repo.signOut();
+      await StorageService.clearAll();
+      _clearUserSessionState();
       // After sign out, ensure guest mode is active
       await ensureAnonymousGuestSignedIn();
     } catch (err, stack) {
@@ -228,6 +234,8 @@ class AuthController extends StateNotifier<AsyncValue<AppUser?>> {
     try {
       state = const AsyncValue.loading();
       await _repo.deleteAccountAndData();
+      await StorageService.clearAll();
+      _clearUserSessionState();
       // After deletion, ensure guest mode is active
       await ensureAnonymousGuestSignedIn();
     } catch (err, stack) {
@@ -238,6 +246,16 @@ class AuthController extends StateNotifier<AsyncValue<AppUser?>> {
       );
       state = AsyncValue.error(err, stack);
       rethrow;
+    }
+  }
+
+  void _clearUserSessionState() {
+    try {
+      _ref.invalidate(friendsControllerProvider);
+      _ref.invalidate(userStatsControllerProvider);
+      _ref.invalidate(userSettingsControllerProvider);
+    } catch (e) {
+      debugPrint('Error invalidating session state on logout: $e');
     }
   }
 

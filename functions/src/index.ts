@@ -1,8 +1,7 @@
 // --- src/index.ts (V2 uyumlu) ---
 import * as admin from 'firebase-admin';
-// v1 import'u kaldırıyoruz:
-// import * as functions from 'firebase-functions';
 import { onCall, HttpsError } from 'firebase-functions/v2/https';
+import { auth as authV1 } from 'firebase-functions/v1';
 
 import dictionary from './dictionary.json';
 import easyPack from './easy_pack.json';
@@ -668,3 +667,27 @@ export const submitWordLegacy = onCall({ region: 'us-central1' }, async (req) =>
 
 // Alias for backward compatibility
 export const submitWordV2 = submitWord;
+
+/**
+ * Automatically clean up all Firestore user data when a Firebase Auth account is deleted.
+ * Cleans up user_settings/{uid}, user_stats/{uid}, users/{uid}, and friendships/{uid}
+ * along with all their subcollections.
+ */
+export const onUserDeleted = authV1.user().onDelete(async (user) => {
+    const uid = user.uid;
+    if (!uid) return;
+
+    console.log(`[onUserDeleted] Starting data cleanup for user UID: ${uid}`);
+
+    try {
+        const collectionsToDelete = ['user_settings', 'user_stats', 'users', 'friendships'];
+        for (const colName of collectionsToDelete) {
+            const docRef = db.collection(colName).doc(uid);
+            await db.recursiveDelete(docRef);
+        }
+        console.log(`[onUserDeleted] Successfully cleaned up data for user UID: ${uid}`);
+    } catch (error) {
+        console.error(`[onUserDeleted] Failed to clean up data for user UID ${uid}:`, error);
+    }
+});
+

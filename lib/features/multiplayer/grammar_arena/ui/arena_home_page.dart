@@ -53,7 +53,7 @@ class _ArenaHomePageState extends ConsumerState<ArenaHomePage> {
                   child: Column(
                     children: [
                       DropdownButtonFormField<String>(
-                        value: _selectedLevel,
+                        initialValue: _selectedLevel,
                         decoration: const InputDecoration(labelText: 'Seviye'),
                         items: ['A1', 'A2', 'B1', 'B2'].map((l) => DropdownMenuItem(value: l, child: Text(l))).toList(),
                         onChanged: (val) => setState(() => _selectedLevel = val!),

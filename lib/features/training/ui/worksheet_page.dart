@@ -44,16 +44,15 @@ class _WorksheetPageState extends ConsumerState<WorksheetPage> {
       if (next.worksheet != null &&
           next.currentIndex >= next.worksheet!.items.length) {
         Future.microtask(() {
-          if (mounted) {
-            context.goNamed(
-              ResultPage.routeName,
-              queryParameters: {
-                'correct': next.correctCount.toString(),
-                'total': next.totalCount.toString(),
-                'id': next.worksheet!.worksheetId,
-              },
-            );
-          }
+          if (!context.mounted) return;
+          context.goNamed(
+            ResultPage.routeName,
+            queryParameters: {
+              'correct': next.correctCount.toString(),
+              'total': next.totalCount.toString(),
+              'id': next.worksheet!.worksheetId,
+            },
+          );
         });
       }
     });

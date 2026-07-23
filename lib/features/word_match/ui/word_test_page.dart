@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'dart:math';
 import '../data/word_match_providers.dart';
 import '../models/word_pair.dart';
-import '../models/word_set.dart';
 
 class WordTestPage extends ConsumerStatefulWidget {
   const WordTestPage({super.key, required this.setId});
@@ -17,7 +16,6 @@ class WordTestPage extends ConsumerStatefulWidget {
 }
 
 class _WordTestPageState extends ConsumerState<WordTestPage> {
-  List<WordPair> _allPairs = [];
   List<_TestQuestion> _questions = [];
   int _currentIndex = 0;
   int _score = 0;
@@ -35,7 +33,6 @@ class _WordTestPageState extends ConsumerState<WordTestPage> {
   Future<void> _loadTestData() async {
     final repo = await ref.read(wordMatchRepoProvider.future);
     final pairs = await repo.fetchPairs(widget.setId);
-    final wordSet = await repo.getSet(widget.setId);
 
     if (pairs.isEmpty) {
       if (mounted) {
@@ -75,7 +72,6 @@ class _WordTestPageState extends ConsumerState<WordTestPage> {
 
     if (mounted) {
       setState(() {
-        _allPairs = pairs;
         _questions = questions;
         _isLoading = false;
       });

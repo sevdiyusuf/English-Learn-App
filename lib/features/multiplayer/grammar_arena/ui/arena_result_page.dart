@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../auth/logic/auth_controller.dart';
 import '../logic/arena_session_controller.dart';
-import '../models/arena_models.dart';
 
 class ArenaResultPage extends ConsumerWidget {
   final String roomId;

@@ -283,7 +283,7 @@ class ArenaWaitingPage extends ConsumerWidget {
                 child:
                     isHost
                         ? DropdownButtonFormField<String>(
-                          value: config.level,
+                          initialValue: config.level,
                           dropdownColor: AppColors.surfaceDark,
                           style: const TextStyle(color: Colors.white),
                           decoration: const InputDecoration(
@@ -343,7 +343,7 @@ class ArenaWaitingPage extends ConsumerWidget {
                 child:
                     isHost
                         ? DropdownButtonFormField<String?>(
-                          value: config.worksheetId,
+                          initialValue: config.worksheetId,
                           dropdownColor: AppColors.surfaceDark,
                           style: const TextStyle(color: Colors.white),
                           decoration: const InputDecoration(

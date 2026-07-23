@@ -106,15 +106,16 @@ enum LessonCardType {
   goal,
   rule,
   tip,
-  common_mistake,
+  commonMistake,
   examples,
   formula,
   checkpoint,
   unknown;
 
   static LessonCardType fromString(String value) {
+    final normalized = value.toLowerCase().replaceAll('_', '');
     return LessonCardType.values.firstWhere(
-      (e) => e.name == value.toLowerCase(),
+      (e) => e.name.toLowerCase() == normalized,
       orElse: () => LessonCardType.unknown,
     );
   }

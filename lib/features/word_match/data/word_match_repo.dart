@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:isar/isar.dart';
 
@@ -386,7 +387,7 @@ class WordMatchRepo implements WordMatchRepoInterface {
           });
         }
       } catch (e) {
-        print('Error loading level set $level: $e');
+        debugPrint('Error loading level set $level: $e');
       }
     }
   }

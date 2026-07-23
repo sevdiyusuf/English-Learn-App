@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/errors/app_exception.dart';
+import '../../../core/errors/firebase_error_mapper.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/error_message_helper.dart';
 import '../logic/auth_controller.dart';
@@ -144,11 +146,13 @@ class _EmailAuthDialogState extends ConsumerState<EmailAuthDialog> {
                   ),
                   style: const TextStyle(color: AppColors.textPrimary),
                   validator: (value) {
-                    if (value == null || value.isEmpty) {
+                    final trimmed = value?.trim();
+                    if (trimmed == null || trimmed.isEmpty) {
                       return 'E-posta adresi gerekli';
                     }
-                    if (!value.contains('@')) {
-                      return 'Geçerli bir e-posta adresi girin';
+                    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                    if (!emailRegex.hasMatch(trimmed)) {
+                      return 'Lütfen geçerli bir e-posta adresi girin';
                     }
                     return null;
                   },
@@ -203,7 +207,18 @@ class _EmailAuthDialogState extends ConsumerState<EmailAuthDialog> {
                     return null;
                   },
                 ),
-                const SizedBox(height: 24),
+                if (_isSignIn)
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: _isLoading ? null : _handleForgotPassword,
+                      child: const Text(
+                        'Şifremi Unuttum',
+                        style: TextStyle(color: AppColors.textSecondary, fontSize: 13),
+                      ),
+                    ),
+                  ),
+                const SizedBox(height: 16),
 
                 // Submit button
                 FilledButton(
@@ -311,6 +326,46 @@ class _EmailAuthDialogState extends ConsumerState<EmailAuthDialog> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(ErrorMessageHelper.getErrorMessage(e)),
+            backgroundColor: AppColors.error,
+          ),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
+    }
+  }
+
+  Future<void> _handleForgotPassword() async {
+    final email = _emailController.text.trim();
+    if (email.isEmpty || !email.contains('@')) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Lütfen şifre sıfırlama bağlantısı için geçerli bir e-posta adresi girin.'),
+          backgroundColor: AppColors.warning,
+        ),
+      );
+      return;
+    }
+
+    setState(() => _isLoading = true);
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('$email adresine şifre sıfırlama e-postası gönderildi. Lütfen gelen kutunuzu kontrol edin.'),
+            backgroundColor: AppColors.success,
+            duration: const Duration(seconds: 4),
+          ),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(FirebaseErrorMapper.getErrorMessage(e)),
             backgroundColor: AppColors.error,
           ),
         );

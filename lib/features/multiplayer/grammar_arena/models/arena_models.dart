@@ -1,6 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-// ignore: unused_import
-import 'package:json_annotation/json_annotation.dart';
 import '../../../../core/utils/timestamp_converters.dart';
 
 part 'arena_models.freezed.dart';

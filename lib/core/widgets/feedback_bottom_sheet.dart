@@ -164,7 +164,7 @@ OS Versiyonu: $osVersion</code>
                 height: 4,
                 margin: const EdgeInsets.only(bottom: 24),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2),
+                  color: Colors.white.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -187,7 +187,7 @@ OS Versiyonu: $osVersion</code>
                 'Geri bildiriminiz başarıyla iletildi.',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Colors.white.withOpacity(0.7),
+                  color: Colors.white.withValues(alpha: 0.7),
                   fontSize: 16,
                 ),
               ),
@@ -205,7 +205,7 @@ OS Versiyonu: $osVersion</code>
               Text(
                 'Karşılaştığınız sorunu veya önerinizi bizimle paylaşın.',
                 style: TextStyle(
-                  color: Colors.white.withOpacity(0.7),
+                  color: Colors.white.withValues(alpha: 0.7),
                   fontSize: 14,
                 ),
               ),
@@ -216,9 +216,9 @@ OS Versiyonu: $osVersion</code>
                 style: const TextStyle(color: Colors.white),
                 decoration: InputDecoration(
                   hintText: 'Mesajınızı buraya yazın...',
-                  hintStyle: TextStyle(color: Colors.white.withOpacity(0.3)),
+                  hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.3)),
                   filled: true,
-                  fillColor: Colors.black.withOpacity(0.2),
+                  fillColor: Colors.black.withValues(alpha: 0.2),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
                     borderSide: BorderSide.none,

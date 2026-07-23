@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/arena_room_repo.dart';
 import '../data/worksheet_catalog_repo.dart';
@@ -76,7 +77,7 @@ class ArenaLobbyController extends StateNotifier<AsyncValue<String?>> {
       await _roomRepo.updateConfig(roomId, config);
     } catch (e) {
       // Handle error quietly or log
-      print('Error updating config: $e');
+      debugPrint('Error updating config: $e');
     }
   }
 

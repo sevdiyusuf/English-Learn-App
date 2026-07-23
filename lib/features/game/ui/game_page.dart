@@ -525,10 +525,12 @@ class _GamePageState extends ConsumerState<GamePage> {
                               if (!mounted) return;
 
                               String message = 'Kelime gönderildi';
-                              if (type == 'verb')
+                              if (type == 'verb') {
                                 message = 'Fiil gönderildi, sıra rakibinde';
-                              if (type == 'adjective')
+                              }
+                              if (type == 'adjective') {
                                 message = 'Sıfat gönderildi, şimdi fiil yaz';
+                              }
 
                               ref
                                   .read(notificationServiceProvider)

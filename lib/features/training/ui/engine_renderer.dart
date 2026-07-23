@@ -69,7 +69,7 @@ class EngineRenderer extends StatelessWidget {
           onChanged: (val) => onAnswerChanged(val),
           isLocked: isLocked,
         );
-      case EngineType.error_spotting:
+      case EngineType.errorSpotting:
         return EngineErrorSpot(
           item: item,
           currentAnswer: userAnswer as String?,

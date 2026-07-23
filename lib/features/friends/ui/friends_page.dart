@@ -2,7 +2,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/theme/app_colors.dart';
 import '../logic/friends_controller.dart';
 import '../models/friend_models.dart';
 import 'friend_profile_page.dart';

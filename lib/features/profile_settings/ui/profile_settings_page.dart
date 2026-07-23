@@ -9,7 +9,6 @@ import '../../../core/repositories/user_stats_repo.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/feedback_bottom_sheet.dart';
 import '../../../core/providers/accent_color_provider.dart';
-import '../../auth/data/auth_repo.dart';
 import '../../auth/logic/auth_controller.dart';
 import '../../auth/models/app_user.dart';
 import '../../auth/ui/account_sheet.dart';
@@ -30,7 +29,6 @@ const _stoneGradient = LinearGradient(
 );
 final _borderSideColor = Colors.white.withValues(alpha: 0.08);
 const _primaryTextColor = Colors.white;
-const _secondaryTextColor = Color(0xFF98989F);
 
 class ProfileSettingsPage extends ConsumerStatefulWidget {
   const ProfileSettingsPage({super.key});
@@ -51,7 +49,6 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
     );
     final l10n = AppLocalizations.of(context)!;
 
-    final accentIndex = ref.watch(accentColorProvider);
     final accentColor = ref.read(accentColorProvider.notifier).currentColor;
 
     return Theme(
@@ -68,14 +65,14 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
         ),
         segmentedButtonTheme: SegmentedButtonThemeData(
           style: SegmentedButton.styleFrom(
-            selectedBackgroundColor: accentColor.withOpacity(0.2),
+            selectedBackgroundColor: accentColor.withValues(alpha: 0.2),
             selectedForegroundColor: Colors.white,
-            side: BorderSide(color: accentColor.withOpacity(0.5)),
+            side: BorderSide(color: accentColor.withValues(alpha: 0.5)),
           ),
         ),
         chipTheme: Theme.of(context).chipTheme.copyWith(
-          selectedColor: accentColor.withOpacity(0.2),
-          secondarySelectedColor: accentColor.withOpacity(0.2),
+          selectedColor: accentColor.withValues(alpha: 0.2),
+          secondarySelectedColor: accentColor.withValues(alpha: 0.2),
           checkmarkColor: accentColor,
           labelStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           secondaryLabelStyle: TextStyle(color: accentColor),
@@ -694,7 +691,7 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
       child: Text(
         title.toUpperCase(),
         style: TextStyle(
-          color: accentColor.withOpacity(0.8),
+          color: accentColor.withValues(alpha: 0.8),
           fontSize: 12,
           fontWeight: FontWeight.w800,
           letterSpacing: 1.5,
@@ -948,10 +945,11 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
         final router = GoRouter.of(context);
         final messenger = ScaffoldMessenger.of(context);
         try {
-          final authRepo = ref.read(authRepositoryProvider);
-          await authRepo.deleteAccountAndData();
+          await ref
+              .read(authControllerProvider.notifier)
+              .deleteAccountAndData();
           if (!context.mounted) return;
-          router.go('/mode-select');
+          router.go('/');
           messenger.showSnackBar(
             SnackBar(
               content: Text(l10n.accountDeletedSuccess),

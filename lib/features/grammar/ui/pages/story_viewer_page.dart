@@ -116,7 +116,7 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage> {
                   preferredSize: const Size.fromHeight(6),
                   child: LinearProgressIndicator(
                     value: progress,
-                    backgroundColor: Colors.white.withOpacity(0.05),
+                    backgroundColor: Colors.white.withValues(alpha: 0.05),
                     valueColor: AlwaysStoppedAnimation<Color>(
                       _getLevelColor(doc.level),
                     ),
@@ -169,10 +169,10 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
-        color: _getLevelColor(level).withOpacity(0.2),
+        color: _getLevelColor(level).withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: _getLevelColor(level).withOpacity(0.5),
+          color: _getLevelColor(level).withValues(alpha: 0.5),
           width: 1,
         ),
       ),
@@ -192,14 +192,14 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage> {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Colors.orange.withOpacity(0.15),
-            Colors.orange.withOpacity(0.05),
+            Colors.orange.withValues(alpha: 0.15),
+            Colors.orange.withValues(alpha: 0.05),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.orange.withOpacity(0.2)),
+        border: Border.all(color: Colors.orange.withValues(alpha: 0.2)),
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
@@ -211,7 +211,7 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage> {
               child: Icon(
                 Icons.auto_stories,
                 size: 100,
-                color: Colors.orange.withOpacity(0.05),
+                color: Colors.orange.withValues(alpha: 0.05),
               ),
             ),
             Padding(
@@ -260,8 +260,7 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage> {
                             ],
                           ),
                         ),
-                      )
-                      .toList(),
+                      ),
                 ],
               ),
             ),
@@ -288,8 +287,8 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage> {
             color:
                 isSolved
                     ? (isCorrect
-                        ? Colors.green.withOpacity(0.5)
-                        : Colors.red.withOpacity(0.5))
+                        ? Colors.green.withValues(alpha: 0.5)
+                        : Colors.red.withValues(alpha: 0.5))
                     : (isActive ? Colors.white12 : Colors.transparent),
             width: 1.5,
           ),
@@ -297,7 +296,7 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage> {
               isActive
                   ? [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.2),
+                      color: Colors.black.withValues(alpha: 0.2),
                       blurRadius: 10,
                       offset: const Offset(0, 4),
                     ),
@@ -317,7 +316,7 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage> {
                     backgroundColor:
                         isSolved
                             ? (isCorrect ? Colors.green : Colors.red)
-                            : Colors.blueAccent.withOpacity(0.2),
+                            : Colors.blueAccent.withValues(alpha: 0.2),
                     child:
                         isSolved
                             ? Icon(
@@ -400,7 +399,7 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage> {
                         style: TextButton.styleFrom(
                           backgroundColor:
                               isSolved
-                                  ? Colors.white.withOpacity(0.05)
+                                  ? Colors.white.withValues(alpha: 0.05)
                                   : Colors.blueAccent,
                           foregroundColor: Colors.white,
                           padding: const EdgeInsets.symmetric(vertical: 16),
@@ -426,8 +425,8 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage> {
                 decoration: BoxDecoration(
                   color:
                       isCorrect
-                          ? Colors.green.withOpacity(0.05)
-                          : Colors.red.withOpacity(0.05),
+                          ? Colors.green.withValues(alpha: 0.05)
+                          : Colors.red.withValues(alpha: 0.05),
                   borderRadius: const BorderRadius.vertical(
                     bottom: Radius.circular(24),
                   ),
@@ -497,7 +496,7 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage> {
             center: Alignment.topCenter,
             radius: 1.2,
             colors: [
-              AppColors.primary.withOpacity(0.2),
+              AppColors.primary.withValues(alpha: 0.2),
               const Color(0xFF0F172A),
             ],
           ),
@@ -535,7 +534,7 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage> {
                       margin: const EdgeInsets.only(bottom: 16),
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.05),
+                        color: Colors.white.withValues(alpha: 0.05),
                         borderRadius: BorderRadius.circular(16),
                         border: Border.all(color: Colors.white10),
                       ),

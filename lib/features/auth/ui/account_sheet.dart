@@ -402,14 +402,20 @@ class _AccountSheetState extends ConsumerState<AccountSheet> {
       );
     } on AppException catch (e) {
       if (!mounted) return;
+      if (e.message.contains('iptal') || e.message.contains('cancel')) {
+        // User cancelled popup, silently return
+        return;
+      }
       messenger.showSnackBar(
         SnackBar(content: Text(e.message), backgroundColor: AppColors.error),
       );
     } catch (e) {
       if (!mounted) return;
+      final msg = e.toString();
+      if (msg.contains('iptal') || msg.contains('cancel')) return;
       messenger.showSnackBar(
         SnackBar(
-          content: Text('Giriş başarısız: ${e.toString()}'),
+          content: Text('Giriş başarısız: $msg'),
           backgroundColor: AppColors.error,
         ),
       );
@@ -442,14 +448,17 @@ class _AccountSheetState extends ConsumerState<AccountSheet> {
       );
     } on AppException catch (e) {
       if (!mounted) return;
+      if (e.message.contains('iptal') || e.message.contains('cancel')) return;
       messenger.showSnackBar(
         SnackBar(content: Text(e.message), backgroundColor: AppColors.error),
       );
     } catch (e) {
       if (!mounted) return;
+      final msg = e.toString();
+      if (msg.contains('iptal') || msg.contains('cancel')) return;
       messenger.showSnackBar(
         SnackBar(
-          content: Text('Giriş başarısız: ${e.toString()}'),
+          content: Text('Giriş başarısız: $msg'),
           backgroundColor: AppColors.error,
         ),
       );

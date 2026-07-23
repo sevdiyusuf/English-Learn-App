@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/arena_room_repo.dart';
 import '../data/arena_match_repo.dart';
@@ -153,7 +154,7 @@ class ArenaSessionController
                   worksheet = await _catalogRepo.loadWorksheet(metadata.path);
                 }
               } catch (e) {
-                print('Error loading worksheet: $e');
+                debugPrint('Error loading worksheet: $e');
               }
             }
 
@@ -207,8 +208,9 @@ class ArenaSessionController
     if (s == null ||
         s.room == null ||
         s.worksheet == null ||
-        s.room!.round == null)
+        s.room!.round == null) {
       return false;
+    }
 
     final room = s.room!;
     final round = room.round!;
@@ -268,7 +270,7 @@ class ArenaSessionController
     // Handle MCQ/String engines
     if (item.engine == EngineType.mcq ||
         item.engine == EngineType.fill ||
-        item.engine == EngineType.error_spotting) {
+        item.engine == EngineType.errorSpotting) {
       String expected = correctAnswer.toString().trim().toLowerCase();
       String actual = value.toString().trim().toLowerCase();
       return expected == actual;
@@ -339,7 +341,7 @@ class ArenaSessionController
         return 15;
       case EngineType.transform:
         return 20;
-      case EngineType.error_spotting:
+      case EngineType.errorSpotting:
         return 25;
       case EngineType.matching:
         return 10;

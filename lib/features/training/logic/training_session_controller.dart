@@ -195,7 +195,7 @@ class TrainingSessionController extends StateNotifier<TrainingSessionState> {
       case EngineType.order:
         // answer should be List<String>
         if (answer is List && item.answer is List) {
-          final ansList = (answer as List).map((e) => e.toString()).toList();
+          final ansList = answer.map((e) => e.toString()).toList();
           final correctList =
               (item.answer as List).map((e) => e.toString()).toList();
 
@@ -210,13 +210,14 @@ class TrainingSessionController extends StateNotifier<TrainingSessionState> {
       case EngineType.transform:
         // answer is List<String> corresponding to steps
         if (answer is List && item.steps.isNotEmpty) {
-          final userSelections = answer as List;
+          final userSelections = answer;
           if (userSelections.length != item.steps.length) return false;
 
           for (int i = 0; i < item.steps.length; i++) {
             // Step answer vs user selection
-            if (userSelections[i].toString() != item.steps[i].answer)
+            if (userSelections[i].toString() != item.steps[i].answer) {
               return false;
+            }
           }
           return true;
         }

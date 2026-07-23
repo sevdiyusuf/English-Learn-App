@@ -31,7 +31,7 @@ const _stoneGradient = LinearGradient(
 );
 
 // Kartların etrafındaki ince "Elit" çizgi rengi
-final _borderSideColor = Colors.white.withOpacity(0.08);
+final _borderSideColor = Colors.white.withValues(alpha: 0.08);
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -109,10 +109,10 @@ class _ModeSelectPageState extends ConsumerState<ModeSelectPage> {
               height: 300,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: accentColor.withOpacity(0.05),
+                color: accentColor.withValues(alpha: 0.05),
                 boxShadow: [
                   BoxShadow(
-                    color: accentColor.withOpacity(0.05),
+                    color: accentColor.withValues(alpha: 0.05),
                     blurRadius: 100,
                   ),
                 ],
@@ -168,7 +168,7 @@ class _SectionTitle extends StatelessWidget {
       child: Text(
         title.toUpperCase(),
         style: TextStyle(
-          color: _secondaryTextColor.withOpacity(0.6),
+          color: _secondaryTextColor.withValues(alpha: 0.6),
           fontSize: 12,
           fontWeight: FontWeight.w700,
           letterSpacing: 1.5,
@@ -214,7 +214,7 @@ class _HomeHeader extends ConsumerWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: accentColor.withOpacity(0.5),
+                color: accentColor.withValues(alpha: 0.5),
                 width: 1.5,
               ),
             ),
@@ -331,8 +331,8 @@ class _SegmentedProgressBar extends StatelessWidget {
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight,
                         colors: [
-                          accentColor.withOpacity(0.95),
-                          accentColor.withOpacity(0.6),
+                          accentColor.withValues(alpha: 0.95),
+                          accentColor.withValues(alpha: 0.6),
                         ],
                       )
                       : const LinearGradient(
@@ -345,7 +345,7 @@ class _SegmentedProgressBar extends StatelessWidget {
                   isFilled
                       ? [
                         BoxShadow(
-                          color: accentColor.withOpacity(0.7),
+                          color: accentColor.withValues(alpha: 0.7),
                           blurRadius: 10,
                           spreadRadius: 0.5,
                           offset: const Offset(0, 0),
@@ -380,12 +380,12 @@ class _WordMatchHeroCard extends StatelessWidget {
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.4),
+              color: Colors.black.withValues(alpha: 0.4),
               blurRadius: 20,
               offset: const Offset(0, 10),
             ),
           ],
-          border: Border.all(color: Colors.white.withOpacity(0.05), width: 1),
+          border: Border.all(color: Colors.white.withValues(alpha: 0.05), width: 1),
         ),
         child: Stack(
           children: [
@@ -398,7 +398,7 @@ class _WordMatchHeroCard extends StatelessWidget {
                 child: Icon(
                   Icons.grid_view_rounded,
                   size: 180,
-                  color: accentColor.withOpacity(0.18),
+                  color: accentColor.withValues(alpha: 0.18),
                 ),
               ),
             ),
@@ -417,7 +417,7 @@ class _WordMatchHeroCard extends StatelessWidget {
                           vertical: 6,
                         ),
                         decoration: BoxDecoration(
-                          color: accentColor.withOpacity(0.2),
+                          color: accentColor.withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
@@ -444,7 +444,7 @@ class _WordMatchHeroCard extends StatelessWidget {
                       Text(
                         'Kelime dağarcığını geliştirmenin\nen pratik yolu.',
                         style: TextStyle(
-                          color: _secondaryTextColor.withOpacity(0.8),
+                          color: _secondaryTextColor.withValues(alpha: 0.8),
                           fontSize: 14,
                           height: 1.4,
                         ),
@@ -460,7 +460,7 @@ class _WordMatchHeroCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(25),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.white.withOpacity(0.2),
+                          color: Colors.white.withValues(alpha: 0.2),
                           blurRadius: 16,
                           offset: const Offset(0, 4),
                         ),
@@ -579,7 +579,7 @@ class _EliteCard extends StatelessWidget {
           border: Border.all(color: _borderSideColor, width: 1),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.3),
+              color: Colors.black.withValues(alpha: 0.3),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -620,7 +620,7 @@ class _EliteCard extends StatelessWidget {
                     ),
                     Icon(
                       Icons.chevron_right_rounded,
-                      color: _borderSideColor.withOpacity(0.3),
+                      color: _borderSideColor.withValues(alpha: 0.3),
                     ),
                   ],
                 )
@@ -636,7 +636,7 @@ class _EliteCard extends StatelessWidget {
                           width: 6,
                           height: 6,
                           decoration: BoxDecoration(
-                            color: _secondaryTextColor.withOpacity(0.2),
+                            color: _secondaryTextColor.withValues(alpha: 0.2),
                             shape: BoxShape.circle,
                           ),
                         ),
@@ -671,7 +671,7 @@ class _EliteCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: iconColor.withOpacity(0.18),
+        color: iconColor.withValues(alpha: 0.18),
         borderRadius: BorderRadius.circular(14),
       ),
       child: Icon(icon, color: iconColor, size: iconSize),
@@ -708,7 +708,7 @@ class _AccentSelector extends StatelessWidget {
               child: Icon(
                 Icons.chevron_left,
                 size: 14,
-                color: Colors.white.withOpacity(0.7),
+                color: Colors.white.withValues(alpha: 0.7),
               ),
             ),
             const SizedBox(width: 6),
@@ -716,10 +716,10 @@ class _AccentSelector extends StatelessWidget {
               padding: const EdgeInsets.all(5),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(color: color.withOpacity(0.9), width: 2),
+                border: Border.all(color: color.withValues(alpha: 0.9), width: 2),
                 boxShadow: [
                   BoxShadow(
-                    color: color.withOpacity(0.4),
+                    color: color.withValues(alpha: 0.4),
                     blurRadius: 8,
                     spreadRadius: 0.5,
                   ),
@@ -755,15 +755,15 @@ class _AccentSelector extends StatelessWidget {
                 border: Border.all(
                   color:
                       isSelected
-                          ? color.withOpacity(0.9)
-                          : Colors.white.withOpacity(0.25),
+                          ? color.withValues(alpha: 0.9)
+                          : Colors.white.withValues(alpha: 0.25),
                   width: isSelected ? 2 : 1,
                 ),
                 boxShadow:
                     isSelected
                         ? [
                           BoxShadow(
-                            color: color.withOpacity(0.4),
+                            color: color.withValues(alpha: 0.4),
                             blurRadius: 8,
                             spreadRadius: 0.5,
                           ),
@@ -784,7 +784,7 @@ class _AccentSelector extends StatelessWidget {
           child: Icon(
             Icons.chevron_right,
             size: 14,
-            color: Colors.white.withOpacity(0.7),
+            color: Colors.white.withValues(alpha: 0.7),
           ),
         ),
       ],
@@ -808,10 +808,10 @@ class _GlassBottomNavBar extends StatelessWidget {
         filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10), // Buzlu Cam efekti
         child: Container(
           decoration: BoxDecoration(
-            color: _backgroundColor.withOpacity(0.85),
+            color: _backgroundColor.withValues(alpha: 0.85),
             border: Border(
               top: BorderSide(
-                color: Colors.white.withOpacity(0.05),
+                color: Colors.white.withValues(alpha: 0.05),
                 width: 0.5,
               ),
             ),
@@ -823,7 +823,7 @@ class _GlassBottomNavBar extends StatelessWidget {
             currentIndex: selectedIndex,
             onTap: (_) {},
             selectedItemColor: accentColor,
-            unselectedItemColor: _secondaryTextColor.withOpacity(0.6),
+            unselectedItemColor: _secondaryTextColor.withValues(alpha: 0.6),
             selectedIconTheme: IconThemeData(color: accentColor),
             selectedLabelStyle: TextStyle(
               fontSize: 10,

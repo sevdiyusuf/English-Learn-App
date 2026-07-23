@@ -459,8 +459,8 @@ class AuthRepository {
   }
 
   /// Delete account and data
-  /// Note: Firestore data deletion should be handled by Cloud Function
-  /// TODO: Call Cloud Function 'deleteUserData' after successful deletion
+  /// Note: Firestore user data cleanup is automatically handled in background
+  /// via the Cloud Function 'onUserDeleted' trigger upon user deletion.
   Future<void> deleteAccountAndData() async {
     try {
       final user = _auth.currentUser;
@@ -468,9 +468,7 @@ class AuthRepository {
         throw AppException('Silinecek kullanıcı bulunamadı');
       }
 
-      // TODO: Call Cloud Function to delete Firestore data
-      // Example: await firebaseFunctions.httpsCallable('deleteUserData').call({'uid': user.uid});
-
+      // Deleting the Firebase Auth user triggers the background onUserDeleted Cloud Function
       await user.delete();
     } catch (e, stack) {
       ErrorLogger.instance.logError(

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/irregular_verb.dart';
@@ -104,8 +103,6 @@ class PracticeNotifier extends StateNotifier<PracticeState> {
   }
 
   List<String> _generateDistractors(IrregularVerb correct) {
-    final List<String> allCandidates = [];
-    
     // Helper to get similar ones
     List<String> getSimilar(String val, String form) {
       final List<String> candidates = [];

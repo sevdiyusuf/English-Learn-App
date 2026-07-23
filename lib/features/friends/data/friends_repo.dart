@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/di.dart';
@@ -219,16 +220,16 @@ class FriendsRepository {
       await batch.commit();
     } on FirebaseException catch (e) {
       // Log detailed error for debugging
-      print('Accept Request Firebase Error:');
-      print('  Code: ${e.code}');
-      print('  Message: ${e.message}');
-      print('  Current User UID: ${currentUser.uid}');
-      print('  From UID: ${request.fromUid}');
-      print('  To UID: ${request.toUid}');
-      print(
+      debugPrint('Accept Request Firebase Error:');
+      debugPrint('  Code: ${e.code}');
+      debugPrint('  Message: ${e.message}');
+      debugPrint('  Current User UID: ${currentUser.uid}');
+      debugPrint('  From UID: ${request.fromUid}');
+      debugPrint('  To UID: ${request.toUid}');
+      debugPrint(
         '  Path 1: /friendships/${request.fromUid}/friends/${request.toUid}',
       );
-      print(
+      debugPrint(
         '  Path 2: /friendships/${request.toUid}/friends/${request.fromUid}',
       );
 
@@ -243,7 +244,7 @@ class FriendsRepository {
       rethrow;
     } catch (e) {
       // Log detailed error for debugging
-      print('Accept Request Error: $e');
+      debugPrint('Accept Request Error: $e');
       // Rethrow so UI knows it failed
       throw StateError('İstek kabul edilirken hata oluştu: $e');
     }
