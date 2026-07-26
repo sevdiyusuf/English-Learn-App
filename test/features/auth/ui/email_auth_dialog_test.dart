@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:yunoo/features/auth/logic/auth_controller.dart';
 import 'package:yunoo/features/auth/models/app_user.dart';
 import 'package:yunoo/features/auth/ui/email_auth_dialog.dart';
+import 'package:yunoo/l10n/app_localizations.dart';
 
 class MockAuthController extends StateNotifier<AsyncValue<AppUser?>>
     implements AuthController {
@@ -91,7 +92,11 @@ void main() {
         overrides: [
           authControllerProvider.overrideWith((ref) => mockController),
         ],
-        child: const MaterialApp(home: Scaffold(body: EmailAuthDialog())),
+        child: const MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: Scaffold(body: EmailAuthDialog()),
+        ),
       ),
     );
 

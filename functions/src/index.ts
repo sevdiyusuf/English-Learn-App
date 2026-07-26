@@ -27,6 +27,10 @@ import {
     submitReport,
     updatePublicProfile as updateModeratedPublicProfile,
 } from './ugc_moderation';
+import {
+    registerNotificationToken as registerPushToken,
+    unregisterNotificationToken as unregisterPushToken,
+} from './push_notifications';
 
 if (admin.apps.length === 0) admin.initializeApp();
 
@@ -69,6 +73,8 @@ export const APP_CHECK_ENFORCEMENT = {
     publishWordMatchShare: false,
     removeWordMatchShare: false,
     updatePublicProfile: false,
+    registerNotificationToken: false,
+    unregisterNotificationToken: false,
 } as const;
 
 const makeFunctionOptions = (enforceAppCheck: boolean) => ({
@@ -1417,6 +1423,10 @@ export const removeWordMatchShare = onCall(makeFunctionOptions(APP_CHECK_ENFORCE
     (req) => removeShare(req.auth, req.data));
 export const updatePublicProfile = onCall(makeFunctionOptions(APP_CHECK_ENFORCEMENT.updatePublicProfile),
     (req) => updateModeratedPublicProfile(req.auth, req.data));
+export const registerNotificationToken = onCall(makeFunctionOptions(APP_CHECK_ENFORCEMENT.registerNotificationToken),
+    (req) => registerPushToken(req.auth, req.data));
+export const unregisterNotificationToken = onCall(makeFunctionOptions(APP_CHECK_ENFORCEMENT.unregisterNotificationToken),
+    (req) => unregisterPushToken(req.auth, req.data));
 
 type AcceptFriendRequestInput = { requestId?: string };
 

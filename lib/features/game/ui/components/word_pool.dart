@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yunoo/l10n/app_localizations.dart';
 
 import '../../models/played_word.dart';
 import '../../models/room.dart';
@@ -70,8 +71,9 @@ class _WordPoolState extends State<WordPool> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     if (widget.room.players.length < 2) {
-      return const Center(child: Text('Henüz kelime yok'));
+      return Center(child: Text(l10n.noWordsYet));
     }
 
     // Get player UIDs
@@ -80,7 +82,7 @@ class _WordPoolState extends State<WordPool> {
         widget.room.players.length > 1 ? widget.room.players[1] : null;
 
     if (player2Uid == null) {
-      return const Center(child: Text('Henüz kelime yok'));
+      return Center(child: Text(l10n.noWordsYet));
     }
 
     // Determine which player is "me" (current user)
@@ -89,7 +91,7 @@ class _WordPoolState extends State<WordPool> {
     if (_sortedWords.isEmpty) {
       return Center(
         child: Text(
-          'Henüz kelime yok',
+          l10n.noWordsYet,
           style: Theme.of(
             context,
           ).textTheme.bodyMedium?.copyWith(color: Colors.grey.shade400),
@@ -147,36 +149,43 @@ class _WordBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: BoxConstraints(
-        maxWidth: MediaQuery.of(context).size.width * 0.7,
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      decoration: BoxDecoration(
-        color: Colors.grey.shade200,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            word,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: Colors.black87,
-              fontSize: 15,
+    final l10n = AppLocalizations.of(context)!;
+    return Semantics(
+      label: isMyWord ? l10n.myPlayedWord(word) : l10n.opponentPlayedWord(word),
+      excludeSemantics: true,
+      child: Container(
+        constraints: BoxConstraints(
+          maxWidth: MediaQuery.of(context).size.width * 0.7,
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        decoration: BoxDecoration(
+          color: Colors.grey.shade200,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Flexible(
+              child: Text(
+                word,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: Colors.black87,
+                  fontSize: 15,
+                ),
+              ),
             ),
-          ),
-          const SizedBox(width: 8),
-          Container(
-            width: 20,
-            height: 20,
-            decoration: BoxDecoration(
-              color: Colors.green.shade300,
-              borderRadius: BorderRadius.circular(4),
+            const SizedBox(width: 8),
+            Container(
+              width: 20,
+              height: 20,
+              decoration: BoxDecoration(
+                color: Colors.green.shade300,
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: const Icon(Icons.check, color: Colors.black, size: 14),
             ),
-            child: const Icon(Icons.check, color: Colors.white, size: 14),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

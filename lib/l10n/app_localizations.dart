@@ -98,6 +98,12 @@ abstract class AppLocalizations {
     Locale('tr'),
   ];
 
+  /// No description provided for @appTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yunoo'**
+  String get appTitle;
+
   /// No description provided for @settingsTitle.
   ///
   /// In tr, this message translates to:
@@ -487,6 +493,42 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'İstek gönderilemedi: {error}'**
   String friendRequestFailed(String error);
+
+  /// No description provided for @friendsEmpty.
+  ///
+  /// In tr, this message translates to:
+  /// **'Henüz arkadaşın yok. Arkadaş eklemek için kodunu paylaş.'**
+  String get friendsEmpty;
+
+  /// No description provided for @incomingFriendRequests.
+  ///
+  /// In tr, this message translates to:
+  /// **'Gelen istekler'**
+  String get incomingFriendRequests;
+
+  /// No description provided for @friendRequestsEmpty.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bekleyen arkadaşlık isteği yok.'**
+  String get friendRequestsEmpty;
+
+  /// No description provided for @friendRequest.
+  ///
+  /// In tr, this message translates to:
+  /// **'Arkadaşlık isteği'**
+  String get friendRequest;
+
+  /// No description provided for @friendRequestPrivacyDescription.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bir kullanıcı seninle bağlantı kurmak istiyor.'**
+  String get friendRequestPrivacyDescription;
+
+  /// No description provided for @reject.
+  ///
+  /// In tr, this message translates to:
+  /// **'Reddet'**
+  String get reject;
 
   /// No description provided for @resetProgressDialogTitle.
   ///
@@ -937,6 +979,666 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Bir hata oluştu. Lütfen tekrar deneyin.'**
   String get errorGeneric;
+
+  /// No description provided for @onboardingIntroTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hoş geldiniz'**
+  String get onboardingIntroTitle;
+
+  /// No description provided for @onboardingLevelTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Seviyenizi seçin'**
+  String get onboardingLevelTitle;
+
+  /// No description provided for @onboardingGoalTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Öğrenme hedefinizi seçin'**
+  String get onboardingGoalTitle;
+
+  /// No description provided for @onboardingReviewTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Seçimlerinizi gözden geçirin'**
+  String get onboardingReviewTitle;
+
+  /// No description provided for @onboardingDescription.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu seçimleri daha sonra Ayarlar\'dan değiştirebilirsiniz.'**
+  String get onboardingDescription;
+
+  /// No description provided for @onboardingNext.
+  ///
+  /// In tr, this message translates to:
+  /// **'Devam et'**
+  String get onboardingNext;
+
+  /// No description provided for @onboardingComplete.
+  ///
+  /// In tr, this message translates to:
+  /// **'Öğrenmeye başla'**
+  String get onboardingComplete;
+
+  /// No description provided for @onboardingSaveFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Seçimleriniz kaydedilemedi. Lütfen tekrar deneyin.'**
+  String get onboardingSaveFailed;
+
+  /// No description provided for @onboardingReviewValue.
+  ///
+  /// In tr, this message translates to:
+  /// **'Seviye: {level} Hedef: {goal}'**
+  String onboardingReviewValue(String level, String goal);
+
+  /// No description provided for @cefrA1.
+  ///
+  /// In tr, this message translates to:
+  /// **'A1 — Başlangıç'**
+  String get cefrA1;
+
+  /// No description provided for @cefrA2.
+  ///
+  /// In tr, this message translates to:
+  /// **'A2 — Temel'**
+  String get cefrA2;
+
+  /// No description provided for @cefrB1.
+  ///
+  /// In tr, this message translates to:
+  /// **'B1 — Orta'**
+  String get cefrB1;
+
+  /// No description provided for @cefrB2.
+  ///
+  /// In tr, this message translates to:
+  /// **'B2 — Orta üstü'**
+  String get cefrB2;
+
+  /// No description provided for @cefrC1.
+  ///
+  /// In tr, this message translates to:
+  /// **'C1 — İleri'**
+  String get cefrC1;
+
+  /// No description provided for @cefrC2.
+  ///
+  /// In tr, this message translates to:
+  /// **'C2 — Yetkin'**
+  String get cefrC2;
+
+  /// No description provided for @learningGoalWords.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kelime dağarcığı geliştir'**
+  String get learningGoalWords;
+
+  /// No description provided for @learningGoalGrammar.
+  ///
+  /// In tr, this message translates to:
+  /// **'Gramer pratiği yap'**
+  String get learningGoalGrammar;
+
+  /// No description provided for @learningGoalGames.
+  ///
+  /// In tr, this message translates to:
+  /// **'Oyunlarla öğren'**
+  String get learningGoalGames;
+
+  /// No description provided for @learningGoalMultiplayer.
+  ///
+  /// In tr, this message translates to:
+  /// **'Diğerleriyle oyna'**
+  String get learningGoalMultiplayer;
+
+  /// No description provided for @learningProfile.
+  ///
+  /// In tr, this message translates to:
+  /// **'Öğrenme profili'**
+  String get learningProfile;
+
+  /// No description provided for @learningProfileSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Seviyenizi ve öğrenme odağınızı seçin'**
+  String get learningProfileSubtitle;
+
+  /// No description provided for @startLearning.
+  ///
+  /// In tr, this message translates to:
+  /// **'Öğrenmeye başla'**
+  String get startLearning;
+
+  /// No description provided for @continueLearning.
+  ///
+  /// In tr, this message translates to:
+  /// **'Öğrenmeye devam et'**
+  String get continueLearning;
+
+  /// No description provided for @saveFailedRetry.
+  ///
+  /// In tr, this message translates to:
+  /// **'Değişiklikler kaydedilemedi. Tekrar deneyin.'**
+  String get saveFailedRetry;
+
+  /// No description provided for @homeLearningModes.
+  ///
+  /// In tr, this message translates to:
+  /// **'Öğrenme modları'**
+  String get homeLearningModes;
+
+  /// No description provided for @multiplayerSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Diğer öğrencilerle canlı pratik yapın'**
+  String get multiplayerSubtitle;
+
+  /// No description provided for @onboardingSelectionRequired.
+  ///
+  /// In tr, this message translates to:
+  /// **'Devam etmek için bir seçim yapın.'**
+  String get onboardingSelectionRequired;
+
+  /// No description provided for @multiplayerNotifications.
+  ///
+  /// In tr, this message translates to:
+  /// **'Çok oyunculu davetleri'**
+  String get multiplayerNotifications;
+
+  /// No description provided for @multiplayerNotificationsSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bir arkadaşın oyuna davet ettiğinde bildirim al.'**
+  String get multiplayerNotificationsSubtitle;
+
+  /// No description provided for @notificationPermissionDenied.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bildirimler kapalı. Bu ayardan yeniden deneyebilirsin.'**
+  String get notificationPermissionDenied;
+
+  /// No description provided for @notificationRegistrationFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bildirimler etkinleştirilemedi. Lütfen tekrar deneyin.'**
+  String get notificationRegistrationFailed;
+
+  /// No description provided for @notificationDisableFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bildirimler kapatılamadı. Lütfen tekrar deneyin.'**
+  String get notificationDisableFailed;
+
+  /// No description provided for @invitationNotificationTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Oyun daveti'**
+  String get invitationNotificationTitle;
+
+  /// No description provided for @invitationNotificationBody.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bir arkadaşın seni oyuna davet etti.'**
+  String get invitationNotificationBody;
+
+  /// No description provided for @invitationOpen.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aç'**
+  String get invitationOpen;
+
+  /// No description provided for @invitationDismiss.
+  ///
+  /// In tr, this message translates to:
+  /// **'Şimdi değil'**
+  String get invitationDismiss;
+
+  /// No description provided for @invitationUnavailable.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu davet artık kullanılamıyor.'**
+  String get invitationUnavailable;
+
+  /// No description provided for @navigationHome.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ana sayfa'**
+  String get navigationHome;
+
+  /// No description provided for @navigationSocial.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sosyal'**
+  String get navigationSocial;
+
+  /// No description provided for @navigationStatistics.
+  ///
+  /// In tr, this message translates to:
+  /// **'İstatistik'**
+  String get navigationStatistics;
+
+  /// No description provided for @navigationProfile.
+  ///
+  /// In tr, this message translates to:
+  /// **'Profil'**
+  String get navigationProfile;
+
+  /// No description provided for @backAction.
+  ///
+  /// In tr, this message translates to:
+  /// **'Geri'**
+  String get backAction;
+
+  /// No description provided for @closeAction.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kapat'**
+  String get closeAction;
+
+  /// No description provided for @backToHomeAction.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ana sayfaya dön'**
+  String get backToHomeAction;
+
+  /// No description provided for @retryAction.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tekrar dene'**
+  String get retryAction;
+
+  /// No description provided for @emptyStateTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Henüz burada bir şey yok'**
+  String get emptyStateTitle;
+
+  /// No description provided for @emptyStateMessage.
+  ///
+  /// In tr, this message translates to:
+  /// **'Gösterilecek içerik henüz bulunmuyor.'**
+  String get emptyStateMessage;
+
+  /// No description provided for @genericErrorTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bir sorun oluştu'**
+  String get genericErrorTitle;
+
+  /// No description provided for @pageUnavailableTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sayfa kullanılamıyor'**
+  String get pageUnavailableTitle;
+
+  /// No description provided for @pageUnavailableMessage.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu sayfa açılamadı.'**
+  String get pageUnavailableMessage;
+
+  /// No description provided for @accentSelectorExpand.
+  ///
+  /// In tr, this message translates to:
+  /// **'Vurgu renklerini göster'**
+  String get accentSelectorExpand;
+
+  /// No description provided for @accentSelectorCollapse.
+  ///
+  /// In tr, this message translates to:
+  /// **'Vurgu renklerini gizle'**
+  String get accentSelectorCollapse;
+
+  /// No description provided for @accentColorOption.
+  ///
+  /// In tr, this message translates to:
+  /// **'Vurgu rengi {number}'**
+  String accentColorOption(int number);
+
+  /// No description provided for @onboardingProgress.
+  ///
+  /// In tr, this message translates to:
+  /// **'{total} adımın {current}. adımı'**
+  String onboardingProgress(int current, int total);
+
+  /// No description provided for @statisticsLoadFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'İstatistikler yüklenemedi.'**
+  String get statisticsLoadFailed;
+
+  /// No description provided for @statisticsEmptyTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Henüz istatistik yok'**
+  String get statisticsEmptyTitle;
+
+  /// No description provided for @statisticsEmptyMessage.
+  ///
+  /// In tr, this message translates to:
+  /// **'İstatistiklerini oluşturmak için ilk öğrenme oturumunu tamamla.'**
+  String get statisticsEmptyMessage;
+
+  /// No description provided for @blockedUserNumber.
+  ///
+  /// In tr, this message translates to:
+  /// **'Engellenen kullanıcı {number}'**
+  String blockedUserNumber(int number);
+
+  /// No description provided for @multiplayerTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Çok oyunculu'**
+  String get multiplayerTitle;
+
+  /// No description provided for @multiplayerHeading.
+  ///
+  /// In tr, this message translates to:
+  /// **'Arkadaşlarınla canlı oyna'**
+  String get multiplayerHeading;
+
+  /// No description provided for @multiplayerDescription.
+  ///
+  /// In tr, this message translates to:
+  /// **'Mevcut çok oyunculu modlarda birlikte kelime ve gramer pratiği yapın.'**
+  String get multiplayerDescription;
+
+  /// No description provided for @wordBattleTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kelime Savaşı'**
+  String get wordBattleTitle;
+
+  /// No description provided for @wordBattleSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Canlı kelime oyunu'**
+  String get wordBattleSubtitle;
+
+  /// No description provided for @wordBattleDescription.
+  ///
+  /// In tr, this message translates to:
+  /// **'Oda kur, arkadaşını davet et ve aynı kelimelerle yarış.'**
+  String get wordBattleDescription;
+
+  /// No description provided for @grammarBattleTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Gramer Savaşı'**
+  String get grammarBattleTitle;
+
+  /// No description provided for @grammarBattleSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Canlı gramer oyunu'**
+  String get grammarBattleSubtitle;
+
+  /// No description provided for @grammarBattleDescription.
+  ///
+  /// In tr, this message translates to:
+  /// **'Soruları birlikte yanıtla ve turlu skor sistemiyle yarış.'**
+  String get grammarBattleDescription;
+
+  /// No description provided for @yourTurn.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sıra sende'**
+  String get yourTurn;
+
+  /// No description provided for @waitingForOpponent.
+  ///
+  /// In tr, this message translates to:
+  /// **'Diğer oyuncu bekleniyor'**
+  String get waitingForOpponent;
+
+  /// No description provided for @elapsedTime.
+  ///
+  /// In tr, this message translates to:
+  /// **'Geçen süre: {minutes} dakika, {seconds} saniye'**
+  String elapsedTime(int minutes, int seconds);
+
+  /// No description provided for @playersCount.
+  ///
+  /// In tr, this message translates to:
+  /// **'Oyuncular: {count}'**
+  String playersCount(int count);
+
+  /// No description provided for @hostLabel.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kurucu'**
+  String get hostLabel;
+
+  /// No description provided for @eliminatedLabel.
+  ///
+  /// In tr, this message translates to:
+  /// **'Elendi'**
+  String get eliminatedLabel;
+
+  /// No description provided for @currentTurnLabel.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sıra bu oyuncuda'**
+  String get currentTurnLabel;
+
+  /// No description provided for @playerScore.
+  ///
+  /// In tr, this message translates to:
+  /// **'{player}, skor {score}'**
+  String playerScore(String player, int score);
+
+  /// No description provided for @gameTopic.
+  ///
+  /// In tr, this message translates to:
+  /// **'Konu: {topic}'**
+  String gameTopic(String topic);
+
+  /// No description provided for @gameTask.
+  ///
+  /// In tr, this message translates to:
+  /// **'Görev: bir {partOfSpeech} gir'**
+  String gameTask(String partOfSpeech);
+
+  /// No description provided for @partOfSpeechVerb.
+  ///
+  /// In tr, this message translates to:
+  /// **'fiil'**
+  String get partOfSpeechVerb;
+
+  /// No description provided for @partOfSpeechAdjective.
+  ///
+  /// In tr, this message translates to:
+  /// **'sıfat'**
+  String get partOfSpeechAdjective;
+
+  /// No description provided for @partOfSpeechNoun.
+  ///
+  /// In tr, this message translates to:
+  /// **'isim'**
+  String get partOfSpeechNoun;
+
+  /// No description provided for @partOfSpeechAdverb.
+  ///
+  /// In tr, this message translates to:
+  /// **'zarf'**
+  String get partOfSpeechAdverb;
+
+  /// No description provided for @waitingForYourTurn.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sıranı bekle'**
+  String get waitingForYourTurn;
+
+  /// No description provided for @waitAction.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bekle'**
+  String get waitAction;
+
+  /// No description provided for @secondsRemaining.
+  ///
+  /// In tr, this message translates to:
+  /// **'{seconds} saniye kaldı'**
+  String secondsRemaining(int seconds);
+
+  /// No description provided for @secondsShort.
+  ///
+  /// In tr, this message translates to:
+  /// **'{seconds} sn'**
+  String secondsShort(int seconds);
+
+  /// No description provided for @noWordsYet.
+  ///
+  /// In tr, this message translates to:
+  /// **'Henüz kelime oynanmadı.'**
+  String get noWordsYet;
+
+  /// No description provided for @myPlayedWord.
+  ///
+  /// In tr, this message translates to:
+  /// **'Senin kelimen: {word}'**
+  String myPlayedWord(String word);
+
+  /// No description provided for @opponentPlayedWord.
+  ///
+  /// In tr, this message translates to:
+  /// **'Diğer oyuncunun kelimesi: {word}'**
+  String opponentPlayedWord(String word);
+
+  /// No description provided for @emailSignInTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Giriş yap'**
+  String get emailSignInTitle;
+
+  /// No description provided for @emailRegisterTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hesap oluştur'**
+  String get emailRegisterTitle;
+
+  /// No description provided for @emailSignInSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'E-posta adresin ve şifrenle giriş yap.'**
+  String get emailSignInSubtitle;
+
+  /// No description provided for @emailRegisterSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yeni bir hesap oluştur.'**
+  String get emailRegisterSubtitle;
+
+  /// No description provided for @fullName.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ad soyad'**
+  String get fullName;
+
+  /// No description provided for @fullNameRequired.
+  ///
+  /// In tr, this message translates to:
+  /// **'Adını ve soyadını gir.'**
+  String get fullNameRequired;
+
+  /// No description provided for @emailAddress.
+  ///
+  /// In tr, this message translates to:
+  /// **'E-posta adresi'**
+  String get emailAddress;
+
+  /// No description provided for @emailRequired.
+  ///
+  /// In tr, this message translates to:
+  /// **'E-posta adresini gir.'**
+  String get emailRequired;
+
+  /// No description provided for @emailInvalid.
+  ///
+  /// In tr, this message translates to:
+  /// **'Geçerli bir e-posta adresi gir.'**
+  String get emailInvalid;
+
+  /// No description provided for @password.
+  ///
+  /// In tr, this message translates to:
+  /// **'Şifre'**
+  String get password;
+
+  /// No description provided for @passwordRequired.
+  ///
+  /// In tr, this message translates to:
+  /// **'Şifreni gir.'**
+  String get passwordRequired;
+
+  /// No description provided for @passwordTooShort.
+  ///
+  /// In tr, this message translates to:
+  /// **'Şifre en az 6 karakter içermelidir.'**
+  String get passwordTooShort;
+
+  /// No description provided for @showPassword.
+  ///
+  /// In tr, this message translates to:
+  /// **'Şifreyi göster'**
+  String get showPassword;
+
+  /// No description provided for @hidePassword.
+  ///
+  /// In tr, this message translates to:
+  /// **'Şifreyi gizle'**
+  String get hidePassword;
+
+  /// No description provided for @forgotPassword.
+  ///
+  /// In tr, this message translates to:
+  /// **'Şifreni mi unuttun?'**
+  String get forgotPassword;
+
+  /// No description provided for @switchToRegister.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hesabın yok mu? Hesap oluştur'**
+  String get switchToRegister;
+
+  /// No description provided for @switchToSignIn.
+  ///
+  /// In tr, this message translates to:
+  /// **'Zaten hesabın var mı? Giriş yap'**
+  String get switchToSignIn;
+
+  /// No description provided for @signInSucceeded.
+  ///
+  /// In tr, this message translates to:
+  /// **'Giriş yapıldı.'**
+  String get signInSucceeded;
+
+  /// No description provided for @registrationSucceeded.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hesap oluşturuldu.'**
+  String get registrationSucceeded;
+
+  /// No description provided for @authenticationFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kimlik doğrulama tamamlanamadı. Lütfen tekrar dene.'**
+  String get authenticationFailed;
+
+  /// No description provided for @passwordResetEmailRequired.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sıfırlama bağlantısı için geçerli bir e-posta adresi gir.'**
+  String get passwordResetEmailRequired;
+
+  /// No description provided for @passwordResetSent.
+  ///
+  /// In tr, this message translates to:
+  /// **'{email} adresine şifre sıfırlama e-postası gönderildi.'**
+  String passwordResetSent(String email);
 }
 
 class _AppLocalizationsDelegate

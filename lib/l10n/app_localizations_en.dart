@@ -9,6 +9,9 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get appTitle => 'Yunoo';
+
+  @override
   String get settingsTitle => 'Settings';
 
   @override
@@ -211,6 +214,26 @@ class AppLocalizationsEn extends AppLocalizations {
   String friendRequestFailed(String error) {
     return 'Could not send request: $error';
   }
+
+  @override
+  String get friendsEmpty =>
+      'You do not have any friends yet. Share your code to add a friend.';
+
+  @override
+  String get incomingFriendRequests => 'Incoming requests';
+
+  @override
+  String get friendRequestsEmpty => 'There are no pending friend requests.';
+
+  @override
+  String get friendRequest => 'Friend request';
+
+  @override
+  String get friendRequestPrivacyDescription =>
+      'A user wants to connect with you.';
+
+  @override
+  String get reject => 'Reject';
 
   @override
   String get resetProgressDialogTitle => 'Reset Progress';
@@ -454,4 +477,374 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errorGeneric => 'Something went wrong. Please try again.';
+
+  @override
+  String get onboardingIntroTitle => 'Welcome';
+
+  @override
+  String get onboardingLevelTitle => 'Choose your level';
+
+  @override
+  String get onboardingGoalTitle => 'Choose a learning goal';
+
+  @override
+  String get onboardingReviewTitle => 'Review your choices';
+
+  @override
+  String get onboardingDescription =>
+      'You can change these choices later in Settings.';
+
+  @override
+  String get onboardingNext => 'Continue';
+
+  @override
+  String get onboardingComplete => 'Start learning';
+
+  @override
+  String get onboardingSaveFailed =>
+      'We could not save your choices. Please try again.';
+
+  @override
+  String onboardingReviewValue(String level, String goal) {
+    return 'Level: $level Goal: $goal';
+  }
+
+  @override
+  String get cefrA1 => 'A1 — Beginner';
+
+  @override
+  String get cefrA2 => 'A2 — Elementary';
+
+  @override
+  String get cefrB1 => 'B1 — Intermediate';
+
+  @override
+  String get cefrB2 => 'B2 — Upper intermediate';
+
+  @override
+  String get cefrC1 => 'C1 — Advanced';
+
+  @override
+  String get cefrC2 => 'C2 — Proficient';
+
+  @override
+  String get learningGoalWords => 'Build vocabulary';
+
+  @override
+  String get learningGoalGrammar => 'Practice grammar';
+
+  @override
+  String get learningGoalGames => 'Learn with games';
+
+  @override
+  String get learningGoalMultiplayer => 'Play with others';
+
+  @override
+  String get learningProfile => 'Learning profile';
+
+  @override
+  String get learningProfileSubtitle => 'Choose your level and learning focus';
+
+  @override
+  String get startLearning => 'Start learning';
+
+  @override
+  String get continueLearning => 'Continue learning';
+
+  @override
+  String get saveFailedRetry => 'Could not save your changes. Try again.';
+
+  @override
+  String get homeLearningModes => 'Learning modes';
+
+  @override
+  String get multiplayerSubtitle => 'Practice live with other learners';
+
+  @override
+  String get onboardingSelectionRequired => 'Choose an option to continue.';
+
+  @override
+  String get multiplayerNotifications => 'Multiplayer invitations';
+
+  @override
+  String get multiplayerNotificationsSubtitle =>
+      'Get notified when a friend invites you to a game.';
+
+  @override
+  String get notificationPermissionDenied =>
+      'Notifications are off. You can try again from this setting.';
+
+  @override
+  String get notificationRegistrationFailed =>
+      'Notifications could not be enabled. Please try again.';
+
+  @override
+  String get notificationDisableFailed =>
+      'Notifications could not be disabled. Please try again.';
+
+  @override
+  String get invitationNotificationTitle => 'Game invitation';
+
+  @override
+  String get invitationNotificationBody => 'A friend invited you to play.';
+
+  @override
+  String get invitationOpen => 'Open';
+
+  @override
+  String get invitationDismiss => 'Not now';
+
+  @override
+  String get invitationUnavailable => 'This invitation is no longer available.';
+
+  @override
+  String get navigationHome => 'Home';
+
+  @override
+  String get navigationSocial => 'Social';
+
+  @override
+  String get navigationStatistics => 'Statistics';
+
+  @override
+  String get navigationProfile => 'Profile';
+
+  @override
+  String get backAction => 'Back';
+
+  @override
+  String get closeAction => 'Close';
+
+  @override
+  String get backToHomeAction => 'Back to home';
+
+  @override
+  String get retryAction => 'Try again';
+
+  @override
+  String get emptyStateTitle => 'Nothing here yet';
+
+  @override
+  String get emptyStateMessage => 'There is no content to show yet.';
+
+  @override
+  String get genericErrorTitle => 'Something went wrong';
+
+  @override
+  String get pageUnavailableTitle => 'Page unavailable';
+
+  @override
+  String get pageUnavailableMessage => 'This page could not be opened.';
+
+  @override
+  String get accentSelectorExpand => 'Show accent colors';
+
+  @override
+  String get accentSelectorCollapse => 'Hide accent colors';
+
+  @override
+  String accentColorOption(int number) {
+    return 'Accent color $number';
+  }
+
+  @override
+  String onboardingProgress(int current, int total) {
+    return 'Step $current of $total';
+  }
+
+  @override
+  String get statisticsLoadFailed => 'Statistics could not be loaded.';
+
+  @override
+  String get statisticsEmptyTitle => 'No statistics yet';
+
+  @override
+  String get statisticsEmptyMessage =>
+      'Complete your first learning session to create statistics.';
+
+  @override
+  String blockedUserNumber(int number) {
+    return 'Blocked user $number';
+  }
+
+  @override
+  String get multiplayerTitle => 'Multiplayer';
+
+  @override
+  String get multiplayerHeading => 'Play live with friends';
+
+  @override
+  String get multiplayerDescription =>
+      'Practice words and grammar together in the existing multiplayer modes.';
+
+  @override
+  String get wordBattleTitle => 'Word Battle';
+
+  @override
+  String get wordBattleSubtitle => 'Live vocabulary game';
+
+  @override
+  String get wordBattleDescription =>
+      'Create a room, invite a friend and compete using the same words.';
+
+  @override
+  String get grammarBattleTitle => 'Grammar Battle';
+
+  @override
+  String get grammarBattleSubtitle => 'Live grammar game';
+
+  @override
+  String get grammarBattleDescription =>
+      'Answer questions together and compete with the round-based score system.';
+
+  @override
+  String get yourTurn => 'Your turn';
+
+  @override
+  String get waitingForOpponent => 'Waiting for the other player';
+
+  @override
+  String elapsedTime(int minutes, int seconds) {
+    return 'Elapsed time: $minutes minutes, $seconds seconds';
+  }
+
+  @override
+  String playersCount(int count) {
+    return 'Players: $count';
+  }
+
+  @override
+  String get hostLabel => 'Host';
+
+  @override
+  String get eliminatedLabel => 'Eliminated';
+
+  @override
+  String get currentTurnLabel => 'Current turn';
+
+  @override
+  String playerScore(String player, int score) {
+    return '$player, score $score';
+  }
+
+  @override
+  String gameTopic(String topic) {
+    return 'Topic: $topic';
+  }
+
+  @override
+  String gameTask(String partOfSpeech) {
+    return 'Task: enter a $partOfSpeech';
+  }
+
+  @override
+  String get partOfSpeechVerb => 'verb';
+
+  @override
+  String get partOfSpeechAdjective => 'adjective';
+
+  @override
+  String get partOfSpeechNoun => 'noun';
+
+  @override
+  String get partOfSpeechAdverb => 'adverb';
+
+  @override
+  String get waitingForYourTurn => 'Wait for your turn';
+
+  @override
+  String get waitAction => 'Wait';
+
+  @override
+  String secondsRemaining(int seconds) {
+    return '$seconds seconds remaining';
+  }
+
+  @override
+  String secondsShort(int seconds) {
+    return '${seconds}s';
+  }
+
+  @override
+  String get noWordsYet => 'No words have been played yet.';
+
+  @override
+  String myPlayedWord(String word) {
+    return 'Your word: $word';
+  }
+
+  @override
+  String opponentPlayedWord(String word) {
+    return 'Other player\'s word: $word';
+  }
+
+  @override
+  String get emailSignInTitle => 'Sign in';
+
+  @override
+  String get emailRegisterTitle => 'Create account';
+
+  @override
+  String get emailSignInSubtitle => 'Sign in with your email and password.';
+
+  @override
+  String get emailRegisterSubtitle => 'Create a new account.';
+
+  @override
+  String get fullName => 'Full name';
+
+  @override
+  String get fullNameRequired => 'Enter your full name.';
+
+  @override
+  String get emailAddress => 'Email address';
+
+  @override
+  String get emailRequired => 'Enter your email address.';
+
+  @override
+  String get emailInvalid => 'Enter a valid email address.';
+
+  @override
+  String get password => 'Password';
+
+  @override
+  String get passwordRequired => 'Enter your password.';
+
+  @override
+  String get passwordTooShort => 'Password must contain at least 6 characters.';
+
+  @override
+  String get showPassword => 'Show password';
+
+  @override
+  String get hidePassword => 'Hide password';
+
+  @override
+  String get forgotPassword => 'Forgot password?';
+
+  @override
+  String get switchToRegister => 'Don\'t have an account? Create one';
+
+  @override
+  String get switchToSignIn => 'Already have an account? Sign in';
+
+  @override
+  String get signInSucceeded => 'Signed in successfully.';
+
+  @override
+  String get registrationSucceeded => 'Account created successfully.';
+
+  @override
+  String get authenticationFailed =>
+      'Authentication could not be completed. Please try again.';
+
+  @override
+  String get passwordResetEmailRequired =>
+      'Enter a valid email address for the reset link.';
+
+  @override
+  String passwordResetSent(String email) {
+    return 'A password reset email was sent to $email.';
+  }
 }

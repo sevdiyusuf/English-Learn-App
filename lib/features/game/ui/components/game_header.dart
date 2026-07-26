@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yunoo/l10n/app_localizations.dart';
 
 import '../../../../core/animations/animations.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -84,6 +85,8 @@ class _StatusBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final status = isMyTurn ? l10n.yourTurn : l10n.waitingForOpponent;
     return Container(
       width: double.infinity,
       margin: const EdgeInsets.only(bottom: 8),
@@ -101,25 +104,33 @@ class _StatusBanner extends StatelessWidget {
                   : Colors.orange.withValues(alpha: 0.5),
         ),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            isMyTurn ? Icons.play_circle_fill : Icons.hourglass_empty,
-            size: 16,
-            color: Colors.white,
-          ),
-          const SizedBox(width: 8),
-          Text(
-            isMyTurn ? 'SIRA SENDE!' : 'RAKİP BEKLENİYOR...',
-            style: const TextStyle(
+      child: Semantics(
+        liveRegion: true,
+        label: status,
+        excludeSemantics: true,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              isMyTurn ? Icons.play_circle_fill : Icons.hourglass_empty,
+              size: 16,
               color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 13,
-              letterSpacing: 0.5,
             ),
-          ),
-        ],
+            const SizedBox(width: 8),
+            Flexible(
+              child: Text(
+                status,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 13,
+                  letterSpacing: 0.5,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -132,25 +143,24 @@ class _GameModeLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final mode = room.gameMode;
     final settings = room.settings;
-    String text = 'Word Battle';
+    String text = l10n.wordBattleTitle;
     Color chipColor = const Color(0xFF4F46E5);
 
     if (mode == GameMode.theme && settings?.theme != null) {
-      text = 'KONU: ${settings!.theme!.packTitle.toUpperCase()}';
+      text = l10n.gameTopic(settings!.theme!.packTitle);
       chipColor = Colors.orange.shade700;
     } else if (mode == GameMode.core && settings?.core != null) {
       final t = settings!.core!.posType;
-      final tr =
-          t == 'verb'
-              ? 'FİİL'
-              : t == 'adjective'
-              ? 'SIFAT'
-              : t == 'noun'
-              ? 'İSİM'
-              : 'ZARF';
-      text = 'GÖREV: $tr GİRİN';
+      final partOfSpeech = switch (t) {
+        'verb' => l10n.partOfSpeechVerb,
+        'adjective' => l10n.partOfSpeechAdjective,
+        'noun' => l10n.partOfSpeechNoun,
+        _ => l10n.partOfSpeechAdverb,
+      };
+      text = l10n.gameTask(partOfSpeech);
       chipColor = Colors.blue.shade700;
     }
 
@@ -223,35 +233,40 @@ class _GameTimerState extends State<_GameTimer> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final minutes = _elapsed.inMinutes;
     final seconds = _elapsed.inSeconds % 60;
     final formattedTime =
         '${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
 
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.25),
-        borderRadius: BorderRadius.circular(6),
-        border: Border.all(
-          color: Colors.white.withValues(alpha: 0.3),
-          width: 1,
-        ),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Icon(Icons.timer_outlined, size: 14, color: Colors.white),
-          const SizedBox(width: 4),
-          Text(
-            formattedTime,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 13,
-              fontWeight: FontWeight.w600,
-            ),
+    return Semantics(
+      label: l10n.elapsedTime(minutes, seconds),
+      excludeSemantics: true,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        decoration: BoxDecoration(
+          color: Colors.white.withValues(alpha: 0.25),
+          borderRadius: BorderRadius.circular(6),
+          border: Border.all(
+            color: Colors.white.withValues(alpha: 0.3),
+            width: 1,
           ),
-        ],
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(Icons.timer_outlined, size: 14, color: Colors.white),
+            const SizedBox(width: 4),
+            Text(
+              formattedTime,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

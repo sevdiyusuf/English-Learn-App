@@ -96,50 +96,55 @@ class InvitationController extends StateNotifier<List<GameInvitation>> {
   }
 
   Future<void> _acceptInvitation(GameInvitation invitation) async {
-    // Server verifies that neither party has blocked the other, then consumes it.
+    await acceptInvitationById(invitation.id);
+  }
+
+  Future<bool> acceptInvitationById(String invitationId) async {
+    late Map<String, dynamic> resolved;
     try {
-      await _ref
+      resolved = await _ref
           .read(invitationRepositoryProvider)
-          .acceptInvitation(invitation.id);
+          .acceptInvitation(invitationId);
     } catch (_) {
-      return;
+      return false;
     }
 
-    // 2. Navigate and Join
+    final roomId = resolved['roomId'];
+    final gameType = resolved['gameType'];
+    if (roomId is! String || roomId.isEmpty || gameType is! String) {
+      return false;
+    }
     final router = _ref.read(appRouterProvider);
 
-    if (invitation.gameType == 'word_battle') {
+    if (gameType == 'word_battle') {
       final currentUser = _ref.read(authControllerProvider).value;
-      if (currentUser != null) {
-        try {
-          await _ref
-              .read(roomControllerProvider.notifier)
-              .joinRoom(
-                roomCode: invitation.roomId,
-                username: currentUser.displayName ?? 'Oyuncu',
-              );
-          router.go('/room/${invitation.roomId}');
-        } catch (e) {
-          _ref
-              .read(notificationServiceProvider)
-              .showError(title: 'Katılma Hatası', message: e.toString());
-        }
-      }
-    } else if (invitation.gameType == 'grammar_arena') {
+      if (currentUser == null) return false;
       try {
         await _ref
-            .read(arenaLobbyControllerProvider.notifier)
-            .joinRoom(invitation.roomId);
+            .read(roomControllerProvider.notifier)
+            .joinRoom(
+              roomCode: roomId,
+              username: currentUser.displayName ?? 'Oyuncu',
+            );
+        router.go('/room/$roomId');
+        return true;
+      } catch (_) {
+        return false;
+      }
+    }
+    if (gameType == 'grammar_arena') {
+      try {
+        await _ref.read(arenaLobbyControllerProvider.notifier).joinRoom(roomId);
         final state = _ref.read(arenaLobbyControllerProvider);
         if (state.hasValue && state.value != null) {
           router.go('/multiplayer/grammar-arena/room/${state.value}');
+          return true;
         }
-      } catch (e) {
-        _ref
-            .read(notificationServiceProvider)
-            .showError(title: 'Katılma Hatası', message: e.toString());
+      } catch (_) {
+        return false;
       }
     }
+    return false;
   }
 
   Future<void> _rejectInvitation(GameInvitation invitation) async {

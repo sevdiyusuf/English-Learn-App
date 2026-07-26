@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yunoo/l10n/app_localizations.dart';
 
 import '../../models/room.dart';
 
@@ -16,6 +17,7 @@ class PlayerBadges extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Card(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -24,7 +26,7 @@ class PlayerBadges extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'Oyuncular (${room.players.length})',
+              l10n.playersCount(room.players.length),
               style: Theme.of(
                 context,
               ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
@@ -41,13 +43,16 @@ class PlayerBadges extends StatelessWidget {
                     final isHost = uid == room.hostUid;
 
                     // Get player name from playerNames map, fallback to UID if not found
-                    final playerName = room.playerNames[uid] ?? uid;
+                    final playerName = room.playerNames[uid] ?? l10n.user;
                     final score = scores[uid] ?? 0;
 
                     final labels = <String>[];
-                    if (isHost) labels.add('Host');
-                    if (isSelf) labels.add('Sen');
-                    if (!isActive) labels.add('Elendi');
+                    if (isHost) labels.add(l10n.hostLabel);
+                    if (isSelf) labels.add(l10n.you);
+                    if (!isActive) labels.add(l10n.eliminatedLabel);
+                    if (isCurrentTurn && isActive) {
+                      labels.add(l10n.currentTurnLabel);
+                    }
 
                     Color textColor;
                     if (!isActive) {
@@ -58,53 +63,57 @@ class PlayerBadges extends StatelessWidget {
                       textColor = Colors.black87;
                     }
 
-                    return Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 4,
-                      ),
-                      decoration: BoxDecoration(
-                        color:
-                            isCurrentTurn && isActive
-                                ? Colors.green.shade50
-                                : Colors.transparent,
-                        borderRadius: BorderRadius.circular(12),
-                        border:
-                            isCurrentTurn && isActive
-                                ? Border.all(
-                                  color: Colors.green.shade300,
-                                  width: 1,
-                                )
-                                : null,
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            '$playerName ($score)',
-                            style: Theme.of(
-                              context,
-                            ).textTheme.bodySmall?.copyWith(
-                              color: textColor,
-                              fontWeight:
-                                  isCurrentTurn
-                                      ? FontWeight.bold
-                                      : FontWeight.normal,
-                            ),
-                          ),
-                          if (labels.isNotEmpty) ...[
-                            const SizedBox(width: 4),
+                    return Semantics(
+                      label: [
+                        l10n.playerScore(playerName, score),
+                        ...labels,
+                      ].join('. '),
+                      excludeSemantics: true,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 6,
+                        ),
+                        decoration: BoxDecoration(
+                          color:
+                              isCurrentTurn && isActive
+                                  ? Colors.green.shade50
+                                  : Colors.transparent,
+                          borderRadius: BorderRadius.circular(12),
+                          border:
+                              isCurrentTurn && isActive
+                                  ? Border.all(
+                                    color: Colors.green.shade300,
+                                    width: 1,
+                                  )
+                                  : null,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
                             Text(
-                              '(${labels.join(', ')})',
+                              l10n.playerScore(playerName, score),
                               style: Theme.of(
                                 context,
                               ).textTheme.bodySmall?.copyWith(
-                                color: Colors.grey.shade600,
-                                fontSize: 10,
+                                color: textColor,
+                                fontWeight:
+                                    isCurrentTurn
+                                        ? FontWeight.bold
+                                        : FontWeight.normal,
                               ),
                             ),
+                            if (labels.isNotEmpty) ...[
+                              const SizedBox(height: 2),
+                              Text(
+                                labels.join(', '),
+                                style: Theme.of(context).textTheme.bodySmall
+                                    ?.copyWith(color: Colors.grey.shade600),
+                              ),
+                            ],
                           ],
-                        ],
+                        ),
                       ),
                     );
                   }).toList(),

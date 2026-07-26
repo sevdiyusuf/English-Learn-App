@@ -2,8 +2,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:yunoo/l10n/app_localizations.dart';
 
 import '../../../core/theme/app_colors.dart';
+import '../../../core/widgets/responsive_content.dart';
 import '../../profile_settings/logic/user_settings_controller.dart';
 import '../../profile_settings/models/user_settings.dart';
 import '../logic/user_stats_controller.dart';
@@ -34,6 +36,7 @@ class _UserStatsPageState extends ConsumerState<UserStatsPage> {
     final statsAsync = ref.watch(userStatsControllerProvider);
     final settingsAsync = ref.watch(userSettingsControllerProvider);
     final statsController = ref.read(userStatsControllerProvider.notifier);
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       backgroundColor: _backgroundColor,
@@ -41,9 +44,9 @@ class _UserStatsPageState extends ConsumerState<UserStatsPage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text(
-          'İstatistik',
-          style: TextStyle(
+        title: Text(
+          l10n.statistics,
+          style: const TextStyle(
             color: _primaryTextColor,
             fontWeight: FontWeight.bold,
             letterSpacing: 0.5,
@@ -81,11 +84,24 @@ class _UserStatsPageState extends ConsumerState<UserStatsPage> {
               data: (stats) {
                 final settings =
                     settingsAsync.valueOrNull ?? const UserSettings();
-                return _buildContent(context, stats, settings, statsController);
+                return ResponsiveContent(
+                  maxWidth: 960,
+                  compactPadding: EdgeInsets.zero,
+                  child: _buildContent(
+                    context,
+                    stats,
+                    settings,
+                    statsController,
+                  ),
+                );
               },
               loading:
-                  () => const Center(
-                    child: CircularProgressIndicator(color: _accentColor),
+                  () => Semantics(
+                    label: l10n.loading,
+                    liveRegion: true,
+                    child: const Center(
+                      child: CircularProgressIndicator(color: _accentColor),
+                    ),
                   ),
               error:
                   (error, stack) => Center(
@@ -99,7 +115,7 @@ class _UserStatsPageState extends ConsumerState<UserStatsPage> {
                         ),
                         const SizedBox(height: 16),
                         Text(
-                          'İstatistikler yüklenemedi',
+                          l10n.statisticsLoadFailed,
                           style: Theme.of(context).textTheme.titleMedium
                               ?.copyWith(color: _primaryTextColor),
                         ),
@@ -107,9 +123,9 @@ class _UserStatsPageState extends ConsumerState<UserStatsPage> {
                         TextButton(
                           onPressed:
                               () => ref.invalidate(userStatsControllerProvider),
-                          child: const Text(
-                            'Yeniden Dene',
-                            style: TextStyle(color: _accentColor),
+                          child: Text(
+                            l10n.retryAction,
+                            style: const TextStyle(color: _accentColor),
                           ),
                         ),
                       ],
@@ -144,70 +160,57 @@ class _UserStatsPageState extends ConsumerState<UserStatsPage> {
       padding: const EdgeInsets.all(20),
       children: [
         _buildSectionHeader(context, 'GENEL BAKIŞ'),
-        Row(
-          children: [
-            Expanded(
-              child: _buildStatCard(
+        LayoutBuilder(
+          builder: (context, constraints) {
+            final columns = constraints.maxWidth >= 600 ? 3 : 2;
+            final width =
+                (constraints.maxWidth - ((columns - 1) * 12)) / columns;
+            final cards = [
+              _buildStatCard(
                 context,
                 'Öğrenilen',
                 '${stats.totalLearnedWords}',
                 Icons.book_outlined,
                 AppColors.primary,
               ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: _buildStatCard(
+              _buildStatCard(
                 context,
                 'Oturum',
                 '${stats.totalSessions}',
                 Icons.play_circle_outline,
                 AppColors.accent,
               ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 12),
-        Row(
-          children: [
-            Expanded(
-              child: _buildStatCard(
+              _buildStatCard(
                 context,
                 'Puan',
                 '${stats.totalScore}',
                 Icons.stars_outlined,
                 AppColors.warning,
               ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: _buildStatCard(
+              _buildStatCard(
                 context,
                 'Seri',
                 '${stats.currentStreakDays} gün',
                 Icons.local_fire_department_outlined,
                 Colors.orangeAccent,
               ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 12),
-        Row(
-          children: [
-            Expanded(
-              child: _buildStatCard(
+              _buildStatCard(
                 context,
                 'En İyi Seri',
                 '${stats.bestStreakDays} gün',
                 Icons.emoji_events_outlined,
                 AppColors.success,
               ),
-            ),
-            const SizedBox(width: 12),
-            const Expanded(
-              child: SizedBox(), // Boş kart (dengeli görünüm için)
-            ),
-          ],
+            ];
+            return Wrap(
+              spacing: 12,
+              runSpacing: 12,
+              children:
+                  cards
+                      .map((card) => SizedBox(width: width, child: card))
+                      .toList(),
+            );
+          },
         ),
         const SizedBox(height: 24),
 
@@ -346,36 +349,42 @@ class _UserStatsPageState extends ConsumerState<UserStatsPage> {
   }
 
   Widget _buildEmptyState(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(32),
+    final l10n = AppLocalizations.of(context)!;
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(32),
+      child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.analytics_outlined,
-              size: 80,
-              color: _secondaryTextColor.withValues(alpha: 0.5),
+            ExcludeSemantics(
+              child: Icon(
+                Icons.analytics_outlined,
+                size: 80,
+                color: _secondaryTextColor.withValues(alpha: 0.5),
+              ),
             ),
             const SizedBox(height: 24),
-            const Text(
-              'Henüz İstatistik Yok',
-              style: TextStyle(
-                color: _primaryTextColor,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
+            Semantics(
+              header: true,
+              child: Text(
+                l10n.statisticsEmptyTitle,
+                style: const TextStyle(
+                  color: _primaryTextColor,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
             ),
             const SizedBox(height: 12),
-            const Text(
-              'İlk oturumunu oynayarak istatistiklerini oluştur!',
-              style: TextStyle(color: _secondaryTextColor, fontSize: 16),
+            Text(
+              l10n.statisticsEmptyMessage,
+              style: const TextStyle(color: _secondaryTextColor, fontSize: 16),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 32),
             FilledButton.icon(
-              onPressed: () => context.go('/mode-select'),
+              onPressed: () => context.go('/'),
               style: FilledButton.styleFrom(
                 backgroundColor: _accentColor,
                 padding: const EdgeInsets.symmetric(
@@ -387,9 +396,9 @@ class _UserStatsPageState extends ConsumerState<UserStatsPage> {
                 ),
               ),
               icon: const Icon(Icons.play_arrow, color: Colors.black),
-              label: const Text(
-                'Oyunlara Git',
-                style: TextStyle(
+              label: Text(
+                l10n.backToHomeAction,
+                style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),

@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -65,6 +64,7 @@ class NotificationService {
   NotificationService();
 
   final List<AppNotification> _notifications = [];
+  final Map<String, Timer> _dismissTimers = {};
   final StreamController<List<AppNotification>> _controller =
       StreamController<List<AppNotification>>.broadcast();
 
@@ -74,16 +74,12 @@ class NotificationService {
 
   /// Show a notification
   void showNotification(AppNotification notification) {
+    _dismissTimers.remove(notification.id)?.cancel();
+    _notifications.removeWhere((item) => item.id == notification.id);
     _notifications.add(notification);
     _controller.add(currentNotifications);
 
-    // Request browser notification permission (web only)
-    if (kIsWeb) {
-      _requestBrowserNotificationPermission(notification);
-    }
-
-    // Auto-dismiss after duration
-    Timer(notification.duration, () {
+    _dismissTimers[notification.id] = Timer(notification.duration, () {
       dismissNotification(notification.id);
     });
   }
@@ -150,62 +146,26 @@ class NotificationService {
 
   /// Dismiss a notification
   void dismissNotification(String id) {
+    _dismissTimers.remove(id)?.cancel();
     _notifications.removeWhere((n) => n.id == id);
-    _controller.add(currentNotifications);
+    if (!_controller.isClosed) _controller.add(currentNotifications);
   }
 
   /// Dismiss all notifications
   void dismissAll() {
+    for (final timer in _dismissTimers.values) {
+      timer.cancel();
+    }
+    _dismissTimers.clear();
     _notifications.clear();
-    _controller.add(currentNotifications);
-  }
-
-  /// Request browser notification permission (web only)
-  Future<void> _requestBrowserNotificationPermission(
-    AppNotification notification,
-  ) async {
-    if (!kIsWeb) return;
-
-    try {
-      // Request permission
-      final permission = await _getBrowserNotificationPermission();
-
-      if (permission == 'granted') {
-        // Show browser notification
-        _showBrowserNotification(notification);
-      }
-    } catch (e) {
-      // Browser notifications not supported or permission denied
-      if (kDebugMode) {
-        debugPrint('Browser notification error: $e');
-      }
-    }
-  }
-
-  /// Get browser notification permission
-  Future<String?> _getBrowserNotificationPermission() async {
-    if (!kIsWeb) return null;
-
-    try {
-      // Use dart:html for web notifications
-      // This is a simplified version - in real implementation,
-      // you'd use package:universal_html or similar
-      return 'default'; // Simplified for now
-    } catch (e) {
-      return null;
-    }
-  }
-
-  /// Show browser notification
-  void _showBrowserNotification(AppNotification notification) {
-    if (!kIsWeb) return;
-
-    // Browser notification implementation
-    // In a real app, you'd use the Web Notifications API
-    // For now, we'll just show in-app notifications
+    if (!_controller.isClosed) _controller.add(currentNotifications);
   }
 
   void dispose() {
+    for (final timer in _dismissTimers.values) {
+      timer.cancel();
+    }
+    _dismissTimers.clear();
     _controller.close();
   }
 }

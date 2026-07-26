@@ -8,6 +8,8 @@ import 'package:yunoo/l10n/app_localizations.dart';
 import '../../../core/repositories/user_stats_repo.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/feedback_bottom_sheet.dart';
+import '../../../core/widgets/responsive_content.dart';
+import '../../../core/notifications/push_notification_controller.dart';
 import '../../../core/providers/accent_color_provider.dart';
 import '../../auth/logic/auth_controller.dart';
 import '../../moderation/ugc_policy_gate.dart';
@@ -16,7 +18,9 @@ import '../../auth/ui/account_sheet.dart';
 import '../../friends/logic/friends_controller.dart';
 import '../../friends/models/friend_models.dart';
 import '../logic/user_settings_controller.dart';
+import '../models/learning_profile_presentation.dart';
 import '../models/user_settings.dart';
+import 'learning_profile_editor.dart';
 
 // Ana Sayfa Tema Sabitleri
 const _backgroundColor = Color(0xFF050505);
@@ -120,26 +124,38 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
             SafeArea(
               child: settingsAsync.when(
                 data:
-                    (settings) => _buildContent(
+                    (settings) => ResponsiveContent(
+                      maxWidth: 840,
+                      compactPadding: EdgeInsets.zero,
+                      child: _buildContent(
+                        context,
+                        authState.valueOrNull,
+                        friendsState.profile,
+                        settings,
+                        settingsController,
+                        accentColor,
+                      ),
+                    ),
+                loading:
+                    () => Semantics(
+                      label: l10n.loading,
+                      liveRegion: true,
+                      child: Center(
+                        child: CircularProgressIndicator(color: accentColor),
+                      ),
+                    ),
+                error: (error, stack) {
+                  return ResponsiveContent(
+                    maxWidth: 840,
+                    compactPadding: EdgeInsets.zero,
+                    child: _buildContent(
                       context,
                       authState.valueOrNull,
                       friendsState.profile,
-                      settings,
-                      settingsController,
+                      const UserSettings(),
+                      ref.read(userSettingsControllerProvider.notifier),
                       accentColor,
                     ),
-                loading:
-                    () => Center(
-                      child: CircularProgressIndicator(color: accentColor),
-                    ),
-                error: (error, stack) {
-                  return _buildContent(
-                    context,
-                    authState.valueOrNull,
-                    friendsState.profile,
-                    UserSettings(),
-                    ref.read(userSettingsControllerProvider.notifier),
-                    accentColor,
                   );
                 },
               ),
@@ -159,6 +175,7 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
     Color accentColor,
   ) {
     final l10n = AppLocalizations.of(context)!;
+    final pushState = ref.watch(pushNotificationControllerProvider);
 
     return ListView(
       padding: const EdgeInsets.all(16),
@@ -166,6 +183,29 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
         // Profile Header
         _buildProfileHeader(context, user, profile, accentColor),
         const SizedBox(height: 24),
+
+        _buildSectionHeader(context, l10n.learningProfile, accentColor),
+        _buildEliteCard(
+          child: ListTile(
+            minVerticalPadding: 16,
+            leading: Icon(Icons.school_outlined, color: accentColor),
+            title: Text(l10n.learningProfile),
+            subtitle: Text(
+              settings.cefrLevel == null || settings.learningGoal == null
+                  ? l10n.learningProfileSubtitle
+                  : '${l10n.cefrLabel(settings.cefrLevel!)} · '
+                      '${l10n.learningGoalLabel(settings.learningGoal!)}',
+            ),
+            trailing: const Icon(Icons.chevron_right),
+            onTap:
+                () => showLearningProfileEditor(
+                  context: context,
+                  ref: ref,
+                  settings: settings,
+                ),
+          ),
+        ),
+        const SizedBox(height: 16),
 
         // Appearance Section
         _buildSectionHeader(context, l10n.appearance, accentColor),
@@ -185,6 +225,54 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
         _buildEliteCard(
           child: Column(
             children: [
+              SwitchListTile(
+                title: Text(l10n.multiplayerNotifications),
+                subtitle: Text(l10n.multiplayerNotificationsSubtitle),
+                value: settings.multiplayerNotificationsEnabled,
+                onChanged:
+                    pushState.busy || user == null || user.isAnonymous
+                        ? null
+                        : (value) async {
+                          final messenger = ScaffoldMessenger.of(context);
+                          final push = ref.read(
+                            pushNotificationControllerProvider.notifier,
+                          );
+                          if (value) {
+                            final result = await push.enable();
+                            if (!context.mounted) return;
+                            if (result == PushPreferenceResult.denied) {
+                              messenger.showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    l10n.notificationPermissionDenied,
+                                  ),
+                                ),
+                              );
+                            } else if (result ==
+                                PushPreferenceResult.unavailable) {
+                              messenger.showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    l10n.notificationRegistrationFailed,
+                                  ),
+                                ),
+                              );
+                            }
+                          } else {
+                            try {
+                              await push.disable();
+                            } catch (_) {
+                              if (!context.mounted) return;
+                              messenger.showSnackBar(
+                                SnackBar(
+                                  content: Text(l10n.notificationDisableFailed),
+                                ),
+                              );
+                            }
+                          }
+                        },
+              ),
+              const Divider(),
               SwitchListTile(
                 title: Text(l10n.sound),
                 subtitle: Text(l10n.soundSubtitle),

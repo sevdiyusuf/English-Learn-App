@@ -7,6 +7,8 @@ import '../core/widgets/app_startup_gate.dart';
 import '../core/widgets/gradient_background.dart';
 import '../core/widgets/network_status_indicator.dart';
 import '../core/widgets/notification_banner.dart';
+import '../core/widgets/incoming_notification_listener.dart';
+import '../core/notifications/push_notification_controller.dart';
 import '../features/auth/logic/auth_controller.dart';
 import '../features/friends/logic/invitation_controller.dart';
 import 'router.dart';
@@ -28,9 +30,10 @@ class VeniVidiApp extends ConsumerWidget {
 
     // Watch invitation controller to handle incoming game invitations
     ref.watch(invitationControllerProvider);
+    ref.watch(pushNotificationControllerProvider);
 
     return MaterialApp.router(
-      title: 'VeniVidi Word Battle',
+      onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
       debugShowCheckedModeBanner: false,
       routerConfig: router,
       theme: theme,
@@ -45,18 +48,20 @@ class VeniVidiApp extends ConsumerWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       builder: (context, child) {
-        return AppStartupGate(
-          child: GradientBackground(
-            child: Stack(
-              children: [
-                Column(
-                  children: [
-                    const NetworkStatusIndicator(),
-                    Expanded(child: child ?? const SizedBox.shrink()),
-                  ],
-                ),
-                const NotificationToast(),
-              ],
+        return IncomingNotificationListener(
+          child: AppStartupGate(
+            child: GradientBackground(
+              child: Stack(
+                children: [
+                  Column(
+                    children: [
+                      const NetworkStatusIndicator(),
+                      Expanded(child: child ?? const SizedBox.shrink()),
+                    ],
+                  ),
+                  const NotificationToast(),
+                ],
+              ),
             ),
           ),
         );

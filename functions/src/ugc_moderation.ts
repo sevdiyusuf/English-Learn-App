@@ -1,5 +1,6 @@
 import * as admin from 'firebase-admin';
 import { HttpsError } from 'firebase-functions/v2/https';
+import { deliverInvitationNotification } from './push_notifications';
 
 // This module is imported before index.ts executes its bootstrap. The guard
 // also keeps isolated Jest imports usable without creating a second app.
@@ -196,22 +197,42 @@ export async function createInvitation(auth: { uid: string } | undefined, input:
   const toUid = typeof data.toUid === 'string' ? data.toUid.trim() : '';
   const roomId = typeof data.roomId === 'string' ? data.roomId.trim() : '';
   const gameType = data.gameType === 'word_battle' || data.gameType === 'grammar_arena' ? data.gameType : '';
-  if (!toUid || !roomId || !gameType || toUid === uid) throw new HttpsError('invalid-argument', 'invalid-request');
+  if (!/^[A-Za-z0-9_-]{1,128}$/.test(toUid) || !/^[A-Za-z0-9_-]{1,128}$/.test(roomId) ||
+    !gameType || toUid === uid) throw new HttpsError('invalid-argument', 'invalid-request');
   if (await blockedEitherWay(uid, toUid)) throw new HttpsError('failed-precondition', 'interaction-unavailable');
+  const invitationRef = db.collection(`users/${toUid}/invitations`).doc();
   await db.runTransaction(async (tx) => {
-    const [senderBlock, recipientBlock, sender] = await Promise.all([
+    const roomRef = gameType === 'word_battle' ? db.doc(`rooms/${roomId}`) : db.doc(`arena_rooms/${roomId}`);
+    const [senderBlock, recipientBlock, sender, friendship, roomSnap] = await Promise.all([
       tx.get(db.doc(`users/${uid}/blocks/${toUid}`)),
       tx.get(db.doc(`users/${toUid}/blocks/${uid}`)),
       tx.get(db.doc(`users/${uid}`)),
+      tx.get(db.doc(`friendships/${uid}/friends/${toUid}`)),
+      tx.get(roomRef),
     ]);
-    if (senderBlock.exists || recipientBlock.exists) {
+    const room = roomSnap.data();
+    const senderCanInvite = gameType === 'word_battle'
+      ? roomSnap.exists && room?.status === 'waiting' &&
+        (room?.hostUid === uid || (Array.isArray(room?.players) && room.players.includes(uid)))
+      : roomSnap.exists && room?.status === 'waiting' &&
+        (room?.hostId === uid || room?.guestId === uid);
+    if (senderBlock.exists || recipientBlock.exists || !friendship.exists || !senderCanInvite) {
       throw new HttpsError('failed-precondition', 'interaction-unavailable');
     }
     await consumeSocialRateLimit(tx, uid, toUid, 'invitation');
-    tx.create(db.collection(`users/${toUid}/invitations`).doc(), { fromUid: uid, toUid, roomId, gameType, status: 'pending',
+    tx.create(invitationRef, { fromUid: uid, toUid, roomId, gameType, status: 'pending',
       fromName: sender.data()?.displayName ?? '', createdAt: admin.firestore.FieldValue.serverTimestamp() });
   });
-  return { success: true };
+  try {
+    await deliverInvitationNotification({
+      invitationId: invitationRef.id,
+      senderUid: uid,
+      recipientUid: toUid,
+    });
+  } catch {
+    // Invitation creation remains successful when push delivery is transiently unavailable.
+  }
+  return { success: true, invitationId: invitationRef.id };
 }
 
 export async function acceptInvitation(auth: { uid: string } | undefined, input: unknown) {

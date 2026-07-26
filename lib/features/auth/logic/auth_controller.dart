@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/utils/error_logger.dart';
+import '../../../core/notifications/push_registration_manager.dart';
 import '../../../core/utils/storage_service.dart';
 import '../../../core/repositories/user_stats_repo.dart';
 import '../../friends/data/friends_repo.dart';
@@ -313,6 +314,17 @@ class AuthController extends StateNotifier<AsyncValue<AppUser?>> {
           e,
           stackTrace: stack,
           context: 'AuthController.signOut - onUserLogout',
+        );
+      }
+
+      // Unregister while the callable still has the old authenticated UID.
+      try {
+        await _ref.read(pushRegistrationManagerProvider).unregisterCurrent();
+      } catch (e, stack) {
+        ErrorLogger.instance.logError(
+          e,
+          stackTrace: stack,
+          context: 'AuthController.signOut - unregister push token',
         );
       }
 

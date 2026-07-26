@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:yunoo/l10n/app_localizations.dart';
 
 class CountdownWidget extends StatefulWidget {
   const CountdownWidget({
@@ -92,6 +93,7 @@ class _CountdownWidgetState extends State<CountdownWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final isWaiting = widget.deadline == null;
     final secondsRemaining = _remaining.inSeconds.clamp(
       0,
@@ -102,50 +104,63 @@ class _CountdownWidgetState extends State<CountdownWidget> {
             ? 1.0
             : secondsRemaining / widget.turnDurationSeconds;
 
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        child: Row(
-          children: [
-            Icon(
-              widget.isActiveTurn
-                  ? Icons.timer_outlined
-                  : Icons.schedule_outlined,
-              size: 20,
-            ),
-            const SizedBox(width: 8),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    widget.isActiveTurn ? 'Sıra sende!' : 'Sıranı bekle',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
+    final status =
+        widget.isActiveTurn ? l10n.yourTurn : l10n.waitingForYourTurn;
+    return Semantics(
+      label:
+          isWaiting
+              ? '$status. ${l10n.waitAction}'
+              : '$status. ${l10n.secondsRemaining(secondsRemaining)}',
+      liveRegion: widget.isActiveTurn,
+      excludeSemantics: true,
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          child: Row(
+            children: [
+              Icon(
+                widget.isActiveTurn
+                    ? Icons.timer_outlined
+                    : Icons.schedule_outlined,
+                size: 20,
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      status,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 4),
-                  LinearProgressIndicator(
-                    value: isWaiting ? null : progress,
-                    minHeight: 6,
-                    borderRadius: BorderRadius.circular(3),
-                    color: secondsRemaining <= 3 ? Colors.red : null,
-                  ),
-                ],
+                    const SizedBox(height: 4),
+                    LinearProgressIndicator(
+                      value: isWaiting ? null : progress,
+                      minHeight: 6,
+                      borderRadius: BorderRadius.circular(3),
+                      color: secondsRemaining <= 3 ? Colors.red : null,
+                    ),
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(width: 8),
-            if (isWaiting)
-              Text('Bekle', style: Theme.of(context).textTheme.bodySmall)
-            else
-              Text(
-                '${secondsRemaining}s',
-                style: Theme.of(
-                  context,
-                ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
-              ),
-          ],
+              const SizedBox(width: 8),
+              if (isWaiting)
+                Text(
+                  l10n.waitAction,
+                  style: Theme.of(context).textTheme.bodySmall,
+                )
+              else
+                Text(
+                  l10n.secondsShort(secondsRemaining),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                ),
+            ],
+          ),
         ),
       ),
     );

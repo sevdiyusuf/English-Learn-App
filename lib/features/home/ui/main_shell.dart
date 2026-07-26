@@ -1,13 +1,15 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:yunoo/l10n/app_localizations.dart';
+
+import '../../../core/widgets/responsive_content.dart';
 
 class MainShell extends StatelessWidget {
   const MainShell({required this.navigationShell, super.key});
 
   final StatefulNavigationShell navigationShell;
 
-  void _onTap(BuildContext context, int index) {
+  void _selectDestination(int index) {
     navigationShell.goBranch(
       index,
       initialLocation: index == navigationShell.currentIndex,
@@ -16,67 +18,96 @@ class MainShell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBody: true, // Body nav barın arkasına geçsin
-      body: navigationShell,
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.fromLTRB(8, 0, 8, 12),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(24),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-            child: Container(
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(
-                  255,
-                  212,
-                  205,
-                  205,
-                ).withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(24),
-                border: Border.all(
-                  color: Colors.white.withValues(alpha: 0.15),
-                  width: 1,
-                ),
-              ),
-              child: BottomNavigationBar(
-                currentIndex: navigationShell.currentIndex,
-                onTap: (index) => _onTap(context, index),
-                type: BottomNavigationBarType.fixed,
-                backgroundColor:
-                    Colors.transparent, // Arka plan Container'dan geliyor
-                selectedItemColor: Colors.white,
-                unselectedItemColor: Colors.white.withValues(alpha: 0.4),
-                showSelectedLabels: true,
-                showUnselectedLabels: true,
-                elevation: 0,
-                items: const [
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.grid_view_outlined),
-                    activeIcon: Icon(Icons.grid_view_rounded),
-                    label: 'Ana Sayfa',
+    final l10n = AppLocalizations.of(context)!;
+    final destinations = <_ShellDestination>[
+      _ShellDestination(
+        label: l10n.navigationHome,
+        icon: Icons.grid_view_outlined,
+        selectedIcon: Icons.grid_view_rounded,
+      ),
+      _ShellDestination(
+        label: l10n.navigationSocial,
+        icon: Icons.people_outline_rounded,
+        selectedIcon: Icons.people_rounded,
+      ),
+      _ShellDestination(
+        label: l10n.navigationStatistics,
+        icon: Icons.analytics_outlined,
+        selectedIcon: Icons.analytics_rounded,
+      ),
+      _ShellDestination(
+        label: l10n.navigationProfile,
+        icon: Icons.person_outline_rounded,
+        selectedIcon: Icons.person_rounded,
+      ),
+    ];
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final expanded =
+            constraints.maxWidth >= ResponsiveContent.expandedBreakpoint;
+        if (expanded) {
+          return Scaffold(
+            body: SafeArea(
+              child: Row(
+                children: [
+                  NavigationRail(
+                    selectedIndex: navigationShell.currentIndex,
+                    onDestinationSelected: _selectDestination,
+                    labelType: NavigationRailLabelType.all,
+                    destinations:
+                        destinations
+                            .map(
+                              (item) => NavigationRailDestination(
+                                icon: Icon(item.icon),
+                                selectedIcon: Icon(item.selectedIcon),
+                                label: Text(item.label),
+                              ),
+                            )
+                            .toList(),
                   ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.people_outline_rounded),
-                    activeIcon: Icon(Icons.people_rounded),
-                    label: 'Sosyal',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.analytics_outlined),
-                    activeIcon: Icon(Icons.analytics_rounded),
-                    label: 'İstatistik',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.person_outline_rounded),
-                    activeIcon: Icon(Icons.person_rounded),
-                    label: 'Profil',
-                  ),
+                  const VerticalDivider(width: 1),
+                  Expanded(child: navigationShell),
                 ],
               ),
             ),
+          );
+        }
+
+        return Scaffold(
+          body: navigationShell,
+          bottomNavigationBar: SafeArea(
+            top: false,
+            child: NavigationBar(
+              selectedIndex: navigationShell.currentIndex,
+              onDestinationSelected: _selectDestination,
+              destinations:
+                  destinations
+                      .map(
+                        (item) => NavigationDestination(
+                          icon: Icon(item.icon),
+                          selectedIcon: Icon(item.selectedIcon),
+                          label: item.label,
+                          tooltip: item.label,
+                        ),
+                      )
+                      .toList(),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
+}
+
+class _ShellDestination {
+  const _ShellDestination({
+    required this.label,
+    required this.icon,
+    required this.selectedIcon,
+  });
+
+  final String label;
+  final IconData icon;
+  final IconData selectedIcon;
 }

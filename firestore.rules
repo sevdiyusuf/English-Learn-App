@@ -171,6 +171,11 @@ service cloud.firestore {
         allow read: if isAuthenticated() && request.auth.uid == userId;
         allow write: if false;
       }
+
+      // Device registrations are server-owned through authenticated callables.
+      match /notification_tokens/{tokenId} {
+        allow read, write: if false;
+      }
     }
 
     // Shared Word Match sets
@@ -198,5 +203,6 @@ service cloud.firestore {
     match /moderation_reports/{reportId} { allow read, write: if false; }
     match /report_cooldowns/{cooldownId} { allow read, write: if false; }
     match /social_rate_limits/{limitId} { allow read, write: if false; }
+    match /notification_deliveries/{deliveryId} { allow read, write: if false; }
   }
 }

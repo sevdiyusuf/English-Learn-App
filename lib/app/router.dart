@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:yunoo/l10n/app_localizations.dart';
 
 import '../core/widgets/error_view.dart';
 import '../core/utils/storage_service.dart';
@@ -12,6 +13,7 @@ import '../features/mode_select/ui/mode_select_page.dart';
 import '../features/friends/ui/friends_page.dart';
 import '../features/user_stats/ui/user_stats_page.dart';
 import '../features/profile_settings/ui/profile_settings_page.dart';
+import '../features/profile_settings/ui/onboarding_gate.dart';
 import '../features/moderation/blocked_users_page.dart';
 import '../features/word_match/ui/shared_word_set_page.dart';
 import 'routes/word_match_routes.dart';
@@ -80,7 +82,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           return SharedWordSetPage(shareId: shareId);
         },
       ),
-      GoRoute(path: '/blocked-users', builder: (context, state) => const BlockedUsersPage()),
+      GoRoute(
+        path: '/blocked-users',
+        builder: (context, state) => const BlockedUsersPage(),
+      ),
 
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
@@ -93,7 +98,9 @@ final appRouterProvider = Provider<GoRouter>((ref) {
               GoRoute(
                 path: '/',
                 name: ModeSelectPage.routeName,
-                builder: (context, state) => const ModeSelectPage(),
+                builder:
+                    (context, state) =>
+                        const OnboardingGate(child: ModeSelectPage()),
               ),
             ],
           ),
@@ -147,15 +154,18 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       ...statsRoutes.whereType<GoRoute>().where((r) => r.path != '/stats'),
     ],
 
-    errorBuilder:
-        (context, state) => Scaffold(
-          backgroundColor: const Color(0xFF050505),
-          body: ErrorView(
-            error: state.error,
-            title: 'Sayfa Bulunamadı veya Yönlendirme Hatası',
+    errorBuilder: (context, state) {
+      final l10n = AppLocalizations.of(context)!;
+      return Scaffold(
+        body: SafeArea(
+          child: ErrorView(
+            title: l10n.pageUnavailableTitle,
+            message: l10n.pageUnavailableMessage,
             onRetry: () => GoRouter.of(context).go('/'),
-            retryButtonText: 'Ana Sayfaya Dön',
+            retryButtonText: l10n.backToHomeAction,
           ),
         ),
+      );
+    },
   );
 });
