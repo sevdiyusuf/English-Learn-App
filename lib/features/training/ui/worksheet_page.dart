@@ -171,7 +171,9 @@ class _WorksheetPageState extends ConsumerState<WorksheetPage> {
                 ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
-                  side: BorderSide(color: AppColors.primary.withValues(alpha: 0.3)),
+                  side: BorderSide(
+                    color: AppColors.primary.withValues(alpha: 0.3),
+                  ),
                 ),
               ),
               child: Row(

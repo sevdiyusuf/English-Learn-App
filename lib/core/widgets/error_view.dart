@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import '../errors/app_failure.dart';
 import '../errors/firebase_error_mapper.dart';
 
-enum ErrorViewMode {
-  error,
-  loading,
-  empty,
-}
+enum ErrorViewMode { error, loading, empty }
 
 class ErrorView extends StatelessWidget {
   const ErrorView({
@@ -21,16 +17,14 @@ class ErrorView extends StatelessWidget {
     this.mode = ErrorViewMode.error,
   });
 
-  const ErrorView.loading({
-    super.key,
-    this.message = 'Yükleniyor...',
-  })  : failure = null,
-        error = null,
-        title = null,
-        icon = null,
-        onRetry = null,
-        retryButtonText = 'Tekrar Dene',
-        mode = ErrorViewMode.loading;
+  const ErrorView.loading({super.key, this.message = 'Yükleniyor...'})
+    : failure = null,
+      error = null,
+      title = null,
+      icon = null,
+      onRetry = null,
+      retryButtonText = 'Tekrar Dene',
+      mode = ErrorViewMode.loading;
 
   const ErrorView.empty({
     super.key,
@@ -39,9 +33,9 @@ class ErrorView extends StatelessWidget {
     this.icon = Icons.inbox_outlined,
     this.onRetry,
     this.retryButtonText = 'Yenile',
-  })  : failure = null,
-        error = null,
-        mode = ErrorViewMode.empty;
+  }) : failure = null,
+       error = null,
+       mode = ErrorViewMode.empty;
 
   final AppFailure? failure;
   final dynamic error;
@@ -73,9 +67,13 @@ class ErrorView extends StatelessWidget {
       );
     }
 
-    final resolvedFailure = failure ?? (error != null ? FirebaseErrorMapper.map(error) : null);
-    final displayTitle = title ?? (mode == ErrorViewMode.empty ? 'Veri Bulunamadı' : 'Bir Hata Oluştu');
-    final displayMessage = message ?? resolvedFailure?.message ?? 'Beklenmeyen bir durum oluştu.';
+    final resolvedFailure =
+        failure ?? (error != null ? FirebaseErrorMapper.map(error) : null);
+    final displayTitle =
+        title ??
+        (mode == ErrorViewMode.empty ? 'Veri Bulunamadı' : 'Bir Hata Oluştu');
+    final displayMessage =
+        message ?? resolvedFailure?.message ?? 'Beklenmeyen bir durum oluştu.';
     final displayIcon = icon ?? _getIconForFailure(resolvedFailure, mode);
     final canRetry = onRetry != null && (resolvedFailure?.isRetryable ?? true);
 
@@ -89,13 +87,19 @@ class ErrorView extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: (mode == ErrorViewMode.empty ? Colors.blueAccent : Colors.redAccent).withValues(alpha: 0.1),
+                color: (mode == ErrorViewMode.empty
+                        ? Colors.blueAccent
+                        : Colors.redAccent)
+                    .withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 displayIcon,
                 size: 48,
-                color: mode == ErrorViewMode.empty ? Colors.blueAccent : Colors.redAccent,
+                color:
+                    mode == ErrorViewMode.empty
+                        ? Colors.blueAccent
+                        : Colors.redAccent,
               ),
             ),
             const SizedBox(height: 20),
@@ -123,7 +127,10 @@ class ErrorView extends StatelessWidget {
               ElevatedButton.icon(
                 onPressed: onRetry,
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 12,
+                  ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),

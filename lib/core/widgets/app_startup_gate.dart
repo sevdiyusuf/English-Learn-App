@@ -16,10 +16,11 @@ class AppStartupGate extends ConsumerWidget {
 
     return authState.when(
       data: (_) => child,
-      loading: () => const Scaffold(
-        backgroundColor: Color(0xFF050505),
-        body: ErrorView.loading(message: 'Uygulama başlatılıyor...'),
-      ),
+      loading:
+          () => const Scaffold(
+            backgroundColor: Color(0xFF050505),
+            body: ErrorView.loading(message: 'Uygulama başlatılıyor...'),
+          ),
       error: (error, stack) {
         final failure = FirebaseErrorMapper.map(error);
         return Scaffold(

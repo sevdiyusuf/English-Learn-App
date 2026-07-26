@@ -745,6 +745,198 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Yanlış cevap! Kilitlendi.'**
   String get wrongAnswerLocked;
+
+  /// No description provided for @communityGuidelines.
+  ///
+  /// In tr, this message translates to:
+  /// **'Topluluk Kuralları'**
+  String get communityGuidelines;
+
+  /// No description provided for @termsDraftNotice.
+  ///
+  /// In tr, this message translates to:
+  /// **'Taslak belgeler — ürün sahibi ve hukuk incelemesi gereklidir.'**
+  String get termsDraftNotice;
+
+  /// No description provided for @termsBody.
+  ///
+  /// In tr, this message translates to:
+  /// **'Uygulamayı saygılı ve hukuka uygun kullanın. Paylaşılan öğrenme içeriğini veya sosyal özellikleri kötüye kullanmayın.'**
+  String get termsBody;
+
+  /// No description provided for @guidelinesBody.
+  ///
+  /// In tr, this message translates to:
+  /// **'Taciz, tehdit, nefret söylemi veya kötüye kullanım, cinsel ya da uygunsuz içerik, spam, dolandırıcılık, tekrarlanan istenmeyen davetler, kimliğe bürünme, başkasının özel bilgileri, yasa dışı içerik veya moderasyondan kaçma girişimleri paylaşmayın.'**
+  String get guidelinesBody;
+
+  /// No description provided for @reviewDocuments.
+  ///
+  /// In tr, this message translates to:
+  /// **'Belgeleri incele'**
+  String get reviewDocuments;
+
+  /// No description provided for @acceptCurrentPolicies.
+  ///
+  /// In tr, this message translates to:
+  /// **'Koşulları ve Topluluk Kurallarını kabul et'**
+  String get acceptCurrentPolicies;
+
+  /// No description provided for @acceptPoliciesPrompt.
+  ///
+  /// In tr, this message translates to:
+  /// **'Herkese açık içerik yayınlamak veya güncellemek için iki belgeyi inceleyip güncel sürümleri açıkça kabul etmelisiniz.'**
+  String get acceptPoliciesPrompt;
+
+  /// No description provided for @acceptPoliciesCheck.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kullanım Koşullarını ve Topluluk Kurallarını okudum ve kabul ediyorum.'**
+  String get acceptPoliciesCheck;
+
+  /// No description provided for @accept.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kabul et'**
+  String get accept;
+
+  /// No description provided for @policyAcceptanceFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kabul kaydedilemedi. Lütfen tekrar deneyin.'**
+  String get policyAcceptanceFailed;
+
+  /// No description provided for @report.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bildir'**
+  String get report;
+
+  /// No description provided for @reportUser.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kullanıcıyı bildir'**
+  String get reportUser;
+
+  /// No description provided for @reportSharedSet.
+  ///
+  /// In tr, this message translates to:
+  /// **'Paylaşılan seti bildir'**
+  String get reportSharedSet;
+
+  /// No description provided for @reportReason.
+  ///
+  /// In tr, this message translates to:
+  /// **'Neden'**
+  String get reportReason;
+
+  /// No description provided for @reportDetails.
+  ///
+  /// In tr, this message translates to:
+  /// **'İsteğe bağlı ayrıntılar'**
+  String get reportDetails;
+
+  /// No description provided for @submitReport.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bildirimi gönder'**
+  String get submitReport;
+
+  /// No description provided for @reportReceived.
+  ///
+  /// In tr, this message translates to:
+  /// **'Teşekkürler. Bildiriminiz alındı.'**
+  String get reportReceived;
+
+  /// No description provided for @reportUnavailable.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu bildirim gönderilemez.'**
+  String get reportUnavailable;
+
+  /// No description provided for @block.
+  ///
+  /// In tr, this message translates to:
+  /// **'Engelle'**
+  String get block;
+
+  /// No description provided for @unblock.
+  ///
+  /// In tr, this message translates to:
+  /// **'Engeli kaldır'**
+  String get unblock;
+
+  /// No description provided for @reportAndBlock.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bildir ve engelle'**
+  String get reportAndBlock;
+
+  /// No description provided for @blockedUsers.
+  ///
+  /// In tr, this message translates to:
+  /// **'Engellenen kullanıcılar'**
+  String get blockedUsers;
+
+  /// No description provided for @blockedUsersEmpty.
+  ///
+  /// In tr, this message translates to:
+  /// **'Engellediğiniz kullanıcı yok.'**
+  String get blockedUsersEmpty;
+
+  /// No description provided for @blockUserPrompt.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu kullanıcı engellensin mi? Bekleyen sosyal etkileşimler kaldırılır.'**
+  String get blockUserPrompt;
+
+  /// No description provided for @interactionUnavailable.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu etkileşim şu anda kullanılamıyor.'**
+  String get interactionUnavailable;
+
+  /// No description provided for @rateLimited.
+  ///
+  /// In tr, this message translates to:
+  /// **'Çok fazla deneme yapıldı. Lütfen daha sonra tekrar deneyin.'**
+  String get rateLimited;
+
+  /// No description provided for @removeSharedSet.
+  ///
+  /// In tr, this message translates to:
+  /// **'Paylaşılan seti kaldır'**
+  String get removeSharedSet;
+
+  /// No description provided for @removeSharedSetPrompt.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu herkese açık paylaşım kaldırılsın mı? Özel çalışma setiniz korunur.'**
+  String get removeSharedSetPrompt;
+
+  /// No description provided for @sharedSetRemoved.
+  ///
+  /// In tr, this message translates to:
+  /// **'Herkese açık paylaşım kaldırıldı.'**
+  String get sharedSetRemoved;
+
+  /// No description provided for @remove.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kaldır'**
+  String get remove;
+
+  /// No description provided for @loading.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yükleniyor…'**
+  String get loading;
+
+  /// No description provided for @errorGeneric.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bir hata oluştu. Lütfen tekrar deneyin.'**
+  String get errorGeneric;
 }
 
 class _AppLocalizationsDelegate

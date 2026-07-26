@@ -19,24 +19,28 @@ class SynonymService {
     }
 
     try {
-      final jsonString =
-          await rootBundle.loadString('assets/synonym.json');
+      final jsonString = await rootBundle.loadString('assets/synonym.json');
       final jsonMap = json.decode(jsonString) as Map<String, dynamic>;
 
       _synonymsByLevel = <String, List<SynonymWord>>{};
       for (final level in ['easy', 'medium', 'upper', 'expert']) {
         if (jsonMap[level] != null) {
-          final list = (jsonMap[level] as List<dynamic>)
-              .map((item) => SynonymWord.fromJson(item as Map<String, dynamic>))
-              .toList();
+          final list =
+              (jsonMap[level] as List<dynamic>)
+                  .map(
+                    (item) =>
+                        SynonymWord.fromJson(item as Map<String, dynamic>),
+                  )
+                  .toList();
           _synonymsByLevel![level] = list;
         }
       }
 
       if (jsonMap['wrong_answers'] != null) {
-        _wrongAnswers = (jsonMap['wrong_answers'] as List<dynamic>)
-            .map((item) => item as String)
-            .toList();
+        _wrongAnswers =
+            (jsonMap['wrong_answers'] as List<dynamic>)
+                .map((item) => item as String)
+                .toList();
       } else {
         _wrongAnswers = [];
       }
@@ -66,8 +70,9 @@ class SynonymService {
     }
 
     final excludeSet = exclude?.toSet() ?? <String>{};
-    final available = _wrongAnswers!.where((w) => !excludeSet.contains(w)).toList();
-    
+    final available =
+        _wrongAnswers!.where((w) => !excludeSet.contains(w)).toList();
+
     if (available.length <= count) {
       return available;
     }
@@ -87,4 +92,3 @@ class SynonymService {
     return selected;
   }
 }
-

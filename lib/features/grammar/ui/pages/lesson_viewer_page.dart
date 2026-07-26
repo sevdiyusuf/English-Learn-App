@@ -90,7 +90,9 @@ class _LessonViewerPageState extends ConsumerState<LessonViewerPage> {
         );
 
         return Scaffold(
-          backgroundColor: const Color(0xFF0F172A), // GrammarHome background color
+          backgroundColor: const Color(
+            0xFF0F172A,
+          ), // GrammarHome background color
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,

@@ -137,16 +137,13 @@ class _CountdownWidgetState extends State<CountdownWidget> {
             ),
             const SizedBox(width: 8),
             if (isWaiting)
-              Text(
-                'Bekle',
-                style: Theme.of(context).textTheme.bodySmall,
-              )
+              Text('Bekle', style: Theme.of(context).textTheme.bodySmall)
             else
               Text(
                 '${secondsRemaining}s',
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
               ),
           ],
         ),

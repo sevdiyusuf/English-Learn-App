@@ -275,7 +275,10 @@ class _HomeHeader extends ConsumerWidget {
                   Expanded(
                     child: _SegmentedProgressBar(
                       totalSegments: streakGoal,
-                      filledSegments: currentStreak > streakGoal ? streakGoal : currentStreak,
+                      filledSegments:
+                          currentStreak > streakGoal
+                              ? streakGoal
+                              : currentStreak,
                       accentColor: accentColor,
                     ),
                   ),
@@ -283,7 +286,10 @@ class _HomeHeader extends ConsumerWidget {
 
                   Text(
                     '$currentStreak / $streakGoal',
-                    style: const TextStyle(color: _secondaryTextColor, fontSize: 12),
+                    style: const TextStyle(
+                      color: _secondaryTextColor,
+                      fontSize: 12,
+                    ),
                   ),
                   const SizedBox(width: 8),
                   Text(
@@ -385,7 +391,10 @@ class _WordMatchHeroCard extends StatelessWidget {
               offset: const Offset(0, 10),
             ),
           ],
-          border: Border.all(color: Colors.white.withValues(alpha: 0.05), width: 1),
+          border: Border.all(
+            color: Colors.white.withValues(alpha: 0.05),
+            width: 1,
+          ),
         ),
         child: Stack(
           children: [
@@ -716,7 +725,10 @@ class _AccentSelector extends StatelessWidget {
               padding: const EdgeInsets.all(5),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(color: color.withValues(alpha: 0.9), width: 2),
+                border: Border.all(
+                  color: color.withValues(alpha: 0.9),
+                  width: 2,
+                ),
                 boxShadow: [
                   BoxShadow(
                     color: color.withValues(alpha: 0.4),

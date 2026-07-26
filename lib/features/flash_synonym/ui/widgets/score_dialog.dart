@@ -28,9 +28,7 @@ class ScoreDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       backgroundColor: AppColors.surfaceDark,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(
@@ -56,10 +54,7 @@ class ScoreDialog extends StatelessWidget {
                 children: [
                   const Text(
                     'Toplam Puan',
-                    style: TextStyle(
-                      color: Colors.white70,
-                      fontSize: 16,
-                    ),
+                    style: TextStyle(color: Colors.white70, fontSize: 16),
                   ),
                   const SizedBox(height: 8),
                   Text(
@@ -75,29 +70,13 @@ class ScoreDialog extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             // Statistics
-            _buildStatRow(
-              'Doğru',
-              '$correctCount',
-              AppColors.success,
-            ),
+            _buildStatRow('Doğru', '$correctCount', AppColors.success),
             const SizedBox(height: 12),
-            _buildStatRow(
-              'Yanlış',
-              '$wrongCount',
-              AppColors.error,
-            ),
+            _buildStatRow('Yanlış', '$wrongCount', AppColors.error),
             const SizedBox(height: 12),
-            _buildStatRow(
-              'Pas',
-              '$passCount',
-              Colors.grey,
-            ),
+            _buildStatRow('Pas', '$passCount', Colors.grey),
             const SizedBox(height: 12),
-            _buildStatRow(
-              'Süre',
-              _formatDuration(elapsedTime),
-              Colors.blue,
-            ),
+            _buildStatRow('Süre', _formatDuration(elapsedTime), Colors.blue),
             if (score != baseScore) ...[
               const SizedBox(height: 12),
               Container(
@@ -139,7 +118,10 @@ class ScoreDialog extends StatelessWidget {
                     onPressed: onBack,
                     style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 16),
-                      side: const BorderSide(color: AppColors.primary, width: 2),
+                      side: const BorderSide(
+                        color: AppColors.primary,
+                        width: 2,
+                      ),
                     ),
                     child: const Text(
                       'Geri',
@@ -206,4 +188,3 @@ class ScoreDialog extends StatelessWidget {
     return '${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
   }
 }
-

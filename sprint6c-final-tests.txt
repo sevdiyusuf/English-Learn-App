@@ -1,0 +1,17 @@
+Test Results for Sprint 6C Owner Review:
+
+1. Firebase Functions (Callable tests)
+- npx jest --preset ts-jest --runInBand --forceExit
+- Result: 10/10 tests passed
+- Coverage includes: unauthenticated deny, malformed payload deny, identity/reciprocal atomic friendship creation, idempotency, Account Deletion reciprocal cleanup.
+
+2. Firestore Rules (Security rules tests)
+- npx jest sprint6c.test.js firestore.rules.test.js --runInBand --forceExit (executed with Java 21)
+- Result: 41/41 tests passed (13 in sprint6c.test.js, 28 in firestore.rules.test.js)
+- sprint6c.test.js coverage includes: room create with safe payloads, join strict constraints, activePlayerIds/players strict sync, arena host/guest immutability, nested field update deny (host.score, status).
+
+3. Flutter App (Client tests)
+- flutter test
+- Result: 123/123 tests passed
+- flutter analyze
+- Result: No issues found!

@@ -11,10 +11,13 @@ final lessonIndexProvider = FutureProvider<LessonIndex>((ref) async {
   return repository.loadIndex();
 });
 
-final lessonDocProvider = FutureProvider.family<LessonDoc, String>((ref, lessonId) async {
+final lessonDocProvider = FutureProvider.family<LessonDoc, String>((
+  ref,
+  lessonId,
+) async {
   final index = await ref.watch(lessonIndexProvider.future);
   final repository = ref.watch(grammarRepositoryProvider);
-  
+
   // Find lesson path from index
   String? path;
   for (var lessons in index.lessonsByLevel.values) {
@@ -35,8 +38,14 @@ final lessonDocProvider = FutureProvider.family<LessonDoc, String>((ref, lessonI
 });
 
 // State for Lesson Viewer
-final currentCardIndexProvider = StateProvider.family<int, String>((ref, lessonId) => 0);
+final currentCardIndexProvider = StateProvider.family<int, String>(
+  (ref, lessonId) => 0,
+);
 
 // State for Story Viewer
-final currentStoryItemIndexProvider = StateProvider.family<int, String>((ref, lessonId) => 0);
-final storyScoreProvider = StateProvider.family<int, String>((ref, lessonId) => 0);
+final currentStoryItemIndexProvider = StateProvider.family<int, String>(
+  (ref, lessonId) => 0,
+);
+final storyScoreProvider = StateProvider.family<int, String>(
+  (ref, lessonId) => 0,
+);

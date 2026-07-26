@@ -25,7 +25,8 @@ class FeedbackBottomSheet extends ConsumerStatefulWidget {
   }
 
   @override
-  ConsumerState<FeedbackBottomSheet> createState() => _FeedbackBottomSheetState();
+  ConsumerState<FeedbackBottomSheet> createState() =>
+      _FeedbackBottomSheetState();
 }
 
 class _FeedbackBottomSheetState extends ConsumerState<FeedbackBottomSheet> {
@@ -61,7 +62,8 @@ class _FeedbackBottomSheetState extends ConsumerState<FeedbackBottomSheet> {
       } else if (Platform.isAndroid) {
         final androidInfo = await deviceInfo.androidInfo;
         deviceModel = '${androidInfo.manufacturer} ${androidInfo.model}';
-        osVersion = 'Android ${androidInfo.version.release} (SDK ${androidInfo.version.sdkInt})';
+        osVersion =
+            'Android ${androidInfo.version.release} (SDK ${androidInfo.version.sdkInt})';
       } else if (Platform.isIOS) {
         final iosInfo = await deviceInfo.iosInfo;
         deviceModel = iosInfo.utsname.machine;
@@ -69,7 +71,8 @@ class _FeedbackBottomSheetState extends ConsumerState<FeedbackBottomSheet> {
       } else if (Platform.isWindows) {
         final windowsInfo = await deviceInfo.windowsInfo;
         deviceModel = 'Windows PC';
-        osVersion = 'Windows ${windowsInfo.majorVersion}.${windowsInfo.minorVersion}';
+        osVersion =
+            'Windows ${windowsInfo.majorVersion}.${windowsInfo.minorVersion}';
       } else if (Platform.isMacOS) {
         final macInfo = await deviceInfo.macOsInfo;
         deviceModel = macInfo.model;
@@ -97,7 +100,9 @@ OS Versiyonu: $osVersion</code>
 ''';
 
       // Send to Telegram
-      final url = Uri.parse('https://api.telegram.org/bot$_botToken/sendMessage');
+      final url = Uri.parse(
+        'https://api.telegram.org/bot$_botToken/sendMessage',
+      );
       final response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},
@@ -128,9 +133,9 @@ OS Versiyonu: $osVersion</code>
         _isSending = false;
       });
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Hata oluştu: $e')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Hata oluştu: $e')));
       }
     }
   }
@@ -171,7 +176,11 @@ OS Versiyonu: $osVersion</code>
             ),
 
             if (_isSent) ...[
-              const Icon(Icons.check_circle_rounded, color: Colors.greenAccent, size: 64),
+              const Icon(
+                Icons.check_circle_rounded,
+                color: Colors.greenAccent,
+                size: 64,
+              ),
               const SizedBox(height: 16),
               const Text(
                 'Teşekkürler!',
@@ -216,7 +225,9 @@ OS Versiyonu: $osVersion</code>
                 style: const TextStyle(color: Colors.white),
                 decoration: InputDecoration(
                   hintText: 'Mesajınızı buraya yazın...',
-                  hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.3)),
+                  hintStyle: TextStyle(
+                    color: Colors.white.withValues(alpha: 0.3),
+                  ),
                   filled: true,
                   fillColor: Colors.black.withValues(alpha: 0.2),
                   border: OutlineInputBorder(
@@ -240,22 +251,23 @@ OS Versiyonu: $osVersion</code>
                       borderRadius: BorderRadius.circular(16),
                     ),
                   ),
-                  child: _isSending
-                      ? const SizedBox(
-                          height: 24,
-                          width: 24,
-                          child: CircularProgressIndicator(
-                            color: Colors.white,
-                            strokeWidth: 2.5,
+                  child:
+                      _isSending
+                          ? const SizedBox(
+                            height: 24,
+                            width: 24,
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                              strokeWidth: 2.5,
+                            ),
+                          )
+                          : const Text(
+                            'Gönder',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        )
-                      : const Text(
-                          'Gönder',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
                 ),
               ),
             ],

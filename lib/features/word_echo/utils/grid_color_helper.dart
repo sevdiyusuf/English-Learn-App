@@ -28,4 +28,3 @@ class GridColorHelper {
   /// Get all available colors
   static List<Color> get allColors => List.unmodifiable(_colors);
 }
-

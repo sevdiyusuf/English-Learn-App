@@ -129,18 +129,12 @@ class _EngineFillState extends State<EngineFill> {
           const SizedBox(height: 16),
           const Text(
             'Çeviri:',
-            style: TextStyle(
-              color: Colors.white54,
-              fontSize: 14,
-            ),
+            style: TextStyle(color: Colors.white54, fontSize: 14),
           ),
           const SizedBox(height: 4),
           Text(
             widget.item.translation!,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 15,
-            ),
+            style: const TextStyle(color: Colors.white, fontSize: 15),
           ),
         ],
       ],

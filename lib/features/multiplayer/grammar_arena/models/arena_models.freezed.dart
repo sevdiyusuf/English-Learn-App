@@ -12,7 +12,8 @@ part of 'arena_models.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 ArenaConfig _$ArenaConfigFromJson(Map<String, dynamic> json) {
   return _ArenaConfig.fromJson(json);
@@ -33,8 +34,9 @@ mixin _$ArenaConfig {
 /// @nodoc
 abstract class $ArenaConfigCopyWith<$Res> {
   factory $ArenaConfigCopyWith(
-          ArenaConfig value, $Res Function(ArenaConfig) then) =
-      _$ArenaConfigCopyWithImpl<$Res, ArenaConfig>;
+    ArenaConfig value,
+    $Res Function(ArenaConfig) then,
+  ) = _$ArenaConfigCopyWithImpl<$Res, ArenaConfig>;
   @useResult
   $Res call({String level, String? worksheetId, int questionCount});
 }
@@ -56,20 +58,26 @@ class _$ArenaConfigCopyWithImpl<$Res, $Val extends ArenaConfig>
     Object? worksheetId = freezed,
     Object? questionCount = null,
   }) {
-    return _then(_value.copyWith(
-      level: null == level
-          ? _value.level
-          : level // ignore: cast_nullable_to_non_nullable
-              as String,
-      worksheetId: freezed == worksheetId
-          ? _value.worksheetId
-          : worksheetId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      questionCount: null == questionCount
-          ? _value.questionCount
-          : questionCount // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            level:
+                null == level
+                    ? _value.level
+                    : level // ignore: cast_nullable_to_non_nullable
+                        as String,
+            worksheetId:
+                freezed == worksheetId
+                    ? _value.worksheetId
+                    : worksheetId // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            questionCount:
+                null == questionCount
+                    ? _value.questionCount
+                    : questionCount // ignore: cast_nullable_to_non_nullable
+                        as int,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -77,8 +85,9 @@ class _$ArenaConfigCopyWithImpl<$Res, $Val extends ArenaConfig>
 abstract class _$$ArenaConfigImplCopyWith<$Res>
     implements $ArenaConfigCopyWith<$Res> {
   factory _$$ArenaConfigImplCopyWith(
-          _$ArenaConfigImpl value, $Res Function(_$ArenaConfigImpl) then) =
-      __$$ArenaConfigImplCopyWithImpl<$Res>;
+    _$ArenaConfigImpl value,
+    $Res Function(_$ArenaConfigImpl) then,
+  ) = __$$ArenaConfigImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String level, String? worksheetId, int questionCount});
@@ -89,8 +98,9 @@ class __$$ArenaConfigImplCopyWithImpl<$Res>
     extends _$ArenaConfigCopyWithImpl<$Res, _$ArenaConfigImpl>
     implements _$$ArenaConfigImplCopyWith<$Res> {
   __$$ArenaConfigImplCopyWithImpl(
-      _$ArenaConfigImpl _value, $Res Function(_$ArenaConfigImpl) _then)
-      : super(_value, _then);
+    _$ArenaConfigImpl _value,
+    $Res Function(_$ArenaConfigImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -99,20 +109,25 @@ class __$$ArenaConfigImplCopyWithImpl<$Res>
     Object? worksheetId = freezed,
     Object? questionCount = null,
   }) {
-    return _then(_$ArenaConfigImpl(
-      level: null == level
-          ? _value.level
-          : level // ignore: cast_nullable_to_non_nullable
-              as String,
-      worksheetId: freezed == worksheetId
-          ? _value.worksheetId
-          : worksheetId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      questionCount: null == questionCount
-          ? _value.questionCount
-          : questionCount // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
+    return _then(
+      _$ArenaConfigImpl(
+        level:
+            null == level
+                ? _value.level
+                : level // ignore: cast_nullable_to_non_nullable
+                    as String,
+        worksheetId:
+            freezed == worksheetId
+                ? _value.worksheetId
+                : worksheetId // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        questionCount:
+            null == questionCount
+                ? _value.questionCount
+                : questionCount // ignore: cast_nullable_to_non_nullable
+                    as int,
+      ),
+    );
   }
 }
 
@@ -120,10 +135,11 @@ class __$$ArenaConfigImplCopyWithImpl<$Res>
 
 @JsonSerializable(explicitToJson: true)
 class _$ArenaConfigImpl implements _ArenaConfig {
-  const _$ArenaConfigImpl(
-      {required this.level,
-      required this.worksheetId,
-      this.questionCount = 12});
+  const _$ArenaConfigImpl({
+    required this.level,
+    required this.worksheetId,
+    this.questionCount = 12,
+  });
 
   factory _$ArenaConfigImpl.fromJson(Map<String, dynamic> json) =>
       _$$ArenaConfigImplFromJson(json);
@@ -166,17 +182,16 @@ class _$ArenaConfigImpl implements _ArenaConfig {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ArenaConfigImplToJson(
-      this,
-    );
+    return _$$ArenaConfigImplToJson(this);
   }
 }
 
 abstract class _ArenaConfig implements ArenaConfig {
-  const factory _ArenaConfig(
-      {required final String level,
-      required final String? worksheetId,
-      final int questionCount}) = _$ArenaConfigImpl;
+  const factory _ArenaConfig({
+    required final String level,
+    required final String? worksheetId,
+    final int questionCount,
+  }) = _$ArenaConfigImpl;
 
   factory _ArenaConfig.fromJson(Map<String, dynamic> json) =
       _$ArenaConfigImpl.fromJson;
@@ -216,16 +231,18 @@ mixin _$ArenaPlayer {
 /// @nodoc
 abstract class $ArenaPlayerCopyWith<$Res> {
   factory $ArenaPlayerCopyWith(
-          ArenaPlayer value, $Res Function(ArenaPlayer) then) =
-      _$ArenaPlayerCopyWithImpl<$Res, ArenaPlayer>;
+    ArenaPlayer value,
+    $Res Function(ArenaPlayer) then,
+  ) = _$ArenaPlayerCopyWithImpl<$Res, ArenaPlayer>;
   @useResult
-  $Res call(
-      {String id,
-      String name,
-      String? photoUrl,
-      int score,
-      bool isOnline,
-      @TimestampConverter() DateTime? lastPing});
+  $Res call({
+    String id,
+    String name,
+    String? photoUrl,
+    int score,
+    bool isOnline,
+    @TimestampConverter() DateTime? lastPing,
+  });
 }
 
 /// @nodoc
@@ -248,32 +265,41 @@ class _$ArenaPlayerCopyWithImpl<$Res, $Val extends ArenaPlayer>
     Object? isOnline = null,
     Object? lastPing = freezed,
   }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      photoUrl: freezed == photoUrl
-          ? _value.photoUrl
-          : photoUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      score: null == score
-          ? _value.score
-          : score // ignore: cast_nullable_to_non_nullable
-              as int,
-      isOnline: null == isOnline
-          ? _value.isOnline
-          : isOnline // ignore: cast_nullable_to_non_nullable
-              as bool,
-      lastPing: freezed == lastPing
-          ? _value.lastPing
-          : lastPing // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            id:
+                null == id
+                    ? _value.id
+                    : id // ignore: cast_nullable_to_non_nullable
+                        as String,
+            name:
+                null == name
+                    ? _value.name
+                    : name // ignore: cast_nullable_to_non_nullable
+                        as String,
+            photoUrl:
+                freezed == photoUrl
+                    ? _value.photoUrl
+                    : photoUrl // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            score:
+                null == score
+                    ? _value.score
+                    : score // ignore: cast_nullable_to_non_nullable
+                        as int,
+            isOnline:
+                null == isOnline
+                    ? _value.isOnline
+                    : isOnline // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            lastPing:
+                freezed == lastPing
+                    ? _value.lastPing
+                    : lastPing // ignore: cast_nullable_to_non_nullable
+                        as DateTime?,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -281,17 +307,19 @@ class _$ArenaPlayerCopyWithImpl<$Res, $Val extends ArenaPlayer>
 abstract class _$$ArenaPlayerImplCopyWith<$Res>
     implements $ArenaPlayerCopyWith<$Res> {
   factory _$$ArenaPlayerImplCopyWith(
-          _$ArenaPlayerImpl value, $Res Function(_$ArenaPlayerImpl) then) =
-      __$$ArenaPlayerImplCopyWithImpl<$Res>;
+    _$ArenaPlayerImpl value,
+    $Res Function(_$ArenaPlayerImpl) then,
+  ) = __$$ArenaPlayerImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String id,
-      String name,
-      String? photoUrl,
-      int score,
-      bool isOnline,
-      @TimestampConverter() DateTime? lastPing});
+  $Res call({
+    String id,
+    String name,
+    String? photoUrl,
+    int score,
+    bool isOnline,
+    @TimestampConverter() DateTime? lastPing,
+  });
 }
 
 /// @nodoc
@@ -299,8 +327,9 @@ class __$$ArenaPlayerImplCopyWithImpl<$Res>
     extends _$ArenaPlayerCopyWithImpl<$Res, _$ArenaPlayerImpl>
     implements _$$ArenaPlayerImplCopyWith<$Res> {
   __$$ArenaPlayerImplCopyWithImpl(
-      _$ArenaPlayerImpl _value, $Res Function(_$ArenaPlayerImpl) _then)
-      : super(_value, _then);
+    _$ArenaPlayerImpl _value,
+    $Res Function(_$ArenaPlayerImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -312,32 +341,40 @@ class __$$ArenaPlayerImplCopyWithImpl<$Res>
     Object? isOnline = null,
     Object? lastPing = freezed,
   }) {
-    return _then(_$ArenaPlayerImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      photoUrl: freezed == photoUrl
-          ? _value.photoUrl
-          : photoUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      score: null == score
-          ? _value.score
-          : score // ignore: cast_nullable_to_non_nullable
-              as int,
-      isOnline: null == isOnline
-          ? _value.isOnline
-          : isOnline // ignore: cast_nullable_to_non_nullable
-              as bool,
-      lastPing: freezed == lastPing
-          ? _value.lastPing
-          : lastPing // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-    ));
+    return _then(
+      _$ArenaPlayerImpl(
+        id:
+            null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                    as String,
+        name:
+            null == name
+                ? _value.name
+                : name // ignore: cast_nullable_to_non_nullable
+                    as String,
+        photoUrl:
+            freezed == photoUrl
+                ? _value.photoUrl
+                : photoUrl // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        score:
+            null == score
+                ? _value.score
+                : score // ignore: cast_nullable_to_non_nullable
+                    as int,
+        isOnline:
+            null == isOnline
+                ? _value.isOnline
+                : isOnline // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        lastPing:
+            freezed == lastPing
+                ? _value.lastPing
+                : lastPing // ignore: cast_nullable_to_non_nullable
+                    as DateTime?,
+      ),
+    );
   }
 }
 
@@ -345,13 +382,14 @@ class __$$ArenaPlayerImplCopyWithImpl<$Res>
 
 @JsonSerializable(explicitToJson: true)
 class _$ArenaPlayerImpl implements _ArenaPlayer {
-  const _$ArenaPlayerImpl(
-      {required this.id,
-      required this.name,
-      this.photoUrl,
-      this.score = 0,
-      this.isOnline = false,
-      @TimestampConverter() this.lastPing});
+  const _$ArenaPlayerImpl({
+    required this.id,
+    required this.name,
+    this.photoUrl,
+    this.score = 0,
+    this.isOnline = false,
+    @TimestampConverter() this.lastPing,
+  });
 
   factory _$ArenaPlayerImpl.fromJson(Map<String, dynamic> json) =>
       _$$ArenaPlayerImplFromJson(json);
@@ -406,20 +444,19 @@ class _$ArenaPlayerImpl implements _ArenaPlayer {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ArenaPlayerImplToJson(
-      this,
-    );
+    return _$$ArenaPlayerImplToJson(this);
   }
 }
 
 abstract class _ArenaPlayer implements ArenaPlayer {
-  const factory _ArenaPlayer(
-      {required final String id,
-      required final String name,
-      final String? photoUrl,
-      final int score,
-      final bool isOnline,
-      @TimestampConverter() final DateTime? lastPing}) = _$ArenaPlayerImpl;
+  const factory _ArenaPlayer({
+    required final String id,
+    required final String name,
+    final String? photoUrl,
+    final int score,
+    final bool isOnline,
+    @TimestampConverter() final DateTime? lastPing,
+  }) = _$ArenaPlayerImpl;
 
   factory _ArenaPlayer.fromJson(Map<String, dynamic> json) =
       _$ArenaPlayerImpl.fromJson;
@@ -463,13 +500,15 @@ mixin _$ArenaRound {
 /// @nodoc
 abstract class $ArenaRoundCopyWith<$Res> {
   factory $ArenaRoundCopyWith(
-          ArenaRound value, $Res Function(ArenaRound) then) =
-      _$ArenaRoundCopyWithImpl<$Res, ArenaRound>;
+    ArenaRound value,
+    $Res Function(ArenaRound) then,
+  ) = _$ArenaRoundCopyWithImpl<$Res, ArenaRound>;
   @useResult
-  $Res call(
-      {int index,
-      @TimestampConverter() DateTime roundStartAt,
-      int timeLimitMs});
+  $Res call({
+    int index,
+    @TimestampConverter() DateTime roundStartAt,
+    int timeLimitMs,
+  });
 }
 
 /// @nodoc
@@ -489,20 +528,26 @@ class _$ArenaRoundCopyWithImpl<$Res, $Val extends ArenaRound>
     Object? roundStartAt = null,
     Object? timeLimitMs = null,
   }) {
-    return _then(_value.copyWith(
-      index: null == index
-          ? _value.index
-          : index // ignore: cast_nullable_to_non_nullable
-              as int,
-      roundStartAt: null == roundStartAt
-          ? _value.roundStartAt
-          : roundStartAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      timeLimitMs: null == timeLimitMs
-          ? _value.timeLimitMs
-          : timeLimitMs // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            index:
+                null == index
+                    ? _value.index
+                    : index // ignore: cast_nullable_to_non_nullable
+                        as int,
+            roundStartAt:
+                null == roundStartAt
+                    ? _value.roundStartAt
+                    : roundStartAt // ignore: cast_nullable_to_non_nullable
+                        as DateTime,
+            timeLimitMs:
+                null == timeLimitMs
+                    ? _value.timeLimitMs
+                    : timeLimitMs // ignore: cast_nullable_to_non_nullable
+                        as int,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -510,14 +555,16 @@ class _$ArenaRoundCopyWithImpl<$Res, $Val extends ArenaRound>
 abstract class _$$ArenaRoundImplCopyWith<$Res>
     implements $ArenaRoundCopyWith<$Res> {
   factory _$$ArenaRoundImplCopyWith(
-          _$ArenaRoundImpl value, $Res Function(_$ArenaRoundImpl) then) =
-      __$$ArenaRoundImplCopyWithImpl<$Res>;
+    _$ArenaRoundImpl value,
+    $Res Function(_$ArenaRoundImpl) then,
+  ) = __$$ArenaRoundImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int index,
-      @TimestampConverter() DateTime roundStartAt,
-      int timeLimitMs});
+  $Res call({
+    int index,
+    @TimestampConverter() DateTime roundStartAt,
+    int timeLimitMs,
+  });
 }
 
 /// @nodoc
@@ -525,8 +572,9 @@ class __$$ArenaRoundImplCopyWithImpl<$Res>
     extends _$ArenaRoundCopyWithImpl<$Res, _$ArenaRoundImpl>
     implements _$$ArenaRoundImplCopyWith<$Res> {
   __$$ArenaRoundImplCopyWithImpl(
-      _$ArenaRoundImpl _value, $Res Function(_$ArenaRoundImpl) _then)
-      : super(_value, _then);
+    _$ArenaRoundImpl _value,
+    $Res Function(_$ArenaRoundImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -535,20 +583,25 @@ class __$$ArenaRoundImplCopyWithImpl<$Res>
     Object? roundStartAt = null,
     Object? timeLimitMs = null,
   }) {
-    return _then(_$ArenaRoundImpl(
-      index: null == index
-          ? _value.index
-          : index // ignore: cast_nullable_to_non_nullable
-              as int,
-      roundStartAt: null == roundStartAt
-          ? _value.roundStartAt
-          : roundStartAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      timeLimitMs: null == timeLimitMs
-          ? _value.timeLimitMs
-          : timeLimitMs // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
+    return _then(
+      _$ArenaRoundImpl(
+        index:
+            null == index
+                ? _value.index
+                : index // ignore: cast_nullable_to_non_nullable
+                    as int,
+        roundStartAt:
+            null == roundStartAt
+                ? _value.roundStartAt
+                : roundStartAt // ignore: cast_nullable_to_non_nullable
+                    as DateTime,
+        timeLimitMs:
+            null == timeLimitMs
+                ? _value.timeLimitMs
+                : timeLimitMs // ignore: cast_nullable_to_non_nullable
+                    as int,
+      ),
+    );
   }
 }
 
@@ -556,10 +609,11 @@ class __$$ArenaRoundImplCopyWithImpl<$Res>
 
 @JsonSerializable(explicitToJson: true)
 class _$ArenaRoundImpl implements _ArenaRound {
-  const _$ArenaRoundImpl(
-      {required this.index,
-      @TimestampConverter() required this.roundStartAt,
-      required this.timeLimitMs});
+  const _$ArenaRoundImpl({
+    required this.index,
+    @TimestampConverter() required this.roundStartAt,
+    required this.timeLimitMs,
+  });
 
   factory _$ArenaRoundImpl.fromJson(Map<String, dynamic> json) =>
       _$$ArenaRoundImplFromJson(json);
@@ -602,17 +656,16 @@ class _$ArenaRoundImpl implements _ArenaRound {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ArenaRoundImplToJson(
-      this,
-    );
+    return _$$ArenaRoundImplToJson(this);
   }
 }
 
 abstract class _ArenaRound implements ArenaRound {
-  const factory _ArenaRound(
-      {required final int index,
-      @TimestampConverter() required final DateTime roundStartAt,
-      required final int timeLimitMs}) = _$ArenaRoundImpl;
+  const factory _ArenaRound({
+    required final int index,
+    @TimestampConverter() required final DateTime roundStartAt,
+    required final int timeLimitMs,
+  }) = _$ArenaRoundImpl;
 
   factory _ArenaRound.fromJson(Map<String, dynamic> json) =
       _$ArenaRoundImpl.fromJson;
@@ -650,8 +703,9 @@ mixin _$ArenaAnswer {
 /// @nodoc
 abstract class $ArenaAnswerCopyWith<$Res> {
   factory $ArenaAnswerCopyWith(
-          ArenaAnswer value, $Res Function(ArenaAnswer) then) =
-      _$ArenaAnswerCopyWithImpl<$Res, ArenaAnswer>;
+    ArenaAnswer value,
+    $Res Function(ArenaAnswer) then,
+  ) = _$ArenaAnswerCopyWithImpl<$Res, ArenaAnswer>;
   @useResult
   $Res call({int attempt, bool isCorrect, int pointsAwarded, int clientSentAt});
 }
@@ -674,24 +728,31 @@ class _$ArenaAnswerCopyWithImpl<$Res, $Val extends ArenaAnswer>
     Object? pointsAwarded = null,
     Object? clientSentAt = null,
   }) {
-    return _then(_value.copyWith(
-      attempt: null == attempt
-          ? _value.attempt
-          : attempt // ignore: cast_nullable_to_non_nullable
-              as int,
-      isCorrect: null == isCorrect
-          ? _value.isCorrect
-          : isCorrect // ignore: cast_nullable_to_non_nullable
-              as bool,
-      pointsAwarded: null == pointsAwarded
-          ? _value.pointsAwarded
-          : pointsAwarded // ignore: cast_nullable_to_non_nullable
-              as int,
-      clientSentAt: null == clientSentAt
-          ? _value.clientSentAt
-          : clientSentAt // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            attempt:
+                null == attempt
+                    ? _value.attempt
+                    : attempt // ignore: cast_nullable_to_non_nullable
+                        as int,
+            isCorrect:
+                null == isCorrect
+                    ? _value.isCorrect
+                    : isCorrect // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            pointsAwarded:
+                null == pointsAwarded
+                    ? _value.pointsAwarded
+                    : pointsAwarded // ignore: cast_nullable_to_non_nullable
+                        as int,
+            clientSentAt:
+                null == clientSentAt
+                    ? _value.clientSentAt
+                    : clientSentAt // ignore: cast_nullable_to_non_nullable
+                        as int,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -699,8 +760,9 @@ class _$ArenaAnswerCopyWithImpl<$Res, $Val extends ArenaAnswer>
 abstract class _$$ArenaAnswerImplCopyWith<$Res>
     implements $ArenaAnswerCopyWith<$Res> {
   factory _$$ArenaAnswerImplCopyWith(
-          _$ArenaAnswerImpl value, $Res Function(_$ArenaAnswerImpl) then) =
-      __$$ArenaAnswerImplCopyWithImpl<$Res>;
+    _$ArenaAnswerImpl value,
+    $Res Function(_$ArenaAnswerImpl) then,
+  ) = __$$ArenaAnswerImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int attempt, bool isCorrect, int pointsAwarded, int clientSentAt});
@@ -711,8 +773,9 @@ class __$$ArenaAnswerImplCopyWithImpl<$Res>
     extends _$ArenaAnswerCopyWithImpl<$Res, _$ArenaAnswerImpl>
     implements _$$ArenaAnswerImplCopyWith<$Res> {
   __$$ArenaAnswerImplCopyWithImpl(
-      _$ArenaAnswerImpl _value, $Res Function(_$ArenaAnswerImpl) _then)
-      : super(_value, _then);
+    _$ArenaAnswerImpl _value,
+    $Res Function(_$ArenaAnswerImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -722,24 +785,30 @@ class __$$ArenaAnswerImplCopyWithImpl<$Res>
     Object? pointsAwarded = null,
     Object? clientSentAt = null,
   }) {
-    return _then(_$ArenaAnswerImpl(
-      attempt: null == attempt
-          ? _value.attempt
-          : attempt // ignore: cast_nullable_to_non_nullable
-              as int,
-      isCorrect: null == isCorrect
-          ? _value.isCorrect
-          : isCorrect // ignore: cast_nullable_to_non_nullable
-              as bool,
-      pointsAwarded: null == pointsAwarded
-          ? _value.pointsAwarded
-          : pointsAwarded // ignore: cast_nullable_to_non_nullable
-              as int,
-      clientSentAt: null == clientSentAt
-          ? _value.clientSentAt
-          : clientSentAt // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
+    return _then(
+      _$ArenaAnswerImpl(
+        attempt:
+            null == attempt
+                ? _value.attempt
+                : attempt // ignore: cast_nullable_to_non_nullable
+                    as int,
+        isCorrect:
+            null == isCorrect
+                ? _value.isCorrect
+                : isCorrect // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        pointsAwarded:
+            null == pointsAwarded
+                ? _value.pointsAwarded
+                : pointsAwarded // ignore: cast_nullable_to_non_nullable
+                    as int,
+        clientSentAt:
+            null == clientSentAt
+                ? _value.clientSentAt
+                : clientSentAt // ignore: cast_nullable_to_non_nullable
+                    as int,
+      ),
+    );
   }
 }
 
@@ -747,11 +816,12 @@ class __$$ArenaAnswerImplCopyWithImpl<$Res>
 
 @JsonSerializable(explicitToJson: true)
 class _$ArenaAnswerImpl implements _ArenaAnswer {
-  const _$ArenaAnswerImpl(
-      {required this.attempt,
-      required this.isCorrect,
-      required this.pointsAwarded,
-      required this.clientSentAt});
+  const _$ArenaAnswerImpl({
+    required this.attempt,
+    required this.isCorrect,
+    required this.pointsAwarded,
+    required this.clientSentAt,
+  });
 
   factory _$ArenaAnswerImpl.fromJson(Map<String, dynamic> json) =>
       _$$ArenaAnswerImplFromJson(json);
@@ -797,18 +867,17 @@ class _$ArenaAnswerImpl implements _ArenaAnswer {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ArenaAnswerImplToJson(
-      this,
-    );
+    return _$$ArenaAnswerImplToJson(this);
   }
 }
 
 abstract class _ArenaAnswer implements ArenaAnswer {
-  const factory _ArenaAnswer(
-      {required final int attempt,
-      required final bool isCorrect,
-      required final int pointsAwarded,
-      required final int clientSentAt}) = _$ArenaAnswerImpl;
+  const factory _ArenaAnswer({
+    required final int attempt,
+    required final bool isCorrect,
+    required final int pointsAwarded,
+    required final int clientSentAt,
+  }) = _$ArenaAnswerImpl;
 
   factory _ArenaAnswer.fromJson(Map<String, dynamic> json) =
       _$ArenaAnswerImpl.fromJson;
@@ -846,8 +915,9 @@ mixin _$ResolvedWorksheet {
 /// @nodoc
 abstract class $ResolvedWorksheetCopyWith<$Res> {
   factory $ResolvedWorksheetCopyWith(
-          ResolvedWorksheet value, $Res Function(ResolvedWorksheet) then) =
-      _$ResolvedWorksheetCopyWithImpl<$Res, ResolvedWorksheet>;
+    ResolvedWorksheet value,
+    $Res Function(ResolvedWorksheet) then,
+  ) = _$ResolvedWorksheetCopyWithImpl<$Res, ResolvedWorksheet>;
   @useResult
   $Res call({String worksheetId, int seed, List<String> questionIds});
 }
@@ -869,29 +939,36 @@ class _$ResolvedWorksheetCopyWithImpl<$Res, $Val extends ResolvedWorksheet>
     Object? seed = null,
     Object? questionIds = null,
   }) {
-    return _then(_value.copyWith(
-      worksheetId: null == worksheetId
-          ? _value.worksheetId
-          : worksheetId // ignore: cast_nullable_to_non_nullable
-              as String,
-      seed: null == seed
-          ? _value.seed
-          : seed // ignore: cast_nullable_to_non_nullable
-              as int,
-      questionIds: null == questionIds
-          ? _value.questionIds
-          : questionIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            worksheetId:
+                null == worksheetId
+                    ? _value.worksheetId
+                    : worksheetId // ignore: cast_nullable_to_non_nullable
+                        as String,
+            seed:
+                null == seed
+                    ? _value.seed
+                    : seed // ignore: cast_nullable_to_non_nullable
+                        as int,
+            questionIds:
+                null == questionIds
+                    ? _value.questionIds
+                    : questionIds // ignore: cast_nullable_to_non_nullable
+                        as List<String>,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$ResolvedWorksheetImplCopyWith<$Res>
     implements $ResolvedWorksheetCopyWith<$Res> {
-  factory _$$ResolvedWorksheetImplCopyWith(_$ResolvedWorksheetImpl value,
-          $Res Function(_$ResolvedWorksheetImpl) then) =
-      __$$ResolvedWorksheetImplCopyWithImpl<$Res>;
+  factory _$$ResolvedWorksheetImplCopyWith(
+    _$ResolvedWorksheetImpl value,
+    $Res Function(_$ResolvedWorksheetImpl) then,
+  ) = __$$ResolvedWorksheetImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String worksheetId, int seed, List<String> questionIds});
@@ -901,9 +978,10 @@ abstract class _$$ResolvedWorksheetImplCopyWith<$Res>
 class __$$ResolvedWorksheetImplCopyWithImpl<$Res>
     extends _$ResolvedWorksheetCopyWithImpl<$Res, _$ResolvedWorksheetImpl>
     implements _$$ResolvedWorksheetImplCopyWith<$Res> {
-  __$$ResolvedWorksheetImplCopyWithImpl(_$ResolvedWorksheetImpl _value,
-      $Res Function(_$ResolvedWorksheetImpl) _then)
-      : super(_value, _then);
+  __$$ResolvedWorksheetImplCopyWithImpl(
+    _$ResolvedWorksheetImpl _value,
+    $Res Function(_$ResolvedWorksheetImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -912,20 +990,25 @@ class __$$ResolvedWorksheetImplCopyWithImpl<$Res>
     Object? seed = null,
     Object? questionIds = null,
   }) {
-    return _then(_$ResolvedWorksheetImpl(
-      worksheetId: null == worksheetId
-          ? _value.worksheetId
-          : worksheetId // ignore: cast_nullable_to_non_nullable
-              as String,
-      seed: null == seed
-          ? _value.seed
-          : seed // ignore: cast_nullable_to_non_nullable
-              as int,
-      questionIds: null == questionIds
-          ? _value._questionIds
-          : questionIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-    ));
+    return _then(
+      _$ResolvedWorksheetImpl(
+        worksheetId:
+            null == worksheetId
+                ? _value.worksheetId
+                : worksheetId // ignore: cast_nullable_to_non_nullable
+                    as String,
+        seed:
+            null == seed
+                ? _value.seed
+                : seed // ignore: cast_nullable_to_non_nullable
+                    as int,
+        questionIds:
+            null == questionIds
+                ? _value._questionIds
+                : questionIds // ignore: cast_nullable_to_non_nullable
+                    as List<String>,
+      ),
+    );
   }
 }
 
@@ -933,11 +1016,11 @@ class __$$ResolvedWorksheetImplCopyWithImpl<$Res>
 
 @JsonSerializable(explicitToJson: true)
 class _$ResolvedWorksheetImpl implements _ResolvedWorksheet {
-  const _$ResolvedWorksheetImpl(
-      {required this.worksheetId,
-      required this.seed,
-      required final List<String> questionIds})
-      : _questionIds = questionIds;
+  const _$ResolvedWorksheetImpl({
+    required this.worksheetId,
+    required this.seed,
+    required final List<String> questionIds,
+  }) : _questionIds = questionIds;
 
   factory _$ResolvedWorksheetImpl.fromJson(Map<String, dynamic> json) =>
       _$$ResolvedWorksheetImplFromJson(json);
@@ -967,35 +1050,42 @@ class _$ResolvedWorksheetImpl implements _ResolvedWorksheet {
             (identical(other.worksheetId, worksheetId) ||
                 other.worksheetId == worksheetId) &&
             (identical(other.seed, seed) || other.seed == seed) &&
-            const DeepCollectionEquality()
-                .equals(other._questionIds, _questionIds));
+            const DeepCollectionEquality().equals(
+              other._questionIds,
+              _questionIds,
+            ));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, worksheetId, seed,
-      const DeepCollectionEquality().hash(_questionIds));
+  int get hashCode => Object.hash(
+    runtimeType,
+    worksheetId,
+    seed,
+    const DeepCollectionEquality().hash(_questionIds),
+  );
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ResolvedWorksheetImplCopyWith<_$ResolvedWorksheetImpl> get copyWith =>
       __$$ResolvedWorksheetImplCopyWithImpl<_$ResolvedWorksheetImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ResolvedWorksheetImplToJson(
-      this,
-    );
+    return _$$ResolvedWorksheetImplToJson(this);
   }
 }
 
 abstract class _ResolvedWorksheet implements ResolvedWorksheet {
-  const factory _ResolvedWorksheet(
-      {required final String worksheetId,
-      required final int seed,
-      required final List<String> questionIds}) = _$ResolvedWorksheetImpl;
+  const factory _ResolvedWorksheet({
+    required final String worksheetId,
+    required final int seed,
+    required final List<String> questionIds,
+  }) = _$ResolvedWorksheetImpl;
 
   factory _ResolvedWorksheet.fromJson(Map<String, dynamic> json) =
       _$ResolvedWorksheetImpl.fromJson;
@@ -1045,20 +1135,21 @@ abstract class $ArenaRoomCopyWith<$Res> {
   factory $ArenaRoomCopyWith(ArenaRoom value, $Res Function(ArenaRoom) then) =
       _$ArenaRoomCopyWithImpl<$Res, ArenaRoom>;
   @useResult
-  $Res call(
-      {String id,
-      String roomCode,
-      ArenaStatus status,
-      String hostId,
-      String? guestId,
-      ArenaConfig config,
-      ResolvedWorksheet? resolvedWorksheet,
-      ArenaRound? round,
-      int hostScore,
-      int guestScore,
-      ArenaPlayer? host,
-      ArenaPlayer? guest,
-      @TimestampConverter() DateTime? createdAt});
+  $Res call({
+    String id,
+    String roomCode,
+    ArenaStatus status,
+    String hostId,
+    String? guestId,
+    ArenaConfig config,
+    ResolvedWorksheet? resolvedWorksheet,
+    ArenaRound? round,
+    int hostScore,
+    int guestScore,
+    ArenaPlayer? host,
+    ArenaPlayer? guest,
+    @TimestampConverter() DateTime? createdAt,
+  });
 
   $ArenaConfigCopyWith<$Res> get config;
   $ResolvedWorksheetCopyWith<$Res>? get resolvedWorksheet;
@@ -1094,60 +1185,76 @@ class _$ArenaRoomCopyWithImpl<$Res, $Val extends ArenaRoom>
     Object? guest = freezed,
     Object? createdAt = freezed,
   }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      roomCode: null == roomCode
-          ? _value.roomCode
-          : roomCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as ArenaStatus,
-      hostId: null == hostId
-          ? _value.hostId
-          : hostId // ignore: cast_nullable_to_non_nullable
-              as String,
-      guestId: freezed == guestId
-          ? _value.guestId
-          : guestId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      config: null == config
-          ? _value.config
-          : config // ignore: cast_nullable_to_non_nullable
-              as ArenaConfig,
-      resolvedWorksheet: freezed == resolvedWorksheet
-          ? _value.resolvedWorksheet
-          : resolvedWorksheet // ignore: cast_nullable_to_non_nullable
-              as ResolvedWorksheet?,
-      round: freezed == round
-          ? _value.round
-          : round // ignore: cast_nullable_to_non_nullable
-              as ArenaRound?,
-      hostScore: null == hostScore
-          ? _value.hostScore
-          : hostScore // ignore: cast_nullable_to_non_nullable
-              as int,
-      guestScore: null == guestScore
-          ? _value.guestScore
-          : guestScore // ignore: cast_nullable_to_non_nullable
-              as int,
-      host: freezed == host
-          ? _value.host
-          : host // ignore: cast_nullable_to_non_nullable
-              as ArenaPlayer?,
-      guest: freezed == guest
-          ? _value.guest
-          : guest // ignore: cast_nullable_to_non_nullable
-              as ArenaPlayer?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            id:
+                null == id
+                    ? _value.id
+                    : id // ignore: cast_nullable_to_non_nullable
+                        as String,
+            roomCode:
+                null == roomCode
+                    ? _value.roomCode
+                    : roomCode // ignore: cast_nullable_to_non_nullable
+                        as String,
+            status:
+                null == status
+                    ? _value.status
+                    : status // ignore: cast_nullable_to_non_nullable
+                        as ArenaStatus,
+            hostId:
+                null == hostId
+                    ? _value.hostId
+                    : hostId // ignore: cast_nullable_to_non_nullable
+                        as String,
+            guestId:
+                freezed == guestId
+                    ? _value.guestId
+                    : guestId // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            config:
+                null == config
+                    ? _value.config
+                    : config // ignore: cast_nullable_to_non_nullable
+                        as ArenaConfig,
+            resolvedWorksheet:
+                freezed == resolvedWorksheet
+                    ? _value.resolvedWorksheet
+                    : resolvedWorksheet // ignore: cast_nullable_to_non_nullable
+                        as ResolvedWorksheet?,
+            round:
+                freezed == round
+                    ? _value.round
+                    : round // ignore: cast_nullable_to_non_nullable
+                        as ArenaRound?,
+            hostScore:
+                null == hostScore
+                    ? _value.hostScore
+                    : hostScore // ignore: cast_nullable_to_non_nullable
+                        as int,
+            guestScore:
+                null == guestScore
+                    ? _value.guestScore
+                    : guestScore // ignore: cast_nullable_to_non_nullable
+                        as int,
+            host:
+                freezed == host
+                    ? _value.host
+                    : host // ignore: cast_nullable_to_non_nullable
+                        as ArenaPlayer?,
+            guest:
+                freezed == guest
+                    ? _value.guest
+                    : guest // ignore: cast_nullable_to_non_nullable
+                        as ArenaPlayer?,
+            createdAt:
+                freezed == createdAt
+                    ? _value.createdAt
+                    : createdAt // ignore: cast_nullable_to_non_nullable
+                        as DateTime?,
+          )
+          as $Val,
+    );
   }
 
   @override
@@ -1211,24 +1318,26 @@ class _$ArenaRoomCopyWithImpl<$Res, $Val extends ArenaRoom>
 abstract class _$$ArenaRoomImplCopyWith<$Res>
     implements $ArenaRoomCopyWith<$Res> {
   factory _$$ArenaRoomImplCopyWith(
-          _$ArenaRoomImpl value, $Res Function(_$ArenaRoomImpl) then) =
-      __$$ArenaRoomImplCopyWithImpl<$Res>;
+    _$ArenaRoomImpl value,
+    $Res Function(_$ArenaRoomImpl) then,
+  ) = __$$ArenaRoomImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String id,
-      String roomCode,
-      ArenaStatus status,
-      String hostId,
-      String? guestId,
-      ArenaConfig config,
-      ResolvedWorksheet? resolvedWorksheet,
-      ArenaRound? round,
-      int hostScore,
-      int guestScore,
-      ArenaPlayer? host,
-      ArenaPlayer? guest,
-      @TimestampConverter() DateTime? createdAt});
+  $Res call({
+    String id,
+    String roomCode,
+    ArenaStatus status,
+    String hostId,
+    String? guestId,
+    ArenaConfig config,
+    ResolvedWorksheet? resolvedWorksheet,
+    ArenaRound? round,
+    int hostScore,
+    int guestScore,
+    ArenaPlayer? host,
+    ArenaPlayer? guest,
+    @TimestampConverter() DateTime? createdAt,
+  });
 
   @override
   $ArenaConfigCopyWith<$Res> get config;
@@ -1247,8 +1356,9 @@ class __$$ArenaRoomImplCopyWithImpl<$Res>
     extends _$ArenaRoomCopyWithImpl<$Res, _$ArenaRoomImpl>
     implements _$$ArenaRoomImplCopyWith<$Res> {
   __$$ArenaRoomImplCopyWithImpl(
-      _$ArenaRoomImpl _value, $Res Function(_$ArenaRoomImpl) _then)
-      : super(_value, _then);
+    _$ArenaRoomImpl _value,
+    $Res Function(_$ArenaRoomImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -1267,60 +1377,75 @@ class __$$ArenaRoomImplCopyWithImpl<$Res>
     Object? guest = freezed,
     Object? createdAt = freezed,
   }) {
-    return _then(_$ArenaRoomImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      roomCode: null == roomCode
-          ? _value.roomCode
-          : roomCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as ArenaStatus,
-      hostId: null == hostId
-          ? _value.hostId
-          : hostId // ignore: cast_nullable_to_non_nullable
-              as String,
-      guestId: freezed == guestId
-          ? _value.guestId
-          : guestId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      config: null == config
-          ? _value.config
-          : config // ignore: cast_nullable_to_non_nullable
-              as ArenaConfig,
-      resolvedWorksheet: freezed == resolvedWorksheet
-          ? _value.resolvedWorksheet
-          : resolvedWorksheet // ignore: cast_nullable_to_non_nullable
-              as ResolvedWorksheet?,
-      round: freezed == round
-          ? _value.round
-          : round // ignore: cast_nullable_to_non_nullable
-              as ArenaRound?,
-      hostScore: null == hostScore
-          ? _value.hostScore
-          : hostScore // ignore: cast_nullable_to_non_nullable
-              as int,
-      guestScore: null == guestScore
-          ? _value.guestScore
-          : guestScore // ignore: cast_nullable_to_non_nullable
-              as int,
-      host: freezed == host
-          ? _value.host
-          : host // ignore: cast_nullable_to_non_nullable
-              as ArenaPlayer?,
-      guest: freezed == guest
-          ? _value.guest
-          : guest // ignore: cast_nullable_to_non_nullable
-              as ArenaPlayer?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-    ));
+    return _then(
+      _$ArenaRoomImpl(
+        id:
+            null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                    as String,
+        roomCode:
+            null == roomCode
+                ? _value.roomCode
+                : roomCode // ignore: cast_nullable_to_non_nullable
+                    as String,
+        status:
+            null == status
+                ? _value.status
+                : status // ignore: cast_nullable_to_non_nullable
+                    as ArenaStatus,
+        hostId:
+            null == hostId
+                ? _value.hostId
+                : hostId // ignore: cast_nullable_to_non_nullable
+                    as String,
+        guestId:
+            freezed == guestId
+                ? _value.guestId
+                : guestId // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        config:
+            null == config
+                ? _value.config
+                : config // ignore: cast_nullable_to_non_nullable
+                    as ArenaConfig,
+        resolvedWorksheet:
+            freezed == resolvedWorksheet
+                ? _value.resolvedWorksheet
+                : resolvedWorksheet // ignore: cast_nullable_to_non_nullable
+                    as ResolvedWorksheet?,
+        round:
+            freezed == round
+                ? _value.round
+                : round // ignore: cast_nullable_to_non_nullable
+                    as ArenaRound?,
+        hostScore:
+            null == hostScore
+                ? _value.hostScore
+                : hostScore // ignore: cast_nullable_to_non_nullable
+                    as int,
+        guestScore:
+            null == guestScore
+                ? _value.guestScore
+                : guestScore // ignore: cast_nullable_to_non_nullable
+                    as int,
+        host:
+            freezed == host
+                ? _value.host
+                : host // ignore: cast_nullable_to_non_nullable
+                    as ArenaPlayer?,
+        guest:
+            freezed == guest
+                ? _value.guest
+                : guest // ignore: cast_nullable_to_non_nullable
+                    as ArenaPlayer?,
+        createdAt:
+            freezed == createdAt
+                ? _value.createdAt
+                : createdAt // ignore: cast_nullable_to_non_nullable
+                    as DateTime?,
+      ),
+    );
   }
 }
 
@@ -1328,20 +1453,21 @@ class __$$ArenaRoomImplCopyWithImpl<$Res>
 
 @JsonSerializable(explicitToJson: true)
 class _$ArenaRoomImpl implements _ArenaRoom {
-  const _$ArenaRoomImpl(
-      {required this.id,
-      required this.roomCode,
-      required this.status,
-      required this.hostId,
-      this.guestId,
-      required this.config,
-      this.resolvedWorksheet,
-      this.round,
-      this.hostScore = 0,
-      this.guestScore = 0,
-      this.host,
-      this.guest,
-      @TimestampConverter() this.createdAt});
+  const _$ArenaRoomImpl({
+    required this.id,
+    required this.roomCode,
+    required this.status,
+    required this.hostId,
+    this.guestId,
+    required this.config,
+    this.resolvedWorksheet,
+    this.round,
+    this.hostScore = 0,
+    this.guestScore = 0,
+    this.host,
+    this.guest,
+    @TimestampConverter() this.createdAt,
+  });
 
   factory _$ArenaRoomImpl.fromJson(Map<String, dynamic> json) =>
       _$$ArenaRoomImplFromJson(json);
@@ -1409,20 +1535,21 @@ class _$ArenaRoomImpl implements _ArenaRoom {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      roomCode,
-      status,
-      hostId,
-      guestId,
-      config,
-      resolvedWorksheet,
-      round,
-      hostScore,
-      guestScore,
-      host,
-      guest,
-      createdAt);
+    runtimeType,
+    id,
+    roomCode,
+    status,
+    hostId,
+    guestId,
+    config,
+    resolvedWorksheet,
+    round,
+    hostScore,
+    guestScore,
+    host,
+    guest,
+    createdAt,
+  );
 
   @JsonKey(ignore: true)
   @override
@@ -1432,27 +1559,26 @@ class _$ArenaRoomImpl implements _ArenaRoom {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ArenaRoomImplToJson(
-      this,
-    );
+    return _$$ArenaRoomImplToJson(this);
   }
 }
 
 abstract class _ArenaRoom implements ArenaRoom {
-  const factory _ArenaRoom(
-      {required final String id,
-      required final String roomCode,
-      required final ArenaStatus status,
-      required final String hostId,
-      final String? guestId,
-      required final ArenaConfig config,
-      final ResolvedWorksheet? resolvedWorksheet,
-      final ArenaRound? round,
-      final int hostScore,
-      final int guestScore,
-      final ArenaPlayer? host,
-      final ArenaPlayer? guest,
-      @TimestampConverter() final DateTime? createdAt}) = _$ArenaRoomImpl;
+  const factory _ArenaRoom({
+    required final String id,
+    required final String roomCode,
+    required final ArenaStatus status,
+    required final String hostId,
+    final String? guestId,
+    required final ArenaConfig config,
+    final ResolvedWorksheet? resolvedWorksheet,
+    final ArenaRound? round,
+    final int hostScore,
+    final int guestScore,
+    final ArenaPlayer? host,
+    final ArenaPlayer? guest,
+    @TimestampConverter() final DateTime? createdAt,
+  }) = _$ArenaRoomImpl;
 
   factory _ArenaRoom.fromJson(Map<String, dynamic> json) =
       _$ArenaRoomImpl.fromJson;

@@ -11,10 +11,10 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/gradient_background.dart';
 import '../../auth/logic/auth_controller.dart';
 import '../../auth/models/app_user.dart';
+import '../../moderation/ugc_policy_gate.dart';
 import '../data/word_match_providers.dart';
 import '../data/word_match_share_repo.dart';
 import '../logic/word_match_sets_controller.dart';
-import '../logic/word_match_sync_service.dart';
 import 'prebuilt_sets_page.dart';
 
 class WordMatchHomePage extends ConsumerWidget {
@@ -24,9 +24,6 @@ class WordMatchHomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // Initialize sync service
-    ref.watch(wordMatchSyncProvider);
-
     final setsState = ref.watch(wordMatchSetsControllerProvider);
 
     return Scaffold(
@@ -45,47 +42,7 @@ class WordMatchHomePage extends ConsumerWidget {
             shadows: [Shadow(blurRadius: 5, color: Colors.black)],
           ),
         ),
-        actions: [
-          // Sync Button
-          Consumer(
-            builder: (context, ref, child) {
-              return IconButton(
-                icon: const Icon(Icons.sync, color: Colors.white),
-                tooltip: 'Senkronize Et',
-                onPressed: () async {
-                  final scaffoldMessenger = ScaffoldMessenger.of(context);
-                  try {
-                    scaffoldMessenger.showSnackBar(
-                      const SnackBar(
-                        content: Text('Senkronizasyon başlatılıyor...'),
-                        duration: Duration(seconds: 1),
-                      ),
-                    );
 
-                    final service = await ref.read(
-                      wordMatchSyncProvider.future,
-                    );
-                    await service.forceSync();
-
-                    scaffoldMessenger.showSnackBar(
-                      const SnackBar(
-                        content: Text('Senkronizasyon tamamlandı'),
-                        backgroundColor: Colors.green,
-                      ),
-                    );
-                  } catch (e) {
-                    scaffoldMessenger.showSnackBar(
-                      SnackBar(
-                        content: Text('Hata: $e'),
-                        backgroundColor: Colors.red,
-                      ),
-                    );
-                  }
-                },
-              );
-            },
-          ),
-        ],
         leading: Container(
           margin: const EdgeInsets.all(8),
           decoration: BoxDecoration(
@@ -384,7 +341,8 @@ class _SetList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final visibleSets = state.sets.where((s) => s.set.name != 'Words from Games').toList();
+    final visibleSets =
+        state.sets.where((s) => s.set.name != 'Words from Games').toList();
     if (visibleSets.isEmpty) {
       return _EmptyState(onCreateTap: onCreateSet);
     }
@@ -883,6 +841,9 @@ class _SetList extends ConsumerWidget {
       final AppUser user =
           (ref.read(authControllerProvider).value) ??
           await notifier.ensureAnonymousGuestSignedIn();
+      if (!context.mounted) return;
+      if (!await ensureCurrentUgcAcceptance(context, ref)) return;
+      if (!context.mounted) return;
 
       // Show a simple loading dialog
       if (context.mounted) {

@@ -12,7 +12,8 @@ part of 'game_invitation.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 GameInvitation _$GameInvitationFromJson(Map<String, dynamic> json) {
   return _GameInvitation.fromJson(json);
@@ -40,18 +41,20 @@ mixin _$GameInvitation {
 /// @nodoc
 abstract class $GameInvitationCopyWith<$Res> {
   factory $GameInvitationCopyWith(
-          GameInvitation value, $Res Function(GameInvitation) then) =
-      _$GameInvitationCopyWithImpl<$Res, GameInvitation>;
+    GameInvitation value,
+    $Res Function(GameInvitation) then,
+  ) = _$GameInvitationCopyWithImpl<$Res, GameInvitation>;
   @useResult
-  $Res call(
-      {String id,
-      String fromUid,
-      String fromName,
-      String toUid,
-      String roomId,
-      String gameType,
-      String status,
-      DateTime? createdAt});
+  $Res call({
+    String id,
+    String fromUid,
+    String fromName,
+    String toUid,
+    String roomId,
+    String gameType,
+    String status,
+    DateTime? createdAt,
+  });
 }
 
 /// @nodoc
@@ -76,60 +79,73 @@ class _$GameInvitationCopyWithImpl<$Res, $Val extends GameInvitation>
     Object? status = null,
     Object? createdAt = freezed,
   }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      fromUid: null == fromUid
-          ? _value.fromUid
-          : fromUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      fromName: null == fromName
-          ? _value.fromName
-          : fromName // ignore: cast_nullable_to_non_nullable
-              as String,
-      toUid: null == toUid
-          ? _value.toUid
-          : toUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      roomId: null == roomId
-          ? _value.roomId
-          : roomId // ignore: cast_nullable_to_non_nullable
-              as String,
-      gameType: null == gameType
-          ? _value.gameType
-          : gameType // ignore: cast_nullable_to_non_nullable
-              as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            id:
+                null == id
+                    ? _value.id
+                    : id // ignore: cast_nullable_to_non_nullable
+                        as String,
+            fromUid:
+                null == fromUid
+                    ? _value.fromUid
+                    : fromUid // ignore: cast_nullable_to_non_nullable
+                        as String,
+            fromName:
+                null == fromName
+                    ? _value.fromName
+                    : fromName // ignore: cast_nullable_to_non_nullable
+                        as String,
+            toUid:
+                null == toUid
+                    ? _value.toUid
+                    : toUid // ignore: cast_nullable_to_non_nullable
+                        as String,
+            roomId:
+                null == roomId
+                    ? _value.roomId
+                    : roomId // ignore: cast_nullable_to_non_nullable
+                        as String,
+            gameType:
+                null == gameType
+                    ? _value.gameType
+                    : gameType // ignore: cast_nullable_to_non_nullable
+                        as String,
+            status:
+                null == status
+                    ? _value.status
+                    : status // ignore: cast_nullable_to_non_nullable
+                        as String,
+            createdAt:
+                freezed == createdAt
+                    ? _value.createdAt
+                    : createdAt // ignore: cast_nullable_to_non_nullable
+                        as DateTime?,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$GameInvitationImplCopyWith<$Res>
     implements $GameInvitationCopyWith<$Res> {
-  factory _$$GameInvitationImplCopyWith(_$GameInvitationImpl value,
-          $Res Function(_$GameInvitationImpl) then) =
-      __$$GameInvitationImplCopyWithImpl<$Res>;
+  factory _$$GameInvitationImplCopyWith(
+    _$GameInvitationImpl value,
+    $Res Function(_$GameInvitationImpl) then,
+  ) = __$$GameInvitationImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String id,
-      String fromUid,
-      String fromName,
-      String toUid,
-      String roomId,
-      String gameType,
-      String status,
-      DateTime? createdAt});
+  $Res call({
+    String id,
+    String fromUid,
+    String fromName,
+    String toUid,
+    String roomId,
+    String gameType,
+    String status,
+    DateTime? createdAt,
+  });
 }
 
 /// @nodoc
@@ -137,8 +153,9 @@ class __$$GameInvitationImplCopyWithImpl<$Res>
     extends _$GameInvitationCopyWithImpl<$Res, _$GameInvitationImpl>
     implements _$$GameInvitationImplCopyWith<$Res> {
   __$$GameInvitationImplCopyWithImpl(
-      _$GameInvitationImpl _value, $Res Function(_$GameInvitationImpl) _then)
-      : super(_value, _then);
+    _$GameInvitationImpl _value,
+    $Res Function(_$GameInvitationImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -152,55 +169,66 @@ class __$$GameInvitationImplCopyWithImpl<$Res>
     Object? status = null,
     Object? createdAt = freezed,
   }) {
-    return _then(_$GameInvitationImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      fromUid: null == fromUid
-          ? _value.fromUid
-          : fromUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      fromName: null == fromName
-          ? _value.fromName
-          : fromName // ignore: cast_nullable_to_non_nullable
-              as String,
-      toUid: null == toUid
-          ? _value.toUid
-          : toUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      roomId: null == roomId
-          ? _value.roomId
-          : roomId // ignore: cast_nullable_to_non_nullable
-              as String,
-      gameType: null == gameType
-          ? _value.gameType
-          : gameType // ignore: cast_nullable_to_non_nullable
-              as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-    ));
+    return _then(
+      _$GameInvitationImpl(
+        id:
+            null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                    as String,
+        fromUid:
+            null == fromUid
+                ? _value.fromUid
+                : fromUid // ignore: cast_nullable_to_non_nullable
+                    as String,
+        fromName:
+            null == fromName
+                ? _value.fromName
+                : fromName // ignore: cast_nullable_to_non_nullable
+                    as String,
+        toUid:
+            null == toUid
+                ? _value.toUid
+                : toUid // ignore: cast_nullable_to_non_nullable
+                    as String,
+        roomId:
+            null == roomId
+                ? _value.roomId
+                : roomId // ignore: cast_nullable_to_non_nullable
+                    as String,
+        gameType:
+            null == gameType
+                ? _value.gameType
+                : gameType // ignore: cast_nullable_to_non_nullable
+                    as String,
+        status:
+            null == status
+                ? _value.status
+                : status // ignore: cast_nullable_to_non_nullable
+                    as String,
+        createdAt:
+            freezed == createdAt
+                ? _value.createdAt
+                : createdAt // ignore: cast_nullable_to_non_nullable
+                    as DateTime?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$GameInvitationImpl implements _GameInvitation {
-  const _$GameInvitationImpl(
-      {required this.id,
-      required this.fromUid,
-      required this.fromName,
-      required this.toUid,
-      required this.roomId,
-      required this.gameType,
-      this.status = 'pending',
-      this.createdAt});
+  const _$GameInvitationImpl({
+    required this.id,
+    required this.fromUid,
+    required this.fromName,
+    required this.toUid,
+    required this.roomId,
+    required this.gameType,
+    this.status = 'pending',
+    this.createdAt,
+  });
 
   factory _$GameInvitationImpl.fromJson(Map<String, dynamic> json) =>
       _$$GameInvitationImplFromJson(json);
@@ -217,11 +245,11 @@ class _$GameInvitationImpl implements _GameInvitation {
   final String roomId;
   @override
   final String gameType;
-// 'word_battle' | 'grammar_arena'
+  // 'word_battle' | 'grammar_arena'
   @override
   @JsonKey()
   final String status;
-// pending, accepted, rejected
+  // pending, accepted, rejected
   @override
   final DateTime? createdAt;
 
@@ -250,34 +278,44 @@ class _$GameInvitationImpl implements _GameInvitation {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, fromUid, fromName, toUid,
-      roomId, gameType, status, createdAt);
+  int get hashCode => Object.hash(
+    runtimeType,
+    id,
+    fromUid,
+    fromName,
+    toUid,
+    roomId,
+    gameType,
+    status,
+    createdAt,
+  );
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$GameInvitationImplCopyWith<_$GameInvitationImpl> get copyWith =>
       __$$GameInvitationImplCopyWithImpl<_$GameInvitationImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$GameInvitationImplToJson(
-      this,
-    );
+    return _$$GameInvitationImplToJson(this);
   }
 }
 
 abstract class _GameInvitation implements GameInvitation {
-  const factory _GameInvitation(
-      {required final String id,
-      required final String fromUid,
-      required final String fromName,
-      required final String toUid,
-      required final String roomId,
-      required final String gameType,
-      final String status,
-      final DateTime? createdAt}) = _$GameInvitationImpl;
+  const factory _GameInvitation({
+    required final String id,
+    required final String fromUid,
+    required final String fromName,
+    required final String toUid,
+    required final String roomId,
+    required final String gameType,
+    final String status,
+    final DateTime? createdAt,
+  }) = _$GameInvitationImpl;
 
   factory _GameInvitation.fromJson(Map<String, dynamic> json) =
       _$GameInvitationImpl.fromJson;

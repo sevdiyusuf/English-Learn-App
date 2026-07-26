@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import '../../models/training_models.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -30,35 +29,39 @@ class EngineMcq extends StatelessWidget {
           ),
           child: Text(
             item.prompt.replaceAll('____', '_______'),
-            style: const TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.w500),
+            style: const TextStyle(
+              fontSize: 20,
+              color: Colors.white,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ),
         const SizedBox(height: 24),
         ...item.options.map((option) {
           final isSelected = selected == option;
           final isCorrect = option == item.answer;
-          
+
           Color borderColor = AppColors.surfaceLight;
           Color bgColor = AppColors.surfaceMedium;
           IconData? icon;
 
           if (isLocked) {
-             if (isSelected) {
-               if (isCorrect) {
-                 borderColor = AppColors.success;
-                 bgColor = AppColors.success.withValues(alpha: 0.2);
-                 icon = Icons.check_circle;
-               } else {
-                 borderColor = AppColors.error;
-                 bgColor = AppColors.error.withValues(alpha: 0.2);
-                 icon = Icons.cancel;
-               }
-             } else if (isCorrect) {
-               // Show correct answer if user missed it
-               borderColor = AppColors.success;
-               bgColor = AppColors.success.withValues(alpha: 0.1);
-               icon = Icons.check_circle_outline;
-             }
+            if (isSelected) {
+              if (isCorrect) {
+                borderColor = AppColors.success;
+                bgColor = AppColors.success.withValues(alpha: 0.2);
+                icon = Icons.check_circle;
+              } else {
+                borderColor = AppColors.error;
+                bgColor = AppColors.error.withValues(alpha: 0.2);
+                icon = Icons.cancel;
+              }
+            } else if (isCorrect) {
+              // Show correct answer if user missed it
+              borderColor = AppColors.success;
+              bgColor = AppColors.success.withValues(alpha: 0.1);
+              icon = Icons.check_circle_outline;
+            }
           } else {
             if (isSelected) {
               borderColor = AppColors.primary;
@@ -88,7 +91,14 @@ class EngineMcq extends StatelessWidget {
                       style: const TextStyle(fontSize: 16, color: Colors.white),
                     ),
                   ),
-                  if (icon != null) Icon(icon, color: isLocked ? borderColor : (isSelected ? AppColors.primary : Colors.grey)),
+                  if (icon != null)
+                    Icon(
+                      icon,
+                      color:
+                          isLocked
+                              ? borderColor
+                              : (isSelected ? AppColors.primary : Colors.grey),
+                    ),
                 ],
               ),
             ),
@@ -100,18 +110,12 @@ class EngineMcq extends StatelessWidget {
           const SizedBox(height: 16),
           const Text(
             'Çeviri:',
-            style: TextStyle(
-              color: Colors.white54,
-              fontSize: 14,
-            ),
+            style: TextStyle(color: Colors.white54, fontSize: 14),
           ),
           const SizedBox(height: 4),
           Text(
             item.translation!,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 15,
-            ),
+            style: const TextStyle(color: Colors.white, fontSize: 15),
           ),
         ],
       ],

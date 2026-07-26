@@ -54,7 +54,7 @@ class _GameTimerState extends State<GameTimer> {
         '${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
 
     if (widget.isSmall) {
-       return Container(
+      return Container(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         decoration: BoxDecoration(
           color: Colors.white.withValues(alpha: 0.25),

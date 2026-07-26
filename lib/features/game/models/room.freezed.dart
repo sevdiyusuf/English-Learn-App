@@ -12,7 +12,8 @@ part of 'room.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 Room _$RoomFromJson(Map<String, dynamic> json) {
   return _Room.fromJson(json);
@@ -42,8 +43,7 @@ mixin _$Room {
   @TimestampConverter()
   DateTime get createdAt => throw _privateConstructorUsedError;
   @TimestampConverter()
-  DateTime? get updatedAt =>
-      throw _privateConstructorUsedError; // Word Battle game mode (Phase 1)
+  DateTime? get updatedAt => throw _privateConstructorUsedError; // Word Battle game mode (Phase 1)
   @GameModeConverter()
   GameMode get gameMode => throw _privateConstructorUsedError;
   bool get locked => throw _privateConstructorUsedError;
@@ -61,27 +61,28 @@ abstract class $RoomCopyWith<$Res> {
   factory $RoomCopyWith(Room value, $Res Function(Room) then) =
       _$RoomCopyWithImpl<$Res, Room>;
   @useResult
-  $Res call(
-      {@JsonKey(includeFromJson: false, includeToJson: false) String? id,
-      String? roomCode,
-      @RoomStatusConverter() RoomStatus status,
-      List<String> players,
-      Map<String, String> playerNames,
-      List<String> activePlayerIds,
-      int currentTurnIndex,
-      String? currentTurnUid,
-      @TimestampConverter() DateTime? turnDeadlineAt,
-      int turnDurationSeconds,
-      String? currentWordType,
-      String? currentVerb,
-      String? winnerUid,
-      String hostUid,
-      @TimestampConverter() DateTime createdAt,
-      @TimestampConverter() DateTime? updatedAt,
-      @GameModeConverter() GameMode gameMode,
-      bool locked,
-      @GameRoomSettingsConverter() GameRoomSettings? settings,
-      Map<String, int> scores});
+  $Res call({
+    @JsonKey(includeFromJson: false, includeToJson: false) String? id,
+    String? roomCode,
+    @RoomStatusConverter() RoomStatus status,
+    List<String> players,
+    Map<String, String> playerNames,
+    List<String> activePlayerIds,
+    int currentTurnIndex,
+    String? currentTurnUid,
+    @TimestampConverter() DateTime? turnDeadlineAt,
+    int turnDurationSeconds,
+    String? currentWordType,
+    String? currentVerb,
+    String? winnerUid,
+    String hostUid,
+    @TimestampConverter() DateTime createdAt,
+    @TimestampConverter() DateTime? updatedAt,
+    @GameModeConverter() GameMode gameMode,
+    bool locked,
+    @GameRoomSettingsConverter() GameRoomSettings? settings,
+    Map<String, int> scores,
+  });
 }
 
 /// @nodoc
@@ -118,119 +119,144 @@ class _$RoomCopyWithImpl<$Res, $Val extends Room>
     Object? settings = freezed,
     Object? scores = null,
   }) {
-    return _then(_value.copyWith(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-      roomCode: freezed == roomCode
-          ? _value.roomCode
-          : roomCode // ignore: cast_nullable_to_non_nullable
-              as String?,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as RoomStatus,
-      players: null == players
-          ? _value.players
-          : players // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      playerNames: null == playerNames
-          ? _value.playerNames
-          : playerNames // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>,
-      activePlayerIds: null == activePlayerIds
-          ? _value.activePlayerIds
-          : activePlayerIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      currentTurnIndex: null == currentTurnIndex
-          ? _value.currentTurnIndex
-          : currentTurnIndex // ignore: cast_nullable_to_non_nullable
-              as int,
-      currentTurnUid: freezed == currentTurnUid
-          ? _value.currentTurnUid
-          : currentTurnUid // ignore: cast_nullable_to_non_nullable
-              as String?,
-      turnDeadlineAt: freezed == turnDeadlineAt
-          ? _value.turnDeadlineAt
-          : turnDeadlineAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      turnDurationSeconds: null == turnDurationSeconds
-          ? _value.turnDurationSeconds
-          : turnDurationSeconds // ignore: cast_nullable_to_non_nullable
-              as int,
-      currentWordType: freezed == currentWordType
-          ? _value.currentWordType
-          : currentWordType // ignore: cast_nullable_to_non_nullable
-              as String?,
-      currentVerb: freezed == currentVerb
-          ? _value.currentVerb
-          : currentVerb // ignore: cast_nullable_to_non_nullable
-              as String?,
-      winnerUid: freezed == winnerUid
-          ? _value.winnerUid
-          : winnerUid // ignore: cast_nullable_to_non_nullable
-              as String?,
-      hostUid: null == hostUid
-          ? _value.hostUid
-          : hostUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      gameMode: null == gameMode
-          ? _value.gameMode
-          : gameMode // ignore: cast_nullable_to_non_nullable
-              as GameMode,
-      locked: null == locked
-          ? _value.locked
-          : locked // ignore: cast_nullable_to_non_nullable
-              as bool,
-      settings: freezed == settings
-          ? _value.settings
-          : settings // ignore: cast_nullable_to_non_nullable
-              as GameRoomSettings?,
-      scores: null == scores
-          ? _value.scores
-          : scores // ignore: cast_nullable_to_non_nullable
-              as Map<String, int>,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            id:
+                freezed == id
+                    ? _value.id
+                    : id // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            roomCode:
+                freezed == roomCode
+                    ? _value.roomCode
+                    : roomCode // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            status:
+                null == status
+                    ? _value.status
+                    : status // ignore: cast_nullable_to_non_nullable
+                        as RoomStatus,
+            players:
+                null == players
+                    ? _value.players
+                    : players // ignore: cast_nullable_to_non_nullable
+                        as List<String>,
+            playerNames:
+                null == playerNames
+                    ? _value.playerNames
+                    : playerNames // ignore: cast_nullable_to_non_nullable
+                        as Map<String, String>,
+            activePlayerIds:
+                null == activePlayerIds
+                    ? _value.activePlayerIds
+                    : activePlayerIds // ignore: cast_nullable_to_non_nullable
+                        as List<String>,
+            currentTurnIndex:
+                null == currentTurnIndex
+                    ? _value.currentTurnIndex
+                    : currentTurnIndex // ignore: cast_nullable_to_non_nullable
+                        as int,
+            currentTurnUid:
+                freezed == currentTurnUid
+                    ? _value.currentTurnUid
+                    : currentTurnUid // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            turnDeadlineAt:
+                freezed == turnDeadlineAt
+                    ? _value.turnDeadlineAt
+                    : turnDeadlineAt // ignore: cast_nullable_to_non_nullable
+                        as DateTime?,
+            turnDurationSeconds:
+                null == turnDurationSeconds
+                    ? _value.turnDurationSeconds
+                    : turnDurationSeconds // ignore: cast_nullable_to_non_nullable
+                        as int,
+            currentWordType:
+                freezed == currentWordType
+                    ? _value.currentWordType
+                    : currentWordType // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            currentVerb:
+                freezed == currentVerb
+                    ? _value.currentVerb
+                    : currentVerb // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            winnerUid:
+                freezed == winnerUid
+                    ? _value.winnerUid
+                    : winnerUid // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            hostUid:
+                null == hostUid
+                    ? _value.hostUid
+                    : hostUid // ignore: cast_nullable_to_non_nullable
+                        as String,
+            createdAt:
+                null == createdAt
+                    ? _value.createdAt
+                    : createdAt // ignore: cast_nullable_to_non_nullable
+                        as DateTime,
+            updatedAt:
+                freezed == updatedAt
+                    ? _value.updatedAt
+                    : updatedAt // ignore: cast_nullable_to_non_nullable
+                        as DateTime?,
+            gameMode:
+                null == gameMode
+                    ? _value.gameMode
+                    : gameMode // ignore: cast_nullable_to_non_nullable
+                        as GameMode,
+            locked:
+                null == locked
+                    ? _value.locked
+                    : locked // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            settings:
+                freezed == settings
+                    ? _value.settings
+                    : settings // ignore: cast_nullable_to_non_nullable
+                        as GameRoomSettings?,
+            scores:
+                null == scores
+                    ? _value.scores
+                    : scores // ignore: cast_nullable_to_non_nullable
+                        as Map<String, int>,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$RoomImplCopyWith<$Res> implements $RoomCopyWith<$Res> {
   factory _$$RoomImplCopyWith(
-          _$RoomImpl value, $Res Function(_$RoomImpl) then) =
-      __$$RoomImplCopyWithImpl<$Res>;
+    _$RoomImpl value,
+    $Res Function(_$RoomImpl) then,
+  ) = __$$RoomImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@JsonKey(includeFromJson: false, includeToJson: false) String? id,
-      String? roomCode,
-      @RoomStatusConverter() RoomStatus status,
-      List<String> players,
-      Map<String, String> playerNames,
-      List<String> activePlayerIds,
-      int currentTurnIndex,
-      String? currentTurnUid,
-      @TimestampConverter() DateTime? turnDeadlineAt,
-      int turnDurationSeconds,
-      String? currentWordType,
-      String? currentVerb,
-      String? winnerUid,
-      String hostUid,
-      @TimestampConverter() DateTime createdAt,
-      @TimestampConverter() DateTime? updatedAt,
-      @GameModeConverter() GameMode gameMode,
-      bool locked,
-      @GameRoomSettingsConverter() GameRoomSettings? settings,
-      Map<String, int> scores});
+  $Res call({
+    @JsonKey(includeFromJson: false, includeToJson: false) String? id,
+    String? roomCode,
+    @RoomStatusConverter() RoomStatus status,
+    List<String> players,
+    Map<String, String> playerNames,
+    List<String> activePlayerIds,
+    int currentTurnIndex,
+    String? currentTurnUid,
+    @TimestampConverter() DateTime? turnDeadlineAt,
+    int turnDurationSeconds,
+    String? currentWordType,
+    String? currentVerb,
+    String? winnerUid,
+    String hostUid,
+    @TimestampConverter() DateTime createdAt,
+    @TimestampConverter() DateTime? updatedAt,
+    @GameModeConverter() GameMode gameMode,
+    bool locked,
+    @GameRoomSettingsConverter() GameRoomSettings? settings,
+    Map<String, int> scores,
+  });
 }
 
 /// @nodoc
@@ -238,7 +264,7 @@ class __$$RoomImplCopyWithImpl<$Res>
     extends _$RoomCopyWithImpl<$Res, _$RoomImpl>
     implements _$$RoomImplCopyWith<$Res> {
   __$$RoomImplCopyWithImpl(_$RoomImpl _value, $Res Function(_$RoomImpl) _then)
-      : super(_value, _then);
+    : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -264,120 +290,142 @@ class __$$RoomImplCopyWithImpl<$Res>
     Object? settings = freezed,
     Object? scores = null,
   }) {
-    return _then(_$RoomImpl(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-      roomCode: freezed == roomCode
-          ? _value.roomCode
-          : roomCode // ignore: cast_nullable_to_non_nullable
-              as String?,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as RoomStatus,
-      players: null == players
-          ? _value._players
-          : players // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      playerNames: null == playerNames
-          ? _value._playerNames
-          : playerNames // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>,
-      activePlayerIds: null == activePlayerIds
-          ? _value._activePlayerIds
-          : activePlayerIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      currentTurnIndex: null == currentTurnIndex
-          ? _value.currentTurnIndex
-          : currentTurnIndex // ignore: cast_nullable_to_non_nullable
-              as int,
-      currentTurnUid: freezed == currentTurnUid
-          ? _value.currentTurnUid
-          : currentTurnUid // ignore: cast_nullable_to_non_nullable
-              as String?,
-      turnDeadlineAt: freezed == turnDeadlineAt
-          ? _value.turnDeadlineAt
-          : turnDeadlineAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      turnDurationSeconds: null == turnDurationSeconds
-          ? _value.turnDurationSeconds
-          : turnDurationSeconds // ignore: cast_nullable_to_non_nullable
-              as int,
-      currentWordType: freezed == currentWordType
-          ? _value.currentWordType
-          : currentWordType // ignore: cast_nullable_to_non_nullable
-              as String?,
-      currentVerb: freezed == currentVerb
-          ? _value.currentVerb
-          : currentVerb // ignore: cast_nullable_to_non_nullable
-              as String?,
-      winnerUid: freezed == winnerUid
-          ? _value.winnerUid
-          : winnerUid // ignore: cast_nullable_to_non_nullable
-              as String?,
-      hostUid: null == hostUid
-          ? _value.hostUid
-          : hostUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      gameMode: null == gameMode
-          ? _value.gameMode
-          : gameMode // ignore: cast_nullable_to_non_nullable
-              as GameMode,
-      locked: null == locked
-          ? _value.locked
-          : locked // ignore: cast_nullable_to_non_nullable
-              as bool,
-      settings: freezed == settings
-          ? _value.settings
-          : settings // ignore: cast_nullable_to_non_nullable
-              as GameRoomSettings?,
-      scores: null == scores
-          ? _value._scores
-          : scores // ignore: cast_nullable_to_non_nullable
-              as Map<String, int>,
-    ));
+    return _then(
+      _$RoomImpl(
+        id:
+            freezed == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        roomCode:
+            freezed == roomCode
+                ? _value.roomCode
+                : roomCode // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        status:
+            null == status
+                ? _value.status
+                : status // ignore: cast_nullable_to_non_nullable
+                    as RoomStatus,
+        players:
+            null == players
+                ? _value._players
+                : players // ignore: cast_nullable_to_non_nullable
+                    as List<String>,
+        playerNames:
+            null == playerNames
+                ? _value._playerNames
+                : playerNames // ignore: cast_nullable_to_non_nullable
+                    as Map<String, String>,
+        activePlayerIds:
+            null == activePlayerIds
+                ? _value._activePlayerIds
+                : activePlayerIds // ignore: cast_nullable_to_non_nullable
+                    as List<String>,
+        currentTurnIndex:
+            null == currentTurnIndex
+                ? _value.currentTurnIndex
+                : currentTurnIndex // ignore: cast_nullable_to_non_nullable
+                    as int,
+        currentTurnUid:
+            freezed == currentTurnUid
+                ? _value.currentTurnUid
+                : currentTurnUid // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        turnDeadlineAt:
+            freezed == turnDeadlineAt
+                ? _value.turnDeadlineAt
+                : turnDeadlineAt // ignore: cast_nullable_to_non_nullable
+                    as DateTime?,
+        turnDurationSeconds:
+            null == turnDurationSeconds
+                ? _value.turnDurationSeconds
+                : turnDurationSeconds // ignore: cast_nullable_to_non_nullable
+                    as int,
+        currentWordType:
+            freezed == currentWordType
+                ? _value.currentWordType
+                : currentWordType // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        currentVerb:
+            freezed == currentVerb
+                ? _value.currentVerb
+                : currentVerb // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        winnerUid:
+            freezed == winnerUid
+                ? _value.winnerUid
+                : winnerUid // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        hostUid:
+            null == hostUid
+                ? _value.hostUid
+                : hostUid // ignore: cast_nullable_to_non_nullable
+                    as String,
+        createdAt:
+            null == createdAt
+                ? _value.createdAt
+                : createdAt // ignore: cast_nullable_to_non_nullable
+                    as DateTime,
+        updatedAt:
+            freezed == updatedAt
+                ? _value.updatedAt
+                : updatedAt // ignore: cast_nullable_to_non_nullable
+                    as DateTime?,
+        gameMode:
+            null == gameMode
+                ? _value.gameMode
+                : gameMode // ignore: cast_nullable_to_non_nullable
+                    as GameMode,
+        locked:
+            null == locked
+                ? _value.locked
+                : locked // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        settings:
+            freezed == settings
+                ? _value.settings
+                : settings // ignore: cast_nullable_to_non_nullable
+                    as GameRoomSettings?,
+        scores:
+            null == scores
+                ? _value._scores
+                : scores // ignore: cast_nullable_to_non_nullable
+                    as Map<String, int>,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$RoomImpl extends _Room with DiagnosticableTreeMixin {
-  const _$RoomImpl(
-      {@JsonKey(includeFromJson: false, includeToJson: false) this.id,
-      this.roomCode,
-      @RoomStatusConverter() this.status = RoomStatus.waiting,
-      final List<String> players = const <String>[],
-      final Map<String, String> playerNames = const <String, String>{},
-      final List<String> activePlayerIds = const <String>[],
-      this.currentTurnIndex = 0,
-      this.currentTurnUid,
-      @TimestampConverter() this.turnDeadlineAt,
-      this.turnDurationSeconds = 12,
-      this.currentWordType,
-      this.currentVerb,
-      this.winnerUid,
-      required this.hostUid,
-      @TimestampConverter() required this.createdAt,
-      @TimestampConverter() this.updatedAt,
-      @GameModeConverter() this.gameMode = GameMode.core,
-      this.locked = false,
-      @GameRoomSettingsConverter() this.settings,
-      final Map<String, int> scores = const <String, int>{}})
-      : _players = players,
-        _playerNames = playerNames,
-        _activePlayerIds = activePlayerIds,
-        _scores = scores,
-        super._();
+  const _$RoomImpl({
+    @JsonKey(includeFromJson: false, includeToJson: false) this.id,
+    this.roomCode,
+    @RoomStatusConverter() this.status = RoomStatus.waiting,
+    final List<String> players = const <String>[],
+    final Map<String, String> playerNames = const <String, String>{},
+    final List<String> activePlayerIds = const <String>[],
+    this.currentTurnIndex = 0,
+    this.currentTurnUid,
+    @TimestampConverter() this.turnDeadlineAt,
+    this.turnDurationSeconds = 12,
+    this.currentWordType,
+    this.currentVerb,
+    this.winnerUid,
+    required this.hostUid,
+    @TimestampConverter() required this.createdAt,
+    @TimestampConverter() this.updatedAt,
+    @GameModeConverter() this.gameMode = GameMode.core,
+    this.locked = false,
+    @GameRoomSettingsConverter() this.settings,
+    final Map<String, int> scores = const <String, int>{},
+  }) : _players = players,
+       _playerNames = playerNames,
+       _activePlayerIds = activePlayerIds,
+       _scores = scores,
+       super._();
 
   factory _$RoomImpl.fromJson(Map<String, dynamic> json) =>
       _$$RoomImplFromJson(json);
@@ -431,10 +479,10 @@ class _$RoomImpl extends _Room with DiagnosticableTreeMixin {
   final int turnDurationSeconds;
   @override
   final String? currentWordType;
-// 'verb' or 'adjective' - tracks which word type we're waiting for
+  // 'verb' or 'adjective' - tracks which word type we're waiting for
   @override
   final String? currentVerb;
-// stored verb when waiting for adjective
+  // stored verb when waiting for adjective
   @override
   final String? winnerUid;
   @override
@@ -445,7 +493,7 @@ class _$RoomImpl extends _Room with DiagnosticableTreeMixin {
   @override
   @TimestampConverter()
   final DateTime? updatedAt;
-// Word Battle game mode (Phase 1)
+  // Word Battle game mode (Phase 1)
   @override
   @JsonKey()
   @GameModeConverter()
@@ -507,10 +555,14 @@ class _$RoomImpl extends _Room with DiagnosticableTreeMixin {
                 other.roomCode == roomCode) &&
             (identical(other.status, status) || other.status == status) &&
             const DeepCollectionEquality().equals(other._players, _players) &&
-            const DeepCollectionEquality()
-                .equals(other._playerNames, _playerNames) &&
-            const DeepCollectionEquality()
-                .equals(other._activePlayerIds, _activePlayerIds) &&
+            const DeepCollectionEquality().equals(
+              other._playerNames,
+              _playerNames,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other._activePlayerIds,
+              _activePlayerIds,
+            ) &&
             (identical(other.currentTurnIndex, currentTurnIndex) ||
                 other.currentTurnIndex == currentTurnIndex) &&
             (identical(other.currentTurnUid, currentTurnUid) ||
@@ -541,28 +593,28 @@ class _$RoomImpl extends _Room with DiagnosticableTreeMixin {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
-        runtimeType,
-        id,
-        roomCode,
-        status,
-        const DeepCollectionEquality().hash(_players),
-        const DeepCollectionEquality().hash(_playerNames),
-        const DeepCollectionEquality().hash(_activePlayerIds),
-        currentTurnIndex,
-        currentTurnUid,
-        turnDeadlineAt,
-        turnDurationSeconds,
-        currentWordType,
-        currentVerb,
-        winnerUid,
-        hostUid,
-        createdAt,
-        updatedAt,
-        gameMode,
-        locked,
-        settings,
-        const DeepCollectionEquality().hash(_scores)
-      ]);
+    runtimeType,
+    id,
+    roomCode,
+    status,
+    const DeepCollectionEquality().hash(_players),
+    const DeepCollectionEquality().hash(_playerNames),
+    const DeepCollectionEquality().hash(_activePlayerIds),
+    currentTurnIndex,
+    currentTurnUid,
+    turnDeadlineAt,
+    turnDurationSeconds,
+    currentWordType,
+    currentVerb,
+    winnerUid,
+    hostUid,
+    createdAt,
+    updatedAt,
+    gameMode,
+    locked,
+    settings,
+    const DeepCollectionEquality().hash(_scores),
+  ]);
 
   @JsonKey(ignore: true)
   @override
@@ -572,34 +624,33 @@ class _$RoomImpl extends _Room with DiagnosticableTreeMixin {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$RoomImplToJson(
-      this,
-    );
+    return _$$RoomImplToJson(this);
   }
 }
 
 abstract class _Room extends Room {
-  const factory _Room(
-      {@JsonKey(includeFromJson: false, includeToJson: false) final String? id,
-      final String? roomCode,
-      @RoomStatusConverter() final RoomStatus status,
-      final List<String> players,
-      final Map<String, String> playerNames,
-      final List<String> activePlayerIds,
-      final int currentTurnIndex,
-      final String? currentTurnUid,
-      @TimestampConverter() final DateTime? turnDeadlineAt,
-      final int turnDurationSeconds,
-      final String? currentWordType,
-      final String? currentVerb,
-      final String? winnerUid,
-      required final String hostUid,
-      @TimestampConverter() required final DateTime createdAt,
-      @TimestampConverter() final DateTime? updatedAt,
-      @GameModeConverter() final GameMode gameMode,
-      final bool locked,
-      @GameRoomSettingsConverter() final GameRoomSettings? settings,
-      final Map<String, int> scores}) = _$RoomImpl;
+  const factory _Room({
+    @JsonKey(includeFromJson: false, includeToJson: false) final String? id,
+    final String? roomCode,
+    @RoomStatusConverter() final RoomStatus status,
+    final List<String> players,
+    final Map<String, String> playerNames,
+    final List<String> activePlayerIds,
+    final int currentTurnIndex,
+    final String? currentTurnUid,
+    @TimestampConverter() final DateTime? turnDeadlineAt,
+    final int turnDurationSeconds,
+    final String? currentWordType,
+    final String? currentVerb,
+    final String? winnerUid,
+    required final String hostUid,
+    @TimestampConverter() required final DateTime createdAt,
+    @TimestampConverter() final DateTime? updatedAt,
+    @GameModeConverter() final GameMode gameMode,
+    final bool locked,
+    @GameRoomSettingsConverter() final GameRoomSettings? settings,
+    final Map<String, int> scores,
+  }) = _$RoomImpl;
   const _Room._() : super._();
 
   factory _Room.fromJson(Map<String, dynamic> json) = _$RoomImpl.fromJson;

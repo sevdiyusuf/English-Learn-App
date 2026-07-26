@@ -6,7 +6,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/word_match_providers.dart';
 import '../data/word_match_repo_interface.dart';
 import '../models/word_set.dart';
-import 'word_match_sync_service.dart';
 
 class WordSetOverview {
   const WordSetOverview({required this.set, required this.pairCount});
@@ -201,40 +200,17 @@ class WordMatchSetsController
   Future<int> createSet(String name) async {
     final repo = await _ensureRepo();
     final id = await repo.createSet(name);
-    try {
-      final syncService = await ref.read(wordMatchSyncProvider.future);
-      await syncService.syncSet(id);
-    } catch (e) {
-      debugPrint('Sync failed after createSet: $e');
-    }
     return id;
   }
 
   Future<void> deleteSet(int id) async {
     final repo = await _ensureRepo();
-    // Get set to verify cloudId before deletion
-    final set = await repo.getSet(id);
     await repo.deleteSet(id);
-
-    if (set != null && set.cloudId != null) {
-      try {
-        final syncService = await ref.read(wordMatchSyncProvider.future);
-        await syncService.deleteSetFromCloud(set.cloudId!);
-      } catch (e) {
-        debugPrint('Sync failed after deleteSet: $e');
-      }
-    }
   }
 
   Future<void> renameSet({required int id, required String name}) async {
     final repo = await _ensureRepo();
     await repo.renameSet(id: id, name: name);
-    try {
-      final syncService = await ref.read(wordMatchSyncProvider.future);
-      await syncService.syncSet(id);
-    } catch (e) {
-      debugPrint('Sync failed after renameSet: $e');
-    }
   }
 
   /// Merge two sets into a new set with [newName].
@@ -252,11 +228,12 @@ class WordMatchSetsController
     if (baseSet == null || otherSet == null) {
       throw StateError('Birleştirilecek setlerden biri bulunamadı');
     }
-    return repo.mergeSetsIntoNewSet(
+    final newId = await repo.mergeSetsIntoNewSet(
       baseSetId: baseSetId,
       otherSetId: otherSetId,
       newName: newName,
     );
+    return newId;
   }
 
   Future<WordMatchRepoInterface> _ensureRepo() async {

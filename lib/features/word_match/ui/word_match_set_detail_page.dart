@@ -12,6 +12,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/gradient_background.dart';
 import '../../auth/logic/auth_controller.dart';
 import '../../auth/models/app_user.dart';
+import '../../moderation/ugc_policy_gate.dart';
 import '../data/word_match_providers.dart';
 import '../data/word_match_share_repo.dart';
 import '../models/word_pair.dart';
@@ -524,6 +525,9 @@ class _WordMatchSetDetailPageState
       final AppUser user =
           (ref.read(authControllerProvider).value) ??
           await notifier.ensureAnonymousGuestSignedIn();
+      if (!context.mounted) return;
+      if (!await ensureCurrentUgcAcceptance(context, ref)) return;
+      if (!context.mounted) return;
 
       // Show a simple loading dialog
       if (context.mounted) {

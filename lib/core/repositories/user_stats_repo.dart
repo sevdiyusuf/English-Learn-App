@@ -276,9 +276,14 @@ class UserStatsRepo {
 
       final currentStats = await getUserStats(user);
       final lastActivityDate = currentStats.lastActivityDate;
-      final lastActivityDay = lastActivityDate != null
-          ? DateTime(lastActivityDate.year, lastActivityDate.month, lastActivityDate.day)
-          : null;
+      final lastActivityDay =
+          lastActivityDate != null
+              ? DateTime(
+                lastActivityDate.year,
+                lastActivityDate.month,
+                lastActivityDate.day,
+              )
+              : null;
 
       int newStreak = 1;
       bool shouldUpdate = false;
@@ -307,9 +312,10 @@ class UserStatsRepo {
       }
 
       if (shouldUpdate) {
-        final bestStreak = newStreak > currentStats.bestStreakDays
-            ? newStreak
-            : currentStats.bestStreakDays;
+        final bestStreak =
+            newStreak > currentStats.bestStreakDays
+                ? newStreak
+                : currentStats.bestStreakDays;
 
         await _firestore.collection('user_stats').doc(user.uid).set({
           'currentStreakDays': newStreak,

@@ -71,12 +71,12 @@ class _CreateRoomPageState extends ConsumerState<CreateRoomPage> {
                     Text(
                       'Kullanıcı adınız',
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            fontSize: ResponsiveUtils.responsiveFontSize(
-                              context,
-                              mobile: 20,
-                              desktop: 22,
-                            ),
-                          ),
+                        fontSize: ResponsiveUtils.responsiveFontSize(
+                          context,
+                          mobile: 20,
+                          desktop: 22,
+                        ),
+                      ),
                     ),
                     SizedBox(height: spacing * 2),
                     TextFormField(
@@ -102,12 +102,12 @@ class _CreateRoomPageState extends ConsumerState<CreateRoomPage> {
                     Text(
                       'Tur süresini seç',
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            fontSize: ResponsiveUtils.responsiveFontSize(
-                              context,
-                              mobile: 20,
-                              desktop: 22,
-                            ),
-                          ),
+                        fontSize: ResponsiveUtils.responsiveFontSize(
+                          context,
+                          mobile: 20,
+                          desktop: 22,
+                        ),
+                      ),
                     ),
                     SizedBox(height: spacing * 2),
                     Slider(
@@ -135,10 +135,12 @@ class _CreateRoomPageState extends ConsumerState<CreateRoomPage> {
                                     _formKey.currentState?.validate() ?? false;
                                 if (!isValid) return;
                                 try {
-                                  final username = _usernameController.text.trim();
-                                  
+                                  final username =
+                                      _usernameController.text.trim();
+
                                   // Validate username
-                                  final usernameError = InputValidator.validateUsername(username);
+                                  final usernameError =
+                                      InputValidator.validateUsername(username);
                                   if (usernameError != null) {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
@@ -148,27 +150,32 @@ class _CreateRoomPageState extends ConsumerState<CreateRoomPage> {
                                     );
                                     return;
                                   }
-                                  
+
                                   // Save username to storage
                                   await StorageService.saveUsername(username);
-                                  
+
                                   // createRoom now returns document ID, not roomCode
                                   final roomId = await ref
                                       .read(roomControllerProvider.notifier)
                                       .createRoom(
                                         username: username,
-                                        turnDurationSeconds: _turnDuration.round(),
+                                        turnDurationSeconds:
+                                            _turnDuration.round(),
                                       );
-                                  
+
                                   // Save room ID to storage
                                   await StorageService.saveRoomId(roomId);
-                                  
+
                                   if (!mounted || !context.mounted) return;
                                   context.go('/room/$roomId');
                                 } on Object catch (err) {
                                   if (!mounted || !context.mounted) return;
-                                  final messenger = ScaffoldMessenger.of(context);
-                                  messenger.showSnackBar(SnackBar(content: Text('$err')));
+                                  final messenger = ScaffoldMessenger.of(
+                                    context,
+                                  );
+                                  messenger.showSnackBar(
+                                    SnackBar(content: Text('$err')),
+                                  );
                                 }
                               },
                       icon: const Icon(Icons.check_circle_outline),
@@ -176,7 +183,9 @@ class _CreateRoomPageState extends ConsumerState<CreateRoomPage> {
                           controllerState.isLoading
                               ? const SizedBox.square(
                                 dimension: 18,
-                                child: CircularProgressIndicator(strokeWidth: 2),
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                ),
                               )
                               : const Text('Oluştur ve devam et'),
                     ),

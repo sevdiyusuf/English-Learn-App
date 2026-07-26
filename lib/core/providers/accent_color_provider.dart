@@ -24,6 +24,8 @@ class AccentColorNotifier extends StateNotifier<int> {
   }
 }
 
-final accentColorProvider = StateNotifierProvider<AccentColorNotifier, int>((ref) {
+final accentColorProvider = StateNotifierProvider<AccentColorNotifier, int>((
+  ref,
+) {
   return AccentColorNotifier();
 });

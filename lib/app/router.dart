@@ -12,6 +12,7 @@ import '../features/mode_select/ui/mode_select_page.dart';
 import '../features/friends/ui/friends_page.dart';
 import '../features/user_stats/ui/user_stats_page.dart';
 import '../features/profile_settings/ui/profile_settings_page.dart';
+import '../features/moderation/blocked_users_page.dart';
 import '../features/word_match/ui/shared_word_set_page.dart';
 import 'routes/word_match_routes.dart';
 import 'routes/cargo_categories_routes.dart';
@@ -79,6 +80,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           return SharedWordSetPage(shareId: shareId);
         },
       ),
+      GoRoute(path: '/blocked-users', builder: (context, state) => const BlockedUsersPage()),
 
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
@@ -145,14 +147,15 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       ...statsRoutes.whereType<GoRoute>().where((r) => r.path != '/stats'),
     ],
 
-    errorBuilder: (context, state) => Scaffold(
-      backgroundColor: const Color(0xFF050505),
-      body: ErrorView(
-        error: state.error,
-        title: 'Sayfa Bulunamadı veya Yönlendirme Hatası',
-        onRetry: () => GoRouter.of(context).go('/'),
-        retryButtonText: 'Ana Sayfaya Dön',
-      ),
-    ),
+    errorBuilder:
+        (context, state) => Scaffold(
+          backgroundColor: const Color(0xFF050505),
+          body: ErrorView(
+            error: state.error,
+            title: 'Sayfa Bulunamadı veya Yönlendirme Hatası',
+            onRetry: () => GoRouter.of(context).go('/'),
+            retryButtonText: 'Ana Sayfaya Dön',
+          ),
+        ),
   );
 });

@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/utils/error_logger.dart';
@@ -8,9 +7,9 @@ import '../../../core/utils/storage_service.dart';
 import '../../../core/repositories/user_stats_repo.dart';
 import '../../friends/data/friends_repo.dart';
 import '../../friends/logic/friends_controller.dart';
-import '../../profile_settings/logic/user_settings_controller.dart';
-import '../../user_stats/logic/user_stats_controller.dart';
-import '../../word_match/data/word_match_migration_service.dart';
+import '../../sync/sync_providers.dart';
+import '../../../core/errors/app_failure.dart';
+import '../../word_match/data/word_match_providers.dart';
 import '../data/auth_repo.dart';
 import '../models/app_user.dart';
 
@@ -33,6 +32,10 @@ class AuthController extends StateNotifier<AsyncValue<AppUser?>> {
         state = AsyncValue.data(user);
         if (user != null) {
           unawaited(_ref.read(userStatsRepoProvider).updateLoginStreak(user));
+
+          if (!user.isAnonymous && !user.isGuestMode) {
+            unawaited(_runPostSignInTasks(user));
+          }
         }
       },
       onError: (Object error, StackTrace stackTrace) {
@@ -80,13 +83,11 @@ class AuthController extends StateNotifier<AsyncValue<AppUser?>> {
     await ensureAnonymousGuestSignedIn();
   }
 
-  /// Sign in with Google
+  /// Sign in with Google (For login only)
   Future<void> signInWithGoogle() async {
     try {
-      // Don't set loading state - keep current state to avoid triggering AppStartupGate error
       final user = await _repo.signInWithGoogle();
       state = AsyncValue.data(user);
-      // Post sign-in hooks (Phase 0: migrate local Word Match sets)
       unawaited(_runPostSignInTasks(user));
     } catch (err, stack) {
       ErrorLogger.instance.logError(
@@ -94,16 +95,13 @@ class AuthController extends StateNotifier<AsyncValue<AppUser?>> {
         stackTrace: stack,
         context: 'AuthController.signInWithGoogle',
       );
-      // Don't set error state - keep current state and just rethrow
-      // This prevents AppStartupGate from showing error screen
       rethrow;
     }
   }
 
-  /// Sign in with Apple (iOS/macOS only)
+  /// Sign in with Apple (For login only)
   Future<void> signInWithApple() async {
     try {
-      // Don't set loading state - keep current state to avoid triggering AppStartupGate error
       final user = await _repo.signInWithApple();
       state = AsyncValue.data(user);
       unawaited(_runPostSignInTasks(user));
@@ -113,8 +111,43 @@ class AuthController extends StateNotifier<AsyncValue<AppUser?>> {
         stackTrace: stack,
         context: 'AuthController.signInWithApple',
       );
-      // Don't set error state - keep current state and just rethrow
-      // This prevents AppStartupGate from showing error screen
+      rethrow;
+    }
+  }
+
+  /// Link Google Account to current user
+  Future<void> linkGoogleAccount() async {
+    try {
+      final user = await _repo.linkGoogleAccount();
+      state = AsyncValue.data(user);
+      // Wait, is it a post sign in task? If they were guest, they are now registered.
+      if (!user.isAnonymous && !user.isGuestMode) {
+        unawaited(_runPostSignInTasks(user));
+      }
+    } catch (err, stack) {
+      ErrorLogger.instance.logError(
+        err,
+        stackTrace: stack,
+        context: 'AuthController.linkGoogleAccount',
+      );
+      rethrow;
+    }
+  }
+
+  /// Link Apple Account to current user
+  Future<void> linkAppleAccount() async {
+    try {
+      final user = await _repo.linkAppleAccount();
+      state = AsyncValue.data(user);
+      if (!user.isAnonymous && !user.isGuestMode) {
+        unawaited(_runPostSignInTasks(user));
+      }
+    } catch (err, stack) {
+      ErrorLogger.instance.logError(
+        err,
+        stackTrace: stack,
+        context: 'AuthController.linkAppleAccount',
+      );
       rethrow;
     }
   }
@@ -179,6 +212,62 @@ class AuthController extends StateNotifier<AsyncValue<AppUser?>> {
     }
   }
 
+  /// Reauthenticate with Google
+  Future<void> reauthenticateWithGoogle() async {
+    try {
+      await _repo.reauthenticateWithGoogle();
+    } catch (err, stack) {
+      ErrorLogger.instance.logError(
+        err,
+        stackTrace: stack,
+        context: 'AuthController.reauthenticateWithGoogle',
+      );
+      rethrow;
+    }
+  }
+
+  /// Reauthenticate with Apple
+  Future<void> reauthenticateWithApple() async {
+    try {
+      await _repo.reauthenticateWithApple();
+    } catch (err, stack) {
+      ErrorLogger.instance.logError(
+        err,
+        stackTrace: stack,
+        context: 'AuthController.reauthenticateWithApple',
+      );
+      rethrow;
+    }
+  }
+
+  /// Reauthenticate with Password
+  Future<void> reauthenticateWithPassword(String password) async {
+    try {
+      await _repo.reauthenticateWithPassword(password);
+    } catch (err, stack) {
+      ErrorLogger.instance.logError(
+        err,
+        stackTrace: stack,
+        context: 'AuthController.reauthenticateWithPassword',
+      );
+      rethrow;
+    }
+  }
+
+  /// Reset password
+  Future<void> resetPassword(String email) async {
+    try {
+      await _repo.sendPasswordResetEmail(email);
+    } catch (err, stack) {
+      ErrorLogger.instance.logError(
+        err,
+        stackTrace: stack,
+        context: 'AuthController.resetPassword',
+      );
+      rethrow;
+    }
+  }
+
   /// Update display name
   Future<void> updateDisplayName(String name) async {
     try {
@@ -214,10 +303,30 @@ class AuthController extends StateNotifier<AsyncValue<AppUser?>> {
   /// Sign out current user
   Future<void> signOut() async {
     try {
+      // 1. Invalidate session/sync early
+      try {
+        await _ref
+            .read(syncCoordinatorProvider.future)
+            .then((c) => c.onUserLogout());
+      } catch (e, stack) {
+        ErrorLogger.instance.logError(
+          e,
+          stackTrace: stack,
+          context: 'AuthController.signOut - onUserLogout',
+        );
+      }
+
+      // 2. Sign out from Firebase
       await _repo.signOut();
+
+      // 3. Clear local storage
       await StorageService.clearAll();
+
+      // 4. Clear memory state
       _clearUserSessionState();
-      // After sign out, ensure guest mode is active
+      state = const AsyncValue.data(null);
+
+      // 5. Enter guest mode
       await ensureAnonymousGuestSignedIn();
     } catch (err, stack) {
       ErrorLogger.instance.logError(
@@ -230,13 +339,71 @@ class AuthController extends StateNotifier<AsyncValue<AppUser?>> {
   }
 
   /// Delete account and data
-  Future<void> deleteAccountAndData() async {
+  Future<void> deleteAccountAndData({String? password}) async {
     try {
+      final currentUser = state.value;
       state = const AsyncValue.loading();
+
+      if (currentUser == null || currentUser.isAnonymous) {
+        throw AppFailure.auth(message: 'Silinecek hesap bulunamadı');
+      }
+
+      // 1. Reauthentication based on provider
+      try {
+        if (currentUser.providerId == 'google.com') {
+          await _repo.reauthenticateWithGoogle();
+        } else if (currentUser.providerId == 'apple.com') {
+          await _repo.reauthenticateWithApple();
+        } else if (currentUser.providerId == 'password') {
+          if (password == null || password.isEmpty) {
+            throw AppFailure.auth(message: 'Şifre gereklidir');
+          }
+          await _repo.reauthenticateWithPassword(password);
+        }
+      } catch (e) {
+        throw AppFailure.auth(
+          message: 'Kimlik doğrulama başarısız oldu. İşlem iptal edildi.',
+        );
+      }
+
+      // 2. Stop sync first
+      try {
+        await _ref
+            .read(syncCoordinatorProvider.future)
+            .then((c) => c.onUserLogout());
+      } catch (e, stack) {
+        ErrorLogger.instance.logError(
+          e,
+          stackTrace: stack,
+          context: 'AuthController.deleteAccountAndData - onUserLogout',
+        );
+      }
+
+      final uid = currentUser.uid;
+
+      // 3. Delete account (Cloud Function)
       await _repo.deleteAccountAndData();
+
+      // 4. Clear local outbox and word sets for this user
+      try {
+        await _ref.read(wordMatchRepoProvider.future).then((repo) async {
+          await repo.clearUserData(uid);
+        });
+
+        await _ref.read(outboxRepositoryProvider.future).then((repo) async {
+          await repo.clearUserData(uid);
+        });
+      } catch (e) {
+        ErrorLogger.instance.logWarning(
+          'Failed to clear Isar User Data: ',
+          context: 'AuthController.deleteAccountAndData',
+        );
+      }
+
       await StorageService.clearAll();
       _clearUserSessionState();
-      // After deletion, ensure guest mode is active
+
+      // 5. After deletion, ensure guest mode is active
       await ensureAnonymousGuestSignedIn();
     } catch (err, stack) {
       ErrorLogger.instance.logError(
@@ -250,13 +417,7 @@ class AuthController extends StateNotifier<AsyncValue<AppUser?>> {
   }
 
   void _clearUserSessionState() {
-    try {
-      _ref.invalidate(friendsControllerProvider);
-      _ref.invalidate(userStatsControllerProvider);
-      _ref.invalidate(userSettingsControllerProvider);
-    } catch (e) {
-      debugPrint('Error invalidating session state on logout: $e');
-    }
+    // userStatsControllerProvider automatically updates reactively when auth state changes
   }
 
   /// Get current user (for backward compatibility)
@@ -287,10 +448,9 @@ class AuthController extends StateNotifier<AsyncValue<AppUser?>> {
       return;
     }
     try {
-      final migrationService = await _ref.read(
-        wordMatchMigrationServiceProvider.future,
-      );
-      await migrationService.migrateLocalSetsForUser(user);
+      final syncCoordinator = await _ref.read(syncCoordinatorProvider.future);
+      // Run bootstrap in the background so auth flow isn't blocked.
+      syncCoordinator.onUserLogin(user);
     } catch (err, stack) {
       // Never break auth flows because of migration problems.
       ErrorLogger.instance.logError(

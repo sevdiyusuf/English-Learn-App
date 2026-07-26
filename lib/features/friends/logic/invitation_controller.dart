@@ -96,8 +96,14 @@ class InvitationController extends StateNotifier<List<GameInvitation>> {
   }
 
   Future<void> _acceptInvitation(GameInvitation invitation) async {
-    // 1. Delete invitation
-    await _deleteInvitation(invitation.id);
+    // Server verifies that neither party has blocked the other, then consumes it.
+    try {
+      await _ref
+          .read(invitationRepositoryProvider)
+          .acceptInvitation(invitation.id);
+    } catch (_) {
+      return;
+    }
 
     // 2. Navigate and Join
     final router = _ref.read(appRouterProvider);

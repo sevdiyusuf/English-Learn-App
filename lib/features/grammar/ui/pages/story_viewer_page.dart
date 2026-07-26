@@ -238,29 +238,28 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage> {
                     ],
                   ),
                   const SizedBox(height: 12),
-                  ...story.introBullets
-                      .map(
-                        (b) => Padding(
-                          padding: const EdgeInsets.only(bottom: 8),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text('⚡', style: TextStyle(fontSize: 14)),
-                              const SizedBox(width: 8),
-                              Expanded(
-                                child: Text(
-                                  b,
-                                  style: const TextStyle(
-                                    color: Colors.white70,
-                                    fontSize: 15,
-                                    height: 1.4,
-                                  ),
-                                ),
+                  ...story.introBullets.map(
+                    (b) => Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text('⚡', style: TextStyle(fontSize: 14)),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              b,
+                              style: const TextStyle(
+                                color: Colors.white70,
+                                fontSize: 15,
+                                height: 1.4,
                               ),
-                            ],
+                            ),
                           ),
-                        ),
+                        ],
                       ),
+                    ),
+                  ),
                 ],
               ),
             ),

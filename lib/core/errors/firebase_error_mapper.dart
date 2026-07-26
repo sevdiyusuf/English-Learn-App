@@ -31,106 +31,81 @@ class FirebaseErrorMapper {
 
   static AppFailure _mapFirebaseException(FirebaseException e) {
     switch (e.code) {
-      // Auth Error Codes
       case 'user-not-found':
-        return AppFailure.auth(
+        return AppAuthFailure(
           message: 'Bu e-posta adresine ait bir kullanıcı kaydı bulunamadı.',
           code: e.code,
+          reason: AuthFailureReason.userNotFound,
           originalError: e,
         );
-
       case 'wrong-password':
       case 'invalid-credential':
       case 'INVALID_LOGIN_CREDENTIALS':
-        return AppFailure.auth(
+        return AppAuthFailure(
           message: 'E-posta adresi veya şifre hatalı.',
           code: e.code,
+          reason: AuthFailureReason.wrongPassword,
           originalError: e,
         );
-
+      case 'credential-already-in-use':
       case 'email-already-in-use':
-        return AppFailure.auth(
-          message: 'Bu e-posta adresi ile zaten kayıtlı bir hesap bulunmaktadır.',
+      case 'account-exists-with-different-credential':
+        return AppAuthFailure(
+          message: 'Bu hesap veya e-posta adresi zaten başka bir hesaba bağlı.',
           code: e.code,
+          reason: AuthFailureReason.collision,
           originalError: e,
         );
-
       case 'invalid-email':
-        return AppFailure.auth(
+        return AppAuthFailure(
           message: 'Lütfen geçerli bir e-posta adresi girin.',
           code: e.code,
+          reason: AuthFailureReason.invalidEmail,
           originalError: e,
         );
-
       case 'weak-password':
-        return AppFailure.auth(
+        return AppAuthFailure(
           message: 'Şifre çok zayıf. En az 6 karakter uzunluğunda olmalıdır.',
           code: e.code,
+          reason: AuthFailureReason.weakPassword,
           originalError: e,
         );
-
       case 'user-disabled':
-        return AppFailure.auth(
-          message: 'Bu kullanıcı hesabı askıya alınmıştır. Destek ekibiyle iletişime geçin.',
+        return AppAuthFailure(
+          message:
+              'Bu kullanıcı hesabı askıya alınmıştır. Destek ekibiyle iletişime geçin.',
           code: e.code,
+          reason: AuthFailureReason.disabled,
           originalError: e,
         );
-
-      case 'operation-not-allowed':
-        return AppFailure.auth(
-          message: 'Bu giriş yöntemi şu anda aktif değildir.',
-          code: e.code,
-          originalError: e,
-        );
-
       case 'too-many-requests':
-        return AppFailure.auth(
-          message: 'Çok fazla başarısız deneme yapıldı. Lütfen biraz bekleyip tekrar deneyin.',
+        return AppAuthFailure(
+          message:
+              'Çok fazla başarısız deneme yapıldı. Lütfen biraz bekleyip tekrar deneyin.',
           code: e.code,
           isRetryable: true,
+          reason: AuthFailureReason.tooManyRequests,
           originalError: e,
         );
-
-      case 'account-exists-with-different-credential':
-        return AppFailure.auth(
-          message: 'Bu e-posta adresi farklı bir giriş yöntemi ile kayıtlıdır.',
+      case 'operation-not-allowed':
+        return AppAuthFailure(
+          message: 'Bu giriş yöntemi şu anda aktif değildir.',
           code: e.code,
+          reason: AuthFailureReason.unknown,
           originalError: e,
         );
-
-      case 'requires-recent-login':
-        return AppFailure.auth(
-          message: 'Bu hassas işlem için lütfen tekrar giriş yapın.',
-          code: e.code,
-          originalError: e,
-        );
-
-      // Firestore & Database Error Codes
-      case 'permission-denied':
-        return AppFailure.database(
-          message: 'Bu işlem için gerekli izinlere sahip değilsiniz.',
-          code: e.code,
-          originalError: e,
-        );
-
-      case 'unavailable':
-        return AppFailure.network(
-          message: 'Sunucuya ulaşılamıyor. İnternet bağlantınızı kontrol edin.',
-          code: e.code,
-          originalError: e,
-        );
-
       case 'network-request-failed':
         return AppFailure.network(
-          message: 'Ağ isteği başarısız oldu. Bağlantınızı kontrol edin.',
+          message:
+              'İnternet bağlantısı kurulamadı. Lütfen bağlantınızı kontrol edin.',
           code: e.code,
           originalError: e,
         );
-
       default:
-        return AppFailure.unexpected(
-          message: e.message ?? 'Bir Firebase hatası oluştu (${e.code}).',
+        return AppAuthFailure(
+          message: 'Kimlik doğrulama işlemi sırasında bir hata oluştu: ',
           code: e.code,
+          reason: AuthFailureReason.unknown,
           originalError: e,
         );
     }

@@ -27,14 +27,14 @@ class InfoChip extends StatelessWidget {
         children: [
           svgIcon != null
               ? SvgPicture.asset(
-                  svgIcon!,
-                  width: 16,
-                  height: 16,
-                  colorFilter: ColorFilter.mode(
-                    theme.colorScheme.onSurface,
-                    BlendMode.srcIn,
-                  ),
-                )
+                svgIcon!,
+                width: 16,
+                height: 16,
+                colorFilter: ColorFilter.mode(
+                  theme.colorScheme.onSurface,
+                  BlendMode.srcIn,
+                ),
+              )
               : Icon(icon, size: 16, color: theme.colorScheme.onSurface),
           const SizedBox(width: 4),
           Text(
@@ -48,5 +48,3 @@ class InfoChip extends StatelessWidget {
     );
   }
 }
-
-

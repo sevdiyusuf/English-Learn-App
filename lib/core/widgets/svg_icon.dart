@@ -19,7 +19,8 @@ class SvgIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final iconSize = size ?? 24.0;
-    final iconColor = color ?? Theme.of(context).iconTheme.color ?? Colors.white;
+    final iconColor =
+        color ?? Theme.of(context).iconTheme.color ?? Colors.white;
 
     // Try to load SVG, fallback to Material Icon if not found
     return Builder(
@@ -30,22 +31,15 @@ class SvgIcon extends StatelessWidget {
             colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
             width: iconSize,
             height: iconSize,
-            placeholderBuilder: (context) => Icon(
-              fallbackIcon,
-              color: iconColor,
-              size: iconSize,
-            ),
+            placeholderBuilder:
+                (context) =>
+                    Icon(fallbackIcon, color: iconColor, size: iconSize),
           );
         } catch (e) {
           // If SVG fails, use Material Icon as fallback
-          return Icon(
-            fallbackIcon,
-            color: iconColor,
-            size: iconSize,
-          );
+          return Icon(fallbackIcon, color: iconColor, size: iconSize);
         }
       },
     );
   }
 }
-

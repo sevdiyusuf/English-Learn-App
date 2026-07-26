@@ -14,7 +14,7 @@ class DefaultFirebaseOptions {
       // If kIsWeb check fails for any reason, assume web (safer for iOS Safari)
       return web;
     }
-    
+
     // For non-web platforms, use defaultTargetPlatform
     // This should never execute on iOS Safari (which is web)
     try {

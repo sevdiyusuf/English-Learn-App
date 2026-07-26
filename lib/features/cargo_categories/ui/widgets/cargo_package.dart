@@ -6,8 +6,10 @@ import '../../models/cargo_word.dart';
 class CargoPackage extends StatelessWidget {
   final CargoWord word;
   final bool isSmall; // true for column, false for belt
-  final VoidCallback? onBookmarkTap; // Callback for bookmark tap (only used when isSmall is true)
-  final bool showTranslate; // If true, show Turkish translation instead of English word
+  final VoidCallback?
+  onBookmarkTap; // Callback for bookmark tap (only used when isSmall is true)
+  final bool
+  showTranslate; // If true, show Turkish translation instead of English word
 
   const CargoPackage({
     super.key,
@@ -21,7 +23,8 @@ class CargoPackage extends StatelessWidget {
   Widget build(BuildContext context) {
     final double height = isSmall ? 42 : 64; // Biraz büyütüldü
     final double fontSize = isSmall ? 12 : 17; // Biraz büyütüldü
-    final double packageIconSize = isSmall ? 20 : 28; // package.svg için daha büyük
+    final double packageIconSize =
+        isSmall ? 20 : 28; // package.svg için daha büyük
     final double borderRadius = isSmall ? 6 : 12;
 
     return Container(
@@ -183,4 +186,3 @@ class CargoPackage extends StatelessWidget {
     );
   }
 }
-

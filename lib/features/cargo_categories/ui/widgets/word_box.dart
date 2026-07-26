@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 
 class WordBox extends StatelessWidget {
-  const WordBox({
-    required this.english,
-    required this.turkish,
-    super.key,
-  });
+  const WordBox({required this.english, required this.turkish, super.key});
 
   final String english;
   final String turkish;
@@ -18,10 +14,7 @@ class WordBox extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color(0xFF8B6F47), // Brown box color
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: Colors.brown.shade800,
-          width: 2,
-        ),
+        border: Border.all(color: Colors.brown.shade800, width: 2),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.5),
@@ -44,4 +37,3 @@ class WordBox extends StatelessWidget {
     );
   }
 }
-

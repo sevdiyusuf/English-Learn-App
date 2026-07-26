@@ -4,7 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/di.dart';
-import '../../game/models/room.dart'; // Room, RoomStatus, GameMode, GameRoomSettings
+import '../../../core/utils/operation_id.dart';
+import '../../game/models/room.dart';
 
 class RoomRepository {
   RoomRepository(this._firestore, this._functions);
@@ -15,104 +16,56 @@ class RoomRepository {
   CollectionReference<Map<String, dynamic>> get _roomsRef =>
       _firestore.collection('rooms');
 
-  /// Creates a room and returns the document ID (not roomCode)
+  /// Creates a room via server callable function and returns the document ID
   Future<String> createRoom({
     required String hostUid,
     required String hostUsername,
     required int turnDurationSeconds,
+    String? operationId,
   }) async {
-    // Generate a unique 5-digit room code
-    String roomCode = '';
-    bool isUnique = false;
-    int attempts = 0;
-    const maxAttempts = 10;
-    final random = DateTime.now().millisecondsSinceEpoch;
+    final opId = operationId ?? generateOperationId();
+    try {
+      final callable = _functions.httpsCallable('createRoom');
+      final result = await callable.call<Map<String, dynamic>>({
+        'turnDurationSeconds': turnDurationSeconds,
+        'username': hostUsername,
+        'operationId': opId,
+      });
 
-    while (!isUnique && attempts < maxAttempts) {
-      // Generate random 5-digit number (10000-99999)
-      final baseTime = random + attempts;
-      final randomValue = baseTime % 90000;
-      roomCode = (10000 + randomValue).toString();
-
-      // Check if room code already exists
-      final existing =
-          await _roomsRef
-              .where('roomCode', isEqualTo: roomCode)
-              .where('status', isNotEqualTo: RoomStatus.finished.name)
-              .limit(1)
-              .get();
-
-      if (existing.docs.isEmpty) {
-        isUnique = true;
-      } else {
-        attempts++;
-        // Small delay to avoid same timestamp
-        await Future.delayed(const Duration(milliseconds: 10));
+      final roomId = result.data['roomId'] as String?;
+      if (roomId == null || roomId.isEmpty) {
+        throw StateError('Oda oluşturulamadı.');
       }
+      return roomId;
+    } catch (e, stackTrace) {
+      if (kDebugMode) {
+        debugPrint('Error creating room via callable: $e\n$stackTrace');
+      }
+      rethrow;
     }
-
-    if (!isUnique || roomCode.isEmpty) {
-      throw StateError(
-        'Benzersiz oda kodu oluşturulamadı. Lütfen tekrar deneyin.',
-      );
-    }
-
-    final doc = _roomsRef.doc();
-    await doc.set({
-      'roomCode': roomCode,
-      'status': RoomStatus.waiting.name,
-      'players': [hostUid],
-      'playerNames': {hostUid: hostUsername},
-      'activePlayerIds': [],
-      'currentTurnIndex': 0,
-      'currentTurnUid': null,
-      'turnDeadlineAt': null,
-      'turnDurationSeconds': turnDurationSeconds,
-      'winnerUid': null,
-      'hostUid': hostUid,
-      'createdAt': FieldValue.serverTimestamp(),
-      'updatedAt': FieldValue.serverTimestamp(),
-    });
-    // Return document ID instead of roomCode for navigation
-    return doc.id;
   }
 
+  /// Joins a room via server callable function
   Future<void> joinRoom({
     required String roomCode,
     required String uid,
     required String username,
+    String? operationId,
   }) async {
-    // Find room by roomCode
-    final rooms =
-        await _roomsRef
-            .where('roomCode', isEqualTo: roomCode)
-            .where('status', isNotEqualTo: RoomStatus.finished.name)
-            .limit(1)
-            .get();
-
-    if (rooms.docs.isEmpty) {
-      throw StateError('Oda bulunamadı. Oda kodunu kontrol edin.');
-    }
-
-    final roomDoc = rooms.docs.first;
-    final roomData = roomDoc.data();
-
-    // Check if player is already in room
-    final players = List<String>.from(roomData['players'] ?? []);
-    if (players.contains(uid)) {
-      // Update username if already in room
-      await roomDoc.reference.update({
-        'playerNames.$uid': username,
-        'updatedAt': FieldValue.serverTimestamp(),
+    final opId = operationId ?? generateOperationId();
+    try {
+      final callable = _functions.httpsCallable('joinRoom');
+      await callable.call<Map<String, dynamic>>({
+        'roomCode': roomCode,
+        'username': username,
+        'operationId': opId,
       });
-      return;
+    } catch (e, stackTrace) {
+      if (kDebugMode) {
+        debugPrint('Error joining room via callable: $e\n$stackTrace');
+      }
+      rethrow;
     }
-
-    await roomDoc.reference.update({
-      'players': FieldValue.arrayUnion([uid]),
-      'playerNames.$uid': username,
-      'updatedAt': FieldValue.serverTimestamp(),
-    });
   }
 
   Future<String?> getRoomIdByCode(
@@ -121,26 +74,36 @@ class RoomRepository {
   }) async {
     var query = _roomsRef.where('roomCode', isEqualTo: roomCode);
 
-    // Only filter by status if we don't want finished rooms
     if (!includeFinished) {
       query = query.where('status', isNotEqualTo: RoomStatus.finished.name);
     }
 
     final rooms = await query.limit(1).get();
-
     if (rooms.docs.isEmpty) {
       return null;
     }
-
     return rooms.docs.first.id;
   }
 
-  Future<void> leaveRoom({required String roomId, required String uid}) async {
-    await _roomsRef.doc(roomId).update({
-      'players': FieldValue.arrayRemove([uid]),
-      'activePlayerIds': FieldValue.arrayRemove([uid]),
-      'updatedAt': FieldValue.serverTimestamp(),
-    });
+  /// Leaves a room via server callable function
+  Future<void> leaveRoom({
+    required String roomId,
+    required String uid,
+    String? operationId,
+  }) async {
+    final opId = operationId ?? generateOperationId();
+    try {
+      final callable = _functions.httpsCallable('leaveRoom');
+      await callable.call<Map<String, dynamic>>({
+        'roomId': roomId,
+        'operationId': opId,
+      });
+    } catch (e, stackTrace) {
+      if (kDebugMode) {
+        debugPrint('Error leaving room via callable: $e\n$stackTrace');
+      }
+      rethrow;
+    }
   }
 
   Stream<Room?> watchRoom(String roomId) {
@@ -154,7 +117,6 @@ class RoomRepository {
         if (kDebugMode) {
           debugPrint('Error parsing room ${snapshot.id}: $e');
           debugPrint('Stack trace: $stackTrace');
-          debugPrint('Snapshot data: ${snapshot.data()}');
         }
         rethrow;
       }
@@ -182,48 +144,33 @@ class RoomRepository {
         });
   }
 
-  /// Starts the game. If [gameMode] and [settings] are provided (host chose mode in lobby),
-  /// they are written to the room and locked when the Cloud Function starts the game.
+  /// Starts the game via server callable function
   Future<void> startGame({
     required String roomId,
     GameMode? gameMode,
     GameRoomSettings? settings,
+    String? operationId,
   }) async {
+    final opId = operationId ?? generateOperationId();
     if (kDebugMode) {
       debugPrint('Starting game for roomId: $roomId gameMode: $gameMode');
     }
     try {
       final callable = _functions.httpsCallable('startGame');
-      final payload = <String, dynamic>{'roomId': roomId};
+      final payload = <String, dynamic>{'roomId': roomId, 'operationId': opId};
       if (gameMode != null) {
         payload['gameMode'] = gameMode.name.toUpperCase();
       }
       if (settings != null) {
         payload['settings'] = settings.toJson();
       }
-      final result = await callable.call(payload);
-      if (kDebugMode) {
-        debugPrint('Start game result: $result');
-      }
+      await callable.call(payload);
     } catch (e, stackTrace) {
       if (kDebugMode) {
-        debugPrint('Error starting game: $e');
-        debugPrint('Stack trace: $stackTrace');
+        debugPrint('Error starting game: $e\n$stackTrace');
       }
       rethrow;
     }
-  }
-
-  Future<void> updateTurnDeadline({
-    required String roomId,
-    required DateTime deadline,
-    required String currentTurnUid,
-  }) async {
-    await _roomsRef.doc(roomId).update({
-      'currentTurnUid': currentTurnUid,
-      'turnDeadlineAt': Timestamp.fromDate(deadline.toUtc()),
-      'updatedAt': FieldValue.serverTimestamp(),
-    });
   }
 }
 

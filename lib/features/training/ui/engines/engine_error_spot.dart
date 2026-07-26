@@ -27,7 +27,9 @@ class _EngineErrorSpotState extends State<EngineErrorSpot> {
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController(text: widget.currentAnswer ?? widget.item.prompt);
+    _controller = TextEditingController(
+      text: widget.currentAnswer ?? widget.item.prompt,
+    );
   }
 
   @override
@@ -47,8 +49,9 @@ class _EngineErrorSpotState extends State<EngineErrorSpot> {
 
   @override
   Widget build(BuildContext context) {
-    final isCorrect = widget.isLocked && (widget.currentAnswer?.trim() == widget.item.answer);
-    
+    final isCorrect =
+        widget.isLocked && (widget.currentAnswer?.trim() == widget.item.answer);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -57,19 +60,23 @@ class _EngineErrorSpotState extends State<EngineErrorSpot> {
             padding: const EdgeInsets.only(bottom: 16),
             child: Text(
               widget.item.hint!,
-              style: const TextStyle(color: Colors.white70, fontStyle: FontStyle.italic),
+              style: const TextStyle(
+                color: Colors.white70,
+                fontStyle: FontStyle.italic,
+              ),
             ),
           ),
-        
+
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: AppColors.surfaceLight,
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: widget.isLocked
-                  ? (isCorrect ? AppColors.success : AppColors.error)
-                  : (_isEditing ? AppColors.primary : Colors.transparent),
+              color:
+                  widget.isLocked
+                      ? (isCorrect ? AppColors.success : AppColors.error)
+                      : (_isEditing ? AppColors.primary : Colors.transparent),
               width: 2,
             ),
           ),
@@ -121,7 +128,7 @@ class _EngineErrorSpotState extends State<EngineErrorSpot> {
             ],
           ),
         ),
-        
+
         if (widget.isLocked && !isCorrect) ...[
           const SizedBox(height: 16),
           Container(
@@ -129,7 +136,9 @@ class _EngineErrorSpotState extends State<EngineErrorSpot> {
             decoration: BoxDecoration(
               color: AppColors.success.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: AppColors.success.withValues(alpha: 0.5)),
+              border: Border.all(
+                color: AppColors.success.withValues(alpha: 0.5),
+              ),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -152,18 +161,12 @@ class _EngineErrorSpotState extends State<EngineErrorSpot> {
                   const SizedBox(height: 8),
                   const Text(
                     'Çeviri:',
-                    style: TextStyle(
-                      color: Colors.white54,
-                      fontSize: 14,
-                    ),
+                    style: TextStyle(color: Colors.white54, fontSize: 14),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     widget.item.translation!,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                    ),
+                    style: const TextStyle(color: Colors.white, fontSize: 15),
                   ),
                 ],
               ],

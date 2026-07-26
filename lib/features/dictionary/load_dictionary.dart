@@ -6,6 +6,10 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 
+import '../sync/models/local_schema_metadata.dart';
+import '../sync/models/outbox_item.dart';
+import '../sync/models/sync_checkpoint.dart';
+import '../sync/services/schema_migration_service.dart';
 import '../word_match/models/word_pair.dart';
 import '../word_match/models/word_set.dart';
 import 'models/dict_entry.dart';
@@ -75,7 +79,9 @@ Future<Isar?> openDictionaryStore() async {
 
   // WEB İÇİN ÖZEL KORUMA
   if (kIsWeb) {
-    debugPrint("⚠️ Web platformu algılandı. WASM dosyası eksik olduğu için Isar ATLANIYOR.");
+    debugPrint(
+      "⚠️ Web platformu algılandı. WASM dosyası eksik olduğu için Isar ATLANIYOR.",
+    );
     // Burada Isar'ı hiç açmıyoruz veya sadece bellek içi (in-memory) açmayı deniyoruz.
     // Eğer illa açman gerekiyorsa WASM olmadan açılmaz.
     // Bu yüzden burayı boş bırakıp uygulamanın çökmesini engelliyoruz.
@@ -134,12 +140,20 @@ Future<Isar?> openDictionaryStore() async {
     Isar isar;
     try {
       isar = await Isar.open(
-        [DictEntrySchema, WordSetSchema, WordPairSchema],
+        [
+          DictEntrySchema,
+          WordSetSchema,
+          WordPairSchema,
+          OutboxItemSchema,
+          LocalSchemaMetadataSchema,
+          SyncCheckpointSchema,
+        ],
         name: _isarInstanceName,
         directory: dirPath,
         inspector: !kIsWeb, // Inspector not supported on web in some versions
       );
       debugPrint('Isar opened successfully');
+      await SchemaMigrationService().runMigrations(isar);
     } catch (e, stackTrace) {
       debugPrint('ERROR: Failed to open Isar: $e');
       debugPrint('Stack trace: $stackTrace');
@@ -245,7 +259,9 @@ Future<Isar?> openDictionaryStore() async {
       await _seedDictionaryIfEmpty(isar);
       debugPrint('Dictionary seeding completed');
     } catch (e) {
-      debugPrint('Dictionary seeding failed safely (non-blocking fallback): $e');
+      debugPrint(
+        'Dictionary seeding failed safely (non-blocking fallback): $e',
+      );
     }
 
     _isInitializing = false;
@@ -282,7 +298,9 @@ Future<void> _seedDictionaryIfEmpty(Isar isar) async {
     debugPrint('Loading dictionary.json...');
     String? jsonString;
     try {
-      jsonString = await rootBundle.loadString('assets/word_battle/dictionary.json');
+      jsonString = await rootBundle.loadString(
+        'assets/word_battle/dictionary.json',
+      );
     } catch (e) {
       debugPrint('Warning: Failed to load dictionary asset (non-blocking): $e');
       return;
@@ -314,7 +332,11 @@ List<DictEntry> _parseDictionaryJson(String jsonString) {
       final word = (map['word'] as String?)?.toLowerCase().trim();
       final type = (map['type'] as String?)?.toLowerCase().trim();
       if (word != null && type != null && word.isNotEmpty && type.isNotEmpty) {
-        entries.add(DictEntry()..word = word..type = type);
+        entries.add(
+          DictEntry()
+            ..word = word
+            ..type = type,
+        );
       }
     }
   }

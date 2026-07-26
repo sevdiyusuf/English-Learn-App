@@ -4,35 +4,31 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Network connection status
-enum NetworkStatus {
-  connected,
-  disconnected,
-  unknown,
-}
+enum NetworkStatus { connected, disconnected, unknown }
 
 /// Network status provider that monitors connectivity changes
 final networkStatusProvider = StreamProvider<NetworkStatus>((ref) {
   final connectivity = Connectivity();
-  
+
   // Initial check
   final controller = StreamController<NetworkStatus>();
-  
+
   // Check initial status
   connectivity.checkConnectivity().then((result) {
     controller.add(_getNetworkStatus(result));
   });
-  
+
   // Listen to connectivity changes
   final subscription = connectivity.onConnectivityChanged.listen((result) {
     controller.add(_getNetworkStatus(result));
   });
-  
+
   // Cleanup
   ref.onDispose(() {
     subscription.cancel();
     controller.close();
   });
-  
+
   return controller.stream;
 });
 
@@ -41,12 +37,10 @@ NetworkStatus _getNetworkStatus(List<ConnectivityResult> result) {
   if (result.isEmpty) {
     return NetworkStatus.unknown;
   }
-  
+
   // Check if any connection type is available
-  final hasConnection = result.any((r) => 
-    r != ConnectivityResult.none
-  );
-  
+  final hasConnection = result.any((r) => r != ConnectivityResult.none);
+
   return hasConnection ? NetworkStatus.connected : NetworkStatus.disconnected;
 }
 
@@ -88,11 +82,9 @@ class NetworkStatusNotifier extends StateNotifier<NetworkStatus> {
     if (result.isEmpty) {
       return NetworkStatus.unknown;
     }
-    
-    final hasConnection = result.any((r) => 
-      r != ConnectivityResult.none
-    );
-    
+
+    final hasConnection = result.any((r) => r != ConnectivityResult.none);
+
     return hasConnection ? NetworkStatus.connected : NetworkStatus.disconnected;
   }
 
@@ -103,8 +95,7 @@ class NetworkStatusNotifier extends StateNotifier<NetworkStatus> {
   }
 }
 
-final networkStatusNotifierProvider = 
+final networkStatusNotifierProvider =
     StateNotifierProvider<NetworkStatusNotifier, NetworkStatus>((ref) {
-  return NetworkStatusNotifier();
-});
-
+      return NetworkStatusNotifier();
+    });

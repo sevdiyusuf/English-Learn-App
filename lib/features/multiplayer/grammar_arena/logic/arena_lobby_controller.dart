@@ -1,16 +1,12 @@
 import 'dart:math';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yunoo/core/utils/operation_id.dart';
 import '../data/arena_room_repo.dart';
 import '../data/worksheet_catalog_repo.dart';
 import '../models/arena_models.dart';
 import '../../../auth/logic/auth_controller.dart';
 import '../../../training/models/training_models.dart';
-
-final arenaRoomRepoProvider = Provider(
-  (ref) => ArenaRoomRepository(FirebaseFirestore.instance),
-);
 
 final arenaLobbyControllerProvider =
     StateNotifierProvider<ArenaLobbyController, AsyncValue<String?>>((ref) {
@@ -29,7 +25,12 @@ class ArenaLobbyController extends StateNotifier<AsyncValue<String?>> {
   ArenaLobbyController(this._roomRepo, this._catalogRepo, this._ref)
     : super(const AsyncValue.data(null));
 
-  Future<void> createRoom({required String level, String? worksheetId}) async {
+  Future<void> createRoom({
+    required String level,
+    String? worksheetId,
+    String? operationId,
+  }) async {
+    final opId = operationId ?? generateOperationId();
     state = const AsyncValue.loading();
     try {
       final user = _ref.read(authControllerProvider).value;
@@ -44,14 +45,19 @@ class ArenaLobbyController extends StateNotifier<AsyncValue<String?>> {
       );
 
       final config = ArenaConfig(level: level, worksheetId: worksheetId);
-      final roomId = await _roomRepo.createRoom(host: host, config: config);
+      final roomId = await _roomRepo.createRoom(
+        host: host,
+        config: config,
+        operationId: opId,
+      );
       state = AsyncValue.data(roomId);
     } catch (e, st) {
       state = AsyncValue.error(e, st);
     }
   }
 
-  Future<void> joinRoom(String roomCode) async {
+  Future<void> joinRoom(String roomCode, {String? operationId}) async {
+    final opId = operationId ?? generateOperationId();
     state = const AsyncValue.loading();
     try {
       final user = _ref.read(authControllerProvider).value;
@@ -65,27 +71,39 @@ class ArenaLobbyController extends StateNotifier<AsyncValue<String?>> {
         lastPing: DateTime.now(),
       );
 
-      final roomId = await _roomRepo.joinRoom(roomCode: roomCode, guest: guest);
+      final roomId = await _roomRepo.joinRoom(
+        roomCode: roomCode,
+        guest: guest,
+        operationId: opId,
+      );
       state = AsyncValue.data(roomId);
     } catch (e, st) {
       state = AsyncValue.error(e, st);
     }
   }
 
-  Future<void> updateRoomConfig(String roomId, ArenaConfig config) async {
+  Future<void> updateRoomConfig(
+    String roomId,
+    ArenaConfig config, {
+    String? operationId,
+  }) async {
+    final opId = operationId ?? generateOperationId();
     try {
-      await _roomRepo.updateConfig(roomId, config);
+      await _roomRepo.updateConfig(roomId, config, operationId: opId);
     } catch (e) {
-      // Handle error quietly or log
       debugPrint('Error updating config: $e');
     }
   }
 
-  Future<void> startGame(String roomId, ArenaConfig config) async {
+  Future<void> startGame(
+    String roomId,
+    ArenaConfig config, {
+    String? operationId,
+  }) async {
+    final opId = operationId ?? generateOperationId();
     state = const AsyncValue.loading();
     try {
-      // First update config to ensure everyone is on the same page
-      await _roomRepo.updateConfig(roomId, config);
+      await _roomRepo.updateConfig(roomId, config, operationId: '${opId}_cfg');
 
       WorksheetMetadata? metadata;
       if (config.worksheetId != null) {
@@ -117,15 +135,35 @@ class ArenaLobbyController extends StateNotifier<AsyncValue<String?>> {
         questionIds: questionIds,
       );
 
+      final itemDetails =
+          selected
+              .map(
+                (i) => {
+                  'id': i.id,
+                  'engine': i.engine.name,
+                  'question': i.prompt,
+                  'answer': i.answer,
+                },
+              )
+              .toList();
+
+      final resolvedMap = resolved.toJson();
+      resolvedMap['items'] = itemDetails;
+
       final round = ArenaRound(
         index: 0,
-        roundStartAt: DateTime.now().add(
-          const Duration(seconds: 1),
-        ), // 1s delay for countdown
-        timeLimitMs: 45000, // 45s per round default
+        roundStartAt: DateTime.now().add(const Duration(seconds: 1)),
+        timeLimitMs: 45000,
       );
 
-      await _roomRepo.startMatch(roomId, round, resolved);
+      final callableResolved = ResolvedWorksheet.fromJson(resolvedMap);
+
+      await _roomRepo.startMatch(
+        roomId,
+        round,
+        callableResolved,
+        operationId: opId,
+      );
       state = AsyncValue.data(roomId);
     } catch (e, st) {
       state = AsyncValue.error(e, st);

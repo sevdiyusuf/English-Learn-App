@@ -36,10 +36,7 @@ class LoadingSkeleton extends StatelessWidget {
 
 /// Shimmer effect widget
 class Shimmer extends StatefulWidget {
-  const Shimmer({
-    required this.child,
-    super.key,
-  });
+  const Shimmer({required this.child, super.key});
 
   final Widget child;
 
@@ -47,8 +44,7 @@ class Shimmer extends StatefulWidget {
   State<Shimmer> createState() => _ShimmerState();
 }
 
-class _ShimmerState extends State<Shimmer>
-    with SingleTickerProviderStateMixin {
+class _ShimmerState extends State<Shimmer> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -59,9 +55,10 @@ class _ShimmerState extends State<Shimmer>
       duration: const Duration(milliseconds: 1500),
       vsync: this,
     )..repeat();
-    _animation = Tween<double>(begin: -1.0, end: 2.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
+    _animation = Tween<double>(
+      begin: -1.0,
+      end: 2.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
   }
 
   @override
@@ -138,10 +135,7 @@ class CardSkeleton extends StatelessWidget {
 
 /// List skeleton for loading lists
 class ListSkeleton extends StatelessWidget {
-  const ListSkeleton({
-    this.itemCount = 3,
-    super.key,
-  });
+  const ListSkeleton({this.itemCount = 3, super.key});
 
   final int itemCount;
 
@@ -177,9 +171,7 @@ class PageSkeleton extends StatelessWidget {
             borderRadius: BorderRadius.circular(4),
           ),
           const SizedBox(height: 24),
-          Expanded(
-            child: ListSkeleton(itemCount: 5),
-          ),
+          Expanded(child: ListSkeleton(itemCount: 5)),
         ],
       ),
     );
@@ -213,23 +205,14 @@ class GamePageSkeleton extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        LoadingSkeleton(
-                          width: 100,
-                          height: 16,
-                        ),
+                        LoadingSkeleton(width: 100, height: 16),
                         const SizedBox(height: 8),
-                        LoadingSkeleton(
-                          width: double.infinity,
-                          height: 8,
-                        ),
+                        LoadingSkeleton(width: double.infinity, height: 8),
                       ],
                     ),
                   ),
                   const SizedBox(width: 16),
-                  LoadingSkeleton(
-                    width: 50,
-                    height: 20,
-                  ),
+                  LoadingSkeleton(width: 50, height: 20),
                 ],
               ),
             ),
@@ -268,4 +251,3 @@ class GamePageSkeleton extends StatelessWidget {
     );
   }
 }
-

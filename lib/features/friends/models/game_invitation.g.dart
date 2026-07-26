@@ -15,20 +15,21 @@ _$GameInvitationImpl _$$GameInvitationImplFromJson(Map<String, dynamic> json) =>
       roomId: json['roomId'] as String,
       gameType: json['gameType'] as String,
       status: json['status'] as String? ?? 'pending',
-      createdAt: json['createdAt'] == null
-          ? null
-          : DateTime.parse(json['createdAt'] as String),
+      createdAt:
+          json['createdAt'] == null
+              ? null
+              : DateTime.parse(json['createdAt'] as String),
     );
 
 Map<String, dynamic> _$$GameInvitationImplToJson(
-        _$GameInvitationImpl instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'fromUid': instance.fromUid,
-      'fromName': instance.fromName,
-      'toUid': instance.toUid,
-      'roomId': instance.roomId,
-      'gameType': instance.gameType,
-      'status': instance.status,
-      'createdAt': instance.createdAt?.toIso8601String(),
-    };
+  _$GameInvitationImpl instance,
+) => <String, dynamic>{
+  'id': instance.id,
+  'fromUid': instance.fromUid,
+  'fromName': instance.fromName,
+  'toUid': instance.toUid,
+  'roomId': instance.roomId,
+  'gameType': instance.gameType,
+  'status': instance.status,
+  'createdAt': instance.createdAt?.toIso8601String(),
+};

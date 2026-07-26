@@ -39,8 +39,14 @@ class InputValidator {
     // Remove HTML tags and script content
     String sanitized = word
         .replaceAll(RegExp(r'<[^>]*>'), '') // Remove HTML tags
-        .replaceAll(RegExp(r'javascript:', caseSensitive: false), '') // Remove javascript: protocol
-        .replaceAll(RegExp(r'on\w+\s*=', caseSensitive: false), ''); // Remove event handlers
+        .replaceAll(
+          RegExp(r'javascript:', caseSensitive: false),
+          '',
+        ) // Remove javascript: protocol
+        .replaceAll(
+          RegExp(r'on\w+\s*=', caseSensitive: false),
+          '',
+        ); // Remove event handlers
 
     // Trim and normalize whitespace
     sanitized = sanitized.trim().replaceAll(RegExp(r'\s+'), ' ');
@@ -84,7 +90,7 @@ class InputValidator {
     }
 
     final trimmed = code.trim().toUpperCase();
-    
+
     // Room codes should be 4-6 alphanumeric characters
     if (trimmed.length < 4 || trimmed.length > 6) {
       return 'Oda kodu 4-6 karakter olmalıdır';
@@ -104,7 +110,7 @@ class InputValidator {
     }
 
     final trimmed = username.trim();
-    
+
     if (trimmed.length < 2) {
       return 'Kullanıcı adı en az 2 karakter olmalıdır';
     }
@@ -120,4 +126,3 @@ class InputValidator {
     return null;
   }
 }
-

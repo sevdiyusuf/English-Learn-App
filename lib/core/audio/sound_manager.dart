@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Service to handle game sound effects.
-/// 
+///
 /// Requires audio files in `assets/audio/`:
 /// - success.mp3
 /// - error.mp3

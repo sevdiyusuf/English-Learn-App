@@ -217,42 +217,40 @@ class SubjectSummaryDialog extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 4),
-            ...item.lines.map(
-              (line) {
-                final parts = line.split('\n');
-                final english = parts[0];
-                final turkish = parts.length > 1 ? parts[1] : null;
+            ...item.lines.map((line) {
+              final parts = line.split('\n');
+              final english = parts[0];
+              final turkish = parts.length > 1 ? parts[1] : null;
 
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        english,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontStyle: FontStyle.italic,
-                        ),
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      english,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontStyle: FontStyle.italic,
                       ),
-                      if (turkish != null)
-                        Padding(
-                          padding: const EdgeInsets.only(top: 2),
-                          child: Text(
-                            turkish,
-                            style: const TextStyle(
-                              color: Colors.white70,
-                              fontSize: 12,
-                              fontStyle: FontStyle.normal,
-                            ),
+                    ),
+                    if (turkish != null)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 2),
+                        child: Text(
+                          turkish,
+                          style: const TextStyle(
+                            color: Colors.white70,
+                            fontSize: 12,
+                            fontStyle: FontStyle.normal,
                           ),
                         ),
-                    ],
-                  ),
-                );
-              },
-            ),
+                      ),
+                  ],
+                ),
+              );
+            }),
           ],
         ),
       );

@@ -38,10 +38,7 @@ class GameHeader extends ConsumerWidget {
           topRight: Radius.circular(12),
         ),
       ),
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16,
-        vertical: 8,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -52,10 +49,7 @@ class GameHeader extends ConsumerWidget {
             _StatusBanner(isMyTurn: isPlayerTurn),
           // Game elapsed time
           if (room.status == RoomStatus.active)
-            _GameTimer(
-              startTime: room.createdAt,
-              serverOffset: serverOffset,
-            ),
+            _GameTimer(startTime: room.createdAt, serverOffset: serverOffset),
           FadeInAnimation(
             child: CountdownWidget(
               deadline: room.turnDeadlineAt,

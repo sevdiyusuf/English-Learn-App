@@ -66,9 +66,11 @@ class GameKeyboardShortcuts extends StatelessWidget {
       autofocus: true,
       onKeyEvent: (event) {
         if (event is KeyDownEvent) {
-          if (event.logicalKey == LogicalKeyboardKey.enter && onSubmit != null) {
+          if (event.logicalKey == LogicalKeyboardKey.enter &&
+              onSubmit != null) {
             onSubmit!();
-          } else if (event.logicalKey == LogicalKeyboardKey.escape && onCancel != null) {
+          } else if (event.logicalKey == LogicalKeyboardKey.escape &&
+              onCancel != null) {
             onCancel!();
           }
         }
@@ -77,4 +79,3 @@ class GameKeyboardShortcuts extends StatelessWidget {
     );
   }
 }
-

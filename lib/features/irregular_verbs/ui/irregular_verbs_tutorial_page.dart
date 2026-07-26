@@ -9,10 +9,12 @@ class IrregularVerbsTutorialPage extends ConsumerStatefulWidget {
   const IrregularVerbsTutorialPage({super.key});
 
   @override
-  ConsumerState<IrregularVerbsTutorialPage> createState() => _IrregularVerbsTutorialPageState();
+  ConsumerState<IrregularVerbsTutorialPage> createState() =>
+      _IrregularVerbsTutorialPageState();
 }
 
-class _IrregularVerbsTutorialPageState extends ConsumerState<IrregularVerbsTutorialPage> {
+class _IrregularVerbsTutorialPageState
+    extends ConsumerState<IrregularVerbsTutorialPage> {
   final FlutterTts _flutterTts = FlutterTts();
 
   @override
@@ -110,7 +112,12 @@ class _GroupView extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              if (index > 0) const Icon(Icons.chevron_left_rounded, color: Colors.white54, size: 28),
+              if (index > 0)
+                const Icon(
+                  Icons.chevron_left_rounded,
+                  color: Colors.white54,
+                  size: 28,
+                ),
               if (index > 0) const SizedBox(width: 8),
               Text(
                 title,
@@ -121,7 +128,12 @@ class _GroupView extends StatelessWidget {
                 ),
               ),
               if (index < total - 1) const SizedBox(width: 8),
-              if (index < total - 1) const Icon(Icons.chevron_right_rounded, color: Colors.white54, size: 28),
+              if (index < total - 1)
+                const Icon(
+                  Icons.chevron_right_rounded,
+                  color: Colors.white54,
+                  size: 28,
+                ),
             ],
           ),
         ),
@@ -171,7 +183,10 @@ class _VerbBentoCard extends StatelessWidget {
                 ),
               ),
               IconButton(
-                icon: const Icon(Icons.volume_up_rounded, color: Colors.white30),
+                icon: const Icon(
+                  Icons.volume_up_rounded,
+                  color: Colors.white30,
+                ),
                 onPressed: () => onSpeak('${verb.v1}, ${verb.v2}, ${verb.v3}'),
               ),
             ],
@@ -196,7 +211,11 @@ class _FormColumn extends StatelessWidget {
   final String value;
   final Function(String) onSpeak;
 
-  const _FormColumn({required this.label, required this.value, required this.onSpeak});
+  const _FormColumn({
+    required this.label,
+    required this.value,
+    required this.onSpeak,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -206,12 +225,20 @@ class _FormColumn extends StatelessWidget {
         children: [
           Text(
             label,
-            style: const TextStyle(color: Colors.white24, fontSize: 10, fontWeight: FontWeight.w800),
+            style: const TextStyle(
+              color: Colors.white24,
+              fontSize: 10,
+              fontWeight: FontWeight.w800,
+            ),
           ),
           const SizedBox(height: 4),
           Text(
             value,
-            style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w700),
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+            ),
           ),
         ],
       ),

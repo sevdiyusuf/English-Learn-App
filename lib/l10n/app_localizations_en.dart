@@ -349,4 +349,109 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get wrongAnswerLocked => 'Wrong answer! Locked.';
+
+  @override
+  String get communityGuidelines => 'Community Guidelines';
+
+  @override
+  String get termsDraftNotice =>
+      'Draft documents — owner and legal review required.';
+
+  @override
+  String get termsBody =>
+      'Use the app respectfully and lawfully. Do not misuse shared learning content or social features.';
+
+  @override
+  String get guidelinesBody =>
+      'Do not post harassment, threats, hateful or abusive material, sexual or inappropriate content, spam, scams, repeated unwanted invitations, impersonation, private information, illegal content, or attempts to evade moderation.';
+
+  @override
+  String get reviewDocuments => 'Review documents';
+
+  @override
+  String get acceptCurrentPolicies => 'Accept Terms and Community Guidelines';
+
+  @override
+  String get acceptPoliciesPrompt =>
+      'To publish or update public content, review both documents and explicitly accept the current versions.';
+
+  @override
+  String get acceptPoliciesCheck =>
+      'I have read and accept the Terms of Use and Community Guidelines.';
+
+  @override
+  String get accept => 'Accept';
+
+  @override
+  String get policyAcceptanceFailed =>
+      'We could not record your acceptance. Please try again.';
+
+  @override
+  String get report => 'Report';
+
+  @override
+  String get reportUser => 'Report user';
+
+  @override
+  String get reportSharedSet => 'Report shared set';
+
+  @override
+  String get reportReason => 'Reason';
+
+  @override
+  String get reportDetails => 'Optional details';
+
+  @override
+  String get submitReport => 'Submit report';
+
+  @override
+  String get reportReceived => 'Thanks. Your report was received.';
+
+  @override
+  String get reportUnavailable => 'This report cannot be submitted.';
+
+  @override
+  String get block => 'Block';
+
+  @override
+  String get unblock => 'Unblock';
+
+  @override
+  String get reportAndBlock => 'Report and block';
+
+  @override
+  String get blockedUsers => 'Blocked users';
+
+  @override
+  String get blockedUsersEmpty => 'You have not blocked anyone.';
+
+  @override
+  String get blockUserPrompt =>
+      'Block this user? Pending social interactions will be removed.';
+
+  @override
+  String get interactionUnavailable =>
+      'This interaction is currently unavailable.';
+
+  @override
+  String get rateLimited => 'Too many attempts. Please try again later.';
+
+  @override
+  String get removeSharedSet => 'Remove shared set';
+
+  @override
+  String get removeSharedSetPrompt =>
+      'Remove this public share? Your private study set will remain.';
+
+  @override
+  String get sharedSetRemoved => 'The public share was removed.';
+
+  @override
+  String get remove => 'Remove';
+
+  @override
+  String get loading => 'Loading…';
+
+  @override
+  String get errorGeneric => 'Something went wrong. Please try again.';
 }

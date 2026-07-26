@@ -12,10 +12,7 @@ const _accentColor = Color(0xFF2997FF);
 const _stoneGradient = LinearGradient(
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,
-  colors: [
-    Color(0xFF2C2C2E),
-    Color(0xFF1C1C1E),
-  ],
+  colors: [Color(0xFF2C2C2E), Color(0xFF1C1C1E)],
 );
 final _borderSideColor = Colors.white.withValues(alpha: 0.08);
 const _primaryTextColor = Colors.white;
@@ -97,14 +94,21 @@ class FriendsPage extends ConsumerWidget {
                       GestureDetector(
                         onTap: () => _showAddFriendDialog(context, ref, state),
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 6,
+                          ),
                           decoration: BoxDecoration(
                             color: _accentColor.withValues(alpha: 0.15),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: const Row(
                             children: [
-                              Icon(Icons.person_add, color: _accentColor, size: 16),
+                              Icon(
+                                Icons.person_add,
+                                color: _accentColor,
+                                size: 16,
+                              ),
                               SizedBox(width: 4),
                               Text(
                                 'Ekle',
@@ -122,13 +126,14 @@ class FriendsPage extends ConsumerWidget {
                   ),
                   const SizedBox(height: 16),
                   Expanded(
-                    child: state.isLoading
-                        ? const Center(
-                            child: CircularProgressIndicator(
-                              color: _accentColor,
-                            ),
-                          )
-                        : _buildFriendsList(context, state),
+                    child:
+                        state.isLoading
+                            ? const Center(
+                              child: CircularProgressIndicator(
+                                color: _accentColor,
+                              ),
+                            )
+                            : _buildFriendsList(context, state),
                   ),
                   const SizedBox(height: 24),
                   const Text(
@@ -185,7 +190,9 @@ class FriendsPage extends ConsumerWidget {
               radius: 24,
               backgroundColor: const Color(0xFF2C2C2E),
               child: Text(
-                (profile.displayName ?? 'Kullanıcı').substring(0, 1).toUpperCase(),
+                (profile.displayName ?? 'Kullanıcı')
+                    .substring(0, 1)
+                    .toUpperCase(),
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -246,7 +253,10 @@ class FriendsPage extends ConsumerWidget {
             border: Border.all(color: _borderSideColor, width: 1),
           ),
           child: ListTile(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 8,
+            ),
             leading: Container(
               padding: const EdgeInsets.all(2),
               decoration: BoxDecoration(
@@ -260,22 +270,28 @@ class FriendsPage extends ConsumerWidget {
                 backgroundColor: const Color(0xFF1C1C1E),
                 child: Text(
                   (friend.displayName ?? 'K').substring(0, 1).toUpperCase(),
-                  style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
             title: Text(
               friend.displayName ?? 'Kullanıcı',
-              style: const TextStyle(color: _primaryTextColor, fontWeight: FontWeight.w600),
+              style: const TextStyle(
+                color: _primaryTextColor,
+                fontWeight: FontWeight.w600,
+              ),
             ),
             subtitle: Text(
               'Kod: ${friend.userCode ?? '-'}',
-              style: const TextStyle(
-                color: _secondaryTextColor,
-                fontSize: 12,
-              ),
+              style: const TextStyle(color: _secondaryTextColor, fontSize: 12),
             ),
-            trailing: Icon(Icons.chevron_right, color: _borderSideColor.withValues(alpha: 0.3)),
+            trailing: Icon(
+              Icons.chevron_right,
+              color: _borderSideColor.withValues(alpha: 0.3),
+            ),
             onTap: () {
               Navigator.push(
                 context,
@@ -290,11 +306,16 @@ class FriendsPage extends ConsumerWidget {
     );
   }
 
-  Widget _buildRequestsList(BuildContext context, WidgetRef ref, FriendsState state) {
-    final incoming = state.incomingRequests
-        .where((r) => r.status == FriendRequestStatus.pending)
-        .toList();
-        
+  Widget _buildRequestsList(
+    BuildContext context,
+    WidgetRef ref,
+    FriendsState state,
+  ) {
+    final incoming =
+        state.incomingRequests
+            .where((r) => r.status == FriendRequestStatus.pending)
+            .toList();
+
     if (incoming.isEmpty) {
       return Center(
         child: Text(
@@ -355,18 +376,25 @@ class FriendsPage extends ConsumerWidget {
                     Expanded(
                       child: GestureDetector(
                         onTap: () async {
-                          await ref.read(friendsControllerProvider.notifier).rejectRequest(request);
+                          await ref
+                              .read(friendsControllerProvider.notifier)
+                              .rejectRequest(request);
                         },
                         child: Container(
                           padding: const EdgeInsets.symmetric(vertical: 8),
                           decoration: BoxDecoration(
-                            border: Border.all(color: Colors.redAccent.withValues(alpha: 0.5)),
+                            border: Border.all(
+                              color: Colors.redAccent.withValues(alpha: 0.5),
+                            ),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           alignment: Alignment.center,
                           child: const Text(
                             'Reddet',
-                            style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                              color: Colors.redAccent,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
@@ -375,7 +403,9 @@ class FriendsPage extends ConsumerWidget {
                     Expanded(
                       child: GestureDetector(
                         onTap: () async {
-                          await ref.read(friendsControllerProvider.notifier).acceptRequest(request);
+                          await ref
+                              .read(friendsControllerProvider.notifier)
+                              .acceptRequest(request);
                         },
                         child: Container(
                           padding: const EdgeInsets.symmetric(vertical: 8),
@@ -386,7 +416,10 @@ class FriendsPage extends ConsumerWidget {
                           alignment: Alignment.center,
                           child: const Text(
                             'Kabul Et',
-                            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
@@ -401,7 +434,11 @@ class FriendsPage extends ConsumerWidget {
     );
   }
 
-  Future<void> _showAddFriendDialog(BuildContext context, WidgetRef ref, FriendsState state) async {
+  Future<void> _showAddFriendDialog(
+    BuildContext context,
+    WidgetRef ref,
+    FriendsState state,
+  ) async {
     final controller = TextEditingController();
     final result = await showDialog<String>(
       context: context,
@@ -414,7 +451,10 @@ class FriendsPage extends ConsumerWidget {
           ),
           title: const Text(
             'Arkadaş Ekle',
-            style: TextStyle(color: _primaryTextColor, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              color: _primaryTextColor,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           content: TextField(
             controller: controller,
@@ -454,7 +494,13 @@ class FriendsPage extends ConsumerWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
-              child: const Text('İstek Gönder', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+              child: const Text(
+                'İstek Gönder',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ],
         );
@@ -464,7 +510,9 @@ class FriendsPage extends ConsumerWidget {
     if (result == null) return;
 
     try {
-      await ref.read(friendsControllerProvider.notifier).sendFriendRequestByCode(result);
+      await ref
+          .read(friendsControllerProvider.notifier)
+          .sendFriendRequestByCode(result);
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Arkadaşlık isteği gönderildi')),
@@ -472,9 +520,9 @@ class FriendsPage extends ConsumerWidget {
       }
     } catch (e) {
       if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('İstek gönderilemedi: $e')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('İstek gönderilemedi: $e')));
       }
     }
   }

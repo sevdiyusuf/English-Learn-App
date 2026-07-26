@@ -15,10 +15,7 @@ const _accentColor = Color(0xFF2997FF);
 const _stoneGradient = LinearGradient(
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,
-  colors: [
-    Color(0xFF2C2C2E),
-    Color(0xFF1C1C1E),
-  ],
+  colors: [Color(0xFF2C2C2E), Color(0xFF1C1C1E)],
 );
 final _borderSideColor = Colors.white.withValues(alpha: 0.08);
 const _primaryTextColor = Colors.white;
@@ -82,32 +79,42 @@ class _UserStatsPageState extends ConsumerState<UserStatsPage> {
           SafeArea(
             child: statsAsync.when(
               data: (stats) {
-                final settings = settingsAsync.valueOrNull ?? const UserSettings();
+                final settings =
+                    settingsAsync.valueOrNull ?? const UserSettings();
                 return _buildContent(context, stats, settings, statsController);
               },
-              loading: () => const Center(child: CircularProgressIndicator(color: _accentColor)),
-              error: (error, stack) => Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(
-                      Icons.error_outline,
-                      size: 48,
-                      color: AppColors.error,
+              loading:
+                  () => const Center(
+                    child: CircularProgressIndicator(color: _accentColor),
+                  ),
+              error:
+                  (error, stack) => Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.error_outline,
+                          size: 48,
+                          color: AppColors.error,
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          'İstatistikler yüklenemedi',
+                          style: Theme.of(context).textTheme.titleMedium
+                              ?.copyWith(color: _primaryTextColor),
+                        ),
+                        const SizedBox(height: 8),
+                        TextButton(
+                          onPressed:
+                              () => ref.invalidate(userStatsControllerProvider),
+                          child: const Text(
+                            'Yeniden Dene',
+                            style: TextStyle(color: _accentColor),
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 16),
-                    Text(
-                      'İstatistikler yüklenemedi',
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(color: _primaryTextColor),
-                    ),
-                    const SizedBox(height: 8),
-                    TextButton(
-                      onPressed: () => ref.invalidate(userStatsControllerProvider),
-                      child: const Text('Yeniden Dene', style: TextStyle(color: _accentColor)),
-                    ),
-                  ],
-                ),
-              ),
+                  ),
             ),
           ),
         ],
@@ -122,7 +129,8 @@ class _UserStatsPageState extends ConsumerState<UserStatsPage> {
     UserStatsController controller,
   ) {
     // Check if stats are empty (new user)
-    final isEmpty = stats.totalSessions == 0 &&
+    final isEmpty =
+        stats.totalSessions == 0 &&
         stats.totalLearnedWords == 0 &&
         stats.currentStreakDays == 0;
 
@@ -226,7 +234,11 @@ class _UserStatsPageState extends ConsumerState<UserStatsPage> {
                 children: [
                   const Text(
                     'Günlük Hedef',
-                    style: TextStyle(color: _primaryTextColor, fontWeight: FontWeight.bold, fontSize: 16),
+                    style: TextStyle(
+                      color: _primaryTextColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
                   ),
                   Text(
                     '${(todayProgress * 100).toInt()}%',
@@ -295,13 +307,13 @@ class _UserStatsPageState extends ConsumerState<UserStatsPage> {
                   padding: EdgeInsets.all(16),
                   child: Text(
                     'Henüz zor kelime yok. Devam edin!',
-                    style: TextStyle(
-                      color: _secondaryTextColor,
-                    ),
+                    style: TextStyle(color: _secondaryTextColor),
                   ),
                 )
               else
-                ...stats.hardestWords.take(10).map(
+                ...stats.hardestWords
+                    .take(10)
+                    .map(
                       (word) => ListTile(
                         dense: true,
                         leading: Container(
@@ -316,8 +328,13 @@ class _UserStatsPageState extends ConsumerState<UserStatsPage> {
                             size: 20,
                           ),
                         ),
-                        title: Text(word, style: const TextStyle(color: _primaryTextColor)),
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 8),
+                        title: Text(
+                          word,
+                          style: const TextStyle(color: _primaryTextColor),
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                        ),
                       ),
                     ),
             ],
@@ -343,7 +360,11 @@ class _UserStatsPageState extends ConsumerState<UserStatsPage> {
             const SizedBox(height: 24),
             const Text(
               'Henüz İstatistik Yok',
-              style: TextStyle(color: _primaryTextColor, fontSize: 24, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                color: _primaryTextColor,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 12),
@@ -357,11 +378,22 @@ class _UserStatsPageState extends ConsumerState<UserStatsPage> {
               onPressed: () => context.go('/mode-select'),
               style: FilledButton.styleFrom(
                 backgroundColor: _accentColor,
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 12,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
               ),
               icon: const Icon(Icons.play_arrow, color: Colors.black),
-              label: const Text('Oyunlara Git', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+              label: const Text(
+                'Oyunlara Git',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ],
         ),
@@ -413,10 +445,7 @@ class _UserStatsPageState extends ConsumerState<UserStatsPage> {
           const SizedBox(height: 4),
           Text(
             label,
-            style: const TextStyle(
-              color: _secondaryTextColor,
-              fontSize: 12,
-            ),
+            style: const TextStyle(color: _secondaryTextColor, fontSize: 12),
           ),
         ],
       ),
@@ -454,53 +483,54 @@ class _UserStatsPageState extends ConsumerState<UserStatsPage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.end,
-      children: last7Days.reversed.map((day) {
-        final height = maxMinutes > 0 ? (day.minutes / maxMinutes) : 0.0;
-        return Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  height: 100,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF1C1C1E),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                      height: 100 * height,
+      children:
+          last7Days.reversed.map((day) {
+            final height = maxMinutes > 0 ? (day.minutes / maxMinutes) : 0.0;
+            return Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      height: 100,
+                      width: double.infinity,
                       decoration: BoxDecoration(
-                        color: _accentColor,
+                        color: const Color(0xFF1C1C1E),
                         borderRadius: BorderRadius.circular(8),
                       ),
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Container(
+                          height: 100 * height,
+                          decoration: BoxDecoration(
+                            color: _accentColor,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
+                    const SizedBox(height: 8),
+                    Text(
+                      '${day.date.day}/${day.date.month}',
+                      style: const TextStyle(
+                        color: _secondaryTextColor,
+                        fontSize: 10,
+                      ),
+                    ),
+                    Text(
+                      '${day.minutes}dk',
+                      style: const TextStyle(
+                        color: _secondaryTextColor,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  '${day.date.day}/${day.date.month}',
-                  style: const TextStyle(
-                    color: _secondaryTextColor,
-                    fontSize: 10,
-                  ),
-                ),
-                Text(
-                  '${day.minutes}dk',
-                  style: const TextStyle(
-                    color: _secondaryTextColor,
-                    fontSize: 10,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      }).toList(),
+              ),
+            );
+          }).toList(),
     );
   }
 
@@ -537,44 +567,77 @@ class _UserStatsPageState extends ConsumerState<UserStatsPage> {
             border: Border.all(color: _borderSideColor, width: 1),
           ),
           child: ListTile(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-            title: Text(modeNames[modeId] ?? modeId, style: const TextStyle(color: _primaryTextColor, fontWeight: FontWeight.bold)),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 8,
+            ),
+            title: Text(
+              modeNames[modeId] ?? modeId,
+              style: const TextStyle(
+                color: _primaryTextColor,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 8),
-                if (accuracy != null) Text('Doğruluk: %${accuracy.toInt()}', style: const TextStyle(color: _secondaryTextColor, fontSize: 12)),
-                Text('Süre: ${modeStats.totalMinutes} dk', style: const TextStyle(color: _secondaryTextColor, fontSize: 12)),
-                Text('Oturum: ${modeStats.sessions}', style: const TextStyle(color: _secondaryTextColor, fontSize: 12)),
+                if (accuracy != null)
+                  Text(
+                    'Doğruluk: %${accuracy.toInt()}',
+                    style: const TextStyle(
+                      color: _secondaryTextColor,
+                      fontSize: 12,
+                    ),
+                  ),
+                Text(
+                  'Süre: ${modeStats.totalMinutes} dk',
+                  style: const TextStyle(
+                    color: _secondaryTextColor,
+                    fontSize: 12,
+                  ),
+                ),
+                Text(
+                  'Oturum: ${modeStats.sessions}',
+                  style: const TextStyle(
+                    color: _secondaryTextColor,
+                    fontSize: 12,
+                  ),
+                ),
               ],
             ),
-            trailing: accuracy != null
-                ? SizedBox(
-                    width: 46,
-                    height: 46,
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        CircularProgressIndicator(
-                          value: accuracy / 100,
-                          backgroundColor: const Color(0xFF1C1C1E),
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            accuracy >= 70
-                                ? AppColors.success
-                                : accuracy >= 50
-                                    ? AppColors.warning
-                                    : AppColors.error,
+            trailing:
+                accuracy != null
+                    ? SizedBox(
+                      width: 46,
+                      height: 46,
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          CircularProgressIndicator(
+                            value: accuracy / 100,
+                            backgroundColor: const Color(0xFF1C1C1E),
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              accuracy >= 70
+                                  ? AppColors.success
+                                  : accuracy >= 50
+                                  ? AppColors.warning
+                                  : AppColors.error,
+                            ),
+                            strokeWidth: 4,
                           ),
-                          strokeWidth: 4,
-                        ),
-                        Text(
-                          '${accuracy.toInt()}',
-                          style: const TextStyle(color: _primaryTextColor, fontSize: 12, fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                  )
-                : null,
+                          Text(
+                            '${accuracy.toInt()}',
+                            style: const TextStyle(
+                              color: _primaryTextColor,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                    : null,
           ),
         ),
       );

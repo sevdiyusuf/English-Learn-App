@@ -5,8 +5,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../auth/data/auth_repo.dart';
 import '../../dictionary/load_dictionary.dart';
 import '../../dictionary/models/dict_entry.dart';
+import '../../sync/models/local_schema_metadata.dart';
+import '../../sync/models/outbox_item.dart';
+import '../../sync/models/sync_checkpoint.dart';
 import '../models/word_pair.dart';
 import '../models/word_set.dart';
 import 'word_match_repo.dart';
@@ -57,6 +61,9 @@ final appIsarProvider = FutureProvider<Isar?>((ref) async {
         await isar.wordSets.count();
         await isar.wordPairs.count();
         await isar.dictEntrys.count();
+        await isar.outboxItems.count();
+        await isar.localSchemaMetadatas.count();
+        await isar.syncCheckpoints.count();
         debugPrint(
           'Isar successfully initialized and verified on attempt ${attempt + 1}',
         );
@@ -125,6 +132,10 @@ final appIsarProvider = FutureProvider<Isar?>((ref) async {
 final wordMatchRepoProvider = FutureProvider<WordMatchRepoInterface>((
   ref,
 ) async {
+  final authUser = ref.watch(authRepositoryProvider).currentUser;
+  final String? activeOwnerUid =
+      (authUser != null && !authUser.isAnonymous) ? authUser.uid : null;
+
   // Kısa timeout - eğer Isar çalışmıyorsa hızlıca fallback'e geç
   // Kullanıcı deneyimi için kritik: uzun beklemeler yapmıyoruz
   try {
@@ -133,45 +144,34 @@ final wordMatchRepoProvider = FutureProvider<WordMatchRepoInterface>((
       debugPrint(
         "⚠️ Web platformu algılandı. Isar beklenmeden fallback'e geçiliyor.",
       );
-      // Bekleme yapmadan direkt hata fırlatarak catch bloğuna düşürüyoruz
-      // veya direkt WordMatchRepoWeb() döndürebiliriz ama aşağıda logic var.
       throw Exception("Web platformunda Isar desteklenmiyor.");
     }
     // -----------------------------------------------------------
 
     final isar = await ref
-        .watch(appIsarProvider.future)
+        .read(appIsarProvider.future)
         .timeout(
-          const Duration(seconds: 5), // Kısa timeout - hızlı fallback için
+          const Duration(seconds: 5),
           onTimeout: () {
-            debugPrint('ERROR: Isar initialization timeout after 5 seconds');
-            _setIsarFailedFlag(true); // Mark as failed persistently
-            throw TimeoutException(
-              'Isar initialization timeout',
-              const Duration(seconds: 5),
-            );
+            throw TimeoutException('Isar loading timed out');
           },
         );
 
     if (isar == null) {
-      // Isar is null - likely failed flag was set, use SharedPreferences
       await _setIsarFailedFlag(true);
       debugPrint('Isar instance is null, using fallback');
-      if (kIsWeb) return WordMatchRepoWeb();
-      return WordMatchRepoPrefs();
+      if (kIsWeb) return WordMatchRepoWeb(activeOwnerUid: activeOwnerUid);
+      return WordMatchRepoPrefs(activeOwnerUid: activeOwnerUid);
     }
 
     debugPrint('Isar instance received, verifying collections...');
 
-    // Kısa ve agresif verification - 3 deneme, her biri 1 saniye timeout
     for (var verifyAttempt = 0; verifyAttempt < 3; verifyAttempt++) {
       try {
-        // Her attempt'te kısa bir delay
         if (verifyAttempt > 0) {
           await Future.delayed(const Duration(milliseconds: 300));
         }
 
-        // Collections'ı kontrol et - timeout ile (APK için daha kısa)
         await Future.wait([
           isar.wordSets.count().timeout(
             const Duration(seconds: 1),
@@ -198,8 +198,7 @@ final wordMatchRepoProvider = FutureProvider<WordMatchRepoInterface>((
             final migrated = prefs.getBool('web_isar_migration_v1') ?? false;
             if (!migrated) {
               debugPrint('Starting Web LocalStorage -> Isar migration...');
-              final oldRepo = WordMatchRepoWeb();
-              // Use timeout to avoid hanging if LocalStorage is slow
+              final oldRepo = WordMatchRepoWeb(activeOwnerUid: activeOwnerUid);
               final sets = await oldRepo.watchSets().first.timeout(
                 const Duration(seconds: 2),
                 onTimeout: () => [],
@@ -208,17 +207,8 @@ final wordMatchRepoProvider = FutureProvider<WordMatchRepoInterface>((
               if (sets.isNotEmpty) {
                 await isar.writeTxn(() async {
                   for (final set in sets) {
-                    // Check if set already exists in Isar (by name/content or ID)
-                    // For now, just use ID if it's unique, but Isar IDs are auto-increment usually.
-                    // WordMatchRepoWeb uses custom IDs? No, it uses integers.
-                    // To avoid collision, we might want to let Isar generate IDs.
-                    // But we want to preserve relationships.
-                    // Let's assume Isar is empty or we just add them.
-
-                    // Check if set with same ID exists
                     final existingSet = await isar.wordSets.get(set.id);
                     if (existingSet != null) {
-                      // Skip if exists
                       continue;
                     }
 
@@ -236,42 +226,36 @@ final wordMatchRepoProvider = FutureProvider<WordMatchRepoInterface>((
             }
           } catch (e) {
             debugPrint('Web migration failed: $e');
-            // MIGRATION FALLBACK:
-            // If migration fails, we should NOT use Isar (which is likely empty or corrupt).
-            // Instead, we return WordMatchRepoWeb() so the user can still access their data from LocalStorage.
-            // We do NOT set the 'web_isar_migration_v1' flag, so it will try again next time.
             debugPrint(
               'Fallback: Returning WordMatchRepoWeb (LocalStorage) due to migration failure.',
             );
-            return WordMatchRepoWeb();
+            return WordMatchRepoWeb(activeOwnerUid: activeOwnerUid);
           }
         }
 
-        return WordMatchRepo(isar);
+        return WordMatchRepo(isar, activeOwnerUid: activeOwnerUid);
       } catch (e) {
         debugPrint(
           'Collections verification attempt ${verifyAttempt + 1}/3 failed: $e',
         );
         if (verifyAttempt == 2) {
-          // Son attempt başarısız - Isar çalışmıyor, fallback kullan
           debugPrint(
             'WARNING: Isar collections could not be initialized after 3 attempts',
           );
-          await _setIsarFailedFlag(true); // Mark as failed persistently
+          await _setIsarFailedFlag(true);
           debugPrint('Falling back to storage implementation...');
-          if (kIsWeb) return WordMatchRepoWeb();
-          return WordMatchRepoPrefs();
+          if (kIsWeb) return WordMatchRepoWeb(activeOwnerUid: activeOwnerUid);
+          return WordMatchRepoPrefs(activeOwnerUid: activeOwnerUid);
         }
       }
     }
 
-    // Should not reach here due to return/throw above
-    if (kIsWeb) return WordMatchRepoWeb();
-    return WordMatchRepoPrefs();
+    if (kIsWeb) return WordMatchRepoWeb(activeOwnerUid: activeOwnerUid);
+    return WordMatchRepoPrefs(activeOwnerUid: activeOwnerUid);
   } catch (e) {
     debugPrint('WordMatchRepo initialization failed: $e');
-    if (kIsWeb) return WordMatchRepoWeb();
-    return WordMatchRepoPrefs();
+    if (kIsWeb) return WordMatchRepoWeb(activeOwnerUid: activeOwnerUid);
+    return WordMatchRepoPrefs(activeOwnerUid: activeOwnerUid);
   }
 });
 

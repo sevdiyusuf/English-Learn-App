@@ -12,7 +12,8 @@ part of 'played_word.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 PlayedWord _$PlayedWordFromJson(Map<String, dynamic> json) {
   return _PlayedWord.fromJson(json);
@@ -36,14 +37,16 @@ mixin _$PlayedWord {
 /// @nodoc
 abstract class $PlayedWordCopyWith<$Res> {
   factory $PlayedWordCopyWith(
-          PlayedWord value, $Res Function(PlayedWord) then) =
-      _$PlayedWordCopyWithImpl<$Res, PlayedWord>;
+    PlayedWord value,
+    $Res Function(PlayedWord) then,
+  ) = _$PlayedWordCopyWithImpl<$Res, PlayedWord>;
   @useResult
-  $Res call(
-      {String word,
-      @WordTypeConverter() WordType type,
-      String byUid,
-      @TimestampConverter() DateTime at});
+  $Res call({
+    String word,
+    @WordTypeConverter() WordType type,
+    String byUid,
+    @TimestampConverter() DateTime at,
+  });
 }
 
 /// @nodoc
@@ -64,24 +67,31 @@ class _$PlayedWordCopyWithImpl<$Res, $Val extends PlayedWord>
     Object? byUid = null,
     Object? at = null,
   }) {
-    return _then(_value.copyWith(
-      word: null == word
-          ? _value.word
-          : word // ignore: cast_nullable_to_non_nullable
-              as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as WordType,
-      byUid: null == byUid
-          ? _value.byUid
-          : byUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      at: null == at
-          ? _value.at
-          : at // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            word:
+                null == word
+                    ? _value.word
+                    : word // ignore: cast_nullable_to_non_nullable
+                        as String,
+            type:
+                null == type
+                    ? _value.type
+                    : type // ignore: cast_nullable_to_non_nullable
+                        as WordType,
+            byUid:
+                null == byUid
+                    ? _value.byUid
+                    : byUid // ignore: cast_nullable_to_non_nullable
+                        as String,
+            at:
+                null == at
+                    ? _value.at
+                    : at // ignore: cast_nullable_to_non_nullable
+                        as DateTime,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -89,15 +99,17 @@ class _$PlayedWordCopyWithImpl<$Res, $Val extends PlayedWord>
 abstract class _$$PlayedWordImplCopyWith<$Res>
     implements $PlayedWordCopyWith<$Res> {
   factory _$$PlayedWordImplCopyWith(
-          _$PlayedWordImpl value, $Res Function(_$PlayedWordImpl) then) =
-      __$$PlayedWordImplCopyWithImpl<$Res>;
+    _$PlayedWordImpl value,
+    $Res Function(_$PlayedWordImpl) then,
+  ) = __$$PlayedWordImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String word,
-      @WordTypeConverter() WordType type,
-      String byUid,
-      @TimestampConverter() DateTime at});
+  $Res call({
+    String word,
+    @WordTypeConverter() WordType type,
+    String byUid,
+    @TimestampConverter() DateTime at,
+  });
 }
 
 /// @nodoc
@@ -105,8 +117,9 @@ class __$$PlayedWordImplCopyWithImpl<$Res>
     extends _$PlayedWordCopyWithImpl<$Res, _$PlayedWordImpl>
     implements _$$PlayedWordImplCopyWith<$Res> {
   __$$PlayedWordImplCopyWithImpl(
-      _$PlayedWordImpl _value, $Res Function(_$PlayedWordImpl) _then)
-      : super(_value, _then);
+    _$PlayedWordImpl _value,
+    $Res Function(_$PlayedWordImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -116,35 +129,42 @@ class __$$PlayedWordImplCopyWithImpl<$Res>
     Object? byUid = null,
     Object? at = null,
   }) {
-    return _then(_$PlayedWordImpl(
-      word: null == word
-          ? _value.word
-          : word // ignore: cast_nullable_to_non_nullable
-              as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as WordType,
-      byUid: null == byUid
-          ? _value.byUid
-          : byUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      at: null == at
-          ? _value.at
-          : at // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-    ));
+    return _then(
+      _$PlayedWordImpl(
+        word:
+            null == word
+                ? _value.word
+                : word // ignore: cast_nullable_to_non_nullable
+                    as String,
+        type:
+            null == type
+                ? _value.type
+                : type // ignore: cast_nullable_to_non_nullable
+                    as WordType,
+        byUid:
+            null == byUid
+                ? _value.byUid
+                : byUid // ignore: cast_nullable_to_non_nullable
+                    as String,
+        at:
+            null == at
+                ? _value.at
+                : at // ignore: cast_nullable_to_non_nullable
+                    as DateTime,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$PlayedWordImpl implements _PlayedWord {
-  const _$PlayedWordImpl(
-      {required this.word,
-      @WordTypeConverter() required this.type,
-      required this.byUid,
-      @TimestampConverter() required this.at});
+  const _$PlayedWordImpl({
+    required this.word,
+    @WordTypeConverter() required this.type,
+    required this.byUid,
+    @TimestampConverter() required this.at,
+  });
 
   factory _$PlayedWordImpl.fromJson(Map<String, dynamic> json) =>
       _$$PlayedWordImplFromJson(json);
@@ -188,18 +208,17 @@ class _$PlayedWordImpl implements _PlayedWord {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PlayedWordImplToJson(
-      this,
-    );
+    return _$$PlayedWordImplToJson(this);
   }
 }
 
 abstract class _PlayedWord implements PlayedWord {
-  const factory _PlayedWord(
-      {required final String word,
-      @WordTypeConverter() required final WordType type,
-      required final String byUid,
-      @TimestampConverter() required final DateTime at}) = _$PlayedWordImpl;
+  const factory _PlayedWord({
+    required final String word,
+    @WordTypeConverter() required final WordType type,
+    required final String byUid,
+    @TimestampConverter() required final DateTime at,
+  }) = _$PlayedWordImpl;
 
   factory _PlayedWord.fromJson(Map<String, dynamic> json) =
       _$PlayedWordImpl.fromJson;

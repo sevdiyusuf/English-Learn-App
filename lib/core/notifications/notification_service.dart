@@ -5,12 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Notification types
-enum NotificationType {
-  info,
-  success,
-  warning,
-  error,
-}
+enum NotificationType { info, success, warning, error }
 
 /// Notification data model
 class AppNotification {
@@ -59,10 +54,7 @@ class AppNotification {
 
 /// Notification action
 class NotificationAction {
-  NotificationAction({
-    required this.label,
-    required this.onPressed,
-  });
+  NotificationAction({required this.label, required this.onPressed});
 
   final String label;
   final VoidCallback onPressed;
@@ -77,7 +69,8 @@ class NotificationService {
       StreamController<List<AppNotification>>.broadcast();
 
   Stream<List<AppNotification>> get notifications => _controller.stream;
-  List<AppNotification> get currentNotifications => List.unmodifiable(_notifications);
+  List<AppNotification> get currentNotifications =>
+      List.unmodifiable(_notifications);
 
   /// Show a notification
   void showNotification(AppNotification notification) {
@@ -113,11 +106,7 @@ class NotificationService {
   }
 
   /// Show error notification
-  void showError({
-    required String title,
-    String? message,
-    Duration? duration,
-  }) {
+  void showError({required String title, String? message, Duration? duration}) {
     showNotification(
       AppNotification(
         id: DateTime.now().millisecondsSinceEpoch.toString(),
@@ -147,11 +136,7 @@ class NotificationService {
   }
 
   /// Show info notification
-  void showInfo({
-    required String title,
-    String? message,
-    Duration? duration,
-  }) {
+  void showInfo({required String title, String? message, Duration? duration}) {
     showNotification(
       AppNotification(
         id: DateTime.now().millisecondsSinceEpoch.toString(),
@@ -176,13 +161,15 @@ class NotificationService {
   }
 
   /// Request browser notification permission (web only)
-  Future<void> _requestBrowserNotificationPermission(AppNotification notification) async {
+  Future<void> _requestBrowserNotificationPermission(
+    AppNotification notification,
+  ) async {
     if (!kIsWeb) return;
 
     try {
       // Request permission
       final permission = await _getBrowserNotificationPermission();
-      
+
       if (permission == 'granted') {
         // Show browser notification
         _showBrowserNotification(notification);
@@ -229,4 +216,3 @@ final notificationServiceProvider = Provider<NotificationService>((ref) {
   ref.onDispose(() => service.dispose());
   return service;
 });
-

@@ -26,22 +26,20 @@ class ResponsiveButton extends StatelessWidget {
     final minWidth = isMobile ? 120.0 : 100.0;
 
     Widget button = ConstrainedBox(
-      constraints: BoxConstraints(
-        minWidth: minWidth,
-        minHeight: buttonHeight,
-      ),
-      child: icon != null
-          ? ElevatedButton.icon(
-              onPressed: onPressed,
-              icon: icon!,
-              label: child,
-              style: style,
-            )
-          : ElevatedButton(
-              onPressed: onPressed,
-              style: style,
-              child: child,
-            ),
+      constraints: BoxConstraints(minWidth: minWidth, minHeight: buttonHeight),
+      child:
+          icon != null
+              ? ElevatedButton.icon(
+                onPressed: onPressed,
+                icon: icon!,
+                label: child,
+                style: style,
+              )
+              : ElevatedButton(
+                onPressed: onPressed,
+                style: style,
+                child: child,
+              ),
     );
 
     if (tooltip != null && !isMobile) {
@@ -74,20 +72,15 @@ class ResponsiveFilledButton extends StatelessWidget {
     final minWidth = isMobile ? 120.0 : 100.0;
 
     Widget button = ConstrainedBox(
-      constraints: BoxConstraints(
-        minWidth: minWidth,
-        minHeight: buttonHeight,
-      ),
-      child: icon != null
-          ? FilledButton.icon(
-              onPressed: onPressed,
-              icon: icon!,
-              label: child,
-            )
-          : FilledButton(
-              onPressed: onPressed,
-              child: child,
-            ),
+      constraints: BoxConstraints(minWidth: minWidth, minHeight: buttonHeight),
+      child:
+          icon != null
+              ? FilledButton.icon(
+                onPressed: onPressed,
+                icon: icon!,
+                label: child,
+              )
+              : FilledButton(onPressed: onPressed, child: child),
     );
 
     if (tooltip != null && !isMobile) {
@@ -120,16 +113,10 @@ class ResponsiveTextButton extends StatelessWidget {
 
     Widget button = SizedBox(
       height: minHeight,
-      child: icon != null
-          ? TextButton.icon(
-              onPressed: onPressed,
-              icon: icon!,
-              label: child,
-            )
-          : TextButton(
-              onPressed: onPressed,
-              child: child,
-            ),
+      child:
+          icon != null
+              ? TextButton.icon(onPressed: onPressed, icon: icon!, label: child)
+              : TextButton(onPressed: onPressed, child: child),
     );
 
     if (tooltip != null && !isMobile) {
@@ -180,4 +167,3 @@ class ResponsiveIconButton extends StatelessWidget {
     return button;
   }
 }
-

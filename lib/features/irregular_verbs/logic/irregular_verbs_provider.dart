@@ -5,7 +5,9 @@ import '../models/irregular_verb.dart';
 
 final irregularVerbsProvider = FutureProvider<List<IrregularVerb>>((ref) async {
   try {
-    final jsonString = await rootBundle.loadString('assets/ırregular_verbs.json');
+    final jsonString = await rootBundle.loadString(
+      'assets/ırregular_verbs.json',
+    );
     final List<dynamic> jsonList = json.decode(jsonString);
     return jsonList.map((e) => IrregularVerb.fromJson(e)).toList();
   } catch (e) {
@@ -72,8 +74,9 @@ class PracticeState {
 
 class PracticeNotifier extends StateNotifier<PracticeState> {
   final List<IrregularVerb> allVerbs;
-  
-  PracticeNotifier(this.allVerbs) : super(PracticeState(remainingVerbs: List.from(allVerbs)..shuffle())) {
+
+  PracticeNotifier(this.allVerbs)
+    : super(PracticeState(remainingVerbs: List.from(allVerbs)..shuffle())) {
     _nextVerb();
   }
 
@@ -82,13 +85,13 @@ class PracticeNotifier extends StateNotifier<PracticeState> {
       // Finished
       return;
     }
-    
+
     final next = state.remainingVerbs.first;
     final remaining = state.remainingVerbs.sublist(1);
-    
+
     // Generate distractors for the whole verb (V2 and V3)
     final distractors = _generateDistractors(next);
-    
+
     state = state.copyWith(
       currentVerb: next,
       remainingVerbs: remaining,
@@ -106,14 +109,17 @@ class PracticeNotifier extends StateNotifier<PracticeState> {
     // Helper to get similar ones
     List<String> getSimilar(String val, String form) {
       final List<String> candidates = [];
-      final suffix = val.length > 3 ? val.substring(val.length - 3) : (val.length > 2 ? val.substring(val.length - 2) : val);
-      
+      final suffix =
+          val.length > 3
+              ? val.substring(val.length - 3)
+              : (val.length > 2 ? val.substring(val.length - 2) : val);
+
       for (var verb in allVerbs) {
         final v = form == 'v2' ? verb.v2 : verb.v3;
         if (v == val) continue;
         if (v.endsWith(suffix)) candidates.add(v);
       }
-      
+
       if (candidates.length < 3) {
         for (var verb in allVerbs) {
           final v = form == 'v2' ? verb.v2 : verb.v3;
@@ -127,10 +133,10 @@ class PracticeNotifier extends StateNotifier<PracticeState> {
 
     final v2Similar = getSimilar(correct.v2, 'v2');
     final v3Similar = getSimilar(correct.v3, 'v3');
-    
+
     final Set<String> combined = {correct.v2, correct.v3};
     final allSimilars = [...v2Similar, ...v3Similar]..shuffle();
-    
+
     for (var s in allSimilars) {
       if (combined.length >= 6) break;
       combined.add(s);
@@ -146,7 +152,7 @@ class PracticeNotifier extends StateNotifier<PracticeState> {
         combined.add(v.v3);
       }
     }
-    
+
     return combined.toList()..shuffle();
   }
 
@@ -156,7 +162,11 @@ class PracticeNotifier extends StateNotifier<PracticeState> {
 
     if (!state.isV2Correct) {
       if (current.v2 == option) {
-        state = state.copyWith(isV2Correct: true, selectedV2: option, wrongOptions: []);
+        state = state.copyWith(
+          isV2Correct: true,
+          selectedV2: option,
+          wrongOptions: [],
+        );
         _checkComplete();
       } else {
         // Wrong
@@ -168,7 +178,11 @@ class PracticeNotifier extends StateNotifier<PracticeState> {
       }
     } else if (!state.isV3Correct) {
       if (current.v3 == option) {
-        state = state.copyWith(isV3Correct: true, selectedV3: option, wrongOptions: []);
+        state = state.copyWith(
+          isV3Correct: true,
+          selectedV3: option,
+          wrongOptions: [],
+        );
         _checkComplete();
       } else {
         // Wrong
@@ -188,7 +202,11 @@ class PracticeNotifier extends StateNotifier<PracticeState> {
 
   void _checkComplete() {
     if (state.isV2Correct && state.isV3Correct) {
-      state = state.copyWith(showCorrectGlow: true, score: state.score + 1, total: state.total + 1);
+      state = state.copyWith(
+        showCorrectGlow: true,
+        score: state.score + 1,
+        total: state.total + 1,
+      );
       Future.delayed(const Duration(milliseconds: 600), () {
         if (mounted) _nextVerb();
       });
@@ -196,7 +214,8 @@ class PracticeNotifier extends StateNotifier<PracticeState> {
   }
 }
 
-final practiceProvider = StateNotifierProvider.autoDispose<PracticeNotifier, PracticeState>((ref) {
-  final verbs = ref.watch(irregularVerbsProvider).valueOrNull ?? [];
-  return PracticeNotifier(verbs);
-});
+final practiceProvider =
+    StateNotifierProvider.autoDispose<PracticeNotifier, PracticeState>((ref) {
+      final verbs = ref.watch(irregularVerbsProvider).valueOrNull ?? [];
+      return PracticeNotifier(verbs);
+    });

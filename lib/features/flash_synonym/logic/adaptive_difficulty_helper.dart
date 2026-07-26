@@ -3,21 +3,16 @@
 library;
 
 enum AdaptiveStage {
-  easy,          // 0 - only easy
-  easyMedium,    // 1 - mix of easy + medium
-  medium,        // 2 - only medium
-  mediumUpper,   // 3 - mix of medium + upper
-  upper,         // 4 - only upper
-  upperExpert,   // 5 - mix of upper + expert
-  expert,        // 6 - only expert
+  easy, // 0 - only easy
+  easyMedium, // 1 - mix of easy + medium
+  medium, // 2 - only medium
+  mediumUpper, // 3 - mix of medium + upper
+  upper, // 4 - only upper
+  upperExpert, // 5 - mix of upper + expert
+  expert, // 6 - only expert
 }
 
-enum DifficultyLevel {
-  easy,
-  medium,
-  upper,
-  expert,
-}
+enum DifficultyLevel { easy, medium, upper, expert }
 
 class AdaptiveDifficultyHelper {
   /// Maps user-selected level to starting adaptive stage
@@ -103,7 +98,8 @@ class AdaptiveDifficultyHelper {
 
       case AdaptiveStage.easyMedium:
         // Alternate between easy and medium
-        if (lastDifficulty == null || lastDifficulty == DifficultyLevel.medium) {
+        if (lastDifficulty == null ||
+            lastDifficulty == DifficultyLevel.medium) {
           return DifficultyLevel.easy;
         } else {
           return DifficultyLevel.medium;
@@ -125,7 +121,8 @@ class AdaptiveDifficultyHelper {
 
       case AdaptiveStage.upperExpert:
         // Alternate between upper and expert
-        if (lastDifficulty == null || lastDifficulty == DifficultyLevel.expert) {
+        if (lastDifficulty == null ||
+            lastDifficulty == DifficultyLevel.expert) {
           return DifficultyLevel.upper;
         } else {
           return DifficultyLevel.expert;
@@ -180,4 +177,3 @@ class AdaptiveDifficultyHelper {
     }
   }
 }
-

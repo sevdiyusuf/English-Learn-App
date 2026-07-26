@@ -16,13 +16,18 @@ class WordEchoService {
     if (_words != null) return;
 
     try {
-      final jsonString = await rootBundle.loadString('assets/word_echo_words.json');
+      final jsonString = await rootBundle.loadString(
+        'assets/word_echo_words.json',
+      );
       final jsonData = json.decode(jsonString) as Map<String, dynamic>;
       final wordsList = jsonData['words'] as List<dynamic>;
-      _words = wordsList
-          .map((word) => WordEchoWord.fromJson(word as Map<String, dynamic>))
-          .toList();
-      
+      _words =
+          wordsList
+              .map(
+                (word) => WordEchoWord.fromJson(word as Map<String, dynamic>),
+              )
+              .toList();
+
       // Build lookup map for quick access by English word
       _wordsByEnglish = {
         for (var word in _words!) word.english.toLowerCase(): word,
@@ -43,7 +48,9 @@ class WordEchoService {
   List<WordEchoWord> getRandomWords(int count) {
     final allWords = getWords();
     if (allWords.length < count) {
-      throw StateError('Not enough words in the set. Need at least $count words.');
+      throw StateError(
+        'Not enough words in the set. Need at least $count words.',
+      );
     }
 
     final random = Random();

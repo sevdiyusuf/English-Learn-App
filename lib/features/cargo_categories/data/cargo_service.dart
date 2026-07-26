@@ -31,8 +31,9 @@ class CargoService {
     }
 
     try {
-      final jsonString =
-          await rootBundle.loadString('assets/cargo_categories.json');
+      final jsonString = await rootBundle.loadString(
+        'assets/cargo_categories.json',
+      );
       final jsonMap = json.decode(jsonString) as Map<String, dynamic>;
 
       _categories = <Category>[];
@@ -41,31 +42,30 @@ class CargoService {
       // Load categories and their words
       if (jsonMap['categories'] != null) {
         final categoriesList = jsonMap['categories'] as List<dynamic>;
-        
+
         for (final categoryItem in categoriesList) {
           final categoryMap = categoryItem as Map<String, dynamic>;
-          
+
           // Add default color if not present
           if (categoryMap['color'] == null) {
             final id = categoryMap['id'] as String;
             categoryMap['color'] = _defaultColors[id] ?? '#9CA3AF';
           }
-          
+
           final category = Category.fromJson(categoryMap);
           _categories!.add(category);
-          
+
           // Load words from this category
           if (categoryMap['words'] != null) {
-            final wordsList = (categoryMap['words'] as List<dynamic>)
-                .map((wordItem) {
+            final wordsList =
+                (categoryMap['words'] as List<dynamic>).map((wordItem) {
                   final wordMap = wordItem as Map<String, dynamic>;
                   return CargoWord.fromJson({
                     'word': wordMap['english'],
                     'translate': wordMap['turkish'],
                     'category': category.id,
                   });
-                })
-                .toList();
+                }).toList();
             _wordsByCategory![category.id] = wordsList;
           }
         }
@@ -73,7 +73,9 @@ class CargoService {
 
       if (kDebugMode) {
         debugPrint('Loaded cargo data: ${_categories?.length} categories');
-        debugPrint('Total words: ${_wordsByCategory?.values.fold<int>(0, (sum, list) => sum + list.length)}');
+        debugPrint(
+          'Total words: ${_wordsByCategory?.values.fold<int>(0, (sum, list) => sum + list.length)}',
+        );
       }
     } catch (e) {
       if (kDebugMode) {
@@ -147,9 +149,15 @@ class CargoService {
     }
 
     // Get categories by difficulty and create fresh shuffled copies
-    final easyCategories = List<Category>.from(getCategoriesByDifficulty('easy'));
-    final mediumCategories = List<Category>.from(getCategoriesByDifficulty('medium'));
-    final hardCategories = List<Category>.from(getCategoriesByDifficulty('hard'));
+    final easyCategories = List<Category>.from(
+      getCategoriesByDifficulty('easy'),
+    );
+    final mediumCategories = List<Category>.from(
+      getCategoriesByDifficulty('medium'),
+    );
+    final hardCategories = List<Category>.from(
+      getCategoriesByDifficulty('hard'),
+    );
 
     // Shuffle each difficulty list multiple times for better randomization
     for (int i = 0; i < 3; i++) {
@@ -167,8 +175,12 @@ class CargoService {
           throw StateError('Not enough categories for beginner level');
         }
         // Use random indices instead of just taking first ones
-        final easyIndices = List<int>.generate(easyCategories.length, (i) => i)..shuffle(random);
-        final mediumIndices = List<int>.generate(mediumCategories.length, (i) => i)..shuffle(random);
+        final easyIndices = List<int>.generate(easyCategories.length, (i) => i)
+          ..shuffle(random);
+        final mediumIndices = List<int>.generate(
+          mediumCategories.length,
+          (i) => i,
+        )..shuffle(random);
         selected.add(easyCategories[easyIndices[0]]);
         selected.add(easyCategories[easyIndices[1]]);
         selected.add(mediumCategories[mediumIndices[0]]);
@@ -178,8 +190,12 @@ class CargoService {
         if (mediumCategories.length < 2 || easyCategories.isEmpty) {
           throw StateError('Not enough categories for normal level');
         }
-        final mediumIndices = List<int>.generate(mediumCategories.length, (i) => i)..shuffle(random);
-        final easyIndices = List<int>.generate(easyCategories.length, (i) => i)..shuffle(random);
+        final mediumIndices = List<int>.generate(
+          mediumCategories.length,
+          (i) => i,
+        )..shuffle(random);
+        final easyIndices = List<int>.generate(easyCategories.length, (i) => i)
+          ..shuffle(random);
         selected.add(mediumCategories[mediumIndices[0]]);
         selected.add(mediumCategories[mediumIndices[1]]);
         selected.add(easyCategories[easyIndices[0]]);
@@ -189,8 +205,12 @@ class CargoService {
         if (mediumCategories.length < 2 || hardCategories.isEmpty) {
           throw StateError('Not enough categories for advanced level');
         }
-        final mediumIndices = List<int>.generate(mediumCategories.length, (i) => i)..shuffle(random);
-        final hardIndices = List<int>.generate(hardCategories.length, (i) => i)..shuffle(random);
+        final mediumIndices = List<int>.generate(
+          mediumCategories.length,
+          (i) => i,
+        )..shuffle(random);
+        final hardIndices = List<int>.generate(hardCategories.length, (i) => i)
+          ..shuffle(random);
         selected.add(mediumCategories[mediumIndices[0]]);
         selected.add(mediumCategories[mediumIndices[1]]);
         selected.add(hardCategories[hardIndices[0]]);
@@ -200,8 +220,12 @@ class CargoService {
         if (hardCategories.length < 2 || mediumCategories.isEmpty) {
           throw StateError('Not enough categories for expert level');
         }
-        final hardIndices = List<int>.generate(hardCategories.length, (i) => i)..shuffle(random);
-        final mediumIndices = List<int>.generate(mediumCategories.length, (i) => i)..shuffle(random);
+        final hardIndices = List<int>.generate(hardCategories.length, (i) => i)
+          ..shuffle(random);
+        final mediumIndices = List<int>.generate(
+          mediumCategories.length,
+          (i) => i,
+        )..shuffle(random);
         selected.add(hardCategories[hardIndices[0]]);
         selected.add(hardCategories[hardIndices[1]]);
         selected.add(mediumCategories[mediumIndices[0]]);
@@ -218,7 +242,11 @@ class CargoService {
   }
 
   /// Get 4 random words from a specific category
-  List<CargoWord> getRandomWordsFromCategory(String categoryId, int count, Random random) {
+  List<CargoWord> getRandomWordsFromCategory(
+    String categoryId,
+    int count,
+    Random random,
+  ) {
     if (_wordsByCategory == null) {
       throw StateError('Data not loaded. Call loadData() first.');
     }

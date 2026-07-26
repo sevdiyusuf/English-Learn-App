@@ -10,6 +10,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/feedback_bottom_sheet.dart';
 import '../../../core/providers/accent_color_provider.dart';
 import '../../auth/logic/auth_controller.dart';
+import '../../moderation/ugc_policy_gate.dart';
 import '../../auth/models/app_user.dart';
 import '../../auth/ui/account_sheet.dart';
 import '../../friends/logic/friends_controller.dart';
@@ -22,10 +23,7 @@ const _backgroundColor = Color(0xFF050505);
 const _stoneGradient = LinearGradient(
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,
-  colors: [
-    Color(0xFF2C2C2E),
-    Color(0xFF1C1C1E),
-  ],
+  colors: [Color(0xFF2C2C2E), Color(0xFF1C1C1E)],
 );
 final _borderSideColor = Colors.white.withValues(alpha: 0.08);
 const _primaryTextColor = Colors.white;
@@ -59,10 +57,7 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
           primary: accentColor,
           secondary: accentColor,
           surfaceTint: Colors.transparent,
-        ).copyWith(
-          primary: accentColor,
-          secondary: accentColor,
-        ),
+        ).copyWith(primary: accentColor, secondary: accentColor),
         segmentedButtonTheme: SegmentedButtonThemeData(
           style: SegmentedButton.styleFrom(
             selectedBackgroundColor: accentColor.withValues(alpha: 0.2),
@@ -74,7 +69,10 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
           selectedColor: accentColor.withValues(alpha: 0.2),
           secondarySelectedColor: accentColor.withValues(alpha: 0.2),
           checkmarkColor: accentColor,
-          labelStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          labelStyle: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
           secondaryLabelStyle: TextStyle(color: accentColor),
         ),
       ),
@@ -121,15 +119,19 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
             ),
             SafeArea(
               child: settingsAsync.when(
-                data: (settings) => _buildContent(
-                  context,
-                  authState.valueOrNull,
-                  friendsState.profile,
-                  settings,
-                  settingsController,
-                  accentColor,
-                ),
-                loading: () => Center(child: CircularProgressIndicator(color: accentColor)),
+                data:
+                    (settings) => _buildContent(
+                      context,
+                      authState.valueOrNull,
+                      friendsState.profile,
+                      settings,
+                      settingsController,
+                      accentColor,
+                    ),
+                loading:
+                    () => Center(
+                      child: CircularProgressIndicator(color: accentColor),
+                    ),
                 error: (error, stack) {
                   return _buildContent(
                     context,
@@ -355,29 +357,32 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Wrap(
                   spacing: 8,
-                  children: [3, 10, 20, 30, 50].map((value) {
-                    final isSelected = settings.streakGoal == value;
-                    return FilterChip(
-                      label: Text('$value Gün'),
-                      selected: isSelected,
-                      onSelected: (selected) async {
-                        if (!selected || !mounted) return;
-                        final messenger = ScaffoldMessenger.of(context);
-                        HapticFeedback.lightImpact();
-                        try {
-                          await controller.updateStreakGoal(value);
-                        } catch (e) {
-                          if (!mounted) return;
-                          messenger.showSnackBar(
-                            SnackBar(
-                              content: Text(l10n.errorOccurred(e.toString())),
-                              backgroundColor: AppColors.error,
-                            ),
-                          );
-                        }
-                      },
-                    );
-                  }).toList(),
+                  children:
+                      [3, 10, 20, 30, 50].map((value) {
+                        final isSelected = settings.streakGoal == value;
+                        return FilterChip(
+                          label: Text('$value Gün'),
+                          selected: isSelected,
+                          onSelected: (selected) async {
+                            if (!selected || !mounted) return;
+                            final messenger = ScaffoldMessenger.of(context);
+                            HapticFeedback.lightImpact();
+                            try {
+                              await controller.updateStreakGoal(value);
+                            } catch (e) {
+                              if (!mounted) return;
+                              messenger.showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    l10n.errorOccurred(e.toString()),
+                                  ),
+                                  backgroundColor: AppColors.error,
+                                ),
+                              );
+                            }
+                          },
+                        );
+                      }).toList(),
                 ),
               ),
               Padding(
@@ -446,10 +451,7 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
           child: ListTile(
             title: Text(l10n.progressAndStats),
             subtitle: Text(l10n.progressAndStatsSubtitle),
-            leading: Icon(
-              Icons.analytics_outlined,
-              color: accentColor,
-            ),
+            leading: Icon(Icons.analytics_outlined, color: accentColor),
             trailing: const Icon(Icons.chevron_right),
             onTap: () => context.go('/stats'),
           ),
@@ -479,6 +481,13 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
                   onTap: () => _showDeleteAccountDialog(context),
                 ),
               ],
+              const Divider(),
+              ListTile(
+                title: Text(l10n.blockedUsers),
+                leading: const Icon(Icons.block),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => context.push('/blocked-users'),
+              ),
               const Divider(),
               ListTile(
                 title: Text(l10n.privacyPolicy),
@@ -567,11 +576,7 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
                       ),
                       if (user != null && !user.isGuestMode)
                         IconButton(
-                          icon: Icon(
-                            Icons.edit,
-                            size: 18,
-                            color: accentColor,
-                          ),
+                          icon: Icon(Icons.edit, size: 18, color: accentColor),
                           onPressed:
                               () => _showEditNameDialog(
                                 context,
@@ -657,6 +662,9 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
                   final newName = controller.text.trim();
                   if (newName.isEmpty) return;
 
+                  if (!await ensureCurrentUgcAcceptance(context, ref)) return;
+                  if (!context.mounted) return;
+
                   Navigator.pop(context);
                   try {
                     await ref
@@ -685,7 +693,11 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
     );
   }
 
-  Widget _buildSectionHeader(BuildContext context, String title, Color accentColor) {
+  Widget _buildSectionHeader(
+    BuildContext context,
+    String title,
+    Color accentColor,
+  ) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(4, 0, 0, 16),
       child: Text(
@@ -716,10 +728,7 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(24),
-        child: Material(
-          color: Colors.transparent,
-          child: child,
-        ),
+        child: Material(color: Colors.transparent, child: child),
       ),
     );
   }
@@ -942,12 +951,22 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
 
       if (confirmed2 == true) {
         if (!context.mounted) return;
+        final user = ref.read(authControllerProvider).value;
+        String? password;
+        if (user != null && user.providerId == 'password') {
+          password = await _showPasswordPromptDialog(context);
+          if (password == null || password.isEmpty) {
+            return; // user cancelled or empty
+          }
+        }
+        if (!context.mounted) return;
+
         final router = GoRouter.of(context);
         final messenger = ScaffoldMessenger.of(context);
         try {
           await ref
               .read(authControllerProvider.notifier)
-              .deleteAccountAndData();
+              .deleteAccountAndData(password: password);
           if (!context.mounted) return;
           router.go('/');
           messenger.showSnackBar(
@@ -967,5 +986,35 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
         }
       }
     }
+  }
+
+  Future<String?> _showPasswordPromptDialog(BuildContext context) async {
+    final l10n = AppLocalizations.of(context)!;
+    String? password;
+    return showDialog<String>(
+      context: context,
+      builder:
+          (context) => AlertDialog(
+            title: Text('Şifre Gereklidir'),
+            content: TextField(
+              obscureText: true,
+              decoration: InputDecoration(
+                labelText: 'Şifre',
+                border: const OutlineInputBorder(),
+              ),
+              onChanged: (val) => password = val,
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text(l10n.cancel),
+              ),
+              FilledButton(
+                onPressed: () => Navigator.of(context).pop(password),
+                child: Text('Onayla'),
+              ),
+            ],
+          ),
+    );
   }
 }

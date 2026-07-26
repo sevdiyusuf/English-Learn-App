@@ -3,27 +3,48 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:isar/isar.dart';
 
+import '../../sync/data/outbox_repository.dart';
 import '../models/word_pair.dart';
 import '../models/word_set.dart';
 import 'word_match_repo_interface.dart';
 
 class WordMatchRepo implements WordMatchRepoInterface {
-  WordMatchRepo(this._isar);
+  WordMatchRepo(this._isar, {this.activeOwnerUid, OutboxRepository? outboxRepo})
+    : _outboxRepo = outboxRepo;
 
   final Isar _isar;
+  final OutboxRepository? _outboxRepo;
+  @override
+  final String? activeOwnerUid;
 
   static const String wordsFromGamesSetName =
       WordMatchRepoInterface.wordsFromGamesSetName;
 
+  bool _matchesScope(WordSet? set) {
+    if (set == null) return false;
+    if (set.isBuiltin) return true;
+    return set.ownerUid == activeOwnerUid;
+  }
+
   @override
   Stream<List<WordSet>> watchSets() {
-    return _isar.wordSets
-        .filter()
-        .isBuiltinEqualTo(false)
-        .or()
-        .nameEqualTo(wordsFromGamesSetName)
-        .sortByUpdatedAtDesc()
-        .watch(fireImmediately: true);
+    final QueryBuilder<WordSet, WordSet, QAfterFilterCondition> query;
+    if (activeOwnerUid == null) {
+      query = _isar.wordSets
+          .filter()
+          .isBuiltinEqualTo(false)
+          .ownerUidIsNull()
+          .or()
+          .isBuiltinEqualTo(true);
+    } else {
+      query = _isar.wordSets
+          .filter()
+          .isBuiltinEqualTo(false)
+          .ownerUidEqualTo(activeOwnerUid)
+          .or()
+          .isBuiltinEqualTo(true);
+    }
+    return query.sortByUpdatedAtDesc().watch(fireImmediately: true);
   }
 
   @override
@@ -37,40 +58,77 @@ class WordMatchRepo implements WordMatchRepoInterface {
   }
 
   @override
-  Stream<List<WordPair>> watchPairs(int setId) {
-    return _isar.wordPairs
+  Stream<List<WordPair>> watchPairs(int setId) async* {
+    final set = await getSet(setId);
+    if (set == null) {
+      yield [];
+      return;
+    }
+    yield* _isar.wordPairs
         .filter()
         .setIdEqualTo(setId)
         .watch(fireImmediately: true);
   }
 
   @override
-  Future<List<WordPair>> fetchPairs(int setId) {
+  Future<List<WordPair>> fetchPairs(int setId) async {
+    final set = await getSet(setId);
+    if (set == null) return [];
     return _isar.wordPairs.filter().setIdEqualTo(setId).findAll();
   }
 
   @override
-  Future<WordSet?> getSet(int id) => _isar.wordSets.get(id);
+  Future<WordSet?> getSet(int id) async {
+    final set = await _isar.wordSets.get(id);
+    if (_matchesScope(set)) return set;
+    return null;
+  }
 
   @override
-  Future<int> countSets() => _isar.wordSets.count();
+  Future<int> countSets() async {
+    final QueryBuilder<WordSet, WordSet, QAfterFilterCondition> customQuery;
+    if (activeOwnerUid == null) {
+      customQuery =
+          _isar.wordSets.filter().isBuiltinEqualTo(false).ownerUidIsNull();
+    } else {
+      customQuery = _isar.wordSets
+          .filter()
+          .isBuiltinEqualTo(false)
+          .ownerUidEqualTo(activeOwnerUid);
+    }
+    return customQuery
+        .or()
+        .group(
+          (q) => q.isBuiltinEqualTo(true).nameEqualTo(wordsFromGamesSetName),
+        )
+        .count();
+  }
 
   @override
-  Future<int> countPairs(int setId) =>
-      _isar.wordPairs.filter().setIdEqualTo(setId).count();
+  Future<int> countPairs(int setId) async {
+    final set = await getSet(setId);
+    if (set == null) return 0;
+    return _isar.wordPairs.filter().setIdEqualTo(setId).count();
+  }
 
   @override
   Future<Map<int, int>> countPairsForSets(List<int> setIds) async {
     final result = <int, int>{};
     for (final id in setIds) {
-      result[id] = await countPairs(id);
+      final set = await getSet(id);
+      if (set != null) {
+        result[id] = await countPairs(id);
+      }
     }
     return result;
   }
 
   @override
-  Future<WordSet?> getSetByCloudId(String cloudId) {
-    return _isar.wordSets.filter().cloudIdEqualTo(cloudId).findFirst();
+  Future<WordSet?> getSetByCloudId(String cloudId) async {
+    final set =
+        await _isar.wordSets.filter().cloudIdEqualTo(cloudId).findFirst();
+    if (_matchesScope(set)) return set;
+    return null;
   }
 
   @override
@@ -91,9 +149,28 @@ class WordMatchRepo implements WordMatchRepoInterface {
           ..name = setName
           ..createdAt = now
           ..updatedAt = now
-          ..isBuiltin = false;
+          ..isBuiltin = false
+          ..ownerUid = activeOwnerUid;
+
     return _isar.writeTxn(() async {
       final id = await _isar.wordSets.put(set);
+      // Atomically enqueue create to outbox (guest sets are not enqueued)
+      final outbox = _outboxRepo;
+      if (activeOwnerUid != null && outbox != null) {
+        final payload = <String, dynamic>{
+          'name': setName,
+          'createdAt': now.toIso8601String(),
+          'updatedAt': now.toIso8601String(),
+          'visibility': set.visibility.name,
+          'pairs': <dynamic>[],
+        };
+        await outbox.enqueueCreateInsideTxn(
+          ownerUid: activeOwnerUid,
+          entityType: 'word_set',
+          entityId: id.toString(),
+          payload: payload,
+        );
+      }
       return id;
     });
   }
@@ -171,7 +248,8 @@ class WordMatchRepo implements WordMatchRepoInterface {
             ..name = trimmedName
             ..createdAt = now
             ..updatedAt = now
-            ..isBuiltin = false;
+            ..isBuiltin = false
+            ..ownerUid = activeOwnerUid;
       final id = await _isar.wordSets.put(newSet);
 
       for (final p in toInsert) {
@@ -187,35 +265,77 @@ class WordMatchRepo implements WordMatchRepoInterface {
 
   @override
   Future<void> renameSet({required int id, required String name}) async {
-    final set = await _isar.wordSets.get(id);
+    final set = await getSet(id);
     if (set == null) {
       throw StateError('Set bulunamadı');
+    }
+    if (set.isBuiltin) {
+      throw StateError('Yerleşik setler değiştirilemez');
     }
     final trimmed = name.trim();
     if (trimmed.isEmpty) {
       throw ArgumentError('Set adı boş olamaz');
     }
+    final now = DateTime.now().toUtc();
     final updated =
         set
           ..name = trimmed
-          ..updatedAt = DateTime.now().toUtc();
+          ..updatedAt = now;
     await _isar.writeTxn(() async {
       await _isar.wordSets.put(updated);
+      // Atomically enqueue update to outbox
+      final outbox = _outboxRepo;
+      if (activeOwnerUid != null && outbox != null) {
+        final existingPairs =
+            await _isar.wordPairs.filter().setIdEqualTo(id).findAll();
+        final pairsJson =
+            existingPairs
+                .map(
+                  (p) => {
+                    'english': p.english,
+                    'turkish': p.turkish,
+                    'learned': p.learned,
+                  },
+                )
+                .toList();
+        final payload = <String, dynamic>{
+          'name': trimmed,
+          'updatedAt': now.toIso8601String(),
+          'pairs': pairsJson,
+        };
+        await outbox.enqueueUpdateInsideTxn(
+          ownerUid: activeOwnerUid,
+          entityType: 'word_set',
+          entityId: id.toString(),
+          payload: payload,
+          remoteVersion: updated.remoteVersion,
+        );
+      }
     });
   }
 
   @override
   Future<void> deleteSet(int id) async {
+    final set = await getSet(id);
+    if (set == null) {
+      throw StateError('Set bulunamadı');
+    }
+    if (set.isBuiltin) {
+      throw StateError('Yerleşik setler silinemez');
+    }
     await _isar.writeTxn(() async {
-      final set = await _isar.wordSets.get(id);
-      if (set == null) {
-        throw StateError('Set bulunamadı');
-      }
-      if (set.isBuiltin) {
-        throw StateError('Yerleşik setler silinemez');
-      }
       await _isar.wordPairs.filter().setIdEqualTo(id).deleteAll();
       await _isar.wordSets.delete(id);
+      // Atomically enqueue delete (tombstone) to outbox
+      final outbox = _outboxRepo;
+      if (activeOwnerUid != null && outbox != null) {
+        await outbox.enqueueDeleteInsideTxn(
+          ownerUid: activeOwnerUid,
+          entityType: 'word_set',
+          entityId: id.toString(),
+          remoteVersion: set.remoteVersion,
+        );
+      }
     });
   }
 
@@ -242,6 +362,9 @@ class WordMatchRepo implements WordMatchRepoInterface {
     for (final pair in pairs) {
       if (pair.english.trim().isEmpty) continue;
 
+      final isNewPair = pair.id == 0 || pair.id == Isar.autoIncrement;
+      pair.setId = setId;
+
       final normalizedKey =
           '${pair.english.toLowerCase().trim()}|${pair.turkish.toLowerCase().trim()}';
 
@@ -249,13 +372,6 @@ class WordMatchRepo implements WordMatchRepoInterface {
       if (sanitizedPairsMap.containsKey(normalizedKey)) {
         continue;
       }
-
-      // Determine if this is a new pair or an existing one
-      final isNewPair =
-          pair.id == 0 ||
-          pair.id == Isar.autoIncrement ||
-          pair.setId == 0 ||
-          pair.setId != setId;
 
       if (isNewPair) {
         // Create a completely NEW WordPair instance for new pairs
@@ -289,16 +405,20 @@ class WordMatchRepo implements WordMatchRepoInterface {
 
     // Perform all operations in a single transaction for atomicity
     await _isar.writeTxn(() async {
-      // Verify set exists
-      final set = await _isar.wordSets.get(setId);
+      // Verify set exists and matches scope
+      final set = await getSet(setId);
       if (set == null) {
         throw StateError('Set bulunamadı');
       }
+      if (set.isBuiltin) {
+        throw StateError('Yerleşik setler değiştirilemez');
+      }
 
       // Update set metadata
+      final now = DateTime.now();
       set
         ..name = trimmedName
-        ..updatedAt = DateTime.now();
+        ..updatedAt = now;
       await _isar.wordSets.put(set);
 
       // Delete all existing pairs for this set
@@ -309,6 +429,33 @@ class WordMatchRepo implements WordMatchRepoInterface {
       // cause only one to be stored (same ID assigned to all).
       for (final pair in sanitizedPairs) {
         await _isar.wordPairs.put(pair);
+      }
+
+      // Atomically enqueue update to outbox
+      final outbox = _outboxRepo;
+      if (activeOwnerUid != null && outbox != null) {
+        final pairsJson =
+            sanitizedPairs
+                .map(
+                  (p) => {
+                    'english': p.english,
+                    'turkish': p.turkish,
+                    'learned': p.learned,
+                  },
+                )
+                .toList();
+        final payload = <String, dynamic>{
+          'name': trimmedName,
+          'updatedAt': now.toUtc().toIso8601String(),
+          'pairs': pairsJson,
+        };
+        await outbox.enqueueUpdateInsideTxn(
+          ownerUid: activeOwnerUid,
+          entityType: 'word_set',
+          entityId: setId.toString(),
+          payload: payload,
+          remoteVersion: set.remoteVersion,
+        );
       }
     });
   }
@@ -529,23 +676,23 @@ class WordMatchRepo implements WordMatchRepoInterface {
   @override
   Future<void> ensureInitialUserSet() async {
     await _isar.writeTxn(() async {
-      // Check if user has any custom sets
-      final customSetsCount = await _isar.wordSets
-          .filter()
-          .isBuiltinEqualTo(false)
-          .count();
-          
-      if (customSetsCount > 0) {
-        return; // Already has sets
+      final existingSets =
+          await _isar.wordSets.filter().isBuiltinEqualTo(false).findAll();
+      final scopedCustomSets =
+          existingSets.where((s) => _matchesScope(s)).toList();
+
+      if (scopedCustomSets.isNotEmpty) {
+        return;
       }
 
-      // Create the default set
       final now = DateTime.now();
-      final initialSet = WordSet()
-        ..name = 'Kelime Setim 1'
-        ..createdAt = now
-        ..updatedAt = now
-        ..isBuiltin = false;
+      final initialSet =
+          WordSet()
+            ..name = 'Kelime Setim 1'
+            ..createdAt = now
+            ..updatedAt = now
+            ..isBuiltin = false
+            ..ownerUid = activeOwnerUid;
 
       await _isar.wordSets.put(initialSet);
     });
@@ -567,7 +714,11 @@ class WordMatchRepo implements WordMatchRepoInterface {
   @override
   Future<void> updateSetCloudId(int id, String cloudId) async {
     final set = await _isar.wordSets.get(id);
-    if (set != null) {
+    if (set == null || set.isBuiltin) return;
+    if (set.ownerUid == activeOwnerUid ||
+        (set.ownerUid == null &&
+            (set.pendingMigrationUid == null ||
+                set.pendingMigrationUid == activeOwnerUid))) {
       set.cloudId = cloudId;
       await _isar.writeTxn(() async {
         await _isar.wordSets.put(set);
@@ -577,14 +728,72 @@ class WordMatchRepo implements WordMatchRepoInterface {
 
   @override
   Future<void> updateSetVisibility(int id, SetVisibility visibility) async {
+    final set = await getSet(id);
+    if (set == null || set.isBuiltin) return;
+    set.visibility = visibility;
+    set.updatedAt = DateTime.now().toUtc();
+    await _isar.writeTxn(() async {
+      await _isar.wordSets.put(set);
+    });
+  }
+
+  @override
+  Future<void> updateSetOwnerUid(int id, String? ownerUid) async {
     final set = await _isar.wordSets.get(id);
-    if (set != null) {
-      set.visibility = visibility;
-      set.updatedAt = DateTime.now().toUtc();
-      await _isar.writeTxn(() async {
-        await _isar.wordSets.put(set);
-      });
+    if (set == null || set.isBuiltin) {
+      throw StateError('Set bulunamadı veya yerel sahiplik değiştirilemez');
     }
+    // Only guest sets (ownerUid == null) can be migrated to activeOwnerUid
+    if (set.ownerUid != null ||
+        ownerUid == null ||
+        ownerUid != activeOwnerUid) {
+      throw StateError('Geçersiz sahiplik transferi');
+    }
+    set.ownerUid = ownerUid;
+    set.pendingMigrationUid = null;
+    await _isar.writeTxn(() async {
+      await _isar.wordSets.put(set);
+    });
+  }
+
+  @override
+  Future<void> updateSetPendingMigrationUid(int id, String? pendingUid) async {
+    final set = await _isar.wordSets.get(id);
+    if (set == null || set.isBuiltin || set.ownerUid != null) {
+      throw StateError('Set bulunamadı veya migrasyon durumu değiştirilemez');
+    }
+    if (set.pendingMigrationUid != null &&
+        set.pendingMigrationUid != pendingUid &&
+        activeOwnerUid != null) {
+      throw StateError('Geçersiz migrasyon sahibi');
+    }
+    if (pendingUid != null &&
+        activeOwnerUid != null &&
+        pendingUid != activeOwnerUid) {
+      throw StateError('Geçersiz migrasyon sahibi');
+    }
+    set.pendingMigrationUid = pendingUid;
+    await _isar.writeTxn(() async {
+      await _isar.wordSets.put(set);
+    });
+  }
+
+  @override
+  Future<List<WordSet>> getUnmigratedGuestSets() async {
+    return _isar.wordSets
+        .filter()
+        .isBuiltinEqualTo(false)
+        .ownerUidIsNull()
+        .findAll();
+  }
+
+  @override
+  Future<List<WordPair>> getUnmigratedGuestPairs(int setId) async {
+    final set = await _isar.wordSets.get(setId);
+    if (set == null || set.isBuiltin || set.ownerUid != null) {
+      return [];
+    }
+    return _isar.wordPairs.filter().setIdEqualTo(setId).findAll();
   }
 
   @override
@@ -593,16 +802,128 @@ class WordMatchRepo implements WordMatchRepoInterface {
     String? sourceSetId,
     String? sourceOwnerUid,
     DateTime? importedAt,
+    String? ownerUid,
+    String? pendingMigrationUid,
   }) async {
-    final set = await _isar.wordSets.get(id);
-    if (set != null) {
+    final set = await getSet(id);
+    if (set != null && !set.isBuiltin) {
       if (sourceSetId != null) set.sourceSetId = sourceSetId;
       if (sourceOwnerUid != null) set.sourceOwnerUid = sourceOwnerUid;
       if (importedAt != null) set.importedAt = importedAt;
+      if (ownerUid != null && ownerUid == activeOwnerUid) {
+        set.ownerUid = ownerUid;
+      }
+      if (pendingMigrationUid != null) {
+        set.pendingMigrationUid = pendingMigrationUid;
+      }
       set.updatedAt = DateTime.now().toUtc();
       await _isar.writeTxn(() async {
         await _isar.wordSets.put(set);
       });
+    }
+  }
+
+  // ── Remote-apply path (no Outbox) ────────────────────────────────────────
+
+  @override
+  Future<int> createSetInternal({
+    required String name,
+    required String ownerUid,
+    required String cloudId,
+  }) async {
+    final now = DateTime.now().toUtc();
+    final set =
+        WordSet()
+          ..name = name.isEmpty ? cloudId : name
+          ..createdAt = now
+          ..updatedAt = now
+          ..isBuiltin = false
+          ..ownerUid = ownerUid
+          ..cloudId = cloudId;
+    return _isar.writeTxn(() async {
+      return _isar.wordSets.put(set);
+    });
+  }
+
+  @override
+  Future<void> renameSetInternal({
+    required int id,
+    required String name,
+  }) async {
+    final set = await _isar.wordSets.get(id);
+    if (set == null || set.isBuiltin) return;
+    set
+      ..name = name
+      ..updatedAt = DateTime.now().toUtc();
+    await _isar.writeTxn(() async {
+      await _isar.wordSets.put(set);
+    });
+  }
+
+  @override
+  Future<void> savePairsInternal({
+    required int setId,
+    required List<WordPair> pairs,
+  }) async {
+    await _isar.writeTxn(() async {
+      await _isar.wordPairs.filter().setIdEqualTo(setId).deleteAll();
+      for (final pair in pairs) {
+        pair
+          ..id = Isar.autoIncrement
+          ..setId = setId;
+        await _isar.wordPairs.put(pair);
+      }
+    });
+  }
+
+  @override
+  Future<void> updateSetRemoteMetadata(
+    int setId, {
+    required String cloudId,
+    required String ownerUid,
+    required int remoteVersion,
+    required String lastOperationId,
+    SetVisibility? visibility,
+    String? sourceSetId,
+    String? sourceOwnerUid,
+    DateTime? importedAt,
+    DateTime? updatedAt,
+    DateTime? createdAt,
+  }) async {
+    final set = await _isar.wordSets.get(setId);
+    if (set == null) return;
+    set
+      ..cloudId = cloudId
+      ..ownerUid = ownerUid
+      ..remoteVersion = remoteVersion
+      ..lastRemoteOperationId = lastOperationId;
+    if (visibility != null) set.visibility = visibility;
+    if (sourceSetId != null) set.sourceSetId = sourceSetId;
+    if (sourceOwnerUid != null) set.sourceOwnerUid = sourceOwnerUid;
+    if (importedAt != null) set.importedAt = importedAt;
+    if (updatedAt != null) set.updatedAt = updatedAt;
+    if (createdAt != null) set.createdAt = createdAt;
+    await _isar.writeTxn(() async {
+      await _isar.wordSets.put(set);
+    });
+  }
+
+  @override
+  Future<void> clearUserData(String uid) async {
+    await _isar.writeTxn(() async {
+      final sets = await _isar.wordSets.filter().ownerUidEqualTo(uid).findAll();
+      for (final set in sets) {
+        final pairs =
+            await _isar.wordPairs.filter().setIdEqualTo(set.id).findAll();
+        final pairIds = pairs.map((p) => p.id).toList();
+        await _isar.wordPairs.deleteAll(pairIds);
+      }
+      final setIds = sets.map((s) => s.id).toList();
+      await _isar.wordSets.deleteAll(setIds);
+    });
+
+    if (_outboxRepo != null) {
+      await _outboxRepo.clearUserData(uid);
     }
   }
 }

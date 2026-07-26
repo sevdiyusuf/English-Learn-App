@@ -349,4 +349,110 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get wrongAnswerLocked => 'Yanlış cevap! Kilitlendi.';
+
+  @override
+  String get communityGuidelines => 'Topluluk Kuralları';
+
+  @override
+  String get termsDraftNotice =>
+      'Taslak belgeler — ürün sahibi ve hukuk incelemesi gereklidir.';
+
+  @override
+  String get termsBody =>
+      'Uygulamayı saygılı ve hukuka uygun kullanın. Paylaşılan öğrenme içeriğini veya sosyal özellikleri kötüye kullanmayın.';
+
+  @override
+  String get guidelinesBody =>
+      'Taciz, tehdit, nefret söylemi veya kötüye kullanım, cinsel ya da uygunsuz içerik, spam, dolandırıcılık, tekrarlanan istenmeyen davetler, kimliğe bürünme, başkasının özel bilgileri, yasa dışı içerik veya moderasyondan kaçma girişimleri paylaşmayın.';
+
+  @override
+  String get reviewDocuments => 'Belgeleri incele';
+
+  @override
+  String get acceptCurrentPolicies =>
+      'Koşulları ve Topluluk Kurallarını kabul et';
+
+  @override
+  String get acceptPoliciesPrompt =>
+      'Herkese açık içerik yayınlamak veya güncellemek için iki belgeyi inceleyip güncel sürümleri açıkça kabul etmelisiniz.';
+
+  @override
+  String get acceptPoliciesCheck =>
+      'Kullanım Koşullarını ve Topluluk Kurallarını okudum ve kabul ediyorum.';
+
+  @override
+  String get accept => 'Kabul et';
+
+  @override
+  String get policyAcceptanceFailed =>
+      'Kabul kaydedilemedi. Lütfen tekrar deneyin.';
+
+  @override
+  String get report => 'Bildir';
+
+  @override
+  String get reportUser => 'Kullanıcıyı bildir';
+
+  @override
+  String get reportSharedSet => 'Paylaşılan seti bildir';
+
+  @override
+  String get reportReason => 'Neden';
+
+  @override
+  String get reportDetails => 'İsteğe bağlı ayrıntılar';
+
+  @override
+  String get submitReport => 'Bildirimi gönder';
+
+  @override
+  String get reportReceived => 'Teşekkürler. Bildiriminiz alındı.';
+
+  @override
+  String get reportUnavailable => 'Bu bildirim gönderilemez.';
+
+  @override
+  String get block => 'Engelle';
+
+  @override
+  String get unblock => 'Engeli kaldır';
+
+  @override
+  String get reportAndBlock => 'Bildir ve engelle';
+
+  @override
+  String get blockedUsers => 'Engellenen kullanıcılar';
+
+  @override
+  String get blockedUsersEmpty => 'Engellediğiniz kullanıcı yok.';
+
+  @override
+  String get blockUserPrompt =>
+      'Bu kullanıcı engellensin mi? Bekleyen sosyal etkileşimler kaldırılır.';
+
+  @override
+  String get interactionUnavailable => 'Bu etkileşim şu anda kullanılamıyor.';
+
+  @override
+  String get rateLimited =>
+      'Çok fazla deneme yapıldı. Lütfen daha sonra tekrar deneyin.';
+
+  @override
+  String get removeSharedSet => 'Paylaşılan seti kaldır';
+
+  @override
+  String get removeSharedSetPrompt =>
+      'Bu herkese açık paylaşım kaldırılsın mı? Özel çalışma setiniz korunur.';
+
+  @override
+  String get sharedSetRemoved => 'Herkese açık paylaşım kaldırıldı.';
+
+  @override
+  String get remove => 'Kaldır';
+
+  @override
+  String get loading => 'Yükleniyor…';
+
+  @override
+  String get errorGeneric => 'Bir hata oluştu. Lütfen tekrar deneyin.';
 }

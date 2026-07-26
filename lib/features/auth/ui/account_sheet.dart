@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/errors/app_exception.dart';
+import '../../../core/errors/app_failure.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/error_message_helper.dart';
 import '../logic/auth_controller.dart';
@@ -387,35 +387,64 @@ class _AccountSheetState extends ConsumerState<AccountSheet> {
     if (!mounted) return;
     final navigator = Navigator.of(context);
     final messenger = ScaffoldMessenger.of(context);
-    
+
     setState(() => _isLoading = true);
     try {
-      await authController.signInWithGoogle();
+      await authController.linkGoogleAccount();
       if (!mounted) return;
       navigator.pop();
       HapticFeedback.lightImpact();
       messenger.showSnackBar(
         const SnackBar(
-          content: Text('Google ile giriş başarılı'),
+          content: Text('Google hesabı başarıyla bağlandı'),
           backgroundColor: AppColors.success,
         ),
       );
-    } on AppException catch (e) {
+    } on AppFailure catch (e) {
       if (!mounted) return;
       if (e.message.contains('iptal') || e.message.contains('cancel')) {
-        // User cancelled popup, silently return
+        setState(() => _isLoading = false);
         return;
       }
-      messenger.showSnackBar(
-        SnackBar(content: Text(e.message), backgroundColor: AppColors.error),
-      );
+
+      if (e is AppAuthFailure && e.reason == AuthFailureReason.collision) {
+        setState(() => _isLoading = false);
+        final shouldSwitch = await _showCollisionDialog(this.context);
+        if (shouldSwitch == true && mounted) {
+          setState(() => _isLoading = true);
+          try {
+            await authController.signInWithGoogle();
+            if (!mounted) return;
+            navigator.pop();
+            HapticFeedback.lightImpact();
+            messenger.showSnackBar(
+              const SnackBar(
+                content: Text('Mevcut hesaba geçiş yapıldı'),
+                backgroundColor: AppColors.success,
+              ),
+            );
+          } catch (signInErr) {
+            if (!mounted) return;
+            messenger.showSnackBar(
+              SnackBar(
+                content: Text('Geçiş başarısız: '),
+                backgroundColor: AppColors.error,
+              ),
+            );
+          }
+        }
+      } else {
+        messenger.showSnackBar(
+          SnackBar(content: Text(e.message), backgroundColor: AppColors.error),
+        );
+      }
     } catch (e) {
       if (!mounted) return;
       final msg = e.toString();
       if (msg.contains('iptal') || msg.contains('cancel')) return;
       messenger.showSnackBar(
         SnackBar(
-          content: Text('Giriş başarısız: $msg'),
+          content: Text('İşlem başarısız: '),
           backgroundColor: AppColors.error,
         ),
       );
@@ -433,32 +462,64 @@ class _AccountSheetState extends ConsumerState<AccountSheet> {
     if (!mounted) return;
     final navigator = Navigator.of(context);
     final messenger = ScaffoldMessenger.of(context);
-    
+
     setState(() => _isLoading = true);
     try {
-      await authController.signInWithApple();
+      await authController.linkAppleAccount();
       if (!mounted) return;
       navigator.pop();
       HapticFeedback.lightImpact();
       messenger.showSnackBar(
         const SnackBar(
-          content: Text('Apple ile giriş başarılı'),
+          content: Text('Apple hesabı başarıyla bağlandı'),
           backgroundColor: AppColors.success,
         ),
       );
-    } on AppException catch (e) {
+    } on AppFailure catch (e) {
       if (!mounted) return;
-      if (e.message.contains('iptal') || e.message.contains('cancel')) return;
-      messenger.showSnackBar(
-        SnackBar(content: Text(e.message), backgroundColor: AppColors.error),
-      );
+      if (e.message.contains('iptal') || e.message.contains('cancel')) {
+        setState(() => _isLoading = false);
+        return;
+      }
+
+      if (e is AppAuthFailure && e.reason == AuthFailureReason.collision) {
+        setState(() => _isLoading = false);
+        final shouldSwitch = await _showCollisionDialog(this.context);
+        if (shouldSwitch == true && mounted) {
+          setState(() => _isLoading = true);
+          try {
+            await authController.signInWithApple();
+            if (!mounted) return;
+            navigator.pop();
+            HapticFeedback.lightImpact();
+            messenger.showSnackBar(
+              const SnackBar(
+                content: Text('Mevcut hesaba geçiş yapıldı'),
+                backgroundColor: AppColors.success,
+              ),
+            );
+          } catch (signInErr) {
+            if (!mounted) return;
+            messenger.showSnackBar(
+              SnackBar(
+                content: Text('Geçiş başarısız: '),
+                backgroundColor: AppColors.error,
+              ),
+            );
+          }
+        }
+      } else {
+        messenger.showSnackBar(
+          SnackBar(content: Text(e.message), backgroundColor: AppColors.error),
+        );
+      }
     } catch (e) {
       if (!mounted) return;
       final msg = e.toString();
       if (msg.contains('iptal') || msg.contains('cancel')) return;
       messenger.showSnackBar(
         SnackBar(
-          content: Text('Giriş başarısız: $msg'),
+          content: Text('İşlem başarısız: '),
           backgroundColor: AppColors.error,
         ),
       );
@@ -476,7 +537,7 @@ class _AccountSheetState extends ConsumerState<AccountSheet> {
     if (!mounted) return;
     final navigator = Navigator.of(context);
     final messenger = ScaffoldMessenger.of(context);
-    
+
     setState(() => _isLoading = true);
     try {
       await authController.signOut();
@@ -487,6 +548,14 @@ class _AccountSheetState extends ConsumerState<AccountSheet> {
         const SnackBar(
           content: Text('Çıkış yapıldı'),
           backgroundColor: AppColors.success,
+        ),
+      );
+    } on AppFailure catch (e) {
+      if (!mounted) return;
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text('Çıkış başarısız: ${e.message}'),
+          backgroundColor: AppColors.error,
         ),
       );
     } catch (e) {
@@ -502,5 +571,29 @@ class _AccountSheetState extends ConsumerState<AccountSheet> {
         setState(() => _isLoading = false);
       }
     }
+  }
+
+  Future<bool?> _showCollisionDialog(BuildContext context) {
+    return showDialog<bool>(
+      context: context,
+      builder:
+          (ctx) => AlertDialog(
+            title: const Text('Hesap Zaten Mevcut'),
+            content: const Text(
+              'Bu sosyal ağ hesabı zaten başka bir hesaba bağlı. '
+              'Misafir verileriniz silinerek mevcut hesabınıza geçmek ister misiniz?',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(ctx).pop(false),
+                child: const Text('İptal'),
+              ),
+              FilledButton(
+                onPressed: () => Navigator.of(ctx).pop(true),
+                child: const Text('Geçiş Yap'),
+              ),
+            ],
+          ),
+    );
   }
 }

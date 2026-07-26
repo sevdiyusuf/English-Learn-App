@@ -1,11 +1,31 @@
 import 'package:flutter/foundation.dart';
 
-enum FailureType {
+enum FailureType { network, auth, database, server, unexpected }
+
+enum AuthFailureReason {
+  collision,
+  wrongPassword,
+  userNotFound,
+  cancelled,
+  invalidEmail,
+  weakPassword,
+  disabled,
+  tooManyRequests,
   network,
-  auth,
-  database,
-  server,
-  unexpected,
+  unknown,
+}
+
+@immutable
+class AppAuthFailure extends AppFailure {
+  const AppAuthFailure({
+    required super.message,
+    super.code,
+    required this.reason,
+    super.isRetryable = false,
+    super.originalError,
+  }) : super(type: FailureType.auth);
+
+  final AuthFailureReason reason;
 }
 
 @immutable
@@ -25,7 +45,8 @@ class AppFailure implements Exception {
   final dynamic originalError;
 
   factory AppFailure.network({
-    String message = 'İnternet bağlantısı kurulamadı. Lütfen bağlantınızı kontrol edin.',
+    String message =
+        'İnternet bağlantısı kurulamadı. Lütfen bağlantınızı kontrol edin.',
     String? code = 'network-error',
     dynamic originalError,
   }) {
