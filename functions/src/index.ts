@@ -33,7 +33,11 @@ import {
 } from './push_notifications';
 import { submitEducationalContentReport as submitEduReport } from './educational_content_reporting';
 
-if (admin.apps.length === 0) admin.initializeApp();
+if (admin.apps.length === 0) {
+    admin.initializeApp({
+        projectId: process.env.GCLOUD_PROJECT || process.env.FIREBASE_PROJECT || 'demo-tamamm',
+    });
+}
 
 export const APP_CHECK_ENFORCEMENT = {
     getServerTime: false,

@@ -15,6 +15,9 @@ permissions:
   pull-requests: read
   checks: write
 
+env:
+  FLUTTER_VERSION: '3.38.3'
+
 jobs:
   flutter_quality:
     name: Flutter Quality & Analysis
@@ -32,7 +35,7 @@ jobs:
       - name: Setup Flutter Toolchain
         uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           cache: true
 
       - name: Install Flutter Dependencies
@@ -57,7 +60,7 @@ jobs:
       - name: Setup Flutter Toolchain
         uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           cache: true
 
       - name: Install Flutter Dependencies
@@ -69,8 +72,11 @@ jobs:
       - name: Regenerate Educational Content Registry
         run: dart run tool/generate_educational_content_registry.dart
 
+      - name: Run Build Runner Generation
+        run: dart run build_runner build --delete-conflicting-outputs
+
       - name: Verify No Stale Artifacts or Uncommitted Diffs
-        run: git diff --exit-code assets/educational_content_registry.json lib/l10n/
+        run: git diff --exit-code
 
   content_integrity:
     name: Educational Content & Provenance Integrity Gate
@@ -82,11 +88,14 @@ jobs:
       - name: Setup Flutter Toolchain
         uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           cache: true
 
       - name: Install Flutter Dependencies
         run: flutter pub get
+
+      - name: Generate Localizations
+        run: flutter gen-l10n
 
       - name: Run Sprint 10A Provenance Validator
         run: dart run tool/provenance_validator.dart
@@ -104,11 +113,14 @@ jobs:
       - name: Setup Flutter Toolchain
         uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           cache: true
 
       - name: Install Flutter Dependencies
         run: flutter pub get
+
+      - name: Generate Localizations
+        run: flutter gen-l10n
 
       - name: Run Complete Flutter Suite
         run: flutter test --reporter=compact
@@ -136,8 +148,8 @@ jobs:
           npm install -g firebase-tools
           firebase setup:emulators:firestore
 
-      - name: Install Functions Dependencies
-        run: npm --prefix functions install
+      - name: Install Functions Dependencies (Reproducible)
+        run: npm --prefix functions ci
 
       - name: Build TypeScript Code
         run: npm --prefix functions run build
@@ -168,8 +180,8 @@ jobs:
           npm install -g firebase-tools
           firebase setup:emulators:firestore
 
-      - name: Install Rules Test Dependencies
-        run: npm --prefix test_rules install
+      - name: Install Rules Test Dependencies (Reproducible)
+        run: npm --prefix test_rules ci
 
       - name: Run Firestore Rules Suite under Firestore Emulator
         run: firebase emulators:exec --only firestore "npx jest test_rules"
@@ -190,11 +202,14 @@ jobs:
       - name: Setup Flutter Toolchain
         uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           cache: true
 
       - name: Install Flutter Dependencies
         run: flutter pub get
+
+      - name: Generate Localizations
+        run: flutter gen-l10n
 
       - name: Build Release APK Artifact
         run: flutter build apk --release
@@ -222,11 +237,14 @@ jobs:
       - name: Setup Flutter Toolchain
         uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           cache: true
 
       - name: Install Flutter Dependencies
         run: flutter pub get
+
+      - name: Generate Localizations
+        run: flutter gen-l10n
 
       - name: Run Android Emulator P0 Integration Smoke Test
         uses: reactivecircus/android-emulator-runner@v2
