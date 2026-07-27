@@ -6,6 +6,7 @@ import '../models/irregular_verb.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/tts/resilient_tts_service.dart';
+import '../../../l10n/app_localizations.dart';
 
 class IrregularVerbsTutorialPage extends ConsumerStatefulWidget {
   const IrregularVerbsTutorialPage({super.key, this.ttsService});
@@ -34,8 +35,31 @@ class _IrregularVerbsTutorialPageState
   }
 
   Future<void> _speak(String text) async {
-    await _flutterTts.setLanguage('en-US');
-    await _flutterTts.speak(text);
+    try {
+      dynamic result = 0;
+      if (widget.ttsService != null) {
+        final outcome = await widget.ttsService!.speak(text);
+        result = outcome == TtsOutcome.completed ? 1 : 0;
+      } else {
+        await _flutterTts.setLanguage('en-US');
+        result = await _flutterTts.speak(text);
+      }
+      if ((result == 0 || result == false) && mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Speech could not be played. Please try again.'),
+          ),
+        );
+      }
+    } catch (_) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Speech could not be played. Please try again.'),
+          ),
+        );
+      }
+    }
   }
 
   @override
@@ -123,12 +147,14 @@ class _GroupView extends StatelessWidget {
                   size: 28,
                 ),
               if (index > 0) const SizedBox(width: 8),
-              Text(
-                title,
-                style: const TextStyle(
-                  color: Colors.blueAccent,
-                  fontSize: 24,
-                  fontWeight: FontWeight.w800,
+              Flexible(
+                child: Text(
+                  title,
+                  style: const TextStyle(
+                    color: Colors.blueAccent,
+                    fontSize: 24,
+                    fontWeight: FontWeight.w800,
+                  ),
                 ),
               ),
               if (index < total - 1) const SizedBox(width: 8),
@@ -178,12 +204,14 @@ class _VerbBentoCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                verb.meaningTr,
-                style: const TextStyle(
-                  color: Colors.white60,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
+              Expanded(
+                child: Text(
+                  verb.meaningTr,
+                  style: const TextStyle(
+                    color: Colors.white60,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
               IconButton(
@@ -191,6 +219,9 @@ class _VerbBentoCard extends StatelessWidget {
                   Icons.volume_up_rounded,
                   color: Colors.white30,
                 ),
+                tooltip: AppLocalizations.of(context)?.localeName == 'tr'
+                    ? 'Telaffuzu dinle'
+                    : 'Hear pronunciation',
                 onPressed: () => onSpeak('${verb.v1}, ${verb.v2}, ${verb.v3}'),
               ),
             ],
@@ -199,9 +230,9 @@ class _VerbBentoCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _FormColumn(label: 'V1', value: verb.v1, onSpeak: onSpeak),
-              _FormColumn(label: 'V2', value: verb.v2, onSpeak: onSpeak),
-              _FormColumn(label: 'V3', value: verb.v3, onSpeak: onSpeak),
+              Expanded(child: _FormColumn(label: 'V1', value: verb.v1, onSpeak: onSpeak)),
+              Expanded(child: _FormColumn(label: 'V2', value: verb.v2, onSpeak: onSpeak)),
+              Expanded(child: _FormColumn(label: 'V3', value: verb.v3, onSpeak: onSpeak)),
             ],
           ),
         ],

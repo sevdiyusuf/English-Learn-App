@@ -31,11 +31,11 @@ void main() {
     addTearDown(router.dispose);
 
     await tester.pumpWidget(_routerApp(router));
-    expect(find.text('Content sources and licenses'), findsOneWidget);
+    expect(find.text('Content & Licenses'), findsOneWidget);
 
     await tester.tap(find.byKey(const Key('content-licenses-settings-tile')));
     await tester.pumpAndSettle();
-    expect(find.text('About the app content'), findsOneWidget);
+    expect(find.byType(ContentLicensesPage), findsOneWidget);
 
     await tester.pageBack();
     await tester.pumpAndSettle();
@@ -52,11 +52,11 @@ void main() {
     );
 
     await tester.scrollUntilVisible(
-      find.text('Open-source software licenses'),
+      find.text('Software Licenses'),
       240,
       scrollable: find.byType(Scrollable).first,
     );
-    await tester.tap(find.text('Open-source software licenses'));
+    await tester.tap(find.text('Software Licenses'));
     await tester.pumpAndSettle();
 
     expect(find.byType(LicensePage), findsOneWidget);
@@ -105,18 +105,18 @@ void main() {
       );
 
       await tester.scrollUntilVisible(
-        find.textContaining('Interface icons by Google'),
+        find.textContaining('Material Icons by Google'),
         240,
         scrollable: find.byType(Scrollable).first,
       );
-      expect(find.textContaining('Interface icons by Google'), findsOneWidget);
-      await tester.ensureVisible(find.text('View source'));
+      expect(find.textContaining('Material Icons by Google'), findsOneWidget);
+      await tester.ensureVisible(find.text('Source'));
       await tester.pumpAndSettle();
-      await tester.tap(find.text('View source'));
+      await tester.tap(find.text('Source'));
       await tester.pump();
       expect(opened.single.host, 'developers.google.com');
       expect(
-        find.text('The external link could not be opened.'),
+        find.text('Link unavailable'),
         findsOneWidget,
       );
 
