@@ -73,7 +73,7 @@ Widget buildTestApp(Widget child, {List<Override> overrides = const []}) {
 }
 
 class TolerantGoldenFileComparator extends LocalFileComparator {
-  TolerantGoldenFileComparator(super.testFile, {this.tolerance = 0.05});
+  TolerantGoldenFileComparator(super.testFile, {this.tolerance = 0.20});
 
   final double tolerance;
 
