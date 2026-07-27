@@ -2,7 +2,7 @@ name: Yunoo CI & PR Gating Pipeline
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main, master, 'agent/**' ]
   pull_request:
     branches: [ main, master ]
 
