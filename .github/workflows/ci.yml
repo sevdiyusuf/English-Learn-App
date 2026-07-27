@@ -165,7 +165,7 @@ jobs:
         run: cd functions && npm run build
 
       - name: Run Functions Test Suite under Firestore Emulator
-        run: firebase emulators:exec --only firestore "npm --prefix functions test"
+        run: firebase emulators:exec --only firestore "cd functions && GCLOUD_PROJECT=demo-tamamm FIRESTORE_EMULATOR_HOST=127.0.0.1:8080 npm test"
 
   firestore_rules:
     name: Firestore Security Rules Emulator Gate
