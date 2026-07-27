@@ -534,7 +534,11 @@ bool _isHttpUrl(String value) {
 }
 
 String _relative(Directory root, FileSystemEntity entity) {
-  final base = root.absolute.path.replaceAll('\\', '/');
+  final base =
+      root.absolute.path.replaceAll('\\', '/').replaceAll(RegExp(r'/$'), '');
   final full = entity.absolute.path.replaceAll('\\', '/');
-  return full.substring(base.length + 1);
+  if (full.startsWith('$base/')) {
+    return full.substring(base.length + 1);
+  }
+  return full;
 }
