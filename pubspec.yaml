@@ -38,7 +38,7 @@ dependencies:
   freezed_annotation: ^2.4.4
   json_annotation: ^4.9.0
   isar: ^3.0.5
-  xxf_isar_flutter_libs: ^3.0.5
+  isar_community_flutter_libs: ^3.3.2
   firebase_core: ^3.7.0
   firebase_auth: ^5.3.0
   cloud_firestore: ^5.4.4
@@ -65,12 +65,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  integration_test:
+    sdk: flutter
 
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^5.0.0
   build_runner: ^2.4.13
   freezed: ^2.5.2
@@ -78,12 +75,13 @@ dev_dependencies:
   isar_generator: ^3.1.0+1
   flutter_launcher_icons: ^0.14.1
   xxh3: ^1.0.0
+  yaml: ^3.1.3
 
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path: "web/eng.png"
-  adaptive_icon_foreground: "web/eng.png"
+  image_path: "web/icons/Icon-512.png"
+  adaptive_icon_foreground: "web/icons/Icon-512.png"
   adaptive_icon_background: "#0F172A"
 
 # For information on the generic Dart part of this file, see the
@@ -104,6 +102,7 @@ flutter:
     - assets/cargo_categories.json
     - assets/ırregular_verbs.json
     - assets/word_echo_words.json
+    - assets/educational_content_registry.json
     - assets/word_sets/
     - assets/word_battle/
     - assets/worksheets/
@@ -116,10 +115,9 @@ flutter:
     - assets/lessons/A2/
     - assets/lessons/B1/
     - assets/lessons/B2/
-    - assets/images/background2.png
-    - assets/images/background3.png
     - assets/icons/bookmark.svg
     - assets/icons/
+    - assets/images/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

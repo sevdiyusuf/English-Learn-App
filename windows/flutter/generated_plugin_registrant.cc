@@ -13,9 +13,9 @@
 #include <firebase_auth/firebase_auth_plugin_c_api.h>
 #include <firebase_core/firebase_core_plugin_c_api.h>
 #include <flutter_tts/flutter_tts_plugin.h>
+#include <isar_community_flutter_libs/isar_flutter_libs_plugin.h>
 #include <share_plus/share_plus_windows_plugin_c_api.h>
 #include <url_launcher_windows/url_launcher_windows.h>
-#include <xxf_isar_flutter_libs/isar_flutter_libs_plugin.h>
 
 void RegisterPlugins(flutter::PluginRegistry* registry) {
   AppLinksPluginCApiRegisterWithRegistrar(
@@ -32,10 +32,10 @@ void RegisterPlugins(flutter::PluginRegistry* registry) {
       registry->GetRegistrarForPlugin("FirebaseCorePluginCApi"));
   FlutterTtsPluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("FlutterTtsPlugin"));
+  IsarFlutterLibsPluginRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("IsarFlutterLibsPlugin"));
   SharePlusWindowsPluginCApiRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("SharePlusWindowsPluginCApi"));
   UrlLauncherWindowsRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("UrlLauncherWindows"));
-  IsarFlutterLibsPluginRegisterWithRegistrar(
-      registry->GetRegistrarForPlugin("IsarFlutterLibsPlugin"));
 }

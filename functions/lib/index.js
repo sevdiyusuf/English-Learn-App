@@ -36,7 +36,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.requestAccountDeletion = exports.onAuthUserDeleted = exports.cleanupUserData = exports.acceptFriendRequest = exports.unregisterNotificationToken = exports.registerNotificationToken = exports.updatePublicProfile = exports.removeWordMatchShare = exports.publishWordMatchShare = exports.dismissSocialInvitation = exports.acceptSocialInvitation = exports.createSocialInvitation = exports.resolveFriendRequest = exports.createFriendRequest = exports.unblockUser = exports.blockUser = exports.submitModerationReport = exports.acceptCurrentUgcPolicy = exports.cleanupExpiredRoomsSchedule = exports.cleanupExpiredRooms = exports.sendArenaHeartbeat = exports.updateArenaConfig = exports.resolveArenaTimeout = exports.submitArenaAnswer = exports.startArenaMatch = exports.leaveArenaRoom = exports.joinArenaRoom = exports.createArenaRoom = exports.sendHeartbeat = exports.resolveTimeoutV2 = exports.resolveTimeout = exports.submitWordLegacy = exports.submitAdjective = exports.submitVerb = exports.submitWordV2 = exports.submitWord = exports.startGameV2 = exports.startGame = exports.leaveRoom = exports.joinRoom = exports.createRoom = exports.getServerTimeV2 = exports.getServerTime = exports.validateOperationId = exports.APP_CHECK_ENFORCEMENT = void 0;
+exports.requestAccountDeletion = exports.onAuthUserDeleted = exports.cleanupUserData = exports.acceptFriendRequest = exports.unregisterNotificationToken = exports.registerNotificationToken = exports.submitEducationalContentReport = exports.updatePublicProfile = exports.removeWordMatchShare = exports.publishWordMatchShare = exports.dismissSocialInvitation = exports.acceptSocialInvitation = exports.createSocialInvitation = exports.resolveFriendRequest = exports.createFriendRequest = exports.unblockUser = exports.blockUser = exports.submitModerationReport = exports.acceptCurrentUgcPolicy = exports.cleanupExpiredRoomsSchedule = exports.cleanupExpiredRooms = exports.sendArenaHeartbeat = exports.updateArenaConfig = exports.resolveArenaTimeout = exports.submitArenaAnswer = exports.startArenaMatch = exports.leaveArenaRoom = exports.joinArenaRoom = exports.createArenaRoom = exports.sendHeartbeat = exports.resolveTimeoutV2 = exports.resolveTimeout = exports.submitWordLegacy = exports.submitAdjective = exports.submitVerb = exports.submitWordV2 = exports.submitWord = exports.startGameV2 = exports.startGame = exports.leaveRoom = exports.joinRoom = exports.createRoom = exports.getServerTimeV2 = exports.getServerTime = exports.validateOperationId = exports.APP_CHECK_ENFORCEMENT = void 0;
 // --- src/index.ts (Sprint 7B Server-Authoritative Core & Lifecycle) ---
 const admin = __importStar(require("firebase-admin"));
 const https_1 = require("firebase-functions/v2/https");
@@ -50,6 +50,7 @@ const grammar_arena_helper_1 = require("./grammar_arena_helper");
 const room_cleanup_helper_1 = require("./room_cleanup_helper");
 const ugc_moderation_1 = require("./ugc_moderation");
 const push_notifications_1 = require("./push_notifications");
+const educational_content_reporting_1 = require("./educational_content_reporting");
 if (admin.apps.length === 0)
     admin.initializeApp();
 exports.APP_CHECK_ENFORCEMENT = {
@@ -93,6 +94,7 @@ exports.APP_CHECK_ENFORCEMENT = {
     updatePublicProfile: false,
     registerNotificationToken: false,
     unregisterNotificationToken: false,
+    submitEducationalContentReport: false,
 };
 const makeFunctionOptions = (enforceAppCheck) => ({
     region: 'us-central1',
@@ -1166,6 +1168,7 @@ exports.dismissSocialInvitation = (0, https_1.onCall)(makeFunctionOptions(export
 exports.publishWordMatchShare = (0, https_1.onCall)(makeFunctionOptions(exports.APP_CHECK_ENFORCEMENT.publishWordMatchShare), (req) => (0, ugc_moderation_1.publishShare)(req.auth, req.data));
 exports.removeWordMatchShare = (0, https_1.onCall)(makeFunctionOptions(exports.APP_CHECK_ENFORCEMENT.removeWordMatchShare), (req) => (0, ugc_moderation_1.removeShare)(req.auth, req.data));
 exports.updatePublicProfile = (0, https_1.onCall)(makeFunctionOptions(exports.APP_CHECK_ENFORCEMENT.updatePublicProfile), (req) => (0, ugc_moderation_1.updatePublicProfile)(req.auth, req.data));
+exports.submitEducationalContentReport = (0, https_1.onCall)(makeFunctionOptions(exports.APP_CHECK_ENFORCEMENT.submitEducationalContentReport), (req) => (0, educational_content_reporting_1.submitEducationalContentReport)(req.auth, req.data));
 exports.registerNotificationToken = (0, https_1.onCall)(makeFunctionOptions(exports.APP_CHECK_ENFORCEMENT.registerNotificationToken), (req) => (0, push_notifications_1.registerNotificationToken)(req.auth, req.data));
 exports.unregisterNotificationToken = (0, https_1.onCall)(makeFunctionOptions(exports.APP_CHECK_ENFORCEMENT.unregisterNotificationToken), (req) => (0, push_notifications_1.unregisterNotificationToken)(req.auth, req.data));
 exports.acceptFriendRequest = (0, https_1.onCall)(makeFunctionOptions(exports.APP_CHECK_ENFORCEMENT.acceptFriendRequest), async (req) => {

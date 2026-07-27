@@ -204,5 +204,12 @@ service cloud.firestore {
     match /report_cooldowns/{cooldownId} { allow read, write: if false; }
     match /social_rate_limits/{limitId} { allow read, write: if false; }
     match /notification_deliveries/{deliveryId} { allow read, write: if false; }
+
+    // Sprint 10C: educational content reports — written exclusively through
+    // the submitEducationalContentReport Callable Function (Admin SDK).
+    // Clients have no read or write access; UID, timestamp and status are
+    // derived server-side and must never be spoofed by the client.
+    match /educational_content_reports/{reportId} { allow read, write: if false; }
+    match /educational_content_report_cooldowns/{cooldownId} { allow read, write: if false; }
   }
 }
