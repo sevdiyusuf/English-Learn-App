@@ -34,6 +34,9 @@ import {
 import { submitEducationalContentReport as submitEduReport } from './educational_content_reporting';
 
 if (admin.apps.length === 0) {
+    if (!process.env.FIRESTORE_EMULATOR_HOST && (process.env.FUNCTIONS_EMULATOR || process.env.NODE_ENV === 'test')) {
+        process.env.FIRESTORE_EMULATOR_HOST = '127.0.0.1:8080';
+    }
     admin.initializeApp({
         projectId: process.env.GCLOUD_PROJECT || process.env.FIREBASE_PROJECT || 'demo-tamamm',
     });

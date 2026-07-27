@@ -94,8 +94,9 @@ class TolerantGoldenFileComparator extends LocalFileComparator {
 void main() {
   setUpAll(() {
     HttpOverrides.global = TestHttpOverrides();
+    final Uri basedir = (goldenFileComparator as LocalFileComparator).basedir;
     goldenFileComparator = TolerantGoldenFileComparator(
-      Uri.parse('test/golden/critical_screens_golden_test.dart'),
+      basedir.resolve('critical_screens_golden_test.dart'),
     );
   });
 
