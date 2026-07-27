@@ -252,6 +252,134 @@ class AppLocalizationsTr extends AppLocalizations {
   String get userNotFound => 'Kullanıcı bulunamadı';
 
   @override
+  String passwordResetSent(String email) {
+    return '$email adresine şifre sıfırlama e-postası gönderildi.';
+  }
+
+  @override
+  String get reportCategoryTypo => 'Yazım veya imla hatası';
+
+  @override
+  String get reportCategoryIncorrectAnswer => 'Hatalı cevap anahtarı';
+
+  @override
+  String get reportCategoryUnclearExplanation =>
+      'Anlaşılmayan veya kafa karıştırıcı açıklama';
+
+  @override
+  String get reportCategoryAudioIssue => 'Ses çalma sorunu';
+
+  @override
+  String get reportCategoryWrongLevelOrCategory =>
+      'Yanlış seviye veya kategori';
+
+  @override
+  String get reportCategoryOther => 'Diğer sorun';
+
+  @override
+  String get reportCategoryRequired => 'Lütfen bir kategori seçin';
+
+  @override
+  String get reportCommentTooLong => 'Yorum maksimum sınırı aşıyor';
+
+  @override
+  String get reportContentSuccess => 'Rapor başarıyla gönderildi';
+
+  @override
+  String get reportContentAlreadyReported => 'Sorun zaten bildirildi';
+
+  @override
+  String get reportContentSignInRequired =>
+      'Sorun bildirmek için giriş yapılması gerekiyor';
+
+  @override
+  String get reportContentFailure => 'Rapor gönderilemedi';
+
+  @override
+  String get reportContentTitle => 'İçerik Sorunu Bildir';
+
+  @override
+  String get reportContentDescription =>
+      'Bu içerik öğesiyle ilgili bir sorun bildirin';
+
+  @override
+  String get reportOptionalComment => 'İsteğe bağlı yorum';
+
+  @override
+  String get reportCommentHint => 'Sorunu açıklayın...';
+
+  @override
+  String get reportContentCancel => 'İptal';
+
+  @override
+  String get reportContentSubmit => 'Gönder';
+
+  @override
+  String get externalLink => 'Harici Bağlantı';
+
+  @override
+  String get linkCopied => 'Bağlantı panoya kopyalandı';
+
+  @override
+  String get copyLink => 'Bağlantıyı kopyala';
+
+  @override
+  String get linkUnavailable => 'Bağlantı mevcut değil';
+
+  @override
+  String get contentAndLicenses => 'İçerik ve Lisanslar';
+
+  @override
+  String get contentInformationTitle => 'İçerik Bilgileri';
+
+  @override
+  String get projectCreatedContent => 'Proje Orijinal İçeriği';
+
+  @override
+  String get projectContentDescription =>
+      'Bu uygulama için özel olarak oluşturulmuş içerik';
+
+  @override
+  String get aiAssistedContent => 'Yapay Zeka Destekli İçerik';
+
+  @override
+  String get aiAssistedContentDescription =>
+      'Yapay zeka yardımıyla oluşturulmuş içerik';
+
+  @override
+  String get aiAccuracyDisclaimer =>
+      'Yapay zeka içeriği bazı durumlarda hatalar içerebilir';
+
+  @override
+  String get attributionsTitle => 'Atıflar';
+
+  @override
+  String get materialIconsTitle => 'Materyal İkonları';
+
+  @override
+  String get materialIconsAttribution => 'Google Materyal İkonları';
+
+  @override
+  String get sourceAction => 'Kaynak';
+
+  @override
+  String get licenseAction => 'Lisans';
+
+  @override
+  String get softwareLicenses => 'Yazılım Lisansları';
+
+  @override
+  String get softwareLicensesSubtitle =>
+      'Üçüncü taraf açık kaynak yazılım lisansları';
+
+  @override
+  String get applicationLegalese => 'Yasal koşullar ve telif hakkı bilgileri';
+
+  @override
+  String get contentAndLicensesSubtitle =>
+      'Uygulama içeriği ve açık kaynak lisansları hakkında bilgi';
+
+  @override
   String progressResetFailed(String error) {
     return 'İlerleme sıfırlama başarısız: $error';
   }
@@ -844,9 +972,4 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get passwordResetEmailRequired =>
       'Sıfırlama bağlantısı için geçerli bir e-posta adresi gir.';
-
-  @override
-  String passwordResetSent(String email) {
-    return '$email adresine şifre sıfırlama e-postası gönderildi.';
-  }
 }

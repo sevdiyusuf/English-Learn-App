@@ -5,8 +5,12 @@ import '../logic/irregular_verbs_provider.dart';
 import '../models/irregular_verb.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/tts/resilient_tts_service.dart';
+
 class IrregularVerbsTutorialPage extends ConsumerStatefulWidget {
-  const IrregularVerbsTutorialPage({super.key});
+  const IrregularVerbsTutorialPage({super.key, this.ttsService});
+
+  final ResilientTtsService? ttsService;
 
   @override
   ConsumerState<IrregularVerbsTutorialPage> createState() =>

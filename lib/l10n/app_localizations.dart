@@ -560,6 +560,240 @@ abstract class AppLocalizations {
   /// **'Kullanıcı bulunamadı'**
   String get userNotFound;
 
+  /// No description provided for @passwordResetSent.
+  ///
+  /// In tr, this message translates to:
+  /// **'{email} adresine şifre sıfırlama e-postası gönderildi.'**
+  String passwordResetSent(String email);
+
+  /// No description provided for @reportCategoryTypo.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yazım veya imla hatası'**
+  String get reportCategoryTypo;
+
+  /// No description provided for @reportCategoryIncorrectAnswer.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hatalı cevap anahtarı'**
+  String get reportCategoryIncorrectAnswer;
+
+  /// No description provided for @reportCategoryUnclearExplanation.
+  ///
+  /// In tr, this message translates to:
+  /// **'Anlaşılmayan veya kafa karıştırıcı açıklama'**
+  String get reportCategoryUnclearExplanation;
+
+  /// No description provided for @reportCategoryAudioIssue.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ses çalma sorunu'**
+  String get reportCategoryAudioIssue;
+
+  /// No description provided for @reportCategoryWrongLevelOrCategory.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yanlış seviye veya kategori'**
+  String get reportCategoryWrongLevelOrCategory;
+
+  /// No description provided for @reportCategoryOther.
+  ///
+  /// In tr, this message translates to:
+  /// **'Diğer sorun'**
+  String get reportCategoryOther;
+
+  /// No description provided for @reportCategoryRequired.
+  ///
+  /// In tr, this message translates to:
+  /// **'Lütfen bir kategori seçin'**
+  String get reportCategoryRequired;
+
+  /// No description provided for @reportCommentTooLong.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yorum maksimum sınırı aşıyor'**
+  String get reportCommentTooLong;
+
+  /// No description provided for @reportContentSuccess.
+  ///
+  /// In tr, this message translates to:
+  /// **'Rapor başarıyla gönderildi'**
+  String get reportContentSuccess;
+
+  /// No description provided for @reportContentAlreadyReported.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sorun zaten bildirildi'**
+  String get reportContentAlreadyReported;
+
+  /// No description provided for @reportContentSignInRequired.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sorun bildirmek için giriş yapılması gerekiyor'**
+  String get reportContentSignInRequired;
+
+  /// No description provided for @reportContentFailure.
+  ///
+  /// In tr, this message translates to:
+  /// **'Rapor gönderilemedi'**
+  String get reportContentFailure;
+
+  /// No description provided for @reportContentTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'İçerik Sorunu Bildir'**
+  String get reportContentTitle;
+
+  /// No description provided for @reportContentDescription.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu içerik öğesiyle ilgili bir sorun bildirin'**
+  String get reportContentDescription;
+
+  /// No description provided for @reportOptionalComment.
+  ///
+  /// In tr, this message translates to:
+  /// **'İsteğe bağlı yorum'**
+  String get reportOptionalComment;
+
+  /// No description provided for @reportCommentHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sorunu açıklayın...'**
+  String get reportCommentHint;
+
+  /// No description provided for @reportContentCancel.
+  ///
+  /// In tr, this message translates to:
+  /// **'İptal'**
+  String get reportContentCancel;
+
+  /// No description provided for @reportContentSubmit.
+  ///
+  /// In tr, this message translates to:
+  /// **'Gönder'**
+  String get reportContentSubmit;
+
+  /// No description provided for @externalLink.
+  ///
+  /// In tr, this message translates to:
+  /// **'Harici Bağlantı'**
+  String get externalLink;
+
+  /// No description provided for @linkCopied.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bağlantı panoya kopyalandı'**
+  String get linkCopied;
+
+  /// No description provided for @copyLink.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bağlantıyı kopyala'**
+  String get copyLink;
+
+  /// No description provided for @linkUnavailable.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bağlantı mevcut değil'**
+  String get linkUnavailable;
+
+  /// No description provided for @contentAndLicenses.
+  ///
+  /// In tr, this message translates to:
+  /// **'İçerik ve Lisanslar'**
+  String get contentAndLicenses;
+
+  /// No description provided for @contentInformationTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'İçerik Bilgileri'**
+  String get contentInformationTitle;
+
+  /// No description provided for @projectCreatedContent.
+  ///
+  /// In tr, this message translates to:
+  /// **'Proje Orijinal İçeriği'**
+  String get projectCreatedContent;
+
+  /// No description provided for @projectContentDescription.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu uygulama için özel olarak oluşturulmuş içerik'**
+  String get projectContentDescription;
+
+  /// No description provided for @aiAssistedContent.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yapay Zeka Destekli İçerik'**
+  String get aiAssistedContent;
+
+  /// No description provided for @aiAssistedContentDescription.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yapay zeka yardımıyla oluşturulmuş içerik'**
+  String get aiAssistedContentDescription;
+
+  /// No description provided for @aiAccuracyDisclaimer.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yapay zeka içeriği bazı durumlarda hatalar içerebilir'**
+  String get aiAccuracyDisclaimer;
+
+  /// No description provided for @attributionsTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Atıflar'**
+  String get attributionsTitle;
+
+  /// No description provided for @materialIconsTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Materyal İkonları'**
+  String get materialIconsTitle;
+
+  /// No description provided for @materialIconsAttribution.
+  ///
+  /// In tr, this message translates to:
+  /// **'Google Materyal İkonları'**
+  String get materialIconsAttribution;
+
+  /// No description provided for @sourceAction.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kaynak'**
+  String get sourceAction;
+
+  /// No description provided for @licenseAction.
+  ///
+  /// In tr, this message translates to:
+  /// **'Lisans'**
+  String get licenseAction;
+
+  /// No description provided for @softwareLicenses.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yazılım Lisansları'**
+  String get softwareLicenses;
+
+  /// No description provided for @softwareLicensesSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Üçüncü taraf açık kaynak yazılım lisansları'**
+  String get softwareLicensesSubtitle;
+
+  /// No description provided for @applicationLegalese.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yasal koşullar ve telif hakkı bilgileri'**
+  String get applicationLegalese;
+
+  /// No description provided for @contentAndLicensesSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Uygulama içeriği ve açık kaynak lisansları hakkında bilgi'**
+  String get contentAndLicensesSubtitle;
+
   /// No description provided for @progressResetFailed.
   ///
   /// In tr, this message translates to:
@@ -1633,12 +1867,6 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Sıfırlama bağlantısı için geçerli bir e-posta adresi gir.'**
   String get passwordResetEmailRequired;
-
-  /// No description provided for @passwordResetSent.
-  ///
-  /// In tr, this message translates to:
-  /// **'{email} adresine şifre sıfırlama e-postası gönderildi.'**
-  String passwordResetSent(String email);
 }
 
 class _AppLocalizationsDelegate

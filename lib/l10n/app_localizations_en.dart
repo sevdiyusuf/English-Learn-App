@@ -252,6 +252,132 @@ class AppLocalizationsEn extends AppLocalizations {
   String get userNotFound => 'User not found';
 
   @override
+  String passwordResetSent(String email) {
+    return 'A password reset email was sent to $email.';
+  }
+
+  @override
+  String get reportCategoryTypo => 'Typo or spelling error';
+
+  @override
+  String get reportCategoryIncorrectAnswer => 'Incorrect answer key';
+
+  @override
+  String get reportCategoryUnclearExplanation =>
+      'Unclear or confusing explanation';
+
+  @override
+  String get reportCategoryAudioIssue => 'Audio playback issue';
+
+  @override
+  String get reportCategoryWrongLevelOrCategory => 'Wrong level or category';
+
+  @override
+  String get reportCategoryOther => 'Other issue';
+
+  @override
+  String get reportCategoryRequired => 'Please select a category';
+
+  @override
+  String get reportCommentTooLong => 'Comment exceeds maximum limit';
+
+  @override
+  String get reportContentSuccess => 'Report submitted successfully';
+
+  @override
+  String get reportContentAlreadyReported => 'Issue already reported';
+
+  @override
+  String get reportContentSignInRequired => 'Sign in required to report issue';
+
+  @override
+  String get reportContentFailure => 'Failed to submit report';
+
+  @override
+  String get reportContentTitle => 'Report Content Issue';
+
+  @override
+  String get reportContentDescription =>
+      'Report an issue with this content item';
+
+  @override
+  String get reportOptionalComment => 'Optional comment';
+
+  @override
+  String get reportCommentHint => 'Describe the issue...';
+
+  @override
+  String get reportContentCancel => 'Cancel';
+
+  @override
+  String get reportContentSubmit => 'Submit';
+
+  @override
+  String get externalLink => 'External Link';
+
+  @override
+  String get linkCopied => 'Link copied to clipboard';
+
+  @override
+  String get copyLink => 'Copy link';
+
+  @override
+  String get linkUnavailable => 'Link unavailable';
+
+  @override
+  String get contentAndLicenses => 'Content & Licenses';
+
+  @override
+  String get contentInformationTitle => 'Content Information';
+
+  @override
+  String get projectCreatedContent => 'Project Original Content';
+
+  @override
+  String get projectContentDescription =>
+      'Content created specifically for this application';
+
+  @override
+  String get aiAssistedContent => 'AI Assisted Content';
+
+  @override
+  String get aiAssistedContentDescription =>
+      'Content generated with AI assistance';
+
+  @override
+  String get aiAccuracyDisclaimer =>
+      'AI-assisted content may contain inaccuracies';
+
+  @override
+  String get attributionsTitle => 'Attributions';
+
+  @override
+  String get materialIconsTitle => 'Material Icons';
+
+  @override
+  String get materialIconsAttribution => 'Material Icons by Google';
+
+  @override
+  String get sourceAction => 'Source';
+
+  @override
+  String get licenseAction => 'License';
+
+  @override
+  String get softwareLicenses => 'Software Licenses';
+
+  @override
+  String get softwareLicensesSubtitle =>
+      'Third-party open source software licenses';
+
+  @override
+  String get applicationLegalese => 'Legal terms and copyright information';
+
+  @override
+  String get contentAndLicensesSubtitle =>
+      'Information about application content and open-source licenses';
+
+  @override
   String progressResetFailed(String error) {
     return 'Progress reset failed: $error';
   }
@@ -842,9 +968,4 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get passwordResetEmailRequired =>
       'Enter a valid email address for the reset link.';
-
-  @override
-  String passwordResetSent(String email) {
-    return 'A password reset email was sent to $email.';
-  }
 }
