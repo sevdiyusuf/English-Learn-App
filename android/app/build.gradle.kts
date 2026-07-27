@@ -78,3 +78,7 @@ android {
 flutter {
     source = "../.."
 }
+
+dependencies {
+    implementation("androidx.test:runner:1.6.2")
+}

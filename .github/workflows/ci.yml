@@ -77,7 +77,9 @@ jobs:
         run: dart run tool/generate_educational_content_registry.dart
 
       - name: Run Build Runner Generation
-        run: dart run build_runner build --delete-conflicting-outputs
+        run: |
+          dart run build_runner build --delete-conflicting-outputs
+          dart format .
 
       - name: Verify No Stale Artifacts or Uncommitted Diffs
         run: git diff --exit-code
@@ -163,7 +165,7 @@ jobs:
         run: cd functions && npm run build
 
       - name: Run Functions Test Suite under Firestore Emulator
-        run: firebase emulators:exec --only firestore "npm --prefix functions test"
+        run: firebase emulators:exec --only firestore "cd functions && FIRESTORE_EMULATOR_HOST=127.0.0.1:8080 npm test"
 
   firestore_rules:
     name: Firestore Security Rules Emulator Gate
