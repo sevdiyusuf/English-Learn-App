@@ -124,14 +124,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: 'functions/package-lock.json'
 
       - name: Setup Java 21 (for Firebase Emulators)
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '21'
+
+      - name: Install Firebase CLI & Firestore Emulator
+        run: |
+          npm install -g firebase-tools
+          firebase setup:emulators:firestore
 
       - name: Install Functions Dependencies
         run: npm --prefix functions install
@@ -140,7 +143,7 @@ jobs:
         run: npm --prefix functions run build
 
       - name: Run Functions Test Suite under Firestore Emulator
-        run: npx firebase emulators:exec --only firestore "npm --prefix functions test"
+        run: firebase emulators:exec --only firestore "npm --prefix functions test"
 
   firestore_rules:
     name: Firestore Security Rules Emulator Gate
@@ -160,11 +163,16 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
+      - name: Install Firebase CLI & Firestore Emulator
+        run: |
+          npm install -g firebase-tools
+          firebase setup:emulators:firestore
+
       - name: Install Rules Test Dependencies
         run: npm --prefix test_rules install
 
       - name: Run Firestore Rules Suite under Firestore Emulator
-        run: npx firebase emulators:exec --only firestore "npx jest test_rules"
+        run: firebase emulators:exec --only firestore "npx jest test_rules"
 
   android_build:
     name: Android Release Build Gate
