@@ -33,11 +33,7 @@ const LocalSchemaMetadataSchema = CollectionSchema(
       name: r'isSuccessful',
       type: IsarType.bool,
     ),
-    r'version': PropertySchema(
-      id: 3,
-      name: r'version',
-      type: IsarType.long,
-    )
+    r'version': PropertySchema(id: 3, name: r'version', type: IsarType.long),
   },
   estimateSize: _localSchemaMetadataEstimateSize,
   serialize: _localSchemaMetadataSerialize,
@@ -55,9 +51,9 @@ const LocalSchemaMetadataSchema = CollectionSchema(
           name: r'version',
           type: IndexType.value,
           caseSensitive: false,
-        )
+        ),
       ],
-    )
+    ),
   },
   links: {},
   embeddedSchemas: {},
@@ -134,12 +130,16 @@ Id _localSchemaMetadataGetId(LocalSchemaMetadata object) {
 }
 
 List<IsarLinkBase<dynamic>> _localSchemaMetadataGetLinks(
-    LocalSchemaMetadata object) {
+  LocalSchemaMetadata object,
+) {
   return [];
 }
 
 void _localSchemaMetadataAttach(
-    IsarCollection<dynamic> col, Id id, LocalSchemaMetadata object) {
+  IsarCollection<dynamic> col,
+  Id id,
+  LocalSchemaMetadata object,
+) {
   object.id = id;
 }
 
@@ -192,8 +192,10 @@ extension LocalSchemaMetadataByIndex on IsarCollection<LocalSchemaMetadata> {
     return putAllByIndex(r'version', objects);
   }
 
-  List<Id> putAllByVersionSync(List<LocalSchemaMetadata> objects,
-      {bool saveLinks = true}) {
+  List<Id> putAllByVersionSync(
+    List<LocalSchemaMetadata> objects, {
+    bool saveLinks = true,
+  }) {
     return putAllByIndexSync(r'version', objects, saveLinks: saveLinks);
   }
 }
@@ -207,7 +209,7 @@ extension LocalSchemaMetadataQueryWhereSort
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterWhere>
-      anyVersion() {
+  anyVersion() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         const IndexWhereClause.any(indexName: r'version'),
@@ -219,17 +221,14 @@ extension LocalSchemaMetadataQueryWhereSort
 extension LocalSchemaMetadataQueryWhere
     on QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QWhereClause> {
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterWhereClause>
-      idEqualTo(Id id) {
+  idEqualTo(Id id) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(IdWhereClause.between(
-        lower: id,
-        upper: id,
-      ));
+      return query.addWhereClause(IdWhereClause.between(lower: id, upper: id));
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterWhereClause>
-      idNotEqualTo(Id id) {
+  idNotEqualTo(Id id) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
@@ -252,7 +251,7 @@ extension LocalSchemaMetadataQueryWhere
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterWhereClause>
-      idGreaterThan(Id id, {bool include = false}) {
+  idGreaterThan(Id id, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         IdWhereClause.greaterThan(lower: id, includeLower: include),
@@ -261,7 +260,7 @@ extension LocalSchemaMetadataQueryWhere
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterWhereClause>
-      idLessThan(Id id, {bool include = false}) {
+  idLessThan(Id id, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         IdWhereClause.lessThan(upper: id, includeUpper: include),
@@ -270,240 +269,256 @@ extension LocalSchemaMetadataQueryWhere
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterWhereClause>
-      idBetween(
+  idBetween(
     Id lowerId,
     Id upperId, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(IdWhereClause.between(
-        lower: lowerId,
-        includeLower: includeLower,
-        upper: upperId,
-        includeUpper: includeUpper,
-      ));
+      return query.addWhereClause(
+        IdWhereClause.between(
+          lower: lowerId,
+          includeLower: includeLower,
+          upper: upperId,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterWhereClause>
-      versionEqualTo(int version) {
+  versionEqualTo(int version) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(IndexWhereClause.equalTo(
-        indexName: r'version',
-        value: [version],
-      ));
+      return query.addWhereClause(
+        IndexWhereClause.equalTo(indexName: r'version', value: [version]),
+      );
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterWhereClause>
-      versionNotEqualTo(int version) {
+  versionNotEqualTo(int version) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
-            .addWhereClause(IndexWhereClause.between(
-              indexName: r'version',
-              lower: [],
-              upper: [version],
-              includeUpper: false,
-            ))
-            .addWhereClause(IndexWhereClause.between(
-              indexName: r'version',
-              lower: [version],
-              includeLower: false,
-              upper: [],
-            ));
+            .addWhereClause(
+              IndexWhereClause.between(
+                indexName: r'version',
+                lower: [],
+                upper: [version],
+                includeUpper: false,
+              ),
+            )
+            .addWhereClause(
+              IndexWhereClause.between(
+                indexName: r'version',
+                lower: [version],
+                includeLower: false,
+                upper: [],
+              ),
+            );
       } else {
         return query
-            .addWhereClause(IndexWhereClause.between(
-              indexName: r'version',
-              lower: [version],
-              includeLower: false,
-              upper: [],
-            ))
-            .addWhereClause(IndexWhereClause.between(
-              indexName: r'version',
-              lower: [],
-              upper: [version],
-              includeUpper: false,
-            ));
+            .addWhereClause(
+              IndexWhereClause.between(
+                indexName: r'version',
+                lower: [version],
+                includeLower: false,
+                upper: [],
+              ),
+            )
+            .addWhereClause(
+              IndexWhereClause.between(
+                indexName: r'version',
+                lower: [],
+                upper: [version],
+                includeUpper: false,
+              ),
+            );
       }
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterWhereClause>
-      versionGreaterThan(
-    int version, {
-    bool include = false,
-  }) {
+  versionGreaterThan(int version, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(IndexWhereClause.between(
-        indexName: r'version',
-        lower: [version],
-        includeLower: include,
-        upper: [],
-      ));
+      return query.addWhereClause(
+        IndexWhereClause.between(
+          indexName: r'version',
+          lower: [version],
+          includeLower: include,
+          upper: [],
+        ),
+      );
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterWhereClause>
-      versionLessThan(
-    int version, {
-    bool include = false,
-  }) {
+  versionLessThan(int version, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(IndexWhereClause.between(
-        indexName: r'version',
-        lower: [],
-        upper: [version],
-        includeUpper: include,
-      ));
+      return query.addWhereClause(
+        IndexWhereClause.between(
+          indexName: r'version',
+          lower: [],
+          upper: [version],
+          includeUpper: include,
+        ),
+      );
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterWhereClause>
-      versionBetween(
+  versionBetween(
     int lowerVersion,
     int upperVersion, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(IndexWhereClause.between(
-        indexName: r'version',
-        lower: [lowerVersion],
-        includeLower: includeLower,
-        upper: [upperVersion],
-        includeUpper: includeUpper,
-      ));
+      return query.addWhereClause(
+        IndexWhereClause.between(
+          indexName: r'version',
+          lower: [lowerVersion],
+          includeLower: includeLower,
+          upper: [upperVersion],
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 }
 
-extension LocalSchemaMetadataQueryFilter on QueryBuilder<LocalSchemaMetadata,
-    LocalSchemaMetadata, QFilterCondition> {
+extension LocalSchemaMetadataQueryFilter
+    on
+        QueryBuilder<
+          LocalSchemaMetadata,
+          LocalSchemaMetadata,
+          QFilterCondition
+        > {
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterFilterCondition>
-      appliedAtEqualTo(DateTime value) {
+  appliedAtEqualTo(DateTime value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'appliedAt',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'appliedAt', value: value),
+      );
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterFilterCondition>
-      appliedAtGreaterThan(
-    DateTime value, {
-    bool include = false,
-  }) {
+  appliedAtGreaterThan(DateTime value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'appliedAt',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'appliedAt',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterFilterCondition>
-      appliedAtLessThan(
-    DateTime value, {
-    bool include = false,
-  }) {
+  appliedAtLessThan(DateTime value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'appliedAt',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'appliedAt',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterFilterCondition>
-      appliedAtBetween(
+  appliedAtBetween(
     DateTime lower,
     DateTime upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'appliedAt',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'appliedAt',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterFilterCondition>
-      descriptionIsNull() {
+  descriptionIsNull() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'description',
-      ));
+      return query.addFilterCondition(
+        const FilterCondition.isNull(property: r'description'),
+      );
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterFilterCondition>
-      descriptionIsNotNull() {
+  descriptionIsNotNull() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'description',
-      ));
+      return query.addFilterCondition(
+        const FilterCondition.isNotNull(property: r'description'),
+      );
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterFilterCondition>
-      descriptionEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+  descriptionEqualTo(String? value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'description',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(
+          property: r'description',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterFilterCondition>
-      descriptionGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'description',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterFilterCondition>
-      descriptionLessThan(
+  descriptionGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'description',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'description',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterFilterCondition>
-      descriptionBetween(
+  descriptionLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'description',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterFilterCondition>
+  descriptionBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -511,269 +526,278 @@ extension LocalSchemaMetadataQueryFilter on QueryBuilder<LocalSchemaMetadata,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'description',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'description',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterFilterCondition>
-      descriptionStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
+  descriptionStartsWith(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'description',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.startsWith(
+          property: r'description',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterFilterCondition>
-      descriptionEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
+  descriptionEndsWith(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'description',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.endsWith(
+          property: r'description',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterFilterCondition>
-      descriptionContains(String value, {bool caseSensitive = true}) {
+  descriptionContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'description',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.contains(
+          property: r'description',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterFilterCondition>
-      descriptionMatches(String pattern, {bool caseSensitive = true}) {
+  descriptionMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'description',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.matches(
+          property: r'description',
+          wildcard: pattern,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterFilterCondition>
-      descriptionIsEmpty() {
+  descriptionIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'description',
-        value: '',
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'description', value: ''),
+      );
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterFilterCondition>
-      descriptionIsNotEmpty() {
+  descriptionIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'description',
-        value: '',
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(property: r'description', value: ''),
+      );
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterFilterCondition>
-      idEqualTo(Id value) {
+  idEqualTo(Id value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'id',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'id', value: value),
+      );
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterFilterCondition>
-      idGreaterThan(
-    Id value, {
-    bool include = false,
-  }) {
+  idGreaterThan(Id value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'id',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'id',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterFilterCondition>
-      idLessThan(
-    Id value, {
-    bool include = false,
-  }) {
+  idLessThan(Id value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'id',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'id',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterFilterCondition>
-      idBetween(
+  idBetween(
     Id lower,
     Id upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'id',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'id',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterFilterCondition>
-      isSuccessfulEqualTo(bool value) {
+  isSuccessfulEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'isSuccessful',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'isSuccessful', value: value),
+      );
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterFilterCondition>
-      versionEqualTo(int value) {
+  versionEqualTo(int value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'version',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'version', value: value),
+      );
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterFilterCondition>
-      versionGreaterThan(
-    int value, {
-    bool include = false,
-  }) {
+  versionGreaterThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'version',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'version',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterFilterCondition>
-      versionLessThan(
-    int value, {
-    bool include = false,
-  }) {
+  versionLessThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'version',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'version',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterFilterCondition>
-      versionBetween(
+  versionBetween(
     int lower,
     int upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'version',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'version',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 }
 
-extension LocalSchemaMetadataQueryObject on QueryBuilder<LocalSchemaMetadata,
-    LocalSchemaMetadata, QFilterCondition> {}
+extension LocalSchemaMetadataQueryObject
+    on
+        QueryBuilder<
+          LocalSchemaMetadata,
+          LocalSchemaMetadata,
+          QFilterCondition
+        > {}
 
-extension LocalSchemaMetadataQueryLinks on QueryBuilder<LocalSchemaMetadata,
-    LocalSchemaMetadata, QFilterCondition> {}
+extension LocalSchemaMetadataQueryLinks
+    on
+        QueryBuilder<
+          LocalSchemaMetadata,
+          LocalSchemaMetadata,
+          QFilterCondition
+        > {}
 
 extension LocalSchemaMetadataQuerySortBy
     on QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QSortBy> {
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterSortBy>
-      sortByAppliedAt() {
+  sortByAppliedAt() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'appliedAt', Sort.asc);
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterSortBy>
-      sortByAppliedAtDesc() {
+  sortByAppliedAtDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'appliedAt', Sort.desc);
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterSortBy>
-      sortByDescription() {
+  sortByDescription() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'description', Sort.asc);
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterSortBy>
-      sortByDescriptionDesc() {
+  sortByDescriptionDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'description', Sort.desc);
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterSortBy>
-      sortByIsSuccessful() {
+  sortByIsSuccessful() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isSuccessful', Sort.asc);
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterSortBy>
-      sortByIsSuccessfulDesc() {
+  sortByIsSuccessfulDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isSuccessful', Sort.desc);
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterSortBy>
-      sortByVersion() {
+  sortByVersion() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'version', Sort.asc);
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterSortBy>
-      sortByVersionDesc() {
+  sortByVersionDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'version', Sort.desc);
     });
@@ -783,70 +807,70 @@ extension LocalSchemaMetadataQuerySortBy
 extension LocalSchemaMetadataQuerySortThenBy
     on QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QSortThenBy> {
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterSortBy>
-      thenByAppliedAt() {
+  thenByAppliedAt() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'appliedAt', Sort.asc);
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterSortBy>
-      thenByAppliedAtDesc() {
+  thenByAppliedAtDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'appliedAt', Sort.desc);
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterSortBy>
-      thenByDescription() {
+  thenByDescription() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'description', Sort.asc);
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterSortBy>
-      thenByDescriptionDesc() {
+  thenByDescriptionDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'description', Sort.desc);
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterSortBy>
-      thenById() {
+  thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterSortBy>
-      thenByIdDesc() {
+  thenByIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.desc);
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterSortBy>
-      thenByIsSuccessful() {
+  thenByIsSuccessful() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isSuccessful', Sort.asc);
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterSortBy>
-      thenByIsSuccessfulDesc() {
+  thenByIsSuccessfulDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isSuccessful', Sort.desc);
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterSortBy>
-      thenByVersion() {
+  thenByVersion() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'version', Sort.asc);
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QAfterSortBy>
-      thenByVersionDesc() {
+  thenByVersionDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'version', Sort.desc);
     });
@@ -856,28 +880,28 @@ extension LocalSchemaMetadataQuerySortThenBy
 extension LocalSchemaMetadataQueryWhereDistinct
     on QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QDistinct> {
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QDistinct>
-      distinctByAppliedAt() {
+  distinctByAppliedAt() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'appliedAt');
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QDistinct>
-      distinctByDescription({bool caseSensitive = true}) {
+  distinctByDescription({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'description', caseSensitive: caseSensitive);
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QDistinct>
-      distinctByIsSuccessful() {
+  distinctByIsSuccessful() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'isSuccessful');
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, LocalSchemaMetadata, QDistinct>
-      distinctByVersion() {
+  distinctByVersion() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'version');
     });
@@ -893,21 +917,21 @@ extension LocalSchemaMetadataQueryProperty
   }
 
   QueryBuilder<LocalSchemaMetadata, DateTime, QQueryOperations>
-      appliedAtProperty() {
+  appliedAtProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'appliedAt');
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, String?, QQueryOperations>
-      descriptionProperty() {
+  descriptionProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'description');
     });
   }
 
   QueryBuilder<LocalSchemaMetadata, bool, QQueryOperations>
-      isSuccessfulProperty() {
+  isSuccessfulProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'isSuccessful');
     });

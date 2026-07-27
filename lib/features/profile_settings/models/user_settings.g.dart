@@ -17,7 +17,8 @@ _$UserSettingsImpl _$$UserSettingsImplFromJson(Map<String, dynamic> json) =>
       streakGoal: (json['streakGoal'] as num?)?.toInt() ?? 10,
       onboardingCompletedVersion:
           (json['onboardingCompletedVersion'] as num?)?.toInt() ?? 0,
-      onboardingStep: json['onboardingStep'] as String? ??
+      onboardingStep:
+          json['onboardingStep'] as String? ??
           LearningProfileValues.onboardingIntro,
       cefrLevel: json['cefrLevel'] as String?,
       learningGoal: json['learningGoal'] as String?,
@@ -29,23 +30,23 @@ _$UserSettingsImpl _$$UserSettingsImplFromJson(Map<String, dynamic> json) =>
       updatedAt: const TimestampConverter().fromJson(json['updatedAt']),
     );
 
-Map<String, dynamic> _$$UserSettingsImplToJson(_$UserSettingsImpl instance) =>
-    <String, dynamic>{
-      'themeMode': instance.themeMode,
-      'languageCode': instance.languageCode,
-      'soundEnabled': instance.soundEnabled,
-      'vibrationEnabled': instance.vibrationEnabled,
-      'dailyGoalType': instance.dailyGoalType,
-      'dailyGoalValue': instance.dailyGoalValue,
-      'streakGoal': instance.streakGoal,
-      'onboardingCompletedVersion': instance.onboardingCompletedVersion,
-      'onboardingStep': instance.onboardingStep,
-      'cefrLevel': instance.cefrLevel,
-      'learningGoal': instance.learningGoal,
-      'multiplayerNotificationsEnabled':
-          instance.multiplayerNotificationsEnabled,
-      'remindersEnabled': instance.remindersEnabled,
-      'reminderTime': instance.reminderTime,
-      'createdAt': const TimestampConverter().toJson(instance.createdAt),
-      'updatedAt': const TimestampConverter().toJson(instance.updatedAt),
-    };
+Map<String, dynamic> _$$UserSettingsImplToJson(
+  _$UserSettingsImpl instance,
+) => <String, dynamic>{
+  'themeMode': instance.themeMode,
+  'languageCode': instance.languageCode,
+  'soundEnabled': instance.soundEnabled,
+  'vibrationEnabled': instance.vibrationEnabled,
+  'dailyGoalType': instance.dailyGoalType,
+  'dailyGoalValue': instance.dailyGoalValue,
+  'streakGoal': instance.streakGoal,
+  'onboardingCompletedVersion': instance.onboardingCompletedVersion,
+  'onboardingStep': instance.onboardingStep,
+  'cefrLevel': instance.cefrLevel,
+  'learningGoal': instance.learningGoal,
+  'multiplayerNotificationsEnabled': instance.multiplayerNotificationsEnabled,
+  'remindersEnabled': instance.remindersEnabled,
+  'reminderTime': instance.reminderTime,
+  'createdAt': const TimestampConverter().toJson(instance.createdAt),
+  'updatedAt': const TimestampConverter().toJson(instance.updatedAt),
+};
