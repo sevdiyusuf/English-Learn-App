@@ -219,9 +219,10 @@ class _VerbBentoCard extends StatelessWidget {
                   Icons.volume_up_rounded,
                   color: Colors.white30,
                 ),
-                tooltip: AppLocalizations.of(context)?.localeName == 'tr'
-                    ? 'Telaffuzu dinle'
-                    : 'Hear pronunciation',
+                tooltip:
+                    AppLocalizations.of(context)?.localeName == 'tr'
+                        ? 'Telaffuzu dinle'
+                        : 'Hear pronunciation',
                 onPressed: () => onSpeak('${verb.v1}, ${verb.v2}, ${verb.v3}'),
               ),
             ],
@@ -230,9 +231,27 @@ class _VerbBentoCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(child: _FormColumn(label: 'V1', value: verb.v1, onSpeak: onSpeak)),
-              Expanded(child: _FormColumn(label: 'V2', value: verb.v2, onSpeak: onSpeak)),
-              Expanded(child: _FormColumn(label: 'V3', value: verb.v3, onSpeak: onSpeak)),
+              Expanded(
+                child: _FormColumn(
+                  label: 'V1',
+                  value: verb.v1,
+                  onSpeak: onSpeak,
+                ),
+              ),
+              Expanded(
+                child: _FormColumn(
+                  label: 'V2',
+                  value: verb.v2,
+                  onSpeak: onSpeak,
+                ),
+              ),
+              Expanded(
+                child: _FormColumn(
+                  label: 'V3',
+                  value: verb.v3,
+                  onSpeak: onSpeak,
+                ),
+              ),
             ],
           ),
         ],

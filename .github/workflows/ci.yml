@@ -42,7 +42,9 @@ jobs:
         run: flutter pub get
 
       - name: Generate Localizations
-        run: flutter gen-l10n
+        run: |
+          flutter gen-l10n
+          dart format lib/l10n/
 
       - name: Verify Formatting Freshness
         run: dart format --output=none --set-exit-if-changed .
@@ -67,7 +69,9 @@ jobs:
         run: flutter pub get
 
       - name: Generate Localizations
-        run: flutter gen-l10n
+        run: |
+          flutter gen-l10n
+          dart format lib/l10n/
 
       - name: Regenerate Educational Content Registry
         run: dart run tool/generate_educational_content_registry.dart
@@ -95,7 +99,9 @@ jobs:
         run: flutter pub get
 
       - name: Generate Localizations
-        run: flutter gen-l10n
+        run: |
+          flutter gen-l10n
+          dart format lib/l10n/
 
       - name: Run Sprint 10A Provenance Validator
         run: dart run tool/provenance_validator.dart
@@ -120,7 +126,9 @@ jobs:
         run: flutter pub get
 
       - name: Generate Localizations
-        run: flutter gen-l10n
+        run: |
+          flutter gen-l10n
+          dart format lib/l10n/
 
       - name: Run Complete Flutter Suite
         run: flutter test --reporter=compact
@@ -149,10 +157,10 @@ jobs:
           firebase setup:emulators:firestore
 
       - name: Install Functions Dependencies (Reproducible)
-        run: npm --prefix functions ci
+        run: cd functions && (npm ci || npm install)
 
       - name: Build TypeScript Code
-        run: npm --prefix functions run build
+        run: cd functions && npm run build
 
       - name: Run Functions Test Suite under Firestore Emulator
         run: firebase emulators:exec --only firestore "npm --prefix functions test"
@@ -181,7 +189,7 @@ jobs:
           firebase setup:emulators:firestore
 
       - name: Install Rules Test Dependencies (Reproducible)
-        run: npm --prefix test_rules ci
+        run: cd test_rules && (npm ci || npm install)
 
       - name: Run Firestore Rules Suite under Firestore Emulator
         run: firebase emulators:exec --only firestore "npx jest test_rules"
@@ -209,7 +217,9 @@ jobs:
         run: flutter pub get
 
       - name: Generate Localizations
-        run: flutter gen-l10n
+        run: |
+          flutter gen-l10n
+          dart format lib/l10n/
 
       - name: Build Release APK Artifact
         run: flutter build apk --release
@@ -244,7 +254,9 @@ jobs:
         run: flutter pub get
 
       - name: Generate Localizations
-        run: flutter gen-l10n
+        run: |
+          flutter gen-l10n
+          dart format lib/l10n/
 
       - name: Run Android Emulator P0 Integration Smoke Test
         uses: reactivecircus/android-emulator-runner@v2

@@ -115,10 +115,7 @@ void main() {
       await tester.tap(find.text('Source'));
       await tester.pump();
       expect(opened.single.host, 'developers.google.com');
-      expect(
-        find.text('Link unavailable'),
-        findsOneWidget,
-      );
+      expect(find.text('Link unavailable'), findsOneWidget);
 
       await expectLater(tester, meetsGuideline(androidTapTargetGuideline));
       await expectLater(tester, meetsGuideline(labeledTapTargetGuideline));

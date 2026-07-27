@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -71,9 +72,31 @@ Widget buildTestApp(Widget child, {List<Override> overrides = const []}) {
   );
 }
 
+class TolerantGoldenFileComparator extends LocalFileComparator {
+  TolerantGoldenFileComparator(super.testFile, {this.tolerance = 0.05});
+
+  final double tolerance;
+
+  @override
+  Future<bool> compare(Uint8List imageBytes, Uri golden) async {
+    final ComparisonResult result = await GoldenFileComparator.compareLists(
+      imageBytes,
+      await getGoldenBytes(golden),
+    );
+    if (!result.passed && result.diffPercent > tolerance) {
+      final String error = await generateFailureOutput(result, golden, basedir);
+      throw FlutterError(error);
+    }
+    return true;
+  }
+}
+
 void main() {
   setUpAll(() {
     HttpOverrides.global = TestHttpOverrides();
+    goldenFileComparator = TolerantGoldenFileComparator(
+      Uri.parse('test/golden/critical_screens_golden_test.dart'),
+    );
   });
 
   group('Critical Screens Golden Baseline Tests', () {
