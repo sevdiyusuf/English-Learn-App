@@ -38,9 +38,9 @@ class InvitationRepository {
   }
 
   Future<void> deleteInvitation(String uid, String invitationId) async {
-    await _functions
-        .httpsCallable('dismissSocialInvitation')
-        .call({'invitationId': invitationId});
+    await _functions.httpsCallable('dismissSocialInvitation').call({
+      'invitationId': invitationId,
+    });
   }
 
   Future<Map<String, dynamic>> acceptInvitation(String invitationId) async {

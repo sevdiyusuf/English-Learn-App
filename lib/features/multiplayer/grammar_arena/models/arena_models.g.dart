@@ -71,21 +71,22 @@ Map<String, dynamic> _$$ArenaAnswerImplToJson(_$ArenaAnswerImpl instance) =>
     };
 
 _$ResolvedWorksheetImpl _$$ResolvedWorksheetImplFromJson(
-  Map<String, dynamic> json,
-) => _$ResolvedWorksheetImpl(
-  worksheetId: json['worksheetId'] as String,
-  seed: (json['seed'] as num).toInt(),
-  questionIds:
-      (json['questionIds'] as List<dynamic>).map((e) => e as String).toList(),
-);
+        Map<String, dynamic> json) =>
+    _$ResolvedWorksheetImpl(
+      worksheetId: json['worksheetId'] as String,
+      seed: (json['seed'] as num).toInt(),
+      questionIds: (json['questionIds'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+    );
 
 Map<String, dynamic> _$$ResolvedWorksheetImplToJson(
-  _$ResolvedWorksheetImpl instance,
-) => <String, dynamic>{
-  'worksheetId': instance.worksheetId,
-  'seed': instance.seed,
-  'questionIds': instance.questionIds,
-};
+        _$ResolvedWorksheetImpl instance) =>
+    <String, dynamic>{
+      'worksheetId': instance.worksheetId,
+      'seed': instance.seed,
+      'questionIds': instance.questionIds,
+    };
 
 _$ArenaRoomImpl _$$ArenaRoomImplFromJson(Map<String, dynamic> json) =>
     _$ArenaRoomImpl(
@@ -95,26 +96,21 @@ _$ArenaRoomImpl _$$ArenaRoomImplFromJson(Map<String, dynamic> json) =>
       hostId: json['hostId'] as String,
       guestId: json['guestId'] as String?,
       config: ArenaConfig.fromJson(json['config'] as Map<String, dynamic>),
-      resolvedWorksheet:
-          json['resolvedWorksheet'] == null
-              ? null
-              : ResolvedWorksheet.fromJson(
-                json['resolvedWorksheet'] as Map<String, dynamic>,
-              ),
-      round:
-          json['round'] == null
-              ? null
-              : ArenaRound.fromJson(json['round'] as Map<String, dynamic>),
+      resolvedWorksheet: json['resolvedWorksheet'] == null
+          ? null
+          : ResolvedWorksheet.fromJson(
+              json['resolvedWorksheet'] as Map<String, dynamic>),
+      round: json['round'] == null
+          ? null
+          : ArenaRound.fromJson(json['round'] as Map<String, dynamic>),
       hostScore: (json['hostScore'] as num?)?.toInt() ?? 0,
       guestScore: (json['guestScore'] as num?)?.toInt() ?? 0,
-      host:
-          json['host'] == null
-              ? null
-              : ArenaPlayer.fromJson(json['host'] as Map<String, dynamic>),
-      guest:
-          json['guest'] == null
-              ? null
-              : ArenaPlayer.fromJson(json['guest'] as Map<String, dynamic>),
+      host: json['host'] == null
+          ? null
+          : ArenaPlayer.fromJson(json['host'] as Map<String, dynamic>),
+      guest: json['guest'] == null
+          ? null
+          : ArenaPlayer.fromJson(json['guest'] as Map<String, dynamic>),
       createdAt: const TimestampConverter().fromJson(json['createdAt']),
     );
 

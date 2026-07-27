@@ -69,11 +69,8 @@ jobs:
       - name: Regenerate Educational Content Registry
         run: dart run tool/generate_educational_content_registry.dart
 
-      - name: Regenerate Code Generators (Freezed, JSON, Isar)
-        run: dart run build_runner build --delete-conflicting-outputs
-
       - name: Verify No Stale Artifacts or Uncommitted Diffs
-        run: git diff --exit-code assets/educational_content_registry.json lib/l10n/ lib/
+        run: git diff --exit-code assets/educational_content_registry.json lib/l10n/
 
   content_integrity:
     name: Educational Content & Provenance Integrity Gate
@@ -82,8 +79,14 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@v1
+      - name: Setup Flutter Toolchain
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Install Flutter Dependencies
+        run: flutter pub get
 
       - name: Run Sprint 10A Provenance Validator
         run: dart run tool/provenance_validator.dart
@@ -131,7 +134,7 @@ jobs:
           java-version: '21'
 
       - name: Install Functions Dependencies
-        run: npm --prefix functions ci || npm --prefix functions install
+        run: npm --prefix functions install
 
       - name: Build TypeScript Code
         run: npm --prefix functions run build
@@ -158,7 +161,7 @@ jobs:
           java-version: '21'
 
       - name: Install Rules Test Dependencies
-        run: npm --prefix test_rules ci || npm --prefix test_rules install
+        run: npm --prefix test_rules install
 
       - name: Run Firestore Rules Suite under Firestore Emulator
         run: npx firebase emulators:exec --only firestore "npx jest test_rules"

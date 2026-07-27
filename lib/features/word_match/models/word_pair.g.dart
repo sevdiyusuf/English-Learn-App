@@ -17,10 +17,26 @@ const WordPairSchema = CollectionSchema(
   name: r'WordPair365',
   id: 7450263015964090,
   properties: {
-    r'english': PropertySchema(id: 0, name: r'english', type: IsarType.string),
-    r'learned': PropertySchema(id: 1, name: r'learned', type: IsarType.bool),
-    r'setId': PropertySchema(id: 2, name: r'setId', type: IsarType.long),
-    r'turkish': PropertySchema(id: 3, name: r'turkish', type: IsarType.string),
+    r'english': PropertySchema(
+      id: 0,
+      name: r'english',
+      type: IsarType.string,
+    ),
+    r'learned': PropertySchema(
+      id: 1,
+      name: r'learned',
+      type: IsarType.bool,
+    ),
+    r'setId': PropertySchema(
+      id: 2,
+      name: r'setId',
+      type: IsarType.long,
+    ),
+    r'turkish': PropertySchema(
+      id: 3,
+      name: r'turkish',
+      type: IsarType.string,
+    )
   },
   estimateSize: _wordPairEstimateSize,
   serialize: _wordPairSerialize,
@@ -117,7 +133,10 @@ extension WordPairQueryWhereSort on QueryBuilder<WordPair, WordPair, QWhere> {
 extension WordPairQueryWhere on QueryBuilder<WordPair, WordPair, QWhereClause> {
   QueryBuilder<WordPair, WordPair, QAfterWhereClause> idEqualTo(Id id) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(IdWhereClause.between(lower: id, upper: id));
+      return query.addWhereClause(IdWhereClause.between(
+        lower: id,
+        upper: id,
+      ));
     });
   }
 
@@ -143,10 +162,8 @@ extension WordPairQueryWhere on QueryBuilder<WordPair, WordPair, QWhereClause> {
     });
   }
 
-  QueryBuilder<WordPair, WordPair, QAfterWhereClause> idGreaterThan(
-    Id id, {
-    bool include = false,
-  }) {
+  QueryBuilder<WordPair, WordPair, QAfterWhereClause> idGreaterThan(Id id,
+      {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         IdWhereClause.greaterThan(lower: id, includeLower: include),
@@ -154,10 +171,8 @@ extension WordPairQueryWhere on QueryBuilder<WordPair, WordPair, QWhereClause> {
     });
   }
 
-  QueryBuilder<WordPair, WordPair, QAfterWhereClause> idLessThan(
-    Id id, {
-    bool include = false,
-  }) {
+  QueryBuilder<WordPair, WordPair, QAfterWhereClause> idLessThan(Id id,
+      {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         IdWhereClause.lessThan(upper: id, includeUpper: include),
@@ -172,14 +187,12 @@ extension WordPairQueryWhere on QueryBuilder<WordPair, WordPair, QWhereClause> {
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IdWhereClause.between(
-          lower: lowerId,
-          includeLower: includeLower,
-          upper: upperId,
-          includeUpper: includeUpper,
-        ),
-      );
+      return query.addWhereClause(IdWhereClause.between(
+        lower: lowerId,
+        includeLower: includeLower,
+        upper: upperId,
+        includeUpper: includeUpper,
+      ));
     });
   }
 }
@@ -191,13 +204,11 @@ extension WordPairQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(
-          property: r'english',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'english',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
@@ -207,14 +218,12 @@ extension WordPairQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'english',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'english',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
@@ -224,14 +233,12 @@ extension WordPairQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'english',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'english',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
@@ -243,16 +250,14 @@ extension WordPairQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'english',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'english',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
@@ -261,13 +266,11 @@ extension WordPairQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.startsWith(
-          property: r'english',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'english',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
@@ -276,67 +279,62 @@ extension WordPairQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.endsWith(
-          property: r'english',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'english',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<WordPair, WordPair, QAfterFilterCondition> englishContains(
-    String value, {
-    bool caseSensitive = true,
-  }) {
+      String value,
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.contains(
-          property: r'english',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'english',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<WordPair, WordPair, QAfterFilterCondition> englishMatches(
-    String pattern, {
-    bool caseSensitive = true,
-  }) {
+      String pattern,
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.matches(
-          property: r'english',
-          wildcard: pattern,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'english',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<WordPair, WordPair, QAfterFilterCondition> englishIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'english', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'english',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<WordPair, WordPair, QAfterFilterCondition> englishIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(property: r'english', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'english',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<WordPair, WordPair, QAfterFilterCondition> idEqualTo(Id value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'id', value: value),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'id',
+        value: value,
+      ));
     });
   }
 
@@ -345,13 +343,11 @@ extension WordPairQueryFilter
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'id',
-          value: value,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'id',
+        value: value,
+      ));
     });
   }
 
@@ -360,13 +356,11 @@ extension WordPairQueryFilter
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'id',
-          value: value,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'id',
+        value: value,
+      ));
     });
   }
 
@@ -377,35 +371,33 @@ extension WordPairQueryFilter
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'id',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'id',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
     });
   }
 
   QueryBuilder<WordPair, WordPair, QAfterFilterCondition> learnedEqualTo(
-    bool value,
-  ) {
+      bool value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'learned', value: value),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'learned',
+        value: value,
+      ));
     });
   }
 
   QueryBuilder<WordPair, WordPair, QAfterFilterCondition> setIdEqualTo(
-    int value,
-  ) {
+      int value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'setId', value: value),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'setId',
+        value: value,
+      ));
     });
   }
 
@@ -414,13 +406,11 @@ extension WordPairQueryFilter
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'setId',
-          value: value,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'setId',
+        value: value,
+      ));
     });
   }
 
@@ -429,13 +419,11 @@ extension WordPairQueryFilter
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'setId',
-          value: value,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'setId',
+        value: value,
+      ));
     });
   }
 
@@ -446,15 +434,13 @@ extension WordPairQueryFilter
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'setId',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'setId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
     });
   }
 
@@ -463,13 +449,11 @@ extension WordPairQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(
-          property: r'turkish',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'turkish',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
@@ -479,14 +463,12 @@ extension WordPairQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'turkish',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'turkish',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
@@ -496,14 +478,12 @@ extension WordPairQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'turkish',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'turkish',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
@@ -515,16 +495,14 @@ extension WordPairQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'turkish',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'turkish',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
@@ -533,13 +511,11 @@ extension WordPairQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.startsWith(
-          property: r'turkish',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'turkish',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
@@ -548,59 +524,53 @@ extension WordPairQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.endsWith(
-          property: r'turkish',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'turkish',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<WordPair, WordPair, QAfterFilterCondition> turkishContains(
-    String value, {
-    bool caseSensitive = true,
-  }) {
+      String value,
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.contains(
-          property: r'turkish',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'turkish',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<WordPair, WordPair, QAfterFilterCondition> turkishMatches(
-    String pattern, {
-    bool caseSensitive = true,
-  }) {
+      String pattern,
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.matches(
-          property: r'turkish',
-          wildcard: pattern,
-          caseSensitive: caseSensitive,
-        ),
-      );
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'turkish',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
     });
   }
 
   QueryBuilder<WordPair, WordPair, QAfterFilterCondition> turkishIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'turkish', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'turkish',
+        value: '',
+      ));
     });
   }
 
   QueryBuilder<WordPair, WordPair, QAfterFilterCondition> turkishIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(property: r'turkish', value: ''),
-      );
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'turkish',
+        value: '',
+      ));
     });
   }
 }
@@ -726,9 +696,8 @@ extension WordPairQuerySortThenBy
 
 extension WordPairQueryWhereDistinct
     on QueryBuilder<WordPair, WordPair, QDistinct> {
-  QueryBuilder<WordPair, WordPair, QDistinct> distinctByEnglish({
-    bool caseSensitive = true,
-  }) {
+  QueryBuilder<WordPair, WordPair, QDistinct> distinctByEnglish(
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'english', caseSensitive: caseSensitive);
     });
@@ -746,9 +715,8 @@ extension WordPairQueryWhereDistinct
     });
   }
 
-  QueryBuilder<WordPair, WordPair, QDistinct> distinctByTurkish({
-    bool caseSensitive = true,
-  }) {
+  QueryBuilder<WordPair, WordPair, QDistinct> distinctByTurkish(
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'turkish', caseSensitive: caseSensitive);
     });

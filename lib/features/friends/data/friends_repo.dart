@@ -85,9 +85,9 @@ class FriendsRepository {
     required String targetCode,
   }) async {
     try {
-      await _functions
-          .httpsCallable('createFriendRequest')
-          .call({'targetCode': targetCode});
+      await _functions.httpsCallable('createFriendRequest').call({
+        'targetCode': targetCode,
+      });
     } on FirebaseFunctionsException catch (error) {
       throw StateError(_safeSocialError(error.code));
     }

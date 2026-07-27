@@ -137,8 +137,11 @@ void main() {
     test(
       'Database closes and reopens existing file on disk preserving all records, identities and isolation',
       () async {
-        final dbName = 'persisted_db_test_${DateTime.now().microsecondsSinceEpoch}';
-        final dbDir = await Directory.systemTemp.createTemp('isar_persist_test_');
+        final dbName =
+            'persisted_db_test_${DateTime.now().microsecondsSinceEpoch}';
+        final dbDir = await Directory.systemTemp.createTemp(
+          'isar_persist_test_',
+        );
 
         // Step 1: Open initial database and populate records
         var instance1 = await Isar.open(
@@ -152,33 +155,37 @@ void main() {
           name: dbName,
         );
 
-        final wordSet = WordSet()
-          ..name = 'Persisted Set'
-          ..ownerUid = 'user_persistent'
-          ..createdAt = DateTime.now()
-          ..updatedAt = DateTime.now();
+        final wordSet =
+            WordSet()
+              ..name = 'Persisted Set'
+              ..ownerUid = 'user_persistent'
+              ..createdAt = DateTime.now()
+              ..updatedAt = DateTime.now();
 
-        final wordPair = WordPair()
-          ..setId = 101
-          ..english = 'apple'
-          ..turkish = 'elma'
-          ..learned = true;
+        final wordPair =
+            WordPair()
+              ..setId = 101
+              ..english = 'apple'
+              ..turkish = 'elma'
+              ..learned = true;
 
-        final outboxItem = OutboxItem()
-          ..operationId = 'op_persist_1'
-          ..entityType = 'word_set'
-          ..entityId = '101'
-          ..coalescingKey = 'user_persistent_word_set_101'
-          ..ownerUid = 'user_persistent'
-          ..operation = OutboxOperationType.create
-          ..createdAt = DateTime.now()
-          ..updatedAt = DateTime.now();
+        final outboxItem =
+            OutboxItem()
+              ..operationId = 'op_persist_1'
+              ..entityType = 'word_set'
+              ..entityId = '101'
+              ..coalescingKey = 'user_persistent_word_set_101'
+              ..ownerUid = 'user_persistent'
+              ..operation = OutboxOperationType.create
+              ..createdAt = DateTime.now()
+              ..updatedAt = DateTime.now();
 
-        final metadata = LocalSchemaMetadata()
-          ..version = 1
-          ..appliedAt = DateTime.now()
-          ..isSuccessful = true
-          ..description = 'Initial schema';
+        final metadata =
+            LocalSchemaMetadata()
+              ..version = 1
+              ..appliedAt = DateTime.now()
+              ..isSuccessful = true
+              ..description = 'Initial schema';
 
         await instance1.writeTxn(() async {
           await instance1.wordSets.put(wordSet);
@@ -209,21 +216,37 @@ void main() {
         );
 
         // Verify all records survived intact
-        final reloadedSets = await instance2.wordSets.filter().ownerUidEqualTo('user_persistent').findAll();
+        final reloadedSets =
+            await instance2.wordSets
+                .filter()
+                .ownerUidEqualTo('user_persistent')
+                .findAll();
         expect(reloadedSets.length, 1);
         expect(reloadedSets.first.name, 'Persisted Set');
 
-        final reloadedPairs = await instance2.wordPairs.filter().setIdEqualTo(101).findAll();
+        final reloadedPairs =
+            await instance2.wordPairs.filter().setIdEqualTo(101).findAll();
         expect(reloadedPairs.length, 1);
         expect(reloadedPairs.first.english, 'apple');
         expect(reloadedPairs.first.turkish, 'elma');
         expect(reloadedPairs.first.learned, true);
 
-        final reloadedOutbox = await instance2.outboxItems.filter().operationIdEqualTo('op_persist_1').findAll();
+        final reloadedOutbox =
+            await instance2.outboxItems
+                .filter()
+                .operationIdEqualTo('op_persist_1')
+                .findAll();
         expect(reloadedOutbox.length, 1);
-        expect(reloadedOutbox.first.coalescingKey, 'user_persistent_word_set_101');
+        expect(
+          reloadedOutbox.first.coalescingKey,
+          'user_persistent_word_set_101',
+        );
 
-        final reloadedMeta = await instance2.localSchemaMetadatas.filter().versionEqualTo(1).findAll();
+        final reloadedMeta =
+            await instance2.localSchemaMetadatas
+                .filter()
+                .versionEqualTo(1)
+                .findAll();
         expect(reloadedMeta.length, 1);
         expect(reloadedMeta.first.isSuccessful, true);
 

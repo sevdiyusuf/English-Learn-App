@@ -23,11 +23,7 @@ Future<void> showReportDialog(
 }) {
   return showDialog<void>(
     context: context,
-    builder: (_) => _ReportDialog(
-      type: type,
-      targetId: targetId,
-      title: title,
-    ),
+    builder: (_) => _ReportDialog(type: type, targetId: targetId, title: title),
   );
 }
 
@@ -39,12 +35,13 @@ Future<void> showReportAndBlockDialog(
   final l10n = AppLocalizations.of(context)!;
   return showDialog<void>(
     context: context,
-    builder: (_) => _ReportDialog(
-      type: 'user',
-      targetId: targetUid,
-      title: l10n.reportAndBlock,
-      alsoBlock: true,
-    ),
+    builder:
+        (_) => _ReportDialog(
+          type: 'user',
+          targetId: targetUid,
+          title: l10n.reportAndBlock,
+          alsoBlock: true,
+        ),
   );
 }
 
@@ -87,17 +84,17 @@ class _ReportDialogState extends ConsumerState<_ReportDialog> {
           DropdownButtonFormField<String>(
             initialValue: _reason,
             decoration: InputDecoration(labelText: l10n.reportReason),
-            items: _reportReasons
-                .map(
-                  (reason) => DropdownMenuItem<String>(
-                    value: reason,
-                    child: Text(reason.replaceAll('_', ' ')),
-                  ),
-                )
-                .toList(),
-            onChanged: _submitting
-                ? null
-                : (value) => setState(() => _reason = value),
+            items:
+                _reportReasons
+                    .map(
+                      (reason) => DropdownMenuItem<String>(
+                        value: reason,
+                        child: Text(reason.replaceAll('_', ' ')),
+                      ),
+                    )
+                    .toList(),
+            onChanged:
+                _submitting ? null : (value) => setState(() => _reason = value),
           ),
           TextField(
             controller: _detailsController,
@@ -137,15 +134,15 @@ class _ReportDialogState extends ConsumerState<_ReportDialog> {
       if (widget.alsoBlock) await client.block(widget.targetId);
       if (!mounted) return;
       Navigator.pop(context);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.reportReceived)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(l10n.reportReceived)));
     } catch (error) {
       if (!mounted) return;
       setState(() => _submitting = false);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(_localizedError(l10n, error))),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(_localizedError(l10n, error))));
     }
   }
 }
@@ -158,31 +155,34 @@ Future<void> showBlockDialog(
   final l10n = AppLocalizations.of(context)!;
   final accepted = await showDialog<bool>(
     context: context,
-    builder: (_) => AlertDialog(
-      content: Text(l10n.blockUserPrompt),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context, false),
-          child: Text(l10n.cancel),
+    builder:
+        (_) => AlertDialog(
+          content: Text(l10n.blockUserPrompt),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: Text(l10n.cancel),
+            ),
+            FilledButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: Text(l10n.block),
+            ),
+          ],
         ),
-        FilledButton(
-          onPressed: () => Navigator.pop(context, true),
-          child: Text(l10n.block),
-        ),
-      ],
-    ),
   );
   if (accepted != true || !context.mounted) return;
 
   try {
     await ref.read(moderationClientProvider).block(targetUid);
     if (!context.mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(l10n.block)));
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(l10n.block)));
   } catch (error) {
     if (!context.mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(_localizedError(l10n, error))),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(_localizedError(l10n, error))));
   }
 }
 

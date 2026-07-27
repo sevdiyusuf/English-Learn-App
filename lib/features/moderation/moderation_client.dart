@@ -13,7 +13,8 @@ class ModerationClient {
   final FirebaseFirestore _firestore;
 
   Future<bool> hasCurrentAcceptance(String uid) async {
-    final data = await _firestore.doc('users/$uid/ugc_acceptance/current').get();
+    final data =
+        await _firestore.doc('users/$uid/ugc_acceptance/current').get();
     return data.data()?['termsVersion'] == ugcTermsVersion &&
         data.data()?['guidelinesVersion'] == ugcGuidelinesVersion;
   }
@@ -24,11 +25,27 @@ class ModerationClient {
     'accepted': true,
   });
 
-  Future<void> report({required String type, required String targetId, required String reason, String details = ''}) =>
-      _call('submitModerationReport', {'targetType': type, 'targetId': targetId, 'reason': reason, 'details': details});
-  Future<void> block(String targetUid) => _call('blockUser', {'targetUid': targetUid});
-  Future<void> unblock(String targetUid) => _call('unblockUser', {'targetUid': targetUid});
-  Stream<List<String>> watchBlocked() => _firestore.collection('users').doc(_uid!).collection('blocks').snapshots().map((s) => s.docs.map((d) => d.id).toList());
+  Future<void> report({
+    required String type,
+    required String targetId,
+    required String reason,
+    String details = '',
+  }) => _call('submitModerationReport', {
+    'targetType': type,
+    'targetId': targetId,
+    'reason': reason,
+    'details': details,
+  });
+  Future<void> block(String targetUid) =>
+      _call('blockUser', {'targetUid': targetUid});
+  Future<void> unblock(String targetUid) =>
+      _call('unblockUser', {'targetUid': targetUid});
+  Stream<List<String>> watchBlocked() => _firestore
+      .collection('users')
+      .doc(_uid!)
+      .collection('blocks')
+      .snapshots()
+      .map((s) => s.docs.map((d) => d.id).toList());
   String? _uid;
   void setUid(String uid) => _uid = uid;
 
@@ -37,14 +54,19 @@ class ModerationClient {
   }
 }
 
-final moderationClientProvider = Provider<ModerationClient>((ref) => ModerationClient(
-  ref.watch(firebaseFunctionsProvider), ref.watch(firestoreProvider),
-));
+final moderationClientProvider = Provider<ModerationClient>(
+  (ref) => ModerationClient(
+    ref.watch(firebaseFunctionsProvider),
+    ref.watch(firestoreProvider),
+  ),
+);
 
 String moderationErrorKey(Object error) {
   if (error is FirebaseFunctionsException) {
     if (error.code == 'resource-exhausted') return 'rateLimited';
-    if (error.code == 'failed-precondition' || error.code == 'permission-denied') return 'interactionUnavailable';
+    if (error.code == 'failed-precondition' ||
+        error.code == 'permission-denied')
+      return 'interactionUnavailable';
   }
   return 'errorGeneric';
 }

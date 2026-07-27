@@ -66,18 +66,25 @@ class FriendProfilePage extends ConsumerWidget {
                 icon: const Icon(Icons.more_vert),
                 onSelected: (value) async {
                   if (value == 0) {
-                    await showReportDialog(context, ref, type: 'user', targetId: profile.uid, title: l10n.reportUser);
+                    await showReportDialog(
+                      context,
+                      ref,
+                      type: 'user',
+                      targetId: profile.uid,
+                      title: l10n.reportUser,
+                    );
                   } else if (value == 1) {
                     await showBlockDialog(context, ref, profile.uid);
                   } else {
                     await showReportAndBlockDialog(context, ref, profile.uid);
                   }
                 },
-                itemBuilder: (context) => [
-                  PopupMenuItem(value: 0, child: Text(l10n.reportUser)),
-                  PopupMenuItem(value: 1, child: Text(l10n.block)),
-                  PopupMenuItem(value: 2, child: Text(l10n.reportAndBlock)),
-                ],
+                itemBuilder:
+                    (context) => [
+                      PopupMenuItem(value: 0, child: Text(l10n.reportUser)),
+                      PopupMenuItem(value: 1, child: Text(l10n.block)),
+                      PopupMenuItem(value: 2, child: Text(l10n.reportAndBlock)),
+                    ],
               ),
           ],
           bottom: TabBar(

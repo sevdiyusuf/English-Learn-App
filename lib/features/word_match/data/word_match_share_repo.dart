@@ -78,9 +78,9 @@ class WordMatchShareRepository {
   }
 
   Future<void> removeShare(String shareId) async {
-    await _functions
-        .httpsCallable('removeWordMatchShare')
-        .call({'shareId': shareId});
+    await _functions.httpsCallable('removeWordMatchShare').call({
+      'shareId': shareId,
+    });
   }
 
   /// Load a shared set from Firestore. Returns null if not found.

@@ -162,7 +162,9 @@ void main() {
       stderr.writeln(result.stdout.toString());
       exit(1);
     }
-    stdout.writeln('  [OK] zipalign -c -P 16 -v 4 passed for ${targetApk.path}');
+    stdout.writeln(
+      '  [OK] zipalign -c -P 16 -v 4 passed for ${targetApk.path}',
+    );
   }
 
   stdout.writeln('\n[4/4] Binary & Toolchain Compatibility Summary:');
@@ -193,11 +195,11 @@ void main() {
 
 String? _findZipAlignExecutable() {
   // Check PATH first
-  final pathResult = Process.runSync(
-    Platform.isWindows ? 'where' : 'which',
-    ['zipalign'],
-  );
-  if (pathResult.exitCode == 0 && pathResult.stdout.toString().trim().isNotEmpty) {
+  final pathResult = Process.runSync(Platform.isWindows ? 'where' : 'which', [
+    'zipalign',
+  ]);
+  if (pathResult.exitCode == 0 &&
+      pathResult.stdout.toString().trim().isNotEmpty) {
     return pathResult.stdout.toString().trim().split(RegExp(r'[\r\n]+')).first;
   }
 
@@ -223,4 +225,3 @@ String? _findZipAlignExecutable() {
   }
   return null;
 }
-

@@ -132,7 +132,8 @@ class _SharedWordSetPageState extends ConsumerState<SharedWordSetPage> {
 
         final previewPairs = shared.pairs.take(3).toList();
         final l10n = AppLocalizations.of(context)!;
-        final isOwner = ref.watch(authControllerProvider).value?.uid == shared.ownerUid;
+        final isOwner =
+            ref.watch(authControllerProvider).value?.uid == shared.ownerUid;
 
         return SingleChildScrollView(
           padding: const EdgeInsets.all(16),
@@ -141,17 +142,25 @@ class _SharedWordSetPageState extends ConsumerState<SharedWordSetPage> {
             children: [
               Align(
                 alignment: Alignment.centerRight,
-                child: isOwner
-                    ? TextButton.icon(
-                        onPressed: () => _confirmRemove(shared, l10n),
-                        icon: const Icon(Icons.delete_outline),
-                        label: Text(l10n.removeSharedSet),
-                      )
-                    : TextButton.icon(
-                        onPressed: () => showReportDialog(context, ref, type: 'share', targetId: shared.shareId, title: l10n.reportSharedSet),
-                        icon: const Icon(Icons.flag_outlined),
-                        label: Text(l10n.report),
-                      ),
+                child:
+                    isOwner
+                        ? TextButton.icon(
+                          onPressed: () => _confirmRemove(shared, l10n),
+                          icon: const Icon(Icons.delete_outline),
+                          label: Text(l10n.removeSharedSet),
+                        )
+                        : TextButton.icon(
+                          onPressed:
+                              () => showReportDialog(
+                                context,
+                                ref,
+                                type: 'share',
+                                targetId: shared.shareId,
+                                title: l10n.reportSharedSet,
+                              ),
+                          icon: const Icon(Icons.flag_outlined),
+                          label: Text(l10n.report),
+                        ),
               ),
               Container(
                 padding: const EdgeInsets.all(16),
@@ -281,22 +290,42 @@ class _SharedWordSetPageState extends ConsumerState<SharedWordSetPage> {
     }
   }
 
-  Future<void> _confirmRemove(SharedWordSet shared, AppLocalizations l10n) async {
-    final remove = await showDialog<bool>(context: context, builder: (_) => AlertDialog(
-      title: Text(l10n.removeSharedSet), content: Text(l10n.removeSharedSetPrompt), actions: [
-        TextButton(onPressed: () => Navigator.pop(context, false), child: Text(l10n.cancel)),
-        FilledButton(onPressed: () => Navigator.pop(context, true), child: Text(l10n.remove)),
-      ],
-    ));
+  Future<void> _confirmRemove(
+    SharedWordSet shared,
+    AppLocalizations l10n,
+  ) async {
+    final remove = await showDialog<bool>(
+      context: context,
+      builder:
+          (_) => AlertDialog(
+            title: Text(l10n.removeSharedSet),
+            content: Text(l10n.removeSharedSetPrompt),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context, false),
+                child: Text(l10n.cancel),
+              ),
+              FilledButton(
+                onPressed: () => Navigator.pop(context, true),
+                child: Text(l10n.remove),
+              ),
+            ],
+          ),
+    );
     if (remove != true || !mounted) return;
     try {
       final repo = await ref.read(wordMatchShareRepositoryProvider.future);
       await repo.removeShare(shared.shareId);
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(l10n.sharedSetRemoved)));
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(l10n.sharedSetRemoved)));
       context.go('/word-match/sets');
     } catch (_) {
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(l10n.errorGeneric)));
+      if (mounted)
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(l10n.errorGeneric)));
     }
   }
 }

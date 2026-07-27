@@ -12,10 +12,9 @@ _$UserProfileImpl _$$UserProfileImplFromJson(Map<String, dynamic> json) =>
       displayName: json['displayName'] as String?,
       photoUrl: json['photoUrl'] as String?,
       userCode: json['userCode'] as String?,
-      createdAt:
-          json['createdAt'] == null
-              ? null
-              : DateTime.parse(json['createdAt'] as String),
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
     );
 
 Map<String, dynamic> _$$UserProfileImplToJson(_$UserProfileImpl instance) =>
@@ -33,14 +32,12 @@ _$FriendRequestImpl _$$FriendRequestImplFromJson(Map<String, dynamic> json) =>
       fromUid: json['fromUid'] as String,
       toUid: json['toUid'] as String,
       status: $enumDecode(_$FriendRequestStatusEnumMap, json['status']),
-      createdAt:
-          json['createdAt'] == null
-              ? null
-              : DateTime.parse(json['createdAt'] as String),
-      updatedAt:
-          json['updatedAt'] == null
-              ? null
-              : DateTime.parse(json['updatedAt'] as String),
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
+      updatedAt: json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
     );
 
 Map<String, dynamic> _$$FriendRequestImplToJson(_$FriendRequestImpl instance) =>

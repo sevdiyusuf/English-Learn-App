@@ -78,28 +78,33 @@ class _AcceptanceDialogState extends State<_AcceptanceDialog> {
           children: [
             Text(l10n.acceptPoliciesPrompt),
             TextButton(
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute<void>(
-                  builder: (_) => const UgcPolicyDocumentPage(guidelines: false),
-                ),
-              ),
+              onPressed:
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder:
+                          (_) => const UgcPolicyDocumentPage(guidelines: false),
+                    ),
+                  ),
               child: Text(l10n.termsOfService),
             ),
             TextButton(
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute<void>(
-                  builder: (_) => const UgcPolicyDocumentPage(guidelines: true),
-                ),
-              ),
+              onPressed:
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder:
+                          (_) => const UgcPolicyDocumentPage(guidelines: true),
+                    ),
+                  ),
               child: Text(l10n.communityGuidelines),
             ),
             CheckboxListTile(
               value: _accepted,
-              onChanged: _saving
-                  ? null
-                  : (value) => setState(() => _accepted = value ?? false),
+              onChanged:
+                  _saving
+                      ? null
+                      : (value) => setState(() => _accepted = value ?? false),
               title: Text(l10n.acceptPoliciesCheck),
               controlAffinity: ListTileControlAffinity.leading,
             ),
@@ -129,9 +134,9 @@ class _AcceptanceDialogState extends State<_AcceptanceDialog> {
     } catch (_) {
       if (!mounted) return;
       setState(() => _saving = false);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.policyAcceptanceFailed)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(l10n.policyAcceptanceFailed)));
     }
   }
 }
