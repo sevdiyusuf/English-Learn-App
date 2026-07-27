@@ -174,7 +174,7 @@ void main() {
       await tester.tap(find.text('Open Report'));
       await tester.pump();
 
-      expect(find.text('Report a content issue'), findsOneWidget);
+      expect(find.text('Report Content Issue'), findsOneWidget);
 
       await expectLater(
         find.byType(MaterialApp),
