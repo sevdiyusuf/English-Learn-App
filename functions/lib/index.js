@@ -51,8 +51,11 @@ const room_cleanup_helper_1 = require("./room_cleanup_helper");
 const ugc_moderation_1 = require("./ugc_moderation");
 const push_notifications_1 = require("./push_notifications");
 const educational_content_reporting_1 = require("./educational_content_reporting");
-if (admin.apps.length === 0)
-    admin.initializeApp();
+if (admin.apps.length === 0) {
+    admin.initializeApp({
+        projectId: process.env.GCLOUD_PROJECT || process.env.FIREBASE_PROJECT || 'demo-tamamm',
+    });
+}
 exports.APP_CHECK_ENFORCEMENT = {
     getServerTime: false,
     getServerTimeV2: false,
