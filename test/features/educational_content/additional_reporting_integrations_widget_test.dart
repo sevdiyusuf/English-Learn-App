@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:yunoo/core/content/educational_content_id_resolver.dart';
 import 'package:yunoo/features/educational_content/content_report_service.dart';
+import 'package:yunoo/features/grammar/data/grammar_repository.dart';
 import 'package:yunoo/features/grammar/logic/grammar_providers.dart';
 import 'package:yunoo/features/grammar/models/grammar_models.dart';
 import 'package:yunoo/features/grammar/ui/pages/lesson_viewer_page.dart';
@@ -176,6 +177,7 @@ void main() {
                 },
               ),
               contentReportServiceProvider.overrideWithValue(fakeService),
+              grammarRepositoryProvider.overrideWith((ref) => GrammarRepository()),
               lessonIndexProvider.overrideWith(
                 (ref) async => LessonIndex(
                   levels: ['A1'],
@@ -270,6 +272,7 @@ void main() {
                 },
               ),
               contentReportServiceProvider.overrideWithValue(fakeService),
+              grammarRepositoryProvider.overrideWith((ref) => GrammarRepository()),
               lessonIndexProvider.overrideWith(
                 (ref) async => LessonIndex(
                   levels: ['A1'],
