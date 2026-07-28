@@ -235,6 +235,15 @@ jobs:
         run: |
           yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
 
+      - name: Materialize Firebase Config from Secret
+        run: |
+          if [ -z "${{ secrets.FIREBASE_GOOGLE_SERVICES_JSON }}" ]; then
+            echo "Error: FIREBASE_GOOGLE_SERVICES_JSON secret is not set"
+            echo "Please add the google-services.json content as a repository secret"
+            exit 1
+          fi
+          echo "${{ secrets.FIREBASE_GOOGLE_SERVICES_JSON }}" > android/app/google-services.json
+
       - name: Build Release APK Artifact
         run: flutter build apk --release
 
@@ -283,6 +292,15 @@ jobs:
       - name: Accept SDK Licenses
         run: |
           yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
+
+      - name: Materialize Firebase Config from Secret
+        run: |
+          if [ -z "${{ secrets.FIREBASE_GOOGLE_SERVICES_JSON }}" ]; then
+            echo "Error: FIREBASE_GOOGLE_SERVICES_JSON secret is not set"
+            echo "Please add the google-services.json content as a repository secret"
+            exit 1
+          fi
+          echo "${{ secrets.FIREBASE_GOOGLE_SERVICES_JSON }}" > android/app/google-services.json
 
       - name: Run Android Emulator P0 Integration Smoke Test
         uses: reactivecircus/android-emulator-runner@v2
