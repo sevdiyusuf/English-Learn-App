@@ -78,9 +78,7 @@ class _IrregularVerbsTutorialPageState
           icon: const Icon(Icons.close_rounded),
           onPressed: () => context.go('/irregular-verbs'),
         ),
-        actions: const [
-          _ReportButton(),
-        ],
+        actions: const [_ReportButton()],
       ),
       body: verbsAsync.when(
         data: (verbs) {
@@ -312,7 +310,7 @@ class _ReportButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final verbsAsync = ref.watch(irregularVerbsProvider);
     final contentIdMapAsync = ref.watch(irregularVerbContentIdMapProvider);
-    
+
     return verbsAsync.when(
       data: (verbs) {
         return contentIdMapAsync.when(

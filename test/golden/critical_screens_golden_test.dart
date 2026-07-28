@@ -88,7 +88,11 @@ class TolerantGoldenFileComparator extends LocalFileComparator {
         if (Platform.environment.containsKey('CI')) {
           return true;
         }
-        final String error = await generateFailureOutput(result, golden, basedir);
+        final String error = await generateFailureOutput(
+          result,
+          golden,
+          basedir,
+        );
         throw FlutterError(error);
       }
       return true;

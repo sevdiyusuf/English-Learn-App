@@ -167,10 +167,7 @@ void main() {
 
         expect(find.text('Report Content Issue'), findsOneWidget);
         expect(find.text('Typo or spelling error'), findsOneWidget);
-        expect(
-          find.text('Incorrect answer key'),
-          findsOneWidget,
-        );
+        expect(find.text('Incorrect answer key'), findsOneWidget);
         expect(find.text('Submit'), findsOneWidget);
         expect(find.text('Cancel'), findsOneWidget);
       },
@@ -223,10 +220,7 @@ void main() {
         expect(fakeService.lastComment, 'V2 is written incorrectly');
 
         // Success snackbar
-        expect(
-          find.text('Report submitted successfully'),
-          findsOneWidget,
-        );
+        expect(find.text('Report submitted successfully'), findsOneWidget);
       },
     );
 
@@ -245,10 +239,7 @@ void main() {
         await tester.tap(find.text('Submit'));
         await tester.pumpAndSettle();
 
-        expect(
-          find.text('Issue already reported'),
-          findsOneWidget,
-        );
+        expect(find.text('Issue already reported'), findsOneWidget);
       },
     );
 
@@ -286,10 +277,7 @@ void main() {
         await tester.tap(find.text('Submit'));
         await tester.pumpAndSettle();
 
-        expect(
-          find.text('Failed to submit report'),
-          findsOneWidget,
-        );
+        expect(find.text('Failed to submit report'), findsOneWidget);
       },
     );
 

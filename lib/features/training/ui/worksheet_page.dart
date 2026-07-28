@@ -421,10 +421,7 @@ class _WorksheetPageState extends ConsumerState<WorksheetPage> {
 }
 
 class _ReportButton extends ConsumerWidget {
-  const _ReportButton({
-    required this.worksheetPath,
-    required this.itemId,
-  });
+  const _ReportButton({required this.worksheetPath, required this.itemId});
 
   final String worksheetPath;
   final String itemId;
@@ -432,7 +429,7 @@ class _ReportButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final registryAsync = ref.watch(educationalContentRegistryProvider);
-    
+
     return registryAsync.when(
       data: (registry) {
         final key = EducationalItemKey(
@@ -440,11 +437,11 @@ class _ReportButton extends ConsumerWidget {
           'id:$itemId',
         );
         final contentId = registry[key];
-        
+
         if (contentId == null) {
           return const SizedBox.shrink();
         }
-        
+
         return IconButton(
           key: ValueKey('report_worksheet_$itemId'),
           icon: const Icon(Icons.flag_outlined, color: Colors.white54),

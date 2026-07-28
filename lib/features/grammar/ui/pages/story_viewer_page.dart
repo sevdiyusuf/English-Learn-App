@@ -621,7 +621,7 @@ class _ReportButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final registryAsync = ref.watch(educationalContentRegistryProvider);
     final lessonAsync = ref.watch(lessonDocProvider(lessonId));
-    
+
     return lessonAsync.when(
       data: (doc) {
         return registryAsync.when(
@@ -630,13 +630,13 @@ class _ReportButton extends ConsumerWidget {
             if (items.isEmpty) {
               return const SizedBox.shrink();
             }
-            
+
             // Use the first story item for reporting
             final item = items[0];
-            
+
             // Try multiple possible keys for the registry lookup
             String? contentId;
-            
+
             // Try with prompt as anchor (for story items)
             if (item.prompt.isNotEmpty) {
               final promptKey = EducationalItemKey(
@@ -645,7 +645,7 @@ class _ReportButton extends ConsumerWidget {
               );
               contentId = registry[promptKey];
             }
-            
+
             // Fallback to ID-based key
             if (contentId == null) {
               final idKey = EducationalItemKey(
@@ -654,11 +654,11 @@ class _ReportButton extends ConsumerWidget {
               );
               contentId = registry[idKey];
             }
-            
+
             if (contentId == null) {
               return const SizedBox.shrink();
             }
-            
+
             return IconButton(
               key: const ValueKey('report_story_item_0'),
               icon: const Icon(Icons.flag_outlined, color: Colors.white54),

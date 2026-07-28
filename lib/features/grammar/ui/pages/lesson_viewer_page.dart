@@ -399,7 +399,7 @@ class _ReportButton extends ConsumerWidget {
     final registryAsync = ref.watch(educationalContentRegistryProvider);
     final currentIndex = ref.watch(currentCardIndexProvider(lessonId));
     final lessonAsync = ref.watch(lessonDocProvider(lessonId));
-    
+
     return lessonAsync.when(
       data: (doc) {
         final card = doc.microLesson.cards[currentIndex];
@@ -410,11 +410,11 @@ class _ReportButton extends ConsumerWidget {
               'id:${card.id}',
             );
             final contentId = registry[key];
-            
+
             if (contentId == null) {
               return const SizedBox.shrink();
             }
-            
+
             return IconButton(
               key: ValueKey('report_lesson_card_${card.id}'),
               icon: const Icon(Icons.flag_outlined, color: Colors.white54),

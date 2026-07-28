@@ -130,10 +130,7 @@ void main() {
         await tester.pumpAndSettle();
 
         expect(find.text('Report Content Issue'), findsOneWidget);
-        expect(
-          find.text('Incorrect answer key'),
-          findsOneWidget,
-        );
+        expect(find.text('Incorrect answer key'), findsOneWidget);
       },
     );
 
@@ -280,10 +277,7 @@ void main() {
         await tester.pumpAndSettle();
 
         expect(find.text('Report Content Issue'), findsOneWidget);
-        expect(
-          find.text('Incorrect answer key'),
-          findsOneWidget,
-        );
+        expect(find.text('Incorrect answer key'), findsOneWidget);
       },
     );
   });
