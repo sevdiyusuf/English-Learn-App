@@ -406,7 +406,7 @@ class _ReportButton extends ConsumerWidget {
         return registryAsync.when(
           data: (registry) {
             final key = EducationalItemKey(
-              'assets/lessons/$doc.level/$lessonId.json',
+              'assets/lessons/${doc.level}/$lessonId.json',
               'id:${card.id}',
             );
             final contentId = registry[key];

@@ -179,6 +179,9 @@ void main() {
               lessonDocProvider(
                 'A1-ADV-01-lesson',
               ).overrideWith((ref) async => dummyLesson),
+              currentCardIndexProvider(
+                'A1-ADV-01-lesson',
+              ).overrideWith((ref) => 0),
             ],
             child: const MaterialApp(
               localizationsDelegates: [

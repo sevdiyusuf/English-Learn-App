@@ -640,7 +640,7 @@ class _ReportButton extends ConsumerWidget {
             // Try with prompt as anchor (for story items)
             if (item.prompt.isNotEmpty) {
               final promptKey = EducationalItemKey(
-                'assets/lessons/$doc.level/$lessonId.json',
+                'assets/lessons/${doc.level}/$lessonId.json',
                 'prompt:${item.prompt}',
               );
               contentId = registry[promptKey];
@@ -649,7 +649,7 @@ class _ReportButton extends ConsumerWidget {
             // Fallback to ID-based key
             if (contentId == null) {
               final idKey = EducationalItemKey(
-                'assets/lessons/$doc.level/$lessonId.json',
+                'assets/lessons/${doc.level}/$lessonId.json',
                 'id:${item.id}',
               );
               contentId = registry[idKey];
