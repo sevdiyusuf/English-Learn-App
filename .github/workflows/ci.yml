@@ -223,6 +223,10 @@ jobs:
           flutter gen-l10n
           dart format lib/l10n/
 
+      - name: Install Android Command-line Tools
+        run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "cmdline-tools;latest"
+
       - name: Install NDK 29.0.13599879
         run: |
           yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "ndk;29.0.13599879"
@@ -267,6 +271,10 @@ jobs:
         run: |
           flutter gen-l10n
           dart format lib/l10n/
+
+      - name: Install Android Command-line Tools
+        run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "cmdline-tools;latest"
 
       - name: Install NDK 29.0.13599879
         run: |

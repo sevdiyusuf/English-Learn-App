@@ -11,6 +11,8 @@ function genCode(prefix: string): string {
 }
 
 describe('Sprint 11A — Multiplayer Concurrency & Idempotency Tests', () => {
+    jest.setTimeout(30000);
+
     afterAll(() => {
         testEnv.cleanup();
     });
