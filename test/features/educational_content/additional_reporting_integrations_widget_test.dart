@@ -177,7 +177,9 @@ void main() {
                 },
               ),
               contentReportServiceProvider.overrideWithValue(fakeService),
-              grammarRepositoryProvider.overrideWith((ref) => GrammarRepository()),
+              grammarRepositoryProvider.overrideWith(
+                (ref) => GrammarRepository(),
+              ),
               lessonIndexProvider.overrideWith(
                 (ref) async => LessonIndex(
                   levels: ['A1'],
@@ -272,7 +274,9 @@ void main() {
                 },
               ),
               contentReportServiceProvider.overrideWithValue(fakeService),
-              grammarRepositoryProvider.overrideWith((ref) => GrammarRepository()),
+              grammarRepositoryProvider.overrideWith(
+                (ref) => GrammarRepository(),
+              ),
               lessonIndexProvider.overrideWith(
                 (ref) async => LessonIndex(
                   levels: ['A1'],
