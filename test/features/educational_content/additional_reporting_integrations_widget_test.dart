@@ -176,6 +176,21 @@ void main() {
                 },
               ),
               contentReportServiceProvider.overrideWithValue(fakeService),
+              lessonIndexProvider.overrideWith(
+                (ref) async => LessonIndex(
+                  levels: ['A1'],
+                  lessonsByLevel: {
+                    'A1': [
+                      LessonEntry(
+                        lessonId: 'A1-ADV-01-lesson',
+                        title: 'Adverbs Lesson',
+                        path: 'A1/A1-ADV-01-lesson.json',
+                        topicTags: ['adverbs'],
+                      ),
+                    ],
+                  },
+                ),
+              ),
               lessonDocProvider(
                 'A1-ADV-01-lesson',
               ).overrideWith((ref) async => dummyLesson),
@@ -255,6 +270,21 @@ void main() {
                 },
               ),
               contentReportServiceProvider.overrideWithValue(fakeService),
+              lessonIndexProvider.overrideWith(
+                (ref) async => LessonIndex(
+                  levels: ['A1'],
+                  lessonsByLevel: {
+                    'A1': [
+                      LessonEntry(
+                        lessonId: 'A1-ADV-01-lesson',
+                        title: 'Adverbs Lesson',
+                        path: 'A1/A1-ADV-01-lesson.json',
+                        topicTags: ['adverbs'],
+                      ),
+                    ],
+                  },
+                ),
+              ),
               lessonDocProvider(
                 'A1-ADV-01-lesson',
               ).overrideWith((ref) async => dummyLesson),
