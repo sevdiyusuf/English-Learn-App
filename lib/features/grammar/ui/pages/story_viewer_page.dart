@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../../../core/content/educational_content_id_resolver.dart';
+import '../../../../core/theme/app_colors.dart';
+import '../../../../features/educational_content/content_report_dialog.dart';
 import '../../logic/grammar_providers.dart';
 import '../../models/grammar_models.dart';
-import '../../../../core/theme/app_colors.dart';
 import '../../../training/models/training_models.dart';
 import '../../../training/ui/engine_renderer.dart';
 
@@ -111,6 +113,7 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage> {
                       ),
                     ),
                   ),
+                  _ReportButton(lessonId: widget.lessonId),
                 ],
                 bottom: PreferredSize(
                   preferredSize: const Size.fromHeight(6),
@@ -605,6 +608,77 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _ReportButton extends ConsumerWidget {
+  const _ReportButton({required this.lessonId});
+
+  final String lessonId;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final registryAsync = ref.watch(educationalContentRegistryProvider);
+    final lessonAsync = ref.watch(lessonDocProvider(lessonId));
+    
+    return lessonAsync.when(
+      data: (doc) {
+        return registryAsync.when(
+          data: (registry) {
+            final items = doc.storyMode.items;
+            if (items.isEmpty) {
+              return const SizedBox.shrink();
+            }
+            
+            // Use the first story item for reporting
+            final item = items[0];
+            
+            // Try multiple possible keys for the registry lookup
+            String? contentId;
+            
+            // Try with prompt as anchor (for story items)
+            if (item.prompt.isNotEmpty) {
+              final promptKey = EducationalItemKey(
+                'assets/lessons/$doc.level/$lessonId.json',
+                'prompt:${item.prompt}',
+              );
+              contentId = registry[promptKey];
+            }
+            
+            // Fallback to ID-based key
+            if (contentId == null) {
+              final idKey = EducationalItemKey(
+                'assets/lessons/$doc.level/$lessonId.json',
+                'id:${item.id}',
+              );
+              contentId = registry[idKey];
+            }
+            
+            if (contentId == null) {
+              return const SizedBox.shrink();
+            }
+            
+            return IconButton(
+              key: const ValueKey('report_story_item_0'),
+              icon: const Icon(Icons.flag_outlined, color: Colors.white54),
+              tooltip: 'Report an issue with this content',
+              onPressed: () async {
+                await showContentReportSheet(
+                  context,
+                  contentId: contentId!,
+                  contentVersion: 1,
+                  contentType: 'story_item',
+                );
+              },
+            );
+          },
+          loading: () => const SizedBox.shrink(),
+          error: (_, __) => const SizedBox.shrink(),
+        );
+      },
+      loading: () => const SizedBox.shrink(),
+      error: (_, __) => const SizedBox.shrink(),
     );
   }
 }

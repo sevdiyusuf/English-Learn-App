@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import '../logic/irregular_verbs_provider.dart';
+import '../logic/irregular_verb_content_ids.dart';
 import '../models/irregular_verb.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/tts/resilient_tts_service.dart';
+import '../../../features/educational_content/content_report_dialog.dart';
 import '../../../l10n/app_localizations.dart';
 
 class IrregularVerbsTutorialPage extends ConsumerStatefulWidget {
@@ -76,6 +78,9 @@ class _IrregularVerbsTutorialPageState
           icon: const Icon(Icons.close_rounded),
           onPressed: () => context.go('/irregular-verbs'),
         ),
+        actions: const [
+          _ReportButton(),
+        ],
       ),
       body: verbsAsync.when(
         data: (verbs) {
@@ -296,6 +301,49 @@ class _FormColumn extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _ReportButton extends ConsumerWidget {
+  const _ReportButton();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final verbsAsync = ref.watch(irregularVerbsProvider);
+    final contentIdMapAsync = ref.watch(irregularVerbContentIdMapProvider);
+    
+    return verbsAsync.when(
+      data: (verbs) {
+        return contentIdMapAsync.when(
+          data: (contentIdMap) {
+            // Find the first verb with a content ID
+            for (final verb in verbs) {
+              final contentId = contentIdMap[verb.v1];
+              if (contentId != null && contentId.isNotEmpty) {
+                return IconButton(
+                  key: ValueKey('report_verb_${verb.v1}'),
+                  icon: const Icon(Icons.flag_outlined, color: Colors.white54),
+                  tooltip: 'Report an issue with this content',
+                  onPressed: () async {
+                    await showContentReportSheet(
+                      context,
+                      contentId: contentId,
+                      contentVersion: 1,
+                      contentType: 'irregular_verb',
+                    );
+                  },
+                );
+              }
+            }
+            return const SizedBox.shrink();
+          },
+          loading: () => const SizedBox.shrink(),
+          error: (_, __) => const SizedBox.shrink(),
+        );
+      },
+      loading: () => const SizedBox.shrink(),
+      error: (_, __) => const SizedBox.shrink(),
     );
   }
 }
