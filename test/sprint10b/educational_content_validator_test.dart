@@ -282,9 +282,10 @@ Map<String, String> _idsByAnchor(Map<String, dynamic> registry) {
 }
 
 String _dartExecutable() {
+  final executableName = Platform.isWindows ? 'dart.bat' : 'dart';
   var directory = File(Platform.resolvedExecutable).parent;
   while (directory.parent.path != directory.path) {
-    final candidate = File('${directory.path}/bin/dart.bat');
+    final candidate = File('${directory.path}/bin/$executableName');
     if (candidate.existsSync()) return candidate.path;
     directory = directory.parent;
   }

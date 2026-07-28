@@ -20,7 +20,7 @@ env:
 
 jobs:
   flutter_quality:
-    name: Flutter Quality & Analysis
+    name: Flutter Quality &   
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -223,6 +223,14 @@ jobs:
           flutter gen-l10n
           dart format lib/l10n/
 
+      - name: Install NDK 29.0.13599879
+        run: |
+          echo "y" | $ANDROID_HOME/tools/bin/sdkmanager "ndk;29.0.13599879"
+
+      - name: Accept SDK Licenses
+        run: |
+          yes | $ANDROID_HOME/tools/bin/sdkmanager --licenses || true
+
       - name: Build Release APK Artifact
         run: flutter build apk --release
 
@@ -259,6 +267,14 @@ jobs:
         run: |
           flutter gen-l10n
           dart format lib/l10n/
+
+      - name: Install NDK 29.0.13599879
+        run: |
+          echo "y" | $ANDROID_HOME/tools/bin/sdkmanager "ndk;29.0.13599879"
+
+      - name: Accept SDK Licenses
+        run: |
+          yes | $ANDROID_HOME/tools/bin/sdkmanager --licenses || true
 
       - name: Run Android Emulator P0 Integration Smoke Test
         uses: reactivecircus/android-emulator-runner@v2
