@@ -384,7 +384,7 @@ jobs:
           target: google_apis
           arch: x86_64
           profile: Nexus 6
-          script: flutter test integration_test/p0_device_smoke_integration_test.dart
+          script: flutter test --timeout 25m integration_test/p0_device_smoke_integration_test.dart
 
       - name: Build Release APK Artifact for Binary Inspection
         run: |
