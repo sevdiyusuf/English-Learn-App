@@ -231,6 +231,10 @@ jobs:
         run: |
           yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "ndk;29.0.13599879"
 
+      - name: Install Android Platform 36
+        run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platforms;android-36" || true
+
       - name: Accept SDK Licenses
         run: |
           yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
@@ -238,8 +242,6 @@ jobs:
       - name: Generate ephemeral CI debug keystore
         run: |
           if [ ! -f android/key.properties ]; then
-            # Derive Android user-home: ANDROID_SDK_HOME takes precedence over HOME
-            # On GitHub Actions ubuntu runners ANDROID_SDK_HOME=/home/runner/.config/
             ANDROID_USER_HOME="${ANDROID_SDK_HOME:-$HOME}"
             DEBUG_KS_DIR="$ANDROID_USER_HOME/.android"
             DEBUG_KS="$DEBUG_KS_DIR/debug.keystore"
@@ -271,7 +273,20 @@ jobs:
           python3 -c 'import json; json.load(open("android/app/google-services.json")); print("Firebase config JSON valid")'
 
       - name: Build Release APK Artifact
-        run: flutter build apk --release
+        run: |
+          set -o pipefail
+          flutter build apk --release 2>&1 | tee /tmp/apk_build.log
+          BUILD_STATUS=${PIPESTATUS[0]}
+          if [ $BUILD_STATUS -ne 0 ]; then
+            echo "::group::Gradle/Flutter build failure details"
+            grep -E "FAILURE|Execution failed|error:|Error:|Exception|BUILD FAILED" \
+              /tmp/apk_build.log | head -40 | while IFS= read -r line; do
+              echo "::error::${line}"
+            done
+            tail -80 /tmp/apk_build.log
+            echo "::endgroup::"
+          fi
+          exit $BUILD_STATUS
 
       - name: Verify Build Artifact Output
         run: ls -lh build/app/outputs/flutter-apk/app-release.apk
@@ -314,6 +329,10 @@ jobs:
       - name: Install NDK 29.0.13599879
         run: |
           yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "ndk;29.0.13599879"
+
+      - name: Install Android Platform 36
+        run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platforms;android-36" || true
 
       - name: Accept SDK Licenses
         run: |
@@ -362,7 +381,20 @@ jobs:
           script: flutter test integration_test/p0_device_smoke_integration_test.dart
 
       - name: Build Release APK Artifact for Binary Inspection
-        run: flutter build apk --release
+        run: |
+          set -o pipefail
+          flutter build apk --release 2>&1 | tee /tmp/apk_build_matrix.log
+          BUILD_STATUS=${PIPESTATUS[0]}
+          if [ $BUILD_STATUS -ne 0 ]; then
+            echo "::group::Gradle/Flutter build failure details"
+            grep -E "FAILURE|Execution failed|error:|Error:|Exception|BUILD FAILED" \
+              /tmp/apk_build_matrix.log | head -40 | while IFS= read -r line; do
+              echo "::error::${line}"
+            done
+            tail -80 /tmp/apk_build_matrix.log
+            echo "::endgroup::"
+          fi
+          exit $BUILD_STATUS
 
       - name: Verify Android 16 KB Page-Size Compatibility
         run: dart run tool/verify_android_16kb_compatibility.dart
