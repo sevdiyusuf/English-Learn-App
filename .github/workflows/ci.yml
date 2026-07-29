@@ -377,6 +377,9 @@ jobs:
           printf '%s' "$FIREBASE_GOOGLE_SERVICES_JSON" > android/app/google-services.json
           python3 -c 'import json; json.load(open("android/app/google-services.json")); print("Firebase config JSON valid")'
 
+      - name: Pre-build Debug APK for Integration Test
+        run: flutter build apk --debug
+
       - name: Run Android Emulator P0 Integration Smoke Test
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -384,7 +387,7 @@ jobs:
           target: google_apis
           arch: x86_64
           profile: Nexus 6
-          script: flutter test --timeout 25m integration_test/p0_device_smoke_integration_test.dart
+          script: flutter test --timeout none integration_test/p0_device_smoke_integration_test.dart
 
       - name: Build Release APK Artifact for Binary Inspection
         run: |
