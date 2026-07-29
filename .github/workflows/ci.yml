@@ -274,19 +274,20 @@ jobs:
 
       - name: Build Release APK Artifact
         run: |
-          set -o pipefail
+          set +e
           flutter build apk --release 2>&1 | tee /tmp/apk_build.log
           BUILD_STATUS=${PIPESTATUS[0]}
-          if [ $BUILD_STATUS -ne 0 ]; then
+          if [ "$BUILD_STATUS" -ne 0 ]; then
             echo "::group::Gradle/Flutter build failure details"
-            grep -E "FAILURE|Execution failed|error:|Error:|Exception|BUILD FAILED" \
-              /tmp/apk_build.log | head -40 | while IFS= read -r line; do
-              echo "::error::${line}"
+            grep -E "FAILURE|Execution failed|error:|Error:|Exception|BUILD FAILED|Caused by" \
+              /tmp/apk_build.log | head -50 | while IFS= read -r errline; do
+              printf '::error::%s\n' "${errline}"
             done
-            tail -80 /tmp/apk_build.log
+            echo "--- last 150 lines of build log ---"
+            tail -150 /tmp/apk_build.log
             echo "::endgroup::"
           fi
-          exit $BUILD_STATUS
+          exit "$BUILD_STATUS"
 
       - name: Verify Build Artifact Output
         run: ls -lh build/app/outputs/flutter-apk/app-release.apk
@@ -382,19 +383,20 @@ jobs:
 
       - name: Build Release APK Artifact for Binary Inspection
         run: |
-          set -o pipefail
+          set +e
           flutter build apk --release 2>&1 | tee /tmp/apk_build_matrix.log
           BUILD_STATUS=${PIPESTATUS[0]}
-          if [ $BUILD_STATUS -ne 0 ]; then
+          if [ "$BUILD_STATUS" -ne 0 ]; then
             echo "::group::Gradle/Flutter build failure details"
-            grep -E "FAILURE|Execution failed|error:|Error:|Exception|BUILD FAILED" \
-              /tmp/apk_build_matrix.log | head -40 | while IFS= read -r line; do
-              echo "::error::${line}"
+            grep -E "FAILURE|Execution failed|error:|Error:|Exception|BUILD FAILED|Caused by" \
+              /tmp/apk_build_matrix.log | head -50 | while IFS= read -r errline; do
+              printf '::error::%s\n' "${errline}"
             done
-            tail -80 /tmp/apk_build_matrix.log
+            echo "--- last 150 lines of build log ---"
+            tail -150 /tmp/apk_build_matrix.log
             echo "::endgroup::"
           fi
-          exit $BUILD_STATUS
+          exit "$BUILD_STATUS"
 
       - name: Verify Android 16 KB Page-Size Compatibility
         run: dart run tool/verify_android_16kb_compatibility.dart
