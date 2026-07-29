@@ -235,6 +235,30 @@ jobs:
         run: |
           yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
 
+      - name: Generate ephemeral CI debug keystore
+        run: |
+          if [ ! -f android/key.properties ]; then
+            # Derive Android user-home: ANDROID_SDK_HOME takes precedence over HOME
+            # On GitHub Actions ubuntu runners ANDROID_SDK_HOME=/home/runner/.config/
+            ANDROID_USER_HOME="${ANDROID_SDK_HOME:-$HOME}"
+            DEBUG_KS_DIR="$ANDROID_USER_HOME/.android"
+            DEBUG_KS="$DEBUG_KS_DIR/debug.keystore"
+            mkdir -p "$DEBUG_KS_DIR"
+            keytool -genkeypair \
+              -keystore "$DEBUG_KS" \
+              -alias androiddebugkey \
+              -keyalg RSA \
+              -keysize 2048 \
+              -validity 10000 \
+              -storepass android \
+              -keypass android \
+              -dname "CN=Android Debug,O=Android,C=US" \
+              -noprompt
+            echo "Ephemeral CI debug keystore created: $DEBUG_KS"
+          else
+            echo "Production key.properties present — skipping ephemeral keystore"
+          fi
+
       - name: Materialize Firebase Config from Secret
         env:
           FIREBASE_GOOGLE_SERVICES_JSON: ${{ secrets.FIREBASE_GOOGLE_SERVICES_JSON }}
@@ -294,6 +318,28 @@ jobs:
       - name: Accept SDK Licenses
         run: |
           yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
+
+      - name: Generate ephemeral CI debug keystore
+        run: |
+          if [ ! -f android/key.properties ]; then
+            ANDROID_USER_HOME="${ANDROID_SDK_HOME:-$HOME}"
+            DEBUG_KS_DIR="$ANDROID_USER_HOME/.android"
+            DEBUG_KS="$DEBUG_KS_DIR/debug.keystore"
+            mkdir -p "$DEBUG_KS_DIR"
+            keytool -genkeypair \
+              -keystore "$DEBUG_KS" \
+              -alias androiddebugkey \
+              -keyalg RSA \
+              -keysize 2048 \
+              -validity 10000 \
+              -storepass android \
+              -keypass android \
+              -dname "CN=Android Debug,O=Android,C=US" \
+              -noprompt
+            echo "Ephemeral CI debug keystore created: $DEBUG_KS"
+          else
+            echo "Production key.properties present — skipping ephemeral keystore"
+          fi
 
       - name: Materialize Firebase Config from Secret
         env:
