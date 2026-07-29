@@ -242,10 +242,14 @@ jobs:
       - name: Generate ephemeral CI debug keystore
         run: |
           if [ ! -f android/key.properties ]; then
-            ANDROID_USER_HOME="${ANDROID_SDK_HOME:-$HOME}"
-            DEBUG_KS_DIR="$ANDROID_USER_HOME/.android"
+            # AGP 8.x resolves debug keystore via ANDROID_SDK_HOME if set,
+            # else XDG_CONFIG_HOME (defaults to $HOME/.config on Linux).
+            # Match that resolution so the keystore lands at the path Gradle expects.
+            ANDROID_PREFS_HOME="${ANDROID_SDK_HOME:-${XDG_CONFIG_HOME:-$HOME/.config}}"
+            DEBUG_KS_DIR="$ANDROID_PREFS_HOME/.android"
             DEBUG_KS="$DEBUG_KS_DIR/debug.keystore"
             mkdir -p "$DEBUG_KS_DIR"
+            echo "::notice::Generating ephemeral CI debug keystore at: $DEBUG_KS"
             keytool -genkeypair \
               -keystore "$DEBUG_KS" \
               -alias androiddebugkey \
@@ -256,7 +260,7 @@ jobs:
               -keypass android \
               -dname "CN=Android Debug,O=Android,C=US" \
               -noprompt
-            echo "Ephemeral CI debug keystore created: $DEBUG_KS"
+            echo "::notice::Ephemeral CI debug keystore created: $(ls -lh $DEBUG_KS)"
           else
             echo "Production key.properties present — skipping ephemeral keystore"
           fi
@@ -342,10 +346,11 @@ jobs:
       - name: Generate ephemeral CI debug keystore
         run: |
           if [ ! -f android/key.properties ]; then
-            ANDROID_USER_HOME="${ANDROID_SDK_HOME:-$HOME}"
-            DEBUG_KS_DIR="$ANDROID_USER_HOME/.android"
+            ANDROID_PREFS_HOME="${ANDROID_SDK_HOME:-${XDG_CONFIG_HOME:-$HOME/.config}}"
+            DEBUG_KS_DIR="$ANDROID_PREFS_HOME/.android"
             DEBUG_KS="$DEBUG_KS_DIR/debug.keystore"
             mkdir -p "$DEBUG_KS_DIR"
+            echo "::notice::Generating ephemeral CI debug keystore at: $DEBUG_KS"
             keytool -genkeypair \
               -keystore "$DEBUG_KS" \
               -alias androiddebugkey \
@@ -356,7 +361,7 @@ jobs:
               -keypass android \
               -dname "CN=Android Debug,O=Android,C=US" \
               -noprompt
-            echo "Ephemeral CI debug keystore created: $DEBUG_KS"
+            echo "::notice::Ephemeral CI debug keystore created: $(ls -lh $DEBUG_KS)"
           else
             echo "Production key.properties present — skipping ephemeral keystore"
           fi
