@@ -298,7 +298,7 @@ jobs:
 
   android_matrix:
     name: Android Device Smoke & Matrix (API ${{ matrix.api-level }})
-    runs-on: macos-13
+    runs-on: macos-15-intel
     strategy:
       fail-fast: false
       matrix:
