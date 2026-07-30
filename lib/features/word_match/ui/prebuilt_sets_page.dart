@@ -81,7 +81,8 @@ class _PreBuiltSetsList extends ConsumerWidget {
     final levels = ['A1', 'A2', 'B1', 'B2'];
     final allSetsState = ref.watch(wordMatchSetsControllerProvider);
     final allSets = allSetsState.valueOrNull?.sets ?? [];
-    final wordsFromGamesOverview = allSets.where((s) => s.set.name == 'Words from Games').firstOrNull;
+    final wordsFromGamesOverview =
+        allSets.where((s) => s.set.name == 'Words from Games').firstOrNull;
 
     return ListView.builder(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -679,7 +680,8 @@ class _WordsFromGamesCard extends ConsumerWidget {
                           ),
                           const SizedBox(width: 6),
                           _SmallChip(
-                            label: 'Yıldızlı: ${learnedStatuses != null ? learnedStatuses.values.where((v) => v).length : '...'}',
+                            label:
+                                'Yıldızlı: ${learnedStatuses != null ? learnedStatuses.values.where((v) => v).length : '...'}',
                             icon: Icons.star_border,
                             color: Colors.greenAccent,
                           ),
@@ -688,7 +690,8 @@ class _WordsFromGamesCard extends ConsumerWidget {
                             color: stripeColor,
                             borderRadius: BorderRadius.circular(10),
                             child: InkWell(
-                              onTap: () => _startPracticeDirect(context, set.id),
+                              onTap:
+                                  () => _startPracticeDirect(context, set.id),
                               borderRadius: BorderRadius.circular(10),
                               child: const Padding(
                                 padding: EdgeInsets.symmetric(
@@ -793,12 +796,15 @@ class _IrregularVerbsHeroCard extends StatelessWidget {
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.4),
+              color: Colors.black.withValues(alpha: 0.4),
               blurRadius: 15,
               offset: const Offset(0, 8),
             ),
           ],
-          border: Border.all(color: Colors.white.withOpacity(0.1), width: 1),
+          border: Border.all(
+            color: Colors.white.withValues(alpha: 0.1),
+            width: 1,
+          ),
         ),
         child: Stack(
           children: [
@@ -808,7 +814,7 @@ class _IrregularVerbsHeroCard extends StatelessWidget {
               child: Icon(
                 Icons.auto_awesome_rounded,
                 size: 120,
-                color: Colors.white.withOpacity(0.05),
+                color: Colors.white.withValues(alpha: 0.05),
               ),
             ),
             Padding(
@@ -821,25 +827,40 @@ class _IrregularVerbsHeroCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 4,
+                          ),
                           decoration: BoxDecoration(
-                            color: Colors.amber.withOpacity(0.2),
+                            color: Colors.amber.withValues(alpha: 0.2),
                             borderRadius: BorderRadius.circular(6),
                           ),
                           child: const Text(
                             'ÖZEL MOD',
-                            style: TextStyle(color: Colors.amber, fontSize: 10, fontWeight: FontWeight.w800),
+                            style: TextStyle(
+                              color: Colors.amber,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w800,
+                            ),
                           ),
                         ),
                         const SizedBox(height: 12),
                         const Text(
                           'Irregular Verbs',
-                          style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w800, letterSpacing: -0.5),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 24,
+                            fontWeight: FontWeight.w800,
+                            letterSpacing: -0.5,
+                          ),
                         ),
                         const SizedBox(height: 4),
                         Text(
                           'Düzensiz fiilleri kolayca öğrenin',
-                          style: TextStyle(color: Colors.white.withOpacity(0.6), fontSize: 14),
+                          style: TextStyle(
+                            color: Colors.white.withValues(alpha: 0.6),
+                            fontSize: 14,
+                          ),
                         ),
                       ],
                     ),
@@ -847,10 +868,14 @@ class _IrregularVerbsHeroCard extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.1),
+                      color: Colors.white.withValues(alpha: 0.1),
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(Icons.arrow_forward_ios_rounded, color: Colors.white, size: 20),
+                    child: const Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      color: Colors.white,
+                      size: 20,
+                    ),
                   ),
                 ],
               ),

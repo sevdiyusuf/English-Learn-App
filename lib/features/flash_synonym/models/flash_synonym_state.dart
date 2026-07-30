@@ -84,8 +84,10 @@ class FlashSynonymState {
       isGameActive: isGameActive ?? this.isGameActive,
       isGameFinished: isGameFinished ?? this.isGameFinished,
       hasPassUsed: hasPassUsed ?? this.hasPassUsed,
-      currentQuestionStartTime: currentQuestionStartTime ?? this.currentQuestionStartTime,
-      fallingWordsPositions: fallingWordsPositions ?? this.fallingWordsPositions,
+      currentQuestionStartTime:
+          currentQuestionStartTime ?? this.currentQuestionStartTime,
+      fallingWordsPositions:
+          fallingWordsPositions ?? this.fallingWordsPositions,
       wordColors: wordColors ?? this.wordColors,
       livesLeft: livesLeft ?? this.livesLeft,
       streak: streak ?? this.streak,
@@ -98,4 +100,3 @@ class FlashSynonymState {
     );
   }
 }
-

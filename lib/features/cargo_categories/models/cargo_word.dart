@@ -18,11 +18,6 @@ class CargoWord {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'word': word,
-      'translate': translate,
-      'category': category,
-    };
+    return {'word': word, 'translate': translate, 'category': category};
   }
 }
-

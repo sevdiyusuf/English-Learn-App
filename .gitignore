@@ -26,6 +26,8 @@ google-services.json
 GoogleService-Info.plist
 node_modules/
 package-lock.json
+!functions/package-lock.json
+!test_rules/package-lock.json
 
 # === ÖZEL İSTEK: Tüm Ek Raporlar ve PowerShell Scriptleri Gizlensin ===
 # (Sadece ana README.md dosyasının gitmesine izin verir, diğer tüm .md'leri engeller)

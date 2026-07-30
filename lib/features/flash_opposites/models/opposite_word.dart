@@ -18,10 +18,6 @@ class OppositeWord {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'word': word,
-      'opposite': opposite,
-      'translate': translate,
-    };
+    return {'word': word, 'opposite': opposite, 'translate': translate};
   }
 }

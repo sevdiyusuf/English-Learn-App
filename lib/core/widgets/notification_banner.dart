@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yunoo/l10n/app_localizations.dart';
 
 import '../notifications/notification_service.dart';
 
@@ -179,13 +180,6 @@ class _NotificationToastItemState extends State<_NotificationToastItem>
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
 
     _controller.forward();
-
-    // Auto-dismiss
-    Future.delayed(widget.notification.duration, () {
-      if (mounted) {
-        _dismiss();
-      }
-    });
   }
 
   void _dismiss() {
@@ -204,98 +198,99 @@ class _NotificationToastItemState extends State<_NotificationToastItem>
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final colors = Theme.of(context).colorScheme;
     return SlideTransition(
       position: _slideAnimation,
       child: FadeTransition(
         opacity: _fadeAnimation,
-        child: Container(
-          margin: const EdgeInsets.only(bottom: 6),
-          decoration: BoxDecoration(
-            color: widget.notification.color,
-            borderRadius: BorderRadius.circular(6),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 4,
-                offset: const Offset(0, 1),
-              ),
-            ],
-          ),
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              onTap: _dismiss,
-              borderRadius: BorderRadius.circular(6),
+        child: Align(
+          alignment: Alignment.topCenter,
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 640),
+            child: Semantics(
+              liveRegion: true,
+              container: true,
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 8,
-                ),
-                child: Row(
-                  children: [
-                    Icon(
-                      widget.notification.icon,
-                      color: Colors.white,
-                      size: 18,
-                    ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            widget.notification.title,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12,
-                            ),
-                          ),
-                          if (widget.notification.message != null) ...[
-                            const SizedBox(height: 2),
-                            Text(
-                              widget.notification.message!,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 10,
+                padding: const EdgeInsets.only(bottom: 6),
+                child: Material(
+                  color: colors.surfaceContainerHighest,
+                  elevation: 6,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    side: BorderSide(color: widget.notification.color),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsetsDirectional.fromSTEB(12, 8, 4, 8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ExcludeSemantics(
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 12),
+                                child: Icon(
+                                  widget.notification.icon,
+                                  color: widget.notification.color,
+                                  size: 22,
+                                ),
                               ),
                             ),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Text(
+                                  widget.notification.title,
+                                  style: Theme.of(context).textTheme.titleSmall,
+                                ),
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: _dismiss,
+                              tooltip: l10n.closeAction,
+                              icon: const Icon(Icons.close),
+                            ),
                           ],
-                        ],
-                      ),
-                    ),
-                    if (widget.notification.actions != null &&
-                        widget.notification.actions!.isNotEmpty) ...[
-                      const SizedBox(width: 8),
-                      ...widget.notification.actions!.map(
-                        (action) => TextButton(
-                          onPressed: () {
-                            action.onPressed();
-                            _dismiss();
-                          },
-                          style: TextButton.styleFrom(
-                            foregroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
-                            minimumSize: const Size(0, 32),
-                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                          ),
-                          child: Text(action.label),
                         ),
-                      ),
-                    ],
-                    const SizedBox(width: 4),
-                    IconButton(
-                      onPressed: _dismiss,
-                      icon: const Icon(
-                        Icons.close,
-                        color: Colors.white,
-                        size: 16,
-                      ),
-                      padding: EdgeInsets.zero,
-                      constraints: const BoxConstraints(),
+                        if (widget.notification.message
+                            case final message?) ...[
+                          const SizedBox(height: 4),
+                          Padding(
+                            padding: const EdgeInsetsDirectional.only(
+                              start: 30,
+                              end: 8,
+                            ),
+                            child: Text(message),
+                          ),
+                        ],
+                        if (widget.notification.actions != null &&
+                            widget.notification.actions!.isNotEmpty) ...[
+                          const SizedBox(height: 8),
+                          OverflowBar(
+                            alignment: MainAxisAlignment.end,
+                            spacing: 8,
+                            overflowSpacing: 8,
+                            children:
+                                widget.notification.actions!
+                                    .map(
+                                      (action) => TextButton(
+                                        onPressed: () {
+                                          action.onPressed();
+                                          _dismiss();
+                                        },
+                                        child: Text(action.label),
+                                      ),
+                                    )
+                                    .toList(),
+                          ),
+                        ],
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),

@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/di.dart';
+import '../../../core/utils/operation_id.dart';
 import '../models/played_word.dart';
 import '../models/room.dart';
 
@@ -17,30 +18,16 @@ class GameRepository {
       _firestore.collection('rooms');
 
   Stream<List<PlayedWord>> watchPlayedWords(String roomId) {
-    if (kDebugMode) {
-      debugPrint('GameRepository: Watching playedWords for roomId: $roomId');
-    }
     return _roomsRef
         .doc(roomId)
         .collection('playedWords')
         .orderBy('at', descending: false)
         .snapshots()
         .map((snapshot) {
-          if (kDebugMode) {
-            debugPrint(
-              'GameRepository: Received ${snapshot.docs.length} playedWords documents',
-            );
-          }
           final words = snapshot.docs
               .map((doc) {
                 try {
                   final data = doc.data();
-                  if (kDebugMode) {
-                    debugPrint(
-                      'GameRepository: Parsing word: ${data['word']} (${data['type']})',
-                    );
-                  }
-                  // Convert Firestore Timestamp to DateTime for 'at' field
                   final processedData = Map<String, dynamic>.from(data);
                   if (data['at'] is Timestamp) {
                     processedData['at'] =
@@ -51,21 +38,14 @@ class GameRepository {
                   }
                   return PlayedWord.fromJson(processedData);
                 } catch (e) {
-                  // Log error but don't crash - return null for this document
                   if (kDebugMode) {
                     debugPrint('Error parsing PlayedWord from Firestore: $e');
-                    debugPrint('Document data: ${doc.data()}');
                   }
                   return null;
                 }
               })
               .whereType<PlayedWord>()
               .toList(growable: false);
-          if (kDebugMode) {
-            debugPrint(
-              'GameRepository: Successfully parsed ${words.length} playedWords',
-            );
-          }
           return words;
         });
   }
@@ -98,14 +78,21 @@ class GameRepository {
   Future<void> submitWord({
     required String roomId,
     required String word,
+    String? operationId,
   }) async {
+    final opId = operationId ?? generateOperationId();
     try {
       final callable = _functions.httpsCallable('submitWord');
-      await callable.call({'roomId': roomId, 'word': word});
+      await callable.call({
+        'roomId': roomId,
+        'word': word,
+        'operationId': opId,
+      });
     } on FirebaseFunctionsException catch (e) {
       if (kDebugMode) {
-        debugPrint('Firebase Functions Error [submitWord]: ${e.code} - ${e.message}');
-        debugPrint('Details: ${e.details}');
+        debugPrint(
+          'Firebase Functions Error [submitWord]: ${e.code} - ${e.message}',
+        );
       }
       rethrow;
     } catch (e) {
@@ -119,14 +106,21 @@ class GameRepository {
   Future<void> submitVerb({
     required String roomId,
     required String verb,
+    String? operationId,
   }) async {
+    final opId = operationId ?? generateOperationId();
     try {
       final callable = _functions.httpsCallable('submitVerb');
-      await callable.call({'roomId': roomId, 'verb': verb});
+      await callable.call({
+        'roomId': roomId,
+        'verb': verb,
+        'operationId': opId,
+      });
     } on FirebaseFunctionsException catch (e) {
       if (kDebugMode) {
-        debugPrint('Firebase Functions Error [submitVerb]: ${e.code} - ${e.message}');
-        debugPrint('Details: ${e.details}');
+        debugPrint(
+          'Firebase Functions Error [submitVerb]: ${e.code} - ${e.message}',
+        );
       }
       rethrow;
     } catch (e) {
@@ -140,14 +134,21 @@ class GameRepository {
   Future<void> submitAdjective({
     required String roomId,
     required String adjective,
+    String? operationId,
   }) async {
+    final opId = operationId ?? generateOperationId();
     try {
       final callable = _functions.httpsCallable('submitAdjective');
-      await callable.call({'roomId': roomId, 'adjective': adjective});
+      await callable.call({
+        'roomId': roomId,
+        'adjective': adjective,
+        'operationId': opId,
+      });
     } on FirebaseFunctionsException catch (e) {
       if (kDebugMode) {
-        debugPrint('Firebase Functions Error [submitAdjective]: ${e.code} - ${e.message}');
-        debugPrint('Details: ${e.details}');
+        debugPrint(
+          'Firebase Functions Error [submitAdjective]: ${e.code} - ${e.message}',
+        );
       }
       rethrow;
     } catch (e) {
@@ -158,23 +159,29 @@ class GameRepository {
     }
   }
 
-  // Legacy method - keeps backward compatibility
   Future<void> submitLegacyTurn({
     required String roomId,
     required String verb,
     required String adjective,
+    String? operationId,
   }) async {
-    final callable = _functions.httpsCallable('submitWord');
+    final opId = operationId ?? generateOperationId();
+    final callable = _functions.httpsCallable('submitWordLegacy');
     await callable.call({
       'roomId': roomId,
       'verb': verb,
       'adjective': adjective,
+      'operationId': opId,
     });
   }
 
-  Future<void> resolveTimeout({required String roomId}) async {
+  Future<void> resolveTimeout({
+    required String roomId,
+    String? operationId,
+  }) async {
+    final opId = operationId ?? generateOperationId();
     final callable = _functions.httpsCallable('resolveTimeout');
-    await callable.call({'roomId': roomId});
+    await callable.call({'roomId': roomId, 'operationId': opId});
   }
 }
 

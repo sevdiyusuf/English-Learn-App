@@ -10,10 +10,12 @@ class WordEchoSummaryDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final accuracy = state.correctCount + state.wrongCount > 0
-        ? ((state.correctCount / (state.correctCount + state.wrongCount)) * 100)
-            .round()
-        : 0;
+    final accuracy =
+        state.correctCount + state.wrongCount > 0
+            ? ((state.correctCount / (state.correctCount + state.wrongCount)) *
+                    100)
+                .round()
+            : 0;
 
     return AlertDialog(
       backgroundColor: AppColors.surfaceDark,
@@ -40,7 +42,11 @@ class WordEchoSummaryDialog extends StatelessWidget {
               AppColors.primaryLight,
             ),
             const SizedBox(height: 8),
-            _buildStatRow('Kullanılan Set', state.setName ?? '-', Colors.white70),
+            _buildStatRow(
+              'Kullanılan Set',
+              state.setName ?? '-',
+              Colors.white70,
+            ),
             const SizedBox(height: 24),
             // Message based on performance
             _buildPerformanceMessage(context, accuracy),
@@ -54,9 +60,7 @@ class WordEchoSummaryDialog extends StatelessWidget {
         ),
         FilledButton(
           onPressed: () => Navigator.pop(context, 'retry'),
-          style: FilledButton.styleFrom(
-            backgroundColor: AppColors.primary,
-          ),
+          style: FilledButton.styleFrom(backgroundColor: AppColors.primary),
           child: const Text('Yeniden Oyna'),
         ),
       ],
@@ -67,10 +71,7 @@ class WordEchoSummaryDialog extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          label,
-          style: const TextStyle(color: Colors.white70),
-        ),
+        Text(label, style: const TextStyle(color: Colors.white70)),
         Text(
           value,
           style: TextStyle(
@@ -92,7 +93,8 @@ class WordEchoSummaryDialog extends StatelessWidget {
     } else if (accuracy >= 40) {
       message = 'Fena değil, daha fazla tekrar accuracy oranını yükseltecek.';
     } else {
-      message = 'Zor bir set seçmiş olabilirsin, tekrar denemek gelişmene yardım eder.';
+      message =
+          'Zor bir set seçmiş olabilirsin, tekrar denemek gelişmene yardım eder.';
     }
 
     return Container(
@@ -103,9 +105,9 @@ class WordEchoSummaryDialog extends StatelessWidget {
       ),
       child: Text(
         message,
-        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-          color: Colors.white70,
-        ),
+        style: Theme.of(
+          context,
+        ).textTheme.bodySmall?.copyWith(color: Colors.white70),
       ),
     );
   }

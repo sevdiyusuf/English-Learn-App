@@ -62,10 +62,7 @@ List<RouteBase> get wordMatchRoutes => [
       }
       final mode = state.uri.queryParameters['mode'];
       final usePassiveOnly = mode == 'active' ? false : true;
-      return PracticeMatchPage(
-        setId: setId,
-        usePassiveOnly: usePassiveOnly,
-      );
+      return PracticeMatchPage(setId: setId, usePassiveOnly: usePassiveOnly);
     },
   ),
   GoRoute(

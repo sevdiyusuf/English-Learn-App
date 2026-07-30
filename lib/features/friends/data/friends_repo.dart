@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/di.dart';
@@ -9,9 +11,10 @@ import '../models/friend_models.dart';
 
 /// Firestore-based friends & friend-requests repository.
 class FriendsRepository {
-  FriendsRepository(this._firestore);
+  FriendsRepository(this._firestore, this._functions);
 
   final FirebaseFirestore _firestore;
+  final FirebaseFunctions _functions;
 
   CollectionReference<Map<String, dynamic>> get _usersRef =>
       _firestore.collection('users');
@@ -51,13 +54,16 @@ class FriendsRepository {
     String? displayName,
     String? photoUrl,
   }) async {
-    final docRef = _usersRef.doc(uid);
     final data = <String, dynamic>{};
     if (displayName != null) data['displayName'] = displayName;
     if (photoUrl != null) data['photoUrl'] = photoUrl;
 
     if (data.isNotEmpty) {
-      await docRef.update(data);
+      try {
+        await _functions.httpsCallable('updatePublicProfile').call(data);
+      } on FirebaseFunctionsException catch (error) {
+        throw StateError(_safeSocialError(error.code));
+      }
     }
   }
 
@@ -78,44 +84,13 @@ class FriendsRepository {
     required AppUser fromUser,
     required String targetCode,
   }) async {
-    final profile = await ensureUserProfile(fromUser);
-    final target = await findUserByCode(targetCode);
-    if (target == null) {
-      throw StateError('Bu koda sahip kullanıcı bulunamadı');
+    try {
+      await _functions.httpsCallable('createFriendRequest').call({
+        'targetCode': targetCode,
+      });
+    } on FirebaseFunctionsException catch (error) {
+      throw StateError(_safeSocialError(error.code));
     }
-    if (target.uid == fromUser.uid) {
-      throw StateError('Kendinize arkadaşlık isteği gönderemezsiniz');
-    }
-
-    // Check existing friendship
-    final existingFriend =
-        await _friendshipsRef(fromUser.uid).doc(target.uid).get();
-    if (existingFriend.exists) {
-      throw StateError('Bu kullanıcı zaten arkadaş listenizde');
-    }
-
-    // Check existing pending request
-    final pendingSnap =
-        await _friendRequestsRef
-            .where('fromUid', isEqualTo: fromUser.uid)
-            .where('toUid', isEqualTo: target.uid)
-            .where('status', isEqualTo: 'pending')
-            .limit(1)
-            .get();
-    if (pendingSnap.docs.isNotEmpty) {
-      throw StateError('Bu kullanıcıya zaten bekleyen bir isteğiniz var');
-    }
-
-    final now = DateTime.now().toUtc();
-    await _friendRequestsRef.add({
-      'fromUid': fromUser.uid,
-      'toUid': target.uid,
-      'status': 'pending',
-      'createdAt': now.toIso8601String(),
-      'updatedAt': now.toIso8601String(),
-      'fromDisplayName': profile.displayName,
-      'fromUserCode': profile.userCode,
-    });
   }
 
   /// Watch incoming friend requests for the given user.
@@ -188,64 +163,17 @@ class FriendsRepository {
       throw StateError('Kullanıcı kimlik doğrulaması gerekli');
     }
 
-    final now = DateTime.now().toUtc();
-    final reqRef = _friendRequestsRef.doc(request.id);
-    final batch = _firestore.batch();
-
-    // Update request status
-    batch.update(reqRef, {
-      'status': 'accepted',
-      'updatedAt': now.toIso8601String(),
-    });
-
-    // Create friendships in both directions
-    // Path 1: /friendships/{fromUid}/friends/{toUid}
-    //   - userId = fromUid, friendUid = toUid (currentUser)
-    //   - Rule should pass: request.auth.uid == toUid == friendUid ✓
-    final aRef = _friendshipsRef(request.fromUid).doc(request.toUid);
-
-    // Path 2: /friendships/{toUid}/friends/{fromUid}
-    //   - userId = toUid (currentUser), friendUid = fromUid
-    //   - Rule should pass: request.auth.uid == toUid == userId ✓
-    final bRef = _friendshipsRef(request.toUid).doc(request.fromUid);
-
-    final payload = {'createdAt': now.toIso8601String()};
-
-    // Use set with merge to ensure we don't overwrite if somehow exists (idempotent)
-    batch.set(aRef, payload, SetOptions(merge: true));
-    batch.set(bRef, payload, SetOptions(merge: true));
-
     try {
-      await batch.commit();
-    } on FirebaseException catch (e) {
-      // Log detailed error for debugging
-      print('Accept Request Firebase Error:');
-      print('  Code: ${e.code}');
-      print('  Message: ${e.message}');
-      print('  Current User UID: ${currentUser.uid}');
-      print('  From UID: ${request.fromUid}');
-      print('  To UID: ${request.toUid}');
-      print(
-        '  Path 1: /friendships/${request.fromUid}/friends/${request.toUid}',
-      );
-      print(
-        '  Path 2: /friendships/${request.toUid}/friends/${request.fromUid}',
-      );
-
-      // Provide more specific error message
-      if (e.code == 'permission-denied') {
-        throw StateError(
-          'İstek kabul edilirken izin hatası oluştu. '
-          'Lütfen tekrar giriş yapmayı deneyin. '
-          'Hata: ${e.message}',
-        );
-      }
-      rethrow;
+      final callable = _functions.httpsCallable('acceptFriendRequest');
+      await callable.call({'requestId': request.id});
+    } on FirebaseFunctionsException catch (e) {
+      debugPrint('Accept Request Functions Error:');
+      debugPrint('  Code: ${e.code}');
+      debugPrint('  Message: ${e.message}');
+      throw StateError(_safeSocialError(e.code));
     } catch (e) {
-      // Log detailed error for debugging
-      print('Accept Request Error: $e');
-      // Rethrow so UI knows it failed
-      throw StateError('İstek kabul edilirken hata oluştu: $e');
+      debugPrint('Accept Request Error: $e');
+      throw StateError('İşlem şu anda kullanılamıyor. Lütfen tekrar deneyin.');
     }
   }
 
@@ -255,11 +183,23 @@ class FriendsRepository {
         request.fromUid != currentUser.uid) {
       throw StateError('Bu isteği yalnızca gönderen veya alıcı reddedebilir');
     }
-    final now = DateTime.now().toUtc();
-    await _friendRequestsRef.doc(request.id).update({
-      'status': 'rejected',
-      'updatedAt': now.toIso8601String(),
-    });
+    final newStatus =
+        request.fromUid == currentUser.uid ? 'cancelled' : 'rejected';
+    try {
+      await _functions.httpsCallable('resolveFriendRequest').call({
+        'requestId': request.id,
+        'action': newStatus == 'cancelled' ? 'cancel' : 'reject',
+      });
+    } on FirebaseFunctionsException catch (error) {
+      throw StateError(_safeSocialError(error.code));
+    }
+  }
+
+  String _safeSocialError(String code) {
+    if (code == 'resource-exhausted') {
+      return 'Çok sık işlem yapıldı. Lütfen biraz sonra tekrar deneyin.';
+    }
+    return 'Bu etkileşim şu anda kullanılamıyor.';
   }
 
   Map<String, dynamic> _normalizeUserDoc(
@@ -335,5 +275,6 @@ class FriendsRepository {
 
 final friendsRepositoryProvider = Provider<FriendsRepository>((ref) {
   final firestore = ref.watch(firestoreProvider);
-  return FriendsRepository(firestore);
+  final functions = ref.watch(firebaseFunctionsProvider);
+  return FriendsRepository(firestore, functions);
 });

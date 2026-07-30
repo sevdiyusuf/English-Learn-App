@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../logic/irregular_verbs_provider.dart';
@@ -10,7 +9,6 @@ class IrregularVerbsPracticePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(practiceProvider);
-    final notifier = ref.read(practiceProvider.notifier);
 
     if (state.currentVerb == null) {
       return const Scaffold(
@@ -28,12 +26,18 @@ class IrregularVerbsPracticePage extends ConsumerWidget {
           children: [
             // Top Progress Bar
             LinearProgressIndicator(
-              value: state.total == 0 ? 0 : state.score / (state.score + state.remainingVerbs.length + 1),
+              value:
+                  state.total == 0
+                      ? 0
+                      : state.score /
+                          (state.score + state.remainingVerbs.length + 1),
               backgroundColor: Colors.white10,
-              valueColor: const AlwaysStoppedAnimation<Color>(Colors.blueAccent),
+              valueColor: const AlwaysStoppedAnimation<Color>(
+                Colors.blueAccent,
+              ),
               minHeight: 2,
             ),
-            
+
             // Score Header
             Padding(
               padding: const EdgeInsets.all(20),
@@ -41,12 +45,19 @@ class IrregularVerbsPracticePage extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.close_rounded, color: Colors.white30),
-                    onPressed: () => GoRouter.of(context).go('/irregular-verbs'),
+                    icon: const Icon(
+                      Icons.close_rounded,
+                      color: Colors.white30,
+                    ),
+                    onPressed:
+                        () => GoRouter.of(context).go('/irregular-verbs'),
                   ),
                   Text(
                     'Score: ${state.score}',
-                    style: const TextStyle(color: Colors.white60, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                      color: Colors.white60,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),
@@ -70,7 +81,7 @@ class IrregularVerbsPracticePage extends ConsumerWidget {
                 Text(
                   verb.meaningTr,
                   style: TextStyle(
-                    color: Colors.white.withOpacity(0.4),
+                    color: Colors.white.withValues(alpha: 0.4),
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
                   ),
@@ -78,94 +89,79 @@ class IrregularVerbsPracticePage extends ConsumerWidget {
               ],
             ),
 
-            const SizedBox(height: 60),
+            const SizedBox(height: 32),
 
-            // Answer Slots (Placeholders)
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
-              child: Row(
-                children: [
-                  _AnswerSlot(
-                    label: 'V2',
-                    value: state.selectedV2,
-                    isCorrect: state.isV2Correct,
-                    showGlow: state.showCorrectGlow,
-                  ),
-                  const SizedBox(width: 20),
-                  _AnswerSlot(
-                    label: 'V3',
-                    value: state.selectedV3,
-                    isCorrect: state.isV3Correct,
-                    showGlow: state.showCorrectGlow,
-                  ),
-                ],
-              ),
+            // Answer Slots
+            Row(
+              children: [
+                _buildSlot(
+                  'V2 (Past)',
+                  state.selectedV2,
+                  state.isV2Correct,
+                  state.showCorrectGlow,
+                ),
+                const SizedBox(width: 16),
+                _buildSlot(
+                  'V3 (Past Participle)',
+                  state.selectedV3,
+                  state.isV3Correct,
+                  state.showCorrectGlow,
+                ),
+              ],
             ),
 
             const Spacer(),
 
-            // Options Section
-            Padding(
-              padding: const EdgeInsets.all(20),
+            // Distractor Options
+            Center(
               child: Wrap(
                 spacing: 12,
                 runSpacing: 12,
                 alignment: WrapAlignment.center,
-                children: state.currentDistractors.map((option) {
-                  final isWrong = state.wrongOptions.contains(option);
-                  final isUsed = (state.selectedV2 == option && state.isV2Correct && verb.v2 != verb.v3) || 
-                                 (state.selectedV3 == option && state.isV3Correct);
-                  
-                  return _OptionChip(
-                    label: option,
-                    isWrong: isWrong,
-                    isUsed: isUsed,
-                    onTap: () {
-                      if (isUsed || isWrong) return;
-                      
-                      // Haptic Feedback before state update
-                      if (verb.v2 == option || verb.v3 == option) {
-                        HapticFeedback.lightImpact();
-                      } else {
-                        HapticFeedback.heavyImpact();
-                      }
-                      
-                      notifier.selectOption(option);
-                    },
-                  );
-                }).toList(),
+                children:
+                    state.currentDistractors.map((option) {
+                      final isWrong = state.wrongOptions.contains(option);
+                      final isUsed =
+                          state.selectedV2 == option ||
+                          state.selectedV3 == option;
+
+                      return _OptionChip(
+                        label: option,
+                        isWrong: isWrong,
+                        isUsed: isUsed,
+                        onTap: () {
+                          ref
+                              .read(practiceProvider.notifier)
+                              .selectOption(option);
+                        },
+                      );
+                    }).toList(),
               ),
             ),
-            
-            const SizedBox(height: 40),
+            const SizedBox(height: 32),
           ],
         ),
       ),
     );
   }
-}
 
-class _AnswerSlot extends StatelessWidget {
-  final String label;
-  final String? value;
-  final bool isCorrect;
-  final bool showGlow;
-
-  const _AnswerSlot({
-    required this.label,
-    this.value,
-    required this.isCorrect,
-    required this.showGlow,
-  });
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildSlot(
+    String title,
+    String? value,
+    bool isCorrect,
+    bool showGlow,
+  ) {
     return Expanded(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            label,
-            style: const TextStyle(color: Colors.white24, fontSize: 12, fontWeight: FontWeight.w800),
+            title,
+            style: const TextStyle(
+              color: Colors.white54,
+              fontSize: 12,
+              fontWeight: FontWeight.w700,
+            ),
           ),
           const SizedBox(height: 8),
           AnimatedContainer(
@@ -173,40 +169,55 @@ class _AnswerSlot extends StatelessWidget {
             height: 60,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: showGlow 
-                ? Colors.green.withOpacity(0.15) 
-                : (isCorrect ? Colors.white.withOpacity(0.08) : Colors.white.withOpacity(0.04)),
+              color:
+                  showGlow
+                      ? Colors.green.withValues(alpha: 0.15)
+                      : (isCorrect
+                          ? Colors.white.withValues(alpha: 0.08)
+                          : Colors.white.withValues(alpha: 0.04)),
               borderRadius: BorderRadius.circular(16),
               border: Border.all(
-                color: showGlow 
-                  ? Colors.green.withOpacity(0.4) 
-                  : (isCorrect ? Colors.white.withOpacity(0.2) : Colors.white.withOpacity(0.05)),
+                color:
+                    showGlow
+                        ? Colors.green.withValues(alpha: 0.4)
+                        : (isCorrect
+                            ? Colors.white.withValues(alpha: 0.2)
+                            : Colors.white.withValues(alpha: 0.05)),
                 width: isCorrect ? 2 : 1,
               ),
-              boxShadow: showGlow ? [
-                BoxShadow(
-                  color: Colors.green.withOpacity(0.2),
-                  blurRadius: 15,
-                  spreadRadius: 2,
-                )
-              ] : [],
+              boxShadow:
+                  showGlow
+                      ? [
+                        BoxShadow(
+                          color: Colors.green.withValues(alpha: 0.2),
+                          blurRadius: 15,
+                          spreadRadius: 2,
+                        ),
+                      ]
+                      : [],
             ),
             child: AnimatedSwitcher(
               duration: const Duration(milliseconds: 200),
               transitionBuilder: (Widget child, Animation<double> animation) {
                 return ScaleTransition(scale: animation, child: child);
               },
-              child: value != null 
-                ? Text(
-                    value!,
-                    key: ValueKey(value),
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  )
-                : Container(key: const ValueKey('empty'), width: 20, height: 2, color: Colors.white10),
+              child:
+                  value != null
+                      ? Text(
+                        value,
+                        key: ValueKey(value),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      )
+                      : Container(
+                        key: const ValueKey('empty'),
+                        width: 20,
+                        height: 2,
+                        color: Colors.white10,
+                      ),
             ),
           ),
         ],
@@ -239,10 +250,16 @@ class _OptionChip extends StatelessWidget {
           duration: const Duration(milliseconds: 200),
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
           decoration: BoxDecoration(
-            color: isWrong ? Colors.red.withOpacity(0.2) : Colors.white.withOpacity(0.08),
+            color:
+                isWrong
+                    ? Colors.red.withValues(alpha: 0.2)
+                    : Colors.white.withValues(alpha: 0.08),
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: isWrong ? Colors.red.withOpacity(0.5) : Colors.white.withOpacity(0.05),
+              color:
+                  isWrong
+                      ? Colors.red.withValues(alpha: 0.5)
+                      : Colors.white.withValues(alpha: 0.05),
               width: 1,
             ),
           ),

@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "records": [
+    {
+      "id": "educational-core-datasets",
+      "scopes": [
+        {"path": "assets/opposites.json", "kind": "file"},
+        {"path": "assets/synonym.json", "kind": "file"},
+        {"path": "assets/cargo_categories.json", "kind": "file"},
+        {"path": "assets/ırregular_verbs.json", "kind": "file"},
+        {"path": "assets/word_echo_words.json", "kind": "file"},
+        {"path": "assets/word_sets", "kind": "directory"},
+        {"path": "assets/word_battle", "kind": "directory"},
+        {"path": "assets/worksheets", "kind": "directory"},
+        {"path": "assets/lessons", "kind": "directory"}
+      ],
+      "materialType": "educational_dataset",
+      "description": "Bundled vocabulary, grammar, worksheet and game datasets.",
+      "usage": "Offline learning, practice and multiplayer game content.",
+      "originCategory": "ai_assisted_project_original",
+      "creatorProvider": "Project owner with mixed/unspecified AI assistance",
+      "rightsBasis": "project_owned",
+      "attributionRequired": false,
+      "verificationStatus": "verified",
+      "notes": "The owner reviewed this project content. This record states provenance only and is not a linguistic or pedagogical certification."
+    },
+    {
+      "id": "educational-content-identity-registry",
+      "scopes": [
+        {"path": "assets/educational_content_registry.json", "kind": "file"}
+      ],
+      "materialType": "content_metadata",
+      "description": "Stable educational content identity and version registry.",
+      "usage": "Structural validation and future content-safe references.",
+      "originCategory": "project_original",
+      "rightsBasis": "project_owned",
+      "attributionRequired": false,
+      "verificationStatus": "verified",
+      "notes": "Generated deterministically from project educational sources; governed separately from the provenance manifest schema."
+    },
+    {
+      "id": "material-icon-svg-assets",
+      "scopes": [
+        {"path": "assets/icons", "kind": "directory"},
+        {"path": "web/icons.otf", "kind": "file"}
+      ],
+      "materialType": "iconography",
+      "description": "Material design icon SVGs and the legacy web icon font.",
+      "usage": "Learning-mode, game and interface iconography.",
+      "originCategory": "third_party_licensed",
+      "creatorProvider": "Google",
+      "sourceUrl": "https://developers.google.com/fonts/docs/material_icons",
+      "licenseIdentifier": "Apache-2.0",
+      "rightsBasis": "third_party_license",
+      "copyrightHolder": "Google",
+      "attributionRequired": false,
+      "attributionText": "Material Icons by Google, licensed under Apache License 2.0.",
+      "noticeLocation": "licenses/THIRD_PARTY_NOTICES.md",
+      "verificationStatus": "verified",
+      "notes": "Repository documentation traces the SVG downloads to the official Material Icons library."
+    },
+    {
+      "id": "project-branding-web",
+      "scopes": [
+        {"path": "web/favicon.png", "kind": "file"},
+        {"path": "web/icons", "kind": "directory"}
+      ],
+      "materialType": "branding",
+      "description": "Yunoo launcher, favicon and web application icon variants.",
+      "usage": "Application identity on web and launcher surfaces.",
+      "originCategory": "project_original",
+      "rightsBasis": "project_owned",
+      "attributionRequired": false,
+      "verificationStatus": "verified",
+      "notes": "Project-owned branding. The 512px web icon is the canonical launcher generator source."
+    },
+    {
+      "id": "web-shell",
+      "scopes": [
+        {"path": "web/index.html", "kind": "file"},
+        {"path": "web/manifest.json", "kind": "file"}
+      ],
+      "materialType": "platform_configuration",
+      "description": "Project web bootstrap and install manifest.",
+      "usage": "Flutter web application startup and install metadata.",
+      "originCategory": "project_original",
+      "rightsBasis": "project_owned",
+      "attributionRequired": false,
+      "verificationStatus": "verified",
+      "notes": "The Material Icons web-font reference uses the same Apache-2.0 basis recorded by material-icon-svg-assets."
+    },
+    {
+      "id": "android-launcher-generated",
+      "scopes": [
+        {"path": "android/app/src/main/res/mipmap-anydpi-v26", "kind": "directory"},
+        {"path": "android/app/src/main/res/mipmap-hdpi", "kind": "directory"},
+        {"path": "android/app/src/main/res/mipmap-mdpi", "kind": "directory"},
+        {"path": "android/app/src/main/res/mipmap-xhdpi", "kind": "directory"},
+        {"path": "android/app/src/main/res/mipmap-xxhdpi", "kind": "directory"},
+        {"path": "android/app/src/main/res/mipmap-xxxhdpi", "kind": "directory"},
+        {"path": "android/app/src/main/res/drawable-hdpi/ic_launcher_foreground.png", "kind": "file"},
+        {"path": "android/app/src/main/res/drawable-mdpi/ic_launcher_foreground.png", "kind": "file"},
+        {"path": "android/app/src/main/res/drawable-xhdpi/ic_launcher_foreground.png", "kind": "file"},
+        {"path": "android/app/src/main/res/drawable-xxhdpi/ic_launcher_foreground.png", "kind": "file"},
+        {"path": "android/app/src/main/res/drawable-xxxhdpi/ic_launcher_foreground.png", "kind": "file"}
+      ],
+      "materialType": "generated_branding",
+      "description": "Android launcher density variants.",
+      "usage": "Android launcher and adaptive icon.",
+      "originCategory": "generated_from_project_source",
+      "creatorProvider": "flutter_launcher_icons",
+      "sourceUrl": "https://pub.dev/packages/flutter_launcher_icons",
+      "rightsBasis": "project_owned",
+      "attributionRequired": false,
+      "verificationStatus": "verified",
+      "notes": "Generated from web/icons/Icon-512.png and the project launcher configuration."
+    },
+    {
+      "id": "flutter-android-template-resources",
+      "scopes": [
+        {"path": "android/app/src/main/res/drawable/launch_background.xml", "kind": "file"},
+        {"path": "android/app/src/main/res/drawable-v21/launch_background.xml", "kind": "file"},
+        {"path": "android/app/src/main/res/values", "kind": "directory"},
+        {"path": "android/app/src/main/res/values-night", "kind": "directory"}
+      ],
+      "materialType": "platform_resource",
+      "description": "Flutter Android launch theme and platform resource definitions.",
+      "usage": "Android application startup and theme integration.",
+      "originCategory": "flutter_platform_provided",
+      "creatorProvider": "Flutter project template",
+      "sourceUrl": "https://github.com/flutter/flutter",
+      "licenseIdentifier": "BSD-3-Clause",
+      "rightsBasis": "third_party_license",
+      "copyrightHolder": "The Flutter Authors",
+      "attributionRequired": false,
+      "noticeLocation": "licenses/THIRD_PARTY_NOTICES.md",
+      "verificationStatus": "verified",
+      "notes": "Template resources retained by the Flutter-generated Android project."
+    },
+    {
+      "id": "ui-image-assets",
+      "scopes": [
+        {"path": "assets/images", "kind": "directory"}
+      ],
+      "materialType": "interface_asset",
+      "description": "Backgrounds and icons for UI features.",
+      "usage": "Interface background renders.",
+      "originCategory": "project_original",
+      "rightsBasis": "project_owned",
+      "attributionRequired": false,
+      "verificationStatus": "verified"
+    }
+  ]
+}

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../../../core/content/educational_content_id_resolver.dart';
+import '../../../../core/theme/app_colors.dart';
+import '../../../../features/educational_content/content_report_dialog.dart';
 import '../../logic/grammar_providers.dart';
 import '../../models/grammar_models.dart';
-import '../../../../core/theme/app_colors.dart';
 import '../../../training/ui/engine_renderer.dart';
 
 class LessonViewerPage extends ConsumerStatefulWidget {
@@ -90,7 +92,9 @@ class _LessonViewerPageState extends ConsumerState<LessonViewerPage> {
         );
 
         return Scaffold(
-          backgroundColor: const Color(0xFF0F172A), // GrammarHome background color
+          backgroundColor: const Color(
+            0xFF0F172A,
+          ), // GrammarHome background color
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
@@ -127,6 +131,7 @@ class _LessonViewerPageState extends ConsumerState<LessonViewerPage> {
                   child: Text('${currentIndex + 1} / ${cards.length}'),
                 ),
               ),
+              _ReportButton(lessonId: widget.lessonId),
             ],
           ),
           body: Column(
@@ -380,6 +385,56 @@ class _LessonViewerPageState extends ConsumerState<LessonViewerPage> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _ReportButton extends ConsumerWidget {
+  const _ReportButton({required this.lessonId});
+
+  final String lessonId;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final registryAsync = ref.watch(educationalContentRegistryProvider);
+    final currentIndex = ref.watch(currentCardIndexProvider(lessonId));
+    final lessonAsync = ref.watch(lessonDocProvider(lessonId));
+
+    return lessonAsync.when(
+      data: (doc) {
+        final card = doc.microLesson.cards[currentIndex];
+        return registryAsync.when(
+          data: (registry) {
+            final key = EducationalItemKey(
+              'assets/lessons/${doc.level}/$lessonId.json',
+              'id:${card.id}',
+            );
+            final contentId = registry[key];
+
+            if (contentId == null) {
+              return const SizedBox.shrink();
+            }
+
+            return IconButton(
+              key: ValueKey('report_lesson_card_${card.id}'),
+              icon: const Icon(Icons.flag_outlined, color: Colors.white54),
+              tooltip: 'Report an issue with this content',
+              onPressed: () async {
+                await showContentReportSheet(
+                  context,
+                  contentId: contentId,
+                  contentVersion: 1,
+                  contentType: 'lesson_card',
+                );
+              },
+            );
+          },
+          loading: () => const SizedBox.shrink(),
+          error: (_, __) => const SizedBox.shrink(),
+        );
+      },
+      loading: () => const SizedBox.shrink(),
+      error: (_, __) => const SizedBox.shrink(),
     );
   }
 }

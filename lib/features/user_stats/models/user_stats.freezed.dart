@@ -12,7 +12,8 @@ part of 'user_stats.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 ModeStats _$ModeStatsFromJson(Map<String, dynamic> json) {
   return _ModeStats.fromJson(json);
@@ -37,12 +38,13 @@ abstract class $ModeStatsCopyWith<$Res> {
   factory $ModeStatsCopyWith(ModeStats value, $Res Function(ModeStats) then) =
       _$ModeStatsCopyWithImpl<$Res, ModeStats>;
   @useResult
-  $Res call(
-      {int sessions,
-      int correctAnswers,
-      int wrongAnswers,
-      int totalQuestions,
-      int totalMinutes});
+  $Res call({
+    int sessions,
+    int correctAnswers,
+    int wrongAnswers,
+    int totalQuestions,
+    int totalMinutes,
+  });
 }
 
 /// @nodoc
@@ -64,28 +66,36 @@ class _$ModeStatsCopyWithImpl<$Res, $Val extends ModeStats>
     Object? totalQuestions = null,
     Object? totalMinutes = null,
   }) {
-    return _then(_value.copyWith(
-      sessions: null == sessions
-          ? _value.sessions
-          : sessions // ignore: cast_nullable_to_non_nullable
-              as int,
-      correctAnswers: null == correctAnswers
-          ? _value.correctAnswers
-          : correctAnswers // ignore: cast_nullable_to_non_nullable
-              as int,
-      wrongAnswers: null == wrongAnswers
-          ? _value.wrongAnswers
-          : wrongAnswers // ignore: cast_nullable_to_non_nullable
-              as int,
-      totalQuestions: null == totalQuestions
-          ? _value.totalQuestions
-          : totalQuestions // ignore: cast_nullable_to_non_nullable
-              as int,
-      totalMinutes: null == totalMinutes
-          ? _value.totalMinutes
-          : totalMinutes // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            sessions:
+                null == sessions
+                    ? _value.sessions
+                    : sessions // ignore: cast_nullable_to_non_nullable
+                        as int,
+            correctAnswers:
+                null == correctAnswers
+                    ? _value.correctAnswers
+                    : correctAnswers // ignore: cast_nullable_to_non_nullable
+                        as int,
+            wrongAnswers:
+                null == wrongAnswers
+                    ? _value.wrongAnswers
+                    : wrongAnswers // ignore: cast_nullable_to_non_nullable
+                        as int,
+            totalQuestions:
+                null == totalQuestions
+                    ? _value.totalQuestions
+                    : totalQuestions // ignore: cast_nullable_to_non_nullable
+                        as int,
+            totalMinutes:
+                null == totalMinutes
+                    ? _value.totalMinutes
+                    : totalMinutes // ignore: cast_nullable_to_non_nullable
+                        as int,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -93,16 +103,18 @@ class _$ModeStatsCopyWithImpl<$Res, $Val extends ModeStats>
 abstract class _$$ModeStatsImplCopyWith<$Res>
     implements $ModeStatsCopyWith<$Res> {
   factory _$$ModeStatsImplCopyWith(
-          _$ModeStatsImpl value, $Res Function(_$ModeStatsImpl) then) =
-      __$$ModeStatsImplCopyWithImpl<$Res>;
+    _$ModeStatsImpl value,
+    $Res Function(_$ModeStatsImpl) then,
+  ) = __$$ModeStatsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int sessions,
-      int correctAnswers,
-      int wrongAnswers,
-      int totalQuestions,
-      int totalMinutes});
+  $Res call({
+    int sessions,
+    int correctAnswers,
+    int wrongAnswers,
+    int totalQuestions,
+    int totalMinutes,
+  });
 }
 
 /// @nodoc
@@ -110,8 +122,9 @@ class __$$ModeStatsImplCopyWithImpl<$Res>
     extends _$ModeStatsCopyWithImpl<$Res, _$ModeStatsImpl>
     implements _$$ModeStatsImplCopyWith<$Res> {
   __$$ModeStatsImplCopyWithImpl(
-      _$ModeStatsImpl _value, $Res Function(_$ModeStatsImpl) _then)
-      : super(_value, _then);
+    _$ModeStatsImpl _value,
+    $Res Function(_$ModeStatsImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -122,40 +135,48 @@ class __$$ModeStatsImplCopyWithImpl<$Res>
     Object? totalQuestions = null,
     Object? totalMinutes = null,
   }) {
-    return _then(_$ModeStatsImpl(
-      sessions: null == sessions
-          ? _value.sessions
-          : sessions // ignore: cast_nullable_to_non_nullable
-              as int,
-      correctAnswers: null == correctAnswers
-          ? _value.correctAnswers
-          : correctAnswers // ignore: cast_nullable_to_non_nullable
-              as int,
-      wrongAnswers: null == wrongAnswers
-          ? _value.wrongAnswers
-          : wrongAnswers // ignore: cast_nullable_to_non_nullable
-              as int,
-      totalQuestions: null == totalQuestions
-          ? _value.totalQuestions
-          : totalQuestions // ignore: cast_nullable_to_non_nullable
-              as int,
-      totalMinutes: null == totalMinutes
-          ? _value.totalMinutes
-          : totalMinutes // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
+    return _then(
+      _$ModeStatsImpl(
+        sessions:
+            null == sessions
+                ? _value.sessions
+                : sessions // ignore: cast_nullable_to_non_nullable
+                    as int,
+        correctAnswers:
+            null == correctAnswers
+                ? _value.correctAnswers
+                : correctAnswers // ignore: cast_nullable_to_non_nullable
+                    as int,
+        wrongAnswers:
+            null == wrongAnswers
+                ? _value.wrongAnswers
+                : wrongAnswers // ignore: cast_nullable_to_non_nullable
+                    as int,
+        totalQuestions:
+            null == totalQuestions
+                ? _value.totalQuestions
+                : totalQuestions // ignore: cast_nullable_to_non_nullable
+                    as int,
+        totalMinutes:
+            null == totalMinutes
+                ? _value.totalMinutes
+                : totalMinutes // ignore: cast_nullable_to_non_nullable
+                    as int,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ModeStatsImpl implements _ModeStats {
-  const _$ModeStatsImpl(
-      {this.sessions = 0,
-      this.correctAnswers = 0,
-      this.wrongAnswers = 0,
-      this.totalQuestions = 0,
-      this.totalMinutes = 0});
+  const _$ModeStatsImpl({
+    this.sessions = 0,
+    this.correctAnswers = 0,
+    this.wrongAnswers = 0,
+    this.totalQuestions = 0,
+    this.totalMinutes = 0,
+  });
 
   factory _$ModeStatsImpl.fromJson(Map<String, dynamic> json) =>
       _$$ModeStatsImplFromJson(json);
@@ -200,8 +221,14 @@ class _$ModeStatsImpl implements _ModeStats {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, sessions, correctAnswers,
-      wrongAnswers, totalQuestions, totalMinutes);
+  int get hashCode => Object.hash(
+    runtimeType,
+    sessions,
+    correctAnswers,
+    wrongAnswers,
+    totalQuestions,
+    totalMinutes,
+  );
 
   @JsonKey(ignore: true)
   @override
@@ -211,19 +238,18 @@ class _$ModeStatsImpl implements _ModeStats {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ModeStatsImplToJson(
-      this,
-    );
+    return _$$ModeStatsImplToJson(this);
   }
 }
 
 abstract class _ModeStats implements ModeStats {
-  const factory _ModeStats(
-      {final int sessions,
-      final int correctAnswers,
-      final int wrongAnswers,
-      final int totalQuestions,
-      final int totalMinutes}) = _$ModeStatsImpl;
+  const factory _ModeStats({
+    final int sessions,
+    final int correctAnswers,
+    final int wrongAnswers,
+    final int totalQuestions,
+    final int totalMinutes,
+  }) = _$ModeStatsImpl;
 
   factory _ModeStats.fromJson(Map<String, dynamic> json) =
       _$ModeStatsImpl.fromJson;
@@ -264,11 +290,15 @@ mixin _$DailyActivityPoint {
 /// @nodoc
 abstract class $DailyActivityPointCopyWith<$Res> {
   factory $DailyActivityPointCopyWith(
-          DailyActivityPoint value, $Res Function(DailyActivityPoint) then) =
-      _$DailyActivityPointCopyWithImpl<$Res, DailyActivityPoint>;
+    DailyActivityPoint value,
+    $Res Function(DailyActivityPoint) then,
+  ) = _$DailyActivityPointCopyWithImpl<$Res, DailyActivityPoint>;
   @useResult
-  $Res call(
-      {@TimestampConverter() DateTime date, int practicedWords, int minutes});
+  $Res call({
+    @TimestampConverter() DateTime date,
+    int practicedWords,
+    int minutes,
+  });
 }
 
 /// @nodoc
@@ -288,42 +318,53 @@ class _$DailyActivityPointCopyWithImpl<$Res, $Val extends DailyActivityPoint>
     Object? practicedWords = null,
     Object? minutes = null,
   }) {
-    return _then(_value.copyWith(
-      date: null == date
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      practicedWords: null == practicedWords
-          ? _value.practicedWords
-          : practicedWords // ignore: cast_nullable_to_non_nullable
-              as int,
-      minutes: null == minutes
-          ? _value.minutes
-          : minutes // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            date:
+                null == date
+                    ? _value.date
+                    : date // ignore: cast_nullable_to_non_nullable
+                        as DateTime,
+            practicedWords:
+                null == practicedWords
+                    ? _value.practicedWords
+                    : practicedWords // ignore: cast_nullable_to_non_nullable
+                        as int,
+            minutes:
+                null == minutes
+                    ? _value.minutes
+                    : minutes // ignore: cast_nullable_to_non_nullable
+                        as int,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$DailyActivityPointImplCopyWith<$Res>
     implements $DailyActivityPointCopyWith<$Res> {
-  factory _$$DailyActivityPointImplCopyWith(_$DailyActivityPointImpl value,
-          $Res Function(_$DailyActivityPointImpl) then) =
-      __$$DailyActivityPointImplCopyWithImpl<$Res>;
+  factory _$$DailyActivityPointImplCopyWith(
+    _$DailyActivityPointImpl value,
+    $Res Function(_$DailyActivityPointImpl) then,
+  ) = __$$DailyActivityPointImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@TimestampConverter() DateTime date, int practicedWords, int minutes});
+  $Res call({
+    @TimestampConverter() DateTime date,
+    int practicedWords,
+    int minutes,
+  });
 }
 
 /// @nodoc
 class __$$DailyActivityPointImplCopyWithImpl<$Res>
     extends _$DailyActivityPointCopyWithImpl<$Res, _$DailyActivityPointImpl>
     implements _$$DailyActivityPointImplCopyWith<$Res> {
-  __$$DailyActivityPointImplCopyWithImpl(_$DailyActivityPointImpl _value,
-      $Res Function(_$DailyActivityPointImpl) _then)
-      : super(_value, _then);
+  __$$DailyActivityPointImplCopyWithImpl(
+    _$DailyActivityPointImpl _value,
+    $Res Function(_$DailyActivityPointImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -332,30 +373,36 @@ class __$$DailyActivityPointImplCopyWithImpl<$Res>
     Object? practicedWords = null,
     Object? minutes = null,
   }) {
-    return _then(_$DailyActivityPointImpl(
-      date: null == date
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      practicedWords: null == practicedWords
-          ? _value.practicedWords
-          : practicedWords // ignore: cast_nullable_to_non_nullable
-              as int,
-      minutes: null == minutes
-          ? _value.minutes
-          : minutes // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
+    return _then(
+      _$DailyActivityPointImpl(
+        date:
+            null == date
+                ? _value.date
+                : date // ignore: cast_nullable_to_non_nullable
+                    as DateTime,
+        practicedWords:
+            null == practicedWords
+                ? _value.practicedWords
+                : practicedWords // ignore: cast_nullable_to_non_nullable
+                    as int,
+        minutes:
+            null == minutes
+                ? _value.minutes
+                : minutes // ignore: cast_nullable_to_non_nullable
+                    as int,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$DailyActivityPointImpl implements _DailyActivityPoint {
-  const _$DailyActivityPointImpl(
-      {@TimestampConverter() required this.date,
-      this.practicedWords = 0,
-      this.minutes = 0});
+  const _$DailyActivityPointImpl({
+    @TimestampConverter() required this.date,
+    this.practicedWords = 0,
+    this.minutes = 0,
+  });
 
   factory _$DailyActivityPointImpl.fromJson(Map<String, dynamic> json) =>
       _$$DailyActivityPointImplFromJson(json);
@@ -395,21 +442,22 @@ class _$DailyActivityPointImpl implements _DailyActivityPoint {
   @pragma('vm:prefer-inline')
   _$$DailyActivityPointImplCopyWith<_$DailyActivityPointImpl> get copyWith =>
       __$$DailyActivityPointImplCopyWithImpl<_$DailyActivityPointImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$DailyActivityPointImplToJson(
-      this,
-    );
+    return _$$DailyActivityPointImplToJson(this);
   }
 }
 
 abstract class _DailyActivityPoint implements DailyActivityPoint {
-  const factory _DailyActivityPoint(
-      {@TimestampConverter() required final DateTime date,
-      final int practicedWords,
-      final int minutes}) = _$DailyActivityPointImpl;
+  const factory _DailyActivityPoint({
+    @TimestampConverter() required final DateTime date,
+    final int practicedWords,
+    final int minutes,
+  }) = _$DailyActivityPointImpl;
 
   factory _DailyActivityPoint.fromJson(Map<String, dynamic> json) =
       _$DailyActivityPointImpl.fromJson;
@@ -437,13 +485,12 @@ mixin _$UserStats {
   int get totalSessions => throw _privateConstructorUsedError;
   int get totalScore =>
       throw _privateConstructorUsedError; // Toplam puan (tüm oyunlardan)
-// streak
+  // streak
   int get currentStreakDays => throw _privateConstructorUsedError;
   int get bestStreakDays => throw _privateConstructorUsedError;
   @TimestampConverter()
-  DateTime? get lastActivityDate =>
-      throw _privateConstructorUsedError; // per-mode stats, keyed by: 'word_match', 'flash_opposites', 'flash_synonym',
-// 'cargo_categories', 'word_echo_classic', 'word_echo_grid', 'multiplayer'
+  DateTime? get lastActivityDate => throw _privateConstructorUsedError; // per-mode stats, keyed by: 'word_match', 'flash_opposites', 'flash_synonym',
+  // 'cargo_categories', 'word_echo_classic', 'word_echo_grid', 'multiplayer'
   Map<String, ModeStats> get modeStats =>
       throw _privateConstructorUsedError; // last N days (e.g. 30 days)
   List<DailyActivityPoint> get last30Days =>
@@ -461,16 +508,17 @@ abstract class $UserStatsCopyWith<$Res> {
   factory $UserStatsCopyWith(UserStats value, $Res Function(UserStats) then) =
       _$UserStatsCopyWithImpl<$Res, UserStats>;
   @useResult
-  $Res call(
-      {int totalLearnedWords,
-      int totalSessions,
-      int totalScore,
-      int currentStreakDays,
-      int bestStreakDays,
-      @TimestampConverter() DateTime? lastActivityDate,
-      Map<String, ModeStats> modeStats,
-      List<DailyActivityPoint> last30Days,
-      List<String> hardestWords});
+  $Res call({
+    int totalLearnedWords,
+    int totalSessions,
+    int totalScore,
+    int currentStreakDays,
+    int bestStreakDays,
+    @TimestampConverter() DateTime? lastActivityDate,
+    Map<String, ModeStats> modeStats,
+    List<DailyActivityPoint> last30Days,
+    List<String> hardestWords,
+  });
 }
 
 /// @nodoc
@@ -496,44 +544,56 @@ class _$UserStatsCopyWithImpl<$Res, $Val extends UserStats>
     Object? last30Days = null,
     Object? hardestWords = null,
   }) {
-    return _then(_value.copyWith(
-      totalLearnedWords: null == totalLearnedWords
-          ? _value.totalLearnedWords
-          : totalLearnedWords // ignore: cast_nullable_to_non_nullable
-              as int,
-      totalSessions: null == totalSessions
-          ? _value.totalSessions
-          : totalSessions // ignore: cast_nullable_to_non_nullable
-              as int,
-      totalScore: null == totalScore
-          ? _value.totalScore
-          : totalScore // ignore: cast_nullable_to_non_nullable
-              as int,
-      currentStreakDays: null == currentStreakDays
-          ? _value.currentStreakDays
-          : currentStreakDays // ignore: cast_nullable_to_non_nullable
-              as int,
-      bestStreakDays: null == bestStreakDays
-          ? _value.bestStreakDays
-          : bestStreakDays // ignore: cast_nullable_to_non_nullable
-              as int,
-      lastActivityDate: freezed == lastActivityDate
-          ? _value.lastActivityDate
-          : lastActivityDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      modeStats: null == modeStats
-          ? _value.modeStats
-          : modeStats // ignore: cast_nullable_to_non_nullable
-              as Map<String, ModeStats>,
-      last30Days: null == last30Days
-          ? _value.last30Days
-          : last30Days // ignore: cast_nullable_to_non_nullable
-              as List<DailyActivityPoint>,
-      hardestWords: null == hardestWords
-          ? _value.hardestWords
-          : hardestWords // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            totalLearnedWords:
+                null == totalLearnedWords
+                    ? _value.totalLearnedWords
+                    : totalLearnedWords // ignore: cast_nullable_to_non_nullable
+                        as int,
+            totalSessions:
+                null == totalSessions
+                    ? _value.totalSessions
+                    : totalSessions // ignore: cast_nullable_to_non_nullable
+                        as int,
+            totalScore:
+                null == totalScore
+                    ? _value.totalScore
+                    : totalScore // ignore: cast_nullable_to_non_nullable
+                        as int,
+            currentStreakDays:
+                null == currentStreakDays
+                    ? _value.currentStreakDays
+                    : currentStreakDays // ignore: cast_nullable_to_non_nullable
+                        as int,
+            bestStreakDays:
+                null == bestStreakDays
+                    ? _value.bestStreakDays
+                    : bestStreakDays // ignore: cast_nullable_to_non_nullable
+                        as int,
+            lastActivityDate:
+                freezed == lastActivityDate
+                    ? _value.lastActivityDate
+                    : lastActivityDate // ignore: cast_nullable_to_non_nullable
+                        as DateTime?,
+            modeStats:
+                null == modeStats
+                    ? _value.modeStats
+                    : modeStats // ignore: cast_nullable_to_non_nullable
+                        as Map<String, ModeStats>,
+            last30Days:
+                null == last30Days
+                    ? _value.last30Days
+                    : last30Days // ignore: cast_nullable_to_non_nullable
+                        as List<DailyActivityPoint>,
+            hardestWords:
+                null == hardestWords
+                    ? _value.hardestWords
+                    : hardestWords // ignore: cast_nullable_to_non_nullable
+                        as List<String>,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -541,20 +601,22 @@ class _$UserStatsCopyWithImpl<$Res, $Val extends UserStats>
 abstract class _$$UserStatsImplCopyWith<$Res>
     implements $UserStatsCopyWith<$Res> {
   factory _$$UserStatsImplCopyWith(
-          _$UserStatsImpl value, $Res Function(_$UserStatsImpl) then) =
-      __$$UserStatsImplCopyWithImpl<$Res>;
+    _$UserStatsImpl value,
+    $Res Function(_$UserStatsImpl) then,
+  ) = __$$UserStatsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int totalLearnedWords,
-      int totalSessions,
-      int totalScore,
-      int currentStreakDays,
-      int bestStreakDays,
-      @TimestampConverter() DateTime? lastActivityDate,
-      Map<String, ModeStats> modeStats,
-      List<DailyActivityPoint> last30Days,
-      List<String> hardestWords});
+  $Res call({
+    int totalLearnedWords,
+    int totalSessions,
+    int totalScore,
+    int currentStreakDays,
+    int bestStreakDays,
+    @TimestampConverter() DateTime? lastActivityDate,
+    Map<String, ModeStats> modeStats,
+    List<DailyActivityPoint> last30Days,
+    List<String> hardestWords,
+  });
 }
 
 /// @nodoc
@@ -562,8 +624,9 @@ class __$$UserStatsImplCopyWithImpl<$Res>
     extends _$UserStatsCopyWithImpl<$Res, _$UserStatsImpl>
     implements _$$UserStatsImplCopyWith<$Res> {
   __$$UserStatsImplCopyWithImpl(
-      _$UserStatsImpl _value, $Res Function(_$UserStatsImpl) _then)
-      : super(_value, _then);
+    _$UserStatsImpl _value,
+    $Res Function(_$UserStatsImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -578,63 +641,74 @@ class __$$UserStatsImplCopyWithImpl<$Res>
     Object? last30Days = null,
     Object? hardestWords = null,
   }) {
-    return _then(_$UserStatsImpl(
-      totalLearnedWords: null == totalLearnedWords
-          ? _value.totalLearnedWords
-          : totalLearnedWords // ignore: cast_nullable_to_non_nullable
-              as int,
-      totalSessions: null == totalSessions
-          ? _value.totalSessions
-          : totalSessions // ignore: cast_nullable_to_non_nullable
-              as int,
-      totalScore: null == totalScore
-          ? _value.totalScore
-          : totalScore // ignore: cast_nullable_to_non_nullable
-              as int,
-      currentStreakDays: null == currentStreakDays
-          ? _value.currentStreakDays
-          : currentStreakDays // ignore: cast_nullable_to_non_nullable
-              as int,
-      bestStreakDays: null == bestStreakDays
-          ? _value.bestStreakDays
-          : bestStreakDays // ignore: cast_nullable_to_non_nullable
-              as int,
-      lastActivityDate: freezed == lastActivityDate
-          ? _value.lastActivityDate
-          : lastActivityDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      modeStats: null == modeStats
-          ? _value._modeStats
-          : modeStats // ignore: cast_nullable_to_non_nullable
-              as Map<String, ModeStats>,
-      last30Days: null == last30Days
-          ? _value._last30Days
-          : last30Days // ignore: cast_nullable_to_non_nullable
-              as List<DailyActivityPoint>,
-      hardestWords: null == hardestWords
-          ? _value._hardestWords
-          : hardestWords // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-    ));
+    return _then(
+      _$UserStatsImpl(
+        totalLearnedWords:
+            null == totalLearnedWords
+                ? _value.totalLearnedWords
+                : totalLearnedWords // ignore: cast_nullable_to_non_nullable
+                    as int,
+        totalSessions:
+            null == totalSessions
+                ? _value.totalSessions
+                : totalSessions // ignore: cast_nullable_to_non_nullable
+                    as int,
+        totalScore:
+            null == totalScore
+                ? _value.totalScore
+                : totalScore // ignore: cast_nullable_to_non_nullable
+                    as int,
+        currentStreakDays:
+            null == currentStreakDays
+                ? _value.currentStreakDays
+                : currentStreakDays // ignore: cast_nullable_to_non_nullable
+                    as int,
+        bestStreakDays:
+            null == bestStreakDays
+                ? _value.bestStreakDays
+                : bestStreakDays // ignore: cast_nullable_to_non_nullable
+                    as int,
+        lastActivityDate:
+            freezed == lastActivityDate
+                ? _value.lastActivityDate
+                : lastActivityDate // ignore: cast_nullable_to_non_nullable
+                    as DateTime?,
+        modeStats:
+            null == modeStats
+                ? _value._modeStats
+                : modeStats // ignore: cast_nullable_to_non_nullable
+                    as Map<String, ModeStats>,
+        last30Days:
+            null == last30Days
+                ? _value._last30Days
+                : last30Days // ignore: cast_nullable_to_non_nullable
+                    as List<DailyActivityPoint>,
+        hardestWords:
+            null == hardestWords
+                ? _value._hardestWords
+                : hardestWords // ignore: cast_nullable_to_non_nullable
+                    as List<String>,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$UserStatsImpl implements _UserStats {
-  const _$UserStatsImpl(
-      {this.totalLearnedWords = 0,
-      this.totalSessions = 0,
-      this.totalScore = 0,
-      this.currentStreakDays = 0,
-      this.bestStreakDays = 0,
-      @TimestampConverter() this.lastActivityDate,
-      final Map<String, ModeStats> modeStats = const <String, ModeStats>{},
-      final List<DailyActivityPoint> last30Days = const <DailyActivityPoint>[],
-      final List<String> hardestWords = const <String>[]})
-      : _modeStats = modeStats,
-        _last30Days = last30Days,
-        _hardestWords = hardestWords;
+  const _$UserStatsImpl({
+    this.totalLearnedWords = 0,
+    this.totalSessions = 0,
+    this.totalScore = 0,
+    this.currentStreakDays = 0,
+    this.bestStreakDays = 0,
+    @TimestampConverter() this.lastActivityDate,
+    final Map<String, ModeStats> modeStats = const <String, ModeStats>{},
+    final List<DailyActivityPoint> last30Days = const <DailyActivityPoint>[],
+    final List<String> hardestWords = const <String>[],
+  }) : _modeStats = modeStats,
+       _last30Days = last30Days,
+       _hardestWords = hardestWords;
 
   factory _$UserStatsImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserStatsImplFromJson(json);
@@ -648,8 +722,8 @@ class _$UserStatsImpl implements _UserStats {
   @override
   @JsonKey()
   final int totalScore;
-// Toplam puan (tüm oyunlardan)
-// streak
+  // Toplam puan (tüm oyunlardan)
+  // streak
   @override
   @JsonKey()
   final int currentStreakDays;
@@ -659,11 +733,11 @@ class _$UserStatsImpl implements _UserStats {
   @override
   @TimestampConverter()
   final DateTime? lastActivityDate;
-// per-mode stats, keyed by: 'word_match', 'flash_opposites', 'flash_synonym',
-// 'cargo_categories', 'word_echo_classic', 'word_echo_grid', 'multiplayer'
+  // per-mode stats, keyed by: 'word_match', 'flash_opposites', 'flash_synonym',
+  // 'cargo_categories', 'word_echo_classic', 'word_echo_grid', 'multiplayer'
   final Map<String, ModeStats> _modeStats;
-// per-mode stats, keyed by: 'word_match', 'flash_opposites', 'flash_synonym',
-// 'cargo_categories', 'word_echo_classic', 'word_echo_grid', 'multiplayer'
+  // per-mode stats, keyed by: 'word_match', 'flash_opposites', 'flash_synonym',
+  // 'cargo_categories', 'word_echo_classic', 'word_echo_grid', 'multiplayer'
   @override
   @JsonKey()
   Map<String, ModeStats> get modeStats {
@@ -672,9 +746,9 @@ class _$UserStatsImpl implements _UserStats {
     return EqualUnmodifiableMapView(_modeStats);
   }
 
-// last N days (e.g. 30 days)
+  // last N days (e.g. 30 days)
   final List<DailyActivityPoint> _last30Days;
-// last N days (e.g. 30 days)
+  // last N days (e.g. 30 days)
   @override
   @JsonKey()
   List<DailyActivityPoint> get last30Days {
@@ -683,9 +757,9 @@ class _$UserStatsImpl implements _UserStats {
     return EqualUnmodifiableListView(_last30Days);
   }
 
-// hardest words – top list aggregated from trap words
+  // hardest words – top list aggregated from trap words
   final List<String> _hardestWords;
-// hardest words – top list aggregated from trap words
+  // hardest words – top list aggregated from trap words
   @override
   @JsonKey()
   List<String> get hardestWords {
@@ -716,27 +790,34 @@ class _$UserStatsImpl implements _UserStats {
                 other.bestStreakDays == bestStreakDays) &&
             (identical(other.lastActivityDate, lastActivityDate) ||
                 other.lastActivityDate == lastActivityDate) &&
-            const DeepCollectionEquality()
-                .equals(other._modeStats, _modeStats) &&
-            const DeepCollectionEquality()
-                .equals(other._last30Days, _last30Days) &&
-            const DeepCollectionEquality()
-                .equals(other._hardestWords, _hardestWords));
+            const DeepCollectionEquality().equals(
+              other._modeStats,
+              _modeStats,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other._last30Days,
+              _last30Days,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other._hardestWords,
+              _hardestWords,
+            ));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      totalLearnedWords,
-      totalSessions,
-      totalScore,
-      currentStreakDays,
-      bestStreakDays,
-      lastActivityDate,
-      const DeepCollectionEquality().hash(_modeStats),
-      const DeepCollectionEquality().hash(_last30Days),
-      const DeepCollectionEquality().hash(_hardestWords));
+    runtimeType,
+    totalLearnedWords,
+    totalSessions,
+    totalScore,
+    currentStreakDays,
+    bestStreakDays,
+    lastActivityDate,
+    const DeepCollectionEquality().hash(_modeStats),
+    const DeepCollectionEquality().hash(_last30Days),
+    const DeepCollectionEquality().hash(_hardestWords),
+  );
 
   @JsonKey(ignore: true)
   @override
@@ -746,23 +827,22 @@ class _$UserStatsImpl implements _UserStats {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UserStatsImplToJson(
-      this,
-    );
+    return _$$UserStatsImplToJson(this);
   }
 }
 
 abstract class _UserStats implements UserStats {
-  const factory _UserStats(
-      {final int totalLearnedWords,
-      final int totalSessions,
-      final int totalScore,
-      final int currentStreakDays,
-      final int bestStreakDays,
-      @TimestampConverter() final DateTime? lastActivityDate,
-      final Map<String, ModeStats> modeStats,
-      final List<DailyActivityPoint> last30Days,
-      final List<String> hardestWords}) = _$UserStatsImpl;
+  const factory _UserStats({
+    final int totalLearnedWords,
+    final int totalSessions,
+    final int totalScore,
+    final int currentStreakDays,
+    final int bestStreakDays,
+    @TimestampConverter() final DateTime? lastActivityDate,
+    final Map<String, ModeStats> modeStats,
+    final List<DailyActivityPoint> last30Days,
+    final List<String> hardestWords,
+  }) = _$UserStatsImpl;
 
   factory _UserStats.fromJson(Map<String, dynamic> json) =
       _$UserStatsImpl.fromJson;
@@ -774,7 +854,7 @@ abstract class _UserStats implements UserStats {
   @override
   int get totalScore;
   @override // Toplam puan (tüm oyunlardan)
-// streak
+  // streak
   int get currentStreakDays;
   @override
   int get bestStreakDays;
@@ -782,7 +862,7 @@ abstract class _UserStats implements UserStats {
   @TimestampConverter()
   DateTime? get lastActivityDate;
   @override // per-mode stats, keyed by: 'word_match', 'flash_opposites', 'flash_synonym',
-// 'cargo_categories', 'word_echo_classic', 'word_echo_grid', 'multiplayer'
+  // 'cargo_categories', 'word_echo_classic', 'word_echo_grid', 'multiplayer'
   Map<String, ModeStats> get modeStats;
   @override // last N days (e.g. 30 days)
   List<DailyActivityPoint> get last30Days;

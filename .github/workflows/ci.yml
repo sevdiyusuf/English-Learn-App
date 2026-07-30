@@ -1,0 +1,411 @@
+name: Yunoo CI & PR Gating Pipeline
+
+on:
+  push:
+    branches: [ main, master, 'agent/**' ]
+  pull_request:
+    branches: [ main, master ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: read
+  checks: write
+
+env:
+  FLUTTER_VERSION: '3.38.3'
+
+jobs:
+  flutter_quality:
+    name: Flutter Quality &   
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Setup Flutter Toolchain
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+
+      - name: Install Flutter Dependencies
+        run: flutter pub get
+
+      - name: Generate Localizations
+        run: |
+          flutter gen-l10n
+          dart format lib/l10n/
+
+      - name: Verify Formatting Freshness
+        run: dart format --output=none --set-exit-if-changed .
+
+      - name: Analyze Static Code
+        run: flutter analyze --no-fatal-infos
+
+  generated_freshness:
+    name: Generated Artifact Freshness Gate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter Toolchain
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+
+      - name: Install Flutter Dependencies
+        run: flutter pub get
+
+      - name: Generate Localizations
+        run: |
+          flutter gen-l10n
+          dart format lib/l10n/
+
+      - name: Regenerate Educational Content Registry
+        run: dart run tool/generate_educational_content_registry.dart
+
+      - name: Run Build Runner Generation
+        run: |
+          dart run build_runner build --delete-conflicting-outputs
+          dart format .
+
+      - name: Verify No Stale Artifacts or Uncommitted Diffs
+        run: git diff --exit-code
+
+  content_integrity:
+    name: Educational Content & Provenance Integrity Gate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter Toolchain
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+
+      - name: Install Flutter Dependencies
+        run: flutter pub get
+
+      - name: Generate Localizations
+        run: |
+          flutter gen-l10n
+          dart format lib/l10n/
+
+      - name: Run Sprint 10A Provenance Validator
+        run: dart run tool/provenance_validator.dart
+
+      - name: Run Sprint 10B Educational Content Validator
+        run: dart run tool/educational_content_validator.dart
+
+  flutter_tests:
+    name: Flutter Full Test & Golden Baseline Suite
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter Toolchain
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+
+      - name: Install Flutter Dependencies
+        run: flutter pub get
+
+      - name: Generate Localizations
+        run: |
+          flutter gen-l10n
+          dart format lib/l10n/
+
+      - name: Run Complete Flutter Suite
+        run: flutter test --reporter=compact
+
+  functions_gate:
+    name: Firebase Functions Build & Emulator Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Java 21 (for Firebase Emulators)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Install Firebase CLI & Firestore Emulator
+        run: |
+          npm install -g firebase-tools
+          firebase setup:emulators:firestore
+
+      - name: Install Functions Dependencies (Reproducible)
+        run: cd functions && npm ci
+
+      - name: Build TypeScript Code
+        run: cd functions && npm run build
+
+      - name: Run Functions Test Suite under Firestore Emulator
+        run: firebase emulators:exec --only firestore "cd functions && GCLOUD_PROJECT=demo-tamamm FIRESTORE_EMULATOR_HOST=127.0.0.1:8080 npm test"
+
+  firestore_rules:
+    name: Firestore Security Rules Emulator Gate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Java 21 (for Firestore Emulator)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Install Firebase CLI & Firestore Emulator
+        run: |
+          npm install -g firebase-tools
+          firebase setup:emulators:firestore
+
+      - name: Install Rules Test Dependencies (Reproducible)
+        run: cd test_rules && npm ci
+
+      - name: Run Firestore Rules Suite under Firestore Emulator
+        run: firebase emulators:exec --only firestore "npx jest test_rules"
+
+  android_build:
+    name: Android Release Build Gate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Flutter Toolchain
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+
+      - name: Install Flutter Dependencies
+        run: flutter pub get
+
+      - name: Generate Localizations
+        run: |
+          flutter gen-l10n
+          dart format lib/l10n/
+
+      - name: Install Android Command-line Tools
+        run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "cmdline-tools;latest"
+
+      - name: Install NDK 29.0.13599879
+        run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "ndk;29.0.13599879"
+
+      - name: Install Android Platform 36
+        run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platforms;android-36" || true
+
+      - name: Accept SDK Licenses
+        run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
+
+      - name: Generate ephemeral CI debug keystore
+        run: |
+          if [ ! -f android/key.properties ]; then
+            # AGP 8.x resolves debug keystore via ANDROID_SDK_HOME if set,
+            # else XDG_CONFIG_HOME (defaults to $HOME/.config on Linux).
+            # Match that resolution so the keystore lands at the path Gradle expects.
+            ANDROID_PREFS_HOME="${ANDROID_SDK_HOME:-${XDG_CONFIG_HOME:-$HOME/.config}}"
+            DEBUG_KS_DIR="$ANDROID_PREFS_HOME/.android"
+            DEBUG_KS="$DEBUG_KS_DIR/debug.keystore"
+            mkdir -p "$DEBUG_KS_DIR"
+            echo "::notice::Generating ephemeral CI debug keystore at: $DEBUG_KS"
+            keytool -genkeypair \
+              -keystore "$DEBUG_KS" \
+              -alias androiddebugkey \
+              -keyalg RSA \
+              -keysize 2048 \
+              -validity 10000 \
+              -storepass android \
+              -keypass android \
+              -dname "CN=Android Debug,O=Android,C=US" \
+              -noprompt
+            echo "::notice::Ephemeral CI debug keystore created: $(ls -lh $DEBUG_KS)"
+          else
+            echo "Production key.properties present — skipping ephemeral keystore"
+          fi
+
+      - name: Materialize Firebase Config from Secret
+        env:
+          FIREBASE_GOOGLE_SERVICES_JSON: ${{ secrets.FIREBASE_GOOGLE_SERVICES_JSON }}
+        run: |
+          if [ -z "$FIREBASE_GOOGLE_SERVICES_JSON" ]; then
+            echo "Error: FIREBASE_GOOGLE_SERVICES_JSON secret is not set"
+            exit 1
+          fi
+          printf '%s' "$FIREBASE_GOOGLE_SERVICES_JSON" > android/app/google-services.json
+          python3 -c 'import json; json.load(open("android/app/google-services.json")); print("Firebase config JSON valid")'
+
+      - name: Build Release APK Artifact
+        run: |
+          set +e
+          flutter build apk --release 2>&1 | tee /tmp/apk_build.log
+          BUILD_STATUS=${PIPESTATUS[0]}
+          if [ "$BUILD_STATUS" -ne 0 ]; then
+            echo "::group::Gradle/Flutter build failure details"
+            grep -E "FAILURE|Execution failed|error:|Error:|Exception|BUILD FAILED|Caused by" \
+              /tmp/apk_build.log | head -50 | while IFS= read -r errline; do
+              printf '::error::%s\n' "${errline}"
+            done
+            echo "--- last 150 lines of build log ---"
+            tail -150 /tmp/apk_build.log
+            echo "::endgroup::"
+          fi
+          exit "$BUILD_STATUS"
+
+      - name: Verify Build Artifact Output
+        run: ls -lh build/app/outputs/flutter-apk/app-release.apk
+
+  android_matrix:
+    name: Android Device Smoke & Matrix (API ${{ matrix.api-level }})
+    runs-on: macos-15-intel
+    strategy:
+      fail-fast: false
+      matrix:
+        api-level: [24, 35]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Flutter Toolchain
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+
+      - name: Install Flutter Dependencies
+        run: flutter pub get
+
+      - name: Generate Localizations
+        run: |
+          flutter gen-l10n
+          dart format lib/l10n/
+
+      - name: Install Android Command-line Tools
+        run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "cmdline-tools;latest"
+
+      - name: Install NDK 29.0.13599879
+        run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "ndk;29.0.13599879"
+
+      - name: Install Android Platform 36
+        run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platforms;android-36" || true
+
+      - name: Accept SDK Licenses
+        run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
+
+      - name: Generate ephemeral CI debug keystore
+        run: |
+          if [ ! -f android/key.properties ]; then
+            ANDROID_PREFS_HOME="${ANDROID_SDK_HOME:-${XDG_CONFIG_HOME:-$HOME/.config}}"
+            DEBUG_KS_DIR="$ANDROID_PREFS_HOME/.android"
+            DEBUG_KS="$DEBUG_KS_DIR/debug.keystore"
+            mkdir -p "$DEBUG_KS_DIR"
+            echo "::notice::Generating ephemeral CI debug keystore at: $DEBUG_KS"
+            keytool -genkeypair \
+              -keystore "$DEBUG_KS" \
+              -alias androiddebugkey \
+              -keyalg RSA \
+              -keysize 2048 \
+              -validity 10000 \
+              -storepass android \
+              -keypass android \
+              -dname "CN=Android Debug,O=Android,C=US" \
+              -noprompt
+            echo "::notice::Ephemeral CI debug keystore created: $(ls -lh $DEBUG_KS)"
+          else
+            echo "Production key.properties present — skipping ephemeral keystore"
+          fi
+
+      - name: Materialize Firebase Config from Secret
+        env:
+          FIREBASE_GOOGLE_SERVICES_JSON: ${{ secrets.FIREBASE_GOOGLE_SERVICES_JSON }}
+        run: |
+          if [ -z "$FIREBASE_GOOGLE_SERVICES_JSON" ]; then
+            echo "Error: FIREBASE_GOOGLE_SERVICES_JSON secret is not set"
+            exit 1
+          fi
+          printf '%s' "$FIREBASE_GOOGLE_SERVICES_JSON" > android/app/google-services.json
+          python3 -c 'import json; json.load(open("android/app/google-services.json")); print("Firebase config JSON valid")'
+
+      - name: Pre-build Debug APK for Integration Test
+        run: flutter build apk --debug
+
+      - name: Run Android Emulator P0 Integration Smoke Test
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ matrix.api-level }}
+          target: google_apis
+          arch: x86_64
+          profile: Nexus 6
+          emulator-boot-timeout: 1800
+          script: flutter test --timeout none integration_test/p0_device_smoke_integration_test.dart
+
+      - name: Build Release APK Artifact for Binary Inspection
+        run: |
+          set +e
+          flutter build apk --release 2>&1 | tee /tmp/apk_build_matrix.log
+          BUILD_STATUS=${PIPESTATUS[0]}
+          if [ "$BUILD_STATUS" -ne 0 ]; then
+            echo "::group::Gradle/Flutter build failure details"
+            grep -E "FAILURE|Execution failed|error:|Error:|Exception|BUILD FAILED|Caused by" \
+              /tmp/apk_build_matrix.log | head -50 | while IFS= read -r errline; do
+              printf '::error::%s\n' "${errline}"
+            done
+            echo "--- last 150 lines of build log ---"
+            tail -150 /tmp/apk_build_matrix.log
+            echo "::endgroup::"
+          fi
+          exit "$BUILD_STATUS"
+
+      - name: Verify Android 16 KB Page-Size Compatibility
+        run: dart run tool/verify_android_16kb_compatibility.dart

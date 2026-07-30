@@ -46,12 +46,16 @@ class FriendSelectionSheet extends ConsumerWidget {
                   final friend = friends[index];
                   return ListTile(
                     leading: CircleAvatar(
-                      backgroundImage: friend.photoUrl != null
-                          ? NetworkImage(friend.photoUrl!)
-                          : null,
-                      child: friend.photoUrl == null
-                          ? Text(friend.displayName?[0].toUpperCase() ?? '?')
-                          : null,
+                      backgroundImage:
+                          friend.photoUrl != null
+                              ? NetworkImage(friend.photoUrl!)
+                              : null,
+                      child:
+                          friend.photoUrl == null
+                              ? Text(
+                                friend.displayName?[0].toUpperCase() ?? '?',
+                              )
+                              : null,
                     ),
                     title: Text(friend.displayName ?? 'İsimsiz'),
                     trailing: TextButton(
@@ -64,7 +68,7 @@ class FriendSelectionSheet extends ConsumerWidget {
                               roomId: roomId,
                               gameType: gameType,
                             );
-                        
+
                         if (context.mounted) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text('Davet gönderildi!')),

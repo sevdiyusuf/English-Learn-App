@@ -7,16 +7,20 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../firebase_options.dart';
+import '../core/config/app_environment.dart';
+import '../core/services/app_check_service.dart';
 import '../features/dictionary/dictionary_service.dart';
 import '../features/dictionary/lazy_dictionary_service.dart';
+import '../firebase_options.dart';
 
 final firebaseAuthProvider = Provider<FirebaseAuth>((ref) {
   try {
     return FirebaseAuth.instance;
   } catch (e) {
     // This should never happen if Firebase is initialized, but handle it safely
-    throw StateError('FirebaseAuth is not available. Ensure Firebase is initialized: $e');
+    throw StateError(
+      'FirebaseAuth is not available. Ensure Firebase is initialized: $e',
+    );
   }
 });
 
@@ -25,7 +29,9 @@ final firestoreProvider = Provider<FirebaseFirestore>((ref) {
     return FirebaseFirestore.instance;
   } catch (e) {
     // This should never happen if Firebase is initialized, but handle it safely
-    throw StateError('Firestore is not available. Ensure Firebase is initialized: $e');
+    throw StateError(
+      'Firestore is not available. Ensure Firebase is initialized: $e',
+    );
   }
 });
 
@@ -35,7 +41,9 @@ final firebaseFunctionsProvider = Provider<FirebaseFunctions>((ref) {
     return FirebaseFunctions.instanceFor(region: 'us-central1');
   } catch (e) {
     // This should never happen if Firebase is initialized, but handle it safely
-    throw StateError('FirebaseFunctions is not available. Ensure Firebase is initialized: $e');
+    throw StateError(
+      'FirebaseFunctions is not available. Ensure Firebase is initialized: $e',
+    );
   }
 });
 
@@ -71,10 +79,12 @@ Future<AppBootstrapData> bootstrapApp() async {
         // Double-check kIsWeb for iOS Safari compatibility
         if (kIsWeb) {
           if (kDebugMode) {
-            debugPrint('Initializing Firebase for web platform (iOS Safari)...');
+            debugPrint(
+              'Initializing Firebase for web platform (iOS Safari)...',
+            );
           }
         }
-        
+
         // Get Firebase options safely
         FirebaseOptions options;
         try {
@@ -88,17 +98,27 @@ Future<AppBootstrapData> bootstrapApp() async {
           }
           throw Exception('Failed to get Firebase options: $e');
         }
-        
+
         // Validate options
-        if (options.apiKey.isEmpty || options.appId.isEmpty || options.projectId.isEmpty) {
-          throw Exception('Firebase options are invalid: apiKey, appId, or projectId is empty');
+        if (options.apiKey.isEmpty ||
+            options.appId.isEmpty ||
+            options.projectId.isEmpty) {
+          throw Exception(
+            'Firebase options are invalid: apiKey, appId, or projectId is empty',
+          );
         }
-        
+
         // Initialize Firebase
         await Firebase.initializeApp(options: options);
         if (kDebugMode) {
           debugPrint('Firebase initialized successfully');
         }
+
+        // Activate App Check securely
+        await AppCheckService.activateAppCheck();
+
+        // Configure Emulators if explicitly enabled
+        await AppEnvironment.configureEmulators();
       } catch (e, stackTrace) {
         // On iOS Safari, Firebase initialization might fail in certain contexts
         if (kDebugMode) {
@@ -149,9 +169,7 @@ Future<AppBootstrapData> bootstrapApp() async {
       if (kDebugMode) {
         debugPrint('Creating dictionary service...');
       }
-      dictionaryService = LazyDictionaryService.create(
-        createDictionaryService,
-      );
+      dictionaryService = LazyDictionaryService.create(createDictionaryService);
       if (kDebugMode) {
         debugPrint('Dictionary service created (loading in background)');
       }

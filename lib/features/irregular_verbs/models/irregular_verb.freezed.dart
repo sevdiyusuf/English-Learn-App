@@ -12,7 +12,8 @@ part of 'irregular_verb.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 IrregularVerb _$IrregularVerbFromJson(Map<String, dynamic> json) {
   return _IrregularVerb.fromJson(json);
@@ -38,14 +39,16 @@ mixin _$IrregularVerb {
 /// @nodoc
 abstract class $IrregularVerbCopyWith<$Res> {
   factory $IrregularVerbCopyWith(
-          IrregularVerb value, $Res Function(IrregularVerb) then) =
-      _$IrregularVerbCopyWithImpl<$Res, IrregularVerb>;
+    IrregularVerb value,
+    $Res Function(IrregularVerb) then,
+  ) = _$IrregularVerbCopyWithImpl<$Res, IrregularVerb>;
   @useResult
-  $Res call(
-      {@JsonKey(name: 'base_form') String v1,
-      @JsonKey(name: 'v2') String v2,
-      @JsonKey(name: 'v3') String v3,
-      @JsonKey(name: 'meaning_tr') String meaningTr});
+  $Res call({
+    @JsonKey(name: 'base_form') String v1,
+    @JsonKey(name: 'v2') String v2,
+    @JsonKey(name: 'v3') String v3,
+    @JsonKey(name: 'meaning_tr') String meaningTr,
+  });
 }
 
 /// @nodoc
@@ -66,24 +69,31 @@ class _$IrregularVerbCopyWithImpl<$Res, $Val extends IrregularVerb>
     Object? v3 = null,
     Object? meaningTr = null,
   }) {
-    return _then(_value.copyWith(
-      v1: null == v1
-          ? _value.v1
-          : v1 // ignore: cast_nullable_to_non_nullable
-              as String,
-      v2: null == v2
-          ? _value.v2
-          : v2 // ignore: cast_nullable_to_non_nullable
-              as String,
-      v3: null == v3
-          ? _value.v3
-          : v3 // ignore: cast_nullable_to_non_nullable
-              as String,
-      meaningTr: null == meaningTr
-          ? _value.meaningTr
-          : meaningTr // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            v1:
+                null == v1
+                    ? _value.v1
+                    : v1 // ignore: cast_nullable_to_non_nullable
+                        as String,
+            v2:
+                null == v2
+                    ? _value.v2
+                    : v2 // ignore: cast_nullable_to_non_nullable
+                        as String,
+            v3:
+                null == v3
+                    ? _value.v3
+                    : v3 // ignore: cast_nullable_to_non_nullable
+                        as String,
+            meaningTr:
+                null == meaningTr
+                    ? _value.meaningTr
+                    : meaningTr // ignore: cast_nullable_to_non_nullable
+                        as String,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -91,15 +101,17 @@ class _$IrregularVerbCopyWithImpl<$Res, $Val extends IrregularVerb>
 abstract class _$$IrregularVerbImplCopyWith<$Res>
     implements $IrregularVerbCopyWith<$Res> {
   factory _$$IrregularVerbImplCopyWith(
-          _$IrregularVerbImpl value, $Res Function(_$IrregularVerbImpl) then) =
-      __$$IrregularVerbImplCopyWithImpl<$Res>;
+    _$IrregularVerbImpl value,
+    $Res Function(_$IrregularVerbImpl) then,
+  ) = __$$IrregularVerbImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@JsonKey(name: 'base_form') String v1,
-      @JsonKey(name: 'v2') String v2,
-      @JsonKey(name: 'v3') String v3,
-      @JsonKey(name: 'meaning_tr') String meaningTr});
+  $Res call({
+    @JsonKey(name: 'base_form') String v1,
+    @JsonKey(name: 'v2') String v2,
+    @JsonKey(name: 'v3') String v3,
+    @JsonKey(name: 'meaning_tr') String meaningTr,
+  });
 }
 
 /// @nodoc
@@ -107,8 +119,9 @@ class __$$IrregularVerbImplCopyWithImpl<$Res>
     extends _$IrregularVerbCopyWithImpl<$Res, _$IrregularVerbImpl>
     implements _$$IrregularVerbImplCopyWith<$Res> {
   __$$IrregularVerbImplCopyWithImpl(
-      _$IrregularVerbImpl _value, $Res Function(_$IrregularVerbImpl) _then)
-      : super(_value, _then);
+    _$IrregularVerbImpl _value,
+    $Res Function(_$IrregularVerbImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -118,36 +131,42 @@ class __$$IrregularVerbImplCopyWithImpl<$Res>
     Object? v3 = null,
     Object? meaningTr = null,
   }) {
-    return _then(_$IrregularVerbImpl(
-      v1: null == v1
-          ? _value.v1
-          : v1 // ignore: cast_nullable_to_non_nullable
-              as String,
-      v2: null == v2
-          ? _value.v2
-          : v2 // ignore: cast_nullable_to_non_nullable
-              as String,
-      v3: null == v3
-          ? _value.v3
-          : v3 // ignore: cast_nullable_to_non_nullable
-              as String,
-      meaningTr: null == meaningTr
-          ? _value.meaningTr
-          : meaningTr // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+    return _then(
+      _$IrregularVerbImpl(
+        v1:
+            null == v1
+                ? _value.v1
+                : v1 // ignore: cast_nullable_to_non_nullable
+                    as String,
+        v2:
+            null == v2
+                ? _value.v2
+                : v2 // ignore: cast_nullable_to_non_nullable
+                    as String,
+        v3:
+            null == v3
+                ? _value.v3
+                : v3 // ignore: cast_nullable_to_non_nullable
+                    as String,
+        meaningTr:
+            null == meaningTr
+                ? _value.meaningTr
+                : meaningTr // ignore: cast_nullable_to_non_nullable
+                    as String,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$IrregularVerbImpl extends _IrregularVerb {
-  const _$IrregularVerbImpl(
-      {@JsonKey(name: 'base_form') required this.v1,
-      @JsonKey(name: 'v2') required this.v2,
-      @JsonKey(name: 'v3') required this.v3,
-      @JsonKey(name: 'meaning_tr') required this.meaningTr})
-      : super._();
+  const _$IrregularVerbImpl({
+    @JsonKey(name: 'base_form') required this.v1,
+    @JsonKey(name: 'v2') required this.v2,
+    @JsonKey(name: 'v3') required this.v3,
+    @JsonKey(name: 'meaning_tr') required this.meaningTr,
+  }) : super._();
 
   factory _$IrregularVerbImpl.fromJson(Map<String, dynamic> json) =>
       _$$IrregularVerbImplFromJson(json);
@@ -194,19 +213,17 @@ class _$IrregularVerbImpl extends _IrregularVerb {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$IrregularVerbImplToJson(
-      this,
-    );
+    return _$$IrregularVerbImplToJson(this);
   }
 }
 
 abstract class _IrregularVerb extends IrregularVerb {
-  const factory _IrregularVerb(
-          {@JsonKey(name: 'base_form') required final String v1,
-          @JsonKey(name: 'v2') required final String v2,
-          @JsonKey(name: 'v3') required final String v3,
-          @JsonKey(name: 'meaning_tr') required final String meaningTr}) =
-      _$IrregularVerbImpl;
+  const factory _IrregularVerb({
+    @JsonKey(name: 'base_form') required final String v1,
+    @JsonKey(name: 'v2') required final String v2,
+    @JsonKey(name: 'v3') required final String v3,
+    @JsonKey(name: 'meaning_tr') required final String meaningTr,
+  }) = _$IrregularVerbImpl;
   const _IrregularVerb._() : super._();
 
   factory _IrregularVerb.fromJson(Map<String, dynamic> json) =

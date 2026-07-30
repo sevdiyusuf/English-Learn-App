@@ -3,13 +3,18 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:yunoo/l10n/app_localizations.dart';
 
+import '../core/widgets/error_view.dart';
+import '../core/utils/storage_service.dart';
+import '../features/auth/logic/auth_controller.dart';
 import '../features/home/ui/main_shell.dart';
 import '../features/mode_select/ui/mode_select_page.dart';
 import '../features/friends/ui/friends_page.dart';
 import '../features/user_stats/ui/user_stats_page.dart';
 import '../features/profile_settings/ui/profile_settings_page.dart';
-import '../core/utils/storage_service.dart';
+import '../features/profile_settings/ui/onboarding_gate.dart';
+import '../features/moderation/blocked_users_page.dart';
 import '../features/word_match/ui/shared_word_set_page.dart';
 import 'routes/word_match_routes.dart';
 import 'routes/cargo_categories_routes.dart';
@@ -40,32 +45,30 @@ final _shellNavigatorProfileKey = GlobalKey<NavigatorState>(
 );
 
 final appRouterProvider = Provider<GoRouter>((ref) {
+  // Listen to authControllerProvider so auth state shifts notify the router
+  ref.watch(authControllerProvider);
+
   String startLocation = '/';
 
   if (kIsWeb) {
     // 1. JavaScript tarafında kaydettiğimiz 'appStartUrl' değişkenini okuyoruz.
-    // Bu değişken index.html içinde tanımlandı.
     final String? jsSavedHash = StorageService.getAppStartUrl();
 
     if (jsSavedHash != null && jsSavedHash.isNotEmpty) {
-      // Hash işaretini temizle: "#/s/123" -> "/s/123"
       startLocation = jsSavedHash.replaceFirst('#', '');
       if (kDebugMode) {
-        print('Dart: JS den gelen link bulundu: $startLocation');
+        debugPrint('Dart: JS den gelen link bulundu: $startLocation');
       }
     }
   }
 
   return GoRouter(
     navigatorKey: _rootNavigatorKey,
-
-    // 2. Router'a "Buradan başla" diyoruz.
     initialLocation: startLocation.contains('/s/') ? startLocation : '/',
-
-    debugLogDiagnostics: true,
+    debugLogDiagnostics: kDebugMode,
 
     redirect: (context, state) {
-      // Paylaşım linkindeysek karışma
+      // Paylaşım linkindeysek müdahale etme
       if (state.uri.toString().contains('/s/')) return null;
       return null;
     },
@@ -79,6 +82,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           return SharedWordSetPage(shareId: shareId);
         },
       ),
+      GoRoute(
+        path: '/blocked-users',
+        builder: (context, state) => const BlockedUsersPage(),
+      ),
 
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
@@ -91,7 +98,9 @@ final appRouterProvider = Provider<GoRouter>((ref) {
               GoRoute(
                 path: '/',
                 name: ModeSelectPage.routeName,
-                builder: (context, state) => const ModeSelectPage(),
+                builder:
+                    (context, state) =>
+                        const OnboardingGate(child: ModeSelectPage()),
               ),
             ],
           ),
@@ -145,8 +154,18 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       ...statsRoutes.whereType<GoRoute>().where((r) => r.path != '/stats'),
     ],
 
-    errorBuilder:
-        (context, state) =>
-            Scaffold(body: Center(child: Text('Hata: ${state.error}'))),
+    errorBuilder: (context, state) {
+      final l10n = AppLocalizations.of(context)!;
+      return Scaffold(
+        body: SafeArea(
+          child: ErrorView(
+            title: l10n.pageUnavailableTitle,
+            message: l10n.pageUnavailableMessage,
+            onRetry: () => GoRouter.of(context).go('/'),
+            retryButtonText: l10n.backToHomeAction,
+          ),
+        ),
+      );
+    },
   );
 });

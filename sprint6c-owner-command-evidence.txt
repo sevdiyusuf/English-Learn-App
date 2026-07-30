@@ -1,0 +1,22 @@
+===== BEGIN COMMAND EVIDENCE =====
+
+> flutter analyze
+Analyzing tamamm...                                             
+No issues found! (ran in 132.5s)
+
+> set JAVA_HOME=C:\Program Files\Java\jdk-21
+> firebase emulators:exec "npx jest test_rules/sprint6c.test.js"
+...
+ PASS  test_rules/sprint6c.test.js
+  Sprint 6C Regression
+    ✓ Room Join - rejects if activePlayerIds are included in payload (121 ms)
+    ✓ Room Join - allows if playerNames, players and updatedAt are updated together (110 ms)
+    ✓ Room Leave - allows if players, activePlayerIds and updatedAt are removed together (140 ms)
+    ✓ Room Rejoin - allows updating playerNames and updatedAt if already in players (95 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       4 passed, 4 total
+Snapshots:   0 total
+Time:        3.42 s
+
+===== END COMMAND EVIDENCE =====

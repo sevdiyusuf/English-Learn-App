@@ -2,17 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import '../logic/irregular_verbs_provider.dart';
+import '../logic/irregular_verb_content_ids.dart';
 import '../models/irregular_verb.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/tts/resilient_tts_service.dart';
+import '../../../features/educational_content/content_report_dialog.dart';
+import '../../../l10n/app_localizations.dart';
+
 class IrregularVerbsTutorialPage extends ConsumerStatefulWidget {
-  const IrregularVerbsTutorialPage({super.key});
+  const IrregularVerbsTutorialPage({super.key, this.ttsService});
+
+  final ResilientTtsService? ttsService;
 
   @override
-  ConsumerState<IrregularVerbsTutorialPage> createState() => _IrregularVerbsTutorialPageState();
+  ConsumerState<IrregularVerbsTutorialPage> createState() =>
+      _IrregularVerbsTutorialPageState();
 }
 
-class _IrregularVerbsTutorialPageState extends ConsumerState<IrregularVerbsTutorialPage> {
+class _IrregularVerbsTutorialPageState
+    extends ConsumerState<IrregularVerbsTutorialPage> {
   final FlutterTts _flutterTts = FlutterTts();
 
   @override
@@ -28,8 +37,31 @@ class _IrregularVerbsTutorialPageState extends ConsumerState<IrregularVerbsTutor
   }
 
   Future<void> _speak(String text) async {
-    await _flutterTts.setLanguage('en-US');
-    await _flutterTts.speak(text);
+    try {
+      dynamic result = 0;
+      if (widget.ttsService != null) {
+        final outcome = await widget.ttsService!.speak(text);
+        result = outcome == TtsOutcome.completed ? 1 : 0;
+      } else {
+        await _flutterTts.setLanguage('en-US');
+        result = await _flutterTts.speak(text);
+      }
+      if ((result == 0 || result == false) && mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Speech could not be played. Please try again.'),
+          ),
+        );
+      }
+    } catch (_) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Speech could not be played. Please try again.'),
+          ),
+        );
+      }
+    }
   }
 
   @override
@@ -46,6 +78,7 @@ class _IrregularVerbsTutorialPageState extends ConsumerState<IrregularVerbsTutor
           icon: const Icon(Icons.close_rounded),
           onPressed: () => context.go('/irregular-verbs'),
         ),
+        actions: const [_ReportButton()],
       ),
       body: verbsAsync.when(
         data: (verbs) {
@@ -110,18 +143,30 @@ class _GroupView extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              if (index > 0) const Icon(Icons.chevron_left_rounded, color: Colors.white54, size: 28),
+              if (index > 0)
+                const Icon(
+                  Icons.chevron_left_rounded,
+                  color: Colors.white54,
+                  size: 28,
+                ),
               if (index > 0) const SizedBox(width: 8),
-              Text(
-                title,
-                style: const TextStyle(
-                  color: Colors.blueAccent,
-                  fontSize: 24,
-                  fontWeight: FontWeight.w800,
+              Flexible(
+                child: Text(
+                  title,
+                  style: const TextStyle(
+                    color: Colors.blueAccent,
+                    fontSize: 24,
+                    fontWeight: FontWeight.w800,
+                  ),
                 ),
               ),
               if (index < total - 1) const SizedBox(width: 8),
-              if (index < total - 1) const Icon(Icons.chevron_right_rounded, color: Colors.white54, size: 28),
+              if (index < total - 1)
+                const Icon(
+                  Icons.chevron_right_rounded,
+                  color: Colors.white54,
+                  size: 28,
+                ),
             ],
           ),
         ),
@@ -154,7 +199,7 @@ class _VerbBentoCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color(0xFF1C1C1E),
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: Colors.white.withOpacity(0.05)),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -162,16 +207,25 @@ class _VerbBentoCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                verb.meaningTr,
-                style: const TextStyle(
-                  color: Colors.white60,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
+              Expanded(
+                child: Text(
+                  verb.meaningTr,
+                  style: const TextStyle(
+                    color: Colors.white60,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
               IconButton(
-                icon: const Icon(Icons.volume_up_rounded, color: Colors.white30),
+                icon: const Icon(
+                  Icons.volume_up_rounded,
+                  color: Colors.white30,
+                ),
+                tooltip:
+                    AppLocalizations.of(context)?.localeName == 'tr'
+                        ? 'Telaffuzu dinle'
+                        : 'Hear pronunciation',
                 onPressed: () => onSpeak('${verb.v1}, ${verb.v2}, ${verb.v3}'),
               ),
             ],
@@ -180,9 +234,27 @@ class _VerbBentoCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _FormColumn(label: 'V1', value: verb.v1, onSpeak: onSpeak),
-              _FormColumn(label: 'V2', value: verb.v2, onSpeak: onSpeak),
-              _FormColumn(label: 'V3', value: verb.v3, onSpeak: onSpeak),
+              Expanded(
+                child: _FormColumn(
+                  label: 'V1',
+                  value: verb.v1,
+                  onSpeak: onSpeak,
+                ),
+              ),
+              Expanded(
+                child: _FormColumn(
+                  label: 'V2',
+                  value: verb.v2,
+                  onSpeak: onSpeak,
+                ),
+              ),
+              Expanded(
+                child: _FormColumn(
+                  label: 'V3',
+                  value: verb.v3,
+                  onSpeak: onSpeak,
+                ),
+              ),
             ],
           ),
         ],
@@ -196,7 +268,11 @@ class _FormColumn extends StatelessWidget {
   final String value;
   final Function(String) onSpeak;
 
-  const _FormColumn({required this.label, required this.value, required this.onSpeak});
+  const _FormColumn({
+    required this.label,
+    required this.value,
+    required this.onSpeak,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -206,15 +282,66 @@ class _FormColumn extends StatelessWidget {
         children: [
           Text(
             label,
-            style: const TextStyle(color: Colors.white24, fontSize: 10, fontWeight: FontWeight.w800),
+            style: const TextStyle(
+              color: Colors.white24,
+              fontSize: 10,
+              fontWeight: FontWeight.w800,
+            ),
           ),
           const SizedBox(height: 4),
           Text(
             value,
-            style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w700),
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+            ),
           ),
         ],
       ),
+    );
+  }
+}
+
+class _ReportButton extends ConsumerWidget {
+  const _ReportButton();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final verbsAsync = ref.watch(irregularVerbsProvider);
+    final contentIdMapAsync = ref.watch(irregularVerbContentIdMapProvider);
+
+    return verbsAsync.when(
+      data: (verbs) {
+        return contentIdMapAsync.when(
+          data: (contentIdMap) {
+            // Find the first verb with a content ID
+            for (final verb in verbs) {
+              final contentId = contentIdMap[verb.v1];
+              if (contentId != null && contentId.isNotEmpty) {
+                return IconButton(
+                  key: ValueKey('report_verb_${verb.v1}'),
+                  icon: const Icon(Icons.flag_outlined, color: Colors.white54),
+                  tooltip: 'Report an issue with this content',
+                  onPressed: () async {
+                    await showContentReportSheet(
+                      context,
+                      contentId: contentId,
+                      contentVersion: 1,
+                      contentType: 'irregular_verb',
+                    );
+                  },
+                );
+              }
+            }
+            return const SizedBox.shrink();
+          },
+          loading: () => const SizedBox.shrink(),
+          error: (_, __) => const SizedBox.shrink(),
+        );
+      },
+      loading: () => const SizedBox.shrink(),
+      error: (_, __) => const SizedBox.shrink(),
     );
   }
 }

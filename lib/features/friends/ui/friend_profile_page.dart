@@ -4,7 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/repositories/user_stats_repo.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/gradient_background.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../auth/models/app_user.dart';
+import '../../auth/logic/auth_controller.dart';
+import '../../moderation/moderation_actions.dart';
 import '../../user_stats/models/user_stats.dart';
 import '../../word_match/data/word_match_share_repo.dart';
 import '../models/friend_models.dart';
@@ -41,6 +44,7 @@ class FriendProfilePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
     final statsAsync = ref.watch(friendStatsProvider(profile));
     final setsAsync = ref.watch(friendSetsProvider(profile));
 
@@ -56,6 +60,33 @@ class FriendProfilePage extends ConsumerWidget {
             style: const TextStyle(color: Colors.white),
           ),
           iconTheme: const IconThemeData(color: Colors.white),
+          actions: [
+            if (ref.watch(authControllerProvider).value?.uid != profile.uid)
+              PopupMenuButton<int>(
+                icon: const Icon(Icons.more_vert),
+                onSelected: (value) async {
+                  if (value == 0) {
+                    await showReportDialog(
+                      context,
+                      ref,
+                      type: 'user',
+                      targetId: profile.uid,
+                      title: l10n.reportUser,
+                    );
+                  } else if (value == 1) {
+                    await showBlockDialog(context, ref, profile.uid);
+                  } else {
+                    await showReportAndBlockDialog(context, ref, profile.uid);
+                  }
+                },
+                itemBuilder:
+                    (context) => [
+                      PopupMenuItem(value: 0, child: Text(l10n.reportUser)),
+                      PopupMenuItem(value: 1, child: Text(l10n.block)),
+                      PopupMenuItem(value: 2, child: Text(l10n.reportAndBlock)),
+                    ],
+              ),
+          ],
           bottom: TabBar(
             labelColor: Colors.white,
             unselectedLabelColor: Colors.white70,

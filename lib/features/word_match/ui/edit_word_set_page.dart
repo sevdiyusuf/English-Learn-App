@@ -7,7 +7,6 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/gradient_background.dart';
 import '../data/word_match_providers.dart';
 import '../data/word_match_repo_interface.dart';
-import '../logic/word_match_sync_service.dart';
 import '../models/word_pair.dart';
 import '../models/word_set.dart';
 import 'word_match_set_detail_page.dart';
@@ -485,12 +484,6 @@ class _EditWordSetPageState extends ConsumerState<EditWordSetPage> {
       );
 
       // Trigger sync
-      try {
-        final syncService = await ref.read(wordMatchSyncProvider.future);
-        await syncService.syncSet(widget.setId);
-      } catch (e) {
-        debugPrint('Sync failed after savePairs: $e');
-      }
 
       // Invalidate all related providers to refresh UI in both edit and detail pages
       ref.invalidate(wordSetDetailProvider(widget.setId));

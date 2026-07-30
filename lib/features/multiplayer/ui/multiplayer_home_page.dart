@@ -1,111 +1,120 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:yunoo/l10n/app_localizations.dart';
+
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/gradient_background.dart';
+import '../../../core/widgets/responsive_content.dart';
 
 class MultiplayerHomePage extends StatelessWidget {
   const MultiplayerHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return GradientBackground(
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.white),
-            onPressed: () => context.go('/'),
+            icon: const Icon(Icons.arrow_back),
+            tooltip: l10n.backAction,
+            onPressed: () => context.canPop() ? context.pop() : context.go('/'),
           ),
-          title: const Text(
-            'Multiplayer',
-            style: TextStyle(color: Colors.white),
-          ),
-          backgroundColor: Colors.transparent,
-          elevation: 0,
+          title: Text(l10n.multiplayerTitle),
         ),
-        body: ListView(
-          padding: const EdgeInsets.all(24),
-          children: [
-            const Text(
-              'Arkadaşlarınla canlı kapışmalar',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
+        body: SafeArea(
+          top: false,
+          child: ResponsiveContent(
+            maxWidth: 840,
+            child: ListView(
+              padding: const EdgeInsets.symmetric(vertical: 24),
+              children: [
+                Semantics(
+                  header: true,
+                  child: Text(
+                    l10n.multiplayerHeading,
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  l10n.multiplayerDescription,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                const SizedBox(height: 24),
+                _GameCard(
+                  title: l10n.wordBattleTitle,
+                  subtitle: l10n.wordBattleSubtitle,
+                  description: l10n.wordBattleDescription,
+                  icon: Icons.sports_esports_rounded,
+                  color: AppColors.primary,
+                  onTap: () => context.push('/lobby?from=multiplayer'),
+                ),
+                const SizedBox(height: 16),
+                _GameCard(
+                  title: l10n.grammarBattleTitle,
+                  subtitle: l10n.grammarBattleSubtitle,
+                  description: l10n.grammarBattleDescription,
+                  icon: Icons.quiz_rounded,
+                  color: AppColors.accent,
+                  onTap: () => context.push('/multiplayer/grammar-arena'),
+                ),
+              ],
             ),
-            const SizedBox(height: 8),
-            const Text(
-              'İki farklı çok oyunculu mod ile kelime ve gramer savaşlarına katıl.',
-              style: TextStyle(fontSize: 14, color: AppColors.textSecondary),
-            ),
-            const SizedBox(height: 24),
-            _buildGameCard(
-              context,
-              title: 'Word Battle',
-              subtitle: 'Klasik kelime savaşları',
-              modesDescription:
-                  'Oda kur, arkadaşlarını davet et ve aynı kelimelerle puan yarışı yap.',
-              icon: Icons.sports_esports_rounded,
-              color: AppColors.primary,
-              onTap: () => context.push('/lobby?from=multiplayer'),
-            ),
-            const SizedBox(height: 16),
-            _buildGameCard(
-              context,
-              title: 'Grammar Battle',
-              subtitle: 'Gerçek zamanlı gramer düelloları',
-              modesDescription:
-                  'Arkadaşlarınla aynı odada soruları yanıtla, turlu skor sistemiyle yarış.',
-              icon: Icons.quiz_rounded,
-              color: AppColors.accent,
-              onTap: () => context.push('/multiplayer/grammar-arena'),
-            ),
-          ],
+          ),
         ),
       ),
     );
   }
+}
 
-  Widget _buildGameCard(
-    BuildContext context, {
-    required String title,
-    required String subtitle,
-    required String modesDescription,
-    required IconData icon,
-    required Color color,
-    required VoidCallback onTap,
-  }) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.surfaceMedium,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: color.withValues(alpha: 0.6), width: 1.5),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.4),
-            blurRadius: 18,
-            offset: const Offset(0, 10),
-          ),
-        ],
-      ),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(20),
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
+class _GameCard extends StatelessWidget {
+  const _GameCard({
+    required this.title,
+    required this.subtitle,
+    required this.description,
+    required this.icon,
+    required this.color,
+    required this.onTap,
+  });
+
+  final String title;
+  final String subtitle;
+  final String description;
+  final IconData icon;
+  final Color color;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      button: true,
+      label: '$title. $subtitle. $description',
+      excludeSemantics: true,
+      child: Card(
+        margin: EdgeInsets.zero,
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: onTap,
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(minHeight: 120),
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: color.withValues(alpha: 0.18),
-                      shape: BoxShape.circle,
+                  ExcludeSemantics(
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: color.withValues(alpha: 0.18),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Icon(icon, color: color, size: 32),
+                      ),
                     ),
-                    child: Icon(icon, color: color, size: 32),
                   ),
                   const SizedBox(width: 16),
                   Expanded(
@@ -114,40 +123,20 @@ class MultiplayerHomePage extends StatelessWidget {
                       children: [
                         Text(
                           title,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
+                          style: Theme.of(context).textTheme.titleMedium,
                         ),
                         const SizedBox(height: 4),
-                        Text(
-                          subtitle,
-                          style: const TextStyle(
-                            fontSize: 14,
-                            color: AppColors.textSecondary,
-                          ),
-                        ),
+                        Text(subtitle),
+                        const SizedBox(height: 12),
+                        Text(description),
                       ],
                     ),
                   ),
-                  const Icon(
-                    Icons.arrow_forward_ios,
-                    size: 18,
-                    color: AppColors.textSecondary,
-                  ),
+                  const SizedBox(width: 8),
+                  const ExcludeSemantics(child: Icon(Icons.chevron_right)),
                 ],
               ),
-              const SizedBox(height: 12),
-              Text(
-                modesDescription,
-                style: const TextStyle(
-                  fontSize: 13,
-                  color: AppColors.textTertiary,
-                  height: 1.4,
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),

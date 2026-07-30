@@ -125,7 +125,7 @@ class GameController extends AutoDisposeFamilyAsyncNotifier<GameState, String> {
       byUid: userUid,
       at: DateTime.now(),
     );
-    
+
     // Create updated room state for optimistic UI (optional but good)
     // We don't change currentTurnUid here because that's server-side logic
     // but we can update playedWords
@@ -147,9 +147,9 @@ class GameController extends AutoDisposeFamilyAsyncNotifier<GameState, String> {
     }
 
     final normalizedVerb = verb.trim().toLowerCase().replaceAll(
-          RegExp(r'\s+'),
-          ' ',
-        );
+      RegExp(r'\s+'),
+      ' ',
+    );
     if (normalizedVerb.isEmpty) {
       throw ArgumentError('Fiil boş olamaz');
     }
@@ -182,15 +182,16 @@ class GameController extends AutoDisposeFamilyAsyncNotifier<GameState, String> {
     }
 
     final mode = current.room.gameMode;
-    
+
     if (mode == GameMode.theme || mode == GameMode.core) {
       await submitWord(word: word);
       return 'word';
     } else {
       // Legacy mode
-      final isVerb = current.room.currentWordType == 'verb' || 
-                     current.room.currentWordType == null;
-      
+      final isVerb =
+          current.room.currentWordType == 'verb' ||
+          current.room.currentWordType == null;
+
       if (isVerb) {
         await submitVerb(verb: word);
         return 'verb';

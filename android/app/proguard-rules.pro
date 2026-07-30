@@ -42,13 +42,6 @@
 -keep class **GetWordPairCollection { *; }
 -keep class **GetDictEntryCollection { *; }
 
-# Keep extension getters (wordSets, wordPairs, dictEntrys)
--keepclassmembers class **Get*Collection* {
-    IsarCollection<*> get wordSets;
-    IsarCollection<*> get wordPairs;
-    IsarCollection<*> get dictEntrys;
-}
-
 # Keep ALL classes with "Collection" in name (Isar generated)
 -keep class **Collection { *; }
 -keep class **CollectionSchema { *; }
@@ -106,3 +99,8 @@
 # Firebase Auth
 -keep class com.google.firebase.auth.** { *; }
 -dontwarn com.google.firebase.auth.**
+
+# Explicit Isar Core & Package Keep Rules
+-keep class isar.** { *; }
+-keep class io.isar.** { *; }
+

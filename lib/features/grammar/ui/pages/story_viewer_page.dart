@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../../../core/content/educational_content_id_resolver.dart';
+import '../../../../core/theme/app_colors.dart';
+import '../../../../features/educational_content/content_report_dialog.dart';
 import '../../logic/grammar_providers.dart';
 import '../../models/grammar_models.dart';
-import '../../../../core/theme/app_colors.dart';
 import '../../../training/models/training_models.dart';
 import '../../../training/ui/engine_renderer.dart';
 
@@ -111,12 +113,13 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage> {
                       ),
                     ),
                   ),
+                  _ReportButton(lessonId: widget.lessonId),
                 ],
                 bottom: PreferredSize(
                   preferredSize: const Size.fromHeight(6),
                   child: LinearProgressIndicator(
                     value: progress,
-                    backgroundColor: Colors.white.withOpacity(0.05),
+                    backgroundColor: Colors.white.withValues(alpha: 0.05),
                     valueColor: AlwaysStoppedAnimation<Color>(
                       _getLevelColor(doc.level),
                     ),
@@ -169,10 +172,10 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
-        color: _getLevelColor(level).withOpacity(0.2),
+        color: _getLevelColor(level).withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: _getLevelColor(level).withOpacity(0.5),
+          color: _getLevelColor(level).withValues(alpha: 0.5),
           width: 1,
         ),
       ),
@@ -192,14 +195,14 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage> {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Colors.orange.withOpacity(0.15),
-            Colors.orange.withOpacity(0.05),
+            Colors.orange.withValues(alpha: 0.15),
+            Colors.orange.withValues(alpha: 0.05),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.orange.withOpacity(0.2)),
+        border: Border.all(color: Colors.orange.withValues(alpha: 0.2)),
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
@@ -211,7 +214,7 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage> {
               child: Icon(
                 Icons.auto_stories,
                 size: 100,
-                color: Colors.orange.withOpacity(0.05),
+                color: Colors.orange.withValues(alpha: 0.05),
               ),
             ),
             Padding(
@@ -238,30 +241,28 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage> {
                     ],
                   ),
                   const SizedBox(height: 12),
-                  ...story.introBullets
-                      .map(
-                        (b) => Padding(
-                          padding: const EdgeInsets.only(bottom: 8),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text('⚡', style: TextStyle(fontSize: 14)),
-                              const SizedBox(width: 8),
-                              Expanded(
-                                child: Text(
-                                  b,
-                                  style: const TextStyle(
-                                    color: Colors.white70,
-                                    fontSize: 15,
-                                    height: 1.4,
-                                  ),
-                                ),
+                  ...story.introBullets.map(
+                    (b) => Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text('⚡', style: TextStyle(fontSize: 14)),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              b,
+                              style: const TextStyle(
+                                color: Colors.white70,
+                                fontSize: 15,
+                                height: 1.4,
                               ),
-                            ],
+                            ),
                           ),
-                        ),
-                      )
-                      .toList(),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -288,8 +289,8 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage> {
             color:
                 isSolved
                     ? (isCorrect
-                        ? Colors.green.withOpacity(0.5)
-                        : Colors.red.withOpacity(0.5))
+                        ? Colors.green.withValues(alpha: 0.5)
+                        : Colors.red.withValues(alpha: 0.5))
                     : (isActive ? Colors.white12 : Colors.transparent),
             width: 1.5,
           ),
@@ -297,7 +298,7 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage> {
               isActive
                   ? [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.2),
+                      color: Colors.black.withValues(alpha: 0.2),
                       blurRadius: 10,
                       offset: const Offset(0, 4),
                     ),
@@ -317,7 +318,7 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage> {
                     backgroundColor:
                         isSolved
                             ? (isCorrect ? Colors.green : Colors.red)
-                            : Colors.blueAccent.withOpacity(0.2),
+                            : Colors.blueAccent.withValues(alpha: 0.2),
                     child:
                         isSolved
                             ? Icon(
@@ -400,7 +401,7 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage> {
                         style: TextButton.styleFrom(
                           backgroundColor:
                               isSolved
-                                  ? Colors.white.withOpacity(0.05)
+                                  ? Colors.white.withValues(alpha: 0.05)
                                   : Colors.blueAccent,
                           foregroundColor: Colors.white,
                           padding: const EdgeInsets.symmetric(vertical: 16),
@@ -426,8 +427,8 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage> {
                 decoration: BoxDecoration(
                   color:
                       isCorrect
-                          ? Colors.green.withOpacity(0.05)
-                          : Colors.red.withOpacity(0.05),
+                          ? Colors.green.withValues(alpha: 0.05)
+                          : Colors.red.withValues(alpha: 0.05),
                   borderRadius: const BorderRadius.vertical(
                     bottom: Radius.circular(24),
                   ),
@@ -497,7 +498,7 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage> {
             center: Alignment.topCenter,
             radius: 1.2,
             colors: [
-              AppColors.primary.withOpacity(0.2),
+              AppColors.primary.withValues(alpha: 0.2),
               const Color(0xFF0F172A),
             ],
           ),
@@ -535,7 +536,7 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage> {
                       margin: const EdgeInsets.only(bottom: 16),
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.05),
+                        color: Colors.white.withValues(alpha: 0.05),
                         borderRadius: BorderRadius.circular(16),
                         border: Border.all(color: Colors.white10),
                       ),
@@ -607,6 +608,77 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _ReportButton extends ConsumerWidget {
+  const _ReportButton({required this.lessonId});
+
+  final String lessonId;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final registryAsync = ref.watch(educationalContentRegistryProvider);
+    final lessonAsync = ref.watch(lessonDocProvider(lessonId));
+
+    return lessonAsync.when(
+      data: (doc) {
+        return registryAsync.when(
+          data: (registry) {
+            final items = doc.storyMode.items;
+            if (items.isEmpty) {
+              return const SizedBox.shrink();
+            }
+
+            // Use the first story item for reporting
+            final item = items[0];
+
+            // Try multiple possible keys for the registry lookup
+            String? contentId;
+
+            // Try with prompt as anchor (for story items)
+            if (item.prompt.isNotEmpty) {
+              final promptKey = EducationalItemKey(
+                'assets/lessons/${doc.level}/$lessonId.json',
+                'prompt:${item.prompt}',
+              );
+              contentId = registry[promptKey];
+            }
+
+            // Fallback to ID-based key
+            if (contentId == null) {
+              final idKey = EducationalItemKey(
+                'assets/lessons/${doc.level}/$lessonId.json',
+                'id:${item.id}',
+              );
+              contentId = registry[idKey];
+            }
+
+            if (contentId == null) {
+              return const SizedBox.shrink();
+            }
+
+            return IconButton(
+              key: const ValueKey('report_story_item_0'),
+              icon: const Icon(Icons.flag_outlined, color: Colors.white54),
+              tooltip: 'Report an issue with this content',
+              onPressed: () async {
+                await showContentReportSheet(
+                  context,
+                  contentId: contentId!,
+                  contentVersion: 1,
+                  contentType: 'story_item',
+                );
+              },
+            );
+          },
+          loading: () => const SizedBox.shrink(),
+          error: (_, __) => const SizedBox.shrink(),
+        );
+      },
+      loading: () => const SizedBox.shrink(),
+      error: (_, __) => const SizedBox.shrink(),
     );
   }
 }

@@ -148,7 +148,10 @@ class CargoCategoriesState {
     if (draggedWord != null) return false;
     if (columns.length != 3) return false;
     // Check if total words in all columns equals 12 (no limit per column)
-    final totalWords = columns.fold<int>(0, (sum, col) => sum + col.words.length);
+    final totalWords = columns.fold<int>(
+      0,
+      (sum, col) => sum + col.words.length,
+    );
     return totalWords == 12;
   }
 
@@ -164,4 +167,3 @@ class CargoCategoriesState {
 }
 
 const _undefined = Object();
-

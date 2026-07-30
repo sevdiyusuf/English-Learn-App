@@ -6,6 +6,10 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 
+import '../sync/models/local_schema_metadata.dart';
+import '../sync/models/outbox_item.dart';
+import '../sync/models/sync_checkpoint.dart';
+import '../sync/services/schema_migration_service.dart';
 import '../word_match/models/word_pair.dart';
 import '../word_match/models/word_set.dart';
 import 'models/dict_entry.dart';
@@ -75,7 +79,9 @@ Future<Isar?> openDictionaryStore() async {
 
   // WEB İÇİN ÖZEL KORUMA
   if (kIsWeb) {
-    debugPrint("⚠️ Web platformu algılandı. WASM dosyası eksik olduğu için Isar ATLANIYOR.");
+    debugPrint(
+      "⚠️ Web platformu algılandı. WASM dosyası eksik olduğu için Isar ATLANIYOR.",
+    );
     // Burada Isar'ı hiç açmıyoruz veya sadece bellek içi (in-memory) açmayı deniyoruz.
     // Eğer illa açman gerekiyorsa WASM olmadan açılmaz.
     // Bu yüzden burayı boş bırakıp uygulamanın çökmesini engelliyoruz.
@@ -134,12 +140,20 @@ Future<Isar?> openDictionaryStore() async {
     Isar isar;
     try {
       isar = await Isar.open(
-        [DictEntrySchema, WordSetSchema, WordPairSchema],
+        [
+          DictEntrySchema,
+          WordSetSchema,
+          WordPairSchema,
+          OutboxItemSchema,
+          LocalSchemaMetadataSchema,
+          SyncCheckpointSchema,
+        ],
         name: _isarInstanceName,
         directory: dirPath,
         inspector: !kIsWeb, // Inspector not supported on web in some versions
       );
       debugPrint('Isar opened successfully');
+      await SchemaMigrationService().runMigrations(isar);
     } catch (e, stackTrace) {
       debugPrint('ERROR: Failed to open Isar: $e');
       debugPrint('Stack trace: $stackTrace');
@@ -240,10 +254,15 @@ Future<Isar?> openDictionaryStore() async {
       }
     }
 
-    debugPrint('Seeding dictionary if empty...');
-    await _seedDictionaryIfEmpty(isar);
-
-    debugPrint('Dictionary seeding completed');
+    try {
+      debugPrint('Seeding dictionary if empty...');
+      await _seedDictionaryIfEmpty(isar);
+      debugPrint('Dictionary seeding completed');
+    } catch (e) {
+      debugPrint(
+        'Dictionary seeding failed safely (non-blocking fallback): $e',
+      );
+    }
 
     _isInitializing = false;
     _initializationCompleter!.complete(isar);
@@ -277,37 +296,22 @@ Future<void> _seedDictionaryIfEmpty(Isar isar) async {
     }
 
     debugPrint('Loading dictionary.json...');
-    final jsonString = await rootBundle.loadString('assets/word_battle/dictionary.json');
+    String? jsonString;
+    try {
+      jsonString = await rootBundle.loadString(
+        'assets/word_battle/dictionary.json',
+      );
+    } catch (e) {
+      debugPrint('Warning: Failed to load dictionary asset (non-blocking): $e');
+      return;
+    }
+
     debugPrint('Dictionary.json loaded, length: ${jsonString.length}');
+    debugPrint('Parsing and mapping JSON in background (non-blocking UI)...');
 
-    debugPrint('Parsing JSON...');
-    final List<dynamic> jsonList = json.decode(jsonString) as List<dynamic>;
-    debugPrint('JSON parsed, entries: ${jsonList.length}');
-
-    debugPrint('Mapping entries...');
-    final entries = jsonList
-        .whereType<Map<String, dynamic>>()
-        .map((map) {
-          try {
-            final word = (map['word'] as String?)?.toLowerCase().trim();
-            final type = (map['type'] as String?)?.toLowerCase().trim();
-            if (word != null &&
-                type != null &&
-                word.isNotEmpty &&
-                type.isNotEmpty) {
-              return DictEntry()
-                ..word = word
-                ..type = type;
-            }
-            return null;
-          } catch (e) {
-            debugPrint('Error mapping entry: $e');
-            return null;
-          }
-        })
-        .whereType<DictEntry>()
-        .toList(growable: false);
-    debugPrint('Entries mapped: ${entries.length}');
+    // Run heavy JSON decoding and mapping in background compute/microtask isolate
+    final entries = await compute(_parseDictionaryJson, jsonString);
+    debugPrint('Entries mapped in background: ${entries.length}');
 
     debugPrint('Writing entries to database...');
     await isar.writeTxn(() async {
@@ -315,10 +319,28 @@ Future<void> _seedDictionaryIfEmpty(Isar isar) async {
     });
     debugPrint('Entries written successfully');
   } catch (e, stackTrace) {
-    debugPrint('Error seeding dictionary: $e');
+    debugPrint('Error seeding dictionary (non-blocking): $e');
     debugPrint('Stack trace: $stackTrace');
-    rethrow;
   }
+}
+
+List<DictEntry> _parseDictionaryJson(String jsonString) {
+  final List<dynamic> jsonList = json.decode(jsonString) as List<dynamic>;
+  final entries = <DictEntry>[];
+  for (final map in jsonList) {
+    if (map is Map<String, dynamic>) {
+      final word = (map['word'] as String?)?.toLowerCase().trim();
+      final type = (map['type'] as String?)?.toLowerCase().trim();
+      if (word != null && type != null && word.isNotEmpty && type.isNotEmpty) {
+        entries.add(
+          DictEntry()
+            ..word = word
+            ..type = type,
+        );
+      }
+    }
+  }
+  return entries;
 }
 
 Future<bool> validateWord({

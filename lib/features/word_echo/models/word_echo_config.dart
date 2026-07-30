@@ -29,6 +29,5 @@ class WordEchoConfigController extends StateNotifier<WordEchoConfig> {
 
 final wordEchoConfigProvider =
     StateNotifierProvider<WordEchoConfigController, WordEchoConfig>((ref) {
-  return WordEchoConfigController();
-});
-
+      return WordEchoConfigController();
+    });

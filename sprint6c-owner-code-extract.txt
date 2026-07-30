@@ -1,0 +1,434 @@
+===== BEGIN firestore.rules =====
+    // Helper function to check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Rooms collection
+    match /rooms/{roomId} {
+      allow read: if isAuthenticated();
+
+      allow create: if isAuthenticated() &&
+                       request.resource.data.hostUid == request.auth.uid &&
+                       request.resource.data.players == [request.auth.uid] &&
+                       request.resource.data.get('activePlayerIds', []) == [] &&
+                       request.resource.data.status == 'waiting' &&
+                       request.resource.data.keys().hasAll(['roomCode', 'status', 'players', 'playerNames', 'hostUid', 'createdAt', 'updatedAt']) &&
+                       request.resource.data.keys().hasOnly(['roomCode', 'status', 'players', 'playerNames', 'activePlayerIds', 'currentTurnIndex', 'currentTurnUid', 'turnDeadlineAt', 'turnDurationSeconds', 'winnerUid', 'hostUid', 'createdAt', 'updatedAt']) &&
+                       request.resource.data.playerNames.keys().hasAll([request.auth.uid]) &&
+                       request.resource.data.playerNames.keys().hasOnly([request.auth.uid]) &&
+                       request.resource.data.playerNames[request.auth.uid] is string &&
+                       request.resource.data.playerNames[request.auth.uid].size() > 0 &&
+                       (!('winnerUid' in request.resource.data) || request.resource.data.winnerUid == null) &&
+                       (!('currentTurnUid' in request.resource.data) || request.resource.data.currentTurnUid == null) &&
+                       (!('turnDeadlineAt' in request.resource.data) || request.resource.data.turnDeadlineAt == null);
+
+      allow update: if isAuthenticated() && (
+        (
+          // JOIN
+          resource.data.status == 'waiting' &&
+          request.resource.data.diff(resource.data).affectedKeys().hasOnly(['players', 'playerNames', 'updatedAt']) &&
+          request.resource.data.diff(resource.data).affectedKeys().hasAll(['players', 'playerNames', 'updatedAt']) &&
+          !(request.auth.uid in resource.data.players) &&
+          request.resource.data.players == resource.data.players.concat([request.auth.uid]) &&
+          request.resource.data.playerNames.diff(resource.data.playerNames).affectedKeys().hasOnly([request.auth.uid]) &&
+          request.resource.data.playerNames[request.auth.uid] is string &&
+          request.resource.data.playerNames[request.auth.uid].size() > 0 &&
+          request.resource.data.updatedAt is timestamp &&
+          request.resource.data.updatedAt != resource.data.updatedAt
+        )
+        ||
+        (
+          // RE-JOIN (Update username if already in room)
+          resource.data.status == 'waiting' &&
+          request.resource.data.diff(resource.data).affectedKeys().hasOnly(['playerNames', 'updatedAt']) &&
+          request.resource.data.diff(resource.data).affectedKeys().hasAll(['playerNames', 'updatedAt']) &&
+          (request.auth.uid in resource.data.players) &&
+          request.resource.data.playerNames.diff(resource.data.playerNames).affectedKeys().hasOnly([request.auth.uid]) &&
+          request.resource.data.playerNames[request.auth.uid] is string &&
+          request.resource.data.playerNames[request.auth.uid].size() > 0 &&
+          request.resource.data.updatedAt is timestamp &&
+          request.resource.data.updatedAt != resource.data.updatedAt
+        )
+        ||
+        (
+          // LEAVE
+          request.auth.uid != resource.data.hostUid && // Host normal leave işlemiyle odadan çıkamamalı
+          request.resource.data.diff(resource.data).affectedKeys().hasOnly(['players', 'activePlayerIds', 'updatedAt']) &&
+          request.resource.data.diff(resource.data).affectedKeys().hasAll(['players', 'updatedAt']) &&
+          request.resource.data.players == resource.data.players.removeAll([request.auth.uid]) &&
+          request.resource.data.get('activePlayerIds', []) == resource.data.get('activePlayerIds', []).removeAll([request.auth.uid]) &&
+          request.resource.data.updatedAt is timestamp &&
+          request.resource.data.updatedAt != resource.data.updatedAt
+        )
+      );
+
+      allow delete: if isAuthenticated() && request.auth.uid == resource.data.hostUid;
+
+      // Played words subcollection
+      match /playedWords/{wordId} {
+        // Anyone authenticated can read played words
+        allow read: if isAuthenticated();
+        // Only Cloud Functions should write (handled via Cloud Functions)
+        allow write: if false;
+      }
+
+      // Meta subcollection (usedWords, etc.)
+      match /meta/{docId} {
+        // Anyone authenticated can read meta
+        allow read: if isAuthenticated();
+        // Only Cloud Functions should write
+        allow write: if false;
+      }
+    }
+
+    // Arena Rooms collection
+    match /arena_rooms/{roomId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated() &&
+        request.resource.data.hostId == request.auth.uid &&
+        (!('guestId' in request.resource.data) || request.resource.data.guestId == null) &&
+        request.resource.data.host.id == request.auth.uid &&
+        request.resource.data.host.keys().hasOnly(['id', 'name', 'photoUrl', 'score', 'isOnline', 'lastPing']) &&
+        request.resource.data.host.score == 0 &&
+        (!('hostScore' in request.resource.data) || request.resource.data.hostScore == 0) &&
+        (!('guestScore' in request.resource.data) || request.resource.data.guestScore == 0) &&
+        (!('resolvedWorksheet' in request.resource.data) || request.resource.data.resolvedWorksheet == null) &&
+        (!('round' in request.resource.data) || request.resource.data.round == null);
+
+      allow update: if isAuthenticated() && (
+        // 1. Host updates (but cannot change hostId)
+        (
+          request.auth.uid == resource.data.hostId &&
+          request.resource.data.hostId == resource.data.hostId &&
+          request.resource.data.diff(resource.data).affectedKeys().hasOnly(['config', 'host']) &&
+          (!('host' in request.resource.data.diff(resource.data).affectedKeys()) || request.resource.data.host.diff(resource.data.host).affectedKeys().hasOnly(['lastPing', 'isOnline'])) &&
+          (!('config' in request.resource.data.diff(resource.data).affectedKeys()) || request.resource.data.config.diff(resource.data.config).affectedKeys().hasOnly(['level', 'worksheetId', 'questionCount']))
+        ) ||
+        // 2. Guest joins (can only modify guest/guestId)
+        (
+          resource.data.guestId == null &&
+          request.resource.data.guestId == request.auth.uid &&
+          request.resource.data.diff(resource.data).affectedKeys().hasOnly(['guestId', 'guest']) &&
+          request.resource.data.guest.id == request.auth.uid &&
+          request.resource.data.guest.keys().hasOnly(['id', 'name', 'photoUrl', 'score', 'isOnline', 'lastPing']) &&
+          request.resource.data.guest.score == 0
+        ) ||
+        // 3. Guest updates their own presence
+        (
+          resource.data.guestId == request.auth.uid &&
+          request.resource.data.diff(resource.data).affectedKeys().hasOnly(['guest']) &&
+          (!('guest' in request.resource.data.diff(resource.data).affectedKeys()) || request.resource.data.guest.diff(resource.data.guest).affectedKeys().hasOnly(['lastPing', 'isOnline']))
+        )
+      );
+
+      allow delete: if isAuthenticated() && request.auth.uid == resource.data.hostId;
+
+      // Answers subcollection
+      match /answers/{answerId} {
+        allow read: if isAuthenticated();
+        allow write: if isAuthenticated() && answerId.matches('.*_' + request.auth.uid);
+      }
+    }
+
+    // Friend requests
+    match /friend_requests/{requestId} {
+      allow create: if isAuthenticated() &&
+                    request.resource.data.fromUid == request.auth.uid &&
+                    request.resource.data.fromUid != request.resource.data.toUid &&
+                    request.resource.data.fromUid is string && request.resource.data.fromUid.size() > 0 &&
+                    request.resource.data.toUid is string && request.resource.data.toUid.size() > 0 &&
+                    request.resource.data.status == 'pending' &&
+                    request.resource.data.status is string &&
+                    // Check standard ISO-8601 UTC format (e.g., 2026-07-25T16:39:50.123Z or 2026-07-25T16:39:50Z)
+                    request.resource.data.createdAt is string && request.resource.data.createdAt.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}([.][0-9]+)?Z$') &&
+                    request.resource.data.updatedAt is string && request.resource.data.updatedAt.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}([.][0-9]+)?Z$') &&
+                    request.resource.data.keys().hasAll(['fromUid', 'toUid', 'status', 'createdAt', 'updatedAt']) &&
+                    request.resource.data.keys().hasOnly(['fromUid', 'toUid', 'status', 'createdAt', 'updatedAt', 'fromDisplayName', 'fromUserCode']);
+
+      allow update: if isAuthenticated() &&
+        // Immutable identity fields
+        request.resource.data.fromUid == resource.data.fromUid &&
+        request.resource.data.toUid == resource.data.toUid &&
+        request.resource.data.createdAt == resource.data.createdAt &&
+        request.resource.data.get('fromDisplayName', '') == resource.data.get('fromDisplayName', '') &&
+        request.resource.data.get('fromUserCode', '') == resource.data.get('fromUserCode', '') &&
+        request.resource.data.keys().hasOnly(['fromUid', 'toUid', 'status', 'createdAt', 'updatedAt', 'fromDisplayName', 'fromUserCode']) &&
+        // Limit affected keys
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt']) &&
+        request.resource.data.updatedAt is string && request.resource.data.updatedAt.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}([.][0-9]+)?Z$') &&
+        request.resource.data.updatedAt != resource.data.updatedAt &&
+        // State machine logic
+        resource.data.status == 'pending' &&
+        (
+          (request.auth.uid == resource.data.toUid && request.resource.data.status == 'rejected') ||
+          (request.auth.uid == resource.data.fromUid && request.resource.data.status == 'cancelled')
+        );
+
+      allow read: if isAuthenticated() && (request.auth.uid == resource.data.fromUid || request.auth.uid == resource.data.toUid);
+      allow delete: if false; // Deletions handled by functions only
+    }
+===== END firestore.rules =====
+
+===== BEGIN functions/src/index.ts =====
+type AcceptFriendRequestInput = { requestId?: string };
+
+export const acceptFriendRequest = onCall({ region: 'us-central1' }, async (req) => {
+    // 1. Authentication check first
+    if (!req.auth) throw new HttpsError('unauthenticated', 'Oturum bulunamadı');
+
+    // 2. Input validation
+    let { requestId } = (req.data as AcceptFriendRequestInput) ?? {};
+    if (typeof requestId !== 'string') {
+        throw new HttpsError('invalid-argument', 'Geçersiz requestId tipi');
+    }
+    requestId = requestId.trim();
+    if (!requestId || requestId.length > 100 || requestId.includes('/') || requestId.includes('\\')) {
+        throw new HttpsError('invalid-argument', 'Geçersiz requestId formatı');
+    }
+
+    const uid = req.auth.uid;
+    const reqRef = db.collection('friend_requests').doc(requestId);
+
+    return db.runTransaction(async (tx) => {
+        const snap = await tx.get(reqRef);
+        if (!snap.exists) {
+            throw new HttpsError('not-found', 'Arkadaşlık isteği bulunamadı');
+        }
+
+        const data = snap.data()!;
+
+        const fromUid = data.fromUid;
+        const toUid = data.toUid;
+        const status = data.status;
+
+        // Strict document validation
+        if (
+            typeof fromUid !== 'string' || typeof toUid !== 'string' ||
+            !fromUid.trim() || !toUid.trim() ||
+            fromUid.includes('/') || toUid.includes('/') ||
+            fromUid.includes('\\') || toUid.includes('\\') ||
+            fromUid.length > 100 || toUid.length > 100 ||
+            fromUid !== fromUid.trim() || toUid !== toUid.trim() ||
+            fromUid === toUid
+        ) {
+            throw new HttpsError('failed-precondition', 'Geçersiz istek belgesi (UID formatı)');
+        }
+
+        if (typeof status !== 'string') {
+            throw new HttpsError('failed-precondition', 'Geçersiz istek durumu (tip hatası)');
+        }
+
+        if (toUid !== uid) {
+            throw new HttpsError('permission-denied', 'Bu isteği yalnızca alıcı kabul edebilir');
+        }
+
+        if (status !== 'pending' && status !== 'accepted') {
+            throw new HttpsError('failed-precondition', 'Bu istek kabul edilemez durumda');
+        }
+
+        const aRef = db.collection('friendships').doc(fromUid).collection('friends').doc(toUid);
+        const bRef = db.collection('friendships').doc(toUid).collection('friends').doc(fromUid);
+
+        // Idempotency Check
+        if (status === 'accepted') {
+            const aSnap = await tx.get(aRef);
+            const bSnap = await tx.get(bRef);
+            if (aSnap.exists && bSnap.exists) {
+                return { success: true, status: 'alreadyAccepted' };
+            }
+        }
+
+        const now = nowTimestamp();
+        const isoNow = new Date(now.toMillis()).toISOString();
+
+        // 1. Update the request status
+        tx.update(reqRef, {
+            status: 'accepted',
+            updatedAt: isoNow,
+        });
+
+        // 2. Create friendship docs
+        const payload = { createdAt: isoNow };
+        tx.set(aRef, payload, { merge: true });
+        tx.set(bRef, payload, { merge: true });
+
+        return { success: true, status: 'accepted' };
+    });
+});
+
+
+/**
+ * Automatically clean up all Firestore user data when a Firebase Auth account is deleted.
+ * Cleans up user_settings/{uid}, user_stats/{uid}, users/{uid}, and friendships/{uid}
+ * along with all their subcollections.
+ */
+
+// --------- Account Deletion ---------
+export const cleanupUserData = async (uid: string) => {
+    console.log(`[cleanupUserData] Starting deletion for UID: ${uid}`);
+    try {
+        const friendsSnapshot = await db.collection('friendships').doc(uid).collection('friends').get();
+        let batch = db.batch();
+        let batchCount = 0;
+        const commitBatchIfNeeded = async () => {
+            if (batchCount > 400) {
+                await batch.commit();
+                batch = db.batch();
+                batchCount = 0;
+            }
+        };
+        for (const friendDoc of friendsSnapshot.docs) {
+            const friendUid = friendDoc.id;
+            const reciprocalRef = db.collection('friendships').doc(friendUid).collection('friends').doc(uid);
+            batch.delete(reciprocalRef);
+            batchCount++;
+            await commitBatchIfNeeded();
+        }
+        if (batchCount > 0) {
+            await batch.commit();
+        }
+
+        const collectionsToDelete = ['user_settings', 'user_stats', 'users', 'friendships'];
+        for (const colName of collectionsToDelete) {
+            const docRef = db.collection(colName).doc(uid);
+            await db.recursiveDelete(docRef);
+        }
+
+        const setsSnapshot = await db.collection('word_match_sets').where('ownerUid', '==', uid).get();
+        const setDeletionPromises: Promise<void>[] = [];
+        setsSnapshot.docs.forEach((doc) => {
+            setDeletionPromises.push(db.recursiveDelete(doc.ref));
+        });
+        await Promise.all(setDeletionPromises);
+
+        const requestsFromUser = await db.collection('friend_requests').where('fromUid', '==', uid).get();
+        const requestsToUser = await db.collection('friend_requests').where('toUid', '==', uid).get();
+
+        let reqBatch = db.batch();
+        let reqBatchCount = 0;
+        const deleteDoc = async (doc: FirebaseFirestore.DocumentSnapshot) => {
+            reqBatch.delete(doc.ref);
+            reqBatchCount++;
+            if (reqBatchCount > 400) {
+                await reqBatch.commit();
+                reqBatch = db.batch();
+                reqBatchCount = 0;
+            }
+        };
+        for (const doc of requestsFromUser.docs) await deleteDoc(doc);
+        for (const doc of requestsToUser.docs) await deleteDoc(doc);
+
+        if (reqBatchCount > 0) {
+            await reqBatch.commit();
+        }
+        console.log(`[cleanupUserData] Successfully cleaned up data for user: ${uid}`);
+    } catch (error) {
+        console.error(`[cleanupUserData] Failed for user ${uid}:`, error);
+        throw error;
+    }
+};
+
+export const onAuthUserDeleted = authV1.user().onDelete(async (user) => {
+    return cleanupUserData(user.uid);
+});
+
+export const requestAccountDeletion = onCall({ region: 'us-central1' }, async (req) => {
+    if (!req.auth) {
+        throw new HttpsError('unauthenticated', 'Oturum bulunamadı');
+    }
+
+    const uid = req.auth.uid;
+
+    // Check recent auth (auth_time)
+    // token.auth_time is in seconds
+    const authTime = req.auth.token.auth_time;
+    const nowSeconds = Math.floor(Date.now() / 1000);
+    // Enforce recent login within last 10 minutes (600 seconds)
+    if (!authTime || nowSeconds - authTime > 600) {
+        throw new HttpsError('permission-denied', 'recent-login-required');
+    }
+
+    console.log(`[requestAccountDeletion] Starting deletion for UID: ${uid}`);
+
+    try {
+        await cleanupUserData(uid);
+        // Finally delete the Auth user
+        await admin.auth().deleteUser(uid);
+        console.log(`[requestAccountDeletion] Successfully deleted user: ${uid}`);
+        return { success: true };
+    } catch (error) {
+        console.error(`[requestAccountDeletion] Failed for user ${uid}:`, error);
+        throw new HttpsError('internal', 'cleanupFailed');
+    }
+});
+===== END functions/src/index.ts =====
+
+===== BEGIN lib/features/friends/data/friends_repo.dart =====
+  /// Accept a friend request (creates friendship both ways).
+  Future<void> acceptRequest(FriendRequest request, AppUser currentUser) async {
+    if (request.toUid != currentUser.uid) {
+      throw StateError('Bu isteği yalnızca alıcı kabul edebilir');
+    }
+
+    // Verify current user is authenticated
+    if (currentUser.uid.isEmpty) {
+      throw StateError('Kullanıcı kimlik doğrulaması gerekli');
+    }
+
+    try {
+      final callable = _functions.httpsCallable('acceptFriendRequest');
+      await callable.call({'requestId': request.id});
+    } on FirebaseFunctionsException catch (e) {
+      debugPrint('Accept Request Functions Error:');
+      debugPrint('  Code: ${e.code}');
+      debugPrint('  Message: ${e.message}');
+      throw StateError('İstek kabul edilirken hata oluştu: ${e.message}');
+    } catch (e) {
+      debugPrint('Accept Request Error: $e');
+      throw StateError('İstek kabul edilirken hata oluştu: $e');
+    }
+  }
+
+  /// Reject or cancel a friend request.
+  Future<void> rejectRequest(FriendRequest request, AppUser currentUser) async {
+    if (request.toUid != currentUser.uid &&
+        request.fromUid != currentUser.uid) {
+      throw StateError('Bu isteği yalnızca gönderen veya alıcı reddedebilir');
+    }
+    final now = DateTime.now().toUtc();
+    final newStatus = request.fromUid == currentUser.uid ? 'cancelled' : 'rejected';
+    await _friendRequestsRef.doc(request.id).update({
+      'status': newStatus,
+      'updatedAt': now.toIso8601String(),
+    });
+  }
+===== END lib/features/friends/data/friends_repo.dart =====
+
+===== BEGIN lib/features/auth/data/auth_repo.dart =====
+  /// Delete account and data
+  /// Calls the secure backend function 'requestAccountDeletion'
+  Future<void> deleteAccountAndData() async {
+    try {
+      final user = _auth.currentUser;
+      if (user == null) {
+        throw AppFailure.auth(message: 'Silinecek kullanıcı bulunamadı');
+      }
+
+      // Call Cloud Function to delete all data AND the Auth user
+      final callable = _functions.httpsCallable('requestAccountDeletion');
+      await callable.call();
+
+      // Force local sign out to drop the invalidated session immediately
+      await _auth.signOut();
+
+    } catch (e, stack) {
+      ErrorLogger.instance.logError(
+        e,
+        stackTrace: stack,
+        context: 'deleteAccountAndData',
+      );
+      throw FirebaseErrorMapper.map(e);
+    }
+  }
+===== END lib/features/auth/data/auth_repo.dart =====

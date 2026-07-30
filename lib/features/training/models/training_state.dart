@@ -1,4 +1,3 @@
-
 import 'training_models.dart';
 
 class TrainingSessionState {
@@ -10,7 +9,7 @@ class TrainingSessionState {
   final Map<String, bool> results; // itemId -> isCorrect
   final bool isLocked; // if current question is submitted
   final List<String> reviewQueue;
-  
+
   TrainingSessionState({
     this.isLoading = false,
     this.error,
@@ -34,7 +33,8 @@ class TrainingSessionState {
   }) {
     return TrainingSessionState(
       isLoading: isLoading ?? this.isLoading,
-      error: error, // If not provided, it clears error unless I want to keep it. Usually clear on new state.
+      error:
+          error, // If not provided, it clears error unless I want to keep it. Usually clear on new state.
       worksheet: worksheet ?? this.worksheet,
       currentIndex: currentIndex ?? this.currentIndex,
       userAnswers: userAnswers ?? this.userAnswers,
@@ -43,7 +43,7 @@ class TrainingSessionState {
       reviewQueue: reviewQueue ?? this.reviewQueue,
     );
   }
-  
+
   WorksheetItem? get currentItem {
     if (worksheet == null) {
       return null;
@@ -66,7 +66,7 @@ class TrainingSessionState {
     }
     return items.first;
   }
-      
+
   bool get isFinished {
     if (worksheet == null) {
       return false;
@@ -76,7 +76,7 @@ class TrainingSessionState {
     final totalSteps = baseLength + reviewLength;
     return currentIndex >= totalSteps;
   }
-      
+
   int get correctCount => results.values.where((v) => v).length;
   int get totalCount => worksheet?.items.length ?? 0;
 }

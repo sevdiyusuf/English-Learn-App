@@ -7,6 +7,8 @@ abstract class WordMatchRepoInterface {
   static const int maxPairsPerSet = 250;
   static const String wordsFromGamesSetName = 'Words from Games';
 
+  String? get activeOwnerUid;
+
   Stream<List<WordSet>> watchSets();
   Stream<List<WordSet>> watchLevelSets();
   Stream<List<WordPair>> watchPairs(int setId);
@@ -45,10 +47,57 @@ abstract class WordMatchRepoInterface {
   Future<void> updateSetCloudId(int id, String cloudId);
   Future<WordSet?> getSetByCloudId(String cloudId);
   Future<void> updateSetVisibility(int id, SetVisibility visibility);
+  Future<void> updateSetOwnerUid(int id, String? ownerUid);
+  Future<void> updateSetPendingMigrationUid(int id, String? pendingUid);
+  Future<List<WordSet>> getUnmigratedGuestSets();
+  Future<List<WordPair>> getUnmigratedGuestPairs(int setId);
   Future<void> updateSetMetadata(
     int id, {
     String? sourceSetId,
     String? sourceOwnerUid,
     DateTime? importedAt,
+    String? ownerUid,
+    String? pendingMigrationUid,
   });
+
+  // ── Remote-apply path (used exclusively by RemoteWordSetApplier) ─────────
+  // These methods do NOT produce Outbox entries.
+
+  /// Creates a new local WordSet from a remote document without triggering
+  /// outbox enqueue. Sets ownerUid and cloudId directly.
+  Future<int> createSetInternal({
+    required String name,
+    required String ownerUid,
+    required String cloudId,
+  });
+
+  /// Renames a WordSet without triggering outbox enqueue.
+  Future<void> renameSetInternal({required int id, required String name});
+
+  /// Replaces all pairs for a set without triggering outbox enqueue.
+  Future<void> savePairsInternal({
+    required int setId,
+    required List<WordPair> pairs,
+  });
+
+  /// Updates remote-sync metadata on a WordSet:
+  /// cloudId, ownerUid, remoteVersion, lastRemoteOperationId,
+  /// visibility, sourceSetId, sourceOwnerUid, importedAt,
+  /// optionally updatedAt and createdAt (from remote payload).
+  Future<void> updateSetRemoteMetadata(
+    int setId, {
+    required String cloudId,
+    required String ownerUid,
+    required int remoteVersion,
+    required String lastOperationId,
+    SetVisibility? visibility,
+    String? sourceSetId,
+    String? sourceOwnerUid,
+    DateTime? importedAt,
+    DateTime? updatedAt,
+    DateTime? createdAt,
+  });
+
+  /// Clears local data (WordSets and Outbox records) belonging to the given uid.
+  Future<void> clearUserData(String uid);
 }

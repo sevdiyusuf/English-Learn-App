@@ -5,10 +5,6 @@ class GameBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned.fill(
-      child: Container(
-        color: const Color(0xFF0F172A),
-      ),
-    );
+    return Positioned.fill(child: Container(color: const Color(0xFF0F172A)));
   }
 }

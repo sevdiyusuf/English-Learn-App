@@ -28,9 +28,9 @@ class ErrorMessageHelper {
 
     // Diğer hatalar
     final errorString = error.toString().toLowerCase();
-    
+
     // Network hataları
-    if (errorString.contains('network') || 
+    if (errorString.contains('network') ||
         errorString.contains('connection') ||
         errorString.contains('socket') ||
         errorString.contains('internet')) {
@@ -38,19 +38,18 @@ class ErrorMessageHelper {
     }
 
     // Timeout hataları
-    if (errorString.contains('timeout') || 
-        errorString.contains('deadline')) {
+    if (errorString.contains('timeout') || errorString.contains('deadline')) {
       return 'İşlem zaman aşımına uğradı. Lütfen tekrar deneyin';
     }
 
     // Permission hataları
-    if (errorString.contains('permission') || 
+    if (errorString.contains('permission') ||
         errorString.contains('unauthorized')) {
       return 'Bu işlem için yetkiniz yok';
     }
 
     // Default mesaj
-    return defaultMessage ?? 
+    return defaultMessage ??
         'Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin';
   }
 
@@ -115,7 +114,9 @@ class ErrorMessageHelper {
   }
 
   /// Cloud Functions hata mesajlarını Türkçe'ye çevirir
-  static String _getCloudFunctionsErrorMessage(FirebaseFunctionsException error) {
+  static String _getCloudFunctionsErrorMessage(
+    FirebaseFunctionsException error,
+  ) {
     switch (error.code) {
       case 'invalid-argument':
         return error.message ?? 'Geçersiz parametre';
@@ -154,32 +155,30 @@ class ErrorMessageHelper {
   /// String hata mesajlarını kontrol eder
   static String _getStringErrorMessage(String error) {
     final lowerError = error.toLowerCase();
-    
-    if (lowerError.contains('deadline-exceeded') || 
+
+    if (lowerError.contains('deadline-exceeded') ||
         lowerError.contains('tur süresi')) {
       return 'Tur süresi dolmuş';
     }
-    
-    if (lowerError.contains('permission-denied') || 
+
+    if (lowerError.contains('permission-denied') ||
         lowerError.contains('yetkiniz yok')) {
       return 'Bu işlem için yetkiniz yok';
     }
-    
-    if (lowerError.contains('network') || 
-        lowerError.contains('internet')) {
+
+    if (lowerError.contains('network') || lowerError.contains('internet')) {
       return 'İnternet bağlantınızı kontrol edin';
     }
-    
-    if (lowerError.contains('not-found') || 
-        lowerError.contains('bulunamadı')) {
+
+    if (lowerError.contains('not-found') || lowerError.contains('bulunamadı')) {
       return 'Aranan kayıt bulunamadı';
     }
-    
+
     // Eğer mesaj zaten Türkçe görünüyorsa, olduğu gibi döndür
     if (_isTurkish(error)) {
       return error;
     }
-    
+
     return 'Bir hata oluştu: $error';
   }
 
@@ -192,32 +191,33 @@ class ErrorMessageHelper {
   /// Hatanın retry edilebilir olup olmadığını kontrol eder
   static bool isRetryable(Object error) {
     if (error is FirebaseException) {
-      return error.code == 'unavailable' || 
-             error.code == 'deadline-exceeded' ||
-             error.code == 'internal' ||
-             error.code == 'cancelled';
+      return error.code == 'unavailable' ||
+          error.code == 'deadline-exceeded' ||
+          error.code == 'internal' ||
+          error.code == 'cancelled';
     }
-    
+
     if (error is FirebaseFunctionsException) {
-      return error.code == 'unavailable' || 
-             error.code == 'deadline-exceeded' ||
-             error.code == 'internal' ||
-             error.code == 'cancelled';
+      return error.code == 'unavailable' ||
+          error.code == 'deadline-exceeded' ||
+          error.code == 'internal' ||
+          error.code == 'cancelled';
     }
-    
+
     final errorString = error.toString().toLowerCase();
-    return errorString.contains('network') || 
-           errorString.contains('timeout') ||
-           errorString.contains('connection');
+    return errorString.contains('network') ||
+        errorString.contains('timeout') ||
+        errorString.contains('connection');
   }
 
   /// Hata için uygun icon döndürür
   static IconData getErrorIcon(Object error) {
     if (error is FirebaseException || error is FirebaseFunctionsException) {
-      final code = (error is FirebaseException) 
-          ? error.code 
-          : (error as FirebaseFunctionsException).code;
-      
+      final code =
+          (error is FirebaseException)
+              ? error.code
+              : (error as FirebaseFunctionsException).code;
+
       switch (code) {
         case 'permission-denied':
         case 'unauthenticated':
@@ -233,13 +233,12 @@ class ErrorMessageHelper {
           return Icons.error_outline;
       }
     }
-    
+
     final errorString = error.toString().toLowerCase();
     if (errorString.contains('network') || errorString.contains('connection')) {
       return Icons.wifi_off;
     }
-    
+
     return Icons.error_outline;
   }
 }
-

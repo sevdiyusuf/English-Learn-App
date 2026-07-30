@@ -12,7 +12,8 @@ part of 'user_settings.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 UserSettings _$UserSettingsFromJson(Map<String, dynamic> json) {
   return _UserSettings.fromJson(json);
@@ -20,11 +21,11 @@ UserSettings _$UserSettingsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserSettings {
-// UI
+  // UI
   String get themeMode =>
       throw _privateConstructorUsedError; // 'system' | 'dark' | 'light'
   String get languageCode => throw _privateConstructorUsedError; // 'tr' | 'en'
-// Feedback
+  // Feedback
   bool get soundEnabled => throw _privateConstructorUsedError;
   bool get vibrationEnabled => throw _privateConstructorUsedError; // Goals
   String get dailyGoalType =>
@@ -32,11 +33,18 @@ mixin _$UserSettings {
   int get dailyGoalValue =>
       throw _privateConstructorUsedError; // 5, 10, 15, etc.
   int get streakGoal => throw _privateConstructorUsedError; // 3, 10, 20, 30, 50
-// Notifications
+  // First-use learning profile. Values are stable identifiers, not labels.
+  int get onboardingCompletedVersion => throw _privateConstructorUsedError;
+  String get onboardingStep => throw _privateConstructorUsedError;
+  String? get cefrLevel => throw _privateConstructorUsedError;
+  String? get learningGoal =>
+      throw _privateConstructorUsedError; // Notifications
+  bool get multiplayerNotificationsEnabled =>
+      throw _privateConstructorUsedError;
   bool get remindersEnabled => throw _privateConstructorUsedError;
   String? get reminderTime =>
       throw _privateConstructorUsedError; // "HH:mm" as string
-// Metadata
+  // Metadata
   @TimestampConverter()
   DateTime? get createdAt => throw _privateConstructorUsedError;
   @TimestampConverter()
@@ -51,21 +59,28 @@ mixin _$UserSettings {
 /// @nodoc
 abstract class $UserSettingsCopyWith<$Res> {
   factory $UserSettingsCopyWith(
-          UserSettings value, $Res Function(UserSettings) then) =
-      _$UserSettingsCopyWithImpl<$Res, UserSettings>;
+    UserSettings value,
+    $Res Function(UserSettings) then,
+  ) = _$UserSettingsCopyWithImpl<$Res, UserSettings>;
   @useResult
-  $Res call(
-      {String themeMode,
-      String languageCode,
-      bool soundEnabled,
-      bool vibrationEnabled,
-      String dailyGoalType,
-      int dailyGoalValue,
-      int streakGoal,
-      bool remindersEnabled,
-      String? reminderTime,
-      @TimestampConverter() DateTime? createdAt,
-      @TimestampConverter() DateTime? updatedAt});
+  $Res call({
+    String themeMode,
+    String languageCode,
+    bool soundEnabled,
+    bool vibrationEnabled,
+    String dailyGoalType,
+    int dailyGoalValue,
+    int streakGoal,
+    int onboardingCompletedVersion,
+    String onboardingStep,
+    String? cefrLevel,
+    String? learningGoal,
+    bool multiplayerNotificationsEnabled,
+    bool remindersEnabled,
+    String? reminderTime,
+    @TimestampConverter() DateTime? createdAt,
+    @TimestampConverter() DateTime? updatedAt,
+  });
 }
 
 /// @nodoc
@@ -88,57 +103,101 @@ class _$UserSettingsCopyWithImpl<$Res, $Val extends UserSettings>
     Object? dailyGoalType = null,
     Object? dailyGoalValue = null,
     Object? streakGoal = null,
+    Object? onboardingCompletedVersion = null,
+    Object? onboardingStep = null,
+    Object? cefrLevel = freezed,
+    Object? learningGoal = freezed,
+    Object? multiplayerNotificationsEnabled = null,
     Object? remindersEnabled = null,
     Object? reminderTime = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(_value.copyWith(
-      themeMode: null == themeMode
-          ? _value.themeMode
-          : themeMode // ignore: cast_nullable_to_non_nullable
-              as String,
-      languageCode: null == languageCode
-          ? _value.languageCode
-          : languageCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      soundEnabled: null == soundEnabled
-          ? _value.soundEnabled
-          : soundEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      vibrationEnabled: null == vibrationEnabled
-          ? _value.vibrationEnabled
-          : vibrationEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      dailyGoalType: null == dailyGoalType
-          ? _value.dailyGoalType
-          : dailyGoalType // ignore: cast_nullable_to_non_nullable
-              as String,
-      dailyGoalValue: null == dailyGoalValue
-          ? _value.dailyGoalValue
-          : dailyGoalValue // ignore: cast_nullable_to_non_nullable
-              as int,
-      streakGoal: null == streakGoal
-          ? _value.streakGoal
-          : streakGoal // ignore: cast_nullable_to_non_nullable
-              as int,
-      remindersEnabled: null == remindersEnabled
-          ? _value.remindersEnabled
-          : remindersEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      reminderTime: freezed == reminderTime
-          ? _value.reminderTime
-          : reminderTime // ignore: cast_nullable_to_non_nullable
-              as String?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            themeMode:
+                null == themeMode
+                    ? _value.themeMode
+                    : themeMode // ignore: cast_nullable_to_non_nullable
+                        as String,
+            languageCode:
+                null == languageCode
+                    ? _value.languageCode
+                    : languageCode // ignore: cast_nullable_to_non_nullable
+                        as String,
+            soundEnabled:
+                null == soundEnabled
+                    ? _value.soundEnabled
+                    : soundEnabled // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            vibrationEnabled:
+                null == vibrationEnabled
+                    ? _value.vibrationEnabled
+                    : vibrationEnabled // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            dailyGoalType:
+                null == dailyGoalType
+                    ? _value.dailyGoalType
+                    : dailyGoalType // ignore: cast_nullable_to_non_nullable
+                        as String,
+            dailyGoalValue:
+                null == dailyGoalValue
+                    ? _value.dailyGoalValue
+                    : dailyGoalValue // ignore: cast_nullable_to_non_nullable
+                        as int,
+            streakGoal:
+                null == streakGoal
+                    ? _value.streakGoal
+                    : streakGoal // ignore: cast_nullable_to_non_nullable
+                        as int,
+            onboardingCompletedVersion:
+                null == onboardingCompletedVersion
+                    ? _value.onboardingCompletedVersion
+                    : onboardingCompletedVersion // ignore: cast_nullable_to_non_nullable
+                        as int,
+            onboardingStep:
+                null == onboardingStep
+                    ? _value.onboardingStep
+                    : onboardingStep // ignore: cast_nullable_to_non_nullable
+                        as String,
+            cefrLevel:
+                freezed == cefrLevel
+                    ? _value.cefrLevel
+                    : cefrLevel // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            learningGoal:
+                freezed == learningGoal
+                    ? _value.learningGoal
+                    : learningGoal // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            multiplayerNotificationsEnabled:
+                null == multiplayerNotificationsEnabled
+                    ? _value.multiplayerNotificationsEnabled
+                    : multiplayerNotificationsEnabled // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            remindersEnabled:
+                null == remindersEnabled
+                    ? _value.remindersEnabled
+                    : remindersEnabled // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            reminderTime:
+                freezed == reminderTime
+                    ? _value.reminderTime
+                    : reminderTime // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            createdAt:
+                freezed == createdAt
+                    ? _value.createdAt
+                    : createdAt // ignore: cast_nullable_to_non_nullable
+                        as DateTime?,
+            updatedAt:
+                freezed == updatedAt
+                    ? _value.updatedAt
+                    : updatedAt // ignore: cast_nullable_to_non_nullable
+                        as DateTime?,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -146,22 +205,29 @@ class _$UserSettingsCopyWithImpl<$Res, $Val extends UserSettings>
 abstract class _$$UserSettingsImplCopyWith<$Res>
     implements $UserSettingsCopyWith<$Res> {
   factory _$$UserSettingsImplCopyWith(
-          _$UserSettingsImpl value, $Res Function(_$UserSettingsImpl) then) =
-      __$$UserSettingsImplCopyWithImpl<$Res>;
+    _$UserSettingsImpl value,
+    $Res Function(_$UserSettingsImpl) then,
+  ) = __$$UserSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String themeMode,
-      String languageCode,
-      bool soundEnabled,
-      bool vibrationEnabled,
-      String dailyGoalType,
-      int dailyGoalValue,
-      int streakGoal,
-      bool remindersEnabled,
-      String? reminderTime,
-      @TimestampConverter() DateTime? createdAt,
-      @TimestampConverter() DateTime? updatedAt});
+  $Res call({
+    String themeMode,
+    String languageCode,
+    bool soundEnabled,
+    bool vibrationEnabled,
+    String dailyGoalType,
+    int dailyGoalValue,
+    int streakGoal,
+    int onboardingCompletedVersion,
+    String onboardingStep,
+    String? cefrLevel,
+    String? learningGoal,
+    bool multiplayerNotificationsEnabled,
+    bool remindersEnabled,
+    String? reminderTime,
+    @TimestampConverter() DateTime? createdAt,
+    @TimestampConverter() DateTime? updatedAt,
+  });
 }
 
 /// @nodoc
@@ -169,8 +235,9 @@ class __$$UserSettingsImplCopyWithImpl<$Res>
     extends _$UserSettingsCopyWithImpl<$Res, _$UserSettingsImpl>
     implements _$$UserSettingsImplCopyWith<$Res> {
   __$$UserSettingsImplCopyWithImpl(
-      _$UserSettingsImpl _value, $Res Function(_$UserSettingsImpl) _then)
-      : super(_value, _then);
+    _$UserSettingsImpl _value,
+    $Res Function(_$UserSettingsImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -182,116 +249,179 @@ class __$$UserSettingsImplCopyWithImpl<$Res>
     Object? dailyGoalType = null,
     Object? dailyGoalValue = null,
     Object? streakGoal = null,
+    Object? onboardingCompletedVersion = null,
+    Object? onboardingStep = null,
+    Object? cefrLevel = freezed,
+    Object? learningGoal = freezed,
+    Object? multiplayerNotificationsEnabled = null,
     Object? remindersEnabled = null,
     Object? reminderTime = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(_$UserSettingsImpl(
-      themeMode: null == themeMode
-          ? _value.themeMode
-          : themeMode // ignore: cast_nullable_to_non_nullable
-              as String,
-      languageCode: null == languageCode
-          ? _value.languageCode
-          : languageCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      soundEnabled: null == soundEnabled
-          ? _value.soundEnabled
-          : soundEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      vibrationEnabled: null == vibrationEnabled
-          ? _value.vibrationEnabled
-          : vibrationEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      dailyGoalType: null == dailyGoalType
-          ? _value.dailyGoalType
-          : dailyGoalType // ignore: cast_nullable_to_non_nullable
-              as String,
-      dailyGoalValue: null == dailyGoalValue
-          ? _value.dailyGoalValue
-          : dailyGoalValue // ignore: cast_nullable_to_non_nullable
-              as int,
-      streakGoal: null == streakGoal
-          ? _value.streakGoal
-          : streakGoal // ignore: cast_nullable_to_non_nullable
-              as int,
-      remindersEnabled: null == remindersEnabled
-          ? _value.remindersEnabled
-          : remindersEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      reminderTime: freezed == reminderTime
-          ? _value.reminderTime
-          : reminderTime // ignore: cast_nullable_to_non_nullable
-              as String?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-    ));
+    return _then(
+      _$UserSettingsImpl(
+        themeMode:
+            null == themeMode
+                ? _value.themeMode
+                : themeMode // ignore: cast_nullable_to_non_nullable
+                    as String,
+        languageCode:
+            null == languageCode
+                ? _value.languageCode
+                : languageCode // ignore: cast_nullable_to_non_nullable
+                    as String,
+        soundEnabled:
+            null == soundEnabled
+                ? _value.soundEnabled
+                : soundEnabled // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        vibrationEnabled:
+            null == vibrationEnabled
+                ? _value.vibrationEnabled
+                : vibrationEnabled // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        dailyGoalType:
+            null == dailyGoalType
+                ? _value.dailyGoalType
+                : dailyGoalType // ignore: cast_nullable_to_non_nullable
+                    as String,
+        dailyGoalValue:
+            null == dailyGoalValue
+                ? _value.dailyGoalValue
+                : dailyGoalValue // ignore: cast_nullable_to_non_nullable
+                    as int,
+        streakGoal:
+            null == streakGoal
+                ? _value.streakGoal
+                : streakGoal // ignore: cast_nullable_to_non_nullable
+                    as int,
+        onboardingCompletedVersion:
+            null == onboardingCompletedVersion
+                ? _value.onboardingCompletedVersion
+                : onboardingCompletedVersion // ignore: cast_nullable_to_non_nullable
+                    as int,
+        onboardingStep:
+            null == onboardingStep
+                ? _value.onboardingStep
+                : onboardingStep // ignore: cast_nullable_to_non_nullable
+                    as String,
+        cefrLevel:
+            freezed == cefrLevel
+                ? _value.cefrLevel
+                : cefrLevel // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        learningGoal:
+            freezed == learningGoal
+                ? _value.learningGoal
+                : learningGoal // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        multiplayerNotificationsEnabled:
+            null == multiplayerNotificationsEnabled
+                ? _value.multiplayerNotificationsEnabled
+                : multiplayerNotificationsEnabled // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        remindersEnabled:
+            null == remindersEnabled
+                ? _value.remindersEnabled
+                : remindersEnabled // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        reminderTime:
+            freezed == reminderTime
+                ? _value.reminderTime
+                : reminderTime // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        createdAt:
+            freezed == createdAt
+                ? _value.createdAt
+                : createdAt // ignore: cast_nullable_to_non_nullable
+                    as DateTime?,
+        updatedAt:
+            freezed == updatedAt
+                ? _value.updatedAt
+                : updatedAt // ignore: cast_nullable_to_non_nullable
+                    as DateTime?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$UserSettingsImpl implements _UserSettings {
-  const _$UserSettingsImpl(
-      {this.themeMode = 'dark',
-      this.languageCode = 'tr',
-      this.soundEnabled = true,
-      this.vibrationEnabled = true,
-      this.dailyGoalType = 'words',
-      this.dailyGoalValue = 10,
-      this.streakGoal = 10,
-      this.remindersEnabled = false,
-      this.reminderTime,
-      @TimestampConverter() this.createdAt,
-      @TimestampConverter() this.updatedAt});
+  const _$UserSettingsImpl({
+    this.themeMode = 'dark',
+    this.languageCode = 'tr',
+    this.soundEnabled = true,
+    this.vibrationEnabled = true,
+    this.dailyGoalType = 'words',
+    this.dailyGoalValue = 10,
+    this.streakGoal = 10,
+    this.onboardingCompletedVersion = 0,
+    this.onboardingStep = LearningProfileValues.onboardingIntro,
+    this.cefrLevel,
+    this.learningGoal,
+    this.multiplayerNotificationsEnabled = false,
+    this.remindersEnabled = false,
+    this.reminderTime,
+    @TimestampConverter() this.createdAt,
+    @TimestampConverter() this.updatedAt,
+  });
 
   factory _$UserSettingsImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserSettingsImplFromJson(json);
 
-// UI
+  // UI
   @override
   @JsonKey()
   final String themeMode;
-// 'system' | 'dark' | 'light'
+  // 'system' | 'dark' | 'light'
   @override
   @JsonKey()
   final String languageCode;
-// 'tr' | 'en'
-// Feedback
+  // 'tr' | 'en'
+  // Feedback
   @override
   @JsonKey()
   final bool soundEnabled;
   @override
   @JsonKey()
   final bool vibrationEnabled;
-// Goals
+  // Goals
   @override
   @JsonKey()
   final String dailyGoalType;
-// 'words' | 'minutes'
+  // 'words' | 'minutes'
   @override
   @JsonKey()
   final int dailyGoalValue;
-// 5, 10, 15, etc.
+  // 5, 10, 15, etc.
   @override
   @JsonKey()
   final int streakGoal;
-// 3, 10, 20, 30, 50
-// Notifications
+  // 3, 10, 20, 30, 50
+  // First-use learning profile. Values are stable identifiers, not labels.
+  @override
+  @JsonKey()
+  final int onboardingCompletedVersion;
+  @override
+  @JsonKey()
+  final String onboardingStep;
+  @override
+  final String? cefrLevel;
+  @override
+  final String? learningGoal;
+  // Notifications
+  @override
+  @JsonKey()
+  final bool multiplayerNotificationsEnabled;
   @override
   @JsonKey()
   final bool remindersEnabled;
   @override
   final String? reminderTime;
-// "HH:mm" as string
-// Metadata
+  // "HH:mm" as string
+  // Metadata
   @override
   @TimestampConverter()
   final DateTime? createdAt;
@@ -301,7 +431,7 @@ class _$UserSettingsImpl implements _UserSettings {
 
   @override
   String toString() {
-    return 'UserSettings(themeMode: $themeMode, languageCode: $languageCode, soundEnabled: $soundEnabled, vibrationEnabled: $vibrationEnabled, dailyGoalType: $dailyGoalType, dailyGoalValue: $dailyGoalValue, streakGoal: $streakGoal, remindersEnabled: $remindersEnabled, reminderTime: $reminderTime, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'UserSettings(themeMode: $themeMode, languageCode: $languageCode, soundEnabled: $soundEnabled, vibrationEnabled: $vibrationEnabled, dailyGoalType: $dailyGoalType, dailyGoalValue: $dailyGoalValue, streakGoal: $streakGoal, onboardingCompletedVersion: $onboardingCompletedVersion, onboardingStep: $onboardingStep, cefrLevel: $cefrLevel, learningGoal: $learningGoal, multiplayerNotificationsEnabled: $multiplayerNotificationsEnabled, remindersEnabled: $remindersEnabled, reminderTime: $reminderTime, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -323,6 +453,24 @@ class _$UserSettingsImpl implements _UserSettings {
                 other.dailyGoalValue == dailyGoalValue) &&
             (identical(other.streakGoal, streakGoal) ||
                 other.streakGoal == streakGoal) &&
+            (identical(
+                  other.onboardingCompletedVersion,
+                  onboardingCompletedVersion,
+                ) ||
+                other.onboardingCompletedVersion ==
+                    onboardingCompletedVersion) &&
+            (identical(other.onboardingStep, onboardingStep) ||
+                other.onboardingStep == onboardingStep) &&
+            (identical(other.cefrLevel, cefrLevel) ||
+                other.cefrLevel == cefrLevel) &&
+            (identical(other.learningGoal, learningGoal) ||
+                other.learningGoal == learningGoal) &&
+            (identical(
+                  other.multiplayerNotificationsEnabled,
+                  multiplayerNotificationsEnabled,
+                ) ||
+                other.multiplayerNotificationsEnabled ==
+                    multiplayerNotificationsEnabled) &&
             (identical(other.remindersEnabled, remindersEnabled) ||
                 other.remindersEnabled == remindersEnabled) &&
             (identical(other.reminderTime, reminderTime) ||
@@ -336,18 +484,24 @@ class _$UserSettingsImpl implements _UserSettings {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      themeMode,
-      languageCode,
-      soundEnabled,
-      vibrationEnabled,
-      dailyGoalType,
-      dailyGoalValue,
-      streakGoal,
-      remindersEnabled,
-      reminderTime,
-      createdAt,
-      updatedAt);
+    runtimeType,
+    themeMode,
+    languageCode,
+    soundEnabled,
+    vibrationEnabled,
+    dailyGoalType,
+    dailyGoalValue,
+    streakGoal,
+    onboardingCompletedVersion,
+    onboardingStep,
+    cefrLevel,
+    learningGoal,
+    multiplayerNotificationsEnabled,
+    remindersEnabled,
+    reminderTime,
+    createdAt,
+    updatedAt,
+  );
 
   @JsonKey(ignore: true)
   @override
@@ -357,25 +511,29 @@ class _$UserSettingsImpl implements _UserSettings {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UserSettingsImplToJson(
-      this,
-    );
+    return _$$UserSettingsImplToJson(this);
   }
 }
 
 abstract class _UserSettings implements UserSettings {
-  const factory _UserSettings(
-      {final String themeMode,
-      final String languageCode,
-      final bool soundEnabled,
-      final bool vibrationEnabled,
-      final String dailyGoalType,
-      final int dailyGoalValue,
-      final int streakGoal,
-      final bool remindersEnabled,
-      final String? reminderTime,
-      @TimestampConverter() final DateTime? createdAt,
-      @TimestampConverter() final DateTime? updatedAt}) = _$UserSettingsImpl;
+  const factory _UserSettings({
+    final String themeMode,
+    final String languageCode,
+    final bool soundEnabled,
+    final bool vibrationEnabled,
+    final String dailyGoalType,
+    final int dailyGoalValue,
+    final int streakGoal,
+    final int onboardingCompletedVersion,
+    final String onboardingStep,
+    final String? cefrLevel,
+    final String? learningGoal,
+    final bool multiplayerNotificationsEnabled,
+    final bool remindersEnabled,
+    final String? reminderTime,
+    @TimestampConverter() final DateTime? createdAt,
+    @TimestampConverter() final DateTime? updatedAt,
+  }) = _$UserSettingsImpl;
 
   factory _UserSettings.fromJson(Map<String, dynamic> json) =
       _$UserSettingsImpl.fromJson;
@@ -385,7 +543,7 @@ abstract class _UserSettings implements UserSettings {
   @override // 'system' | 'dark' | 'light'
   String get languageCode;
   @override // 'tr' | 'en'
-// Feedback
+  // Feedback
   bool get soundEnabled;
   @override
   bool get vibrationEnabled;
@@ -396,12 +554,22 @@ abstract class _UserSettings implements UserSettings {
   @override // 5, 10, 15, etc.
   int get streakGoal;
   @override // 3, 10, 20, 30, 50
-// Notifications
+  // First-use learning profile. Values are stable identifiers, not labels.
+  int get onboardingCompletedVersion;
+  @override
+  String get onboardingStep;
+  @override
+  String? get cefrLevel;
+  @override
+  String? get learningGoal;
+  @override // Notifications
+  bool get multiplayerNotificationsEnabled;
+  @override
   bool get remindersEnabled;
   @override
   String? get reminderTime;
   @override // "HH:mm" as string
-// Metadata
+  // Metadata
   @TimestampConverter()
   DateTime? get createdAt;
   @override

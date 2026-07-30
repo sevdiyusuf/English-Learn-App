@@ -652,7 +652,7 @@ class _WorksheetCard extends StatelessWidget {
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Text(
-                              '${orderNumber}.',
+                              '$orderNumber.',
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 12,

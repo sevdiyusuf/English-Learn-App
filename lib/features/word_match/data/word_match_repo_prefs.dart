@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:isar/isar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/word_pair.dart';
@@ -11,8 +12,17 @@ import 'word_match_repo_interface.dart';
 
 /// SharedPreferences implementation as fallback when Isar fails on Android APK
 class WordMatchRepoPrefs implements WordMatchRepoInterface {
-  WordMatchRepoPrefs() {
+  WordMatchRepoPrefs({this.activeOwnerUid}) {
     _initPrefs();
+  }
+
+  @override
+  final String? activeOwnerUid;
+
+  bool _matchesScope(WordSet? set) {
+    if (set == null) return false;
+    if (set.isBuiltin) return true;
+    return set.ownerUid == activeOwnerUid;
   }
 
   static const String _storageKeySets = 'word_match_sets';
@@ -79,6 +89,8 @@ class WordMatchRepoPrefs implements WordMatchRepoInterface {
                           : null
                   ..isBuiltin = json['isBuiltin'] as bool? ?? false
                   ..cloudId = json['cloudId'] as String?
+                  ..ownerUid = json['ownerUid'] as String?
+                  ..pendingMigrationUid = json['pendingMigrationUid'] as String?
                   ..visibility = SetVisibility.values.firstWhere(
                     (e) => e.index == (json['visibility'] as int? ?? 0),
                     orElse: () => SetVisibility.private,
@@ -88,7 +100,10 @@ class WordMatchRepoPrefs implements WordMatchRepoInterface {
                   ..importedAt =
                       json['importedAt'] != null
                           ? DateTime.parse(json['importedAt'] as String)
-                          : null,
+                          : null
+                  ..remoteVersion = json['remoteVersion'] as int?
+                  ..lastRemoteOperationId =
+                      json['lastRemoteOperationId'] as String?,
           )
           .toList();
     } catch (e) {
@@ -101,7 +116,9 @@ class WordMatchRepoPrefs implements WordMatchRepoInterface {
   Future<WordSet?> getSetByCloudId(String cloudId) async {
     final sets = await _loadSets();
     try {
-      return sets.firstWhere((s) => s.cloudId == cloudId);
+      final set = sets.firstWhere((s) => s.cloudId == cloudId);
+      if (_matchesScope(set)) return set;
+      return null;
     } catch (_) {
       return null;
     }
@@ -121,6 +138,8 @@ class WordMatchRepoPrefs implements WordMatchRepoInterface {
                   'lastPracticedAt': set.lastPracticedAt?.toIso8601String(),
                   'isBuiltin': set.isBuiltin,
                   'cloudId': set.cloudId,
+                  'ownerUid': set.ownerUid,
+                  'pendingMigrationUid': set.pendingMigrationUid,
                   'visibility': set.visibility.index,
                   'sourceSetId': set.sourceSetId,
                   'sourceOwnerUid': set.sourceOwnerUid,
@@ -183,7 +202,8 @@ class WordMatchRepoPrefs implements WordMatchRepoInterface {
   }
 
   Future<List<WordSet>> _currentSortedSets() async {
-    final sets = await _loadSets();
+    final allSets = await _loadSets();
+    final sets = allSets.where((s) => _matchesScope(s)).toList();
     sets.sort((a, b) {
       if (a.isBuiltin != b.isBuiltin) {
         return a.isBuiltin ? -1 : 1;
@@ -194,6 +214,8 @@ class WordMatchRepoPrefs implements WordMatchRepoInterface {
   }
 
   Future<List<WordPair>> _currentPairsForSet(int setId) async {
+    final set = await getSet(setId);
+    if (set == null) return [];
     final pairs = await _loadPairs();
     return pairs.where((p) => p.setId == setId).toList();
   }
@@ -291,6 +313,8 @@ class WordMatchRepoPrefs implements WordMatchRepoInterface {
 
   @override
   Future<List<WordPair>> fetchPairs(int setId) async {
+    final set = await getSet(setId);
+    if (set == null) return [];
     final pairs = await _loadPairs();
     return pairs.where((p) => p.setId == setId).toList();
   }
@@ -299,7 +323,9 @@ class WordMatchRepoPrefs implements WordMatchRepoInterface {
   Future<WordSet?> getSet(int id) async {
     final sets = await _loadSets();
     try {
-      return sets.firstWhere((s) => s.id == id);
+      final set = sets.firstWhere((s) => s.id == id);
+      if (_matchesScope(set)) return set;
+      return null;
     } catch (_) {
       return null;
     }
@@ -307,23 +333,40 @@ class WordMatchRepoPrefs implements WordMatchRepoInterface {
 
   @override
   Future<int> countSets() async {
-    return (await _loadSets()).length;
+    return (await _currentSortedSets()).length;
   }
 
   @override
   Future<int> countPairs(int setId) async {
+    final set = await getSet(setId);
+    if (set == null) return 0;
     final pairs = await _loadPairs();
     return pairs.where((p) => p.setId == setId).length;
   }
 
   @override
   Future<Map<int, int>> countPairsForSets(List<int> setIds) async {
-    final pairs = await _loadPairs();
     final result = <int, int>{};
     for (final setId in setIds) {
-      result[setId] = pairs.where((p) => p.setId == setId).length;
+      final set = await getSet(setId);
+      if (set != null) {
+        result[setId] = await countPairs(setId);
+      }
     }
     return result;
+  }
+
+  int _getNextIdFromSets(List<WordSet> sets) {
+    int maxId = 0;
+    for (final s in sets) {
+      if (s.id > maxId) maxId = s.id;
+    }
+    final id = maxId >= _nextId ? maxId + 1 : _nextId;
+    _nextId = id + 1;
+    _getPrefs().then((prefs) {
+      prefs.setString(_storageKeyNextId, _nextId.toString());
+    });
+    return id;
   }
 
   @override
@@ -341,11 +384,12 @@ class WordMatchRepoPrefs implements WordMatchRepoInterface {
     }
     final set =
         WordSet()
-          ..id = _getNextId()
+          ..id = _getNextIdFromSets(sets)
           ..name = setName
           ..createdAt = now
           ..updatedAt = now
-          ..isBuiltin = false;
+          ..isBuiltin = false
+          ..ownerUid = activeOwnerUid;
     sets.add(set);
     await _saveSets(sets);
     return set.id;
@@ -393,31 +437,37 @@ class WordMatchRepoPrefs implements WordMatchRepoInterface {
 
   @override
   Future<void> renameSet({required int id, required String name}) async {
-    final sets = await _loadSets();
-    final setIndex = sets.indexWhere((s) => s.id == id);
-    if (setIndex == -1) {
+    final set = await getSet(id);
+    if (set == null) {
       throw StateError('Set bulunamadı');
+    }
+    if (set.isBuiltin) {
+      throw StateError('Yerleşik setler değiştirilemez');
     }
     final trimmed = name.trim();
     if (trimmed.isEmpty) {
       throw ArgumentError('Set adı boş olamaz');
     }
-    sets[setIndex]
-      ..name = trimmed
-      ..updatedAt = DateTime.now();
-    await _saveSets(sets);
+    final sets = await _loadSets();
+    final setIndex = sets.indexWhere((s) => s.id == id);
+    if (setIndex != -1) {
+      sets[setIndex]
+        ..name = trimmed
+        ..updatedAt = DateTime.now().toUtc();
+      await _saveSets(sets);
+    }
   }
 
   @override
   Future<void> deleteSet(int id) async {
-    final sets = await _loadSets();
-    final set = sets.firstWhere(
-      (s) => s.id == id,
-      orElse: () => throw StateError('Set bulunamadı'),
-    );
+    final set = await getSet(id);
+    if (set == null) {
+      throw StateError('Set bulunamadı');
+    }
     if (set.isBuiltin) {
       throw StateError('Yerleşik setler silinemez');
     }
+    final sets = await _loadSets();
     sets.removeWhere((s) => s.id == id);
     await _saveSets(sets);
     final pairs = await _loadPairs();
@@ -434,6 +484,13 @@ class WordMatchRepoPrefs implements WordMatchRepoInterface {
     required String setName,
     required List<WordPair> pairs,
   }) async {
+    final targetSet = await getSet(setId);
+    if (targetSet == null) {
+      throw StateError('Set bulunamadı');
+    }
+    if (targetSet.isBuiltin) {
+      throw StateError('Yerleşik setler değiştirilemez');
+    }
     if (pairs.length > WordMatchRepoInterface.maxPairsPerSet) {
       throw StateError(
         'Bir sette en fazla ${WordMatchRepoInterface.maxPairsPerSet} çift olabilir',
@@ -450,12 +507,14 @@ class WordMatchRepoPrefs implements WordMatchRepoInterface {
     for (final pair in pairs) {
       if (pair.english.trim().isEmpty) continue;
 
+      final isNewPair = pair.id == 0 || pair.id == Isar.autoIncrement;
+      pair.setId = setId;
+
       final normalizedKey =
           '${pair.english.toLowerCase().trim()}|${pair.turkish.toLowerCase().trim()}';
 
-      if (pair.id == 0 || pair.setId != setId) {
+      if (isNewPair) {
         if (!sanitizedPairs.containsKey(normalizedKey)) {
-          // Treat as new pair to be assigned a new ID
           newPairs.add(pair);
         }
         continue;
@@ -718,21 +777,21 @@ class WordMatchRepoPrefs implements WordMatchRepoInterface {
   @override
   Future<void> ensureInitialUserSet() async {
     final sets = await _loadSets();
-    // Check if user has any custom sets
-    final customSetsCount = sets.where((s) => !s.isBuiltin).length;
-
-    if (customSetsCount > 0) {
-      return; // Already has sets
+    final scopedCustomSets =
+        sets.where((s) => !s.isBuiltin && _matchesScope(s)).toList();
+    if (scopedCustomSets.isNotEmpty) {
+      return;
     }
 
-    // Create the default set
-    final now = DateTime.now();
-    final initialSet = WordSet()
-      ..id = _getNextId()
-      ..name = 'Kelime Setim 1'
-      ..createdAt = now
-      ..updatedAt = now
-      ..isBuiltin = false;
+    final now = DateTime.now().toUtc();
+    final initialSet =
+        WordSet()
+          ..id = _getNextIdFromSets(sets)
+          ..name = 'Kelime Setim 1'
+          ..createdAt = now
+          ..updatedAt = now
+          ..isBuiltin = false
+          ..ownerUid = activeOwnerUid;
 
     sets.add(initialSet);
     await _saveSets(sets);
@@ -783,7 +842,12 @@ class WordMatchRepoPrefs implements WordMatchRepoInterface {
   Future<void> updateSetCloudId(int id, String cloudId) async {
     final sets = await _loadSets();
     final index = sets.indexWhere((s) => s.id == id);
-    if (index != -1) {
+    if (index == -1 || sets[index].isBuiltin) return;
+    final set = sets[index];
+    if (set.ownerUid == activeOwnerUid ||
+        (set.ownerUid == null &&
+            (set.pendingMigrationUid == null ||
+                set.pendingMigrationUid == activeOwnerUid))) {
       sets[index].cloudId = cloudId;
       await _saveSets(sets);
     }
@@ -791,6 +855,8 @@ class WordMatchRepoPrefs implements WordMatchRepoInterface {
 
   @override
   Future<void> updateSetVisibility(int id, SetVisibility visibility) async {
+    final set = await getSet(id);
+    if (set == null || set.isBuiltin) return;
     final sets = await _loadSets();
     final index = sets.indexWhere((s) => s.id == id);
     if (index != -1) {
@@ -802,21 +868,189 @@ class WordMatchRepoPrefs implements WordMatchRepoInterface {
   }
 
   @override
+  Future<void> updateSetOwnerUid(int id, String? ownerUid) async {
+    final sets = await _loadSets();
+    final index = sets.indexWhere((s) => s.id == id);
+    if (index == -1 || sets[index].isBuiltin) {
+      throw StateError('Set bulunamadı veya yerel sahiplik değiştirilemez');
+    }
+    final set = sets[index];
+    if (set.ownerUid != null ||
+        ownerUid == null ||
+        ownerUid != activeOwnerUid) {
+      throw StateError('Geçersiz sahiplik transferi');
+    }
+    set.ownerUid = ownerUid;
+    set.pendingMigrationUid = null;
+    await _saveSets(sets);
+  }
+
+  @override
+  Future<void> updateSetPendingMigrationUid(int id, String? pendingUid) async {
+    final sets = await _loadSets();
+    final index = sets.indexWhere((s) => s.id == id);
+    if (index == -1 || sets[index].isBuiltin || sets[index].ownerUid != null) {
+      throw StateError('Set bulunamadı veya migrasyon durumu değiştirilemez');
+    }
+    final set = sets[index];
+    if (set.pendingMigrationUid != null &&
+        set.pendingMigrationUid != pendingUid &&
+        activeOwnerUid != null) {
+      throw StateError('Geçersiz migrasyon sahibi');
+    }
+    if (pendingUid != null &&
+        activeOwnerUid != null &&
+        pendingUid != activeOwnerUid) {
+      throw StateError('Geçersiz migrasyon sahibi');
+    }
+    sets[index].pendingMigrationUid = pendingUid;
+    await _saveSets(sets);
+  }
+
+  @override
+  Future<List<WordSet>> getUnmigratedGuestSets() async {
+    final sets = await _loadSets();
+    return sets.where((s) => !s.isBuiltin && s.ownerUid == null).toList();
+  }
+
+  @override
+  Future<List<WordPair>> getUnmigratedGuestPairs(int setId) async {
+    final sets = await _loadSets();
+    final set = sets.firstWhere(
+      (s) => s.id == setId,
+      orElse: () => WordSet()..id = -1,
+    );
+    if (set.id == -1 || set.isBuiltin || set.ownerUid != null) {
+      return [];
+    }
+    final pairs = await _loadPairs();
+    return pairs.where((p) => p.setId == setId).toList();
+  }
+
+  @override
   Future<void> updateSetMetadata(
     int id, {
     String? sourceSetId,
     String? sourceOwnerUid,
     DateTime? importedAt,
+    String? ownerUid,
+    String? pendingMigrationUid,
   }) async {
+    final set = await getSet(id);
+    if (set == null || set.isBuiltin) return;
     final sets = await _loadSets();
     final index = sets.indexWhere((s) => s.id == id);
     if (index != -1) {
-      final set = sets[index];
-      if (sourceSetId != null) set.sourceSetId = sourceSetId;
-      if (sourceOwnerUid != null) set.sourceOwnerUid = sourceOwnerUid;
-      if (importedAt != null) set.importedAt = importedAt;
-      set.updatedAt = DateTime.now().toUtc();
+      final s = sets[index];
+      if (sourceSetId != null) s.sourceSetId = sourceSetId;
+      if (sourceOwnerUid != null) s.sourceOwnerUid = sourceOwnerUid;
+      if (importedAt != null) s.importedAt = importedAt;
+      if (ownerUid != null && ownerUid == activeOwnerUid) s.ownerUid = ownerUid;
+      if (pendingMigrationUid != null) {
+        s.pendingMigrationUid = pendingMigrationUid;
+      }
+      s.updatedAt = DateTime.now().toUtc();
       await _saveSets(sets);
     }
+  }
+
+  // ── Remote-apply path stubs (NOT-ATOMIC in Prefs) ────────────────────────
+
+  @override
+  Future<int> createSetInternal({
+    required String name,
+    required String ownerUid,
+    required String cloudId,
+  }) async {
+    final now = DateTime.now().toUtc();
+    final set =
+        WordSet()
+          ..name = name.isEmpty ? cloudId : name
+          ..createdAt = now
+          ..updatedAt = now
+          ..isBuiltin = false
+          ..ownerUid = ownerUid
+          ..cloudId = cloudId;
+    final sets = await _loadSets();
+    final id = _nextId++;
+    set.id = id;
+    await _saveNextId();
+    sets.add(set);
+    await _saveSets(sets);
+    return id;
+  }
+
+  @override
+  Future<void> renameSetInternal({
+    required int id,
+    required String name,
+  }) async {
+    final sets = await _loadSets();
+    final index = sets.indexWhere((s) => s.id == id);
+    if (index == -1) return;
+    sets[index]
+      ..name = name
+      ..updatedAt = DateTime.now().toUtc();
+    await _saveSets(sets);
+  }
+
+  @override
+  Future<void> savePairsInternal({
+    required int setId,
+    required List<WordPair> pairs,
+  }) async {
+    final allPairs = await _loadPairs();
+    final others = allPairs.where((p) => p.setId != setId).toList();
+    int nextPairId = _nextId++;
+    await _saveNextId();
+    final newPairs =
+        pairs.map((p) {
+          final np =
+              WordPair()
+                ..id = nextPairId++
+                ..setId = setId
+                ..english = p.english
+                ..turkish = p.turkish
+                ..learned = p.learned;
+          return np;
+        }).toList();
+    await _savePairs([...others, ...newPairs]);
+  }
+
+  @override
+  Future<void> updateSetRemoteMetadata(
+    int setId, {
+    required String cloudId,
+    required String ownerUid,
+    required int remoteVersion,
+    required String lastOperationId,
+    SetVisibility? visibility,
+    String? sourceSetId,
+    String? sourceOwnerUid,
+    DateTime? importedAt,
+    DateTime? updatedAt,
+    DateTime? createdAt,
+  }) async {
+    final sets = await _loadSets();
+    final index = sets.indexWhere((s) => s.id == setId);
+    if (index == -1) return;
+    final s = sets[index];
+    s
+      ..cloudId = cloudId
+      ..ownerUid = ownerUid
+      ..remoteVersion = remoteVersion
+      ..lastRemoteOperationId = lastOperationId;
+    if (visibility != null) s.visibility = visibility;
+    if (sourceSetId != null) s.sourceSetId = sourceSetId;
+    if (sourceOwnerUid != null) s.sourceOwnerUid = sourceOwnerUid;
+    if (importedAt != null) s.importedAt = importedAt;
+    if (updatedAt != null) s.updatedAt = updatedAt;
+    if (createdAt != null) s.createdAt = createdAt;
+    await _saveSets(sets);
+  }
+
+  @override
+  Future<void> clearUserData(String uid) async {
+    // Legacy fallback repo, no-op for clearUserData
   }
 }

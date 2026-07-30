@@ -8,7 +8,11 @@ import 'notification_service.dart';
 class GameNotifications {
   static String? _lastNotifiedTurnUid;
 
-  static void setupGameNotifications(WidgetRef ref, Room room, String? currentUid) {
+  static void setupGameNotifications(
+    WidgetRef ref,
+    Room room,
+    String? currentUid,
+  ) {
     final notificationService = ref.read(notificationServiceProvider);
     final authState = ref.read(authControllerProvider);
     final userUid = authState.value?.uid;
@@ -30,7 +34,7 @@ class GameNotifications {
 
     // Notify when game starts (only once) - removed to avoid notification spam
     // Game page will handle the UI transition automatically
-    
+
     // Notify when game ends (only once) - removed to avoid notification spam
     // Game page will show a dialog instead
   }
@@ -40,4 +44,3 @@ class GameNotifications {
     _lastNotifiedTurnUid = null;
   }
 }
-

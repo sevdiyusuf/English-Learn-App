@@ -28,13 +28,7 @@ class Breakpoints {
 }
 
 /// Screen size category
-enum ScreenSize {
-  mobile,
-  tablet,
-  desktop,
-  wide,
-  ultraWide,
-}
+enum ScreenSize { mobile, tablet, desktop, wide, ultraWide }
 
 /// Responsive utilities
 class ResponsiveUtils {
@@ -183,10 +177,7 @@ class ResponsiveUtils {
 
 /// Responsive builder widget
 class ResponsiveBuilder extends StatelessWidget {
-  const ResponsiveBuilder({
-    required this.builder,
-    super.key,
-  });
+  const ResponsiveBuilder({required this.builder, super.key});
 
   final Widget Function(BuildContext context, ScreenSize screenSize) builder;
 
@@ -233,11 +224,7 @@ class ResponsiveValue<T> extends StatelessWidget {
 
 /// Adaptive container with max width constraint
 class AdaptiveContainer extends StatelessWidget {
-  const AdaptiveContainer({
-    required this.child,
-    this.padding,
-    super.key,
-  });
+  const AdaptiveContainer({required this.child, this.padding, super.key});
 
   final Widget child;
   final EdgeInsets? padding;
@@ -245,7 +232,8 @@ class AdaptiveContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final maxWidth = ResponsiveUtils.responsiveMaxWidth(context);
-    final containerPadding = padding ?? ResponsiveUtils.responsivePadding(context);
+    final containerPadding =
+        padding ?? ResponsiveUtils.responsivePadding(context);
 
     return Center(
       child: ConstrainedBox(
@@ -262,4 +250,3 @@ class AdaptiveContainer extends StatelessWidget {
     );
   }
 }
-

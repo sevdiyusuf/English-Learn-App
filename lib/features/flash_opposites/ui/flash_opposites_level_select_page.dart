@@ -63,7 +63,9 @@ class FlashOppositesLevelSelectPage extends StatelessWidget {
                       // Title
                       Text(
                         'ZORLUK SEVİYESİ',
-                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                        style: Theme.of(
+                          context,
+                        ).textTheme.headlineSmall?.copyWith(
                           fontSize: 24,
                           fontWeight: FontWeight.w900,
                           color: Colors.white,

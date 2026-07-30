@@ -1,14 +1,6 @@
-enum WordEchoSpeed {
-  normal,
-  fast,
-}
+enum WordEchoSpeed { normal, fast }
 
-enum WordEchoPhase {
-  showingSequence,
-  waitingForAnswer,
-  feedback,
-  finished,
-}
+enum WordEchoPhase { showingSequence, waitingForAnswer, feedback, finished }
 
 class WordEchoSlot {
   const WordEchoSlot({
@@ -67,10 +59,12 @@ class WordEchoState {
   final WordEchoPhase phase;
   final String? currentTurkishHint;
   final int? currentCorrectSlotIndex;
-  final String? currentCorrectEnglishWord; // Store the correct English word for verification
+  final String?
+  currentCorrectEnglishWord; // Store the correct English word for verification
   final int currentQuestionIndex; // 0-9 (10 questions)
   final String? setName;
-  final List<int> selectedSlots; // Which slots are selected for current question
+  final List<int>
+  selectedSlots; // Which slots are selected for current question
   final List<String> currentSequence; // Current sequence of English words
 
   WordEchoState copyWith({
@@ -100,8 +94,10 @@ class WordEchoState {
       slots: slots ?? this.slots,
       phase: phase ?? this.phase,
       currentTurkishHint: currentTurkishHint ?? this.currentTurkishHint,
-      currentCorrectSlotIndex: currentCorrectSlotIndex ?? this.currentCorrectSlotIndex,
-      currentCorrectEnglishWord: currentCorrectEnglishWord ?? this.currentCorrectEnglishWord,
+      currentCorrectSlotIndex:
+          currentCorrectSlotIndex ?? this.currentCorrectSlotIndex,
+      currentCorrectEnglishWord:
+          currentCorrectEnglishWord ?? this.currentCorrectEnglishWord,
       currentQuestionIndex: currentQuestionIndex ?? this.currentQuestionIndex,
       setName: setName ?? this.setName,
       selectedSlots: selectedSlots ?? this.selectedSlots,

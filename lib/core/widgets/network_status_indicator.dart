@@ -22,11 +22,7 @@ class NetworkStatusIndicator extends ConsumerWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(
-                  Icons.wifi_off,
-                  color: Colors.white,
-                  size: 20,
-                ),
+                const Icon(Icons.wifi_off, color: Colors.white, size: 20),
                 const SizedBox(width: 8),
                 const Text(
                   'İnternet bağlantısı yok',
@@ -60,11 +56,7 @@ class NetworkStatusBadge extends ConsumerWidget {
         if (status == NetworkStatus.disconnected) {
           return Tooltip(
             message: 'İnternet bağlantısı yok',
-            child: Icon(
-              Icons.wifi_off,
-              color: Colors.red.shade700,
-              size: 20,
-            ),
+            child: Icon(Icons.wifi_off, color: Colors.red.shade700, size: 20),
           );
         }
         return const SizedBox.shrink();
@@ -74,4 +66,3 @@ class NetworkStatusBadge extends ConsumerWidget {
     );
   }
 }
-

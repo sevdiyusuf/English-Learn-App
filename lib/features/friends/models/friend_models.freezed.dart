@@ -12,7 +12,8 @@ part of 'friend_models.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 UserProfile _$UserProfileFromJson(Map<String, dynamic> json) {
   return _UserProfile.fromJson(json);
@@ -35,15 +36,17 @@ mixin _$UserProfile {
 /// @nodoc
 abstract class $UserProfileCopyWith<$Res> {
   factory $UserProfileCopyWith(
-          UserProfile value, $Res Function(UserProfile) then) =
-      _$UserProfileCopyWithImpl<$Res, UserProfile>;
+    UserProfile value,
+    $Res Function(UserProfile) then,
+  ) = _$UserProfileCopyWithImpl<$Res, UserProfile>;
   @useResult
-  $Res call(
-      {String uid,
-      String? displayName,
-      String? photoUrl,
-      String? userCode,
-      DateTime? createdAt});
+  $Res call({
+    String uid,
+    String? displayName,
+    String? photoUrl,
+    String? userCode,
+    DateTime? createdAt,
+  });
 }
 
 /// @nodoc
@@ -65,28 +68,36 @@ class _$UserProfileCopyWithImpl<$Res, $Val extends UserProfile>
     Object? userCode = freezed,
     Object? createdAt = freezed,
   }) {
-    return _then(_value.copyWith(
-      uid: null == uid
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
-              as String,
-      displayName: freezed == displayName
-          ? _value.displayName
-          : displayName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      photoUrl: freezed == photoUrl
-          ? _value.photoUrl
-          : photoUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      userCode: freezed == userCode
-          ? _value.userCode
-          : userCode // ignore: cast_nullable_to_non_nullable
-              as String?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            uid:
+                null == uid
+                    ? _value.uid
+                    : uid // ignore: cast_nullable_to_non_nullable
+                        as String,
+            displayName:
+                freezed == displayName
+                    ? _value.displayName
+                    : displayName // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            photoUrl:
+                freezed == photoUrl
+                    ? _value.photoUrl
+                    : photoUrl // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            userCode:
+                freezed == userCode
+                    ? _value.userCode
+                    : userCode // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            createdAt:
+                freezed == createdAt
+                    ? _value.createdAt
+                    : createdAt // ignore: cast_nullable_to_non_nullable
+                        as DateTime?,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -94,16 +105,18 @@ class _$UserProfileCopyWithImpl<$Res, $Val extends UserProfile>
 abstract class _$$UserProfileImplCopyWith<$Res>
     implements $UserProfileCopyWith<$Res> {
   factory _$$UserProfileImplCopyWith(
-          _$UserProfileImpl value, $Res Function(_$UserProfileImpl) then) =
-      __$$UserProfileImplCopyWithImpl<$Res>;
+    _$UserProfileImpl value,
+    $Res Function(_$UserProfileImpl) then,
+  ) = __$$UserProfileImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String uid,
-      String? displayName,
-      String? photoUrl,
-      String? userCode,
-      DateTime? createdAt});
+  $Res call({
+    String uid,
+    String? displayName,
+    String? photoUrl,
+    String? userCode,
+    DateTime? createdAt,
+  });
 }
 
 /// @nodoc
@@ -111,8 +124,9 @@ class __$$UserProfileImplCopyWithImpl<$Res>
     extends _$UserProfileCopyWithImpl<$Res, _$UserProfileImpl>
     implements _$$UserProfileImplCopyWith<$Res> {
   __$$UserProfileImplCopyWithImpl(
-      _$UserProfileImpl _value, $Res Function(_$UserProfileImpl) _then)
-      : super(_value, _then);
+    _$UserProfileImpl _value,
+    $Res Function(_$UserProfileImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -123,40 +137,48 @@ class __$$UserProfileImplCopyWithImpl<$Res>
     Object? userCode = freezed,
     Object? createdAt = freezed,
   }) {
-    return _then(_$UserProfileImpl(
-      uid: null == uid
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
-              as String,
-      displayName: freezed == displayName
-          ? _value.displayName
-          : displayName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      photoUrl: freezed == photoUrl
-          ? _value.photoUrl
-          : photoUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      userCode: freezed == userCode
-          ? _value.userCode
-          : userCode // ignore: cast_nullable_to_non_nullable
-              as String?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-    ));
+    return _then(
+      _$UserProfileImpl(
+        uid:
+            null == uid
+                ? _value.uid
+                : uid // ignore: cast_nullable_to_non_nullable
+                    as String,
+        displayName:
+            freezed == displayName
+                ? _value.displayName
+                : displayName // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        photoUrl:
+            freezed == photoUrl
+                ? _value.photoUrl
+                : photoUrl // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        userCode:
+            freezed == userCode
+                ? _value.userCode
+                : userCode // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        createdAt:
+            freezed == createdAt
+                ? _value.createdAt
+                : createdAt // ignore: cast_nullable_to_non_nullable
+                    as DateTime?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$UserProfileImpl implements _UserProfile {
-  const _$UserProfileImpl(
-      {required this.uid,
-      this.displayName,
-      this.photoUrl,
-      this.userCode,
-      this.createdAt});
+  const _$UserProfileImpl({
+    required this.uid,
+    this.displayName,
+    this.photoUrl,
+    this.userCode,
+    this.createdAt,
+  });
 
   factory _$UserProfileImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserProfileImplFromJson(json);
@@ -206,19 +228,18 @@ class _$UserProfileImpl implements _UserProfile {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UserProfileImplToJson(
-      this,
-    );
+    return _$$UserProfileImplToJson(this);
   }
 }
 
 abstract class _UserProfile implements UserProfile {
-  const factory _UserProfile(
-      {required final String uid,
-      final String? displayName,
-      final String? photoUrl,
-      final String? userCode,
-      final DateTime? createdAt}) = _$UserProfileImpl;
+  const factory _UserProfile({
+    required final String uid,
+    final String? displayName,
+    final String? photoUrl,
+    final String? userCode,
+    final DateTime? createdAt,
+  }) = _$UserProfileImpl;
 
   factory _UserProfile.fromJson(Map<String, dynamic> json) =
       _$UserProfileImpl.fromJson;
@@ -261,16 +282,18 @@ mixin _$FriendRequest {
 /// @nodoc
 abstract class $FriendRequestCopyWith<$Res> {
   factory $FriendRequestCopyWith(
-          FriendRequest value, $Res Function(FriendRequest) then) =
-      _$FriendRequestCopyWithImpl<$Res, FriendRequest>;
+    FriendRequest value,
+    $Res Function(FriendRequest) then,
+  ) = _$FriendRequestCopyWithImpl<$Res, FriendRequest>;
   @useResult
-  $Res call(
-      {String id,
-      String fromUid,
-      String toUid,
-      FriendRequestStatus status,
-      DateTime? createdAt,
-      DateTime? updatedAt});
+  $Res call({
+    String id,
+    String fromUid,
+    String toUid,
+    FriendRequestStatus status,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  });
 }
 
 /// @nodoc
@@ -293,32 +316,41 @@ class _$FriendRequestCopyWithImpl<$Res, $Val extends FriendRequest>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      fromUid: null == fromUid
-          ? _value.fromUid
-          : fromUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      toUid: null == toUid
-          ? _value.toUid
-          : toUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as FriendRequestStatus,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            id:
+                null == id
+                    ? _value.id
+                    : id // ignore: cast_nullable_to_non_nullable
+                        as String,
+            fromUid:
+                null == fromUid
+                    ? _value.fromUid
+                    : fromUid // ignore: cast_nullable_to_non_nullable
+                        as String,
+            toUid:
+                null == toUid
+                    ? _value.toUid
+                    : toUid // ignore: cast_nullable_to_non_nullable
+                        as String,
+            status:
+                null == status
+                    ? _value.status
+                    : status // ignore: cast_nullable_to_non_nullable
+                        as FriendRequestStatus,
+            createdAt:
+                freezed == createdAt
+                    ? _value.createdAt
+                    : createdAt // ignore: cast_nullable_to_non_nullable
+                        as DateTime?,
+            updatedAt:
+                freezed == updatedAt
+                    ? _value.updatedAt
+                    : updatedAt // ignore: cast_nullable_to_non_nullable
+                        as DateTime?,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -326,17 +358,19 @@ class _$FriendRequestCopyWithImpl<$Res, $Val extends FriendRequest>
 abstract class _$$FriendRequestImplCopyWith<$Res>
     implements $FriendRequestCopyWith<$Res> {
   factory _$$FriendRequestImplCopyWith(
-          _$FriendRequestImpl value, $Res Function(_$FriendRequestImpl) then) =
-      __$$FriendRequestImplCopyWithImpl<$Res>;
+    _$FriendRequestImpl value,
+    $Res Function(_$FriendRequestImpl) then,
+  ) = __$$FriendRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String id,
-      String fromUid,
-      String toUid,
-      FriendRequestStatus status,
-      DateTime? createdAt,
-      DateTime? updatedAt});
+  $Res call({
+    String id,
+    String fromUid,
+    String toUid,
+    FriendRequestStatus status,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  });
 }
 
 /// @nodoc
@@ -344,8 +378,9 @@ class __$$FriendRequestImplCopyWithImpl<$Res>
     extends _$FriendRequestCopyWithImpl<$Res, _$FriendRequestImpl>
     implements _$$FriendRequestImplCopyWith<$Res> {
   __$$FriendRequestImplCopyWithImpl(
-      _$FriendRequestImpl _value, $Res Function(_$FriendRequestImpl) _then)
-      : super(_value, _then);
+    _$FriendRequestImpl _value,
+    $Res Function(_$FriendRequestImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -357,45 +392,54 @@ class __$$FriendRequestImplCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(_$FriendRequestImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      fromUid: null == fromUid
-          ? _value.fromUid
-          : fromUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      toUid: null == toUid
-          ? _value.toUid
-          : toUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as FriendRequestStatus,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-    ));
+    return _then(
+      _$FriendRequestImpl(
+        id:
+            null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                    as String,
+        fromUid:
+            null == fromUid
+                ? _value.fromUid
+                : fromUid // ignore: cast_nullable_to_non_nullable
+                    as String,
+        toUid:
+            null == toUid
+                ? _value.toUid
+                : toUid // ignore: cast_nullable_to_non_nullable
+                    as String,
+        status:
+            null == status
+                ? _value.status
+                : status // ignore: cast_nullable_to_non_nullable
+                    as FriendRequestStatus,
+        createdAt:
+            freezed == createdAt
+                ? _value.createdAt
+                : createdAt // ignore: cast_nullable_to_non_nullable
+                    as DateTime?,
+        updatedAt:
+            freezed == updatedAt
+                ? _value.updatedAt
+                : updatedAt // ignore: cast_nullable_to_non_nullable
+                    as DateTime?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$FriendRequestImpl implements _FriendRequest {
-  const _$FriendRequestImpl(
-      {required this.id,
-      required this.fromUid,
-      required this.toUid,
-      required this.status,
-      this.createdAt,
-      this.updatedAt});
+  const _$FriendRequestImpl({
+    required this.id,
+    required this.fromUid,
+    required this.toUid,
+    required this.status,
+    this.createdAt,
+    this.updatedAt,
+  });
 
   factory _$FriendRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$FriendRequestImplFromJson(json);
@@ -436,7 +480,14 @@ class _$FriendRequestImpl implements _FriendRequest {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, fromUid, toUid, status, createdAt, updatedAt);
+    runtimeType,
+    id,
+    fromUid,
+    toUid,
+    status,
+    createdAt,
+    updatedAt,
+  );
 
   @JsonKey(ignore: true)
   @override
@@ -446,20 +497,19 @@ class _$FriendRequestImpl implements _FriendRequest {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$FriendRequestImplToJson(
-      this,
-    );
+    return _$$FriendRequestImplToJson(this);
   }
 }
 
 abstract class _FriendRequest implements FriendRequest {
-  const factory _FriendRequest(
-      {required final String id,
-      required final String fromUid,
-      required final String toUid,
-      required final FriendRequestStatus status,
-      final DateTime? createdAt,
-      final DateTime? updatedAt}) = _$FriendRequestImpl;
+  const factory _FriendRequest({
+    required final String id,
+    required final String fromUid,
+    required final String toUid,
+    required final FriendRequestStatus status,
+    final DateTime? createdAt,
+    final DateTime? updatedAt,
+  }) = _$FriendRequestImpl;
 
   factory _FriendRequest.fromJson(Map<String, dynamic> json) =
       _$FriendRequestImpl.fromJson;

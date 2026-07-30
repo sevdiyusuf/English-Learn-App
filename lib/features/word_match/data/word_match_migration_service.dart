@@ -11,11 +11,10 @@ import '../models/word_set.dart';
 import 'word_match_providers.dart';
 import 'word_match_repo_interface.dart';
 
-/// Handles migration of local (Isar / SharedPreferences / localStorage)
-/// Word Match sets into a signed-in Firebase user account.
+/// Handles migration of local guest (ownerUid == null) Word Match sets
+/// into a signed-in Firebase user account.
 ///
-/// Phase 0 hedefi: Misafir / local setler, kullanıcı Google/Email/Apple ile
-/// giriş yaptıktan sonra Firestore'daki `users/{uid}/sets` altına kopyalanır.
+/// Canonical path: `users/{uid}/word_match_sets`
 class WordMatchMigrationService {
   WordMatchMigrationService(this._firestore, this._repo);
 
@@ -23,15 +22,18 @@ class WordMatchMigrationService {
   final WordMatchRepoInterface _repo;
 
   CollectionReference<Map<String, dynamic>> _userSetsRef(String uid) {
-    return _firestore.collection('users').doc(uid).collection('sets');
+    return _firestore
+        .collection('users')
+        .doc(uid)
+        .collection('word_match_sets');
   }
 
-  /// Migrate all non-builtin local sets for the given user UID.
+  /// Migrate all non-builtin guest local sets (ownerUid == null) for the given user UID.
   ///
   /// - Skips built-in sets.
-  /// - Skips sets that have already been migrated for this user
-  ///   (based on `localSetId` field in Firestore).
-  /// - Handles name collisions by adding " (1)", " (2)", ... suffixes.
+  /// - Skips sets that already have a non-null ownerUid.
+  /// - Assigns a persistent cloudId locally before uploading so retries reuse the document ID.
+  /// - Only updates local ownerUid to user.uid after remote write succeeds.
   Future<void> migrateLocalSetsForUser(AppUser user) async {
     if (user.isAnonymous || user.isGuestMode) {
       // Anonymous/guest users do not get cloud migration.
@@ -39,92 +41,93 @@ class WordMatchMigrationService {
     }
 
     try {
-      // Get local sets with a short timeout to avoid hanging on broken storage.
-      final sets = await _repo.watchSets().first.timeout(
+      // Get unmigrated guest sets (isBuiltin == false && ownerUid == null)
+      final guestSets = await _repo.getUnmigratedGuestSets().timeout(
         const Duration(seconds: 8),
         onTimeout: () => <WordSet>[],
       );
 
-      if (sets.isEmpty) {
+      if (guestSets.isEmpty) {
         return;
       }
 
-      // Load existing remote sets once to:
-      // - detect which localSetIds were already migrated
-      // - track existing names for collision handling
-      final existingSnapshot = await _userSetsRef(user.uid).get();
-      final existingLocalSetIds = <int>{};
-      final existingNames = <String>{};
-
-      for (final doc in existingSnapshot.docs) {
-        final data = doc.data();
-        final localId = data['localSetId'];
-        if (localId is int) {
-          existingLocalSetIds.add(localId);
-        } else if (localId is num) {
-          existingLocalSetIds.add(localId.toInt());
-        } else if (localId is String) {
-          final parsed = int.tryParse(localId);
-          if (parsed != null) {
-            existingLocalSetIds.add(parsed);
-          }
-        }
-        final name = data['name'];
-        if (name is String && name.isNotEmpty) {
-          existingNames.add(name);
-        }
-      }
-
-      for (final set in sets) {
-        if (set.isBuiltin) {
-          // Built-in sets are not user-specific; skip.
+      for (final set in guestSets) {
+        if (set.isBuiltin || set.ownerUid != null) {
           continue;
         }
 
-        if (existingLocalSetIds.contains(set.id)) {
-          // This local set was already migrated for this user.
+        // Target UID Security: If migration was initiated for another user account, skip.
+        if (set.pendingMigrationUid != null &&
+            set.pendingMigrationUid != user.uid) {
+          debugPrint(
+            'Skipping set ${set.id}: pending migration for ${set.pendingMigrationUid}, active user is ${user.uid}',
+          );
           continue;
         }
 
-        // Name collision handling
-        final safeName = _generateUniqueName(set.name, existingNames);
-        existingNames.add(safeName);
+        // Set pendingMigrationUid locally for current user before proceeding
+        if (set.pendingMigrationUid == null) {
+          await _repo.updateSetPendingMigrationUid(set.id, user.uid);
+        }
 
-        // Fetch pairs for this set
-        final pairs = await _safeFetchPairs(set.id);
+        // Fetch pairs using dedicated unmigrated guest pairs API.
+        // If pair reading fails, DO NOT perform remote write and DO NOT change ownerUid.
+        final List<WordPair> pairs;
+        try {
+          pairs = await _repo.getUnmigratedGuestPairs(set.id);
+        } catch (e) {
+          debugPrint(
+            'Failed to read guest pairs for set ${set.id}: $e. Aborting migration for this set.',
+          );
+          continue;
+        }
 
-        final now = DateTime.now().toUtc();
-        final docRef = _userSetsRef(user.uid).doc();
+        // Determine or retrieve persistent cloud document ID
+        String? cloudId = set.cloudId;
+        final DocumentReference<Map<String, dynamic>> docRef;
+        if (cloudId == null || cloudId.isEmpty) {
+          docRef = _userSetsRef(user.uid).doc();
+          cloudId = docRef.id;
+          // Save cloudId locally first so retries reuse the exact same doc ID
+          await _repo.updateSetCloudId(set.id, cloudId);
+        } else {
+          docRef = _userSetsRef(user.uid).doc(cloudId);
+        }
 
-        final data = <String, dynamic>{
-          'ownerUid': user.uid,
-          'name': safeName,
-          'visibility': 'PRIVATE', // Phase 2'de enum ile genişletilecek
-          'createdAt': Timestamp.fromDate(set.createdAt.toUtc()),
-          'updatedAt': Timestamp.fromDate(set.updatedAt.toUtc()),
-          if (set.lastPracticedAt != null)
-            'lastPracticedAt': Timestamp.fromDate(set.lastPracticedAt!.toUtc()),
-          'pairsCount': pairs.length,
-          'isBuiltin': set.isBuiltin,
-          'localSetId': set.id,
-          'migratedFromLocal': true,
-          'migratedAt': Timestamp.fromDate(now),
+        final pairsJson =
+            pairs
+                .map(
+                  (p) => {
+                    'english': p.english,
+                    'turkish': p.turkish,
+                    'learned': p.learned,
+                  },
+                )
+                .toList();
+
+        final payload = <String, dynamic>{
+          'name': set.name,
+          'createdAt': set.createdAt.toUtc().toIso8601String(),
+          'updatedAt': set.updatedAt.toUtc().toIso8601String(),
+          'visibility': set.visibility.name,
+          'sourceSetId': set.sourceSetId,
+          'sourceOwnerUid': set.sourceOwnerUid,
+          'importedAt': set.importedAt?.toUtc().toIso8601String(),
+          'pairs': pairsJson,
         };
 
-        await docRef.set(data);
-
-        // Write pairs in a batch for efficiency
-        if (pairs.isNotEmpty) {
-          final batch = _firestore.batch();
-          for (final pair in pairs) {
-            final pairRef = docRef.collection('pairs').doc();
-            batch.set(pairRef, {
-              'english': pair.english,
-              'turkish': pair.turkish,
-              'learned': pair.learned,
-            });
-          }
-          await batch.commit();
+        try {
+          await docRef.set(payload, SetOptions(merge: true));
+          // Update ownerUid locally ONLY after remote write succeeds (also clears pendingMigrationUid)
+          await _repo.updateSetOwnerUid(set.id, user.uid);
+          debugPrint(
+            'Successfully migrated guest set ${set.id} (${set.name}) to cloud ID $cloudId for user ${user.uid}',
+          );
+        } catch (e) {
+          debugPrint(
+            'Failed to migrate guest set ${set.id} (${set.name}) to cloud: $e',
+          );
+          // Set remains ownerUid == null; retry on next login for user.uid will reuse same cloudId
         }
       }
     } catch (e, stackTrace) {
@@ -135,33 +138,6 @@ class WordMatchMigrationService {
         debugPrint(stackTrace.toString());
       }
       // Migration is best-effort; never crash auth flow because of this.
-    }
-  }
-
-  Future<List<WordPair>> _safeFetchPairs(int setId) async {
-    try {
-      return await _repo.fetchPairs(setId);
-    } catch (_) {
-      return <WordPair>[];
-    }
-  }
-
-  String _generateUniqueName(String baseName, Set<String> existingNames) {
-    var candidate = baseName.trim().isEmpty ? 'Set' : baseName.trim();
-    if (!existingNames.contains(candidate)) {
-      return candidate;
-    }
-    var index = 1;
-    while (true) {
-      final withSuffix = '$candidate ($index)';
-      if (!existingNames.contains(withSuffix)) {
-        return withSuffix;
-      }
-      index++;
-      if (index > 1000) {
-        // Safety guard
-        return '$candidate (${DateTime.now().millisecondsSinceEpoch})';
-      }
     }
   }
 }

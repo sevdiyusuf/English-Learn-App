@@ -17,11 +17,7 @@ const WordSetSchema = CollectionSchema(
   name: r'WordSet319',
   id: 726125641648813,
   properties: {
-    r'cloudId': PropertySchema(
-      id: 0,
-      name: r'cloudId',
-      type: IsarType.string,
-    ),
+    r'cloudId': PropertySchema(id: 0, name: r'cloudId', type: IsarType.string),
     r'createdAt': PropertySchema(
       id: 1,
       name: r'createdAt',
@@ -42,39 +38,69 @@ const WordSetSchema = CollectionSchema(
       name: r'lastPracticedAt',
       type: IsarType.dateTime,
     ),
-    r'name': PropertySchema(
+    r'lastRemoteOperationId': PropertySchema(
       id: 5,
-      name: r'name',
+      name: r'lastRemoteOperationId',
       type: IsarType.string,
     ),
+    r'name': PropertySchema(id: 6, name: r'name', type: IsarType.string),
+    r'ownerUid': PropertySchema(
+      id: 7,
+      name: r'ownerUid',
+      type: IsarType.string,
+    ),
+    r'pendingMigrationUid': PropertySchema(
+      id: 8,
+      name: r'pendingMigrationUid',
+      type: IsarType.string,
+    ),
+    r'remoteVersion': PropertySchema(
+      id: 9,
+      name: r'remoteVersion',
+      type: IsarType.long,
+    ),
     r'sourceOwnerUid': PropertySchema(
-      id: 6,
+      id: 10,
       name: r'sourceOwnerUid',
       type: IsarType.string,
     ),
     r'sourceSetId': PropertySchema(
-      id: 7,
+      id: 11,
       name: r'sourceSetId',
       type: IsarType.string,
     ),
     r'updatedAt': PropertySchema(
-      id: 8,
+      id: 12,
       name: r'updatedAt',
       type: IsarType.dateTime,
     ),
     r'visibility': PropertySchema(
-      id: 9,
+      id: 13,
       name: r'visibility',
       type: IsarType.byte,
       enumMap: _WordSetvisibilityEnumValueMap,
-    )
+    ),
   },
   estimateSize: _wordSetEstimateSize,
   serialize: _wordSetSerialize,
   deserialize: _wordSetDeserialize,
   deserializeProp: _wordSetDeserializeProp,
   idName: r'id',
-  indexes: {},
+  indexes: {
+    r'ownerUid': IndexSchema(
+      id: -8016718989707307851,
+      name: r'ownerUid',
+      unique: false,
+      replace: false,
+      properties: [
+        IndexPropertySchema(
+          name: r'ownerUid',
+          type: IndexType.hash,
+          caseSensitive: true,
+        ),
+      ],
+    ),
+  },
   links: {},
   embeddedSchemas: {},
   getId: _wordSetGetId,
@@ -95,7 +121,25 @@ int _wordSetEstimateSize(
       bytesCount += 3 + value.length * 3;
     }
   }
+  {
+    final value = object.lastRemoteOperationId;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   bytesCount += 3 + object.name.length * 3;
+  {
+    final value = object.ownerUid;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.pendingMigrationUid;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   {
     final value = object.sourceOwnerUid;
     if (value != null) {
@@ -122,11 +166,15 @@ void _wordSetSerialize(
   writer.writeDateTime(offsets[2], object.importedAt);
   writer.writeBool(offsets[3], object.isBuiltin);
   writer.writeDateTime(offsets[4], object.lastPracticedAt);
-  writer.writeString(offsets[5], object.name);
-  writer.writeString(offsets[6], object.sourceOwnerUid);
-  writer.writeString(offsets[7], object.sourceSetId);
-  writer.writeDateTime(offsets[8], object.updatedAt);
-  writer.writeByte(offsets[9], object.visibility.index);
+  writer.writeString(offsets[5], object.lastRemoteOperationId);
+  writer.writeString(offsets[6], object.name);
+  writer.writeString(offsets[7], object.ownerUid);
+  writer.writeString(offsets[8], object.pendingMigrationUid);
+  writer.writeLong(offsets[9], object.remoteVersion);
+  writer.writeString(offsets[10], object.sourceOwnerUid);
+  writer.writeString(offsets[11], object.sourceSetId);
+  writer.writeDateTime(offsets[12], object.updatedAt);
+  writer.writeByte(offsets[13], object.visibility.index);
 }
 
 WordSet _wordSetDeserialize(
@@ -142,13 +190,17 @@ WordSet _wordSetDeserialize(
   object.importedAt = reader.readDateTimeOrNull(offsets[2]);
   object.isBuiltin = reader.readBool(offsets[3]);
   object.lastPracticedAt = reader.readDateTimeOrNull(offsets[4]);
-  object.name = reader.readString(offsets[5]);
-  object.sourceOwnerUid = reader.readStringOrNull(offsets[6]);
-  object.sourceSetId = reader.readStringOrNull(offsets[7]);
-  object.updatedAt = reader.readDateTime(offsets[8]);
+  object.lastRemoteOperationId = reader.readStringOrNull(offsets[5]);
+  object.name = reader.readString(offsets[6]);
+  object.ownerUid = reader.readStringOrNull(offsets[7]);
+  object.pendingMigrationUid = reader.readStringOrNull(offsets[8]);
+  object.remoteVersion = reader.readLongOrNull(offsets[9]);
+  object.sourceOwnerUid = reader.readStringOrNull(offsets[10]);
+  object.sourceSetId = reader.readStringOrNull(offsets[11]);
+  object.updatedAt = reader.readDateTime(offsets[12]);
   object.visibility =
-      _WordSetvisibilityValueEnumMap[reader.readByteOrNull(offsets[9])] ??
-          SetVisibility.private;
+      _WordSetvisibilityValueEnumMap[reader.readByteOrNull(offsets[13])] ??
+      SetVisibility.private;
   return object;
 }
 
@@ -170,16 +222,25 @@ P _wordSetDeserializeProp<P>(
     case 4:
       return (reader.readDateTimeOrNull(offset)) as P;
     case 5:
-      return (reader.readString(offset)) as P;
-    case 6:
       return (reader.readStringOrNull(offset)) as P;
+    case 6:
+      return (reader.readString(offset)) as P;
     case 7:
       return (reader.readStringOrNull(offset)) as P;
     case 8:
-      return (reader.readDateTime(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 9:
+      return (reader.readLongOrNull(offset)) as P;
+    case 10:
+      return (reader.readStringOrNull(offset)) as P;
+    case 11:
+      return (reader.readStringOrNull(offset)) as P;
+    case 12:
+      return (reader.readDateTime(offset)) as P;
+    case 13:
       return (_WordSetvisibilityValueEnumMap[reader.readByteOrNull(offset)] ??
-          SetVisibility.private) as P;
+              SetVisibility.private)
+          as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -219,10 +280,7 @@ extension WordSetQueryWhereSort on QueryBuilder<WordSet, WordSet, QWhere> {
 extension WordSetQueryWhere on QueryBuilder<WordSet, WordSet, QWhereClause> {
   QueryBuilder<WordSet, WordSet, QAfterWhereClause> idEqualTo(Id id) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(IdWhereClause.between(
-        lower: id,
-        upper: id,
-      ));
+      return query.addWhereClause(IdWhereClause.between(lower: id, upper: id));
     });
   }
 
@@ -248,8 +306,10 @@ extension WordSetQueryWhere on QueryBuilder<WordSet, WordSet, QWhereClause> {
     });
   }
 
-  QueryBuilder<WordSet, WordSet, QAfterWhereClause> idGreaterThan(Id id,
-      {bool include = false}) {
+  QueryBuilder<WordSet, WordSet, QAfterWhereClause> idGreaterThan(
+    Id id, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         IdWhereClause.greaterThan(lower: id, includeLower: include),
@@ -257,8 +317,10 @@ extension WordSetQueryWhere on QueryBuilder<WordSet, WordSet, QWhereClause> {
     });
   }
 
-  QueryBuilder<WordSet, WordSet, QAfterWhereClause> idLessThan(Id id,
-      {bool include = false}) {
+  QueryBuilder<WordSet, WordSet, QAfterWhereClause> idLessThan(
+    Id id, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         IdWhereClause.lessThan(upper: id, includeUpper: include),
@@ -273,12 +335,89 @@ extension WordSetQueryWhere on QueryBuilder<WordSet, WordSet, QWhereClause> {
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(IdWhereClause.between(
-        lower: lowerId,
-        includeLower: includeLower,
-        upper: upperId,
-        includeUpper: includeUpper,
-      ));
+      return query.addWhereClause(
+        IdWhereClause.between(
+          lower: lowerId,
+          includeLower: includeLower,
+          upper: upperId,
+          includeUpper: includeUpper,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterWhereClause> ownerUidIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        IndexWhereClause.equalTo(indexName: r'ownerUid', value: [null]),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterWhereClause> ownerUidIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        IndexWhereClause.between(
+          indexName: r'ownerUid',
+          lower: [null],
+          includeLower: false,
+          upper: [],
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterWhereClause> ownerUidEqualTo(
+    String? ownerUid,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        IndexWhereClause.equalTo(indexName: r'ownerUid', value: [ownerUid]),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterWhereClause> ownerUidNotEqualTo(
+    String? ownerUid,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(
+              IndexWhereClause.between(
+                indexName: r'ownerUid',
+                lower: [],
+                upper: [ownerUid],
+                includeUpper: false,
+              ),
+            )
+            .addWhereClause(
+              IndexWhereClause.between(
+                indexName: r'ownerUid',
+                lower: [ownerUid],
+                includeLower: false,
+                upper: [],
+              ),
+            );
+      } else {
+        return query
+            .addWhereClause(
+              IndexWhereClause.between(
+                indexName: r'ownerUid',
+                lower: [ownerUid],
+                includeLower: false,
+                upper: [],
+              ),
+            )
+            .addWhereClause(
+              IndexWhereClause.between(
+                indexName: r'ownerUid',
+                lower: [],
+                upper: [ownerUid],
+                includeUpper: false,
+              ),
+            );
+      }
     });
   }
 }
@@ -287,17 +426,17 @@ extension WordSetQueryFilter
     on QueryBuilder<WordSet, WordSet, QFilterCondition> {
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition> cloudIdIsNull() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'cloudId',
-      ));
+      return query.addFilterCondition(
+        const FilterCondition.isNull(property: r'cloudId'),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition> cloudIdIsNotNull() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'cloudId',
-      ));
+      return query.addFilterCondition(
+        const FilterCondition.isNotNull(property: r'cloudId'),
+      );
     });
   }
 
@@ -306,11 +445,13 @@ extension WordSetQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'cloudId',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(
+          property: r'cloudId',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
@@ -320,12 +461,14 @@ extension WordSetQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'cloudId',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'cloudId',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
@@ -335,12 +478,14 @@ extension WordSetQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'cloudId',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'cloudId',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
@@ -352,14 +497,16 @@ extension WordSetQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'cloudId',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'cloudId',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
@@ -368,11 +515,13 @@ extension WordSetQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'cloudId',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.startsWith(
+          property: r'cloudId',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
@@ -381,63 +530,69 @@ extension WordSetQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'cloudId',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.endsWith(
+          property: r'cloudId',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition> cloudIdContains(
-      String value,
-      {bool caseSensitive = true}) {
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'cloudId',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.contains(
+          property: r'cloudId',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition> cloudIdMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
+    String pattern, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'cloudId',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.matches(
+          property: r'cloudId',
+          wildcard: pattern,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition> cloudIdIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'cloudId',
-        value: '',
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'cloudId', value: ''),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition> cloudIdIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'cloudId',
-        value: '',
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(property: r'cloudId', value: ''),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition> createdAtEqualTo(
-      DateTime value) {
+    DateTime value,
+  ) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'createdAt',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'createdAt', value: value),
+      );
     });
   }
 
@@ -446,11 +601,13 @@ extension WordSetQueryFilter
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'createdAt',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'createdAt',
+          value: value,
+        ),
+      );
     });
   }
 
@@ -459,11 +616,13 @@ extension WordSetQueryFilter
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'createdAt',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'createdAt',
+          value: value,
+        ),
+      );
     });
   }
 
@@ -474,22 +633,23 @@ extension WordSetQueryFilter
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'createdAt',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'createdAt',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition> idEqualTo(Id value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'id',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'id', value: value),
+      );
     });
   }
 
@@ -498,11 +658,13 @@ extension WordSetQueryFilter
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'id',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'id',
+          value: value,
+        ),
+      );
     });
   }
 
@@ -511,11 +673,13 @@ extension WordSetQueryFilter
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'id',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'id',
+          value: value,
+        ),
+      );
     });
   }
 
@@ -526,39 +690,41 @@ extension WordSetQueryFilter
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'id',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'id',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition> importedAtIsNull() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'importedAt',
-      ));
+      return query.addFilterCondition(
+        const FilterCondition.isNull(property: r'importedAt'),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition> importedAtIsNotNull() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'importedAt',
-      ));
+      return query.addFilterCondition(
+        const FilterCondition.isNotNull(property: r'importedAt'),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition> importedAtEqualTo(
-      DateTime? value) {
+    DateTime? value,
+  ) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'importedAt',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'importedAt', value: value),
+      );
     });
   }
 
@@ -567,11 +733,13 @@ extension WordSetQueryFilter
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'importedAt',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'importedAt',
+          value: value,
+        ),
+      );
     });
   }
 
@@ -580,11 +748,13 @@ extension WordSetQueryFilter
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'importedAt',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'importedAt',
+          value: value,
+        ),
+      );
     });
   }
 
@@ -595,65 +765,66 @@ extension WordSetQueryFilter
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'importedAt',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'importedAt',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition> isBuiltinEqualTo(
-      bool value) {
+    bool value,
+  ) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'isBuiltin',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'isBuiltin', value: value),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
-      lastPracticedAtIsNull() {
+  lastPracticedAtIsNull() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'lastPracticedAt',
-      ));
+      return query.addFilterCondition(
+        const FilterCondition.isNull(property: r'lastPracticedAt'),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
-      lastPracticedAtIsNotNull() {
+  lastPracticedAtIsNotNull() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'lastPracticedAt',
-      ));
+      return query.addFilterCondition(
+        const FilterCondition.isNotNull(property: r'lastPracticedAt'),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition> lastPracticedAtEqualTo(
-      DateTime? value) {
+    DateTime? value,
+  ) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'lastPracticedAt',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'lastPracticedAt', value: value),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
-      lastPracticedAtGreaterThan(
-    DateTime? value, {
-    bool include = false,
-  }) {
+  lastPracticedAtGreaterThan(DateTime? value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'lastPracticedAt',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'lastPracticedAt',
+          value: value,
+        ),
+      );
     });
   }
 
@@ -662,11 +833,13 @@ extension WordSetQueryFilter
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'lastPracticedAt',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'lastPracticedAt',
+          value: value,
+        ),
+      );
     });
   }
 
@@ -677,13 +850,177 @@ extension WordSetQueryFilter
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'lastPracticedAt',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'lastPracticedAt',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
+  lastRemoteOperationIdIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        const FilterCondition.isNull(property: r'lastRemoteOperationId'),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
+  lastRemoteOperationIdIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        const FilterCondition.isNotNull(property: r'lastRemoteOperationId'),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
+  lastRemoteOperationIdEqualTo(String? value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(
+          property: r'lastRemoteOperationId',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
+  lastRemoteOperationIdGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'lastRemoteOperationId',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
+  lastRemoteOperationIdLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'lastRemoteOperationId',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
+  lastRemoteOperationIdBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'lastRemoteOperationId',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
+  lastRemoteOperationIdStartsWith(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.startsWith(
+          property: r'lastRemoteOperationId',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
+  lastRemoteOperationIdEndsWith(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.endsWith(
+          property: r'lastRemoteOperationId',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
+  lastRemoteOperationIdContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.contains(
+          property: r'lastRemoteOperationId',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
+  lastRemoteOperationIdMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.matches(
+          property: r'lastRemoteOperationId',
+          wildcard: pattern,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
+  lastRemoteOperationIdIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'lastRemoteOperationId', value: ''),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
+  lastRemoteOperationIdIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          property: r'lastRemoteOperationId',
+          value: '',
+        ),
+      );
     });
   }
 
@@ -692,11 +1029,13 @@ extension WordSetQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(
+          property: r'name',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
@@ -706,12 +1045,14 @@ extension WordSetQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'name',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
@@ -721,12 +1062,14 @@ extension WordSetQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'name',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
@@ -738,14 +1081,16 @@ extension WordSetQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'name',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'name',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
@@ -754,11 +1099,13 @@ extension WordSetQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.startsWith(
+          property: r'name',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
@@ -767,70 +1114,474 @@ extension WordSetQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.endsWith(
+          property: r'name',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition> nameContains(
-      String value,
-      {bool caseSensitive = true}) {
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.contains(
+          property: r'name',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition> nameMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
+    String pattern, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'name',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.matches(
+          property: r'name',
+          wildcard: pattern,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition> nameIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'name',
-        value: '',
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'name', value: ''),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition> nameIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'name',
-        value: '',
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(property: r'name', value: ''),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition> ownerUidIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        const FilterCondition.isNull(property: r'ownerUid'),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition> ownerUidIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        const FilterCondition.isNotNull(property: r'ownerUid'),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition> ownerUidEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(
+          property: r'ownerUid',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition> ownerUidGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'ownerUid',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition> ownerUidLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'ownerUid',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition> ownerUidBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'ownerUid',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition> ownerUidStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.startsWith(
+          property: r'ownerUid',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition> ownerUidEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.endsWith(
+          property: r'ownerUid',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition> ownerUidContains(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.contains(
+          property: r'ownerUid',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition> ownerUidMatches(
+    String pattern, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.matches(
+          property: r'ownerUid',
+          wildcard: pattern,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition> ownerUidIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'ownerUid', value: ''),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition> ownerUidIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(property: r'ownerUid', value: ''),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
+  pendingMigrationUidIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        const FilterCondition.isNull(property: r'pendingMigrationUid'),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
+  pendingMigrationUidIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        const FilterCondition.isNotNull(property: r'pendingMigrationUid'),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
+  pendingMigrationUidEqualTo(String? value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(
+          property: r'pendingMigrationUid',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
+  pendingMigrationUidGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'pendingMigrationUid',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
+  pendingMigrationUidLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'pendingMigrationUid',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
+  pendingMigrationUidBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'pendingMigrationUid',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
+  pendingMigrationUidStartsWith(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.startsWith(
+          property: r'pendingMigrationUid',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
+  pendingMigrationUidEndsWith(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.endsWith(
+          property: r'pendingMigrationUid',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
+  pendingMigrationUidContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.contains(
+          property: r'pendingMigrationUid',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
+  pendingMigrationUidMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.matches(
+          property: r'pendingMigrationUid',
+          wildcard: pattern,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
+  pendingMigrationUidIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'pendingMigrationUid', value: ''),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
+  pendingMigrationUidIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          property: r'pendingMigrationUid',
+          value: '',
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition> remoteVersionIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        const FilterCondition.isNull(property: r'remoteVersion'),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
+  remoteVersionIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        const FilterCondition.isNotNull(property: r'remoteVersion'),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition> remoteVersionEqualTo(
+    int? value,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'remoteVersion', value: value),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
+  remoteVersionGreaterThan(int? value, {bool include = false}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'remoteVersion',
+          value: value,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition> remoteVersionLessThan(
+    int? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'remoteVersion',
+          value: value,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterFilterCondition> remoteVersionBetween(
+    int? lower,
+    int? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'remoteVersion',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition> sourceOwnerUidIsNull() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'sourceOwnerUid',
-      ));
+      return query.addFilterCondition(
+        const FilterCondition.isNull(property: r'sourceOwnerUid'),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
-      sourceOwnerUidIsNotNull() {
+  sourceOwnerUidIsNotNull() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'sourceOwnerUid',
-      ));
+      return query.addFilterCondition(
+        const FilterCondition.isNotNull(property: r'sourceOwnerUid'),
+      );
     });
   }
 
@@ -839,27 +1590,31 @@ extension WordSetQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'sourceOwnerUid',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(
+          property: r'sourceOwnerUid',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
-      sourceOwnerUidGreaterThan(
+  sourceOwnerUidGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'sourceOwnerUid',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'sourceOwnerUid',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
@@ -869,12 +1624,14 @@ extension WordSetQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'sourceOwnerUid',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'sourceOwnerUid',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
@@ -886,28 +1643,29 @@ extension WordSetQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'sourceOwnerUid',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'sourceOwnerUid',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
-      sourceOwnerUidStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
+  sourceOwnerUidStartsWith(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'sourceOwnerUid',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.startsWith(
+          property: r'sourceOwnerUid',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
@@ -916,71 +1674,77 @@ extension WordSetQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'sourceOwnerUid',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.endsWith(
+          property: r'sourceOwnerUid',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition> sourceOwnerUidContains(
-      String value,
-      {bool caseSensitive = true}) {
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'sourceOwnerUid',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.contains(
+          property: r'sourceOwnerUid',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition> sourceOwnerUidMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
+    String pattern, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'sourceOwnerUid',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.matches(
+          property: r'sourceOwnerUid',
+          wildcard: pattern,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
-      sourceOwnerUidIsEmpty() {
+  sourceOwnerUidIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'sourceOwnerUid',
-        value: '',
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'sourceOwnerUid', value: ''),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
-      sourceOwnerUidIsNotEmpty() {
+  sourceOwnerUidIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'sourceOwnerUid',
-        value: '',
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(property: r'sourceOwnerUid', value: ''),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition> sourceSetIdIsNull() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'sourceSetId',
-      ));
+      return query.addFilterCondition(
+        const FilterCondition.isNull(property: r'sourceSetId'),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition> sourceSetIdIsNotNull() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'sourceSetId',
-      ));
+      return query.addFilterCondition(
+        const FilterCondition.isNotNull(property: r'sourceSetId'),
+      );
     });
   }
 
@@ -989,11 +1753,13 @@ extension WordSetQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'sourceSetId',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(
+          property: r'sourceSetId',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
@@ -1003,12 +1769,14 @@ extension WordSetQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'sourceSetId',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'sourceSetId',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
@@ -1018,12 +1786,14 @@ extension WordSetQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'sourceSetId',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'sourceSetId',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
@@ -1035,14 +1805,16 @@ extension WordSetQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'sourceSetId',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'sourceSetId',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
@@ -1051,11 +1823,13 @@ extension WordSetQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'sourceSetId',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.startsWith(
+          property: r'sourceSetId',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
@@ -1064,64 +1838,70 @@ extension WordSetQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'sourceSetId',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.endsWith(
+          property: r'sourceSetId',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition> sourceSetIdContains(
-      String value,
-      {bool caseSensitive = true}) {
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'sourceSetId',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.contains(
+          property: r'sourceSetId',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition> sourceSetIdMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
+    String pattern, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'sourceSetId',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.matches(
+          property: r'sourceSetId',
+          wildcard: pattern,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition> sourceSetIdIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'sourceSetId',
-        value: '',
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'sourceSetId', value: ''),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition>
-      sourceSetIdIsNotEmpty() {
+  sourceSetIdIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'sourceSetId',
-        value: '',
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(property: r'sourceSetId', value: ''),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition> updatedAtEqualTo(
-      DateTime value) {
+    DateTime value,
+  ) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'updatedAt',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'updatedAt', value: value),
+      );
     });
   }
 
@@ -1130,11 +1910,13 @@ extension WordSetQueryFilter
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'updatedAt',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'updatedAt',
+          value: value,
+        ),
+      );
     });
   }
 
@@ -1143,11 +1925,13 @@ extension WordSetQueryFilter
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'updatedAt',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'updatedAt',
+          value: value,
+        ),
+      );
     });
   }
 
@@ -1158,23 +1942,25 @@ extension WordSetQueryFilter
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'updatedAt',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'updatedAt',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 
   QueryBuilder<WordSet, WordSet, QAfterFilterCondition> visibilityEqualTo(
-      SetVisibility value) {
+    SetVisibility value,
+  ) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'visibility',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'visibility', value: value),
+      );
     });
   }
 
@@ -1183,11 +1969,13 @@ extension WordSetQueryFilter
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'visibility',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'visibility',
+          value: value,
+        ),
+      );
     });
   }
 
@@ -1196,11 +1984,13 @@ extension WordSetQueryFilter
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'visibility',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'visibility',
+          value: value,
+        ),
+      );
     });
   }
 
@@ -1211,13 +2001,15 @@ extension WordSetQueryFilter
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'visibility',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'visibility',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 }
@@ -1289,6 +2081,19 @@ extension WordSetQuerySortBy on QueryBuilder<WordSet, WordSet, QSortBy> {
     });
   }
 
+  QueryBuilder<WordSet, WordSet, QAfterSortBy> sortByLastRemoteOperationId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'lastRemoteOperationId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterSortBy>
+  sortByLastRemoteOperationIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'lastRemoteOperationId', Sort.desc);
+    });
+  }
+
   QueryBuilder<WordSet, WordSet, QAfterSortBy> sortByName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.asc);
@@ -1298,6 +2103,42 @@ extension WordSetQuerySortBy on QueryBuilder<WordSet, WordSet, QSortBy> {
   QueryBuilder<WordSet, WordSet, QAfterSortBy> sortByNameDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.desc);
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterSortBy> sortByOwnerUid() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'ownerUid', Sort.asc);
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterSortBy> sortByOwnerUidDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'ownerUid', Sort.desc);
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterSortBy> sortByPendingMigrationUid() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'pendingMigrationUid', Sort.asc);
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterSortBy> sortByPendingMigrationUidDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'pendingMigrationUid', Sort.desc);
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterSortBy> sortByRemoteVersion() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'remoteVersion', Sort.asc);
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterSortBy> sortByRemoteVersionDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'remoteVersion', Sort.desc);
     });
   }
 
@@ -1424,6 +2265,19 @@ extension WordSetQuerySortThenBy
     });
   }
 
+  QueryBuilder<WordSet, WordSet, QAfterSortBy> thenByLastRemoteOperationId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'lastRemoteOperationId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterSortBy>
+  thenByLastRemoteOperationIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'lastRemoteOperationId', Sort.desc);
+    });
+  }
+
   QueryBuilder<WordSet, WordSet, QAfterSortBy> thenByName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.asc);
@@ -1433,6 +2287,42 @@ extension WordSetQuerySortThenBy
   QueryBuilder<WordSet, WordSet, QAfterSortBy> thenByNameDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.desc);
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterSortBy> thenByOwnerUid() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'ownerUid', Sort.asc);
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterSortBy> thenByOwnerUidDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'ownerUid', Sort.desc);
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterSortBy> thenByPendingMigrationUid() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'pendingMigrationUid', Sort.asc);
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterSortBy> thenByPendingMigrationUidDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'pendingMigrationUid', Sort.desc);
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterSortBy> thenByRemoteVersion() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'remoteVersion', Sort.asc);
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QAfterSortBy> thenByRemoteVersionDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'remoteVersion', Sort.desc);
     });
   }
 
@@ -1487,8 +2377,9 @@ extension WordSetQuerySortThenBy
 
 extension WordSetQueryWhereDistinct
     on QueryBuilder<WordSet, WordSet, QDistinct> {
-  QueryBuilder<WordSet, WordSet, QDistinct> distinctByCloudId(
-      {bool caseSensitive = true}) {
+  QueryBuilder<WordSet, WordSet, QDistinct> distinctByCloudId({
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'cloudId', caseSensitive: caseSensitive);
     });
@@ -1518,23 +2409,64 @@ extension WordSetQueryWhereDistinct
     });
   }
 
-  QueryBuilder<WordSet, WordSet, QDistinct> distinctByName(
-      {bool caseSensitive = true}) {
+  QueryBuilder<WordSet, WordSet, QDistinct> distinctByLastRemoteOperationId({
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(
+        r'lastRemoteOperationId',
+        caseSensitive: caseSensitive,
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QDistinct> distinctByName({
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'name', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<WordSet, WordSet, QDistinct> distinctBySourceOwnerUid(
-      {bool caseSensitive = true}) {
+  QueryBuilder<WordSet, WordSet, QDistinct> distinctByOwnerUid({
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'sourceOwnerUid',
-          caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'ownerUid', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<WordSet, WordSet, QDistinct> distinctBySourceSetId(
-      {bool caseSensitive = true}) {
+  QueryBuilder<WordSet, WordSet, QDistinct> distinctByPendingMigrationUid({
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(
+        r'pendingMigrationUid',
+        caseSensitive: caseSensitive,
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QDistinct> distinctByRemoteVersion() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'remoteVersion');
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QDistinct> distinctBySourceOwnerUid({
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(
+        r'sourceOwnerUid',
+        caseSensitive: caseSensitive,
+      );
+    });
+  }
+
+  QueryBuilder<WordSet, WordSet, QDistinct> distinctBySourceSetId({
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'sourceSetId', caseSensitive: caseSensitive);
     });
@@ -1591,9 +2523,35 @@ extension WordSetQueryProperty
     });
   }
 
+  QueryBuilder<WordSet, String?, QQueryOperations>
+  lastRemoteOperationIdProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'lastRemoteOperationId');
+    });
+  }
+
   QueryBuilder<WordSet, String, QQueryOperations> nameProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'name');
+    });
+  }
+
+  QueryBuilder<WordSet, String?, QQueryOperations> ownerUidProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'ownerUid');
+    });
+  }
+
+  QueryBuilder<WordSet, String?, QQueryOperations>
+  pendingMigrationUidProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'pendingMigrationUid');
+    });
+  }
+
+  QueryBuilder<WordSet, int?, QQueryOperations> remoteVersionProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'remoteVersion');
     });
   }
 

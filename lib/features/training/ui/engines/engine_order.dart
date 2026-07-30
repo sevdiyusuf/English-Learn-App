@@ -62,22 +62,17 @@ class EngineOrder extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                if (item.translation != null && item.translation!.isNotEmpty) ...[
+                if (item.translation != null &&
+                    item.translation!.isNotEmpty) ...[
                   const SizedBox(height: 8),
                   const Text(
                     'Çeviri:',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.white54,
-                    ),
+                    style: TextStyle(fontSize: 14, color: Colors.white54),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     item.translation!,
-                    style: const TextStyle(
-                      fontSize: 15,
-                      color: Colors.white,
-                    ),
+                    style: const TextStyle(fontSize: 15, color: Colors.white),
                   ),
                 ],
               ],

@@ -10,7 +10,7 @@ class GrammarRepository {
 
   Future<LessonIndex> loadIndex() async {
     if (_cachedIndex != null) return _cachedIndex!;
-    
+
     try {
       final String content = await rootBundle.loadString(_indexPath);
       final Map<String, dynamic> json = jsonDecode(content);

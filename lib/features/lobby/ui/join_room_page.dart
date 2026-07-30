@@ -35,11 +35,11 @@ class _JoinRoomPageState extends ConsumerState<JoinRoomPage> {
     // Load saved data from storage
     final savedRoomCode = StorageService.getRoomCode();
     final savedUsername = StorageService.getUsername();
-    
+
     _roomController = TextEditingController(
       text: widget.initialRoomId ?? savedRoomCode ?? '',
     );
-    
+
     if (savedUsername != null && savedUsername.isNotEmpty) {
       _usernameController.text = savedUsername;
     }
@@ -134,10 +134,12 @@ class _JoinRoomPageState extends ConsumerState<JoinRoomPage> {
                                     _formKey.currentState?.validate() ?? false;
                                 if (!isValid) return;
                                 final roomCode = _roomController.text.trim();
-                                final username = _usernameController.text.trim();
-                                
+                                final username =
+                                    _usernameController.text.trim();
+
                                 // Validate inputs
-                                final usernameError = InputValidator.validateUsername(username);
+                                final usernameError =
+                                    InputValidator.validateUsername(username);
                                 if (usernameError != null) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
@@ -147,8 +149,9 @@ class _JoinRoomPageState extends ConsumerState<JoinRoomPage> {
                                   );
                                   return;
                                 }
-                                
-                                final roomCodeError = InputValidator.validateRoomCode(roomCode);
+
+                                final roomCodeError =
+                                    InputValidator.validateRoomCode(roomCode);
                                 if (roomCodeError != null) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
@@ -158,32 +161,38 @@ class _JoinRoomPageState extends ConsumerState<JoinRoomPage> {
                                   );
                                   return;
                                 }
-                                
+
                                 try {
                                   // Save username and room code to storage
                                   await StorageService.saveUsername(username);
                                   await StorageService.saveRoomCode(roomCode);
-                                  
+
                                   await ref
                                       .read(roomControllerProvider.notifier)
                                       .joinRoom(
                                         roomCode: roomCode,
                                         username: username,
                                       );
-                                  
+
                                   if (!mounted || !context.mounted) return;
                                   context.go('/room/$roomCode');
                                 } on Object catch (err) {
                                   if (!mounted || !context.mounted) return;
-                                  final messenger = ScaffoldMessenger.of(context);
-                                  messenger.showSnackBar(SnackBar(content: Text('$err')));
+                                  final messenger = ScaffoldMessenger.of(
+                                    context,
+                                  );
+                                  messenger.showSnackBar(
+                                    SnackBar(content: Text('$err')),
+                                  );
                                 }
                               },
                       icon:
                           controllerState.isLoading
                               ? const SizedBox.square(
                                 dimension: 18,
-                                child: CircularProgressIndicator(strokeWidth: 2),
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                ),
                               )
                               : const Icon(Icons.login),
                       label: const Text('Katıl'),

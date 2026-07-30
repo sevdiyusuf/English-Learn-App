@@ -1,6 +1,5 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -38,9 +37,10 @@ class SharedWordPair {
 ///
 /// This is designed to work even when the user has only anonymous auth.
 class WordMatchShareRepository {
-  WordMatchShareRepository(this._firestore, this._repo);
+  WordMatchShareRepository(this._firestore, this._functions, this._repo);
 
   final FirebaseFirestore _firestore;
+  final FirebaseFunctions _functions;
   final WordMatchRepoInterface _repo;
 
   CollectionReference<Map<String, dynamic>> get _sharesRef =>
@@ -60,10 +60,6 @@ class WordMatchShareRepository {
     }
     final pairs = await _repo.fetchPairs(localSetId);
 
-    // Generate short random ID
-    final shareId = _generateShortId();
-
-    final now = DateTime.now().toUtc();
     final payloadPairs = pairs
         .where(
           (p) => p.english.trim().isNotEmpty && p.turkish.trim().isNotEmpty,
@@ -72,20 +68,19 @@ class WordMatchShareRepository {
         .map((p) => {'front': p.english.trim(), 'back': p.turkish.trim()})
         .toList(growable: false);
 
-    final docRef = _sharesRef.doc(shareId);
-    await docRef.set({
-      'ownerUid': owner.uid,
-      'setName': set.name,
-      'pairsCount': payloadPairs.length,
-      'pairs': payloadPairs,
-      'createdAt': Timestamp.fromDate(now),
-      // For future visibility / social features
-      'visibilityAtShareTime': 'PUBLIC',
-      'accessMode': 'public_link',
-      'sourceLocalSetId': localSetId,
-    });
+    final response = await _functions
+        .httpsCallable('publishWordMatchShare')
+        .call<Map<String, dynamic>>({
+          'setName': set.name,
+          'pairs': payloadPairs,
+        });
+    return response.data['shareId'] as String;
+  }
 
-    return shareId;
+  Future<void> removeShare(String shareId) async {
+    await _functions.httpsCallable('removeWordMatchShare').call({
+      'shareId': shareId,
+    });
   }
 
   /// Load a shared set from Firestore. Returns null if not found.
@@ -100,6 +95,9 @@ class WordMatchShareRepository {
         return null;
       }
 
+      if (data['status'] != 'published' || data['visibility'] != 'public') {
+        return null;
+      }
       final ownerUid = (data['ownerUid'] as String?) ?? '';
       final setName = (data['setName'] as String?) ?? 'Paylaşılan Set';
       final createdAtRaw = data['createdAt'];
@@ -243,17 +241,6 @@ class WordMatchShareRepository {
     }).toList();
   }
 
-  String _generateShortId() {
-    const chars =
-        'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    final rand = Random.secure();
-    final codeUnits = List<int>.generate(
-      8,
-      (_) => chars.codeUnitAt(rand.nextInt(chars.length)),
-    );
-    return String.fromCharCodes(codeUnits);
-  }
-
   String _generateUniqueName(String baseName, Set<String> existingNames) {
     var candidate = baseName.trim().isEmpty ? 'Set' : baseName.trim();
     if (!existingNames.contains(candidate)) {
@@ -278,5 +265,6 @@ final wordMatchShareRepositoryProvider =
     FutureProvider<WordMatchShareRepository>((ref) async {
       final firestore = ref.watch(firestoreProvider);
       final repo = await ref.watch(wordMatchRepoProvider.future);
-      return WordMatchShareRepository(firestore, repo);
+      final functions = ref.watch(firebaseFunctionsProvider);
+      return WordMatchShareRepository(firestore, functions, repo);
     });

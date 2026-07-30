@@ -1,0 +1,1707 @@
+{
+  "schemaVersion": 1,
+  "generatedFrom": "pubspec.lock and distributed local package metadata",
+  "packages": [
+    {
+      "name": "_fe_analyzer_shared",
+      "version": "61.0.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "_flutterfire_internals",
+      "version": "1.3.59",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "analyzer",
+      "version": "5.13.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "app_links",
+      "version": "6.4.1",
+      "dependency": "direct main",
+      "source": "hosted",
+      "licenseIdentifier": "Apache-2.0",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "app_links_linux",
+      "version": "1.0.3",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "Apache-2.0",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "app_links_platform_interface",
+      "version": "2.0.2",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "Apache-2.0",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "app_links_web",
+      "version": "1.0.4",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "Apache-2.0",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "archive",
+      "version": "4.0.7",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "MIT",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "args",
+      "version": "2.7.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "async",
+      "version": "2.12.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "audioplayers",
+      "version": "6.6.0",
+      "dependency": "direct main",
+      "source": "hosted",
+      "licenseIdentifier": "MIT",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "audioplayers_android",
+      "version": "5.2.1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "MIT",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "audioplayers_darwin",
+      "version": "6.4.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "MIT",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "audioplayers_linux",
+      "version": "4.2.1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "MIT",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "audioplayers_platform_interface",
+      "version": "7.1.1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "MIT",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "audioplayers_web",
+      "version": "5.2.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "MIT",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "audioplayers_windows",
+      "version": "4.3.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "MIT",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "boolean_selector",
+      "version": "2.1.2",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "build",
+      "version": "2.4.1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "build_config",
+      "version": "1.1.2",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "build_daemon",
+      "version": "4.1.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "build_resolvers",
+      "version": "2.4.2",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "build_runner",
+      "version": "2.4.13",
+      "dependency": "direct dev",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "build_runner_core",
+      "version": "7.3.2",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "built_collection",
+      "version": "5.1.1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "built_value",
+      "version": "8.12.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "characters",
+      "version": "1.4.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "charcode",
+      "version": "1.4.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "checked_yaml",
+      "version": "2.0.3",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "cli_util",
+      "version": "0.4.2",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "clock",
+      "version": "1.1.2",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "Apache-2.0",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "cloud_firestore",
+      "version": "5.6.12",
+      "dependency": "direct main",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "cloud_firestore_platform_interface",
+      "version": "6.6.12",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "cloud_firestore_web",
+      "version": "4.4.12",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "cloud_functions",
+      "version": "5.6.2",
+      "dependency": "direct main",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "cloud_functions_platform_interface",
+      "version": "5.8.2",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "cloud_functions_web",
+      "version": "4.11.5",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "code_builder",
+      "version": "4.11.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "collection",
+      "version": "1.19.1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "confetti",
+      "version": "0.8.0",
+      "dependency": "direct main",
+      "source": "hosted",
+      "licenseIdentifier": "MIT",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "connectivity_plus",
+      "version": "6.1.5",
+      "dependency": "direct main",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "connectivity_plus_platform_interface",
+      "version": "2.0.1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "convert",
+      "version": "3.1.2",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "cross_file",
+      "version": "0.3.5+1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "crypto",
+      "version": "3.0.7",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "csslib",
+      "version": "1.0.2",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "dart_style",
+      "version": "2.3.2",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "dartx",
+      "version": "1.2.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "Apache-2.0",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "dbus",
+      "version": "0.7.11",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "MPL-2.0",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "device_info_plus",
+      "version": "12.4.0",
+      "dependency": "direct main",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "device_info_plus_platform_interface",
+      "version": "7.0.3",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "fake_async",
+      "version": "1.3.3",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "Apache-2.0",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "ffi",
+      "version": "2.1.4",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "file",
+      "version": "7.0.1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "firebase_app_check",
+      "version": "0.3.2+10",
+      "dependency": "direct main",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "firebase_app_check_platform_interface",
+      "version": "0.1.1+10",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "firebase_app_check_web",
+      "version": "0.2.0+14",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "firebase_auth",
+      "version": "5.7.0",
+      "dependency": "direct main",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "firebase_auth_platform_interface",
+      "version": "7.7.3",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "firebase_auth_web",
+      "version": "5.15.3",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "firebase_core",
+      "version": "3.15.2",
+      "dependency": "direct main",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "firebase_core_platform_interface",
+      "version": "6.0.2",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "firebase_core_web",
+      "version": "2.24.1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "firebase_messaging",
+      "version": "15.2.10",
+      "dependency": "direct main",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "firebase_messaging_platform_interface",
+      "version": "4.6.10",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "firebase_messaging_web",
+      "version": "3.10.10",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "fixnum",
+      "version": "1.1.1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "flutter",
+      "version": "0.0.0",
+      "dependency": "direct main",
+      "source": "sdk",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "flutter_driver",
+      "version": "0.0.0",
+      "dependency": "transitive",
+      "source": "sdk",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "flutter_launcher_icons",
+      "version": "0.14.4",
+      "dependency": "direct dev",
+      "source": "hosted",
+      "licenseIdentifier": "MIT",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "flutter_lints",
+      "version": "5.0.0",
+      "dependency": "direct dev",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "flutter_localizations",
+      "version": "0.0.0",
+      "dependency": "direct main",
+      "source": "sdk",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "flutter_riverpod",
+      "version": "2.6.1",
+      "dependency": "direct main",
+      "source": "hosted",
+      "licenseIdentifier": "MIT",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "flutter_svg",
+      "version": "2.2.3",
+      "dependency": "direct main",
+      "source": "hosted",
+      "licenseIdentifier": "MIT",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "flutter_test",
+      "version": "0.0.0",
+      "dependency": "direct dev",
+      "source": "sdk",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "flutter_tts",
+      "version": "4.2.5",
+      "dependency": "direct main",
+      "source": "hosted",
+      "licenseIdentifier": "MIT",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "flutter_web_plugins",
+      "version": "0.0.0",
+      "dependency": "transitive",
+      "source": "sdk",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "freezed",
+      "version": "2.5.2",
+      "dependency": "direct dev",
+      "source": "hosted",
+      "licenseIdentifier": "MIT",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "freezed_annotation",
+      "version": "2.4.4",
+      "dependency": "direct main",
+      "source": "hosted",
+      "licenseIdentifier": "MIT",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "frontend_server_client",
+      "version": "4.0.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "fuchsia_remote_debug_protocol",
+      "version": "0.0.0",
+      "dependency": "transitive",
+      "source": "sdk",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "glob",
+      "version": "2.1.3",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "go_router",
+      "version": "14.8.1",
+      "dependency": "direct main",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "google_identity_services_web",
+      "version": "0.3.3+1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "google_sign_in",
+      "version": "6.3.0",
+      "dependency": "direct main",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "google_sign_in_android",
+      "version": "6.2.1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "google_sign_in_ios",
+      "version": "5.9.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "google_sign_in_platform_interface",
+      "version": "2.5.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "google_sign_in_web",
+      "version": "0.12.4+4",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "graphs",
+      "version": "2.3.2",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "gtk",
+      "version": "2.2.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "MPL-2.0",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "html",
+      "version": "0.15.6",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "MIT",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "http",
+      "version": "1.6.0",
+      "dependency": "direct main",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "http_multi_server",
+      "version": "3.2.2",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "http_parser",
+      "version": "4.1.2",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "image",
+      "version": "4.5.4",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "MIT",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "integration_test",
+      "version": "0.0.0",
+      "dependency": "direct dev",
+      "source": "sdk",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "intl",
+      "version": "0.20.2",
+      "dependency": "direct main",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "io",
+      "version": "1.0.5",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "isar",
+      "version": "3.1.0+1",
+      "dependency": "direct main",
+      "source": "hosted",
+      "licenseIdentifier": "Apache-2.0",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "isar_community",
+      "version": "3.3.2",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "Apache-2.0",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "isar_community_flutter_libs",
+      "version": "3.3.2",
+      "dependency": "direct main",
+      "source": "hosted",
+      "licenseIdentifier": "Apache-2.0",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "isar_generator",
+      "version": "3.1.0+1",
+      "dependency": "direct dev",
+      "source": "hosted",
+      "licenseIdentifier": "Apache-2.0",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "js",
+      "version": "0.6.7",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "json_annotation",
+      "version": "4.9.0",
+      "dependency": "direct main",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "json_serializable",
+      "version": "6.8.0",
+      "dependency": "direct dev",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "leak_tracker",
+      "version": "11.0.2",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "leak_tracker_flutter_testing",
+      "version": "3.0.10",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "leak_tracker_testing",
+      "version": "3.0.2",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "lints",
+      "version": "5.1.1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "logging",
+      "version": "1.3.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "matcher",
+      "version": "0.12.17",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "material_color_utilities",
+      "version": "0.11.1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "Apache-2.0",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "meta",
+      "version": "1.17.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "mime",
+      "version": "2.0.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "nm",
+      "version": "0.5.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "MPL-2.0",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "package_config",
+      "version": "2.2.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "package_info_plus",
+      "version": "9.0.1",
+      "dependency": "direct main",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "package_info_plus_platform_interface",
+      "version": "3.2.1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "path",
+      "version": "1.9.1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "path_parsing",
+      "version": "1.1.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "MIT",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "path_provider",
+      "version": "2.1.5",
+      "dependency": "direct main",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "path_provider_android",
+      "version": "2.2.19",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "path_provider_foundation",
+      "version": "2.4.2",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "path_provider_linux",
+      "version": "2.2.1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "path_provider_platform_interface",
+      "version": "2.1.2",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "path_provider_windows",
+      "version": "2.3.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "petitparser",
+      "version": "6.1.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "MIT",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "platform",
+      "version": "3.1.6",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "plugin_platform_interface",
+      "version": "2.1.8",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "pool",
+      "version": "1.5.2",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "posix",
+      "version": "6.0.3",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "MIT",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "process",
+      "version": "5.0.5",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "pub_semver",
+      "version": "2.2.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "pubspec_parse",
+      "version": "1.5.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "riverpod",
+      "version": "2.6.1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "MIT",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "share_plus",
+      "version": "12.0.1",
+      "dependency": "direct main",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "share_plus_platform_interface",
+      "version": "6.1.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "shared_preferences",
+      "version": "2.5.3",
+      "dependency": "direct main",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "shared_preferences_android",
+      "version": "2.4.18",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "shared_preferences_foundation",
+      "version": "2.5.6",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "shared_preferences_linux",
+      "version": "2.4.1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "shared_preferences_platform_interface",
+      "version": "2.4.1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "shared_preferences_web",
+      "version": "2.4.3",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "shared_preferences_windows",
+      "version": "2.4.1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "shelf",
+      "version": "1.4.2",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "shelf_web_socket",
+      "version": "2.0.1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "sign_in_with_apple",
+      "version": "6.1.4",
+      "dependency": "direct main",
+      "source": "hosted",
+      "licenseIdentifier": "MIT",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "sign_in_with_apple_platform_interface",
+      "version": "1.1.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "MIT",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "sign_in_with_apple_web",
+      "version": "2.1.1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "MIT",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "sky_engine",
+      "version": "0.0.0",
+      "dependency": "transitive",
+      "source": "sdk",
+      "licenseIdentifier": "MPL-2.0",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "source_gen",
+      "version": "1.5.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "source_helper",
+      "version": "1.3.5",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "Apache-2.0",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "source_span",
+      "version": "1.10.1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "stack_trace",
+      "version": "1.12.1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "state_notifier",
+      "version": "1.0.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "MIT",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "stream_channel",
+      "version": "2.1.4",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "stream_transform",
+      "version": "2.1.1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "string_scanner",
+      "version": "1.4.1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "sync_http",
+      "version": "0.3.1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "synchronized",
+      "version": "3.4.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "MIT",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "term_glyph",
+      "version": "1.2.2",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "test_api",
+      "version": "0.7.7",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "time",
+      "version": "2.1.6",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "MIT",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "timing",
+      "version": "1.0.2",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "typed_data",
+      "version": "1.4.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "universal_html",
+      "version": "2.3.0",
+      "dependency": "direct main",
+      "source": "hosted",
+      "licenseIdentifier": "Apache-2.0",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "universal_io",
+      "version": "2.3.1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "Apache-2.0",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "url_launcher_linux",
+      "version": "3.2.2",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "url_launcher_platform_interface",
+      "version": "2.3.2",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "url_launcher_web",
+      "version": "2.4.2",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "Apache-2.0",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "url_launcher_windows",
+      "version": "3.1.5",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "uuid",
+      "version": "4.5.2",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "MIT",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "vector_graphics",
+      "version": "1.1.19",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "vector_graphics_codec",
+      "version": "1.1.13",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "vector_graphics_compiler",
+      "version": "1.1.19",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "vector_math",
+      "version": "2.2.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "vm_service",
+      "version": "14.3.1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "watcher",
+      "version": "1.1.4",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "web",
+      "version": "1.1.1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "web_socket",
+      "version": "1.0.1",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "web_socket_channel",
+      "version": "3.0.3",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "webdriver",
+      "version": "3.1.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "Apache-2.0",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "win32",
+      "version": "5.15.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "win32_registry",
+      "version": "2.1.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "xdg_directories",
+      "version": "1.1.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "xml",
+      "version": "6.5.0",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "MIT",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "xxh3",
+      "version": "1.2.0",
+      "dependency": "direct dev",
+      "source": "hosted",
+      "licenseIdentifier": "MIT",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "yaml",
+      "version": "3.1.3",
+      "dependency": "direct dev",
+      "source": "hosted",
+      "licenseIdentifier": "MIT",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    }
+  ]
+}

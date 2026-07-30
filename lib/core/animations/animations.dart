@@ -16,11 +16,7 @@ class AnimationCurves {
 
 /// Success animation widget
 class SuccessAnimation extends StatefulWidget {
-  const SuccessAnimation({
-    required this.child,
-    this.onComplete,
-    super.key,
-  });
+  const SuccessAnimation({required this.child, this.onComplete, super.key});
 
   final Widget child;
   final VoidCallback? onComplete;
@@ -46,18 +42,12 @@ class _SuccessAnimationState extends State<SuccessAnimation>
     _scaleAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.elasticOut,
-    ));
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.elasticOut));
 
     _fadeAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeOut,
-    ));
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
 
     _controller.forward().then((_) {
       widget.onComplete?.call();
@@ -74,21 +64,14 @@ class _SuccessAnimationState extends State<SuccessAnimation>
   Widget build(BuildContext context) {
     return ScaleTransition(
       scale: _scaleAnimation,
-      child: FadeTransition(
-        opacity: _fadeAnimation,
-        child: widget.child,
-      ),
+      child: FadeTransition(opacity: _fadeAnimation, child: widget.child),
     );
   }
 }
 
 /// Error animation widget
 class ErrorAnimation extends StatefulWidget {
-  const ErrorAnimation({
-    required this.child,
-    this.onComplete,
-    super.key,
-  });
+  const ErrorAnimation({required this.child, this.onComplete, super.key});
 
   final Widget child;
   final VoidCallback? onComplete;
@@ -113,10 +96,7 @@ class _ErrorAnimationState extends State<ErrorAnimation>
     _shakeAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.elasticOut,
-    ));
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.elasticOut));
 
     _controller.forward().then((_) {
       widget.onComplete?.call();
@@ -136,10 +116,7 @@ class _ErrorAnimationState extends State<ErrorAnimation>
       builder: (context, child) {
         final offset = _shakeAnimation.value;
         return Transform.translate(
-          offset: Offset(
-            offset * 10 * (offset < 0.5 ? 1 : -1),
-            0,
-          ),
+          offset: Offset(offset * 10 * (offset < 0.5 ? 1 : -1), 0),
           child: widget.child,
         );
       },
@@ -170,18 +147,13 @@ class _PulseAnimationState extends State<PulseAnimation>
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: widget.duration,
-      vsync: this,
-    )..repeat(reverse: true);
+    _controller = AnimationController(duration: widget.duration, vsync: this)
+      ..repeat(reverse: true);
 
     _scaleAnimation = Tween<double>(
       begin: 1.0,
       end: 1.1,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInOut,
-    ));
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
   }
 
   @override
@@ -192,10 +164,7 @@ class _PulseAnimationState extends State<PulseAnimation>
 
   @override
   Widget build(BuildContext context) {
-    return ScaleTransition(
-      scale: _scaleAnimation,
-      child: widget.child,
-    );
+    return ScaleTransition(scale: _scaleAnimation, child: widget.child);
   }
 }
 
@@ -224,18 +193,12 @@ class _FadeInAnimationState extends State<FadeInAnimation>
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: widget.duration,
-      vsync: this,
-    );
+    _controller = AnimationController(duration: widget.duration, vsync: this);
 
     _fadeAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeOut,
-    ));
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
 
     Future.delayed(widget.delay, () {
       if (mounted) {
@@ -252,10 +215,7 @@ class _FadeInAnimationState extends State<FadeInAnimation>
 
   @override
   Widget build(BuildContext context) {
-    return FadeTransition(
-      opacity: _fadeAnimation,
-      child: widget.child,
-    );
+    return FadeTransition(opacity: _fadeAnimation, child: widget.child);
   }
 }
 
@@ -289,34 +249,26 @@ class _SlideInAnimationState extends State<SlideInAnimation>
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: widget.duration,
-      vsync: this,
-    );
+    _controller = AnimationController(duration: widget.duration, vsync: this);
 
-    final beginOffset = widget.direction == Axis.horizontal
-        ? (widget.from == Alignment.centerLeft
-            ? const Offset(-1, 0)
-            : const Offset(1, 0))
-        : (widget.from == Alignment.topCenter
-            ? const Offset(0, -1)
-            : const Offset(0, 1));
+    final beginOffset =
+        widget.direction == Axis.horizontal
+            ? (widget.from == Alignment.centerLeft
+                ? const Offset(-1, 0)
+                : const Offset(1, 0))
+            : (widget.from == Alignment.topCenter
+                ? const Offset(0, -1)
+                : const Offset(0, 1));
 
     _slideAnimation = Tween<Offset>(
       begin: beginOffset,
       end: Offset.zero,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeOut,
-    ));
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
 
     _fadeAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeOut,
-    ));
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
 
     Future.delayed(widget.delay, () {
       if (mounted) {
@@ -335,10 +287,7 @@ class _SlideInAnimationState extends State<SlideInAnimation>
   Widget build(BuildContext context) {
     return SlideTransition(
       position: _slideAnimation,
-      child: FadeTransition(
-        opacity: _fadeAnimation,
-        child: widget.child,
-      ),
+      child: FadeTransition(opacity: _fadeAnimation, child: widget.child),
     );
   }
 }
@@ -391,10 +340,7 @@ class _AnimatedButtonWrapperState extends State<_AnimatedButtonWrapper>
     _scaleAnimation = Tween<double>(
       begin: 1.0,
       end: 0.95,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInOut,
-    ));
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
   }
 
   @override
@@ -424,11 +370,7 @@ class _AnimatedButtonWrapperState extends State<_AnimatedButtonWrapper>
       onTapUp: _handleTapUp,
       onTapCancel: _handleTapCancel,
       onLongPress: widget.onLongPress,
-      child: ScaleTransition(
-        scale: _scaleAnimation,
-        child: widget.child,
-      ),
+      child: ScaleTransition(scale: _scaleAnimation, child: widget.child),
     );
   }
 }
-

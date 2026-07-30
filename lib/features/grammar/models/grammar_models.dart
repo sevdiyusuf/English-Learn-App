@@ -4,27 +4,22 @@ class LessonIndex {
   final List<String> levels;
   final Map<String, List<LessonEntry>> lessonsByLevel;
 
-  LessonIndex({
-    required this.levels,
-    required this.lessonsByLevel,
-  });
+  LessonIndex({required this.levels, required this.lessonsByLevel});
 
   factory LessonIndex.fromJson(Map<String, dynamic> json) {
     final levels = List<String>.from(json['levels'] ?? []);
     final lessonsJson = json['lessons'] as Map<String, dynamic>? ?? {};
-    
+
     final lessonsByLevel = <String, List<LessonEntry>>{};
     for (var level in levels) {
       final list = lessonsJson[level] as List<dynamic>? ?? [];
-      lessonsByLevel[level] = list
-          .map((e) => LessonEntry.fromJson(e as Map<String, dynamic>))
-          .toList();
+      lessonsByLevel[level] =
+          list
+              .map((e) => LessonEntry.fromJson(e as Map<String, dynamic>))
+              .toList();
     }
 
-    return LessonIndex(
-      levels: levels,
-      lessonsByLevel: lessonsByLevel,
-    );
+    return LessonIndex(levels: levels, lessonsByLevel: lessonsByLevel);
   }
 }
 
@@ -82,9 +77,15 @@ class LessonDoc {
       lessonId: json['lesson_id'] as String? ?? '',
       title: json['title'] as String? ?? '',
       topicTags: List<String>.from(json['topic_tags'] ?? []),
-      microLesson: MicroLesson.fromJson(json['micro_lesson'] as Map<String, dynamic>? ?? {}),
-      storyMode: StoryMode.fromJson(json['story_mode'] as Map<String, dynamic>? ?? {}),
-      trainWorksheetId: (json['train_link'] as Map<String, dynamic>?)?['worksheet_id'] as String?,
+      microLesson: MicroLesson.fromJson(
+        json['micro_lesson'] as Map<String, dynamic>? ?? {},
+      ),
+      storyMode: StoryMode.fromJson(
+        json['story_mode'] as Map<String, dynamic>? ?? {},
+      ),
+      trainWorksheetId:
+          (json['train_link'] as Map<String, dynamic>?)?['worksheet_id']
+              as String?,
     );
   }
 }
@@ -97,7 +98,10 @@ class MicroLesson {
   factory MicroLesson.fromJson(Map<String, dynamic> json) {
     final cardsList = json['cards'] as List<dynamic>? ?? [];
     return MicroLesson(
-      cards: cardsList.map((e) => LessonCard.fromJson(e as Map<String, dynamic>)).toList(),
+      cards:
+          cardsList
+              .map((e) => LessonCard.fromJson(e as Map<String, dynamic>))
+              .toList(),
     );
   }
 }
@@ -106,15 +110,16 @@ enum LessonCardType {
   goal,
   rule,
   tip,
-  common_mistake,
+  commonMistake,
   examples,
   formula,
   checkpoint,
   unknown;
 
   static LessonCardType fromString(String value) {
+    final normalized = value.toLowerCase().replaceAll('_', '');
     return LessonCardType.values.firstWhere(
-      (e) => e.name == value.toLowerCase(),
+      (e) => e.name.toLowerCase() == normalized,
       orElse: () => LessonCardType.unknown,
     );
   }
@@ -142,7 +147,7 @@ class LessonCard {
   factory LessonCard.fromJson(Map<String, dynamic> json) {
     final typeStr = json['type'] as String? ?? '';
     final type = LessonCardType.fromString(typeStr);
-    
+
     return LessonCard(
       id: json['id'] as String? ?? '',
       type: type,
@@ -150,7 +155,10 @@ class LessonCard {
       bullets: List<String>.from(json['bullets'] ?? []),
       formula: List<String>.from(json['formula'] ?? []),
       examples: List<String>.from(json['examples'] ?? []),
-      checkpoint: type == LessonCardType.checkpoint ? WorksheetItem.fromJson(json) : null,
+      checkpoint:
+          type == LessonCardType.checkpoint
+              ? WorksheetItem.fromJson(json)
+              : null,
     );
   }
 }
@@ -175,9 +183,10 @@ class StoryMode {
       enabled: json['enabled'] as bool? ?? false,
       title: json['title'] as String? ?? '',
       introBullets: List<String>.from(json['intro_bullets'] ?? []),
-      items: (json['items'] as List<dynamic>? ?? [])
-          .map((e) => WorksheetItem.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      items:
+          (json['items'] as List<dynamic>? ?? [])
+              .map((e) => WorksheetItem.fromJson(e as Map<String, dynamic>))
+              .toList(),
       recapBullets: List<String>.from(json['recap_bullets'] ?? []),
     );
   }

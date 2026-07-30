@@ -103,6 +103,37 @@ class UserSettingsController extends AutoDisposeAsyncNotifier<UserSettings> {
     await _saveSettings(updated);
   }
 
+  Future<void> updateLearningProfile({
+    required String? cefrLevel,
+    required String? learningGoal,
+    required String onboardingStep,
+    required int onboardingCompletedVersion,
+  }) async {
+    final current = state.valueOrNull ?? const UserSettings();
+    await _saveSettings(
+      learningProfileUpdate(
+        current,
+        cefrLevel: cefrLevel,
+        learningGoal: learningGoal,
+        onboardingStep: onboardingStep,
+        onboardingCompletedVersion: onboardingCompletedVersion,
+      ),
+    );
+  }
+
+  static UserSettings learningProfileUpdate(
+    UserSettings current, {
+    required String? cefrLevel,
+    required String? learningGoal,
+    required String onboardingStep,
+    required int onboardingCompletedVersion,
+  }) => current.copyWith(
+    cefrLevel: cefrLevel,
+    learningGoal: learningGoal,
+    onboardingStep: onboardingStep,
+    onboardingCompletedVersion: onboardingCompletedVersion,
+  );
+
   /// Update reminder settings
   Future<void> updateReminder({required bool enabled, String? time}) async {
     final current = state.valueOrNull ?? const UserSettings();
@@ -113,6 +144,13 @@ class UserSettingsController extends AutoDisposeAsyncNotifier<UserSettings> {
     await _saveSettings(updated);
   }
 
+  Future<void> updateMultiplayerNotifications(bool enabled) async {
+    final current = state.valueOrNull ?? const UserSettings();
+    await _saveSettings(
+      current.copyWith(multiplayerNotificationsEnabled: enabled),
+    );
+  }
+
   /// Reset settings to default
   Future<void> resetSettingsToDefault() async {
     const defaultSettings = UserSettings();
@@ -120,46 +158,27 @@ class UserSettingsController extends AutoDisposeAsyncNotifier<UserSettings> {
   }
 
   Future<void> _saveSettings(UserSettings settings) async {
-    // Update state IMMEDIATELY for instant UI feedback (optimistic update)
-    // This makes the UI feel instant, especially for Firestore operations
-    state = AsyncValue.data(settings);
-
     try {
-      _isSaving = true; // Mark that we're saving to prevent stream updates
+      _isSaving = true;
 
       final authState = ref.read(authControllerProvider);
       final repo = ref.read(userSettingsRepoProvider);
-
       final user = authState.valueOrNull;
 
-      // Save in background without blocking UI
-      // For guests (localStorage), this is instant anyway
-      // For Firestore, this runs async and won't block the UI
       if (user == null) {
-        // Use guest user for fallback
         final guestUser = AppUser(
           uid: 'guest',
           isAnonymous: true,
           isGuestMode: true,
         );
-        // Guest saves are instant (localStorage), so we can await
         await repo.saveSettings(guestUser, settings);
       } else {
-        // For Firestore, save in background without blocking
-        // If save fails, we'll handle it via error logging
-        // The optimistic update already made UI responsive
-        repo.saveSettings(user, settings).catchError((error, stackTrace) {
-          // On error, we could revert the state, but for now just log
-          // The stream will eventually sync the correct state
-          // In production, you might want to show a snackbar here
-        });
+        await repo.saveSettings(user, settings);
       }
+
+      state = AsyncValue.data(settings);
     } finally {
-      // Re-enable stream updates after a delay to allow Firestore to sync
-      // This prevents circular updates when Firestore stream reflects our change
-      Future.delayed(const Duration(milliseconds: 800), () {
-        _isSaving = false;
-      });
+      _isSaving = false;
     }
   }
 }

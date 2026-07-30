@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../../core/content/educational_content_id_resolver.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../features/educational_content/content_report_dialog.dart';
 import '../data/subject_summaries_data.dart';
 import '../logic/training_session_controller.dart';
 import '../models/training_models.dart';
@@ -44,16 +46,15 @@ class _WorksheetPageState extends ConsumerState<WorksheetPage> {
       if (next.worksheet != null &&
           next.currentIndex >= next.worksheet!.items.length) {
         Future.microtask(() {
-          if (mounted) {
-            context.goNamed(
-              ResultPage.routeName,
-              queryParameters: {
-                'correct': next.correctCount.toString(),
-                'total': next.totalCount.toString(),
-                'id': next.worksheet!.worksheetId,
-              },
-            );
-          }
+          if (!context.mounted) return;
+          context.goNamed(
+            ResultPage.routeName,
+            queryParameters: {
+              'correct': next.correctCount.toString(),
+              'total': next.totalCount.toString(),
+              'id': next.worksheet!.worksheetId,
+            },
+          );
         });
       }
     });
@@ -172,7 +173,9 @@ class _WorksheetPageState extends ConsumerState<WorksheetPage> {
                 ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
-                  side: BorderSide(color: AppColors.primary.withValues(alpha: 0.3)),
+                  side: BorderSide(
+                    color: AppColors.primary.withValues(alpha: 0.3),
+                  ),
                 ),
               ),
               child: Row(
@@ -192,6 +195,10 @@ class _WorksheetPageState extends ConsumerState<WorksheetPage> {
               ),
             ),
           ),
+        _ReportButton(
+          worksheetPath: widget.path,
+          itemId: session.currentItem!.id,
+        ),
       ],
     );
   }
@@ -409,6 +416,48 @@ class _WorksheetPageState extends ConsumerState<WorksheetPage> {
           (context) => SubjectSummaryDialog(
             summary: subjectSummaries[session.worksheet!.worksheetId]!,
           ),
+    );
+  }
+}
+
+class _ReportButton extends ConsumerWidget {
+  const _ReportButton({required this.worksheetPath, required this.itemId});
+
+  final String worksheetPath;
+  final String itemId;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final registryAsync = ref.watch(educationalContentRegistryProvider);
+
+    return registryAsync.when(
+      data: (registry) {
+        final key = EducationalItemKey(
+          'assets/worksheets/$worksheetPath',
+          'id:$itemId',
+        );
+        final contentId = registry[key];
+
+        if (contentId == null) {
+          return const SizedBox.shrink();
+        }
+
+        return IconButton(
+          key: ValueKey('report_worksheet_$itemId'),
+          icon: const Icon(Icons.flag_outlined, color: Colors.white54),
+          tooltip: 'Report an issue with this content',
+          onPressed: () async {
+            await showContentReportSheet(
+              context,
+              contentId: contentId,
+              contentVersion: 1,
+              contentType: 'worksheet',
+            );
+          },
+        );
+      },
+      loading: () => const SizedBox.shrink(),
+      error: (_, __) => const SizedBox.shrink(),
     );
   }
 }

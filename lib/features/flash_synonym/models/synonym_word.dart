@@ -18,11 +18,6 @@ class SynonymWord {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'word': word,
-      'synonym': synonym,
-      'translate': translate,
-    };
+    return {'word': word, 'synonym': synonym, 'translate': translate};
   }
 }
-

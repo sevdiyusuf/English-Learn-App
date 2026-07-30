@@ -1,8 +1,5 @@
 class WordEchoWord {
-  const WordEchoWord({
-    required this.english,
-    required this.turkish,
-  });
+  const WordEchoWord({required this.english, required this.turkish});
 
   final String english;
   final String turkish;
@@ -15,9 +12,6 @@ class WordEchoWord {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'english': english,
-      'turkish': turkish,
-    };
+    return {'english': english, 'turkish': turkish};
   }
 }

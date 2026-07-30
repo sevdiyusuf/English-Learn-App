@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 
 /// Improved loading widget with message
 class LoadingWidget extends StatelessWidget {
-  const LoadingWidget({
-    this.message,
-    this.useSkeleton = false,
-    super.key,
-  });
+  const LoadingWidget({this.message, this.useSkeleton = false, super.key});
 
   final String? message;
   final bool useSkeleton;
@@ -47,10 +43,7 @@ class LoadingWidget extends StatelessWidget {
 
 /// Full screen loading with backdrop
 class FullScreenLoading extends StatelessWidget {
-  const FullScreenLoading({
-    this.message,
-    super.key,
-  });
+  const FullScreenLoading({this.message, super.key});
 
   final String? message;
 
@@ -126,4 +119,3 @@ class LoadingOverlay extends StatelessWidget {
     );
   }
 }
-

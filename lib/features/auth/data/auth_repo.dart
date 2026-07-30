@@ -4,17 +4,22 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import '../../../app/di.dart';
-import '../../../core/errors/app_exception.dart';
+import '../../../core/errors/app_failure.dart';
+import '../../../core/errors/firebase_error_mapper.dart';
 import '../../../core/utils/error_logger.dart';
+import '../services/social_auth_service.dart';
+import 'package:cloud_functions/cloud_functions.dart';
+
 import '../models/app_user.dart';
 
 class AuthRepository {
-  AuthRepository(this._auth);
+  AuthRepository(this._auth, this._socialAuth, this._functions);
 
   final firebase_auth.FirebaseAuth _auth;
+  final SocialAuthService _socialAuth;
+  final FirebaseFunctions _functions;
 
   /// Get current Firebase user (for backward compatibility)
   firebase_auth.User? get currentUser => _auth.currentUser;
@@ -45,8 +50,8 @@ class AuthRepository {
       final credential = await _auth.signInAnonymously();
       final user = credential.user;
       if (user == null) {
-        throw AppException(
-          'Giriş başarılı oldu ancak kullanıcı bilgisi alınamadı',
+        throw AppFailure.auth(
+          message: 'Giriş başarılı oldu ancak kullanıcı bilgisi alınamadı',
         );
       }
       return AppUser.fromFirebaseUser(user);
@@ -56,214 +61,211 @@ class AuthRepository {
         stackTrace: stack,
         context: 'ensureAnonymousGuestSignedIn',
       );
-      rethrow;
+      throw FirebaseErrorMapper.map(e);
     }
   }
 
-  /// Sign in with Google
+  /// Sign in with Google (For login only)
   Future<AppUser> signInWithGoogle() async {
     try {
-      if (kIsWeb) {
-        // Web'de Firebase Auth'un kendi Google Sign-In metodunu kullan
-        // Bu People API'ye ihtiyaç duymaz
-        return await _signInWithGoogleWeb();
-      } else {
-        // Mobil/Desktop için google_sign_in paketini kullan
-        return await _signInWithGoogleMobile();
+      if (_socialAuth.isWeb) {
+        final googleProvider = firebase_auth.GoogleAuthProvider();
+        final userCredential = await _auth.signInWithPopup(googleProvider);
+        final user = userCredential.user;
+        if (user == null) {
+          throw AppFailure.auth(message: 'Giriş başarısız oldu');
+        }
+        return AppUser.fromFirebaseUser(user);
       }
+
+      final credential = await _socialAuth.getGoogleCredential();
+      if (credential == null) {
+        throw AppFailure.auth(message: 'Giriş iptal edildi');
+      }
+      final userCredential = await _auth.signInWithCredential(credential);
+      final user = userCredential.user;
+      if (user == null) {
+        throw AppFailure.auth(message: 'Giriş başarısız oldu');
+      }
+      return AppUser.fromFirebaseUser(user);
     } catch (e, stack) {
+      if (e is firebase_auth.FirebaseAuthException &&
+          (e.code == 'auth/popup-closed-by-user' ||
+              e.code == 'auth/cancelled-popup-request')) {
+        throw AppFailure.auth(message: 'Giriş iptal edildi');
+      }
       ErrorLogger.instance.logError(
         e,
         stackTrace: stack,
         context: 'signInWithGoogle',
       );
-      if (e is AppException) rethrow;
-      throw AppException('Google ile giriş yapılamadı: ${e.toString()}');
+      throw FirebaseErrorMapper.map(e);
     }
   }
 
-  /// Web için Google Sign-In (Firebase Auth'un native signInWithPopup metodunu kullanır)
-  /// Bu yöntem People API'ye ihtiyaç duymaz
-  Future<AppUser> _signInWithGoogleWeb() async {
+  /// Sign in with Apple
+  Future<AppUser> signInWithApple() async {
     try {
-      final currentUser = _auth.currentUser;
-      final googleProvider = firebase_auth.GoogleAuthProvider();
-
-      // If current user is anonymous, try to link
-      if (currentUser != null && currentUser.isAnonymous) {
-        try {
-          // Web'de linkWithPopup kullan
-          final userCredential = await currentUser.linkWithPopup(
-            googleProvider,
-          );
-          final user = userCredential.user;
-          if (user == null) {
-            throw AppException('Hesap bağlantısı başarısız oldu');
-          }
-          return AppUser.fromFirebaseUser(user);
-        } on firebase_auth.FirebaseAuthException catch (e) {
-          // If linking fails (e.g., credential already in use), sign in with popup
-          if (e.code == 'credential-already-in-use' ||
-              e.code == 'email-already-in-use') {
-            final userCredential = await _auth.signInWithPopup(googleProvider);
-            final user = userCredential.user;
-            if (user == null) {
-              throw AppException('Giriş başarısız oldu');
-            }
-            return AppUser.fromFirebaseUser(user);
-          }
-          rethrow;
-        }
-      } else {
-        // Normal sign in with popup
-        final userCredential = await _auth.signInWithPopup(googleProvider);
-        final user = userCredential.user;
-        if (user == null) {
-          throw AppException('Giriş başarısız oldu');
-        }
-        return AppUser.fromFirebaseUser(user);
+      final credential = await _socialAuth.getAppleCredential();
+      if (credential == null) {
+        throw AppFailure.auth(message: 'Giriş iptal edildi');
       }
-    } on firebase_auth.FirebaseAuthException catch (e) {
-      if (e.code == 'auth/popup-closed-by-user' ||
-          e.code == 'auth/cancelled-popup-request') {
-        throw AppException('Giriş iptal edildi');
-      }
-      rethrow;
-    } catch (e) {
-      if (e is AppException) rethrow;
-      rethrow;
-    }
-  }
-
-  /// Mobil/Desktop için Google Sign-In (google_sign_in paketi ile)
-  Future<AppUser> _signInWithGoogleMobile() async {
-    final GoogleSignIn googleSignIn = GoogleSignIn(
-      scopes: ['email', 'profile'],
-    );
-
-    final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
-
-    if (googleUser == null) {
-      // User cancelled the sign-in
-      throw AppException('Giriş iptal edildi');
-    }
-
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
-
-    // Null check'ler
-    if (googleAuth.accessToken == null && googleAuth.idToken == null) {
-      throw AppException('Google kimlik doğrulama bilgileri alınamadı');
-    }
-
-    final credential = firebase_auth.GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-
-    final currentUser = _auth.currentUser;
-
-    // If current user is anonymous, try to link
-    if (currentUser != null && currentUser.isAnonymous) {
-      try {
-        await currentUser.linkWithCredential(credential);
-        final updatedUser = _auth.currentUser;
-        if (updatedUser == null) {
-          throw AppException('Hesap bağlantısı başarısız oldu');
-        }
-        return AppUser.fromFirebaseUser(updatedUser);
-      } on firebase_auth.FirebaseAuthException catch (e) {
-        // If linking fails (e.g., credential already in use), sign in with credential
-        if (e.code == 'credential-already-in-use' ||
-            e.code == 'email-already-in-use') {
-          await _auth.signInWithCredential(credential);
-          final user = _auth.currentUser;
-          if (user == null) {
-            throw AppException('Giriş başarısız oldu');
-          }
-          return AppUser.fromFirebaseUser(user);
-        }
-        rethrow;
-      }
-    } else {
-      // Normal sign in
-      await _auth.signInWithCredential(credential);
-      final user = _auth.currentUser;
+      final userCredential = await _auth.signInWithCredential(credential);
+      final user = userCredential.user;
       if (user == null) {
-        throw AppException('Giriş başarısız oldu');
+        throw AppFailure.auth(message: 'Giriş başarısız oldu');
       }
       return AppUser.fromFirebaseUser(user);
-    }
-  }
-
-  /// Sign in with Apple (iOS/macOS only)
-  Future<AppUser> signInWithApple() async {
-    if (kIsWeb) {
-      throw AppException('Apple ile giriş web platformunda desteklenmiyor');
-    }
-
-    try {
-      final appleCredential = await SignInWithApple.getAppleIDCredential(
-        scopes: [
-          AppleIDAuthorizationScopes.email,
-          AppleIDAuthorizationScopes.fullName,
-        ],
-      );
-
-      final oauthCredential = firebase_auth.OAuthProvider(
-        'apple.com',
-      ).credential(
-        idToken: appleCredential.identityToken,
-        accessToken: appleCredential.authorizationCode,
-      );
-
-      final currentUser = _auth.currentUser;
-
-      // If current user is anonymous, try to link
-      if (currentUser != null && currentUser.isAnonymous) {
-        try {
-          await currentUser.linkWithCredential(oauthCredential);
-          final updatedUser = _auth.currentUser;
-          if (updatedUser == null) {
-            throw AppException('Hesap bağlantısı başarısız oldu');
-          }
-          return AppUser.fromFirebaseUser(updatedUser);
-        } on firebase_auth.FirebaseAuthException catch (e) {
-          // If linking fails, sign in with credential
-          if (e.code == 'credential-already-in-use' ||
-              e.code == 'email-already-in-use') {
-            await _auth.signInWithCredential(oauthCredential);
-            final user = _auth.currentUser;
-            if (user == null) {
-              throw AppException('Giriş başarısız oldu');
-            }
-            return AppUser.fromFirebaseUser(user);
-          }
-          rethrow;
-        }
-      } else {
-        // Normal sign in
-        await _auth.signInWithCredential(oauthCredential);
-        final user = _auth.currentUser;
-        if (user == null) {
-          throw AppException('Giriş başarısız oldu');
-        }
-        return AppUser.fromFirebaseUser(user);
-      }
     } catch (e, stack) {
       ErrorLogger.instance.logError(
         e,
         stackTrace: stack,
         context: 'signInWithApple',
       );
-      if (e is AppException) rethrow;
-      if (e is SignInWithAppleAuthorizationException) {
-        if (e.code == AuthorizationErrorCode.canceled) {
-          throw AppException('Giriş iptal edildi');
-        }
-        throw AppException('Apple ile giriş yapılamadı: ${e.message}');
+      throw FirebaseErrorMapper.map(e);
+    }
+  }
+
+  /// Link Google Account to current user
+  Future<AppUser> linkGoogleAccount() async {
+    try {
+      final currentUser = _auth.currentUser;
+      if (currentUser == null) {
+        throw AppFailure.auth(message: 'Aktif bir kullanıcı bulunamadı.');
       }
-      throw AppException('Apple ile giriş yapılamadı: ${e.toString()}');
+
+      if (_socialAuth.isWeb) {
+        final googleProvider = firebase_auth.GoogleAuthProvider();
+        final userCredential = await currentUser.linkWithPopup(googleProvider);
+        final user = userCredential.user;
+        if (user == null) {
+          throw AppFailure.auth(message: 'Hesap bağlantısı başarısız oldu');
+        }
+        return AppUser.fromFirebaseUser(user);
+      }
+
+      final credential = await _socialAuth.getGoogleCredential();
+      if (credential == null) {
+        throw AppFailure.auth(message: 'Bağlantı iptal edildi');
+      }
+
+      await currentUser.linkWithCredential(credential);
+      final updatedUser = _auth.currentUser;
+      if (updatedUser == null) {
+        throw AppFailure.auth(message: 'Hesap bağlantısı başarısız oldu');
+      }
+      return AppUser.fromFirebaseUser(updatedUser);
+    } catch (e, stack) {
+      if (e is firebase_auth.FirebaseAuthException &&
+          (e.code == 'auth/popup-closed-by-user' ||
+              e.code == 'auth/cancelled-popup-request')) {
+        throw AppFailure.auth(message: 'Giriş iptal edildi');
+      }
+      ErrorLogger.instance.logError(
+        e,
+        stackTrace: stack,
+        context: 'linkGoogleAccount',
+      );
+      throw FirebaseErrorMapper.map(e);
+    }
+  }
+
+  /// Link Apple Account to current user
+  Future<AppUser> linkAppleAccount() async {
+    try {
+      final currentUser = _auth.currentUser;
+      if (currentUser == null) {
+        throw AppFailure.auth(message: 'Aktif bir kullanıcı bulunamadı.');
+      }
+      final credential = await _socialAuth.getAppleCredential();
+      if (credential == null) {
+        throw AppFailure.auth(message: 'Bağlantı iptal edildi');
+      }
+
+      await currentUser.linkWithCredential(credential);
+      final updatedUser = _auth.currentUser;
+      if (updatedUser == null) {
+        throw AppFailure.auth(message: 'Hesap bağlantısı başarısız oldu');
+      }
+      return AppUser.fromFirebaseUser(updatedUser);
+    } catch (e, stack) {
+      ErrorLogger.instance.logError(
+        e,
+        stackTrace: stack,
+        context: 'linkAppleAccount',
+      );
+      throw FirebaseErrorMapper.map(e);
+    }
+  }
+
+  /// Reauthenticate with Google
+  Future<void> reauthenticateWithGoogle() async {
+    try {
+      final currentUser = _auth.currentUser;
+      if (currentUser == null) {
+        throw AppFailure.auth(message: 'Aktif bir kullanıcı bulunamadı.');
+      }
+      if (_socialAuth.isWeb) {
+        throw AppFailure.auth(
+          message: 'Web platformunda yeniden doğrulama şu an desteklenmiyor.',
+        );
+      }
+      final credential = await _socialAuth.getGoogleCredential();
+      if (credential == null) {
+        throw AppFailure.auth(message: 'İşlem iptal edildi');
+      }
+      await currentUser.reauthenticateWithCredential(credential);
+    } catch (e, stack) {
+      ErrorLogger.instance.logError(
+        e,
+        stackTrace: stack,
+        context: 'reauthenticateWithGoogle',
+      );
+      throw FirebaseErrorMapper.map(e);
+    }
+  }
+
+  /// Reauthenticate with Password
+  Future<void> reauthenticateWithPassword(String password) async {
+    try {
+      final currentUser = _auth.currentUser;
+      if (currentUser == null || currentUser.email == null) {
+        throw AppFailure.auth(message: 'Aktif bir kullanıcı bulunamadı.');
+      }
+      final credential = firebase_auth.EmailAuthProvider.credential(
+        email: currentUser.email!,
+        password: password,
+      );
+      await currentUser.reauthenticateWithCredential(credential);
+    } catch (e, stack) {
+      ErrorLogger.instance.logError(
+        e,
+        stackTrace: stack,
+        context: 'reauthenticateWithPassword',
+      );
+      throw FirebaseErrorMapper.map(e);
+    }
+  }
+
+  /// Reauthenticate with Apple
+  Future<void> reauthenticateWithApple() async {
+    try {
+      final currentUser = _auth.currentUser;
+      if (currentUser == null) {
+        throw AppFailure.auth(message: 'Aktif bir kullanıcı bulunamadı.');
+      }
+      final credential = await _socialAuth.getAppleCredential();
+      if (credential == null) {
+        throw AppFailure.auth(message: 'İşlem iptal edildi');
+      }
+      await currentUser.reauthenticateWithCredential(credential);
+    } catch (e, stack) {
+      ErrorLogger.instance.logError(
+        e,
+        stackTrace: stack,
+        context: 'reauthenticateWithApple',
+      );
+      throw FirebaseErrorMapper.map(e);
     }
   }
 
@@ -299,12 +301,12 @@ class AuthRepository {
               user = _auth.currentUser;
             } else {
               // Other errors from createUserWithEmailAndPassword
-              rethrow;
+              throw FirebaseErrorMapper.map(createError);
             }
           }
         } catch (e) {
-          // If linking also fails, rethrow the error
-          rethrow;
+          // If linking also fails, throw mapped
+          throw FirebaseErrorMapper.map(e);
         }
       } else {
         // Normal registration (no anonymous user)
@@ -316,7 +318,7 @@ class AuthRepository {
       }
 
       if (user == null) {
-        throw AppException('Kayıt başarısız oldu');
+        throw AppFailure.auth(message: 'Kayıt başarısız oldu');
       }
 
       // Update display name if provided
@@ -333,12 +335,7 @@ class AuthRepository {
         stackTrace: stack,
         context: 'registerWithEmail',
       );
-      if (e is AppException) rethrow;
-      if (e is firebase_auth.FirebaseAuthException) {
-        final errorMessage = _getFirebaseAuthErrorMessage(e);
-        throw AppException(errorMessage);
-      }
-      throw AppException('Kayıt başarısız oldu: ${e.toString()}');
+      throw FirebaseErrorMapper.map(e);
     }
   }
 
@@ -360,7 +357,7 @@ class AuthRepository {
           await currentUser.linkWithCredential(credential);
           final updatedUser = _auth.currentUser;
           if (updatedUser == null) {
-            throw AppException('Hesap bağlantısı başarısız oldu');
+            throw AppFailure.auth(message: 'Hesap bağlantısı başarısız oldu');
           }
           return AppUser.fromFirebaseUser(updatedUser);
         } on firebase_auth.FirebaseAuthException catch (e) {
@@ -379,12 +376,12 @@ class AuthRepository {
             );
             final user = _auth.currentUser;
             if (user == null) {
-              throw AppException('Giriş başarısız oldu');
+              throw AppFailure.auth(message: 'Giriş başarısız oldu');
             }
             return AppUser.fromFirebaseUser(user);
           }
-          // Other linking errors - rethrow
-          rethrow;
+          // Other linking errors
+          throw FirebaseErrorMapper.map(e);
         }
       } else {
         // Normal sign in (no anonymous user)
@@ -394,7 +391,7 @@ class AuthRepository {
         );
         final user = _auth.currentUser;
         if (user == null) {
-          throw AppException('Giriş başarısız oldu');
+          throw AppFailure.auth(message: 'Giriş başarısız oldu');
         }
         return AppUser.fromFirebaseUser(user);
       }
@@ -404,12 +401,30 @@ class AuthRepository {
         stackTrace: stack,
         context: 'signInWithEmail',
       );
-      if (e is AppException) rethrow;
-      if (e is firebase_auth.FirebaseAuthException) {
-        final errorMessage = _getFirebaseAuthErrorMessage(e);
-        throw AppException(errorMessage);
+      throw FirebaseErrorMapper.map(e);
+    }
+  }
+
+  /// Send password reset email
+  Future<void> sendPasswordResetEmail(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    } catch (e, stack) {
+      if (e is firebase_auth.FirebaseAuthException &&
+          e.code == 'user-not-found') {
+        // Email enumeration prevention: Silently succeed if user not found
+        ErrorLogger.instance.logWarning(
+          'Password reset requested for non-existent email: $email',
+          context: 'sendPasswordResetEmail',
+        );
+        return;
       }
-      throw AppException('Giriş başarısız oldu: ${e.toString()}');
+      ErrorLogger.instance.logError(
+        e,
+        stackTrace: stack,
+        context: 'sendPasswordResetEmail',
+      );
+      throw FirebaseErrorMapper.map(e);
     }
   }
 
@@ -418,7 +433,7 @@ class AuthRepository {
     try {
       final user = _auth.currentUser;
       if (user == null) {
-        throw AppException('Kullanıcı bulunamadı');
+        throw AppFailure.auth(message: 'Kullanıcı bulunamadı');
       }
 
       await user.updateDisplayName(name);
@@ -429,8 +444,7 @@ class AuthRepository {
         stackTrace: stack,
         context: 'updateDisplayName',
       );
-      if (e is AppException) rethrow;
-      throw AppException('İsim güncellenemedi: ${e.toString()}');
+      throw FirebaseErrorMapper.map(e);
     }
   }
 
@@ -454,62 +468,32 @@ class AuthRepository {
       await _auth.signOut();
     } catch (e, stack) {
       ErrorLogger.instance.logError(e, stackTrace: stack, context: 'signOut');
-      rethrow;
+      throw FirebaseErrorMapper.map(e);
     }
   }
 
   /// Delete account and data
-  /// Note: Firestore data deletion should be handled by Cloud Function
-  /// TODO: Call Cloud Function 'deleteUserData' after successful deletion
+  /// Calls the secure backend function 'requestAccountDeletion'
   Future<void> deleteAccountAndData() async {
     try {
       final user = _auth.currentUser;
       if (user == null) {
-        throw AppException('Silinecek kullanıcı bulunamadı');
+        throw AppFailure.auth(message: 'Silinecek kullanıcı bulunamadı');
       }
 
-      // TODO: Call Cloud Function to delete Firestore data
-      // Example: await firebaseFunctions.httpsCallable('deleteUserData').call({'uid': user.uid});
+      // Call Cloud Function to delete all data AND the Auth user
+      final callable = _functions.httpsCallable('requestAccountDeletion');
+      await callable.call();
 
-      await user.delete();
+      // Force local sign out to drop the invalidated session immediately
+      await _auth.signOut();
     } catch (e, stack) {
       ErrorLogger.instance.logError(
         e,
         stackTrace: stack,
         context: 'deleteAccountAndData',
       );
-      if (e is AppException) rethrow;
-      if (e is firebase_auth.FirebaseAuthException) {
-        final errorMessage = _getFirebaseAuthErrorMessage(e);
-        throw AppException(errorMessage);
-      }
-      throw AppException('Hesap silme başarısız oldu: ${e.toString()}');
-    }
-  }
-
-  /// Helper to get user-friendly error messages from Firebase Auth exceptions
-  String _getFirebaseAuthErrorMessage(firebase_auth.FirebaseAuthException e) {
-    switch (e.code) {
-      case 'weak-password':
-        return 'Şifre çok zayıf. Daha güçlü bir şifre seçin.';
-      case 'email-already-in-use':
-        return 'Bu e-posta adresi zaten kullanılıyor.';
-      case 'invalid-email':
-        return 'Geçersiz e-posta adresi.';
-      case 'user-disabled':
-        return 'Bu hesap devre dışı bırakılmış.';
-      case 'user-not-found':
-        return 'Kullanıcı bulunamadı.';
-      case 'wrong-password':
-        return 'Yanlış şifre.';
-      case 'credential-already-in-use':
-        return 'Bu hesap zaten başka bir yöntemle bağlı.';
-      case 'operation-not-allowed':
-        return 'Bu işlem izin verilmiyor.';
-      case 'requires-recent-login':
-        return 'Güvenlik için lütfen tekrar giriş yapın.';
-      default:
-        return e.message ?? 'Bir hata oluştu: ${e.code}';
+      throw FirebaseErrorMapper.map(e);
     }
   }
 
@@ -521,5 +505,7 @@ class AuthRepository {
 
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
   final auth = ref.watch(firebaseAuthProvider);
-  return AuthRepository(auth);
+  final socialAuth = ref.watch(socialAuthServiceProvider);
+  final functions = ref.watch(firebaseFunctionsProvider);
+  return AuthRepository(auth, socialAuth, functions);
 });

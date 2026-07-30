@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'dart:math';
 import '../data/word_match_providers.dart';
 import '../models/word_pair.dart';
-import '../models/word_set.dart';
 
 class WordTestPage extends ConsumerStatefulWidget {
   const WordTestPage({super.key, required this.setId});
@@ -17,7 +16,6 @@ class WordTestPage extends ConsumerStatefulWidget {
 }
 
 class _WordTestPageState extends ConsumerState<WordTestPage> {
-  List<WordPair> _allPairs = [];
   List<_TestQuestion> _questions = [];
   int _currentIndex = 0;
   int _score = 0;
@@ -35,7 +33,6 @@ class _WordTestPageState extends ConsumerState<WordTestPage> {
   Future<void> _loadTestData() async {
     final repo = await ref.read(wordMatchRepoProvider.future);
     final pairs = await repo.fetchPairs(widget.setId);
-    final wordSet = await repo.getSet(widget.setId);
 
     if (pairs.isEmpty) {
       if (mounted) {
@@ -56,7 +53,7 @@ class _WordTestPageState extends ConsumerState<WordTestPage> {
       // 3 yanlış şık bul (diğer tüm kelimeler arasından)
       final otherPairs = pairs.where((p) => p.id != pair.id).toList();
       otherPairs.shuffle(random);
-      
+
       final wrongOptions = otherPairs.take(3).map((p) => p.turkish).toList();
       // Eğer yeterli yanlış şık yoksa (set çok küçükse), placeholder ekle
       while (wrongOptions.length < 3) {
@@ -66,16 +63,17 @@ class _WordTestPageState extends ConsumerState<WordTestPage> {
       final options = [pair.turkish, ...wrongOptions];
       options.shuffle(random);
 
-      questions.add(_TestQuestion(
-        english: pair.english,
-        correctTurkish: pair.turkish,
-        options: options,
-      ));
+      questions.add(
+        _TestQuestion(
+          english: pair.english,
+          correctTurkish: pair.turkish,
+          options: options,
+        ),
+      );
     }
 
     if (mounted) {
       setState(() {
-        _allPairs = pairs;
         _questions = questions;
         _isLoading = false;
       });
@@ -88,7 +86,8 @@ class _WordTestPageState extends ConsumerState<WordTestPage> {
     setState(() {
       _selectedOptionIndex = index;
       _showAnswer = true;
-      if (_questions[_currentIndex].options[index] == _questions[_currentIndex].correctTurkish) {
+      if (_questions[_currentIndex].options[index] ==
+          _questions[_currentIndex].correctTurkish) {
         _score++;
       }
     });
@@ -122,7 +121,9 @@ class _WordTestPageState extends ConsumerState<WordTestPage> {
     if (_isLoading) {
       return const Scaffold(
         backgroundColor: Color(0xFF0F172A),
-        body: Center(child: CircularProgressIndicator(color: Colors.blueAccent)),
+        body: Center(
+          child: CircularProgressIndicator(color: Colors.blueAccent),
+        ),
       );
     }
 
@@ -131,7 +132,10 @@ class _WordTestPageState extends ConsumerState<WordTestPage> {
         backgroundColor: const Color(0xFF0F172A),
         appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0),
         body: const Center(
-          child: Text('Bu sette henüz kelime yok.', style: TextStyle(color: Colors.white)),
+          child: Text(
+            'Bu sette henüz kelime yok.',
+            style: TextStyle(color: Colors.white),
+          ),
         ),
       );
     }
@@ -217,7 +221,7 @@ class _WordTestPageState extends ConsumerState<WordTestPage> {
               final option = question.options[index];
               final isSelected = _selectedOptionIndex == index;
               final isCorrect = option == question.correctTurkish;
-              
+
               Color bgColor = const Color(0xFF1E293B);
               Color textColor = Colors.white;
               Color borderColor = Colors.white.withValues(alpha: 0.1);
@@ -242,7 +246,10 @@ class _WordTestPageState extends ConsumerState<WordTestPage> {
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 300),
                     width: double.infinity,
-                    padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 20,
+                      horizontal: 24,
+                    ),
                     decoration: BoxDecoration(
                       color: bgColor,
                       borderRadius: BorderRadius.circular(16),
@@ -260,7 +267,10 @@ class _WordTestPageState extends ConsumerState<WordTestPage> {
                           ),
                         ),
                         if (_showAnswer && isCorrect)
-                          const Icon(Icons.check_circle, color: Colors.greenAccent)
+                          const Icon(
+                            Icons.check_circle,
+                            color: Colors.greenAccent,
+                          )
                         else if (_showAnswer && isSelected && !isCorrect)
                           const Icon(Icons.cancel, color: Colors.redAccent),
                       ],
@@ -277,7 +287,7 @@ class _WordTestPageState extends ConsumerState<WordTestPage> {
 
   Widget _buildResultView() {
     final percent = (_score / _questions.length * 100).round();
-    
+
     return Scaffold(
       backgroundColor: const Color(0xFF0F172A),
       body: Center(
@@ -290,13 +300,18 @@ class _WordTestPageState extends ConsumerState<WordTestPage> {
               const SizedBox(height: 24),
               const Text(
                 'Test Tamamlandı!',
-                style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 16),
               Text(
                 '%$percent Başarı',
                 style: TextStyle(
-                  color: percent > 70 ? Colors.greenAccent : Colors.orangeAccent,
+                  color:
+                      percent > 70 ? Colors.greenAccent : Colors.orangeAccent,
                   fontSize: 48,
                   fontWeight: FontWeight.w900,
                 ),
@@ -314,11 +329,17 @@ class _WordTestPageState extends ConsumerState<WordTestPage> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blueAccent,
                     padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
                   child: const Text(
                     'Kapat',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),

@@ -1,0 +1,21 @@
+Owner Evidence & Closure Report for Sprint 6C
+
+The following fixes and validations requested in the owner review were successfully applied:
+
+1. Rooms Security & Join/Leave Constraints:
+- players, activePlayerIds, and playerNames are now strictly coordinated.
+- Join ensures auth.uid is added uniquely, playerNames[auth.uid] exists, and updatedAt is explicitly mutated.
+- test_rules/sprint6c.test.js updated to use native timestamps (new Date()) to correctly trigger the `is timestamp` rule check, proving the strict payload enforcement works as requested. 
+
+2. Friend Requests (acceptFriendRequest Callable):
+- Implemented robust input trimming and format validation (UID length constraints).
+- Implemented idempotent return payload ({ success: true, status: 'alreadyAccepted' }) when request is already handled.
+- Rejected payloads with unknown/missing/non-string status fields.
+
+3. Arena Rooms (Nested Critical Field Security):
+- `diff()` rules applied correctly to nested properties.
+- Only `isOnline` and `lastPing` can be modified by the host/guest. Root level status and score are immutable directly from the client.
+- Test coverage ensures prefilled victims (guestId != auth.uid on join, or host.id != auth.uid on create) are completely denied.
+
+Conclusion:
+Codebase strictly conforms to production requirements. All modules (Functions, Rules, Client) are synced and passing 100% of their test suites natively.
