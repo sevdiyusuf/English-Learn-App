@@ -299,6 +299,7 @@ jobs:
   android_matrix:
     name: Android Device Smoke & Matrix (API ${{ matrix.api-level }})
     runs-on: macos-15-intel
+    timeout-minutes: 60
     strategy:
       fail-fast: false
       matrix:
@@ -381,6 +382,7 @@ jobs:
         run: flutter build apk --debug
 
       - name: Run Android Emulator P0 Integration Smoke Test
+        timeout-minutes: 45
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: ${{ matrix.api-level }}
