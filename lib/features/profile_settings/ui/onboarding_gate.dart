@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yunoo/l10n/app_localizations.dart';
 
+import 'package:yunoo/core/telemetry/telemetry_events.dart';
+import 'package:yunoo/core/telemetry/telemetry_service.dart';
 import '../../../core/widgets/responsive_content.dart';
 import '../logic/user_settings_controller.dart';
 import '../models/user_settings.dart';
@@ -124,6 +126,13 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
         onboardingStep: LearningProfileValues.onboardingReview,
         onboardingCompletedVersion:
             LearningProfileValues.currentOnboardingVersion,
+      );
+      await TelemetryService.instance.logAnalyticsEvent(
+        TelemetryEvents.onboardingCompleted,
+        parameters: {
+          TelemetryParams.level: _level,
+          TelemetryParams.goal: _goal,
+        },
       );
     } catch (_) {
       if (mounted) setState(() => _saveFailed = true);

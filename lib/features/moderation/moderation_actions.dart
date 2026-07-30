@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:yunoo/core/telemetry/telemetry_events.dart';
+import 'package:yunoo/core/telemetry/telemetry_service.dart';
 import '../../l10n/app_localizations.dart';
 import 'moderation_client.dart';
 
@@ -132,12 +134,31 @@ class _ReportDialogState extends ConsumerState<_ReportDialog> {
         details: _detailsController.text.trim(),
       );
       if (widget.alsoBlock) await client.block(widget.targetId);
+
+      await TelemetryService.instance.logAnalyticsEvent(
+        TelemetryEvents.contentReportSubmitted,
+        parameters: {
+          TelemetryParams.contentType: widget.type,
+          TelemetryParams.reason: reason,
+        },
+      );
+
       if (!mounted) return;
       Navigator.pop(context);
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text(l10n.reportReceived)));
     } catch (error) {
+      TelemetryService.instance.recordNonFatalError(
+        error,
+        reason: 'report_submission_failed',
+        attributes: {
+          TelemetryParams.feature: 'moderation',
+          TelemetryParams.contentType: widget.type,
+          TelemetryParams.reason: reason,
+        },
+      );
+
       if (!mounted) return;
       setState(() => _submitting = false);
       ScaffoldMessenger.of(

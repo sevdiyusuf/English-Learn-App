@@ -9,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../core/config/app_environment.dart';
 import '../core/services/app_check_service.dart';
+import '../core/telemetry/telemetry_service.dart';
 import '../features/dictionary/dictionary_service.dart';
 import '../features/dictionary/lazy_dictionary_service.dart';
 import '../firebase_options.dart';
@@ -119,6 +120,9 @@ Future<AppBootstrapData> bootstrapApp() async {
 
         // Configure Emulators if explicitly enabled
         await AppEnvironment.configureEmulators();
+
+        // Initialize Telemetry & Crashlytics
+        await TelemetryService.instance.initialize();
       } catch (e, stackTrace) {
         // On iOS Safari, Firebase initialization might fail in certain contexts
         if (kDebugMode) {
@@ -191,6 +195,12 @@ Future<AppBootstrapData> bootstrapApp() async {
         debugPrint('Dictionary loading error (non-blocking): $error');
         debugPrint('Stack trace: $stackTrace');
       }
+      TelemetryService.instance.recordNonFatalError(
+        error,
+        stackTrace: stackTrace,
+        reason: 'educational_content_load_corruption',
+        attributes: {'feature': 'dictionary', 'stage': 'background_load'},
+      );
       // Return the service anyway - it will handle errors gracefully
       return dictionaryService;
     });

@@ -3,6 +3,8 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yunoo/app/di.dart';
+import 'package:yunoo/core/telemetry/telemetry_events.dart';
+import 'package:yunoo/core/telemetry/telemetry_service.dart';
 import 'package:yunoo/core/utils/operation_id.dart';
 import '../models/arena_models.dart';
 
@@ -119,10 +121,23 @@ class ArenaRoomRepository {
         'resolvedWorksheet': resolvedWorksheet.toJson(),
         'operationId': opId,
       });
+      await TelemetryService.instance.logAnalyticsEvent(
+        TelemetryEvents.multiplayerMatchStarted,
+        parameters: {TelemetryParams.matchMode: 'grammar_arena'},
+      );
     } catch (e, st) {
       if (kDebugMode) {
         debugPrint('Error starting arena match: $e\n$st');
       }
+      await TelemetryService.instance.recordNonFatalError(
+        e,
+        stackTrace: st,
+        reason: 'multiplayer_start_failed',
+        attributes: {
+          TelemetryParams.feature: 'multiplayer',
+          TelemetryParams.matchMode: 'grammar_arena',
+        },
+      );
       rethrow;
     }
   }
