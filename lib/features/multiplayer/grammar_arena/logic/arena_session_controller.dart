@@ -2,7 +2,10 @@ import 'dart:async';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yunoo/core/utils/operation_id.dart';
+
+import 'package:yunoo/core/telemetry/telemetry_events.dart';
+import 'package:yunoo/core/telemetry/telemetry_service.dart';
+import '../../../../core/utils/operation_id.dart';
 import '../data/arena_room_repo.dart';
 import '../data/arena_match_repo.dart';
 import '../data/worksheet_catalog_repo.dart';
@@ -100,6 +103,17 @@ class ArenaSessionController
               } catch (e) {
                 debugPrint('Error loading worksheet: $e');
               }
+            }
+
+            if (currentState.room?.status != ArenaStatus.finished &&
+                room.status == ArenaStatus.finished) {
+              TelemetryService.instance.logAnalyticsEvent(
+                TelemetryEvents.multiplayerMatchCompleted,
+                parameters: {
+                  TelemetryParams.matchMode: 'grammar_arena',
+                  TelemetryParams.resultCategory: 'finished',
+                },
+              );
             }
 
             state = AsyncValue.data(

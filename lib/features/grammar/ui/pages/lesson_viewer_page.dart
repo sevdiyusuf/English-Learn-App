@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../../logic/grammar_providers.dart';
-import '../../models/grammar_models.dart';
+
+import 'package:yunoo/core/telemetry/telemetry_events.dart';
+import 'package:yunoo/core/telemetry/telemetry_service.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../training/ui/engine_renderer.dart';
+import '../../logic/grammar_providers.dart';
+import '../../models/grammar_models.dart';
 
 class LessonViewerPage extends ConsumerStatefulWidget {
   final String lessonId;
@@ -20,6 +23,7 @@ class _LessonViewerPageState extends ConsumerState<LessonViewerPage> {
   dynamic _checkpointAnswer;
   bool _isCheckpointSolved = false;
   bool _isCheckpointCorrect = false;
+  bool _hasLoggedStart = false;
 
   @override
   void initState() {
@@ -51,6 +55,14 @@ class _LessonViewerPageState extends ConsumerState<LessonViewerPage> {
       });
     } else {
       // Last card finished
+      TelemetryService.instance.logAnalyticsEvent(
+        TelemetryEvents.lessonCompleted,
+        parameters: {
+          TelemetryParams.contentType: 'grammar_lesson',
+          TelemetryParams.contentLevel: doc.level,
+        },
+      );
+
       if (doc.storyMode.enabled) {
         context.push('/grammar/learn/${widget.lessonId}/story');
       } else if (doc.trainWorksheetId != null) {
@@ -84,6 +96,18 @@ class _LessonViewerPageState extends ConsumerState<LessonViewerPage> {
 
     return lessonAsync.when(
       data: (doc) {
+        if (!_hasLoggedStart) {
+          _hasLoggedStart = true;
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            TelemetryService.instance.logAnalyticsEvent(
+              TelemetryEvents.lessonStarted,
+              parameters: {
+                TelemetryParams.contentType: 'grammar_lesson',
+                TelemetryParams.contentLevel: doc.level,
+              },
+            );
+          });
+        }
         final cards = doc.microLesson.cards;
         final currentIndex = ref.watch(
           currentCardIndexProvider(widget.lessonId),

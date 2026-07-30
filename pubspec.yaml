@@ -61,6 +61,8 @@ dependencies:
   device_info_plus: ^12.4.0
   package_info_plus: ^9.0.1
   flutter_tts: ^4.2.5
+  firebase_crashlytics: ^4.3.10
+  firebase_analytics: ^11.6.0
 
 dev_dependencies:
   flutter_test:
