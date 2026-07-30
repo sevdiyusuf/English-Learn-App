@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 
+import '../telemetry/telemetry_service.dart';
+
 /// Centralized error logging service
 class ErrorLogger {
   static ErrorLogger? _instance;
@@ -34,17 +36,12 @@ class ErrorLogger {
       }
       debugPrint('========================================');
     }
+  }
 
-    // In production, you can send to Firebase Crashlytics or other services
-    // Example:
-    // if (kReleaseMode) {
-    //   FirebaseCrashlytics.instance.recordError(
-    //     error,
-    //     stackTrace,
-    //     reason: context,
-    //     information: additionalData?.entries.map((e) => DiagnosticsProperty(e.key, e.value)).toList(),
-    //   );
-    // }
+  /// Controlled test crash trigger.
+  /// Strictly gated by dev/debug mode and compile-time flag --dart-define=ENABLE_TEST_CRASH=true.
+  void triggerControlledTestCrash() {
+    TelemetryService.instance.triggerControlledTestCrash();
   }
 
   /// Logs a warning

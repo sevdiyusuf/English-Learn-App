@@ -1,10 +1,13 @@
 import 'dart:ui';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:yunoo/l10n/app_localizations.dart';
 
+import '../../../core/telemetry/telemetry_service.dart';
+import '../../../core/utils/error_logger.dart';
 import '../../../core/repositories/user_stats_repo.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/feedback_bottom_sheet.dart';
@@ -606,6 +609,29 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
             },
           ),
         ),
+        if (!kReleaseMode && TelemetryService.enableTestCrash) ...[
+          const SizedBox(height: 16),
+          _buildSectionHeader(context, 'GELİŞTİRİCİ TESTLERİ', AppColors.error),
+          _buildEliteCard(
+            child: ListTile(
+              title: const Text(
+                'Send Crashlytics Test Crash',
+                style: TextStyle(
+                  color: AppColors.error,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              subtitle: const Text(
+                'Simulates an uncaught fatal crash for manual Crashlytics verification',
+              ),
+              leading: const Icon(Icons.bug_report, color: AppColors.error),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () {
+                ErrorLogger.instance.triggerControlledTestCrash();
+              },
+            ),
+          ),
+        ],
         const SizedBox(height: 32),
       ],
     );

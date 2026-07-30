@@ -6,11 +6,23 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'app/app.dart';
 import 'app/di.dart';
+import 'core/telemetry/telemetry_service.dart';
 import 'core/utils/error_logger.dart';
 import 'features/dictionary/load_dictionary.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Wire global crashlytics handlers
+  FlutterError.onError = (FlutterErrorDetails details) {
+    FlutterError.presentError(details);
+    TelemetryService.instance.recordFlutterError(details);
+  };
+
+  PlatformDispatcher.instance.onError = (Object error, StackTrace stackTrace) {
+    TelemetryService.instance.recordPlatformError(error, stackTrace);
+    return true;
+  };
 
   // --- KRİTİK DEĞİŞİKLİK: Veritabanı (Isar) Başlatma (Force Await) ---
   // Uygulama açılmadan önce veritabanının hazır olmasını bekliyoruz.
@@ -83,6 +95,12 @@ class _BootstrapWrapperState extends ConsumerState<BootstrapWrapper> {
         e,
         stackTrace: st,
         context: 'Bootstrap Error',
+      );
+      TelemetryService.instance.recordNonFatalError(
+        e,
+        stackTrace: st,
+        reason: 'bootstrap_failed',
+        attributes: {'stage': 'bootstrap'},
       );
       if (mounted) {
         setState(() {
