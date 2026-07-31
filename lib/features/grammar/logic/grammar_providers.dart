@@ -1,4 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yunoo/core/performance/performance_service.dart';
+import 'package:yunoo/core/performance/performance_traces.dart';
 import '../data/grammar_repository.dart';
 import '../models/grammar_models.dart';
 
@@ -34,7 +36,11 @@ final lessonDocProvider = FutureProvider.family<LessonDoc, String>((
     throw Exception('Lesson with ID $lessonId not found in index');
   }
 
-  return repository.loadLesson(path);
+  return PerformanceService.instance.traceAsync(
+    PerformanceTraces.lessonLoad,
+    () => repository.loadLesson(path!),
+    attributes: {PerformanceParams.contentType: 'grammar_lesson'},
+  );
 });
 
 // State for Lesson Viewer

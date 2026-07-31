@@ -1,5 +1,7 @@
 import 'dart:math';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yunoo/core/performance/performance_service.dart';
+import 'package:yunoo/core/performance/performance_traces.dart';
 import '../../../training/data/training_repo.dart';
 import '../../../training/models/training_models.dart';
 
@@ -17,7 +19,11 @@ class WorksheetCatalogRepo {
   }
 
   Future<Worksheet> loadWorksheet(String path) {
-    return _trainingRepo.loadWorksheet(path);
+    return PerformanceService.instance.traceAsync(
+      PerformanceTraces.worksheetLoad,
+      () => _trainingRepo.loadWorksheet(path),
+      attributes: {PerformanceParams.contentType: 'worksheet'},
+    );
   }
 
   Future<WorksheetMetadata?> getRandomWorksheetForLevel(String level) async {

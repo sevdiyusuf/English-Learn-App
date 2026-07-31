@@ -36,7 +36,7 @@ class ArenaRoomRepository {
         'level': config.level,
         'worksheetId': config.worksheetId,
         'questionCount': config.questionCount,
-        'player': host.toJson(),
+        'player': host.toCallablePayload(),
         'operationId': opId,
       });
 
@@ -63,7 +63,7 @@ class ArenaRoomRepository {
       final callable = _functions.httpsCallable('joinArenaRoom');
       final res = await callable.call<Map<String, dynamic>>({
         'roomCode': roomCode,
-        'player': guest.toJson(),
+        'player': guest.toCallablePayload(),
         'operationId': opId,
       });
 
