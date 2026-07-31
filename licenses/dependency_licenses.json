@@ -642,6 +642,33 @@
       "licenseEvidence": "LICENSE"
     },
     {
+      "name": "firebase_performance",
+      "version": "0.10.1+10",
+      "dependency": "direct main",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "firebase_performance_platform_interface",
+      "version": "0.1.5+10",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
+      "name": "firebase_performance_web",
+      "version": "0.1.7+16",
+      "dependency": "transitive",
+      "source": "hosted",
+      "licenseIdentifier": "BSD-3-Clause",
+      "licenseStatus": "verified",
+      "licenseEvidence": "LICENSE"
+    },
+    {
       "name": "fixnum",
       "version": "1.1.1",
       "dependency": "transitive",

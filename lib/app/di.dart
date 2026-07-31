@@ -8,6 +8,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../core/config/app_environment.dart';
+import '../core/performance/performance_service.dart';
 import '../core/services/app_check_service.dart';
 import '../core/telemetry/telemetry_service.dart';
 import '../features/dictionary/dictionary_service.dart';
@@ -121,8 +122,9 @@ Future<AppBootstrapData> bootstrapApp() async {
         // Configure Emulators if explicitly enabled
         await AppEnvironment.configureEmulators();
 
-        // Initialize Telemetry & Crashlytics
+        // Initialize Telemetry and Performance Services
         await TelemetryService.instance.initialize();
+        await PerformanceService.instance.initialize();
       } catch (e, stackTrace) {
         // On iOS Safari, Firebase initialization might fail in certain contexts
         if (kDebugMode) {

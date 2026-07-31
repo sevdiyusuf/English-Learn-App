@@ -33,6 +33,16 @@ class ArenaPlayer with _$ArenaPlayer {
       _$ArenaPlayerFromJson(json);
 }
 
+extension ArenaPlayerCallableExtension on ArenaPlayer {
+  /// Converts [ArenaPlayer] into a narrow JSON/callable-safe payload.
+  ///
+  /// Excludes server-authoritative fields (`id`/`uid`, `score`, `isOnline`, `lastPing`)
+  /// and non-JSON-encodable types (`Timestamp`).
+  Map<String, dynamic> toCallablePayload() {
+    return <String, dynamic>{'name': name, 'photoUrl': photoUrl};
+  }
+}
+
 @freezed
 class ArenaRound with _$ArenaRound {
   @JsonSerializable(explicitToJson: true)

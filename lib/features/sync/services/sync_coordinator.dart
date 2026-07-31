@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 
+import '../../../core/performance/performance_service.dart';
+import '../../../core/performance/performance_traces.dart';
 import '../../auth/models/app_user.dart';
 import '../../word_match/data/word_match_migration_service.dart';
 import '../domain/remote_word_set_applier.dart';
@@ -78,51 +80,54 @@ class SyncCoordinator extends ChangeNotifier {
   }
 
   Future<void> _runBootstrap(AppUser user) async {
-    try {
-      _setStatus(SyncStatus.syncing);
-      final uid = user.uid;
+    await PerformanceService.instance.traceAsync(
+      PerformanceTraces.syncCycle,
+      () async {
+        try {
+          _setStatus(SyncStatus.syncing);
+          final uid = user.uid;
 
-      // 1. Guest -> User Migration
-      debugPrint('SyncCoordinator: Starting migration for $uid');
-      await _migrationService.migrateLocalSetsForUser(user);
-      if (_activeUidFetcher() != uid) return;
+          // 1. Guest -> User Migration
+          debugPrint('SyncCoordinator: Starting migration for $uid');
+          await _migrationService.migrateLocalSetsForUser(user);
+          if (_activeUidFetcher() != uid) return;
 
-      // 2. Initial Push (flush existing outbox items)
-      debugPrint('SyncCoordinator: Starting initial push for $uid');
-      await _pushService.pushOnce(ownerUid: uid, batchLimit: 10);
-      if (_activeUidFetcher() != uid) return;
+          // 2. Initial Push (flush existing outbox items)
+          debugPrint('SyncCoordinator: Starting initial push for $uid');
+          await _pushService.pushOnce(ownerUid: uid, batchLimit: 10);
+          if (_activeUidFetcher() != uid) return;
 
-      // 3. Full Pull (catch up from last checkpoint)
-      debugPrint('SyncCoordinator: Starting full pull for $uid');
-      await _runPullLoop(uid);
-      if (_activeUidFetcher() != uid) return;
+          // 3. Full Pull (catch up from last checkpoint)
+          debugPrint('SyncCoordinator: Starting full pull for $uid');
+          await _runPullLoop(uid);
+          if (_activeUidFetcher() != uid) return;
 
-      // 4. Start Real-time Listener
-      debugPrint('SyncCoordinator: Starting real-time listener for $uid');
-      _listenerManager.startListening(
-        ownerUid: uid,
-        onChanges: (changes) => _handleRemoteChange(uid),
-      );
+          // 4. Start Real-time Listener
+          debugPrint('SyncCoordinator: Starting real-time listener for $uid');
+          _listenerManager.startListening(
+            ownerUid: uid,
+            onChanges: (changes) => _handleRemoteChange(uid),
+          );
 
-      if (_activeUidFetcher() == uid) {
-        _setStatus(SyncStatus.upToDate);
-        debugPrint('SyncCoordinator: Bootstrap completed for $uid');
-      }
-    } catch (e, stack) {
-      debugPrint(
-        'SyncCoordinator: Bootstrap failed for ${user.uid}: $e\n$stack',
-      );
-      if (_activeUidFetcher() == user.uid) {
-        _setStatus(SyncStatus.error);
-      }
-    } finally {
-      // Clear future if it belongs to this run so next login can re-trigger if needed,
-      // but in practice, once successful, we leave it or rely on _activeBootstrapUid.
-      // We keep _activeBootstrapUid to prevent re-runs, but if error, maybe allow retry?
-      if (_status == SyncStatus.error) {
-        _bootstrapFuture = null; // Allow retry on error
-      }
-    }
+          if (_activeUidFetcher() == uid) {
+            _setStatus(SyncStatus.upToDate);
+            debugPrint('SyncCoordinator: Bootstrap completed for $uid');
+          }
+        } catch (e, stack) {
+          debugPrint(
+            'SyncCoordinator: Bootstrap failed for ${user.uid}: $e\n$stack',
+          );
+          if (_activeUidFetcher() == user.uid) {
+            _setStatus(SyncStatus.error);
+          }
+        } finally {
+          if (_status == SyncStatus.error) {
+            _bootstrapFuture = null; // Allow retry on error
+          }
+        }
+      },
+      attributes: {PerformanceParams.operation: 'sync_bootstrap'},
+    );
   }
 
   /// Pulls all available pages from Firestore and applies them locally.
