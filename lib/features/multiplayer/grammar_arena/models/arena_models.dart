@@ -39,10 +39,7 @@ extension ArenaPlayerCallableExtension on ArenaPlayer {
   /// Excludes server-authoritative fields (`id`/`uid`, `score`, `isOnline`, `lastPing`)
   /// and non-JSON-encodable types (`Timestamp`).
   Map<String, dynamic> toCallablePayload() {
-    return <String, dynamic>{
-      'name': name,
-      'photoUrl': photoUrl,
-    };
+    return <String, dynamic>{'name': name, 'photoUrl': photoUrl};
   }
 }
 
