@@ -4,6 +4,7 @@ import 'package:yunoo/features/sync/domain/remote_word_set_applier.dart';
 import 'package:yunoo/features/sync/services/pull_sync_service.dart';
 import 'package:yunoo/features/sync/services/push_sync_service.dart';
 import 'package:yunoo/features/sync/services/sync_coordinator.dart';
+import 'package:yunoo/features/sync/services/sync_coordinator_impl.dart';
 import 'package:yunoo/features/sync/services/sync_listener_manager.dart';
 import 'package:yunoo/features/word_match/data/word_match_migration_service.dart';
 import 'package:yunoo/features/sync/domain/word_set_sync_codec.dart';
@@ -135,7 +136,7 @@ void main() {
 
     activeUid = 'test_user';
 
-    coordinator = SyncCoordinator(
+    coordinator = DefaultSyncCoordinator(
       pushService: fakePushService,
       pullService: fakePullService,
       listenerManager: fakeListenerManager,

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'outbox_item.dart';
+part of 'outbox_item_io.dart';
 
 // **************************************************************************
 // IsarCollectionGenerator

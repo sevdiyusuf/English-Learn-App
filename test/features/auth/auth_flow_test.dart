@@ -80,6 +80,9 @@ class SpySyncCoordinator extends ChangeNotifier implements SyncCoordinator {
   }
 
   @override
+  Future<void> triggerSync() async {}
+
+  @override
   SyncStatus get status => SyncStatus.idle;
 }
 

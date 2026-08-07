@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'local_schema_metadata.dart';
+part of 'local_schema_metadata_io.dart';
 
 // **************************************************************************
 // IsarCollectionGenerator

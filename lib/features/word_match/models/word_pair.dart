@@ -1,14 +1,1 @@
-import 'package:isar/isar.dart';
-
-part 'word_pair.g.dart';
-
-@collection
-@Name("WordPair365")
-class WordPair {
-  Id id = Isar.autoIncrement;
-
-  late int setId;
-  late String english;
-  late String turkish;
-  bool learned = false;
-}
+export 'word_pair_web.dart' if (dart.library.io) 'word_pair_io.dart';
