@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'sync_checkpoint.dart';
+part of 'sync_checkpoint_io.dart';
 
 // **************************************************************************
 // IsarCollectionGenerator

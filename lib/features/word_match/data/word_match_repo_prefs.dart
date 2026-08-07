@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:isar/isar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/word_pair.dart';
@@ -507,7 +506,7 @@ class WordMatchRepoPrefs implements WordMatchRepoInterface {
     for (final pair in pairs) {
       if (pair.english.trim().isEmpty) continue;
 
-      final isNewPair = pair.id == 0 || pair.id == Isar.autoIncrement;
+      final isNewPair = pair.id == 0;
       pair.setId = setId;
 
       final normalizedKey =

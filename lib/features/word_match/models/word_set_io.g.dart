@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'word_set.dart';
+part of 'word_set_io.dart';
 
 // **************************************************************************
 // IsarCollectionGenerator
